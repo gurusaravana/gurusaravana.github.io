@@ -2,7 +2,7 @@
 layout: about
 title: About
 permalink: /
-subtitle: <a href='www.ftveti.edu.et'>Affiliations</a>. Associate Professor, FTI.
+subtitle: <a href='#'>Affiliations</a>. Associate Professor, FTI.
 
 profile:
   align: right
