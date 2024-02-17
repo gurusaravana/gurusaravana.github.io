@@ -2,149 +2,177 @@
   "basics": {
     "name": "Saravanakumar Gurusamy",
     "label": "Associate Professor",
-    "image": "",
     "email": "gurusaravana@ieee.org",
-    "phone": "(+91) 9994700450, (+251) 987204395",
-    "url": "https://gurusaravana.github.io/",
-    "summary": "An Indian control and  Instrumenation Engineer/Researcher, trying to do best to the world by Teaching,  Reseaerch and Collaboration(SDG7,SDG11 ....)",
+    "phone": "+91 9994700450",
+    "summary": "Inspiring and motivating young technical minds through research for the betterment and advancement of humanity.",
     "location": {
-      "address": "65 Goundar Street, Seithur",
-      "postalCode": "Rajapalayam",
-      "city": "Tamil Nadu",
-      "countryCode": "INDIA",
-      "region": "ADDIS ABABA"
+      "address": "65 Gounder Street Seithur Rajapalayam Taluk",
+      "city": "Virudhunagar District",
+      "region": "Tamil Nadu",
+      "postalCode": "626121",
+      "countryCode": "INDIA"
     },
     "profiles": [
       {
-        "network": "Twitter",
-        "username": "@saravanaGSK",
-        "url": "https://twitter.com/saravanaGSK"
+        "network": "ORCID",
+        "username": "gurusaravana",
+        "url": "http://orcid.org/0000-0002-7721-2613"
       }
     ]
   },
-  "work": [
-    {
-      "name": "FDRE TVT Institute (FTI) ",
-      "position": "Associate Professor of Electrical Automation and Control Technology",
-      "url": "https://ftveti.edu.et",
-      "startDate": "2019-11-26",
-      "endDate": "2024-11-25",
-      "summary": "Teaching at MSc - EACT, I associated with the EET Department.",
-      "highlights": ["Indutrial Automation, Robotics and Control"]
-    }
-  ],
-  "volunteer": [
-    {
-      "organization": "IEEE Ethiopia Sub section ",
-      "position": "Secretary",
-      "url": "https://ieee.org",
-      "startDate": "2022-12-03",
-      "endDate": "2024-12-02",
-      "summary": " Cordinating IEEE related activities in Ethiopia",
-      "highlights": ["-"]
-    }
-  ],
   "education": [
     {
-      "institution": "University of Zurich, Zurich, Switzerland",
-      "location": "Zurich, Switzerland",
-      "url": "https://www.uzh.ch/",
-      "area": "Software Development",
-      "studyType": "PhD",
-      "startDate": "1905-01-01",
-      "endDate": "1905-01-01",
-      "score": "10",
-      "courses": ["Theory of Relativity"]
+      "institution": "Kalasalingam Academy of Research and Education",
+      "area": "Instrumentation and Control Engineering",
+      "studyType": "Ph.D",
+      "startDate": "2011",
+      "endDate": "2017",
+      "thesis": "Metaheuristic Algorithms for the Identification of Nonlinear systems and Multivariable PID Controller Tuning"
+    },
+    {
+      "institution": "Anna University Tirunelveli",
+      "area": "Control and Instrumentation Engineering",
+      "studyType": "M.Tech",
+      "startDate": "2007",
+      "endDate": "2009",
+      "grade": "First Class with Distinction"
+    },
+    {
+      "institution": "Manonmaniam Sundaranar University Tirunelveli",
+      "area": "Electronics and Instrumentation Engineering",
+      "studyType": "B.E",
+      "startDate": "2000",
+      "endDate": "2004",
+      "grade": "First Class"
     }
   ],
-  "awards": [
+  "work": [
     {
-      "title": "Nobel Prize in Physics",
-      "date": "1921-11-01",
-      "awarder": "Royal Swedish Academy of Sciences",
-      "url": "https://www.nobelprize.org/prizes/physics/1921/einstein/biographical/",
-      "summary": "The Nobel Prizes are five separate prizes that, according to Alfred Nobel's will of 1895, are awarded to 'those who, during the preceding year, have conferred the greatest benefit to humankind.'"
-    }
-  ],
-  "certificates": [
+      "position": "Associate Professor",
+      "department": "Department of Electrical and Electronics Technology",
+      "institution": "FDRE TVT Institute",
+      "startDate": "2019",
+      "summary": "Focus on Electrical and Electronics Technology education and research. Formerly associated with Ethiopian Technical University (ETU)."
+    },
     {
-      "name": "Machine Learning",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
-      "icon": "fa-solid fa-location-dot"
-    }  
-  ],
-  "publications": [
-        {
-      "name": "-",
-      "publisher": "-",
-      "releaseDate": "1916-03-20",
-      "url": "https://de.wikisource.org/wiki/Die_Grundlage_der_allgemeinen_Relativitätstheorie",
-      "summary": "-."
+      "position": "Lecturer",
+      "department": "Department of Electrical and Computer Engineering",
+      "institution": "University of Gondar",
+      "startDate": "2014",
+      "endDate": "2018",
+      "summary": "Engaged in Electrical and Computer Engineering education and research activities."
+    },
+    {
+      "position": "Assistant Professor",
+      "department": "Department of Instrumentation and Control Engineering",
+      "institution": "Kalasalingam Academy of Research and Education",
+      "startDate": "2009",
+      "endDate": "2014",
+      "summary": "Contributed to Instrumentation and Control Engineering education and research."
+    },
+    {
+      "position": "Lecturer",
+      "department": "Department of Electronics and Communication Engineering",
+      "institution": "Lakshmi Ammal Polytechnic College",
+      "startDate": "2004",
+      "endDate": "2007",
+      "summary": "Engaged in Electronics and Communication Engineering education."
     }
   ],
   "skills": [
     {
-      "name": "Physics",
-      "level": "Master",
-      "icon": "fa-solid fa-hashtag",
-      "keywords": [
-        "Quantum Mechanics",
-        "Quantum Computing",
-        "Quantum Information",
-        "Quantum Cryptography",
-        "Quantum Communication",
-        "Quantum Teleportation"
+      "name": "Technical Skills",
+      "details": [
+        "LabVIEW",
+        "MATLAB",
+        "NI MulitiSim",
+        "SciLab",
+        "Python",
+        "NI Hardwares",
+        "Arduino",
+        "Raspberry Pi",
+        "Advantech ADAM Modules",
+        "Teensy",
+        "Robotics Operating System (ROS2) - Gazebo",
+        "PLC and DCS systems",
+        "Windows 10",
+        "Ubuntu 16.04",
+        "Documentation tools like MS Office, Libre Office, LATEX, and Beamer"
       ]
     }
   ],
   "languages": [
     {
-      "language": "German",
-      "fluency": "Native speaker",
-      "icon": ""
+      "language": "English",
+      "fluency": "Fluent"
     },
     {
-      "language": "English",
-      "fluency": "Fluent",
-      "icon": ""
+      "language": "Tamil",
+      "fluency": "Native"
+    }
+  ],
+  "volunteer": [
+    {
+      "organization": "IEEE Ethiopia Sub Section",
+      "position": "Secretary",
+      "startDate": "2023",
+      "endDate": "2025",
+      "summary": "Coordinating IEEE related activities in Ethiopia."
+    }
+  ],
+  "publications": [
+    {
+      "title": "An IoT-Enabled Intelligent and Secure Manufacturing Model Using Blockchain in Hybrid Cloud Communication System",
+      "journal": "Security and Communication Networks",
+     "year": "2023",
+      "authors": ["Sudipto Bhattacharyya", "Senthil Athithan", "Souvik Pal", "Bikramjit Sarkar", "D. Akila", "Subrata Chowdhury", "Karthik Chandran", "Saravanakumar Gurusamy"],
+      "summary": "This paper presents an IoT-enabled manufacturing model that enhances security and efficiency through blockchain technology in hybrid cloud communication systems."
+    },
+    {
+      "title": "Prediction of Flank Wear during Turning of EN8 Steel with Cutting Force Signals Using a Deep Learning Approach",
+      "journal": "Mathematical Problems in Engineering",
+      "year": "2023",
+      "authors": ["S. K. Thangarasu", "T. Mohanraj", "K. Devendran", "M. Rajalakshmi", "S. Chowdhury", "S. Gurusamy"],
+      "summary": "A study on predicting flank wear in EN8 steel turning through cutting force signals, utilizing deep learning techniques for improved accuracy."
+    },
+  ],
+  "awards": [
+    {
+      "title": "Young Scientist Fellowship",
+      "year": "2011",
+      "awarder": "Tamil Nadu State Council for Science and Technology (TNSCST)",
+      "summary": "Awarded for outstandisng contributions to the field of science and technology."
+    },
+    {
+      "title": "Best Paper Award",
+      "events": [
+        {
+          "name": "International Conference on Soft Computing Systems (ICSCS-2016)",
+          "year": "2016"
+        },
+        {
+          "name": "International Conference on Smart Grids, Structures, and Materials (ICSGSM-2021)",
+          "year": "2021"
+        }
+      ],
+      "summary": "Received for exceptional research papers presented at international conferences."
     }
   ],
   "interests": [
     {
-      "name": "Physics",
-      "icon": "fa-solid fa-tag",
-      "keywords": [
-        "Quantum Mechanics",
-        "Quantum Computing",
-        "Quantum Information",
-        "Quantum Cryptography",
-        "Quantum Communication",
-        "Quantum Teleportation"
-      ]
-    }
-  ],
-  "references": [
-    {
-      "name": "Professor Valarmathi ",
-      "icon": "fa-solid fa-laptop",
-      "reference": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam condimentum, diam quis convallis euismod, arcu mi ullamcorper lorem, a vestibulum nunc magna at sem. Sed in risus ac felis varius blandit. D"
+      "name": "Robotics",
+      "keywords": ["RoboSoccer", "Autonomous Vehicles", "Embedded Systems"]
     },
     {
-      "name": "Professor WWilluice Iruthayarajan",
-      "icon": "fa-solid fa-thumbtack",
-      "reference": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam condimentum, diam quis convallis euismod, arcu mi ullamcorper lorem, a vestibulum nunc magna at sem. Sed in risus ac felis varius blandit. D"
+      "name": "Control Systems",
+      "keywords": ["PID Controller Tuning", "Nonlinear Control", "Optimization"]
     }
   ],
   "projects": [
     {
-      "name": "Quantum Computing",
-      "summary": "Quantum computing is the use of quantum-mechanical phenomena such as superposition and entanglement to perform computation. Computers that perform quantum computations are known as quantum computers.",
-      "highlights": ["Quantum Teleportation", "Quantum Cryptography"],
-      "startDate": "2018-01-01",
-      "endDate": "2018-01-01",
-      "url": "https://example.com"
-    }
+      "name": "Embedded Remote Condition Monitoring System for Industrial Machinery",
+      "startDate": "2022",
+      "summary": "Developed a system for remote condition monitoring of industrial machinery, enhancing operational efficiency and predictive maintenance capabilities."
+    },
   ]
 }
