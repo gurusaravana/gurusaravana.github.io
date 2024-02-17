@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Nonlinear Control project 1
-description: a project with a background image
+description: Concept and Research related to Nonlinear Control
 img: assets/img/12.jpg
 importance: 1
 category: work
