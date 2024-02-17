@@ -286,7 +286,7 @@ scholar:
   last_name: [GURUSAMY]
   first_name: [SARAVANAKUMAR]
 
-  style: IEEE
+  style: apa
   locale: en
 
   source: /_bibliography/
