@@ -1,178 +1,199 @@
 {
   "basics": {
-    "name": "Saravanakumar Gurusamy",
-    "label": "Associate Professor",
-    "email": "gurusaravana@ieee.org",
-    "phone": "+91 9994700450",
-    "summary": "Inspiring and motivating young technical minds through research for the betterment and advancement of humanity.",
+    "name": "Albert Einstein",
+    "label": "Scientist",
+    "image": "",
+    "email": "albert@einstein.de",
+    "phone": "(912) 123-4567",
+    "url": "https://alshedivat.github.io/al-folio/",
+    "summary": "A German-born theoretical physicist, widely ranked among the greatest and most influential scientists of all time",
     "location": {
-      "address": "65 Gounder Street Seithur Rajapalayam Taluk",
-      "city": "Virudhunagar District",
-      "region": "Tamil Nadu",
-      "postalCode": "626121",
-      "countryCode": "INDIA"
+      "address": "2712 Broadway St",
+      "postalCode": "CA 94115",
+      "city": "San Francisco",
+      "countryCode": "US",
+      "region": "California"
     },
     "profiles": [
       {
-        "network": "ORCID",
-        "username": "gurusaravana",
-        "url": "http://orcid.org/0000-0002-7721-2613"
+        "network": "Twitter",
+        "username": "AlbertEinstein",
+        "url": "https://twitter.com/AlbertEinstein"
       }
     ]
   },
-  "education": [
-    {
-      "institution": "Kalasalingam Academy of Research and Education",
-      "area": "Instrumentation and Control Engineering",
-      "studyType": "Ph.D",
-      "startDate": "2011",
-      "endDate": "2017",
-      "thesis": "Metaheuristic Algorithms for the Identification of Nonlinear systems and Multivariable PID Controller Tuning"
-    },
-    {
-      "institution": "Anna University Tirunelveli",
-      "area": "Control and Instrumentation Engineering",
-      "studyType": "M.Tech",
-      "startDate": "2007",
-      "endDate": "2009",
-      "grade": "First Class with Distinction"
-    },
-    {
-      "institution": "Manonmaniam Sundaranar University Tirunelveli",
-      "area": "Electronics and Instrumentation Engineering",
-      "studyType": "B.E",
-      "startDate": "2000",
-      "endDate": "2004",
-      "grade": "First Class"
-    }
-  ],
   "work": [
     {
-      "position": "Associate Professor",
-      "department": "Department of Electrical and Electronics Technology",
-      "institution": "FDRE TVT Institute",
-      "startDate": "2019",
-      "summary": "Focus on Electrical and Electronics Technology education and research. Formerly associated with Ethiopian Technical University (ETU)."
+      "name": "Institute for Advanced Study, Princeton University",
+      "position": "Professor of Theoretical Physics",
+      "url": "https://example.com",
+      "startDate": "1933-01-01",
+      "endDate": "1955-01-01",
+      "summary": "Teaching at Palmer Physical Laboratory (now 302 Frist Campus Center). While not a professor at Princeton, I associated with the physics professors and continued to give lectures on campus.",
+      "highlights": ["Relativity"]
+    }
+  ],
+  "volunteer": [
+    {
+      "organization": "People's Climate March",
+      "position": "Lead Organizer",
+      "url": "https://example.com",
+      "startDate": "2014-04-01",
+      "endDate": "2015-07-01",
+      "summary": "Lead organizer for the New York City branch of the People's Climate March, the largest climate march in history.",
+      "highlights": ["Awarded 'Climate Hero' award by Greenpeace for my efforts organizing the march.", "Men of the year 2014 by Time magazine"]
+    }
+  ],
+  "education": [
+    {
+      "institution": "University of Zurich, Zurich, Switzerland",
+      "location": "Zurich, Switzerland",
+      "url": "https://www.uzh.ch/",
+      "area": "Software Development",
+      "studyType": "PhD",
+      "startDate": "1905-01-01",
+      "endDate": "1905-01-01",
+      "score": "10",
+      "courses": ["Theory of Relativity"]
+    }
+  ],
+  "awards": [
+    {
+      "title": "Nobel Prize in Physics",
+      "date": "1921-11-01",
+      "awarder": "Royal Swedish Academy of Sciences",
+      "url": "https://www.nobelprize.org/prizes/physics/1921/einstein/biographical/",
+      "summary": "The Nobel Prizes are five separate prizes that, according to Alfred Nobel's will of 1895, are awarded to 'those who, during the preceding year, have conferred the greatest benefit to humankind.'"
+    }
+  ],
+  "certificates": [
+    {
+      "name": "Machine Learning",
+      "date": "2018-01-01",
+      "issuer": "Stanford University",
+      "url": "https://example.com",
+      "icon": "fa-solid fa-location-dot"
     },
     {
-      "position": "Lecturer",
-      "department": "Department of Electrical and Computer Engineering",
-      "institution": "University of Gondar",
-      "startDate": "2014",
-      "endDate": "2018",
-      "summary": "Engaged in Electrical and Computer Engineering education and research activities."
+      "name": "Quantum Computing",
+      "date": "2018-01-01",
+      "issuer": "Stanford University",
+      "url": "https://example.com",
+      "icon": "fa-solid fa-tag"
     },
     {
-      "position": "Assistant Professor",
-      "department": "Department of Instrumentation and Control Engineering",
-      "institution": "Kalasalingam Academy of Research and Education",
-      "startDate": "2009",
-      "endDate": "2014",
-      "summary": "Contributed to Instrumentation and Control Engineering education and research."
+      "name": "Quantum Information",
+      "date": "2018-01-01",
+      "issuer": "Stanford University",
+      "url": "https://example.com",
+      "icon": "fa-solid fa-envelope"
     },
     {
-      "position": "Lecturer",
-      "department": "Department of Electronics and Communication Engineering",
-      "institution": "Lakshmi Ammal Polytechnic College",
-      "startDate": "2004",
-      "endDate": "2007",
-      "summary": "Engaged in Electronics and Communication Engineering education."
+      "name": "Quantum Cryptography",
+      "date": "2018-01-01",
+      "issuer": "Stanford University",
+      "url": "https://example.com",
+      "icon": "fa-solid fa-hashtag"
+    },
+    {
+      "name": "Quantum Communication",
+      "date": "2018-01-01",
+      "issuer": "Stanford University",
+      "url": "https://example.com",
+      "icon": "fa-solid fa-calendar"
+    },
+    {
+      "name": "Quantum Teleportation",
+      "date": "2018-01-01",
+      "issuer": "Stanford University",
+      "url": "https://example.com",
+      "icon": "fa-solid fa-clipboard-check"
+    }
+  ],
+  "publications": [
+    {
+      "name": "Zur Elektrody/namik bewegter Körper",
+      "publisher": "Annalen der Physik",
+      "releaseDate": "1905-06-30",
+      "url": "https://en.wikisource.org/wiki/Translation:On_the_Electrodynamics_of_Moving_Bodies",
+      "summary": "It concerned an interpretation of the Michelson–Morley experiment and the properties of light and time. Special relativity incorporates the principle that the speed of light is the same for all inertial observers regardless of the state of motion of the source."
+    },
+    {
+      "name": "Über einen die Erzeugung und Verwandlung des Lichtes betreffenden heuristischen Gesichtspunkt",
+      "publisher": "Annalen der Physik",
+      "releaseDate": "1905-03-18",
+      "url": "https://de.wikisource.org/wiki/Über_einen_die_Erzeugung_und_Verwandlung_des_Lichtes_betreffenden_heuristischen_Gesichtspunkt",
+      "summary": "In the second paper, he applied the quantum theory to light to explain the photoelectric effect. In particular, he used the idea of light quanta (photons) to explain experimental results, but stressed the importance of the experimental results. The importance of his work on the photoelectric effect earned him the Nobel Prize in Physics in 1921."
+    },
+    {
+      "name": "Die Grundlage der allgemeinen Relativitätstheorie",
+      "publisher": "Annalen der Physik",
+      "releaseDate": "1916-03-20",
+      "url": "https://de.wikisource.org/wiki/Die_Grundlage_der_allgemeinen_Relativitätstheorie",
+      "summary": "The publication of the theory of general relativity made him internationally famous. He was professor of physics at the universities of Zurich (1909–1911) and Prague (1911–1912), before he returned to ETH Zurich (1912–1914)."
     }
   ],
   "skills": [
     {
-      "name": "Technical Skills",
-      "details": [
-        "LabVIEW",
-        "MATLAB",
-        "NI MulitiSim",
-        "SciLab",
-        "Python",
-        "NI Hardwares",
-        "Arduino",
-        "Raspberry Pi",
-        "Advantech ADAM Modules",
-        "Teensy",
-        "Robotics Operating System (ROS2) - Gazebo",
-        "PLC and DCS systems",
-        "Windows 10",
-        "Ubuntu 16.04",
-        "Documentation tools like MS Office, Libre Office, LATEX, and Beamer"
+      "name": "Physics",
+      "level": "Master",
+      "icon": "fa-solid fa-hashtag",
+      "keywords": [
+        "Quantum Mechanics",
+        "Quantum Computing",
+        "Quantum Information",
+        "Quantum Cryptography",
+        "Quantum Communication",
+        "Quantum Teleportation"
       ]
     }
   ],
   "languages": [
     {
+      "language": "German",
+      "fluency": "Native speaker",
+      "icon": ""
+    },
+    {
       "language": "English",
-      "fluency": "Fluent"
-    },
-    {
-      "language": "Tamil",
-      "fluency": "Native"
-    }
-  ],
-  "volunteer": [
-    {
-      "organization": "IEEE Ethiopia Sub Section",
-      "position": "Secretary",
-      "startDate": "2023",
-      "endDate": "2025",
-      "summary": "Coordinating IEEE related activities in Ethiopia."
-    }
-  ],
-  "publications": [
-    {
-      "title": "An IoT-Enabled Intelligent and Secure Manufacturing Model Using Blockchain in Hybrid Cloud Communication System",
-      "journal": "Security and Communication Networks",
-     "year": "2023",
-      "authors": ["Sudipto Bhattacharyya", "Senthil Athithan", "Souvik Pal", "Bikramjit Sarkar", "D. Akila", "Subrata Chowdhury", "Karthik Chandran", "Saravanakumar Gurusamy"],
-      "summary": "This paper presents an IoT-enabled manufacturing model that enhances security and efficiency through blockchain technology in hybrid cloud communication systems."
-    },
-    {
-      "title": "Prediction of Flank Wear during Turning of EN8 Steel with Cutting Force Signals Using a Deep Learning Approach",
-      "journal": "Mathematical Problems in Engineering",
-      "year": "2023",
-      "authors": ["S. K. Thangarasu", "T. Mohanraj", "K. Devendran", "M. Rajalakshmi", "S. Chowdhury", "S. Gurusamy"],
-      "summary": "A study on predicting flank wear in EN8 steel turning through cutting force signals, utilizing deep learning techniques for improved accuracy."
-    },
-  ],
-  "awards": [
-    {
-      "title": "Young Scientist Fellowship",
-      "year": "2011",
-      "awarder": "Tamil Nadu State Council for Science and Technology (TNSCST)",
-      "summary": "Awarded for outstandisng contributions to the field of science and technology."
-    },
-    {
-      "title": "Best Paper Award",
-      "events": [
-        {
-          "name": "International Conference on Soft Computing Systems (ICSCS-2016)",
-          "year": "2016"
-        },
-        {
-          "name": "International Conference on Smart Grids, Structures, and Materials (ICSGSM-2021)",
-          "year": "2021"
-        }
-      ],
-      "summary": "Received for exceptional research papers presented at international conferences."
+      "fluency": "Fluent",
+      "icon": ""
     }
   ],
   "interests": [
     {
-      "name": "Robotics",
-      "keywords": ["RoboSoccer", "Autonomous Vehicles", "Embedded Systems"]
+      "name": "Physics",
+      "icon": "fa-solid fa-tag",
+      "keywords": [
+        "Quantum Mechanics",
+        "Quantum Computing",
+        "Quantum Information",
+        "Quantum Cryptography",
+        "Quantum Communication",
+        "Quantum Teleportation"
+      ]
+    }
+  ],
+  "references": [
+    {
+      "name": "Professor John Doe",
+      "icon": "fa-solid fa-laptop",
+      "reference": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam condimentum, diam quis convallis euismod, arcu mi ullamcorper lorem, a vestibulum nunc magna at sem. Sed in risus ac felis varius blandit. D"
     },
     {
-      "name": "Control Systems",
-      "keywords": ["PID Controller Tuning", "Nonlinear Control", "Optimization"]
+      "name": "Professor John Doe",
+      "icon": "fa-solid fa-thumbtack",
+      "reference": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam condimentum, diam quis convallis euismod, arcu mi ullamcorper lorem, a vestibulum nunc magna at sem. Sed in risus ac felis varius blandit. D"
     }
   ],
   "projects": [
     {
-      "name": "Embedded Remote Condition Monitoring System for Industrial Machinery",
-      "startDate": "2022",
-      "summary": "Developed a system for remote condition monitoring of industrial machinery, enhancing operational efficiency and predictive maintenance capabilities."
-    },
+      "name": "Quantum Computing",
+      "summary": "Quantum computing is the use of quantum-mechanical phenomena such as superposition and entanglement to perform computation. Computers that perform quantum computations are known as quantum computers.",
+      "highlights": ["Quantum Teleportation", "Quantum Cryptography"],
+      "startDate": "2018-01-01",
+      "endDate": "2018-01-01",
+      "url": "https://example.com"
+    }
   ]
 }
