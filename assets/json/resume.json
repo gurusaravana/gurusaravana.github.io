@@ -135,7 +135,6 @@
       "authors": ["S. K. Thangarasu", "T. Mohanraj", "K. Devendran", "M. Rajalakshmi", "S. Chowdhury", "S. Gurusamy"],
       "summary": "A study on predicting flank wear in EN8 steel turning through cutting force signals, utilizing deep learning techniques for improved accuracy."
     },
-    // Additional publications omitted for brevity
   ],
   "awards": [
     {
@@ -175,6 +174,5 @@
       "startDate": "2022",
       "summary": "Developed a system for remote condition monitoring of industrial machinery, enhancing operational efficiency and predictive maintenance capabilities."
     },
-    // Additional projects omitted for brevity
   ]
 }
