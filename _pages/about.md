@@ -9,7 +9,11 @@ profile:
   image: guruv2.png
   image_circular: true # crops the image to make it circular
   more_info: >
+<<<<<<< HEAD
     <p>Departmen to EET, B9, Room 202 </p>
+=======
+    <p>555 Departmen to EET, B9, Room 202 </p>
+>>>>>>> ec498350b3f9f293e2b9322fa07c382bec3bb8ab
     <p>Addis Ababa</p>
     <p>Ethiopia 22113/1000 </p>
 
