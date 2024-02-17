@@ -1,8 +1,8 @@
 ---
 layout: page
-title: projects
+title: Academic and Research Projects
 permalink: /projects/
-description: Academic and Research Projects
+description: Deatils of academic and research Projects
 nav: true
 nav_order: 3
 display_categories: [work, fun]
