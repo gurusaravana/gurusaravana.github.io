@@ -1,7 +1,7 @@
 ---
 layout: about
 title: about
-permalink: /
+permalink: /about/
 subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Moto. Etc.
 
 profile:
@@ -9,13 +9,8 @@ profile:
   image: guruv2.png
   image_circular: true # crops the image to make it circular
   more_info: >
-<<<<<<< HEAD
     <p>Departmen to EET, </p>
     <p>B9, Room 202, Addis Ababa</p>
-=======
-    <p>Departmen to EET, B9, Room 202 </p>
-    <p>Addis Ababa</p>
->>>>>>> be89e5fd39980380a0e7e11b8eda3b716f60dd06
     <p>Ethiopia 22113/1000 </p>
 
 news: true # includes a list of news items

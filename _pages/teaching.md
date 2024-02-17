@@ -7,9 +7,9 @@ nav: true
 nav_order: 6
 ---
 
-- Nonlinear Control
-- Adaptive Control
-- Digital Control
+- # Nonlinear Control
+- # Adaptive Control
+- # Digital Control
 - Virtual Instrumenation
 - System Identification
 - Linear and Nonlionar Control
@@ -17,9 +17,3 @@ nav_order: 6
 - Industrial Automation
 - Computer Control of  Process
 - Process Control
-
-
-
-# For now, this page is assumed to be a static description of your courses. You can convert it to a #collection similar to `_projects/` so that you can have a dedicated page for each course.
-
-# Organize your courses by years, topics, or universities, however you like!
