@@ -5,7 +5,7 @@ title: Teaching
 description: Course Materials for the courses that i taught in UG and PG Level in KARE, UoG and FTI
 nav: true
 nav_order: 6
-display_categories: [work, fun]
+display_categories: [UG, PG]
 horizontal: false
 ---
 ### Undergraduate Level Courses Taught at KARE, UOG:
