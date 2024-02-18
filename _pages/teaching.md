@@ -8,7 +8,7 @@ nav_order: 6
 display_categories: [UG, PG]
 horizontal: false
 ---
-### Undergraduate Level Courses Taught at KARE, UOG:
+- ### Undergraduate Level Courses Taught at KARE, UOG:
 1. **Electrical Measurement and Instrumentation** - Focused on principles and applications of measuring electrical quantities.
 2. **Virtual Instrumentation** - Explored software and hardware for creating flexible measurement systems.
 3. **System Identification** - Covered methods for building mathematical models from measured data.
@@ -19,7 +19,7 @@ horizontal: false
 8. **Process Control** - Covered techniques and technologies used in industrial process control.
 9. **Microprocessor and Microcontroller** - 
 10. **Control systems** - A comprehensive course covering fundamentals to Linear contol topics.
-### Postgraduate Level Courses Taught at KARE, FTI:
+- ### Postgraduate Level Courses Taught at KARE, FTI:
 1. **Nonlinear Control** - Advanced study on control systems with nonlinear dynamics.
 2. **Adaptive Control** - Covered control systems that adapt to changing environments and parameters.
 3. **Advanced Process Control** - Focused on advanced process control techniques and technologies.
@@ -37,7 +37,7 @@ horizontal: false
   <a id="{{ category }}" href=".#{{ category }}">
     <h2 class="category">{{ category }}</h2>
   </a>
-  {% assign categorized_projects = sit.teaching | where: "category", category %}
+  {% assign categorized_projects = site.teaching | where: "category", category %}
   {% assign sorted_projects = categorized_projects | sort: "importance" %}
   <!-- Generate cards for each project -->
   {% if page.horizontal %}
