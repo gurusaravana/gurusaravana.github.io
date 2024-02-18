@@ -247,7 +247,7 @@
                 "Arduino",
                 "Raspberry Pi",
                 "PLC",
-                "DCS"
+                "DCS",
                 "tinyML"
             ]
         }
