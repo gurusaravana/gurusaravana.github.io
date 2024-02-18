@@ -4,7 +4,7 @@ permalink: /teaching/
 title: Teaching
 description: Course Materials for the courses that i taught in UG and PG Level in KARE, UoG and FTI
 nav: true
-nav_order: 6
+nav_order: 3
 display_categories: [UG, PG]
 horizontal: false
 ---
