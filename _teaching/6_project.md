@@ -4,7 +4,7 @@ title: project 6
 description: a project with no image
 img:
 importance: 6
-category: fun
+category: UG
 ---
 
 Every project has a beautiful feature showcase page.

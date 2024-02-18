@@ -1,9 +1,9 @@
 ---
 layout: page
-title: project 5
-description: a project with a background image
+title: MSc Thesis Works
+description: Thesis work of my Students
 img: assets/img/1.jpg
-importance: 3
+importance: 4
 category: fun
 ---
 

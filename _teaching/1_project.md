@@ -1,10 +1,10 @@
 ---
 layout: page
-title: Nonlinear Control project 1
+title: Nonlinear Control Course
 description: Concept and Research related to Nonlinear Control
 img: assets/img/12.jpg
 importance: 1
-category: work
+category: PG
 related_publications: true
 ---
 

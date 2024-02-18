@@ -1,10 +1,10 @@
 ---
 layout: page
-title: project 4
-description: another without an image
+title: Climate actions for Sustainability (SDG 7)
+description: SDG Framework with Energy transition
 img:
 importance: 3
-category: fun
+category: Work
 ---
 
 Every project has a beautiful feature showcase page.

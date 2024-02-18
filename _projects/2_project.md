@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Adaptive Control project 2
+title: Digital Twin (DT)
 description: a project with a background image and giscus comments
 img: assets/img/3.jpg
 importance: 2
