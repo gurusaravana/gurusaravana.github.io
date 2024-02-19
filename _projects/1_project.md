@@ -77,7 +77,7 @@ ROS 2 is used in a wide range of robotic applications, including but not limited
 
 To get started with ROS 2, you would typically follow these steps:
 
-1. **Installation:** Download and install ROS 2 from the official [ROS 2 website](https://index.ros.org/doc/ros2/Installation/), selecting the version and OS that fits your project needs.
+1. **Installation:** Download and install ROS 2 from the official [ROS 2 website](https://wiki.ros.org/ROS/Installation), selecting the version and OS that fits your project needs.
 2. **Learn the Basics:** Go through the tutorials and documentation available on the ROS 2 website to understand the core concepts, tools, and functionalities.
 3. **Build Your Application:** Start building your robot applications using ROS 2 libraries and tools, customizing and extending the system as needed for your specific project requirements.
 
