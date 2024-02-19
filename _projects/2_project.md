@@ -7,7 +7,7 @@ importance: 2
 category: work
 giscus_comments: true
 ---
-Details will be updated soon.
+- # Details will be updated soon.
 
 ```html
 <div class="row justify-content-sm-center">
@@ -19,5 +19,3 @@ Details will be updated soon.
   </div>
 </div>
 ```
-
-{% endraw %}
