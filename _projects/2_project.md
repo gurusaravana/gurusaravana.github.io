@@ -1,13 +1,15 @@
 ---
 layout: page
 title: Digital Twin (DT)
-description: a project with a background image and giscus comments
-img: assets/img/3.jpg
+description: Concepts and project related to Digital Twin 
+img: assets/img/DT1.png
 importance: 2
 category: work
 giscus_comments: true
 ---
+Details will be updated soon.
 
+<!-- 
 Every project has a beautiful feature showcase page.
 It's easy to include images in a flexible 3-column grid format.
 Make your photos 1/3, 2/3, or full width.
@@ -32,6 +34,7 @@ To give your project a background in the portfolio page, just add the img tag to
         {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
+
 <div class="caption">
     Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
 </div>
@@ -74,6 +77,21 @@ Here's the code for the last row of images above:
   </div>
   <div class="col-sm-4 mt-3 mt-md-0">
     {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+  </div>
+</div>
+```
+
+{% endraw %} -->
+
+{% raw %}
+
+```html
+<div class="row justify-content-sm-center">
+  <div class="col-sm-8 mt-3 mt-md-0">
+    {% include figure.liquid path="assets/img/DT11.png" title="Digital Twin" class="img-fluid rounded z-depth-1" %}
+  </div>
+  <div class="col-sm-4 mt-3 mt-md-0">
+    {% include figure.liquid path="assets/img/DT1.png" title="Digtial Twin" class="img-fluid rounded z-depth-1" %}
   </div>
 </div>
 ```
