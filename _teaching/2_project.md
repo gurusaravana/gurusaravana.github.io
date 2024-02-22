@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Adaptive Control System
-description: a project with a background image and giscus comments
+description: Lecture notes related to Adaptive Control system
 img: assets/img/3.jpg
 importance: 2
 category: PG

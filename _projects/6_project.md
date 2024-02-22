@@ -4,6 +4,6 @@ title: Academic Research Projects - Institutional Funding
 description: Open PLC Project
 img:
 importance: 4
-category: fun
+category: Academic
 ---
 - # will be updated soon..

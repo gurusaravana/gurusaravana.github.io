@@ -1,12 +1,12 @@
 ---
 layout: page
 title: Data Driven Control System
-description: Concepts and codes
+description: Concepts and codes realted to Data driven Control
 img: assets/img/7.jpg
 importance: 3
 category: PG
 ---
-- ## will be update Soon ... 
+- ## will be updated Soon ... 
 
 {% raw %}
 

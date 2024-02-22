@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Process Control 
-description: Concept and Codes 
+description: Lecture notes on Process Control 
 img:
 importance: 2
 category: UG

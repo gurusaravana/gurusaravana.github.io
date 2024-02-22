@@ -1,10 +1,10 @@
 ---
 layout: page
 title: Digital Twin (DT)
-description: Concepts and project related to Digital Twin 
+description: Concepts and projects related to Digital Twin 
 img: assets/img/DT1.png
 importance: 2
-category: work
+category: Research
 giscus_comments: true
 ---
 - # Details will be updated soon.

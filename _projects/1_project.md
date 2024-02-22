@@ -1,10 +1,10 @@
 ---
 layout: page
 title: Robotics Operating System (ROS2) - Control Framework
-description: Concept and Research related to Nonlinear Control
+description: Concept and Research related to Robotics using (ROS2)
 img: assets/img/ROS2.png
 importance: 1
-category: work
+category: Research
 related_publications: true
 ---
 

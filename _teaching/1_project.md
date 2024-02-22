@@ -1,10 +1,10 @@
 ---
 layout: page
-title: Nonlinear Control Course
-description: Concept and Research related to Nonlinear Control
+title: Nonlinear Control System
+description: Lecture notes related to Nonlinear Control course
 img: assets/img/12.jpg
 importance: 1
 category: PG
 related_publications: true
 ---
-- # will be updated soon
+- # will be updated soon....

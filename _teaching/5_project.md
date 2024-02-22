@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Linear Control System
-description: Concept and Codes
+description: Lecture and Tutorials on Linear Control System
 img: assets/img/1.jpg
 importance: 1
 category: UG
