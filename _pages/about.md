@@ -29,3 +29,30 @@ A prolific researcher and a revered mentor, Dr. Gurusamy has guided teams to not
 Beyond his academic and research accomplishments, his professional affiliations with prestigious societies like IEEE, where he holds senior membership, and ISTE, reflect his esteemed standing in the engineering community. Currently serving as the Secretary of the IEEE Ethiopia Subsection, he continues to play a pivotal role in advancing the engineering profession and fostering a culture of innovation and excellence.
 
 His career is a testament to unwavering dedication to education, research, and the advancement of engineering. His work not only contributes to the body of scientific knowledge but also serves as an inspiration to students, colleagues, and professionals worldwide, embodying the true spirit of a scholar dedicated to the betterment of society through engineering and technology.
+
+# Our Contribution to Sustainable Development Goals
+
+## SDG 4: Quality Education
+![SDG 4: Quality Education](4_SDG.gif)
+
+Committed to enhancing education quality and accessibility, supporting schools and educational programs worldwide.
+
+## SDG 7: Affordable and Clean Energy
+![SDG 7: Affordable and Clean Energy](7_SDG.gif)
+
+Our initiatives in renewable energy projects have impacted numerous communities, providing sustainable power solutions.
+
+## SDG 11: Sustainable Cities and Communities
+![SDG 11: Sustainable Cities and Communities](4_SDG.gif)
+
+We are involved in urban planning projects that emphasize sustainability, reducing the carbon footprint of cities.
+
+## SDG 13: Climate Action
+![SDG 13: Climate Action](4_SDG.gif)
+
+Our climate change awareness campaigns are helping to drive action and policy change at various levels of government.
+
+## SDG 17: Partnerships for the Goals
+![SDG 17: Partnerships for the Goals](17_SDG.gif)
+
+Foster global partnerships that enable sharing of sustainable technologies and practices.
