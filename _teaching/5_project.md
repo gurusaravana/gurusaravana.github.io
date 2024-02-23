@@ -35,6 +35,7 @@ category: UG
    - [Introduction to Digital Control Systems](#introduction-to-digital-control-systems)
    - [Overview of Nonlinear Control Systems](#overview-of-nonlinear-control-systems)
    - [Lab: Digital Control Design](#lab-digital-control-design)
+7. [Control System using Julia Language](#control-system-using-julia-language)
 
 ---
 
@@ -111,3 +112,14 @@ Implementing digital control systems on microcontrollers or FPGAs.
 2. R.C. Dorf and R.H. Bishop, "Modern Control Systems."
 3. Software Tools: MATLAB/Simulink, LabVIEW.
 4. Journals: IEEE Transactions on Automatic Control, Control Systems Magazine.
+
+## Control System using Julia Language
+{::nomarkdown}
+{% assign jupyter_path = 'assets/jupyter/conJu1.ipynb' | relative_url %}
+{% capture notebook_exists %}{% file_exists assets/jupyter/blog.ipynb %}{% endcapture %}
+{% if notebook_exists == 'true' %}
+  {% jupyter_notebook jupyter_path %}
+{% else %}
+  <p>Sorry, the notebook you are looking for does not exist.</p>
+{% endif %}
+{:/nomarkdown}
