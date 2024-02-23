@@ -12,6 +12,7 @@ related_publications: true
 1. [Key Features and Improvements over ROS 1](#key-features-and-improvements-over-ros-1)
 2. [Use Cases](#use-cases)
 3. [Getting Started](#getting-started)
+4. [Creating Packages](#creating-packages)
 
 ROS 2 (Robot Operating System 2) is the second generation of the Robot Operating System (ROS), which is an open-source set of software libraries and tools that help you build robot applications. ROS 2 builds upon the successes of ROS 1 and addresses some of its limitations, especially in terms of real-time processing, security, scalability, and system architecture. It is designed to be more flexible and adaptable to the needs of modern robotics projects, including those that require real-time performance or operate in distributed environments.
 
@@ -60,3 +61,75 @@ To get started with ROS 2, you would typically follow these steps:
 
 ROS 2 represents a significant step forward in the development of robotic systems, offering a more robust, secure, and flexible framework for both research and commercial projects in the field of robotics.
 
+## Creating Packages
+
+Creating packages in ROS2 involves a structured process to organize your robotics software's nodes, libraries, and other components. Here's a step-by-step guide to get you started with creating a new package in ROS2:
+
+#### Setup ROS2 Environment
+Ensure you have ROS2 installed on your system. Source your ROS2 installation to set up your environment:
+
+```bash
+source /opt/ros/<distro>/setup.bash
+```
+Replace `<distro>` with your ROS2 distribution name (e.g., foxy, galactic).
+
+#### Create a Workspace
+ROS2 packages are typically developed in a workspace. Create and navigate to a new workspace directory:
+
+```bash
+mkdir -p ~/ros2_ws/src
+cd ~/ros2_ws/
+```
+
+#### Create a Package
+Use the `ros2 pkg create` command to create a new package. Here is the basic syntax:
+
+```bash
+ros2 pkg create --build-type ament_cmake <package_name>
+```
+
+Replace `<package_name>` with your desired package name. The `--build-type` option specifies the build system; `ament_cmake` for C++ packages or `ament_python` for Python packages.
+
+##### Example:
+```bash
+ros2 pkg create --build-type ament_cmake my_ros2_package
+```
+
+This command creates a new package directory under `~/ros2_ws/src` with some starter files, including a `package.xml` and CMakeLists.txt for C++ packages.
+
+#### Customize Package.xml
+Edit the `package.xml` file in your package directory to add package information like version, description, maintainers, and dependencies.
+
+#### Write Package Code
+Add your source code to the package. For C++ packages, place your `.cpp` files in the `src` directory and header files in the `include/<package_name>` directory. For Python packages, place your `.py` files directly in the package folder.
+
+#### Build Your Package
+Navigate back to your workspace directory and build your package using `colcon`:
+
+```bash
+cd ~/ros2_ws
+colcon build --packages-select <package_name>
+```
+
+Replace `<package_name>` with the name of your package.
+
+#### Source the Setup Script
+After building, you need to source the setup script to make the ROS2 environment aware of your new package:
+
+```bash
+source install/setup.bash
+```
+
+#### Verify Package Creation
+Use ROS2 CLI tools to verify that your package has been created successfully:
+
+```bash
+ros2 pkg list | grep <package_name>
+```
+
+This command should return your package name, indicating it's recognized by the ROS2 environment.
+
+##### Tips for Package Development
+- Keep your package's purpose focused; it's better to have multiple small packages than one large package.
+- Follow best practices for naming and organizing your package's components.
+- Regularly run tests and use continuous integration to maintain package quality.

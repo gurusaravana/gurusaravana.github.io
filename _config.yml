@@ -295,6 +295,7 @@ scholar:
   bibliography_template: bib
   abstract: true
   bibtex_show: true
+  repository: /publications
 
   # Note: if you have latex math in your bibtex, the latex filter
   # preprocessing may conflict with MathJAX if the latter is enabled.
