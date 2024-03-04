@@ -9,9 +9,9 @@ profile:
   image: gskPro1.jpg
   image_circular: true # crops the image to make it circular
   more_info: >
-    <p>Department to EET,Block-9,</p>
-    <p>Room Nr:202, Addis Ababa,</p>
-    <p>Ethiopia, PBox:22113/1000. </p>
+    <p>Department of EET,Block 9,</p>
+    <p>Room Nr: 202, Addis Ababa </p>
+    <p>Ethiopia PBox:22113/1000 </p>
 
 news: false # includes a list of news items
 latest_posts: false # includes a list of the newest posts
@@ -30,20 +30,32 @@ Beyond his academic and research accomplishments, his professional affiliations 
 
 His career is a testament to unwavering dedication to education, research, and the advancement of engineering. His work not only contributes to the body of scientific knowledge but also serves as an inspiration to students, colleagues, and professionals worldwide, embodying the true spirit of a scholar dedicated to the betterment of society through engineering and technology.
 
-### Impact to Sustainable Development Goals
+# Impact to Sustainable Development Goals
 
-### SDG 4: Quality Education
-Committed to enhancing education quality and accessibility, supporting schools and educational programs worldwide. 
+## SDG 4: Quality Education
+![SDG 4: Quality Education](/assets/img/4_SDG.gif)
 
-<img src="/assets/img/4_SDG.gif" width="100" height="100" alt="SDG 4: Quality Education">
+Committed to enhancing education quality and accessibility, supporting schools and educational programs worldwide.
 
-### SDG 7: Affordable and Clean Energy
+## SDG 7: Affordable and Clean Energy
+![SDG 7: Affordable and Clean Energy](/assets/img/7_SDG.gif)
+
 Our initiatives in renewable energy projects have impacted numerous communities, providing sustainable power solutions.
+<!---
 
-<img src="/assets/img/7_SDG.gif" width="100" height="100" alt="SDG 7: Quality Education">
+## SDG 11: Sustainable Cities and Communities
+![SDG 11: Sustainable Cities and Communities](/assets/img/4_SDG.gif)
 
-### SDG 17: Partnerships for the Goals
+Involved in urban planning projects that emphasize sustainability, reducing the carbon footprint of cities.
+
+## SDG 13: Climate Action
+![SDG 13: Climate Action](/assets/img/4_SDG.gif)
+
+Our climate change awareness campaigns are helping to drive action and policy change at various levels of government.
+comments syntax
+--->
+
+## SDG 17: Partnerships for the Goals
+![SDG 17: Partnerships for the Goals](/assets/img/17_SDG.gif)
 
 Foster global partnerships that enable sharing of sustainable technologies and practices.
-
-<img src="/assets/img/17_SDG.gif" width="100" height="100" alt="SDG 4: Quality Education">
