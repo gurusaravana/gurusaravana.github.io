@@ -8,6 +8,8 @@ nav_order: 3
 display_categories: [UG, PG]
 horizontal: false
 ---
+<!---
+comments syntax
 - ### Undergraduate Level Courses Taught at KARE, UOG:
 1. **Electrical Measurement and Instrumentation** - Focused on principles and applications of measuring electrical quantities.
 2. **Virtual Instrumentation** - Explored software and hardware for creating flexible measurement systems.
@@ -28,6 +30,7 @@ horizontal: false
 6. **Intelligent Control** - Studied fuzzy, ANN, ANFIS and artificial intelligence applications in control systems.
 7. **Industrial Automation and Robotics** - Aimed at the design, operation, and application of robots in automation.
 8. **System Identification and Adaptive Control** - Covered methods for building mathematical models from measured data and ontrol systems that adapt to changing environments and parameters.
+--->
 
 <!-- pages/projects.md -->
 <div class="projects">
