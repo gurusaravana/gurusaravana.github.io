@@ -9,7 +9,10 @@ display_categories: [UG, PG]
 horizontal: false
 ---
 <!---
+<<<<<<< HEAD
 comments syntax
+=======
+>>>>>>> e9d3ff5 (xx)
 - ### Undergraduate Level Courses Taught at KARE, UOG:
 1. **Electrical Measurement and Instrumentation** - Focused on principles and applications of measuring electrical quantities.
 2. **Virtual Instrumentation** - Explored software and hardware for creating flexible measurement systems.
