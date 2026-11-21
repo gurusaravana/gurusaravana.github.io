@@ -4,7 +4,9 @@ Personal academic website of Dr. Saravanakumar Gurusamy, live at https://gurusar
 
 ## How to update the website
 
-Everything on the website is in one file: `index.html`.
+The home page is `index.html`. Each course has its own page in the `courses` folder, with lecture files in `courses/files`.
+
+**To add notes, slides, live simulations, animations or videos to a course, follow [HOW-TO-ADD-TEACHING-CONTENT.md](HOW-TO-ADD-TEACHING-CONTENT.md).**
 
 1. Open `index.html` on GitHub and click the pencil icon ("Edit this file").
 2. Find the text you want to change (for example a course name or a new paper) and edit it.

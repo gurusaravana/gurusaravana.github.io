@@ -8,76 +8,7 @@
 <link rel="icon" href="assets/img/favicon1.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#fbfaf7;--surface:#ffffff;--ink:#1c2230;--muted:#5d6577;--line:#e6e2d9;--accent:#0f5c63;--accent-soft:#e3f0ef;--gold:#b7862c;}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12161d;--surface:#1a2029;--ink:#e8eaee;--muted:#9aa3b2;--line:#2a313c;--accent:#5fc2bb;--accent-soft:#1d3134;--gold:#d9ad5b;}}
-:root[data-theme="dark"]{--bg:#12161d;--surface:#1a2029;--ink:#e8eaee;--muted:#9aa3b2;--line:#2a313c;--accent:#5fc2bb;--accent-soft:#1d3134;--gold:#d9ad5b;}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:72px}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,system-ui,sans-serif}
-a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
-h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.2;margin:0}
-.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
-header.nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-header.nav .wrap{display:flex;align-items:center;gap:16px;height:60px}
-.brand{font-family:"Source Serif 4",serif;font-weight:600;color:var(--ink);white-space:nowrap}
-nav.links{display:flex;gap:18px;margin-left:auto;min-width:0;overflow-x:auto;scrollbar-width:none}
-nav.links a{color:var(--muted);font-size:14px;font-weight:500;white-space:nowrap}
-nav.links a:hover{color:var(--ink);text-decoration:none}
-#theme{display:grid;place-items:center;background:none;border:1px solid var(--line);border-radius:8px;color:var(--muted);width:34px;height:34px;cursor:pointer;flex:none}
-.hero{padding:64px 0 48px;display:grid;grid-template-columns:220px 1fr;gap:44px;align-items:center}
-.hero img{width:220px;height:220px;border-radius:50%;object-fit:cover;object-position:top;border:4px solid var(--surface);box-shadow:0 0 0 1px var(--line)}
-.eyebrow{color:var(--gold);font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
-.hero h1{font-size:clamp(30px,5vw,46px)}
-.role{font-size:18px;color:var(--muted);margin:10px 0 18px}
-.tagline{font-family:"Source Serif 4",serif;font-style:italic;font-size:18px;border-left:3px solid var(--accent);padding-left:14px;margin:0 0 22px}
-.profiles{display:flex;flex-wrap:wrap;gap:8px}
-.profiles a{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:6px 12px;border-radius:999px;font-size:14px;font-weight:500}
-.profiles a:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
-section{padding:56px 0;border-top:1px solid var(--line)}
-section h2{font-size:30px;margin-bottom:22px}
-.grid2{display:grid;grid-template-columns:1.6fr 1fr;gap:40px}.grid2.even{grid-template-columns:1fr 1fr}.grid2>*{min-width:0}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px}
-.card h3{font-size:18px;margin-bottom:12px}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chips span{background:var(--accent-soft);color:var(--accent);padding:6px 12px;border-radius:8px;font-size:14px;font-weight:500}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
-.stats div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center}
-.stats b{display:block;font-family:"Source Serif 4",serif;font-size:28px;color:var(--accent)}
-.stats small{color:var(--muted);font-size:13px}
-.toolbar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px}
-.toolbar input{flex:1;min-width:200px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font:inherit}
-.toolbar button{padding:9px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--muted);font:inherit;font-size:14px;cursor:pointer}
-.toolbar button.on{background:var(--accent);border-color:var(--accent);color:#fff}
-h3.year{font-size:20px;color:var(--gold);margin:26px 0 8px}
-ol.pubs{list-style:none;margin:0;padding:0}
-.pub{padding:14px 0;border-bottom:1px dashed var(--line)}
-.tag{float:right;margin-left:12px;font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:1px 8px}
-.ptitle{font-weight:600;color:var(--ink)}
-.pauth{color:var(--muted);font-size:14.5px;margin-top:3px}.pauth strong{color:var(--ink)}
-.pvenue{font-style:italic;font-size:14.5px;color:var(--muted)}
-.empty{display:none;color:var(--muted);padding:20px 0}
-ul.courses{margin:0;padding-left:18px}ul.courses li{margin:6px 0}
-.timeline{position:relative;margin:0;padding:0;list-style:none}
-.timeline li{position:relative;padding:0 0 22px 26px;border-left:2px solid var(--line);margin-left:6px}
-.timeline li:last-child{padding-bottom:0}
-.timeline li::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--accent)}
-.when{font-size:13px;color:var(--gold);font-weight:600}
-.what{font-weight:600}.where{color:var(--muted);font-size:14.5px}
-.sdg{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.sdg .card{display:flex;gap:14px;align-items:flex-start}
-.sdg img{width:64px;height:64px;border-radius:8px;flex:none}
-.sdg p{margin:4px 0 0;font-size:14.5px;color:var(--muted)}
-.contact{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-footer{padding:30px 0 40px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
-@media (max-width:800px){
- .hero{grid-template-columns:1fr;text-align:center;padding:40px 0 32px;gap:22px}
- .hero img{margin:0 auto;width:170px;height:170px}
- .tagline{text-align:left}.profiles{justify-content:center}
- .grid2,.grid2.even,.sdg,.contact{grid-template-columns:1fr}
- .brand{display:none}nav.links{margin-left:0}
-}
-</style>
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 <header class="nav"><div class="wrap">
@@ -142,7 +73,7 @@ footer{padding:30px 0 40px;color:var(--muted);font-size:14px;border-top:1px soli
     <div id="publist"><h3 class="year">2023</h3><ol class="pubs">
 <li class="pub" data-kind="Journal"><span class="tag">Journal</span>
 <a class="ptitle" href="https://scholar.google.com/scholar?q=%22Prediction+of+Flank+Wear+during+Turning+of+EN8+Steel+with+Cutting+Force+Signals+Using+a+Deep+Learning+Approach%22" target="_blank" rel="noopener">Prediction of Flank Wear during Turning of EN8 Steel with Cutting Force Signals Using a Deep Learning Approach</a>
-<div class="pauth">Sk Thangarasu, T Mohanraj, K Devendran, M Rajalakshmi, Subrata Chowdhury, <strong>Saravanakumar Gurusamy</strong>, et al.</div><div class="pvenue">Mathematical Problems in Engineering, vol. 2023</div></li>
+<div class="pauth">SK Thangarasu, T Mohanraj, K Devendran, M Rajalakshmi, Subrata Chowdhury, <strong>Saravanakumar Gurusamy</strong>, et al.</div><div class="pvenue">Mathematical Problems in Engineering, vol. 2023</div></li>
 <li class="pub" data-kind="Journal"><span class="tag">Journal</span>
 <a class="ptitle" href="https://scholar.google.com/scholar?q=%22Tikhonov+Regularization+and+Perturbation-Level+Tuning+for+the+CNM+in+Pharmacokinetics%22" target="_blank" rel="noopener">Tikhonov Regularization and Perturbation-Level Tuning for the CNM in Pharmacokinetics</a>
 <div class="pauth">Luong Thi Theu, Tran Quang-Huy, Tran Duc-Tan, Bhisham Sharma, Subrata Chowdhury, Karthik Chandran, <strong>Saravanakumar Gurusamy</strong></div><div class="pvenue">IEEE Access, vol. 11, pp. 30057–30068</div></li>
@@ -189,7 +120,7 @@ footer{padding:30px 0 40px;color:var(--muted);font-size:14px;border-top:1px soli
 <h3 class="year">2019</h3><ol class="pubs">
 <li class="pub" data-kind="Journal"><span class="tag">Journal</span>
 <a class="ptitle" href="https://scholar.google.com/scholar?q=%22Environmental+Condition+Monitoring+System+of+Textile+Industry+for+Sustainable+Development+Goal%22" target="_blank" rel="noopener">Environmental Condition Monitoring System of Textile Industry for Sustainable Development Goal</a>
-<div class="pauth"><strong>G Saravanakumar</strong>, Cv Baalachandar, K Mohaideen Abdul Kadhar</div><div class="pvenue">International Journal of Innovative Technology and Exploring Engineering (IJITEE), vol. 9(2S2), pp. 986–991</div></li>
+<div class="pauth"><strong>G Saravanakumar</strong>, CV Baalachandar, K Mohaideen Abdul Kadhar</div><div class="pvenue">International Journal of Innovative Technology and Exploring Engineering (IJITEE), vol. 9(2S2), pp. 986–991</div></li>
 <li class="pub" data-kind="Conference"><span class="tag">Conference</span>
 <a class="ptitle" href="https://scholar.google.com/scholar?q=%22Life-time+maximization+of+wireless+sensor+network+using+jaya+algorithm%22" target="_blank" rel="noopener">Life-time maximization of wireless sensor network using jaya algorithm</a>
 <div class="pauth">C Jency, <strong>Saravanakumar Gurusamy</strong>, Abdul Kadher K Mohaideen</div><div class="pvenue">2019 IEEE International Conference on Clean Energy and Energy Efficient Electronics Circuit for Sustainable Development (INCCES), pp. 1–6</div></li>
@@ -222,7 +153,7 @@ footer{padding:30px 0 40px;color:var(--muted);font-size:14px;border-top:1px soli
 <div class="pauth">Seshadhri Srinivasan, Furio Buonopane, <strong>G Saravanakumar</strong>, B Subathra, Srini Ramaswamy</div><div class="pvenue">2015 IEEE international conference on automation science and engineering (case), pp. 362–368</div></li>
 <li class="pub" data-kind="Conference"><span class="tag">Conference</span>
 <a class="ptitle" href="https://scholar.google.com/scholar?q=%22On+simulating+processor+schedules+and+network+protocols+within+CPS+using+TrueTime%22" target="_blank" rel="noopener">On simulating processor schedules and network protocols within CPS using TrueTime</a>
-<div class="pauth">Sreram Balasubramaniyan, B Subathra, Rc Hemesh, <strong>Saravanakumar Gurusamy</strong>, Seshadri Srinivasan</div><div class="pvenue">2015 IEEE International Conference on Computational Intelligence and Computing Research (ICCIC), pp. 1–6</div></li>
+<div class="pauth">Sreram Balasubramaniyan, B Subathra, RC Hemesh, <strong>Saravanakumar Gurusamy</strong>, Seshadri Srinivasan</div><div class="pvenue">2015 IEEE International Conference on Computational Intelligence and Computing Research (ICCIC), pp. 1–6</div></li>
 <li class="pub" data-kind="Conference"><span class="tag">Conference</span>
 <a class="ptitle" href="https://scholar.google.com/scholar?q=%22State+Transition+Algorithm+(STA)+based+tuning+of+integer+and+fractional-order+PID+controller+for+benchmark+system%22" target="_blank" rel="noopener">State Transition Algorithm (STA) based tuning of integer and fractional-order PID controller for benchmark system</a>
 <div class="pauth"><strong>G Saravanakumar</strong>, K Valarmathi, M Pallikonda Rajasekaran, Seshadhri Srinivasan, K Mohaideen Abdul Kadhar</div><div class="pvenue">2015 IEEE International Conference on Computational Intelligence and Computing Research (ICCIC), pp. 1–5</div></li>
@@ -238,7 +169,7 @@ footer{padding:30px 0 40px;color:var(--muted);font-size:14px;border-top:1px soli
 <h3 class="year">2013</h3><ol class="pubs">
 <li class="pub" data-kind="Journal"><span class="tag">Journal</span>
 <a class="ptitle" href="https://scholar.google.com/scholar?q=%22Real-coded+Genetic+Algorithm+for+system+identification+and+tuning+of+a+modified+Model+Reference+Adaptive+Controller+for+a+hybrid+tank+system%22" target="_blank" rel="noopener">Real-coded Genetic Algorithm for system identification and tuning of a modified Model Reference Adaptive Controller for a hybrid tank system</a>
-<div class="pauth">K Asan Mohideen, <strong>G Saravanakumar</strong>, K Valarmathi, D Devaraj, Tk Radhakrishnan</div><div class="pvenue">Applied Mathematical Modelling, vol. 37(6), pp. 3829–3847</div></li>
+<div class="pauth">K Asan Mohideen, <strong>G Saravanakumar</strong>, K Valarmathi, D Devaraj, TK Radhakrishnan</div><div class="pvenue">Applied Mathematical Modelling, vol. 37(6), pp. 3829–3847</div></li>
 <li class="pub" data-kind="Conference"><span class="tag">Conference</span>
 <a class="ptitle" href="https://scholar.google.com/scholar?q=%22Temperature+control+of+green+house+system+using+evolutionary+computation%22" target="_blank" rel="noopener">Temperature control of green house system using evolutionary computation</a>
 <div class="pauth">R Umashankari, K Valarmathi, <strong>G Saravanakumar</strong></div><div class="pvenue">2013 International Conference on Energy Efficient Technologies for Sustainability, pp. 814–820</div></li>
@@ -256,13 +187,29 @@ footer{padding:30px 0 40px;color:var(--muted);font-size:14px;border-top:1px soli
 
   <section id="teaching">
     <h2>Teaching</h2>
-    <p style="color:var(--muted);margin-top:-8px">Undergraduate and postgraduate courses taught at KARE (India), the University of Gondar and FTI (Ethiopia).</p>
+    <p style="color:var(--muted);margin-top:-8px">Undergraduate and postgraduate courses taught at KARE (India), the University of Gondar and FTI (Ethiopia). Open a course for notes, slides, live simulations and animations.</p>
     <div class="grid2 even">
-      <div class="card"><h3>Undergraduate</h3><ul class="courses">
-        <li>Control Systems</li><li>Process Control</li><li>Computer Control of Processes</li><li>Industrial Automation</li><li>Introduction to Robotics</li><li>System Identification</li><li>Instrumentation Engineering I &amp; II</li><li>Electrical Measurement and Instrumentation</li><li>Virtual Instrumentation</li><li>Microprocessors and Microcontrollers</li>
+      <div class="card"><h3>Undergraduate</h3><ul class="course-list">
+        <li><a href="courses/control-systems.html">Control Systems<span class="badge">Live simulations</span></a></li>
+        <li><a href="courses/process-control.html">Process Control</a></li>
+        <li><a href="courses/computer-control-of-processes.html">Computer Control of Processes</a></li>
+        <li><a href="courses/industrial-automation.html">Industrial Automation</a></li>
+        <li><a href="courses/introduction-to-robotics.html">Introduction to Robotics</a></li>
+        <li><a href="courses/system-identification.html">System Identification</a></li>
+        <li><a href="courses/instrumentation-engineering-i-and-ii.html">Instrumentation Engineering I &amp; II</a></li>
+        <li><a href="courses/electrical-measurement-and-instrumentation.html">Electrical Measurement and Instrumentation</a></li>
+        <li><a href="courses/virtual-instrumentation.html">Virtual Instrumentation</a></li>
+        <li><a href="courses/microprocessors-and-microcontrollers.html">Microprocessors and Microcontrollers</a></li>
       </ul></div>
-      <div class="card"><h3>Postgraduate</h3><ul class="courses">
-        <li>Linear Control Systems</li><li>Nonlinear Control</li><li>Optimal Control</li><li>Adaptive Control</li><li>Intelligent Control (Fuzzy, ANN, ANFIS)</li><li>Advanced Process Control</li><li>System Identification and Adaptive Control</li><li>Industrial Automation and Robotics</li>
+      <div class="card"><h3>Postgraduate</h3><ul class="course-list">
+        <li><a href="courses/linear-control-systems.html">Linear Control Systems</a></li>
+        <li><a href="courses/nonlinear-control.html">Nonlinear Control</a></li>
+        <li><a href="courses/optimal-control.html">Optimal Control</a></li>
+        <li><a href="courses/adaptive-control.html">Adaptive Control</a></li>
+        <li><a href="courses/intelligent-control.html">Intelligent Control</a></li>
+        <li><a href="courses/advanced-process-control.html">Advanced Process Control</a></li>
+        <li><a href="courses/system-identification-and-adaptive-control.html">System Identification and Adaptive Control</a></li>
+        <li><a href="courses/industrial-automation-and-robotics.html">Industrial Automation and Robotics</a></li>
       </ul></div>
     </div>
   </section>
@@ -305,16 +252,6 @@ footer{padding:30px 0 40px;color:var(--muted);font-size:14px;border-top:1px soli
   </section>
 </main>
 <footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy</div></footer>
-<script>
-document.getElementById('yr').textContent=new Date().getFullYear();
-(function(){var r=document.documentElement,b=document.getElementById('theme');
-try{var s=localStorage.getItem('theme');if(s)r.dataset.theme=s}catch(e){}
-b.onclick=function(){var d=r.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');r.dataset.theme=d==='dark'?'light':'dark';try{localStorage.setItem('theme',r.dataset.theme)}catch(e){}}})();
-(function(){var q=document.getElementById('q'),k='all',btns=document.querySelectorAll('.toolbar button');
-function run(){var t=q.value.toLowerCase(),n=0;document.querySelectorAll('.pub').forEach(function(p){var ok=(k==='all'||p.dataset.kind===k)&&p.textContent.toLowerCase().indexOf(t)>-1;p.style.display=ok?'':'none';if(ok)n++});
-document.querySelectorAll('#publist h3.year').forEach(function(h){var ol=h.nextElementSibling,any=[].some.call(ol.children,function(li){return li.style.display!=='none'});h.style.display=ol.style.display=any?'':'none'});
-document.getElementById('none').style.display=n?'none':'block'}
-q.oninput=run;btns.forEach(function(b){b.onclick=function(){btns.forEach(function(x){x.classList.remove('on')});b.classList.add('on');k=b.dataset.k;run()}})})();
-</script>
+<script src="assets/js/site.js"></script>
 </body>
 </html>

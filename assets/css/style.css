@@ -1,0 +1,100 @@
+:root{--bg:#fbfaf7;--surface:#ffffff;--ink:#1c2230;--muted:#5d6577;--line:#e6e2d9;--accent:#0f5c63;--accent-soft:#e3f0ef;--gold:#b7862c;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12161d;--surface:#1a2029;--ink:#e8eaee;--muted:#9aa3b2;--line:#2a313c;--accent:#5fc2bb;--accent-soft:#1d3134;--gold:#d9ad5b;}}
+:root[data-theme="dark"]{--bg:#12161d;--surface:#1a2029;--ink:#e8eaee;--muted:#9aa3b2;--line:#2a313c;--accent:#5fc2bb;--accent-soft:#1d3134;--gold:#d9ad5b;}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,system-ui,sans-serif}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.2;margin:0}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header.nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header.nav .wrap{display:flex;align-items:center;gap:16px;height:60px}
+.brand{font-family:"Source Serif 4",serif;font-weight:600;color:var(--ink);white-space:nowrap}
+nav.links{display:flex;gap:18px;margin-left:auto;min-width:0;overflow-x:auto;scrollbar-width:none}
+nav.links a{color:var(--muted);font-size:14px;font-weight:500;white-space:nowrap}
+nav.links a:hover{color:var(--ink);text-decoration:none}
+#theme{display:grid;place-items:center;background:none;border:1px solid var(--line);border-radius:8px;color:var(--muted);width:34px;height:34px;cursor:pointer;flex:none}
+.hero{padding:64px 0 48px;display:grid;grid-template-columns:220px 1fr;gap:44px;align-items:center}
+.hero img{width:220px;height:220px;border-radius:50%;object-fit:cover;object-position:top;border:4px solid var(--surface);box-shadow:0 0 0 1px var(--line)}
+.eyebrow{color:var(--gold);font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
+.hero h1{font-size:clamp(30px,5vw,46px)}
+.role{font-size:18px;color:var(--muted);margin:10px 0 18px}
+.tagline{font-family:"Source Serif 4",serif;font-style:italic;font-size:18px;border-left:3px solid var(--accent);padding-left:14px;margin:0 0 22px}
+.profiles{display:flex;flex-wrap:wrap;gap:8px}
+.profiles a{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:6px 12px;border-radius:999px;font-size:14px;font-weight:500}
+.profiles a:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+section{padding:56px 0;border-top:1px solid var(--line)}
+section h2{font-size:30px;margin-bottom:22px}
+.grid2{display:grid;grid-template-columns:1.6fr 1fr;gap:40px}.grid2.even{grid-template-columns:1fr 1fr}.grid2>*{min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px}
+.card h3{font-size:18px;margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{background:var(--accent-soft);color:var(--accent);padding:6px 12px;border-radius:8px;font-size:14px;font-weight:500}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+.stats div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center}
+.stats b{display:block;font-family:"Source Serif 4",serif;font-size:28px;color:var(--accent)}
+.stats small{color:var(--muted);font-size:13px}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px}
+.toolbar input{flex:1;min-width:200px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font:inherit}
+.toolbar button{padding:9px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--muted);font:inherit;font-size:14px;cursor:pointer}
+.toolbar button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+h3.year{font-size:20px;color:var(--gold);margin:26px 0 8px}
+ol.pubs{list-style:none;margin:0;padding:0}
+.pub{padding:14px 0;border-bottom:1px dashed var(--line)}
+.tag{float:right;margin-left:12px;font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:1px 8px}
+.ptitle{font-weight:600;color:var(--ink)}
+.pauth{color:var(--muted);font-size:14.5px;margin-top:3px}.pauth strong{color:var(--ink)}
+.pvenue{font-style:italic;font-size:14.5px;color:var(--muted)}
+.empty{display:none;color:var(--muted);padding:20px 0}
+ul.courses{margin:0;padding-left:18px}ul.courses li{margin:6px 0}
+.timeline{position:relative;margin:0;padding:0;list-style:none}
+.timeline li{position:relative;padding:0 0 22px 26px;border-left:2px solid var(--line);margin-left:6px}
+.timeline li:last-child{padding-bottom:0}
+.timeline li::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--accent)}
+.when{font-size:13px;color:var(--gold);font-weight:600}
+.what{font-weight:600}.where{color:var(--muted);font-size:14.5px}
+.sdg{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.sdg .card{display:flex;gap:14px;align-items:flex-start}
+.sdg img{width:64px;height:64px;border-radius:8px;flex:none}
+.sdg p{margin:4px 0 0;font-size:14.5px;color:var(--muted)}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+footer{padding:30px 0 40px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+@media (max-width:800px){
+ .hero{grid-template-columns:1fr;text-align:center;padding:40px 0 32px;gap:22px}
+ .hero img{margin:0 auto;width:170px;height:170px}
+ .tagline{text-align:left}.profiles{justify-content:center}
+ .grid2,.grid2.even,.sdg,.contact{grid-template-columns:1fr}
+ .brand{display:none}nav.links{margin-left:0}
+}
+/* ---------- teaching cards ---------- */
+.course-list{list-style:none;margin:0;padding:0}
+.course-list li{margin:0;border-bottom:1px solid var(--line)}
+.course-list li:last-child{border-bottom:0}
+.course-list a{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 2px;color:var(--ink)}
+.course-list a:hover{color:var(--accent);text-decoration:none}
+.course-list a::after{content:"→";color:var(--muted)}
+.badge{font-size:11.5px;font-weight:600;background:var(--accent-soft);color:var(--accent);padding:2px 8px;border-radius:6px;white-space:nowrap;margin-left:auto}
+/* ---------- course pages ---------- */
+.crumb{padding:28px 0 0;font-size:14px}
+.course-head{padding:18px 0 36px}
+.course-head h1{font-size:clamp(28px,4.5vw,40px);margin:6px 0 12px}
+.course-head p{color:var(--muted);max-width:720px;margin:0}
+.materials{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.materials li{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+.materials .kind{flex:none;width:64px;text-align:center;font-size:12px;font-weight:600;color:var(--accent);background:var(--accent-soft);border-radius:6px;padding:3px 0}
+.materials .soon{margin-left:auto;font-size:13px;color:var(--muted)}
+.materials a.open{margin-left:auto;font-size:14px;font-weight:600}
+.note{color:var(--muted);font-size:14.5px}
+.sim{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:22px}
+.sim h3{font-size:19px;margin-bottom:4px}
+.sim .desc{color:var(--muted);font-size:14.5px;margin:0 0 14px}
+.sim .controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px 22px;margin-bottom:14px}
+.sim label{display:block;font-size:14px;color:var(--muted)}
+.sim label b{color:var(--ink);font-variant-numeric:tabular-nums}
+.sim input[type=range]{width:100%;accent-color:var(--accent)}
+.sim canvas{width:100%;height:auto;display:block;border-radius:10px;background:var(--bg);border:1px solid var(--line)}
+.sim .btns{display:flex;gap:8px;margin-bottom:12px}
+.sim button{padding:7px 14px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit;font-size:14px;cursor:pointer}
+.sim .readout{font-size:13.5px;color:var(--muted);margin-top:8px;font-variant-numeric:tabular-nums}
+.video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
