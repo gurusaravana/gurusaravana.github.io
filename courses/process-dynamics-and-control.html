@@ -1,39 +1,27 @@
 <!doctype html>
-<!--
-  ============================================================
-  HOW TO ADD CONTENT TO THIS COURSE PAGE  (full guide: HOW-TO-ADD-TEACHING-CONTENT.md)
-
-  A) Add a file (PDF notes, PowerPoint slides, assignment):
-     1. Upload the file to the folder  courses/files/process-dynamics-and-control/
-     2. Copy this line into the "Course materials" list below and change the words:
-        <li><span class="kind">Slides</span>Lecture 2: Block diagrams<a class="open" href="files/process-dynamics-and-control/lecture-2.pdf">Open</a></li>
-
-  B) Add a live simulation: paste one of these lines in the "Live simulations" section:
-        <div class="sim" data-sim="second-order"></div>
-        <div class="sim" data-sim="pid"></div>
-        <div class="sim" data-sim="spring"></div>
-        <div class="sim" data-sim="pendulum"></div>
-
-  C) Add a YouTube video or an online simulation (PhET, GeoGebra, MATLAB Online...):
-        <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div>
-     For YouTube, VIDEO-ID is the part after "v=" in the video link.
-  ============================================================
--->
-<html lang="en">
+<html lang="en" data-skin="glass">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Process Dynamics and Control · Dr. Saravanakumar Gurusamy</title>
-<meta name="description" content="Dynamic behaviour of chemical and industrial processes and their feedback control.">
+<title>Process Dynamics and Control · Process Dynamics and Control</title>
+<meta name="description" content="Course home: lessons, notes, exercises and live simulations for Process Dynamics and Control.">
 <link rel="icon" href="../assets/img/favicon1.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/vendor/katex/katex.min.css">
+<script defer src="../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
 </head>
 <body>
+<!--
+  COURSE HOME for Process Dynamics and Control.
+  Lessons live in the folder courses/process-dynamics-and-control/ (one file per lesson).
+  To change a lesson, open its file and edit the text between the comments.
+-->
 <header class="nav"><div class="wrap">
   <a class="brand" href="../index.html">S. Gurusamy</a>
-  <nav class="links"><a href="../index.html">Home</a><a href="../index.html#teaching">Courses</a><a href="#materials">Materials</a></nav>
+  <nav class="links"><a href="process-dynamics-and-control.html">Course home</a><a href="process-dynamics-and-control/syllabus.html">Syllabus</a><a href="process-dynamics-and-control/schedule.html">Schedule</a><a href="process-dynamics-and-control.html#lessons">Lessons</a><a href="../index.html#teaching">All courses</a></nav>
   <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
 </div></header>
 <div class="band course-band"><div class="wrap">
@@ -41,25 +29,32 @@
   <div class="course-head">
     <div class="eyebrow">Undergraduate course · KARE (EIE306)</div>
     <h1>Process Dynamics and Control</h1>
-    <p>Dynamic behaviour of chemical and industrial processes and their feedback control.</p>
+    <p>How chemical and industrial processes behave over time, and how to control them with feedback. Fourteen lessons with notes, worked exercises and live simulations you can run in your browser.</p>
   </div>
 </div></div>
 <main class="wrap">
-  <section id="materials">
-    <h2>Course materials</h2>
-    <ul class="materials">
-      <!-- Add your files here (see the instructions at the top of this file) -->
-    </ul>
-    <p class="note">Materials for this course will be added soon.</p>
+  <section id="start">
+    <h2>Start here</h2>
+    <div class="qgrid"><a class="qcard card" href="process-dynamics-and-control/syllabus.html"><span class="qi">📘</span><b>Syllabus</b><span>Aims, outcomes, textbooks and grading</span></a><a class="qcard card" href="process-dynamics-and-control/schedule.html"><span class="qi">🗓️</span><b>Schedule</b><span>Week-by-week plan, assignments and exams</span></a><a class="qcard card" href="process-dynamics-and-control/01-introduction.html"><span class="qi">🚀</span><b>Start lesson 1</b><span>Introduction to process control</span></a><a class="qcard card" href="#sims"><span class="qi">🎛️</span><b>Simulations</b><span>Interactive models you can run in the browser</span></a></div>
   </section>
-  <!-- To show live simulations on this course, delete this line and the matching one below
-  <section id="simulations">
-    <h2>Live simulations &amp; animations</h2>
-    <div class="sim" data-sim="second-order"></div>
+  <section id="lessons">
+    <h2>Lessons</h2>
+    <p class="note" style="margin-top:-10px;margin-bottom:22px">Each lesson has learning objectives, notes, a lecture video slot, a live simulation where it helps, and exercises with solutions you can reveal.</p>
+    <div class="modgrid"><div class="modcard"><div class="mhead"><span class="mcode">A</span><div><h3>Foundations</h3><p>What process control is and how to write a dynamic model.</p></div></div><ul class="lessons"><li><a href="process-dynamics-and-control/01-introduction.html"><span class="n">01</span><span class="t">Introduction to process control</span></a></li><li><a href="process-dynamics-and-control/02-dynamic-modelling.html"><span class="n">02</span><span class="t">Dynamic models from balance equations</span><span class="tag sim">▶ Tank level</span></a></li><li><a href="process-dynamics-and-control/03-linearisation.html"><span class="n">03</span><span class="t">Linearisation and deviation variables</span></a></li><li><a href="process-dynamics-and-control/04-transfer-functions.html"><span class="n">04</span><span class="t">Laplace transforms and transfer functions</span></a></li></ul></div><div class="modcard"><div class="mhead"><span class="mcode">B</span><div><h3>Dynamic behaviour</h3><p>How first-order, second-order and dead-time processes respond.</p></div></div><ul class="lessons"><li><a href="process-dynamics-and-control/05-first-order-systems.html"><span class="n">05</span><span class="t">First-order systems</span><span class="tag sim">▶ First-order response</span></a></li><li><a href="process-dynamics-and-control/06-second-order-systems.html"><span class="n">06</span><span class="t">Second-order and higher-order systems</span><span class="tag sim">▶ Second-order response</span></a></li><li><a href="process-dynamics-and-control/07-dead-time-and-fopdt.html"><span class="n">07</span><span class="t">Dead time and FOPDT model fitting</span><span class="tag sim">▶ First-order response</span></a></li><li><a href="process-dynamics-and-control/08-frequency-response.html"><span class="n">08</span><span class="t">Frequency response</span><span class="tag sim">▶ Frequency response</span></a></li></ul></div><div class="modcard"><div class="mhead"><span class="mcode">C</span><div><h3>Feedback control</h3><p>PID control, tuning and closed-loop stability.</p></div></div><ul class="lessons"><li><a href="process-dynamics-and-control/09-pid-control.html"><span class="n">09</span><span class="t">Feedback control and the PID controller</span><span class="tag sim">▶ PID tuning</span></a></li><li><a href="process-dynamics-and-control/10-controller-tuning.html"><span class="n">10</span><span class="t">Controller tuning</span><span class="tag sim">▶ PID tuning</span></a></li><li><a href="process-dynamics-and-control/11-closed-loop-stability.html"><span class="n">11</span><span class="t">Closed-loop stability</span><span class="tag sim">▶ PID tuning</span></a></li></ul></div><div class="modcard"><div class="mhead"><span class="mcode">D</span><div><h3>Advanced strategies</h3><p>Feedforward, cascade, a level control case study and MPC.</p></div></div><ul class="lessons"><li><a href="process-dynamics-and-control/12-feedforward-and-cascade.html"><span class="n">12</span><span class="t">Feedforward and cascade control</span></a></li><li><a href="process-dynamics-and-control/13-level-control-case-study.html"><span class="n">13</span><span class="t">Case study: tank level control</span><span class="tag sim">▶ Tank level</span></a></li><li><a href="process-dynamics-and-control/14-introduction-to-mpc.html"><span class="n">14</span><span class="t">Introduction to model predictive control</span></a></li></ul></div></div>
   </section>
-  delete this line too -->
+  <section id="sims">
+    <h2>Simulations in this course</h2>
+    <ul class="simlist"><li><a href="process-dynamics-and-control/02-dynamic-modelling.html#try-it"><b>Tank level</b><span>Lesson 2: Dynamic models from balance equations</span></a></li><li><a href="process-dynamics-and-control/05-first-order-systems.html#try-it"><b>First-order response</b><span>Lesson 5: First-order systems</span></a></li><li><a href="process-dynamics-and-control/06-second-order-systems.html#try-it"><b>Second-order response</b><span>Lesson 6: Second-order and higher-order systems</span></a></li><li><a href="process-dynamics-and-control/08-frequency-response.html#try-it"><b>Frequency response</b><span>Lesson 8: Frequency response</span></a></li><li><a href="process-dynamics-and-control/09-pid-control.html#try-it"><b>PID tuning</b><span>Lesson 9: Feedback control and the PID controller</span></a></li></ul>
+  </section>
+  <section id="about-course">
+    <h2>About this course</h2>
+    <div class="grid2 even">
+      <div class="card"><h3>Who it is for</h3><p>Third-year students in Electronics and Instrumentation, Chemical and Electrical engineering. You should know basic calculus, differential equations and mass balances.</p></div>
+      <div class="card"><h3>How to use this site</h3><p>Read the notes before class, try the simulation, then do the exercises. Reveal a solution only after you have tried it yourself. Bring questions to the tutorial.</p></div>
+    </div>
+  </section>
 </main>
-<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../index.html">Home</a></div></footer>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../index.html">Home</a> · <a href="../index.html#teaching">Teaching</a></div></footer>
 <script src="../assets/js/site.js"></script>
 <script src="../assets/js/sims.js"></script>
 </body>

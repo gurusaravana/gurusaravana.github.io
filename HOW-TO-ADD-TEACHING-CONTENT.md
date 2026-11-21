@@ -43,6 +43,9 @@ These simulations are built in and work on any course page:
 | `<div class="sim" data-sim="pid"></div>` | PID controller tuning on a process with dead time (Kp, Ki, Kd sliders) |
 | `<div class="sim" data-sim="spring"></div>` | Animated mass–spring–damper with a live displacement plot |
 | `<div class="sim" data-sim="pendulum"></div>` | Damped pendulum you can drag, with a live phase portrait (gravity, length, damping sliders) |
+| `<div class="sim" data-sim="first-order"></div>` | First-order process with dead time: step response with the 63.2 % point marked |
+| `<div class="sim" data-sim="tank"></div>` | Animated tank level with manual or automatic (PI) level control |
+| `<div class="sim" data-sim="frequency"></div>` | Sine in, sine out: amplitude ratio and phase lag of a first-order process |
 
 On a course page that has no simulations yet, the simulations section is switched off with two "delete this line" notes.
 Delete those two lines (the one starting with `<!-- To show live simulations` and the one saying `delete this line too -->`), then put the simulation lines you want inside the section.
@@ -88,7 +91,7 @@ If anything goes wrong, nothing is lost: GitHub keeps every earlier version. Jus
 
 ## 5. Change the website colours
 
-All colours are at the top of `assets/css/style.css` (the lines starting with `:root`). For example, change `--accent:#0077b6` to another colour code to change the blue used for links and highlights.
+The site uses the **Glass** theme. Its colours are in `assets/css/style.css`, in the block that starts with `/* ================= Glass theme`. For example, change `--accent:#4f46e5` to another colour code to change the colour used for links and highlights.
 
 ---
 
@@ -119,3 +122,25 @@ All colours are at the top of `assets/css/style.css` (the lines starting with `:
 **To change a caption:** search for the title text in `index.html` and edit the words.
 
 **To remove a card:** delete everything from its `<figure` line to its `</figure>` line.
+
+---
+
+## 7. The full course site (Process Dynamics and Control)
+
+`courses/process-dynamics-and-control.html` is a complete course site, and a model for turning any other course into one:
+
+- **Course home**: `courses/process-dynamics-and-control.html`
+- **Syllabus** and **schedule**: `courses/process-dynamics-and-control/syllabus.html` and `schedule.html`
+- **Lessons**: one file each, `courses/process-dynamics-and-control/01-introduction.html` to `14-introduction-to-mpc.html`
+
+Each lesson has objectives, notes, a lecture video slot, a simulation and exercises with hidden solutions. To edit a lesson, open its file on GitHub and change the text. Equations are written in LaTeX between `$ ... $`, for example `$G(s) = K/(\tau s + 1)$`.
+
+To put a lecture video into a lesson, find the `<div class="video-slot">` block in that lesson and replace it with the YouTube line shown in section 3.
+
+## 8. Current and past courses
+
+On the home page, the Teaching section has **Current courses** (Presidency University) and **Past courses**. To list a current course, find the comment `To list a current course` in `index.html` and paste a line like this inside the list:
+
+```html
+<li><a href="courses/control-systems.html">Control Systems</a></li>
+```

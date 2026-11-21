@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 3: Linearisation and deviation variables · Process Dynamics and Control</title>
+<meta name="description" content="Linearisation and deviation variables">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 3: Linearisation and deviation variables
+  Edit the notes inside <article class="notes"> ... </article>.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Simulation: change data-sim="..." (choices: tank, first-order, second-order, frequency, pid, spring, pendulum).
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">S. Gurusamy</a>
+  <nav class="links"><a href="../process-dynamics-and-control.html">Course home</a><a href="../process-dynamics-and-control/syllabus.html">Syllabus</a><a href="../process-dynamics-and-control/schedule.html">Schedule</a><a href="../process-dynamics-and-control.html#lessons">Lessons</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../process-dynamics-and-control.html">← Process Dynamics and Control</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 3 of 14 · Module A: Foundations</div>
+    <h1>Linearisation and deviation variables</h1>
+    <p>Process Dynamics and Control · EIE306</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">Module A · Foundations</div><ol><li><a href="01-introduction.html"><span class="n">1</span>Introduction to process control</a></li><li><a href="02-dynamic-modelling.html"><span class="n">2</span>Dynamic models from balance equations</a></li><li class="on"><a href="03-linearisation.html"><span class="n">3</span>Linearisation and deviation variables</a></li><li><a href="04-transfer-functions.html"><span class="n">4</span>Laplace transforms and transfer functions</a></li></ol></div><div class="mod"><div class="modname">Module B · Dynamic behaviour</div><ol><li><a href="05-first-order-systems.html"><span class="n">5</span>First-order systems</a></li><li><a href="06-second-order-systems.html"><span class="n">6</span>Second-order and higher-order systems</a></li><li><a href="07-dead-time-and-fopdt.html"><span class="n">7</span>Dead time and FOPDT model fitting</a></li><li><a href="08-frequency-response.html"><span class="n">8</span>Frequency response</a></li></ol></div><div class="mod"><div class="modname">Module C · Feedback control</div><ol><li><a href="09-pid-control.html"><span class="n">9</span>Feedback control and the PID controller</a></li><li><a href="10-controller-tuning.html"><span class="n">10</span>Controller tuning</a></li><li><a href="11-closed-loop-stability.html"><span class="n">11</span>Closed-loop stability</a></li></ol></div><div class="mod"><div class="modname">Module D · Advanced strategies</div><ol><li><a href="12-feedforward-and-cascade.html"><span class="n">12</span>Feedforward and cascade control</a></li><li><a href="13-level-control-case-study.html"><span class="n">13</span>Case study: tank level control</a></li><li><a href="14-introduction-to-mpc.html"><span class="n">14</span>Introduction to model predictive control</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Linearise a nonlinear model about a steady state using a Taylor series</li><li>Write a model in deviation variables</li><li>Judge when the linear model is accurate</li></ul></div>
+    <section class="lsec"><h2>Notes</h2>
+    <article class="notes">
+<p>Transfer functions and most controller design methods need <b>linear</b> models. We get one by approximating the nonlinear model close to a steady operating point.</p>
+<h3>Taylor series</h3>
+<p>For a function $f(x)$ near the steady state $\bar x$, keep only the first-order term:</p>
+<p class="eq">$$f(x) \approx f(\bar x) + \left.\frac{df}{dx}\right|_{\bar x}(x - \bar x)$$</p>
+<h3>Deviation variables</h3>
+<p>Define $h' = h - \bar h$ and $q' = q_{in} - \bar q_{in}$. Deviation variables are zero at the steady state, which makes initial conditions zero and Laplace transforms simple.</p>
+<h3>Tank example</h3>
+<p>Linearising $\sqrt{h}$ about $\bar h$: $\sqrt{h} \approx \sqrt{\bar h} + \dfrac{1}{2\sqrt{\bar h}}h'$. Subtracting the steady-state balance gives</p>
+<p class="eq">$$A\frac{dh'}{dt} = q' - \frac{c_v}{2\sqrt{\bar h}}\,h' \quad\Rightarrow\quad \tau\frac{dh'}{dt} + h' = K q'$$</p>
+<p>with $K = 2\sqrt{\bar h}/c_v$ and $\tau = 2A\sqrt{\bar h}/c_v$. Both depend on the operating point: the tank responds more slowly and more strongly at high levels.</p>
+<p class="tip">The linear model is good for small changes. A common rule of thumb is to trust it for changes of up to about 10–20 % around the operating point.</p>
+</article></section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the <div class="video-slot">...</div> below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">Linearise $f(T) = k_0 e^{-E/RT}$ about $\bar T$.</div><details><summary>Show solution</summary><div class="sol">$f \approx k_0 e^{-E/R\bar T}\left[1 + \dfrac{E}{R\bar T^2}(T - \bar T)\right]$.</div></details></li><li><div class="q">For the tank of Lesson 2 at $\bar h = 4$ m, find $K$ and $\tau$.</div><details><summary>Show solution</summary><div class="sol">$K = 2\sqrt4/0.5 = 8\,\text{min/m}^2$, $\tau = 2(2)(2)/0.5 = 16\,\text{min}$.</div></details></li><li><div class="q">Why do we use deviation variables before taking Laplace transforms?</div><details><summary>Show solution</summary><div class="sol">Because they make all initial conditions zero at the steady state, so the transform of a derivative is simply $sY(s)$ and the transfer function can be read directly.</div></details></li></ol></section>
+    <nav class="prevnext"><a class="pn prev" href="02-dynamic-modelling.html"><small>← Lesson 2</small>Dynamic models from balance equations</a><a class="pn next" href="04-transfer-functions.html"><small>Lesson 4 →</small>Laplace transforms and transfer functions</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+<script src="../../assets/js/sims.js"></script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-skin="glass">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -226,12 +226,20 @@
 
   <section id="teaching">
     <h2>Teaching</h2>
-    <p style="color:var(--muted);margin-top:-8px">Undergraduate and postgraduate courses and laboratories taught at KARE (India), the University of Gondar and FTI (Ethiopia). Open a course for notes, slides, live simulations and animations.</p>
+    <h3 class="teach-h">Current courses <span class="now-badge">Now teaching</span></h3>
+    <div class="card current-card">
+      <p class="where">Presidency University, Bengaluru · B.Tech Electrical and Electronics Engineering · 2025 to present</p>
+      <!-- To list a current course: add it to CURRENT in gen/courses.py, or paste a line like
+           <li><a href="courses/control-systems.html">Control Systems</a></li> inside the list -->
+      <p class="note">Course pages for this semester will be added here soon.</p>
+    </div>
+    <h3 class="teach-h">Past courses</h3>
+    <p style="color:var(--muted);margin-top:-4px">Undergraduate and postgraduate courses and laboratories taught at KARE (India), the University of Gondar and FTI (Ethiopia). Open a course for notes, slides, live simulations and animations.</p>
     <div class="grid2 even">
       <div class="card"><h3>Undergraduate</h3><ul class="course-list">
         <li><a href="courses/control-systems.html">Control Systems<span class="badge">Live simulations</span></a></li>
         <li><a href="courses/control-system-design.html">Control System Design</a></li>
-        <li><a href="courses/process-dynamics-and-control.html">Process Dynamics and Control</a></li>
+        <li><a href="courses/process-dynamics-and-control.html">Process Dynamics and Control<span class="badge">Full course</span></a></li>
         <li><a href="courses/process-control-fundamentals.html">Process Control Fundamentals</a></li>
         <li><a href="courses/process-control-laboratory.html">Process Control Laboratory</a></li>
         <li><a href="courses/industrial-automation.html">Industrial Automation</a></li>
