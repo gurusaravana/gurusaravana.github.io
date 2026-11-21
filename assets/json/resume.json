@@ -4,14 +4,14 @@
         "label": "Associate Professor",
         "image": "",
         "email": "gurusaravana@ieee.org",
-        "phone": "+91 9994700450",
+        "phone": "",
         "url": "http://orcid.org/0000-0002-7721-2613",
         "summary": "Inspiring and motivating young technical minds through research for the betterment and advancement of humanity.",
         "location": {
-            "address": "65 Gounder Street Seithur Rajapalayam Taluk",
-            "postalCode": "626121",
-            "city": "Virudhunagar District, Tamil Nadu",
-            "countryCode": "INDIA",
+            "address": "Department of EET, FDRE TVT Institute (FTI)",
+            "postalCode": "",
+            "city": "Addis Ababa",
+            "countryCode": "Ethiopia",
             "region": ""
         },
         "profiles": []
