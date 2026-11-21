@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Syllabus · Process Dynamics and Control</title>
+<meta name="description" content="Syllabus for Process Dynamics and Control">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">S. Gurusamy</a>
+  <nav class="links"><a href="../process-dynamics-and-control.html">Course home</a><a href="../process-dynamics-and-control/syllabus.html">Syllabus</a><a href="../process-dynamics-and-control/schedule.html">Schedule</a><a href="../process-dynamics-and-control.html#lessons">Lessons</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../process-dynamics-and-control.html">← Process Dynamics and Control</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Process Dynamics and Control · EIE306</div>
+    <h1>Syllabus</h1>
+    <p>What the course covers, how it is assessed and what to read.</p>
+  </div>
+</div></div>
+<main class="wrap prose">
+  <section><h2>Course description</h2>
+  <p>This course introduces the dynamic behaviour of chemical and industrial processes and the design of control systems that keep them safe, on specification and economical. Students build models from first principles, analyse them with Laplace transforms and frequency response, and design and tune feedback controllers. Interactive simulations are used throughout.</p></section>
+  <section><h2>Prerequisites</h2><p>Engineering mathematics (differential equations, complex numbers), and basic material and energy balances.</p></section>
+  <section><h2>Learning outcomes</h2><p>After completing the course, students will be able to:</p><ol><li>Develop dynamic models of processes from mass and energy balances</li><li>Linearise models and express them as transfer functions</li><li>Predict the response of first-order, second-order and dead-time processes</li><li>Fit simple models to plant step-test data</li><li>Design, tune and analyse PID feedback loops</li><li>Choose feedforward, cascade and advanced control strategies for a given process</li></ol></section>
+  <section><h2>Textbooks</h2><ul class="refs">
+    <li>D. E. Seborg, T. F. Edgar, D. A. Mellichamp and F. J. Doyle III, <i>Process Dynamics and Control</i>, 4th ed., Wiley.</li>
+    <li>G. Stephanopoulos, <i>Chemical Process Control: An Introduction to Theory and Practice</i>, Prentice Hall.</li>
+    <li>D. R. Coughanowr and S. E. LeBlanc, <i>Process Systems Analysis and Control</i>, 3rd ed., McGraw-Hill.</li>
+    <li>B. A. Ogunnaike and W. H. Ray, <i>Process Dynamics, Modeling, and Control</i>, Oxford University Press.</li></ul></section>
+  <section><h2>Assessment</h2>
+  <!-- Edit the weights below to match your institution -->
+  <table class="tbl"><tr><th>Component</th><th>Weight</th></tr><tr><td>Assignments (4)</td><td>20 %</td></tr><tr><td>Simulation mini-project</td><td>10 %</td></tr><tr><td>Mid-semester examination</td><td>20 %</td></tr><tr><td>Final examination</td><td>50 %</td></tr></table></section>
+  <section><h2>Software</h2><p>All simulations on this site run in the browser with nothing to install. For assignments, students may also use MATLAB/Simulink, Python (with SciPy) or Scilab.</p></section>
+  <section><h2>Lessons</h2><div class="lside flat"><div class="mod"><div class="modname">Module A · Foundations</div><ol><li><a href="01-introduction.html"><span class="n">1</span>Introduction to process control</a></li><li><a href="02-dynamic-modelling.html"><span class="n">2</span>Dynamic models from balance equations</a></li><li><a href="03-linearisation.html"><span class="n">3</span>Linearisation and deviation variables</a></li><li><a href="04-transfer-functions.html"><span class="n">4</span>Laplace transforms and transfer functions</a></li></ol></div><div class="mod"><div class="modname">Module B · Dynamic behaviour</div><ol><li><a href="05-first-order-systems.html"><span class="n">5</span>First-order systems</a></li><li><a href="06-second-order-systems.html"><span class="n">6</span>Second-order and higher-order systems</a></li><li><a href="07-dead-time-and-fopdt.html"><span class="n">7</span>Dead time and FOPDT model fitting</a></li><li><a href="08-frequency-response.html"><span class="n">8</span>Frequency response</a></li></ol></div><div class="mod"><div class="modname">Module C · Feedback control</div><ol><li><a href="09-pid-control.html"><span class="n">9</span>Feedback control and the PID controller</a></li><li><a href="10-controller-tuning.html"><span class="n">10</span>Controller tuning</a></li><li><a href="11-closed-loop-stability.html"><span class="n">11</span>Closed-loop stability</a></li></ol></div><div class="mod"><div class="modname">Module D · Advanced strategies</div><ol><li><a href="12-feedforward-and-cascade.html"><span class="n">12</span>Feedforward and cascade control</a></li><li><a href="13-level-control-case-study.html"><span class="n">13</span>Case study: tank level control</a></li><li><a href="14-introduction-to-mpc.html"><span class="n">14</span>Introduction to model predictive control</a></li></ol></div></div></section>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+<script src="../../assets/js/sims.js"></script>
+</body>
+</html>

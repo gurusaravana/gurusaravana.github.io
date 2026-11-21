@@ -4,6 +4,9 @@
      <div class="sim" data-sim="pid"></div>
      <div class="sim" data-sim="spring"></div>
      <div class="sim" data-sim="pendulum"></div>
+     <div class="sim" data-sim="first-order"></div>
+     <div class="sim" data-sim="tank"></div>
+     <div class="sim" data-sim="frequency"></div>
 */
 (function () {
   function css(v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
@@ -23,7 +26,7 @@
   // Size the canvas to its on-screen width (sharp text on phones and retina screens).
   function fit(c) {
     var dpr = window.devicePixelRatio || 1, w = c.clientWidth || 900;
-    var h = c._h === 'pendulum' ? (w >= 640 ? Math.min(460, w * 0.48) : Math.max(560, w * 1.5)) : c._h === 'spring' ? Math.max(380, Math.min(440, w * 0.55)) : Math.max(250, Math.min(c._h, w * 0.62));
+    var h = c._h === 'tank' ? (w < 560 ? 580 : 420) : c._h === 'pendulum' ? (w >= 640 ? Math.min(460, w * 0.48) : Math.max(560, w * 1.5)) : c._h === 'spring' ? Math.max(380, Math.min(440, w * 0.55)) : Math.max(250, Math.min(c._h, w * 0.62));
     if (c.width !== Math.round(w * dpr) || c.height !== Math.round(h * dpr)) { c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); c.style.height = h + 'px'; }
     var ctx = c.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, w, h);
     return { ctx: ctx, w: w, h: h };
@@ -36,7 +39,7 @@
     function X(t) { return L + (t / tmax) * (R - L); }
     function Y(y) { return T + (1 - (y - ymin) / (ymax - ymin)) * (B - T); }
     ctx.font = '12px Inter, system-ui, sans-serif'; ctx.lineWidth = 1;
-    ctx.strokeStyle = css('--line'); ctx.fillStyle = css('--muted');
+    ctx.strokeStyle = css('--plotgrid') || css('--line'); ctx.fillStyle = css('--muted');
     for (var i = 0; i <= ny; i++) {
       var yv = ymin + (ymax - ymin) * i / ny, yy = Y(yv);
       ctx.beginPath(); ctx.moveTo(L, yy); ctx.lineTo(R, yy); ctx.stroke();
@@ -264,6 +267,109 @@
     clr.onclick = function () { trail = []; };
     onTheme(render);
     requestAnimationFrame(tick);
+  };
+
+
+  /* 5. First-order plus dead-time (FOPDT) step response */
+  SIMS['first-order'] = function (root) {
+    root.appendChild(el('h3', {}, 'First-order process with dead time'));
+    root.appendChild(el('p', { 'class': 'desc' }, 'G(s) = K<sub>p</sub> e<sup>&minus;&theta;s</sup> / (&tau;s + 1). A step of size &Delta;u is applied at t = 2 s. The dot marks 63.2 % of the final change, reached at t = 2 + &theta; + &tau;.'));
+    var box = el('div', { 'class': 'controls' }); root.appendChild(box);
+    var K = slider(box, 'Process gain Kp', 0.2, 3, 0.1, 1.5, '', draw);
+    var tau = slider(box, 'Time constant τ', 0.5, 15, 0.5, 5, ' s', draw);
+    var th = slider(box, 'Dead time θ', 0, 8, 0.5, 2, ' s', draw);
+    var du = slider(box, 'Input step Δu', 0.5, 2, 0.1, 1, '', draw);
+    var c = canvas(root); var info = el('div', { 'class': 'readout' }); root.appendChild(info);
+    function draw() {
+      var k = +K.value, ta = +tau.value, the = +th.value, d = +du.value, tmax = 40, t = [], y = [], u = [];
+      for (var i = 0; i <= 800; i++) { var tt = tmax * i / 800; t.push(tt); u.push(tt >= 2 ? d : 0); var s = tt - 2 - the; y.push(s > 0 ? k * d * (1 - Math.exp(-s / ta)) : 0); }
+      var f = fit(c), top = Math.max(3.2, k * d * 1.15);
+      plot(f.ctx, { x: 0, y: 0, w: f.w, h: f.h }, [{ t: t, y: u, color: css('--muted'), dash: [6, 5], width: 1.5, name: 'Input u(t)' }, { t: t, y: y, color: css('--accent'), name: 'Output y(t)' }], { tmax: tmax, ymin: 0, ymax: top, ny: 4 });
+      var ctx = f.ctx, L = 46, R = f.w - 12, T = 28, B = f.h - 38, t63 = 2 + the + ta, y63 = 0.632 * k * d;
+      if (t63 < tmax) { var X = L + t63 / tmax * (R - L), Y = T + (1 - y63 / top) * (B - T); ctx.fillStyle = css('--gold'); ctx.beginPath(); ctx.arc(X, Y, 5, 0, 7); ctx.fill(); ctx.strokeStyle = css('--gold'); ctx.setLineDash([3, 3]); ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(X, Y); ctx.lineTo(X, B); ctx.stroke(); ctx.setLineDash([]); }
+      info.textContent = 'Final change Δy = Kp·Δu = ' + (k * d).toFixed(2) + '   ·   63.2 % reached at t = ' + t63.toFixed(1) + ' s   ·   ~98 % settled at t ≈ ' + (2 + the + 4 * ta).toFixed(1) + ' s';
+    }
+    draw(); onTheme(draw);
+  };
+
+  /* 6. Gravity-drained tank: animated level, manual or PI level control */
+  SIMS['tank'] = function (root) {
+    root.appendChild(el('h3', {}, 'Tank level: open loop and level control'));
+    root.appendChild(el('p', { 'class': 'desc' }, 'A &middot; dh/dt = q<sub>in</sub> &minus; c<sub>v</sub>&radic;h. In <b>Manual</b> you set the inlet valve yourself. In <b>Auto</b> a PI controller moves the inlet valve to hold the level at the set-point. Try opening the outlet valve (a disturbance) in both modes.'));
+    var box = el('div', { 'class': 'controls' }); root.appendChild(box);
+    var vin = slider(box, 'Inlet valve (manual)', 0, 100, 1, 50, ' %', function () {});
+    var cv = slider(box, 'Outlet valve', 10, 100, 1, 50, ' %', function () {});
+    var sp = slider(box, 'Level set-point', 0.5, 4.5, 0.1, 2.5, ' m', function () {});
+    var kc = slider(box, 'Controller gain Kc', 1, 60, 1, 20, ' %/m', function () {});
+    var ti = slider(box, 'Integral time τI', 2, 60, 1, 15, ' s', function () {});
+    var btns = el('div', { 'class': 'btns' }); root.appendChild(btns);
+    var mode = el('button', { type: 'button' }, 'Mode: Manual'), play = el('button', { type: 'button' }, '❚❚ Pause'), rs = el('button', { type: 'button' }, '↺ Reset');
+    btns.appendChild(mode); btns.appendChild(play); btns.appendChild(rs);
+    var c = canvas(root, 'tank'); var info = el('div', { 'class': 'readout' }); root.appendChild(info);
+    var A = 1.0, H = 5, h, I, auto = false, running = true, t, hist, last = 0, vpos = 50, flowPhase = 0;
+    function reset() { h = 1.5; I = 0; t = 0; vpos = +vin.value; hist = { t: [], h: [], s: [], v: [] }; }
+    function step(dt) {
+      var hh = 0.01;
+      for (var s = 0; s < dt / hh; s++) {
+        if (auto) { var e = +sp.value - h; I += e * hh; vpos = Math.max(0, Math.min(100, 50 + +kc.value * (e + I / +ti.value))); if ((vpos === 0 || vpos === 100)) I -= e * hh; }
+        else vpos = +vin.value;
+        var qin = 0.004 * vpos, qout = 0.0024 * +cv.value * Math.sqrt(Math.max(h, 0));
+        h = Math.max(0, Math.min(H, h + hh * (qin - qout) / A)); t += hh;
+      }
+      hist.t.push(t); hist.h.push(h); hist.s.push(auto ? +sp.value : NaN); hist.v.push(vpos / 25);
+      if (t > 120) { var k0 = hist.t.findIndex(function (x) { return x >= t - 120; }); ['t', 'h', 's', 'v'].forEach(function (k) { hist[k] = hist[k].slice(k0); }); }
+    }
+    function render() {
+      var f = fit(c), ctx = f.ctx, W = f.w, Hc = f.h, narrow = W < 560;
+      var tw = narrow ? W * 0.36 : 150, th = narrow ? 170 : Hc - 84, tx = narrow ? (W - tw) / 2 : 70, ty = 44;
+      var accent = css('--accent'), ink = css('--ink'), muted = css('--muted'), sig = css('--signal') || css('--gold');
+      // inlet pipe + valve
+      ctx.strokeStyle = muted; ctx.lineWidth = 6; ctx.beginPath(); ctx.moveTo(tx - 50, ty - 10); ctx.lineTo(tx + tw * 0.3, ty - 10); ctx.lineTo(tx + tw * 0.3, ty + 4); ctx.stroke();
+      ctx.fillStyle = css('--gold'); ctx.beginPath(); ctx.moveTo(tx - 30, ty - 20); ctx.lineTo(tx - 30, ty); ctx.lineTo(tx - 10, ty - 20); ctx.lineTo(tx - 10, ty); ctx.closePath(); ctx.fill();
+      ctx.fillStyle = muted; ctx.font = '11px Inter, sans-serif'; ctx.textAlign = 'center'; ctx.fillText('inlet ' + vpos.toFixed(0) + '%', tx - 20, ty - 26);
+      // falling stream
+      if (vpos > 1) { ctx.strokeStyle = accent; ctx.globalAlpha = .7; ctx.lineWidth = 1 + vpos / 25; ctx.setLineDash([6, 6]); ctx.lineDashOffset = -flowPhase; ctx.beginPath(); ctx.moveTo(tx + tw * 0.3, ty + 4); ctx.lineTo(tx + tw * 0.3, ty + th - (h / H) * th); ctx.stroke(); ctx.setLineDash([]); ctx.globalAlpha = 1; }
+      // tank
+      var lv = (h / H) * th;
+      ctx.fillStyle = accent; ctx.globalAlpha = .35; ctx.fillRect(tx, ty + th - lv, tw, lv); ctx.globalAlpha = 1;
+      ctx.strokeStyle = accent; ctx.lineWidth = 2; ctx.beginPath();
+      for (var x = 0; x <= tw; x += 4) { var yy = ty + th - lv + Math.sin((x + flowPhase * 2) / 12) * 2; x ? ctx.lineTo(tx + x, yy) : ctx.moveTo(tx, yy); } ctx.stroke();
+      ctx.strokeStyle = ink; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.moveTo(tx, ty); ctx.lineTo(tx, ty + th); ctx.lineTo(tx + tw, ty + th); ctx.lineTo(tx + tw, ty); ctx.stroke();
+      if (auto) { var sy = ty + th - (+sp.value / H) * th; ctx.strokeStyle = ink; ctx.setLineDash([5, 4]); ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(tx - 6, sy); ctx.lineTo(tx + tw + 6, sy); ctx.stroke(); ctx.setLineDash([]); ctx.fillStyle = ink; ctx.textAlign = 'left'; ctx.fillText('SP', tx + tw + 8, sy + 4); }
+      // outlet
+      ctx.strokeStyle = muted; ctx.lineWidth = 6; ctx.beginPath(); ctx.moveTo(tx + tw, ty + th - 8); ctx.lineTo(tx + tw + 50, ty + th - 8); ctx.stroke();
+      ctx.fillStyle = muted; ctx.textAlign = 'center'; ctx.fillText('outlet ' + cv.value + '%', tx + tw + 30, ty + th + 14);
+      ctx.fillStyle = ink; ctx.font = '600 14px Inter, sans-serif'; ctx.fillText('h = ' + h.toFixed(2) + ' m', tx + tw / 2, ty + th + 34);
+      if (auto) { ctx.fillStyle = css('--gold'); ctx.font = '600 12px Inter, sans-serif'; ctx.fillText('LC', tx - 30, ty + 60); ctx.strokeStyle = css('--gold'); ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(tx - 30, ty + 56, 14, 0, 7); ctx.stroke(); ctx.setLineDash([3, 3]); ctx.beginPath(); ctx.moveTo(tx - 30, ty + 42); ctx.lineTo(tx - 20, ty - 2); ctx.moveTo(tx - 16, ty + 56); ctx.lineTo(tx, ty + 56); ctx.stroke(); ctx.setLineDash([]); }
+      var bx = narrow ? 0 : tx + tw + 90, by = narrow ? th + ty + 48 : 0;
+      var t0 = hist.t.length ? hist.t[0] : 0, tt = hist.t.map(function (x) { return x - t0; });
+      plot(ctx, { x: bx, y: by, w: W - bx, h: Hc - by }, [{ t: tt, y: hist.s, color: ink, dash: [6, 5], width: 1.5, name: 'Set-point' }, { t: tt, y: hist.v, color: css('--gold'), width: 1.5, name: 'Inlet valve ÷ 25' }, { t: tt, y: hist.h, color: accent, name: 'Level h (m)' }], { tmax: 120, ymin: 0, ymax: 5, ny: 5, xlabel: 'time (s), last 2 minutes' });
+      info.textContent = auto ? 'Auto: the controller holds the level. Error = ' + (+sp.value - h).toFixed(2) + ' m' : 'Manual: the level settles where inflow equals outflow, h = (qin / cv)². Steady level for these valves ≈ ' + Math.min(H, Math.pow(0.004 * +vin.value / (0.0024 * +cv.value), 2)).toFixed(2) + ' m';
+    }
+    function loop(ts) { var dt = Math.min(0.05, (ts - last) / 1000 || 0.016); last = ts; if (running && root.isConnected) { step(dt * 4); flowPhase += dt * 40; render(); } requestAnimationFrame(loop); }
+    mode.onclick = function () { auto = !auto; I = 0; if (!auto) { vin.value = Math.round(vpos); vin.dispatchEvent(new Event('input')); } mode.textContent = 'Mode: ' + (auto ? 'Auto (PI)' : 'Manual'); mode.classList.toggle('on', auto); };
+    play.onclick = function () { running = !running; play.textContent = running ? '❚❚ Pause' : '▶ Play'; };
+    rs.onclick = function () { reset(); render(); };
+    reset(); render(); onTheme(render); requestAnimationFrame(loop);
+  };
+
+  /* 7. Frequency response of a first-order process: sine in, sine out */
+  SIMS['frequency'] = function (root) {
+    root.appendChild(el('h3', {}, 'Frequency response: sine in, sine out'));
+    root.appendChild(el('p', { 'class': 'desc' }, 'A sine wave of frequency &omega; enters G(s) = K / (&tau;s + 1). After the start-up transient the output is a sine of the same frequency, smaller by the amplitude ratio AR = K/&radic;(1+&omega;&sup2;&tau;&sup2;) and delayed by the phase lag &phi; = &minus;tan<sup>&minus;1</sup>(&omega;&tau;).'));
+    var box = el('div', { 'class': 'controls' }); root.appendChild(box);
+    var w = slider(box, 'Input frequency ω', 0.05, 3, 0.05, 0.4, ' rad/s', draw);
+    var tau = slider(box, 'Time constant τ', 0.5, 10, 0.5, 3, ' s', draw);
+    var K = slider(box, 'Gain K', 0.5, 2, 0.1, 1, '', draw);
+    var c = canvas(root); var info = el('div', { 'class': 'readout' }); root.appendChild(info);
+    function draw() {
+      var om = +w.value, ta = +tau.value, k = +K.value, tmax = 40, dt = 0.01, y = 0, T = [], U = [], Y = [];
+      for (var i = 0; i * dt <= tmax; i++) { var tt = i * dt, u = Math.sin(om * tt); T.push(tt); U.push(u); Y.push(y); y += dt * (k * u - y) / ta; }
+      var f = fit(c); plot(f.ctx, { x: 0, y: 0, w: f.w, h: f.h }, [{ t: T, y: U, color: css('--muted'), width: 1.5, dash: [6, 5], name: 'Input sin(ωt)' }, { t: T, y: Y, color: css('--accent'), name: 'Output y(t)' }], { tmax: tmax, ymin: -2, ymax: 2, ny: 4 });
+      var ar = k / Math.sqrt(1 + om * om * ta * ta), ph = -Math.atan(om * ta) * 180 / Math.PI;
+      info.textContent = 'Amplitude ratio AR = ' + ar.toFixed(3) + '   ·   Phase lag φ = ' + ph.toFixed(1) + '°   ·   Corner frequency 1/τ = ' + (1 / ta).toFixed(2) + ' rad/s';
+    }
+    draw(); onTheme(draw);
   };
 
   document.querySelectorAll('.sim[data-sim]').forEach(function (root) {

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 7: Dead time and FOPDT model fitting · Process Dynamics and Control</title>
+<meta name="description" content="Dead time and FOPDT model fitting">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 7: Dead time and FOPDT model fitting
+  Edit the notes inside <article class="notes"> ... </article>.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Simulation: change data-sim="..." (choices: tank, first-order, second-order, frequency, pid, spring, pendulum).
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">S. Gurusamy</a>
+  <nav class="links"><a href="../process-dynamics-and-control.html">Course home</a><a href="../process-dynamics-and-control/syllabus.html">Syllabus</a><a href="../process-dynamics-and-control/schedule.html">Schedule</a><a href="../process-dynamics-and-control.html#lessons">Lessons</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../process-dynamics-and-control.html">← Process Dynamics and Control</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 7 of 14 · Module B: Dynamic behaviour</div>
+    <h1>Dead time and FOPDT model fitting</h1>
+    <p>Process Dynamics and Control · EIE306</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">Module A · Foundations</div><ol><li><a href="01-introduction.html"><span class="n">1</span>Introduction to process control</a></li><li><a href="02-dynamic-modelling.html"><span class="n">2</span>Dynamic models from balance equations</a></li><li><a href="03-linearisation.html"><span class="n">3</span>Linearisation and deviation variables</a></li><li><a href="04-transfer-functions.html"><span class="n">4</span>Laplace transforms and transfer functions</a></li></ol></div><div class="mod"><div class="modname">Module B · Dynamic behaviour</div><ol><li><a href="05-first-order-systems.html"><span class="n">5</span>First-order systems</a></li><li><a href="06-second-order-systems.html"><span class="n">6</span>Second-order and higher-order systems</a></li><li class="on"><a href="07-dead-time-and-fopdt.html"><span class="n">7</span>Dead time and FOPDT model fitting</a></li><li><a href="08-frequency-response.html"><span class="n">8</span>Frequency response</a></li></ol></div><div class="mod"><div class="modname">Module C · Feedback control</div><ol><li><a href="09-pid-control.html"><span class="n">9</span>Feedback control and the PID controller</a></li><li><a href="10-controller-tuning.html"><span class="n">10</span>Controller tuning</a></li><li><a href="11-closed-loop-stability.html"><span class="n">11</span>Closed-loop stability</a></li></ol></div><div class="mod"><div class="modname">Module D · Advanced strategies</div><ol><li><a href="12-feedforward-and-cascade.html"><span class="n">12</span>Feedforward and cascade control</a></li><li><a href="13-level-control-case-study.html"><span class="n">13</span>Case study: tank level control</a></li><li><a href="14-introduction-to-mpc.html"><span class="n">14</span>Introduction to model predictive control</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Explain where dead time comes from</li><li>Fit a first-order plus dead-time model to step-test data</li><li>Use the Padé approximation</li></ul></div>
+    <section class="lsec"><h2>Notes</h2>
+    <article class="notes">
+<p><b>Dead time</b> (time delay) $\theta$ is the time between a change in the input and the first sign of a change in the output. It comes from transport in pipes and conveyors, from analysers that take samples, and from many small lags in series.</p>
+<p class="eq">$$G(s) = \frac{K e^{-\theta s}}{\tau s + 1}$$</p>
+<p>This <b>FOPDT</b> model is the workhorse of industrial tuning because three numbers describe most self-regulating processes well enough to tune a PID controller.</p>
+<h3>Fitting from a step test (two-point method)</h3>
+<ol><li>Make a step of size $\Delta u$ with the controller in manual and record the output until it settles.</li>
+<li>Gain: $K = \Delta y_\infty / \Delta u$.</li>
+<li>Find the times $t_{28}$ and $t_{63}$ at which the output has made 28.3 % and 63.2 % of its final change (measured from the time of the step).</li>
+<li>$\tau = 1.5\,(t_{63} - t_{28})$ and $\theta = t_{63} - \tau$.</li></ol>
+<h3>Why dead time is hard</h3>
+<p>During the dead time the controller sees no effect of what it has done, so it keeps pushing. The ratio $\theta/\tau$ (controllability ratio) tells us how hard a loop is: below 0.5 is easy, above 1 needs careful, slower tuning.</p>
+<h3>Padé approximation</h3>
+<p>For analysis we can replace the delay by a rational function: $e^{-\theta s} \approx \dfrac{1 - \theta s/2}{1 + \theta s/2}$.</p>
+</article></section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the <div class="video-slot">...</div> below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section id="try-it" class="lsec"><h2>Try it</h2>
+    <div class="sim" data-sim="first-order"></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">Step test: $\Delta u = 10$ %, final $\Delta y = 25$ °C, $t_{28} = 7$ min, $t_{63} = 13$ min. Fit an FOPDT model.</div><details><summary>Show solution</summary><div class="sol">$K = 2.5$ °C/%. $\tau = 1.5(13 - 7) = 9$ min. $\theta = 13 - 9 = 4$ min.</div></details></li><li><div class="q">Liquid travels 30 m along a pipe at 1.5 m/s before reaching a sensor. What dead time does this add?</div><details><summary>Show solution</summary><div class="sol">$\theta = 30/1.5 = 20$ s.</div></details></li><li><div class="q">Which loop is harder to control: $\theta/\tau = 0.2$ or $\theta/\tau = 1.5$? Why?</div><details><summary>Show solution</summary><div class="sol">The second. The controller must wait longer to see the effect of its action relative to how fast the process responds, so it must act more cautiously.</div></details></li></ol></section>
+    <nav class="prevnext"><a class="pn prev" href="06-second-order-systems.html"><small>← Lesson 6</small>Second-order and higher-order systems</a><a class="pn next" href="08-frequency-response.html"><small>Lesson 8 →</small>Frequency response</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+<script src="../../assets/js/sims.js"></script>
+</body>
+</html>
