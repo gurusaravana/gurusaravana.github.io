@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lesson 16: State diagrams and solution of the state equation · Control System Engineering</title>
+<title>Lesson 17: State diagrams and solution of the state equation · Control System Engineering</title>
 <meta name="description" content="State diagrams and solution of the state equation">
 <link rel="icon" href="../../assets/img/favicon1.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,10 +15,10 @@
 </head>
 <body>
 <!--
-  LESSON 16: State diagrams and solution of the state equation
+  LESSON 17: State diagrams and solution of the state equation
   Edit the notes inside <article class="notes"> ... </article>.
   Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
-  Simulation: change data-sim="..." (choices: tank, first-order, second-order, frequency, pid, spring, pendulum).
+  Simulation: change data-sim="..." (choices: tank, first-order, second-order, frequency, pid, spring, pendulum, rlc, rc-ladder, two-mass, laplace).
 -->
 <header class="nav"><div class="wrap">
   <a class="brand" href="../../index.html">S. Gurusamy</a>
@@ -28,16 +28,17 @@
 <div class="band course-band"><div class="wrap">
   <div class="crumb"><a href="../control-system-engineering.html">← Control System Engineering</a></div>
   <div class="course-head">
-    <div class="eyebrow">Lesson 16 of 18 · Module 4: State space analysis</div>
+    <div class="eyebrow">Lesson 17 of 19 · Module 4: State space analysis</div>
     <h1>State diagrams and solution of the state equation</h1>
     <p>Control System Engineering · EEE2510 · Sessions 49–51 · CO6</p>
   </div>
 </div></div>
 <main class="wrap lesson-layout">
-  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">Module 1 · System components and their representation</div><ol><li><a href="01-introduction.html"><span class="n">1</span>Introduction to control systems</a></li><li><a href="02-electrical-systems.html"><span class="n">2</span>Models of electrical systems</a></li><li><a href="03-mechanical-systems.html"><span class="n">3</span>Models of mechanical systems</a></li><li><a href="04-block-diagrams.html"><span class="n">4</span>Block diagram reduction</a></li><li><a href="05-signal-flow-graphs.html"><span class="n">5</span>Signal flow graphs and Mason's gain formula</a></li></ol></div><div class="mod"><div class="modname">Module 2 · Time response analysis</div><ol><li><a href="06-first-order-response.html"><span class="n">6</span>Standard test signals and first-order response</a></li><li><a href="07-second-order-response.html"><span class="n">7</span>Second-order response and time-domain specifications</a></li><li><a href="08-steady-state-errors.html"><span class="n">8</span>Steady-state errors and error constants</a></li><li><a href="09-p-pi-pid-controllers.html"><span class="n">9</span>P, PI and PID controllers</a></li></ol></div><div class="mod"><div class="modname">Module 3 · Stability analysis</div><ol><li><a href="10-routh-stability.html"><span class="n">10</span>Stability and the Routh criterion</a></li><li><a href="11-root-locus.html"><span class="n">11</span>Root locus</a></li><li><a href="12-bode-plots.html"><span class="n">12</span>Frequency response and Bode plots</a></li><li><a href="13-nyquist.html"><span class="n">13</span>Nyquist stability criterion</a></li><li><a href="14-compensation.html"><span class="n">14</span>Lead, lag and lead-lag compensation</a></li></ol></div><div class="mod"><div class="modname">Module 4 · State space analysis</div><ol><li><a href="15-state-space-models.html"><span class="n">15</span>State variables and state models</a></li><li class="on"><a href="16-state-equation-solution.html"><span class="n">16</span>State diagrams and solution of the state equation</a></li><li><a href="17-controllability-observability.html"><span class="n">17</span>Controllability and observability</a></li><li><a href="18-nonlinear-systems.html"><span class="n">18</span>Introduction to nonlinear systems</a></li></ol></div></details></aside>
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">Module 1 · System components and their representation</div><ol><li><a href="01-introduction.html"><span class="n">1</span>Introduction to control systems</a></li><li><a href="02-laplace-and-partial-fractions.html"><span class="n">2</span>Laplace transform and partial fractions</a></li><li><a href="03-electrical-systems.html"><span class="n">3</span>Models of electrical systems</a></li><li><a href="04-mechanical-systems.html"><span class="n">4</span>Models of mechanical systems</a></li><li><a href="05-block-diagrams.html"><span class="n">5</span>Block diagram reduction</a></li><li><a href="06-signal-flow-graphs.html"><span class="n">6</span>Signal flow graphs and Mason's gain formula</a></li></ol></div><div class="mod"><div class="modname">Module 2 · Time response analysis</div><ol><li><a href="07-first-order-response.html"><span class="n">7</span>Standard test signals and first-order response</a></li><li><a href="08-second-order-response.html"><span class="n">8</span>Second-order response and time-domain specifications</a></li><li><a href="09-steady-state-errors.html"><span class="n">9</span>Steady-state errors and error constants</a></li><li><a href="10-p-pi-pid-controllers.html"><span class="n">10</span>P, PI and PID controllers</a></li></ol></div><div class="mod"><div class="modname">Module 3 · Stability analysis</div><ol><li><a href="11-routh-stability.html"><span class="n">11</span>Stability and the Routh criterion</a></li><li><a href="12-root-locus.html"><span class="n">12</span>Root locus</a></li><li><a href="13-bode-plots.html"><span class="n">13</span>Frequency response and Bode plots</a></li><li><a href="14-nyquist.html"><span class="n">14</span>Nyquist stability criterion</a></li><li><a href="15-compensation.html"><span class="n">15</span>Lead, lag and lead-lag compensation</a></li></ol></div><div class="mod"><div class="modname">Module 4 · State space analysis</div><ol><li><a href="16-state-space-models.html"><span class="n">16</span>State variables and state models</a></li><li class="on"><a href="17-state-equation-solution.html"><span class="n">17</span>State diagrams and solution of the state equation</a></li><li><a href="18-controllability-observability.html"><span class="n">18</span>Controllability and observability</a></li><li><a href="19-nonlinear-systems.html"><span class="n">19</span>Introduction to nonlinear systems</a></li></ol></div></details></aside>
   <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
   <div class="lmain">
     <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Draw a state diagram</li><li>Find the state transition matrix</li><li>Solve the state equation for given inputs</li></ul></div>
+    
     <section class="lsec"><h2>Notes</h2>
     <article class="notes">
 <p>A <b>state diagram</b> is a block diagram or signal flow graph built from integrators: each state variable is the output of an integrator whose input is its derivative.</p>
@@ -55,7 +56,7 @@
     
     <section class="lsec" id="exercises"><h2>Exercises</h2>
     <ol class="exlist"><li><div class="q">Find $\phi(t)$ for $A = \begin{bmatrix}0&1\\-2&-3\end{bmatrix}$.</div><details><summary>Show solution</summary><div class="sol">$(sI - A)^{-1} = \dfrac{1}{(s+1)(s+2)}\begin{bmatrix}s+3&1\\-2&s\end{bmatrix}$, so $\phi(t) = \begin{bmatrix}2e^{-t} - e^{-2t} & e^{-t} - e^{-2t}\\ -2e^{-t} + 2e^{-2t} & -e^{-t} + 2e^{-2t}\end{bmatrix}$.</div></details></li><li><div class="q">With $u = 0$ and $\mathbf x(0) = [1\ 0]^T$, find $x_1(t)$.</div><details><summary>Show solution</summary><div class="sol">$x_1(t) = 2e^{-t} - e^{-2t}$.</div></details></li><li><div class="q">Check $\phi(0)$ for your answer to Exercise 1.</div><details><summary>Show solution</summary><div class="sol">At $t = 0$ the matrix is $\begin{bmatrix}1&0\\0&1\end{bmatrix} = I$, as required.</div></details></li></ol></section>
-    <nav class="prevnext"><a class="pn prev" href="15-state-space-models.html"><small>← Lesson 15</small>State variables and state models</a><a class="pn next" href="17-controllability-observability.html"><small>Lesson 17 →</small>Controllability and observability</a></nav>
+    <nav class="prevnext"><a class="pn prev" href="16-state-space-models.html"><small>← Lesson 16</small>State variables and state models</a><a class="pn next" href="18-controllability-observability.html"><small>Lesson 18 →</small>Controllability and observability</a></nav>
   </div>
 </main>
 <footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>

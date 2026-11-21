@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lesson 5: Signal flow graphs and Mason&#x27;s gain formula · Control System Engineering</title>
+<title>Lesson 6: Signal flow graphs and Mason&#x27;s gain formula · Control System Engineering</title>
 <meta name="description" content="Signal flow graphs and Mason&#x27;s gain formula">
 <link rel="icon" href="../../assets/img/favicon1.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,10 +15,10 @@
 </head>
 <body>
 <!--
-  LESSON 5: Signal flow graphs and Mason's gain formula
+  LESSON 6: Signal flow graphs and Mason's gain formula
   Edit the notes inside <article class="notes"> ... </article>.
   Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
-  Simulation: change data-sim="..." (choices: tank, first-order, second-order, frequency, pid, spring, pendulum).
+  Simulation: change data-sim="..." (choices: tank, first-order, second-order, frequency, pid, spring, pendulum, rlc, rc-ladder, two-mass, laplace).
 -->
 <header class="nav"><div class="wrap">
   <a class="brand" href="../../index.html">S. Gurusamy</a>
@@ -28,16 +28,17 @@
 <div class="band course-band"><div class="wrap">
   <div class="crumb"><a href="../control-system-engineering.html">← Control System Engineering</a></div>
   <div class="course-head">
-    <div class="eyebrow">Lesson 5 of 18 · Module 1: System components and their representation</div>
+    <div class="eyebrow">Lesson 6 of 19 · Module 1: System components and their representation</div>
     <h1>Signal flow graphs and Mason's gain formula</h1>
     <p>Control System Engineering · EEE2510 · Sessions 11–12 · CO2</p>
   </div>
 </div></div>
 <main class="wrap lesson-layout">
-  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">Module 1 · System components and their representation</div><ol><li><a href="01-introduction.html"><span class="n">1</span>Introduction to control systems</a></li><li><a href="02-electrical-systems.html"><span class="n">2</span>Models of electrical systems</a></li><li><a href="03-mechanical-systems.html"><span class="n">3</span>Models of mechanical systems</a></li><li><a href="04-block-diagrams.html"><span class="n">4</span>Block diagram reduction</a></li><li class="on"><a href="05-signal-flow-graphs.html"><span class="n">5</span>Signal flow graphs and Mason's gain formula</a></li></ol></div><div class="mod"><div class="modname">Module 2 · Time response analysis</div><ol><li><a href="06-first-order-response.html"><span class="n">6</span>Standard test signals and first-order response</a></li><li><a href="07-second-order-response.html"><span class="n">7</span>Second-order response and time-domain specifications</a></li><li><a href="08-steady-state-errors.html"><span class="n">8</span>Steady-state errors and error constants</a></li><li><a href="09-p-pi-pid-controllers.html"><span class="n">9</span>P, PI and PID controllers</a></li></ol></div><div class="mod"><div class="modname">Module 3 · Stability analysis</div><ol><li><a href="10-routh-stability.html"><span class="n">10</span>Stability and the Routh criterion</a></li><li><a href="11-root-locus.html"><span class="n">11</span>Root locus</a></li><li><a href="12-bode-plots.html"><span class="n">12</span>Frequency response and Bode plots</a></li><li><a href="13-nyquist.html"><span class="n">13</span>Nyquist stability criterion</a></li><li><a href="14-compensation.html"><span class="n">14</span>Lead, lag and lead-lag compensation</a></li></ol></div><div class="mod"><div class="modname">Module 4 · State space analysis</div><ol><li><a href="15-state-space-models.html"><span class="n">15</span>State variables and state models</a></li><li><a href="16-state-equation-solution.html"><span class="n">16</span>State diagrams and solution of the state equation</a></li><li><a href="17-controllability-observability.html"><span class="n">17</span>Controllability and observability</a></li><li><a href="18-nonlinear-systems.html"><span class="n">18</span>Introduction to nonlinear systems</a></li></ol></div></details></aside>
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">Module 1 · System components and their representation</div><ol><li><a href="01-introduction.html"><span class="n">1</span>Introduction to control systems</a></li><li><a href="02-laplace-and-partial-fractions.html"><span class="n">2</span>Laplace transform and partial fractions</a></li><li><a href="03-electrical-systems.html"><span class="n">3</span>Models of electrical systems</a></li><li><a href="04-mechanical-systems.html"><span class="n">4</span>Models of mechanical systems</a></li><li><a href="05-block-diagrams.html"><span class="n">5</span>Block diagram reduction</a></li><li class="on"><a href="06-signal-flow-graphs.html"><span class="n">6</span>Signal flow graphs and Mason's gain formula</a></li></ol></div><div class="mod"><div class="modname">Module 2 · Time response analysis</div><ol><li><a href="07-first-order-response.html"><span class="n">7</span>Standard test signals and first-order response</a></li><li><a href="08-second-order-response.html"><span class="n">8</span>Second-order response and time-domain specifications</a></li><li><a href="09-steady-state-errors.html"><span class="n">9</span>Steady-state errors and error constants</a></li><li><a href="10-p-pi-pid-controllers.html"><span class="n">10</span>P, PI and PID controllers</a></li></ol></div><div class="mod"><div class="modname">Module 3 · Stability analysis</div><ol><li><a href="11-routh-stability.html"><span class="n">11</span>Stability and the Routh criterion</a></li><li><a href="12-root-locus.html"><span class="n">12</span>Root locus</a></li><li><a href="13-bode-plots.html"><span class="n">13</span>Frequency response and Bode plots</a></li><li><a href="14-nyquist.html"><span class="n">14</span>Nyquist stability criterion</a></li><li><a href="15-compensation.html"><span class="n">15</span>Lead, lag and lead-lag compensation</a></li></ol></div><div class="mod"><div class="modname">Module 4 · State space analysis</div><ol><li><a href="16-state-space-models.html"><span class="n">16</span>State variables and state models</a></li><li><a href="17-state-equation-solution.html"><span class="n">17</span>State diagrams and solution of the state equation</a></li><li><a href="18-controllability-observability.html"><span class="n">18</span>Controllability and observability</a></li><li><a href="19-nonlinear-systems.html"><span class="n">19</span>Introduction to nonlinear systems</a></li></ol></div></details></aside>
   <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
   <div class="lmain">
     <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Convert a block diagram into a signal flow graph</li><li>Identify forward paths, loops and non-touching loops</li><li>Apply Mason's gain formula</li></ul></div>
+    
     <section class="lsec"><h2>Notes</h2>
     <article class="notes">
 <p>A signal flow graph uses <b>nodes</b> for signals and <b>branches</b> with gains for the relations between them. It gives the transfer function in one step, without repeated reduction.</p>
@@ -51,7 +52,7 @@
 <p class="eq">$$\Delta = 1 - \sum L_i + \sum L_iL_j - \sum L_iL_jL_k + \dots$$</p>
 <p>($\sum L_i$: all loop gains; $\sum L_iL_j$: products of all pairs of non-touching loops; and so on). $\Delta_k$ is $\Delta$ computed with the loops that touch the $k$-th forward path removed.</p>
 <h3>Example</h3>
-<p>For $G_1$ in series with an inner loop $G_2, H_2$, and outer feedback $H_1$: one forward path $P_1 = G_1G_2$; loops $L_1 = -G_2H_2$, $L_2 = -G_1G_2H_1$, which touch. So $\Delta = 1 + G_2H_2 + G_1G_2H_1$ and $\Delta_1 = 1$, matching Lesson 4.</p>
+<p>For $G_1$ in series with an inner loop $G_2, H_2$, and outer feedback $H_1$: one forward path $P_1 = G_1G_2$; loops $L_1 = -G_2H_2$, $L_2 = -G_1G_2H_1$, which touch. So $\Delta = 1 + G_2H_2 + G_1G_2H_1$ and $\Delta_1 = 1$, matching Lesson 5.</p>
 </article></section>
     <section class="lsec"><h2>Lecture</h2>
     <!-- LECTURE VIDEO: replace the <div class="video-slot">...</div> below with
@@ -60,7 +61,7 @@
     
     <section class="lsec" id="exercises"><h2>Exercises</h2>
     <ol class="exlist"><li><div class="q">A graph has forward paths $P_1 = G_1G_2G_3$ and $P_2 = G_4$, and one loop $L_1 = -G_2H$ touching $P_1$ only. Find $T$.</div><details><summary>Show solution</summary><div class="sol">$\Delta = 1 + G_2H$, $\Delta_1 = 1$, $\Delta_2 = 1 + G_2H$. $T = \dfrac{G_1G_2G_3 + G_4(1 + G_2H)}{1 + G_2H}$.</div></details></li><li><div class="q">Two non-touching loops have gains $L_1 = -0.5$ and $L_2 = -0.2$. Find $\Delta$.</div><details><summary>Show solution</summary><div class="sol">$\Delta = 1 - (L_1 + L_2) + L_1L_2 = 1 + 0.7 + 0.1 = 1.8$.</div></details></li><li><div class="q">Why is Mason's formula often faster than block diagram reduction?</div><details><summary>Show solution</summary><div class="sol">It finds the transfer function directly from paths and loops, without redrawing the diagram after each step or moving summing and take-off points.</div></details></li></ol></section>
-    <nav class="prevnext"><a class="pn prev" href="04-block-diagrams.html"><small>← Lesson 4</small>Block diagram reduction</a><a class="pn next" href="06-first-order-response.html"><small>Lesson 6 →</small>Standard test signals and first-order response</a></nav>
+    <nav class="prevnext"><a class="pn prev" href="05-block-diagrams.html"><small>← Lesson 5</small>Block diagram reduction</a><a class="pn next" href="07-first-order-response.html"><small>Lesson 7 →</small>Standard test signals and first-order response</a></nav>
   </div>
 </main>
 <footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>

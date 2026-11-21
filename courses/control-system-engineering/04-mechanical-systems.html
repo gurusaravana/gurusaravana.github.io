@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 4: Models of mechanical systems · Control System Engineering</title>
+<meta name="description" content="Models of mechanical systems">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 4: Models of mechanical systems
+  Edit the notes inside <article class="notes"> ... </article>.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Simulation: change data-sim="..." (choices: tank, first-order, second-order, frequency, pid, spring, pendulum, rlc, rc-ladder, two-mass, laplace).
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">S. Gurusamy</a>
+  <nav class="links"><a href="../control-system-engineering.html">Course home</a><a href="../control-system-engineering/syllabus.html">Syllabus</a><a href="../control-system-engineering/schedule.html">Schedule</a><a href="../control-system-engineering.html#lessons">Lessons</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../control-system-engineering.html">← Control System Engineering</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 4 of 19 · Module 1: System components and their representation</div>
+    <h1>Models of mechanical systems</h1>
+    <p>Control System Engineering · EEE2510 · Sessions 5–6 · CO1</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">Module 1 · System components and their representation</div><ol><li><a href="01-introduction.html"><span class="n">1</span>Introduction to control systems</a></li><li><a href="02-laplace-and-partial-fractions.html"><span class="n">2</span>Laplace transform and partial fractions</a></li><li><a href="03-electrical-systems.html"><span class="n">3</span>Models of electrical systems</a></li><li class="on"><a href="04-mechanical-systems.html"><span class="n">4</span>Models of mechanical systems</a></li><li><a href="05-block-diagrams.html"><span class="n">5</span>Block diagram reduction</a></li><li><a href="06-signal-flow-graphs.html"><span class="n">6</span>Signal flow graphs and Mason's gain formula</a></li></ol></div><div class="mod"><div class="modname">Module 2 · Time response analysis</div><ol><li><a href="07-first-order-response.html"><span class="n">7</span>Standard test signals and first-order response</a></li><li><a href="08-second-order-response.html"><span class="n">8</span>Second-order response and time-domain specifications</a></li><li><a href="09-steady-state-errors.html"><span class="n">9</span>Steady-state errors and error constants</a></li><li><a href="10-p-pi-pid-controllers.html"><span class="n">10</span>P, PI and PID controllers</a></li></ol></div><div class="mod"><div class="modname">Module 3 · Stability analysis</div><ol><li><a href="11-routh-stability.html"><span class="n">11</span>Stability and the Routh criterion</a></li><li><a href="12-root-locus.html"><span class="n">12</span>Root locus</a></li><li><a href="13-bode-plots.html"><span class="n">13</span>Frequency response and Bode plots</a></li><li><a href="14-nyquist.html"><span class="n">14</span>Nyquist stability criterion</a></li><li><a href="15-compensation.html"><span class="n">15</span>Lead, lag and lead-lag compensation</a></li></ol></div><div class="mod"><div class="modname">Module 4 · State space analysis</div><ol><li><a href="16-state-space-models.html"><span class="n">16</span>State variables and state models</a></li><li><a href="17-state-equation-solution.html"><span class="n">17</span>State diagrams and solution of the state equation</a></li><li><a href="18-controllability-observability.html"><span class="n">18</span>Controllability and observability</a></li><li><a href="19-nonlinear-systems.html"><span class="n">19</span>Introduction to nonlinear systems</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Draw free-body diagrams and write D'Alembert equations for each mass</li><li>Derive transfer functions of two-mass translational systems</li><li>Use force–voltage and force–current analogies</li></ul></div>
+    <p class="lesson-files"><a class="btnlink" href="module-1-notes.pdf" target="_blank">📄 Module 1 lecture notes and tutorial (PDF)</a> </p>
+    <section class="lsec"><h2>Notes</h2>
+    <article class="notes">
+<h3>Translational elements</h3>
+<table class="tbl"><tr><th>Element</th><th>Force</th><th>Laplace form</th></tr>
+<tr><td>Mass $M$</td><td>$M\,\ddot x$</td><td>$Ms^2X(s)$</td></tr><tr><td>Damper $B$</td><td>$B\,\dot x$</td><td>$BsX(s)$</td></tr><tr><td>Spring $K$</td><td>$Kx$</td><td>$KX(s)$</td></tr></table>
+<p>For a damper or spring <b>between</b> two masses, use the relative motion: $B(\dot x_1 - \dot x_2)$ and $K(x_1 - x_2)$ on mass 1, and the opposite sign on mass 2.</p>
+<h3>Method (D'Alembert's principle)</h3>
+<ol><li>Draw a free-body diagram for each mass (node), with the inertial force $M\ddot x$ opposing positive motion.</li>
+<li>Write the force balance: sum of opposing forces = applied force.</li>
+<li>Take Laplace transforms with zero initial conditions.</li>
+<li>Solve the simultaneous equations for the output you want.</li></ol>
+<p>A quick check: in the $s$-domain each equation reads (sum of impedances on this mass) × $X_k$ − (impedances shared with the other mass) × $X_j$ = applied force, just like mesh analysis.</p>
+
+<h3>Worked example 1: single mass–spring–damper</h3>
+<p class="eq">$$M\ddot x + B\dot x + Kx = f(t) \quad\Rightarrow\quad \frac{X(s)}{F(s)} = \frac{1}{Ms^2 + Bs + K}$$</p>
+<p class="tip">In the <a href="#sim-spring">mass–spring–damper animation</a>, set damping to zero for undamped oscillation, then raise it until the mass returns without overshoot: critical damping is $B = 2\sqrt{MK}$.</p>
+
+<h3>Worked example 2: two masses coupled by a spring and a damper</h3>
+<p>$M_1$ is tied to the wall by $K_1$ and $B_1$, coupled to $M_2$ by $K$ and $B$; $M_2$ has friction $B_2$ and is pushed by $f(t)$. Find $X(s)/F(s)$ for the displacement $x$ of $M_2$.</p>
+<p>Node 1: $M_1\ddot x_1 + B_1\dot x_1 + B(\dot x_1 - \dot x) + K_1x_1 + K(x_1 - x) = 0$</p>
+<p>Node 2: $M_2\ddot x + B_2\dot x + B(\dot x - \dot x_1) + K(x - x_1) = f(t)$</p>
+<p class="eq">$$\begin{aligned}\left[M_1s^2 + (B + B_1)s + (K_1 + K)\right]X_1 - (Bs + K)X &= 0\\ -(Bs + K)X_1 + \left[M_2s^2 + (B + B_2)s + K\right]X &= F\end{aligned}$$</p>
+<p>From the first equation $X_1 = \dfrac{Bs + K}{M_1s^2 + (B + B_1)s + (K_1 + K)}X$. Substituting and clearing the denominator:</p>
+<p class="eq">$$\frac{X(s)}{F(s)} = \frac{M_1s^2 + (B + B_1)s + (K_1 + K)}{\left[M_1s^2 + (B + B_1)s + (K_1 + K)\right]\left[M_2s^2 + (B + B_2)s + K\right] - (Bs + K)^2}$$</p>
+<p class="tip">This is the system in the <a href="#sim-two-mass">two-mass simulation</a>. Press Play: $M_2$ moves first and drags $M_1$ through the coupling. Make $K$ very stiff and the two masses move almost as one.</p>
+
+<h3>Worked example 3: vertical two-mass system</h3>
+<p>$M_1$ hangs from $K_1$ with damper $B$ and carries force $f(t)$; $M_2$ hangs from $M_1$ by spring $K_2$. Find $Y_2(s)/F(s)$.</p>
+<p>Node 1: $M_1\ddot y_1 + B\dot y_1 + K_1y_1 + K_2(y_1 - y_2) = f(t)$. Node 2: $M_2\ddot y_2 + K_2(y_2 - y_1) = 0$.</p>
+<p>From node 2, $Y_1 = \dfrac{M_2s^2 + K_2}{K_2}Y_2$. Substituting into node 1:</p>
+<p class="eq">$$\frac{Y_2(s)}{F(s)} = \frac{K_2}{\left[M_1s^2 + Bs + (K_1 + K_2)\right](M_2s^2 + K_2) - K_2^2}$$</p>
+
+<h3>Worked example 4: masses coupled only by a damper</h3>
+<p>$M_1$ (with $B_1$, $K_1$ to ground) carries $f(t)$; $M_2$ (with $B_2$, $K_2$ to ground) is linked to $M_1$ by damper $B_{12}$. Find $X_1/F$ and $X_2/F$.</p>
+<p class="eq">$$\begin{aligned}\left[M_1s^2 + (B_1 + B_{12})s + K_1\right]X_1 - B_{12}sX_2 &= F\\ -B_{12}sX_1 + \left[M_2s^2 + (B_2 + B_{12})s + K_2\right]X_2 &= 0\end{aligned}$$</p>
+<p>With the determinant</p><p class="eq">$$\Delta = \left[M_1s^2 + (B_1 + B_{12})s + K_1\right]\left[M_2s^2 + (B_2 + B_{12})s + K_2\right] - (B_{12}s)^2$$</p>
+<p class="eq">$$\frac{X_1(s)}{F(s)} = \frac{M_2s^2 + (B_2 + B_{12})s + K_2}{\Delta}, \qquad \frac{X_2(s)}{F(s)} = \frac{B_{12}s}{\Delta}$$</p>
+<p>Note the $s$ in the numerator of $X_2/F$: a damper passes on only <i>changes</i>, so in steady state $M_2$ returns to rest.</p>
+
+<h3>Rotational systems and analogies</h3>
+<p>Inertia $J\ddot\theta$, rotational damping $B\dot\theta$ and torsional spring $K\theta$ play the same roles, with torque in place of force.</p>
+<table class="tbl"><tr><th>Mechanical</th><th>Force–voltage</th><th>Force–current</th></tr>
+<tr><td>Force $f$</td><td>Voltage $v$</td><td>Current $i$</td></tr><tr><td>Mass $M$</td><td>Inductance $L$</td><td>Capacitance $C$</td></tr>
+<tr><td>Damping $B$</td><td>Resistance $R$</td><td>Conductance $1/R$</td></tr><tr><td>Stiffness $K$</td><td>Elastance $1/C$</td><td>Reciprocal inductance $1/L$</td></tr>
+<tr><td>Displacement $x$</td><td>Charge $q$</td><td>Flux linkage $\psi$</td></tr></table>
+<p>So the single mass–spring–damper behaves exactly like the series RLC circuit of Lesson 3.</p>
+</article></section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the <div class="video-slot">...</div> below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section id="try-it" class="lsec"><h2>Try it</h2>
+    <div class="sim" id="sim-spring" data-sim="spring"></div>
+    <div class="sim" id="sim-two-mass" data-sim="two-mass"></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">In worked example 2, find the steady-state displacements for a constant force $F_0$.</div><details><summary>Show solution</summary><div class="sol">Set $s = 0$: $X/F = (K_1 + K)/((K_1 + K)K - K^2) = (K_1 + K)/(K_1K)$, so $x = F_0/K_1 + F_0/K$, and $x_1 = F_0/K_1$. The two-mass simulation shows these values in its readout.</div></details></li><li><div class="q">For $M = 1$ kg and $K = 10$ N/m, what damping gives critical damping?</div><details><summary>Show solution</summary><div class="sol">$B = 2\sqrt{MK} = 2\sqrt{10} = 6.32$ N·s/m.</div></details></li><li><div class="q">In worked example 4, what is the final value of $x_2(t)$ for a step force?</div><details><summary>Show solution</summary><div class="sol">$\lim_{s\to0} s\cdot\frac{B_{12}s}{\Delta}\cdot\frac{F_0}{s} = 0$: $M_2$ returns to its starting position, since a damper carries no force at rest.</div></details></li><li><div class="q">Write the force–voltage analogous circuit of $M\ddot x + B\dot x + Kx = f$.</div><details><summary>Show solution</summary><div class="sol">A series RLC circuit with $L = M$, $R = B$, $C = 1/K$, driven by voltage $v = f$; the loop charge $q$ plays the role of $x$.</div></details></li></ol></section>
+    <nav class="prevnext"><a class="pn prev" href="03-electrical-systems.html"><small>← Lesson 3</small>Models of electrical systems</a><a class="pn next" href="05-block-diagrams.html"><small>Lesson 5 →</small>Block diagram reduction</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+<script src="../../assets/js/sims.js"></script>
+</body>
+</html>
