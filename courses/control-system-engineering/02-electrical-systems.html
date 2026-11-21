@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 2: Models of electrical systems · Control System Engineering</title>
+<meta name="description" content="Models of electrical systems">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 2: Models of electrical systems
+  Edit the notes inside <article class="notes"> ... </article>.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Simulation: change data-sim="..." (choices: tank, first-order, second-order, frequency, pid, spring, pendulum).
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">S. Gurusamy</a>
+  <nav class="links"><a href="../control-system-engineering.html">Course home</a><a href="../control-system-engineering/syllabus.html">Syllabus</a><a href="../control-system-engineering/schedule.html">Schedule</a><a href="../control-system-engineering.html#lessons">Lessons</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../control-system-engineering.html">← Control System Engineering</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 2 of 18 · Module 1: System components and their representation</div>
+    <h1>Models of electrical systems</h1>
+    <p>Control System Engineering · EEE2510 · Sessions 3–4 · CO1</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">Module 1 · System components and their representation</div><ol><li><a href="01-introduction.html"><span class="n">1</span>Introduction to control systems</a></li><li class="on"><a href="02-electrical-systems.html"><span class="n">2</span>Models of electrical systems</a></li><li><a href="03-mechanical-systems.html"><span class="n">3</span>Models of mechanical systems</a></li><li><a href="04-block-diagrams.html"><span class="n">4</span>Block diagram reduction</a></li><li><a href="05-signal-flow-graphs.html"><span class="n">5</span>Signal flow graphs and Mason's gain formula</a></li></ol></div><div class="mod"><div class="modname">Module 2 · Time response analysis</div><ol><li><a href="06-first-order-response.html"><span class="n">6</span>Standard test signals and first-order response</a></li><li><a href="07-second-order-response.html"><span class="n">7</span>Second-order response and time-domain specifications</a></li><li><a href="08-steady-state-errors.html"><span class="n">8</span>Steady-state errors and error constants</a></li><li><a href="09-p-pi-pid-controllers.html"><span class="n">9</span>P, PI and PID controllers</a></li></ol></div><div class="mod"><div class="modname">Module 3 · Stability analysis</div><ol><li><a href="10-routh-stability.html"><span class="n">10</span>Stability and the Routh criterion</a></li><li><a href="11-root-locus.html"><span class="n">11</span>Root locus</a></li><li><a href="12-bode-plots.html"><span class="n">12</span>Frequency response and Bode plots</a></li><li><a href="13-nyquist.html"><span class="n">13</span>Nyquist stability criterion</a></li><li><a href="14-compensation.html"><span class="n">14</span>Lead, lag and lead-lag compensation</a></li></ol></div><div class="mod"><div class="modname">Module 4 · State space analysis</div><ol><li><a href="15-state-space-models.html"><span class="n">15</span>State variables and state models</a></li><li><a href="16-state-equation-solution.html"><span class="n">16</span>State diagrams and solution of the state equation</a></li><li><a href="17-controllability-observability.html"><span class="n">17</span>Controllability and observability</a></li><li><a href="18-nonlinear-systems.html"><span class="n">18</span>Introduction to nonlinear systems</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Write differential equations for RLC circuits</li><li>Derive transfer functions with Laplace transforms</li><li>Use impedances to find transfer functions directly</li></ul></div>
+    <section class="lsec"><h2>Notes</h2>
+    <article class="notes">
+<p>Kirchhoff's laws and the element laws give the differential equations. With zero initial conditions, each element has an impedance:</p>
+<table class="tbl"><tr><th>Element</th><th>Voltage–current law</th><th>Impedance $Z(s)$</th></tr>
+<tr><td>Resistor</td><td>$v = Ri$</td><td>$R$</td></tr><tr><td>Inductor</td><td>$v = L\,di/dt$</td><td>$Ls$</td></tr><tr><td>Capacitor</td><td>$v = \frac{1}{C}\int i\,dt$</td><td>$1/(Cs)$</td></tr></table>
+<h3>Series RLC circuit</h3>
+<p>Input $v_i(t)$, output the capacitor voltage $v_o(t)$. KVL gives $L\,\dfrac{di}{dt} + Ri + \dfrac{1}{C}\int i\,dt = v_i$. Using the voltage divider with impedances:</p>
+<p class="eq">$$\frac{V_o(s)}{V_i(s)} = \frac{1/(Cs)}{Ls + R + 1/(Cs)} = \frac{1}{LCs^2 + RCs + 1}$$</p>
+<p>This is a second-order system with $\omega_n = 1/\sqrt{LC}$ and $\zeta = \dfrac{R}{2}\sqrt{C/L}$.</p>
+<h3>RC low-pass circuit</h3>
+<p class="eq">$$\frac{V_o(s)}{V_i(s)} = \frac{1}{RCs + 1}$$</p>
+<p>a first-order system with time constant $\tau = RC$.</p>
+<h3>Armature-controlled DC motor</h3>
+<p>With armature resistance $R_a$, inductance $L_a$, back-emf constant $K_b$, torque constant $K_t$, inertia $J$ and friction $B$:</p>
+<p class="eq">$$\frac{\Omega(s)}{V_a(s)} = \frac{K_t}{(L_as + R_a)(Js + B) + K_tK_b}$$</p>
+<p class="tip">Model the RLC circuit in MATLAB with <code>tf(1,[L*C R*C 1])</code> and <code>step()</code>, and compare it with the second-order simulation in Lesson 7.</p>
+</article></section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the <div class="video-slot">...</div> below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">Find $V_o/V_i$ for a series RLC circuit when the output is taken across the resistor.</div><details><summary>Show solution</summary><div class="sol">$\dfrac{V_o}{V_i} = \dfrac{R}{Ls + R + 1/(Cs)} = \dfrac{RCs}{LCs^2 + RCs + 1}$.</div></details></li><li><div class="q">For $R = 10\,\Omega$, $L = 1$ H, $C = 0.01$ F (output across $C$), find $\omega_n$ and $\zeta$.</div><details><summary>Show solution</summary><div class="sol">$\omega_n = 1/\sqrt{0.01} = 10$ rad/s. $\zeta = (10/2)\sqrt{0.01/1} = 0.5$.</div></details></li><li><div class="q">Neglecting $L_a$, write the DC motor transfer function as a first-order system.</div><details><summary>Show solution</summary><div class="sol">$\Omega/V_a = K_t/(R_a(Js + B) + K_tK_b) = K/(\tau s + 1)$ with $K = K_t/(R_aB + K_tK_b)$ and $\tau = R_aJ/(R_aB + K_tK_b)$.</div></details></li></ol></section>
+    <nav class="prevnext"><a class="pn prev" href="01-introduction.html"><small>← Lesson 1</small>Introduction to control systems</a><a class="pn next" href="03-mechanical-systems.html"><small>Lesson 3 →</small>Models of mechanical systems</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+<script src="../../assets/js/sims.js"></script>
+</body>
+</html>

@@ -260,6 +260,9 @@ ul.lessons .t{flex:1;min-width:160px;font-weight:500}
 .teach-h{font-size:20px;margin:26px 0 12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .now-badge{font:600 12px var(--mono);padding:4px 10px;border-radius:999px;background:var(--accent);color:#fff}
 .current-card .where{color:var(--muted);margin:0 0 6px}
+.sched2 tr.exam td{background:var(--accent-soft)}
+.sched2 tr.sub td{padding-left:28px;font-size:14.5px;border-top:0}
+.btnlink{display:inline-block;padding:9px 16px;border-radius:999px;background:var(--accent);color:#fff;text-decoration:none;font-weight:500}
 /* ================= Glass theme (active: <html data-skin="glass">) ================= */
 :root[data-skin="glass"]{--plotgrid:rgba(15,23,42,.10);--bg:#eef2ff;--surface:rgba(255,255,255,.55);--ink:#0f172a;--muted:#475569;--line:rgba(255,255,255,.7);--accent:#4f46e5;--accent-soft:rgba(79,70,229,.12);--gold:#0ea5e9;--band:transparent;--band-ink:#0f172a;--band-muted:#334155;--grid:transparent;--signal:#ec4899}
 :root[data-skin="glass"][data-theme="dark"]{--plotgrid:rgba(255,255,255,.10);--bg:#0b1024;--surface:rgba(30,41,80,.45);--ink:#eef2ff;--muted:#a5b4fc;--line:rgba(255,255,255,.12);--accent:#a5b4fc;--accent-soft:rgba(165,180,252,.15);--gold:#67e8f9;--band-ink:#eef2ff;--band-muted:#c7d2fe}

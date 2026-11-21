@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 12: Frequency response and Bode plots · Control System Engineering</title>
+<meta name="description" content="Frequency response and Bode plots">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 12: Frequency response and Bode plots
+  Edit the notes inside <article class="notes"> ... </article>.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Simulation: change data-sim="..." (choices: tank, first-order, second-order, frequency, pid, spring, pendulum).
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">S. Gurusamy</a>
+  <nav class="links"><a href="../control-system-engineering.html">Course home</a><a href="../control-system-engineering/syllabus.html">Syllabus</a><a href="../control-system-engineering/schedule.html">Schedule</a><a href="../control-system-engineering.html#lessons">Lessons</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../control-system-engineering.html">← Control System Engineering</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 12 of 18 · Module 3: Stability analysis</div>
+    <h1>Frequency response and Bode plots</h1>
+    <p>Control System Engineering · EEE2510 · Sessions 34–38 · CO4</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">Module 1 · System components and their representation</div><ol><li><a href="01-introduction.html"><span class="n">1</span>Introduction to control systems</a></li><li><a href="02-electrical-systems.html"><span class="n">2</span>Models of electrical systems</a></li><li><a href="03-mechanical-systems.html"><span class="n">3</span>Models of mechanical systems</a></li><li><a href="04-block-diagrams.html"><span class="n">4</span>Block diagram reduction</a></li><li><a href="05-signal-flow-graphs.html"><span class="n">5</span>Signal flow graphs and Mason's gain formula</a></li></ol></div><div class="mod"><div class="modname">Module 2 · Time response analysis</div><ol><li><a href="06-first-order-response.html"><span class="n">6</span>Standard test signals and first-order response</a></li><li><a href="07-second-order-response.html"><span class="n">7</span>Second-order response and time-domain specifications</a></li><li><a href="08-steady-state-errors.html"><span class="n">8</span>Steady-state errors and error constants</a></li><li><a href="09-p-pi-pid-controllers.html"><span class="n">9</span>P, PI and PID controllers</a></li></ol></div><div class="mod"><div class="modname">Module 3 · Stability analysis</div><ol><li><a href="10-routh-stability.html"><span class="n">10</span>Stability and the Routh criterion</a></li><li><a href="11-root-locus.html"><span class="n">11</span>Root locus</a></li><li class="on"><a href="12-bode-plots.html"><span class="n">12</span>Frequency response and Bode plots</a></li><li><a href="13-nyquist.html"><span class="n">13</span>Nyquist stability criterion</a></li><li><a href="14-compensation.html"><span class="n">14</span>Lead, lag and lead-lag compensation</a></li></ol></div><div class="mod"><div class="modname">Module 4 · State space analysis</div><ol><li><a href="15-state-space-models.html"><span class="n">15</span>State variables and state models</a></li><li><a href="16-state-equation-solution.html"><span class="n">16</span>State diagrams and solution of the state equation</a></li><li><a href="17-controllability-observability.html"><span class="n">17</span>Controllability and observability</a></li><li><a href="18-nonlinear-systems.html"><span class="n">18</span>Introduction to nonlinear systems</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Define frequency-domain specifications</li><li>Sketch asymptotic Bode magnitude and phase plots</li><li>Find gain and phase margins from a Bode plot</li></ul></div>
+    <section class="lsec"><h2>Notes</h2>
+    <article class="notes">
+<p>Put $s = j\omega$: a sine input gives a sine output scaled by $|G(j\omega)|$ and shifted by $\angle G(j\omega)$.</p>
+<h3>Frequency-domain specifications</h3>
+<ul><li><b>Resonant peak</b> $M_r = \dfrac{1}{2\zeta\sqrt{1-\zeta^2}}$ at $\omega_r = \omega_n\sqrt{1 - 2\zeta^2}$ (for $\zeta &lt; 0.707$).</li>
+<li><b>Bandwidth</b>: the frequency where the closed-loop gain falls to −3 dB.</li></ul>
+<h3>Asymptotic Bode plot</h3>
+<table class="tbl"><tr><th>Factor</th><th>Magnitude slope</th><th>Phase</th></tr>
+<tr><td>Gain $K$</td><td>Flat at $20\log K$</td><td>0°</td></tr>
+<tr><td>Pole at origin $1/s$</td><td>−20 dB/decade</td><td>−90°</td></tr>
+<tr><td>Simple pole $1/(1 + sT)$</td><td>0, then −20 dB/dec after $1/T$</td><td>0 to −90°</td></tr>
+<tr><td>Simple zero $(1 + sT)$</td><td>0, then +20 dB/dec after $1/T$</td><td>0 to +90°</td></tr>
+<tr><td>Quadratic pole</td><td>−40 dB/dec after $\omega_n$</td><td>0 to −180°</td></tr></table>
+<h3>Stability from the Bode plot</h3>
+<ul><li><b>Gain crossover</b> $\omega_{gc}$: where $|GH| = 0$ dB. <b>Phase margin</b> $= 180° + \angle GH(j\omega_{gc})$.</li>
+<li><b>Phase crossover</b> $\omega_{pc}$: where $\angle GH = -180°$. <b>Gain margin</b> $= -20\log|GH(j\omega_{pc})|$ dB.</li>
+<li>For a minimum-phase system, both margins positive means stable. Typical targets: PM 30°–60°, GM above 6 dB.</li></ul>
+</article></section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the <div class="video-slot">...</div> below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section id="try-it" class="lsec"><h2>Try it</h2>
+    <div class="sim" data-sim="frequency"></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">Sketch the magnitude asymptotes of $G = 10/(s(1 + 0.1s))$.</div><details><summary>Show solution</summary><div class="sol">At $\omega = 1$: 20 dB, slope −20 dB/dec; corner at 10 rad/s, then −40 dB/dec. It crosses 0 dB near $\omega = 10$ rad/s.</div></details></li><li><div class="q">Find $M_r$ and $\omega_r$ for $\zeta = 0.4$, $\omega_n = 5$.</div><details><summary>Show solution</summary><div class="sol">$M_r = 1/(2\cdot0.4\cdot0.917) = 1.36$. $\omega_r = 5\sqrt{1 - 0.32} = 4.12$ rad/s.</div></details></li><li><div class="q">Why does a larger phase margin usually mean less overshoot?</div><details><summary>Show solution</summary><div class="sol">Phase margin is closely related to closed-loop damping: roughly $\zeta \approx PM/100$ for PM below about 70°.</div></details></li></ol></section>
+    <nav class="prevnext"><a class="pn prev" href="11-root-locus.html"><small>← Lesson 11</small>Root locus</a><a class="pn next" href="13-nyquist.html"><small>Lesson 13 →</small>Nyquist stability criterion</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+<script src="../../assets/js/sims.js"></script>
+</body>
+</html>
