@@ -1,68 +1,60 @@
 <!doctype html>
-<!--
-  ============================================================
-  HOW TO ADD CONTENT TO THIS COURSE PAGE  (full guide: HOW-TO-ADD-TEACHING-CONTENT.md)
-
-  A) Add a file (PDF notes, PowerPoint slides, assignment):
-     1. Upload the file to the folder  courses/files/control-system-engineering/
-     2. Copy this line into the "Course materials" list below and change the words:
-        <li><span class="kind">Slides</span>Lecture 2: Block diagrams<a class="open" href="files/control-system-engineering/lecture-2.pdf">Open</a></li>
-
-  B) Add a live simulation: paste one of these lines in the "Live simulations" section:
-        <div class="sim" data-sim="second-order"></div>
-        <div class="sim" data-sim="pid"></div>
-        <div class="sim" data-sim="spring"></div>
-        <div class="sim" data-sim="pendulum"></div>
-
-  C) Add a YouTube video or an online simulation (PhET, GeoGebra, MATLAB Online...):
-        <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div>
-     For YouTube, VIDEO-ID is the part after "v=" in the video link.
-  ============================================================
--->
 <html lang="en" data-skin="glass">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Control System Engineering · Dr. Saravanakumar Gurusamy</title>
-<meta name="description" content="Modelling of physical systems, time and frequency response, stability and the design of controllers and compensators.">
+<title>Control System Engineering · Control System Engineering</title>
+<meta name="description" content="Course home: lessons, notes, exercises and live simulations for Process Dynamics and Control.">
 <link rel="icon" href="../assets/img/favicon1.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/vendor/katex/katex.min.css">
+<script defer src="../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
 </head>
 <body>
+<!--
+  COURSE HOME for Process Dynamics and Control.
+  Lessons live in the folder courses/control-system-engineering/ (one file per lesson).
+  To change a lesson, open its file and edit the text between the comments.
+-->
 <header class="nav"><div class="wrap">
   <a class="brand" href="../index.html">S. Gurusamy</a>
-  <nav class="links"><a href="../index.html">Home</a><a href="../index.html#teaching">Courses</a><a href="#materials">Materials</a><a href="#simulations">Simulations</a></nav>
+  <nav class="links"><a href="control-system-engineering.html">Course home</a><a href="control-system-engineering/syllabus.html">Syllabus</a><a href="control-system-engineering/schedule.html">Schedule</a><a href="control-system-engineering.html#lessons">Lessons</a><a href="../index.html#teaching">All courses</a></nav>
   <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
 </div></header>
 <div class="band course-band"><div class="wrap">
   <div class="crumb"><a href="../index.html#teaching">← Teaching</a></div>
   <div class="course-head">
-    <div class="eyebrow">Current · B.Tech course · Presidency University (EEE2510)</div>
+    <div class="eyebrow">B.Tech EEE · Semester V · Presidency University (EEE2510)</div>
     <h1>Control System Engineering</h1>
-    <p>Modelling of physical systems, time and frequency response, stability and the design of controllers and compensators.</p>
+    <p>How to model, analyse and design feedback control systems: from transfer functions and block diagrams to time response, stability, compensation and state space. Eighteen lessons that follow the course plan, with notes, worked exercises and live simulations.</p>
   </div>
 </div></div>
 <main class="wrap">
-  <section id="materials">
-    <h2>Course materials</h2>
-    <ul class="materials">
-      <!-- Add your files here (see the instructions at the top of this file) -->
-    </ul>
-    <p class="note">Notes, slides and assignments for this semester will be added here.</p>
+  <section id="start">
+    <h2>Start here</h2>
+    <div class="qgrid"><a class="qcard card" href="control-system-engineering/syllabus.html"><span class="qi">📘</span><b>Syllabus</b><span>Aims, outcomes, textbooks and grading</span></a><a class="qcard card" href="control-system-engineering/schedule.html"><span class="qi">🗓️</span><b>Schedule</b><span>Week-by-week plan, assignments and exams</span></a><a class="qcard card" href="control-system-engineering/01-introduction.html"><span class="qi">🚀</span><b>Start lesson 1</b><span>Introduction to control systems</span></a><a class="qcard card" href="#sims"><span class="qi">🎛️</span><b>Simulations</b><span>Interactive models you can run in the browser</span></a><a class="qcard card" href="control-system-engineering/course-plan.pdf"><span class="qi">📄</span><b>Course plan (PDF)</b><span>The official 2026-27 course plan</span></a></div>
   </section>
-  <section id="simulations">
-    <h2>Live simulations &amp; animations</h2>
-    <p class="note" style="margin-top:-10px;margin-bottom:20px">Move the sliders and watch how each system responds.</p>
-    <div class="sim" data-sim="second-order"></div>
-    <div class="sim" data-sim="first-order"></div>
-    <div class="sim" data-sim="pid"></div>
-    <div class="sim" data-sim="frequency"></div>
-    <div class="sim" data-sim="spring"></div>
+  <section id="lessons">
+    <h2>Lessons</h2>
+    <p class="note" style="margin-top:-10px;margin-bottom:22px">Each lesson has learning objectives, notes, a lecture video slot, a live simulation where it helps, and exercises with solutions you can reveal.</p>
+    <div class="modgrid"><div class="modcard"><div class="mhead"><span class="mcode">1</span><div><h3>System components and their representation</h3><p>Open and closed loops, models of electrical and mechanical systems, block diagrams and signal flow graphs.</p></div></div><ul class="lessons"><li><a href="control-system-engineering/01-introduction.html"><span class="n">01</span><span class="t">Introduction to control systems</span></a></li><li><a href="control-system-engineering/02-electrical-systems.html"><span class="n">02</span><span class="t">Models of electrical systems</span></a></li><li><a href="control-system-engineering/03-mechanical-systems.html"><span class="n">03</span><span class="t">Models of mechanical systems</span><span class="tag sim">▶ Mass–spring–damper</span></a></li><li><a href="control-system-engineering/04-block-diagrams.html"><span class="n">04</span><span class="t">Block diagram reduction</span></a></li><li><a href="control-system-engineering/05-signal-flow-graphs.html"><span class="n">05</span><span class="t">Signal flow graphs and Mason's gain formula</span></a></li></ul></div><div class="modcard"><div class="mhead"><span class="mcode">2</span><div><h3>Time response analysis</h3><p>First and second-order step responses, specifications, steady-state errors and P, PI and PID control.</p></div></div><ul class="lessons"><li><a href="control-system-engineering/06-first-order-response.html"><span class="n">06</span><span class="t">Standard test signals and first-order response</span><span class="tag sim">▶ First-order response</span></a></li><li><a href="control-system-engineering/07-second-order-response.html"><span class="n">07</span><span class="t">Second-order response and time-domain specifications</span><span class="tag sim">▶ Second-order response</span></a></li><li><a href="control-system-engineering/08-steady-state-errors.html"><span class="n">08</span><span class="t">Steady-state errors and error constants</span></a></li><li><a href="control-system-engineering/09-p-pi-pid-controllers.html"><span class="n">09</span><span class="t">P, PI and PID controllers</span><span class="tag sim">▶ PID tuning</span></a></li></ul></div><div class="modcard"><div class="mhead"><span class="mcode">3</span><div><h3>Stability analysis</h3><p>Routh criterion, root locus, Bode and Nyquist methods, and lead, lag and lead-lag compensation.</p></div></div><ul class="lessons"><li><a href="control-system-engineering/10-routh-stability.html"><span class="n">10</span><span class="t">Stability and the Routh criterion</span></a></li><li><a href="control-system-engineering/11-root-locus.html"><span class="n">11</span><span class="t">Root locus</span></a></li><li><a href="control-system-engineering/12-bode-plots.html"><span class="n">12</span><span class="t">Frequency response and Bode plots</span><span class="tag sim">▶ Frequency response</span></a></li><li><a href="control-system-engineering/13-nyquist.html"><span class="n">13</span><span class="t">Nyquist stability criterion</span></a></li><li><a href="control-system-engineering/14-compensation.html"><span class="n">14</span><span class="t">Lead, lag and lead-lag compensation</span></a></li></ul></div><div class="modcard"><div class="mhead"><span class="mcode">4</span><div><h3>State space analysis</h3><p>State models, solution of the state equation, controllability, observability and nonlinear systems.</p></div></div><ul class="lessons"><li><a href="control-system-engineering/15-state-space-models.html"><span class="n">15</span><span class="t">State variables and state models</span></a></li><li><a href="control-system-engineering/16-state-equation-solution.html"><span class="n">16</span><span class="t">State diagrams and solution of the state equation</span></a></li><li><a href="control-system-engineering/17-controllability-observability.html"><span class="n">17</span><span class="t">Controllability and observability</span></a></li><li><a href="control-system-engineering/18-nonlinear-systems.html"><span class="n">18</span><span class="t">Introduction to nonlinear systems</span><span class="tag sim">▶ Pendulum phase portrait</span></a></li></ul></div></div>
+  </section>
+  <section id="sims">
+    <h2>Simulations in this course</h2>
+    <ul class="simlist"><li><a href="control-system-engineering/03-mechanical-systems.html#try-it"><b>Mass–spring–damper</b><span>Lesson 3: Models of mechanical systems</span></a></li><li><a href="control-system-engineering/06-first-order-response.html#try-it"><b>First-order response</b><span>Lesson 6: Standard test signals and first-order response</span></a></li><li><a href="control-system-engineering/07-second-order-response.html#try-it"><b>Second-order response</b><span>Lesson 7: Second-order response and time-domain specifications</span></a></li><li><a href="control-system-engineering/09-p-pi-pid-controllers.html#try-it"><b>PID tuning</b><span>Lesson 9: P, PI and PID controllers</span></a></li><li><a href="control-system-engineering/12-bode-plots.html#try-it"><b>Frequency response</b><span>Lesson 12: Frequency response and Bode plots</span></a></li><li><a href="control-system-engineering/18-nonlinear-systems.html#try-it"><b>Pendulum phase portrait</b><span>Lesson 18: Introduction to nonlinear systems</span></a></li></ul>
+  </section>
+  <section id="about-course">
+    <h2>About this course</h2>
+    <div class="grid2 even">
+      <div class="card"><h3>Who it is for</h3><p>Third-year B.Tech Electrical and Electronics Engineering students (Semester V). Prerequisite: Signals and Systems. Bring a scientific calculator to every class; MATLAB or Python skills help.</p></div>
+      <div class="card"><h3>How to use this site</h3><p>Read the notes before class, try the simulation, then do the exercises. Reveal a solution only after you have tried it yourself. Bring questions to the tutorial.</p></div>
+    </div>
   </section>
 </main>
-<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../index.html">Home</a></div></footer>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../index.html">Home</a> · <a href="../index.html#teaching">Teaching</a></div></footer>
 <script src="../assets/js/site.js"></script>
 <script src="../assets/js/sims.js"></script>
 </body>

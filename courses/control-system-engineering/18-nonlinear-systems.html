@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 18: Introduction to nonlinear systems · Control System Engineering</title>
+<meta name="description" content="Introduction to nonlinear systems">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 18: Introduction to nonlinear systems
+  Edit the notes inside <article class="notes"> ... </article>.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Simulation: change data-sim="..." (choices: tank, first-order, second-order, frequency, pid, spring, pendulum).
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">S. Gurusamy</a>
+  <nav class="links"><a href="../control-system-engineering.html">Course home</a><a href="../control-system-engineering/syllabus.html">Syllabus</a><a href="../control-system-engineering/schedule.html">Schedule</a><a href="../control-system-engineering.html#lessons">Lessons</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../control-system-engineering.html">← Control System Engineering</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 18 of 18 · Module 4: State space analysis</div>
+    <h1>Introduction to nonlinear systems</h1>
+    <p>Control System Engineering · EEE2510 · Sessions 57–58 · CO6</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">Module 1 · System components and their representation</div><ol><li><a href="01-introduction.html"><span class="n">1</span>Introduction to control systems</a></li><li><a href="02-electrical-systems.html"><span class="n">2</span>Models of electrical systems</a></li><li><a href="03-mechanical-systems.html"><span class="n">3</span>Models of mechanical systems</a></li><li><a href="04-block-diagrams.html"><span class="n">4</span>Block diagram reduction</a></li><li><a href="05-signal-flow-graphs.html"><span class="n">5</span>Signal flow graphs and Mason's gain formula</a></li></ol></div><div class="mod"><div class="modname">Module 2 · Time response analysis</div><ol><li><a href="06-first-order-response.html"><span class="n">6</span>Standard test signals and first-order response</a></li><li><a href="07-second-order-response.html"><span class="n">7</span>Second-order response and time-domain specifications</a></li><li><a href="08-steady-state-errors.html"><span class="n">8</span>Steady-state errors and error constants</a></li><li><a href="09-p-pi-pid-controllers.html"><span class="n">9</span>P, PI and PID controllers</a></li></ol></div><div class="mod"><div class="modname">Module 3 · Stability analysis</div><ol><li><a href="10-routh-stability.html"><span class="n">10</span>Stability and the Routh criterion</a></li><li><a href="11-root-locus.html"><span class="n">11</span>Root locus</a></li><li><a href="12-bode-plots.html"><span class="n">12</span>Frequency response and Bode plots</a></li><li><a href="13-nyquist.html"><span class="n">13</span>Nyquist stability criterion</a></li><li><a href="14-compensation.html"><span class="n">14</span>Lead, lag and lead-lag compensation</a></li></ol></div><div class="mod"><div class="modname">Module 4 · State space analysis</div><ol><li><a href="15-state-space-models.html"><span class="n">15</span>State variables and state models</a></li><li><a href="16-state-equation-solution.html"><span class="n">16</span>State diagrams and solution of the state equation</a></li><li><a href="17-controllability-observability.html"><span class="n">17</span>Controllability and observability</a></li><li class="on"><a href="18-nonlinear-systems.html"><span class="n">18</span>Introduction to nonlinear systems</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>List common nonlinearities in control systems</li><li>Describe behaviours that only nonlinear systems show</li><li>Use the phase plane to visualise nonlinear motion</li></ul></div>
+    <section class="lsec"><h2>Notes</h2>
+    <article class="notes">
+<p>Real systems are only approximately linear. Superposition fails for nonlinear systems, so the methods of Modules 2 and 3 apply only near an operating point.</p>
+<h3>Common nonlinearities</h3>
+<table class="tbl"><tr><th>Nonlinearity</th><th>Where it appears</th></tr>
+<tr><td>Saturation</td><td>Amplifiers, valves at their limits, motor current limits</td></tr>
+<tr><td>Dead zone</td><td>Small inputs that produce no motion (static friction, motor start-up)</td></tr>
+<tr><td>Backlash</td><td>Gear trains</td></tr><tr><td>Relay (on–off)</td><td>Thermostats, bang-bang control</td></tr>
+<tr><td>Coulomb friction</td><td>Mechanical sliding contacts</td></tr></table>
+<h3>Nonlinear behaviour</h3>
+<ul><li>Several equilibrium points, each with its own stability.</li><li>Stability that depends on the size of the initial condition or input.</li>
+<li><b>Limit cycles</b>: sustained oscillations of fixed amplitude.</li><li>Jump resonance and harmonics in the output.</li></ul>
+<h3>Phase plane</h3>
+<p>The phase plane plots velocity against position. Each initial condition gives a trajectory. The pendulum $\ddot\theta = -(g/L)\sin\theta - c\dot\theta$ is the classic example: small swings look linear, but large swings can go over the top.</p>
+<p class="tip">In the simulation, drag the bob a little and let go, then try a large flick. Compare the trajectories in the phase portrait.</p>
+</article></section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the <div class="video-slot">...</div> below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section id="try-it" class="lsec"><h2>Try it</h2>
+    <div class="sim" data-sim="pendulum"></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">Linearise the pendulum about $\theta = 0$ and about $\theta = \pi$.</div><details><summary>Show solution</summary><div class="sol">Near 0: $\ddot\theta = -(g/L)\theta$, a stable oscillator. Near $\pi$: $\ddot\phi = +(g/L)\phi$ (with $\phi = \theta - \pi$), unstable.</div></details></li><li><div class="q">Give an example of saturation causing trouble in a PID loop.</div><details><summary>Show solution</summary><div class="sol">Integral windup: when the actuator saturates, the integral keeps growing and causes a large overshoot after the error changes sign.</div></details></li><li><div class="q">What is a limit cycle, and can a linear system have one?</div><details><summary>Show solution</summary><div class="sol">A sustained oscillation of fixed amplitude independent of initial conditions nearby. A linear system cannot: its oscillation amplitude always scales with the initial condition.</div></details></li></ol></section>
+    <nav class="prevnext"><a class="pn prev" href="17-controllability-observability.html"><small>← Lesson 17</small>Controllability and observability</a><a class="pn next" href="../control-system-engineering.html"><small>→</small>Course home</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+<script src="../../assets/js/sims.js"></script>
+</body>
+</html>
