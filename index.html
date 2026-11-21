@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dr. Saravanakumar Gurusamy</title>
+<meta name="description" content="Dr. Saravanakumar Gurusamy, Associate Professor at FDRE TVT Institute, Addis Ababa. Research in control engineering, system identification, robotics and digital twins.">
+<link rel="icon" href="assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbfaf7;--surface:#ffffff;--ink:#1c2230;--muted:#5d6577;--line:#e6e2d9;--accent:#0f5c63;--accent-soft:#e3f0ef;--gold:#b7862c;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12161d;--surface:#1a2029;--ink:#e8eaee;--muted:#9aa3b2;--line:#2a313c;--accent:#5fc2bb;--accent-soft:#1d3134;--gold:#d9ad5b;}}
+:root[data-theme="dark"]{--bg:#12161d;--surface:#1a2029;--ink:#e8eaee;--muted:#9aa3b2;--line:#2a313c;--accent:#5fc2bb;--accent-soft:#1d3134;--gold:#d9ad5b;}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,system-ui,sans-serif}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.2;margin:0}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header.nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header.nav .wrap{display:flex;align-items:center;gap:16px;height:60px}
+.brand{font-family:"Source Serif 4",serif;font-weight:600;color:var(--ink);white-space:nowrap}
+nav.links{display:flex;gap:18px;margin-left:auto;min-width:0;overflow-x:auto;scrollbar-width:none}
+nav.links a{color:var(--muted);font-size:14px;font-weight:500;white-space:nowrap}
+nav.links a:hover{color:var(--ink);text-decoration:none}
+#theme{display:grid;place-items:center;background:none;border:1px solid var(--line);border-radius:8px;color:var(--muted);width:34px;height:34px;cursor:pointer;flex:none}
+.hero{padding:64px 0 48px;display:grid;grid-template-columns:220px 1fr;gap:44px;align-items:center}
+.hero img{width:220px;height:220px;border-radius:50%;object-fit:cover;object-position:top;border:4px solid var(--surface);box-shadow:0 0 0 1px var(--line)}
+.eyebrow{color:var(--gold);font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
+.hero h1{font-size:clamp(30px,5vw,46px)}
+.role{font-size:18px;color:var(--muted);margin:10px 0 18px}
+.tagline{font-family:"Source Serif 4",serif;font-style:italic;font-size:18px;border-left:3px solid var(--accent);padding-left:14px;margin:0 0 22px}
+.profiles{display:flex;flex-wrap:wrap;gap:8px}
+.profiles a{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:6px 12px;border-radius:999px;font-size:14px;font-weight:500}
+.profiles a:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+section{padding:56px 0;border-top:1px solid var(--line)}
+section h2{font-size:30px;margin-bottom:22px}
+.grid2{display:grid;grid-template-columns:1.6fr 1fr;gap:40px}.grid2.even{grid-template-columns:1fr 1fr}.grid2>*{min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px}
+.card h3{font-size:18px;margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{background:var(--accent-soft);color:var(--accent);padding:6px 12px;border-radius:8px;font-size:14px;font-weight:500}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+.stats div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center}
+.stats b{display:block;font-family:"Source Serif 4",serif;font-size:28px;color:var(--accent)}
+.stats small{color:var(--muted);font-size:13px}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px}
+.toolbar input{flex:1;min-width:200px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font:inherit}
+.toolbar button{padding:9px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--muted);font:inherit;font-size:14px;cursor:pointer}
+.toolbar button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+h3.year{font-size:20px;color:var(--gold);margin:26px 0 8px}
+ol.pubs{list-style:none;margin:0;padding:0}
+.pub{padding:14px 0;border-bottom:1px dashed var(--line)}
+.tag{float:right;margin-left:12px;font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:1px 8px}
+.ptitle{font-weight:600;color:var(--ink)}
+.pauth{color:var(--muted);font-size:14.5px;margin-top:3px}.pauth strong{color:var(--ink)}
+.pvenue{font-style:italic;font-size:14.5px;color:var(--muted)}
+.empty{display:none;color:var(--muted);padding:20px 0}
+ul.courses{margin:0;padding-left:18px}ul.courses li{margin:6px 0}
+.timeline{position:relative;margin:0;padding:0;list-style:none}
+.timeline li{position:relative;padding:0 0 22px 26px;border-left:2px solid var(--line);margin-left:6px}
+.timeline li:last-child{padding-bottom:0}
+.timeline li::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--accent)}
+.when{font-size:13px;color:var(--gold);font-weight:600}
+.what{font-weight:600}.where{color:var(--muted);font-size:14.5px}
+.sdg{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.sdg .card{display:flex;gap:14px;align-items:flex-start}
+.sdg img{width:64px;height:64px;border-radius:8px;flex:none}
+.sdg p{margin:4px 0 0;font-size:14.5px;color:var(--muted)}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+footer{padding:30px 0 40px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+@media (max-width:800px){
+ .hero{grid-template-columns:1fr;text-align:center;padding:40px 0 32px;gap:22px}
+ .hero img{margin:0 auto;width:170px;height:170px}
+ .tagline{text-align:left}.profiles{justify-content:center}
+ .grid2,.grid2.even,.sdg,.contact{grid-template-columns:1fr}
+ .brand{display:none}nav.links{margin-left:0}
+}
+</style>
+</head>
+<body>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="#top">S. Gurusamy</a>
+  <nav class="links">
+    <a href="#about">About</a><a href="#publications">Publications</a><a href="#teaching">Teaching</a><a href="#experience">Experience</a><a href="#impact">Impact</a><a href="#contact">Contact</a>
+  </nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+
+<main class="wrap" id="top">
+  <div class="hero">
+    <img src="assets/img/gskPro1.jpg" alt="Portrait of Dr. Saravanakumar Gurusamy">
+    <div>
+      <div class="eyebrow">Control &amp; Instrumentation Engineering</div>
+      <h1>Dr. Saravanakumar Gurusamy</h1>
+      <p class="role">Associate Professor, Department of Electrical &amp; Electronics Technology<br>FDRE Technical and Vocational Training Institute (FTI), Addis Ababa, Ethiopia</p>
+      <p class="tagline">Inspiring and motivating young technical minds through research for the betterment and advancement of humanity.</p>
+      <div class="profiles">
+        <a href="mailto:gurusaravana@ieee.org">Email</a>
+        <a href="https://scholar.google.com/citations?user=2VeSyhEAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>
+        <a href="https://orcid.org/0000-0002-7721-2613" target="_blank" rel="noopener">ORCID</a>
+        <a href="https://www.researchgate.net/profile/Saravanakumar-Gurusamy-2" target="_blank" rel="noopener">ResearchGate</a>
+        <a href="https://www.scopus.com/authid/detail.uri?authorId=57226273113" target="_blank" rel="noopener">Scopus</a>
+        <a href="https://github.com/gurusaravana" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://x.com/saravanaGSK" target="_blank" rel="noopener">X</a>
+      </div>
+    </div>
+  </div>
+
+  <section id="about">
+    <h2>About</h2>
+    <div class="grid2">
+      <div>
+        <p>Dr. Saravanakumar Gurusamy is an academic and researcher in instrumentation and control engineering. Born in Seithur, Tamil Nadu, India, he holds a B.E. in Electronics and Instrumentation Engineering, an M.Tech in Control and Instrumentation Engineering, and a Ph.D. on metaheuristic algorithms for nonlinear system identification and multivariable PID controller tuning.</p>
+        <p>He began his career as a Lecturer at Lakshmi Ammal Polytechnic College, then served as Assistant Professor at Kalasalingam Academy of Research and Education (KARE), as Lecturer at the University of Gondar, and since 2019 as Associate Professor at the FDRE TVT Institute (FTI) in Addis Ababa.</p>
+        <p>He has guided student teams to success in international competitions such as AfRoboCup, and publishes in journals and conferences on control systems, robotics and intelligent systems. He is a Senior Member of IEEE, a member of ISTE, and serves as Secretary of the IEEE Ethiopia Subsection.</p>
+      </div>
+      <div>
+        <div class="card">
+          <h3>Research interests</h3>
+          <div class="chips">
+            <span>Evolutionary algorithms for control</span><span>Nonlinear system identification</span><span>Multivariable PID control</span><span>Model predictive control</span><span>Autonomous vehicles</span><span>Mobile robotics</span><span>Digital twins</span>
+          </div>
+        </div>
+        <div class="stats">
+          <div><b>30</b><small>Publications</small></div>
+          <div><b>20+</b><small>Years teaching</small></div>
+          <div><b>4</b><small>Institutions</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="publications">
+    <h2>Publications</h2>
+    <p style="color:var(--muted);margin-top:-8px">30 selected works (2012–2023). For the full, up-to-date list see <a href="https://scholar.google.com/citations?user=2VeSyhEAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>.</p>
+    <div class="toolbar">
+      <input id="q" type="search" placeholder="Search titles, authors or venues…" aria-label="Search publications">
+      <button class="on" data-k="all">All</button><button data-k="Journal">Journals (18)</button><button data-k="Conference">Conferences (9)</button>
+    </div>
+    <div id="publist"><h3 class="year">2023</h3><ol class="pubs">
+<li class="pub" data-kind="Journal"><span class="tag">Journal</span>
+<a class="ptitle" href="https://scholar.google.com/scholar?q=%22Prediction+of+Flank+Wear+during+Turning+of+EN8+Steel+with+Cutting+Force+Signals+Using+a+Deep+Learning+Approach%22" target="_blank" rel="noopener">Prediction of Flank Wear during Turning of EN8 Steel with Cutting Force Signals Using a Deep Learning Approach</a>
+<div class="pauth">Sk Thangarasu, T Mohanraj, K Devendran, M Rajalakshmi, Subrata Chowdhury, <strong>Saravanakumar Gurusamy</strong>, et al.</div><div class="pvenue">Mathematical Problems in Engineering, vol. 2023</div></li>
+<li class="pub" data-kind="Journal"><span class="tag">Journal</span>
+<a class="ptitle" href="https://scholar.google.com/scholar?q=%22Tikhonov+Regularization+and+Perturbation-Level+Tuning+for+the+CNM+in+Pharmacokinetics%22" target="_blank" rel="noopener">Tikhonov Regularization and Perturbation-Level Tuning for the CNM in Pharmacokinetics</a>
+<div class="pauth">Luong Thi Theu, Tran Quang-Huy, Tran Duc-Tan, Bhisham Sharma, Subrata Chowdhury, Karthik Chandran, <strong>Saravanakumar Gurusamy</strong></div><div class="pvenue">IEEE Access, vol. 11, pp. 30057–30068</div></li>
+</ol>
+<h3 class="year">2022</h3><ol class="pubs">
+<li class="pub" data-kind="Book chapter"><span class="tag">Book chapter</span>
+<a class="ptitle" href="https://scholar.google.com/scholar?q=%22Embedded+Remote+Condition+Monitoring+System+for+Industrial+Machinery%22" target="_blank" rel="noopener">Embedded Remote Condition Monitoring System for Industrial Machinery</a>
+<div class="pauth"><strong>Saravanakumar Gurusamy</strong>, Mesay Mengistie, Abraham Simon Kangi, K Asan Mohideen, D Ganesha Perumal</div><div class="pvenue">Recent Advances in Materials and Modern Manufacturing: Select Proceedings of ICAMMM 2021, pp. 577–589</div></li>
+<li class="pub" data-kind="Article"><span class="tag">Article</span>
+<a class="ptitle" href="https://scholar.google.com/scholar?q=%22Machine+Learning+Approach+on+Time+Series+for+PV-Solar+Energy%22" target="_blank" rel="noopener">Machine Learning Approach on Time Series for PV-Solar Energy</a>
+<div class="pauth">S Sivakumar, B Neeraja, M Jamuna Rani, Harishchander Anandaram, S Ramya, Girish Padhan, <strong>Saravanakumar Gurusamy</strong></div><div class="pvenue"></div></li>
+<li class="pub" data-kind="Journal"><span class="tag">Journal</span>
+<a class="ptitle" href="https://scholar.google.com/scholar?q=%22Parameter+evaluation+of+a+nonlinear+Muskingum+model+using+a+constrained+self-adaptive+differential+evolution+algorithm%22" target="_blank" rel="noopener">Parameter evaluation of a nonlinear Muskingum model using a constrained self-adaptive differential evolution algorithm</a>
+<div class="pauth">Kattuva Mohaideen Abdul Kadhar, Narayanan Natarajan, Mangottiri Vasudevan, <strong>Saravanakumar Gurusamy</strong></div><div class="pvenue">Water Practice &amp; Technology, vol. 17(11), pp. 2396–2407</div></li>
+</ol>
+<h3 class="year">2021</h3><ol class="pubs">
+<li class="pub" data-kind="Journal"><span class="tag">Journal</span>
+<a class="ptitle" href="https://scholar.google.com/scholar?q=%222D+nanomaterial-based+hybrid+structured+(Au-WSe+2-PtSe+2-BP)+surface+plasmon+resonance+(SPR)+sensor+with+improved+performance%22" target="_blank" rel="noopener">2D nanomaterial-based hybrid structured (Au-WSe 2-PtSe 2-BP) surface plasmon resonance (SPR) sensor with improved performance</a>
+<div class="pauth">Md Mahabubur Rahman, Lway Faisal Abdulrazak, Mominul Ahsan, Md Abdul Based, Md Masud Rana, Md Shamim Anower, Khaleda Akter Rikta, Julfikar Haider, <strong>Saravanakumar Gurusamy</strong></div><div class="pvenue">IEEE Access, vol. 10, pp. 689–698</div></li>
+<li class="pub" data-kind="Journal"><span class="tag">Journal</span>
+<a class="ptitle" href="https://scholar.google.com/scholar?q=%22A+hybrid+personalized+scientific+paper+recommendation+approach+integrating+public+contextual+metadata%22" target="_blank" rel="noopener">A hybrid personalized scientific paper recommendation approach integrating public contextual metadata</a>
+<div class="pauth">Nazmus Sakib, Rodina Binti Ahmad, Mominul Ahsan, Md Abdul Based, Khalid Haruna, Julfikar Haider, <strong>Saravanakumar Gurusamy</strong></div><div class="pvenue">IEEE Access, vol. 9, pp. 83080–83091</div></li>
+<li class="pub" data-kind="Journal"><span class="tag">Journal</span>
+<a class="ptitle" href="https://scholar.google.com/scholar?q=%22A+novel+method+for+multivariant+pneumonia+classification+based+on+hybrid+CNN-PCA+based+feature+extraction+using+extreme+learning+machine+with+CXR+images%22" target="_blank" rel="noopener">A novel method for multivariant pneumonia classification based on hybrid CNN-PCA based feature extraction using extreme learning machine with CXR images</a>
+<div class="pauth">Md Nahiduzzaman, Md Omaer Faruq Goni, Md Shamim Anower, Md Robiul Islam, Mominul Ahsan, Julfikar Haider, <strong>Saravanakumar Gurusamy</strong>, Rakibul Hassan, Md Rakibul Islam</div><div class="pvenue">IEEE Access, vol. 9, pp. 147512–147526</div></li>
+<li class="pub" data-kind="Article"><span class="tag">Article</span>
+<a class="ptitle" href="https://scholar.google.com/scholar?q=%22Current-Fed+Bidirectional+DC-DC+Converter+Topology+for+Wireless+Charging+System+Electrical+Vehicle+Applications%22" target="_blank" rel="noopener">Current-Fed Bidirectional DC-DC Converter Topology for Wireless Charging System Electrical Vehicle Applications</a>
+<div class="pauth">Partha Sarathi Subudhi, M Thilagaraj, CS Sundar Ganesh, S Diwakaran, P Naveen, <strong>Saravanakumar Gurusamy</strong>, M Pallikonda Rajasekaran</div><div class="pvenue">vol. 24, pp. 25</div></li>
+<li class="pub" data-kind="Journal"><span class="tag">Journal</span>
+<a class="ptitle" href="https://scholar.google.com/scholar?q=%22Estimating+the+survival+of+aqua+fauna+by+image+analysis+techniques+from+the+video+sequences+of+pond+aquaculture%22" target="_blank" rel="noopener">Estimating the survival of aqua fauna by image analysis techniques from the video sequences of pond aquaculture</a>
+<div class="pauth">Suryasankar Ramalakshmi Palani, Devaraj Durairaj, Kannapiran Balasubramaniyan, <strong>Saravanakumar Gurusamy</strong></div><div class="pvenue">AgroLife Scientific Journal, vol. 10(1), pp. 227–235</div></li>
+<li class="pub" data-kind="Journal"><span class="tag">Journal</span>
+<a class="ptitle" href="https://scholar.google.com/scholar?q=%22Eye+movement+signal+classification+for+developing+human-computer+interface+using+electrooculogram%22" target="_blank" rel="noopener">Eye movement signal classification for developing human-computer interface using electrooculogram</a>
+<div class="pauth">M Thilagaraj, B Dwarakanath, S Ramkumar, K Karthikeyan, A Prabhu, <strong>Gurusamy Saravanakumar</strong>, M Pallikonda Rajasekaran, N Arunkumar</div><div class="pvenue">Journal of Healthcare Engineering, vol. 2021</div></li>
+<li class="pub" data-kind="Journal"><span class="tag">Journal</span>
+<a class="ptitle" href="https://scholar.google.com/scholar?q=%22Photonic+crystal+fiber+based+biosensor+for+pseudomonas+bacteria+detection:+A+simulation+study%22" target="_blank" rel="noopener">Photonic crystal fiber based biosensor for pseudomonas bacteria detection: A simulation study</a>
+<div class="pauth">Nusrat Jahan, Md M Rahman, Mominul Ahsan, Md Abdul Based, Md Masud Rana, <strong>Saravanakumar Gurusamy</strong>, Julfikar Haider</div><div class="pvenue">IEEE Access, vol. 9, pp. 42206–42215</div></li>
+</ol>
+<h3 class="year">2020</h3><ol class="pubs">
+<li class="pub" data-kind="Journal"><span class="tag">Journal</span>
+<a class="ptitle" href="https://scholar.google.com/scholar?q=%22Modified+cascade+controller+design+for+unstable+processes+with+large+dead+time%22" target="_blank" rel="noopener">Modified cascade controller design for unstable processes with large dead time</a>
+<div class="pauth">Karthik Chandran, Rajalakshmi Murugesan, <strong>Saravanakumar Gurusamy</strong>, K Asan Mohideen, Sanjeevi Pandiyan, Anand Nayyar, Mohamed Abouhawwash, Yunyoung Nam</div><div class="pvenue">IEEE Access, vol. 8, pp. 157022–157036</div></li>
+</ol>
+<h3 class="year">2019</h3><ol class="pubs">
+<li class="pub" data-kind="Journal"><span class="tag">Journal</span>
+<a class="ptitle" href="https://scholar.google.com/scholar?q=%22Environmental+Condition+Monitoring+System+of+Textile+Industry+for+Sustainable+Development+Goal%22" target="_blank" rel="noopener">Environmental Condition Monitoring System of Textile Industry for Sustainable Development Goal</a>
+<div class="pauth"><strong>G Saravanakumar</strong>, Cv Baalachandar, K Mohaideen Abdul Kadhar</div><div class="pvenue">International Journal of Innovative Technology and Exploring Engineering (IJITEE), vol. 9(2S2), pp. 986–991</div></li>
+<li class="pub" data-kind="Conference"><span class="tag">Conference</span>
+<a class="ptitle" href="https://scholar.google.com/scholar?q=%22Life-time+maximization+of+wireless+sensor+network+using+jaya+algorithm%22" target="_blank" rel="noopener">Life-time maximization of wireless sensor network using jaya algorithm</a>
+<div class="pauth">C Jency, <strong>Saravanakumar Gurusamy</strong>, Abdul Kadher K Mohaideen</div><div class="pvenue">2019 IEEE International Conference on Clean Energy and Energy Efficient Electronics Circuit for Sustainable Development (INCCES), pp. 1–6</div></li>
+</ol>
+<h3 class="year">2018</h3><ol class="pubs">
+<li class="pub" data-kind="Conference"><span class="tag">Conference</span>
+<a class="ptitle" href="https://scholar.google.com/scholar?q=%22Adaptive+controller+for+networked+control+systems+subjected+to+random+communication+delays%22" target="_blank" rel="noopener">Adaptive controller for networked control systems subjected to random communication delays</a>
+<div class="pauth">Seshadhri Srinivasan, <strong>G Saravanakumar</strong>, B Subathra, N Sundarajan, Ülle Kotta, Srini Ramasamy, Valentina Emilia Balas</div><div class="pvenue">Soft Computing Applications: Proceedings of the 7th International Workshop Soft Computing Applications (SOFA 2016), Volume 1 7, pp. 78–94</div></li>
+<li class="pub" data-kind="Journal"><span class="tag">Journal</span>
+<a class="ptitle" href="https://scholar.google.com/scholar?q=%22Path-planning+in+autonomous+electric+vehicle+using+nonlinear+state+estimation+and+behaviour-based+controllers%22" target="_blank" rel="noopener">Path-planning in autonomous electric vehicle using nonlinear state estimation and behaviour-based controllers</a>
+<div class="pauth">B Subathra, <strong>G Saravanakumar</strong>, K Ramkumar, Seshadhri Srinivasan, N Muthukumar</div><div class="pvenue">International Journal of Vehicle Systems Modelling and Testing, vol. 12(3/4), pp. 304</div></li>
+</ol>
+<h3 class="year">2016</h3><ol class="pubs">
+<li class="pub" data-kind="Journal"><span class="tag">Journal</span>
+<a class="ptitle" href="https://scholar.google.com/scholar?q=%22Extended+Kalman+filter+based+path-planning+algorithm+for+autonomous+vehicles+with+I2V+communication%22" target="_blank" rel="noopener">Extended Kalman filter based path-planning algorithm for autonomous vehicles with I2V communication</a>
+<div class="pauth">D Ganesha Perumal, B Subathra, <strong>G Saravanakumar</strong>, Seshadhri Srinivasan</div><div class="pvenue">IFAC-PapersOnLine, vol. 49(1), pp. 652–657</div></li>
+<li class="pub" data-kind="Journal"><span class="tag">Journal</span>
+<a class="ptitle" href="https://scholar.google.com/scholar?q=%22Lagrangian-based+state+transition+algorithm+for+tuning+multivariable+decentralised+controller%22" target="_blank" rel="noopener">Lagrangian-based state transition algorithm for tuning multivariable decentralised controller</a>
+<div class="pauth"><strong>G Saravanakumar</strong>, K Valarmathi, M Willjuice Iruthayarajan, Seshadhri Srinivasan</div><div class="pvenue">International Journal of Advanced Intelligence Paradigms, vol. 8(3), pp. 303–317</div></li>
+<li class="pub" data-kind="Journal"><span class="tag">Journal</span>
+<a class="ptitle" href="https://scholar.google.com/scholar?q=%22MILP+based+autonomous+vehicle+path-planning+controller+for+unknown+environments+with+dynamic+obstacles%22" target="_blank" rel="noopener">MILP based autonomous vehicle path-planning controller for unknown environments with dynamic obstacles</a>
+<div class="pauth">D Ganesha Perumal, Seshadhri Srinivasan, B Subathra, <strong>G Saravanakumar</strong>, Ramakalyan Ayyagari</div><div class="pvenue">International Journal of Heavy Vehicle Systems, vol. 23(4), pp. 350–369</div></li>
+</ol>
+<h3 class="year">2015</h3><ol class="pubs">
+<li class="pub" data-kind="Journal"><span class="tag">Journal</span>
+<a class="ptitle" href="https://scholar.google.com/scholar?q=%22An+Approach+for+Short-Term+Load+Forecasting+Using+RBFNN+in+the+Smart+Grid%22" target="_blank" rel="noopener">An Approach for Short-Term Load Forecasting Using RBFNN in the Smart Grid</a>
+<div class="pauth">Satheesh Kumar, <strong>Saravanakumar Gurusamy</strong>, B Subathra, Seshadhri Srinivasan</div><div class="pvenue">International Journal of Control Theory and Applications, vol. 8(5), pp. 2169–2177</div></li>
+<li class="pub" data-kind="Conference"><span class="tag">Conference</span>
+<a class="ptitle" href="https://scholar.google.com/scholar?q=%22Modelling+time-varying+delays+in+networked+automation+systems+with+heterogeneous+networks+using+machine+learning+techniques%22" target="_blank" rel="noopener">Modelling time-varying delays in networked automation systems with heterogeneous networks using machine learning techniques</a>
+<div class="pauth">Seshadhri Srinivasan, Furio Buonopane, <strong>G Saravanakumar</strong>, B Subathra, Srini Ramaswamy</div><div class="pvenue">2015 IEEE international conference on automation science and engineering (case), pp. 362–368</div></li>
+<li class="pub" data-kind="Conference"><span class="tag">Conference</span>
+<a class="ptitle" href="https://scholar.google.com/scholar?q=%22On+simulating+processor+schedules+and+network+protocols+within+CPS+using+TrueTime%22" target="_blank" rel="noopener">On simulating processor schedules and network protocols within CPS using TrueTime</a>
+<div class="pauth">Sreram Balasubramaniyan, B Subathra, Rc Hemesh, <strong>Saravanakumar Gurusamy</strong>, Seshadri Srinivasan</div><div class="pvenue">2015 IEEE International Conference on Computational Intelligence and Computing Research (ICCIC), pp. 1–6</div></li>
+<li class="pub" data-kind="Conference"><span class="tag">Conference</span>
+<a class="ptitle" href="https://scholar.google.com/scholar?q=%22State+Transition+Algorithm+(STA)+based+tuning+of+integer+and+fractional-order+PID+controller+for+benchmark+system%22" target="_blank" rel="noopener">State Transition Algorithm (STA) based tuning of integer and fractional-order PID controller for benchmark system</a>
+<div class="pauth"><strong>G Saravanakumar</strong>, K Valarmathi, M Pallikonda Rajasekaran, Seshadhri Srinivasan, K Mohaideen Abdul Kadhar</div><div class="pvenue">2015 IEEE International Conference on Computational Intelligence and Computing Research (ICCIC), pp. 1–5</div></li>
+<li class="pub" data-kind="Journal"><span class="tag">Journal</span>
+<a class="ptitle" href="https://scholar.google.com/scholar?q=%22Tuning+of+multivariable+decentralized+PID+controller+using+state+transition+algorithm%22" target="_blank" rel="noopener">Tuning of multivariable decentralized PID controller using state transition algorithm</a>
+<div class="pauth"><strong>G Saravanakumar</strong>, K Valarmathi, M Pallikonda Rajasekaran, Seshadhri Srinivasan, M Willjuice Iruthayarajan, Valentina E Balas</div><div class="pvenue">Studies in Informatics and control, vol. 24(4), pp. 367–378</div></li>
+</ol>
+<h3 class="year">2014</h3><ol class="pubs">
+<li class="pub" data-kind="Conference"><span class="tag">Conference</span>
+<a class="ptitle" href="https://scholar.google.com/scholar?q=%22Nonlinear+state+estimation+based+predictive+path+planning+algorithm+using+infrastructure-to-vehicle+(I2V)+communication+for+intelligent+vehicle%22" target="_blank" rel="noopener">Nonlinear state estimation based predictive path planning algorithm using infrastructure-to-vehicle (I2V) communication for intelligent vehicle</a>
+<div class="pauth">D Ganesh Perumal, <strong>G Saravanakumar</strong>, B Subathra, Seshadhri Srinivasan, Srini Ramaswamy</div><div class="pvenue">Proceedings of the Second International Conference on Emerging Research in Computing, Information, Communication and Applications (ERCICA 2014)</div></li>
+</ol>
+<h3 class="year">2013</h3><ol class="pubs">
+<li class="pub" data-kind="Journal"><span class="tag">Journal</span>
+<a class="ptitle" href="https://scholar.google.com/scholar?q=%22Real-coded+Genetic+Algorithm+for+system+identification+and+tuning+of+a+modified+Model+Reference+Adaptive+Controller+for+a+hybrid+tank+system%22" target="_blank" rel="noopener">Real-coded Genetic Algorithm for system identification and tuning of a modified Model Reference Adaptive Controller for a hybrid tank system</a>
+<div class="pauth">K Asan Mohideen, <strong>G Saravanakumar</strong>, K Valarmathi, D Devaraj, Tk Radhakrishnan</div><div class="pvenue">Applied Mathematical Modelling, vol. 37(6), pp. 3829–3847</div></li>
+<li class="pub" data-kind="Conference"><span class="tag">Conference</span>
+<a class="ptitle" href="https://scholar.google.com/scholar?q=%22Temperature+control+of+green+house+system+using+evolutionary+computation%22" target="_blank" rel="noopener">Temperature control of green house system using evolutionary computation</a>
+<div class="pauth">R Umashankari, K Valarmathi, <strong>G Saravanakumar</strong></div><div class="pvenue">2013 International Conference on Energy Efficient Technologies for Sustainability, pp. 814–820</div></li>
+</ol>
+<h3 class="year">2012</h3><ol class="pubs">
+<li class="pub" data-kind="Conference"><span class="tag">Conference</span>
+<a class="ptitle" href="https://scholar.google.com/scholar?q=%22Hybrid+PSO-Bacterial+Foraging+Based+Intelligent+PI+Controller+Tuning+for+pH+Process%22" target="_blank" rel="noopener">Hybrid PSO-Bacterial Foraging Based Intelligent PI Controller Tuning for pH Process</a>
+<div class="pauth">G Petchinathan, <strong>G Saravanakumar</strong>, K Valarmathi, D Devaraj</div><div class="pvenue">Proceedings of the International Conference on Information Systems Design and Intelligent Applications 2012 (INDIA 2012) held in Visakhapatnam, India, January 2012, pp. 515–522</div></li>
+<li class="pub" data-kind="Conference"><span class="tag">Conference</span>
+<a class="ptitle" href="https://scholar.google.com/scholar?q=%22Nonlinear+identification+of+pH+processes+by+using+NNARX+model%22" target="_blank" rel="noopener">Nonlinear identification of pH processes by using NNARX model</a>
+<div class="pauth">M Rajalakshmi, <strong>G Saravanakumar</strong>, C Karthik</div><div class="pvenue">Proceedings of the International Conference on Computing and Control Engineering (ICCCE’12)</div></li>
+</ol></div>
+    <p class="empty" id="none">No publications match your search.</p>
+  </section>
+
+  <section id="teaching">
+    <h2>Teaching</h2>
+    <p style="color:var(--muted);margin-top:-8px">Undergraduate and postgraduate courses taught at KARE (India), the University of Gondar and FTI (Ethiopia).</p>
+    <div class="grid2 even">
+      <div class="card"><h3>Undergraduate</h3><ul class="courses">
+        <li>Control Systems</li><li>Process Control</li><li>Computer Control of Processes</li><li>Industrial Automation</li><li>Introduction to Robotics</li><li>System Identification</li><li>Instrumentation Engineering I &amp; II</li><li>Electrical Measurement and Instrumentation</li><li>Virtual Instrumentation</li><li>Microprocessors and Microcontrollers</li>
+      </ul></div>
+      <div class="card"><h3>Postgraduate</h3><ul class="courses">
+        <li>Linear Control Systems</li><li>Nonlinear Control</li><li>Optimal Control</li><li>Adaptive Control</li><li>Intelligent Control (Fuzzy, ANN, ANFIS)</li><li>Advanced Process Control</li><li>System Identification and Adaptive Control</li><li>Industrial Automation and Robotics</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2>Experience &amp; Education</h2>
+    <div class="grid2 even">
+      <div><h3 style="margin-bottom:16px">Positions</h3><ul class="timeline">
+        <li><div class="when">2019 – Present</div><div class="what">Associate Professor, Electrical &amp; Electronics Technology</div><div class="where">FDRE TVT Institute (FTI), Addis Ababa</div></li>
+        <li><div class="when">2014 – 2018</div><div class="what">Lecturer, Electrical &amp; Computer Engineering</div><div class="where">University of Gondar, Ethiopia</div></li>
+        <li><div class="when">2009 – 2014</div><div class="what">Assistant Professor, Instrumentation &amp; Control Engineering</div><div class="where">Kalasalingam Academy of Research and Education, India</div></li>
+        <li><div class="when">2004 – 2007</div><div class="what">Lecturer, Electronics &amp; Communication Engineering</div><div class="where">Lakshmi Ammal Polytechnic College, India</div></li>
+      </ul></div>
+      <div><h3 style="margin-bottom:16px">Education</h3><ul class="timeline">
+        <li><div class="when">2011 – 2017</div><div class="what">Ph.D., Instrumentation &amp; Control Engineering</div><div class="where">Kalasalingam Academy of Research and Education</div></li>
+        <li><div class="when">2007 – 2009</div><div class="what">M.Tech, Control &amp; Instrumentation Engineering</div><div class="where">Thiagarajar College of Engineering</div></li>
+        <li><div class="when">2000 – 2004</div><div class="what">B.E., Electronics &amp; Instrumentation Engineering</div><div class="where">National Engineering College</div></li>
+      </ul>
+      <div class="card" style="margin-top:26px"><h3>Awards &amp; service</h3><ul class="courses">
+        <li>Young Scientist Fellowship, TNSCST (2011)</li><li>Best Paper Award, ICSCS-2016</li><li>Best Paper Award, ICSGSM-2021</li><li>Secretary, IEEE Ethiopia Subsection (2023 – 2025)</li><li>Senior Member, IEEE · Member, ISTE</li>
+      </ul></div></div>
+    </div>
+  </section>
+
+  <section id="impact">
+    <h2>Sustainable Development Goals</h2>
+    <div class="sdg">
+      <div class="card"><img src="assets/img/sdg-4.png" alt="SDG 4"><div><b>Quality Education</b><p>Improving the quality and reach of engineering education.</p></div></div>
+      <div class="card"><img src="assets/img/sdg-7.png" alt="SDG 7"><div><b>Affordable &amp; Clean Energy</b><p>Research on renewable energy, smart grids and efficient systems.</p></div></div>
+      <div class="card"><img src="assets/img/sdg-17.png" alt="SDG 17"><div><b>Partnerships for the Goals</b><p>International collaboration to share sustainable technology.</p></div></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="contact">
+      <div class="card"><h3>Email</h3><a href="mailto:gurusaravana@ieee.org">gurusaravana@ieee.org</a></div>
+      <div class="card"><h3>Office</h3>Department of EET, Block 9, Room 202<br>FDRE TVT Institute, P.O. Box 22113/1000<br>Addis Ababa, Ethiopia</div>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy</div></footer>
+<script>
+document.getElementById('yr').textContent=new Date().getFullYear();
+(function(){var r=document.documentElement,b=document.getElementById('theme');
+try{var s=localStorage.getItem('theme');if(s)r.dataset.theme=s}catch(e){}
+b.onclick=function(){var d=r.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');r.dataset.theme=d==='dark'?'light':'dark';try{localStorage.setItem('theme',r.dataset.theme)}catch(e){}}})();
+(function(){var q=document.getElementById('q'),k='all',btns=document.querySelectorAll('.toolbar button');
+function run(){var t=q.value.toLowerCase(),n=0;document.querySelectorAll('.pub').forEach(function(p){var ok=(k==='all'||p.dataset.kind===k)&&p.textContent.toLowerCase().indexOf(t)>-1;p.style.display=ok?'':'none';if(ok)n++});
+document.querySelectorAll('#publist h3.year').forEach(function(h){var ol=h.nextElementSibling,any=[].some.call(ol.children,function(li){return li.style.display!=='none'});h.style.display=ol.style.display=any?'':'none'});
+document.getElementById('none').style.display=n?'none':'block'}
+q.oninput=run;btns.forEach(function(b){b.onclick=function(){btns.forEach(function(x){x.classList.remove('on')});b.classList.add('on');k=b.dataset.k;run()}})})();
+</script>
+</body>
+</html>
