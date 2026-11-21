@@ -13,18 +13,18 @@ You can do everything below on the GitHub website. No software is needed.
 1. Go to https://github.com/gurusaravana/gurusaravana.github.io
 2. Open the `courses` folder, then the `files` folder.
 3. Click **Add file → Upload files**.
-4. Drag your file in. To put it in a folder for the course, type the folder name before the file name, for example `process-control/lecture-1.pdf`.
+4. Drag your file in. To put it in a folder for the course, type the folder name before the file name, for example `process-control-fundamentals/lecture-1.pdf`.
    Tip: use simple file names with no spaces, like `lecture-1.pdf`.
 5. Click **Commit changes**.
 
 **Step 2: Show it on the course page**
 
-1. Open the course page, for example `courses/process-control.html`, and click the **pencil icon** (Edit).
+1. Open the course page, for example `courses/process-control-fundamentals.html`, and click the **pencil icon** (Edit).
 2. Find the part that says `<ul class="materials">`.
 3. Just below it, paste this line and change the words and the file name:
 
 ```html
-<li><span class="kind">Notes</span>Lecture 1: Introduction<a class="open" href="files/process-control/lecture-1.pdf" target="_blank">Open</a></li>
+<li><span class="kind">Notes</span>Lecture 1: Introduction<a class="open" href="files/process-control-fundamentals/lecture-1.pdf" target="_blank">Open</a></li>
 ```
 
    The word in the first box can be anything short: `Notes`, `Slides`, `Task`, `Lab`, `Exam`, `Outline`.
@@ -77,7 +77,7 @@ GitHub only accepts files up to 25 MB through the website, so put long videos on
 
 ## 4. Add a new course
 
-1. Open any course page, for example `courses/optimal-control.html`, click **Raw**, and copy everything.
+1. Open any course page, for example `courses/nonlinear-control.html`, click **Raw**, and copy everything.
 2. In the `courses` folder, click **Add file → Create new file**, name it like `my-new-course.html`, paste, and change the title and description.
 3. In `index.html`, find the Teaching section and copy one course line, changing the name and the link to `courses/my-new-course.html`.
 
