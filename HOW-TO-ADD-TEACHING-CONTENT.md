@@ -46,6 +46,10 @@ These simulations are built in and work on any course page:
 | `<div class="sim" data-sim="first-order"></div>` | First-order process with dead time: step response with the 63.2 % point marked |
 | `<div class="sim" data-sim="tank"></div>` | Animated tank level with manual or automatic (PI) level control |
 | `<div class="sim" data-sim="frequency"></div>` | Sine in, sine out: amplitude ratio and phase lag of a first-order process |
+| `<div class="sim" data-sim="rlc"></div>` | Series RLC circuit step response (capacitor, resistor or inductor voltage) |
+| `<div class="sim" data-sim="rc-ladder"></div>` | Two-loop RC network showing the loading effect |
+| `<div class="sim" data-sim="two-mass"></div>` | Animated two-mass spring–damper system with a step force |
+| `<div class="sim" data-sim="laplace"></div>` | Partial fractions explorer for the three root cases |
 
 On a course page that has no simulations yet, the simulations section is switched off with two "delete this line" notes.
 Delete those two lines (the one starting with `<!-- To show live simulations` and the one saying `delete this line too -->`), then put the simulation lines you want inside the section.

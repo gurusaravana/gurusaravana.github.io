@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 2: Laplace transform and partial fractions · Control System Engineering</title>
+<meta name="description" content="Laplace transform and partial fractions">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 2: Laplace transform and partial fractions
+  Edit the notes inside <article class="notes"> ... </article>.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Simulation: change data-sim="..." (choices: tank, first-order, second-order, frequency, pid, spring, pendulum, rlc, rc-ladder, two-mass, laplace).
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">S. Gurusamy</a>
+  <nav class="links"><a href="../control-system-engineering.html">Course home</a><a href="../control-system-engineering/syllabus.html">Syllabus</a><a href="../control-system-engineering/schedule.html">Schedule</a><a href="../control-system-engineering.html#lessons">Lessons</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../control-system-engineering.html">← Control System Engineering</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 2 of 19 · Module 1: System components and their representation</div>
+    <h1>Laplace transform and partial fractions</h1>
+    <p>Control System Engineering · EEE2510 · Sessions 3 (review) · CO1</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">Module 1 · System components and their representation</div><ol><li><a href="01-introduction.html"><span class="n">1</span>Introduction to control systems</a></li><li class="on"><a href="02-laplace-and-partial-fractions.html"><span class="n">2</span>Laplace transform and partial fractions</a></li><li><a href="03-electrical-systems.html"><span class="n">3</span>Models of electrical systems</a></li><li><a href="04-mechanical-systems.html"><span class="n">4</span>Models of mechanical systems</a></li><li><a href="05-block-diagrams.html"><span class="n">5</span>Block diagram reduction</a></li><li><a href="06-signal-flow-graphs.html"><span class="n">6</span>Signal flow graphs and Mason's gain formula</a></li></ol></div><div class="mod"><div class="modname">Module 2 · Time response analysis</div><ol><li><a href="07-first-order-response.html"><span class="n">7</span>Standard test signals and first-order response</a></li><li><a href="08-second-order-response.html"><span class="n">8</span>Second-order response and time-domain specifications</a></li><li><a href="09-steady-state-errors.html"><span class="n">9</span>Steady-state errors and error constants</a></li><li><a href="10-p-pi-pid-controllers.html"><span class="n">10</span>P, PI and PID controllers</a></li></ol></div><div class="mod"><div class="modname">Module 3 · Stability analysis</div><ol><li><a href="11-routh-stability.html"><span class="n">11</span>Stability and the Routh criterion</a></li><li><a href="12-root-locus.html"><span class="n">12</span>Root locus</a></li><li><a href="13-bode-plots.html"><span class="n">13</span>Frequency response and Bode plots</a></li><li><a href="14-nyquist.html"><span class="n">14</span>Nyquist stability criterion</a></li><li><a href="15-compensation.html"><span class="n">15</span>Lead, lag and lead-lag compensation</a></li></ol></div><div class="mod"><div class="modname">Module 4 · State space analysis</div><ol><li><a href="16-state-space-models.html"><span class="n">16</span>State variables and state models</a></li><li><a href="17-state-equation-solution.html"><span class="n">17</span>State diagrams and solution of the state equation</a></li><li><a href="18-controllability-observability.html"><span class="n">18</span>Controllability and observability</a></li><li><a href="19-nonlinear-systems.html"><span class="n">19</span>Introduction to nonlinear systems</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Use the Laplace transform table and theorems</li><li>Expand a rational function into partial fractions for the three root cases</li><li>Get a transfer function from a differential equation</li></ul></div>
+    <p class="lesson-files"><a class="btnlink" href="module-1-notes.pdf" target="_blank">📄 Module 1 lecture notes and tutorial (PDF)</a> </p>
+    <section class="lsec"><h2>Notes</h2>
+    <article class="notes">
+<p>The unilateral Laplace transform turns linear differential equations in time into algebraic equations in the complex frequency $s = \sigma + j\omega$:</p>
+<p class="eq">$$\mathcal L\{f(t)\} = F(s) = \int_{0^-}^{\infty} f(t)e^{-st}\,dt$$</p>
+<h3>Common transforms</h3>
+<table class="tbl"><tr><th>$f(t)$</th><th>$F(s)$</th><th>Converges for</th></tr>
+<tr><td>$\delta(t)$, unit impulse</td><td>$1$</td><td>all $s$</td></tr>
+<tr><td>$u(t)$, unit step</td><td>$1/s$</td><td>$\text{Re}(s) &gt; 0$</td></tr>
+<tr><td>$t\,u(t)$, unit ramp</td><td>$1/s^2$</td><td>$\text{Re}(s) &gt; 0$</td></tr>
+<tr><td>$t^n u(t)$</td><td>$n!/s^{n+1}$</td><td>$\text{Re}(s) &gt; 0$</td></tr>
+<tr><td>$e^{-at}u(t)$</td><td>$1/(s+a)$</td><td>$\text{Re}(s) &gt; -a$</td></tr>
+<tr><td>$\sin(\omega t)\,u(t)$</td><td>$\omega/(s^2+\omega^2)$</td><td>$\text{Re}(s) &gt; 0$</td></tr>
+<tr><td>$\cos(\omega t)\,u(t)$</td><td>$s/(s^2+\omega^2)$</td><td>$\text{Re}(s) &gt; 0$</td></tr></table>
+<h3>Essential theorems</h3>
+<table class="tbl"><tr><th>Theorem</th><th>Time domain</th><th>$s$-domain</th></tr>
+<tr><td>Linearity</td><td>$k_1f_1(t) + k_2f_2(t)$</td><td>$k_1F_1(s) + k_2F_2(s)$</td></tr>
+<tr><td>Frequency shift</td><td>$e^{-at}f(t)$</td><td>$F(s+a)$</td></tr>
+<tr><td>Time shift</td><td>$f(t-T)u(t-T)$</td><td>$e^{-sT}F(s)$</td></tr>
+<tr><td>Scaling</td><td>$f(at)$</td><td>$\frac1aF\!\left(\frac sa\right)$</td></tr>
+<tr><td>First derivative</td><td>$df/dt$</td><td>$sF(s) - f(0^-)$</td></tr>
+<tr><td>Second derivative</td><td>$d^2f/dt^2$</td><td>$s^2F(s) - sf(0^-) - f'(0^-)$</td></tr>
+<tr><td>Integration</td><td>$\int_{0^-}^t f(\tau)d\tau$</td><td>$F(s)/s$</td></tr>
+<tr><td>Initial value</td><td>$f(0^+)$</td><td>$\lim_{s\to\infty} sF(s)$</td></tr>
+<tr><td>Final value</td><td>$f(\infty)$</td><td>$\lim_{s\to0} sF(s)$</td></tr></table>
+<h3>Partial-fraction expansion</h3>
+<p>To invert $F(s) = N(s)/D(s)$ with the degree of $N$ less than that of $D$ (otherwise divide first), split it into simple terms.</p>
+<p><b>Case 1: real and distinct roots.</b> $F(s) = \dfrac{K_1}{s+p_1} + \dots + \dfrac{K_n}{s+p_n}$ with $K_i = \lim_{s\to-p_i}(s+p_i)F(s)$.</p>
+<p><b>Case 2: a repeated real root</b> $-p_1$ of multiplicity $r$: include $\dfrac{K_1}{(s+p_1)^r} + \dfrac{K_2}{(s+p_1)^{r-1}} + \dots + \dfrac{K_r}{s+p_1}$, with</p>
+<p class="eq">$$K_i = \frac{1}{(i-1)!}\lim_{s\to-p_1}\frac{d^{\,i-1}}{ds^{\,i-1}}\left[(s+p_1)^rF(s)\right]$$</p>
+<p><b>Case 3: complex-conjugate roots</b> from $s^2 + as + b$: use $\dfrac{K_2s + K_3}{s^2+as+b}$ and balance coefficients, or complex residues $K_2$, $K_2^*$. The pair inverts to a damped sinusoid $Ce^{-\alpha t}\cos(\beta t - \phi)$.</p>
+<p class="tip">Use the <a href="#sim-laplace">partial fractions explorer</a> below: switch between the three cases and watch how each term adds up to $f(t)$.</p>
+<h3>Worked example: transfer function from a differential equation</h3>
+<p>Find the transfer function of $\dfrac{dc(t)}{dt} + 2c(t) = r(t)$, where $c$ is the output and $r$ the input.</p>
+<ol><li>The transfer function is $G(s) = C(s)/R(s)$ with all initial conditions zero.</li>
+<li>Transform both sides and use linearity: $\mathcal L\{dc/dt\} + 2C(s) = R(s)$.</li>
+<li>Differentiation theorem: $\mathcal L\{dc/dt\} = sC(s) - c(0^-)$.</li>
+<li>Zero initial conditions: $sC(s) + 2C(s) = R(s)$.</li>
+<li>Factor: $(s+2)C(s) = R(s)$.</li>
+<li>So $G(s) = \dfrac{C(s)}{R(s)} = \dfrac{1}{s+2}$, a first-order system with time constant 0.5 s (see Lesson 7).</li></ol>
+</article></section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the <div class="video-slot">...</div> below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section id="try-it" class="lsec"><h2>Try it</h2>
+    <div class="sim" id="sim-laplace" data-sim="laplace"></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">Find $f(t)$ for $F(s) = \dfrac{1}{(s+1)(s+2)}$.</div><details><summary>Show solution</summary><div class="sol">$K_1 = 1/(−1+2) = 1$, $K_2 = 1/(−2+1) = −1$. $f(t) = e^{-t} − e^{-2t}$. Check it in the explorer with $a = 1$, $b = 2$.</div></details></li><li><div class="q">Find $f(t)$ for $F(s) = \dfrac{2}{(s+1)^2(s+2)}$.</div><details><summary>Show solution</summary><div class="sol">$K_1 = 2/(−1+2) = 2$, $K_2 = \frac{d}{ds}\left[\frac{2}{s+2}\right]_{s=-1} = −2$, $K_3 = 2/(−2+1)^2 = 2$. $f(t) = 2te^{-t} − 2e^{-t} + 2e^{-2t}$.</div></details></li><li><div class="q">Find $f(t)$ for $F(s) = \dfrac{3}{s^2 + 2s + 5}$.</div><details><summary>Show solution</summary><div class="sol">$s^2 + 2s + 5 = (s+1)^2 + 2^2$, so $f(t) = \frac32 e^{-t}\sin 2t$.</div></details></li><li><div class="q">Use the final value theorem on $Y(s) = \dfrac{10}{s(s+2)}$.</div><details><summary>Show solution</summary><div class="sol">$y(\infty) = \lim_{s\to0} s\cdot\frac{10}{s(s+2)} = 5$.</div></details></li></ol></section>
+    <nav class="prevnext"><a class="pn prev" href="01-introduction.html"><small>← Lesson 1</small>Introduction to control systems</a><a class="pn next" href="03-electrical-systems.html"><small>Lesson 3 →</small>Models of electrical systems</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+<script src="../../assets/js/sims.js"></script>
+</body>
+</html>

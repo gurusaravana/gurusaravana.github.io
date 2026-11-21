@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 3: Models of electrical systems · Control System Engineering</title>
+<meta name="description" content="Models of electrical systems">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 3: Models of electrical systems
+  Edit the notes inside <article class="notes"> ... </article>.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Simulation: change data-sim="..." (choices: tank, first-order, second-order, frequency, pid, spring, pendulum, rlc, rc-ladder, two-mass, laplace).
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">S. Gurusamy</a>
+  <nav class="links"><a href="../control-system-engineering.html">Course home</a><a href="../control-system-engineering/syllabus.html">Syllabus</a><a href="../control-system-engineering/schedule.html">Schedule</a><a href="../control-system-engineering.html#lessons">Lessons</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../control-system-engineering.html">← Control System Engineering</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 3 of 19 · Module 1: System components and their representation</div>
+    <h1>Models of electrical systems</h1>
+    <p>Control System Engineering · EEE2510 · Sessions 3–4 · CO1</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">Module 1 · System components and their representation</div><ol><li><a href="01-introduction.html"><span class="n">1</span>Introduction to control systems</a></li><li><a href="02-laplace-and-partial-fractions.html"><span class="n">2</span>Laplace transform and partial fractions</a></li><li class="on"><a href="03-electrical-systems.html"><span class="n">3</span>Models of electrical systems</a></li><li><a href="04-mechanical-systems.html"><span class="n">4</span>Models of mechanical systems</a></li><li><a href="05-block-diagrams.html"><span class="n">5</span>Block diagram reduction</a></li><li><a href="06-signal-flow-graphs.html"><span class="n">6</span>Signal flow graphs and Mason's gain formula</a></li></ol></div><div class="mod"><div class="modname">Module 2 · Time response analysis</div><ol><li><a href="07-first-order-response.html"><span class="n">7</span>Standard test signals and first-order response</a></li><li><a href="08-second-order-response.html"><span class="n">8</span>Second-order response and time-domain specifications</a></li><li><a href="09-steady-state-errors.html"><span class="n">9</span>Steady-state errors and error constants</a></li><li><a href="10-p-pi-pid-controllers.html"><span class="n">10</span>P, PI and PID controllers</a></li></ol></div><div class="mod"><div class="modname">Module 3 · Stability analysis</div><ol><li><a href="11-routh-stability.html"><span class="n">11</span>Stability and the Routh criterion</a></li><li><a href="12-root-locus.html"><span class="n">12</span>Root locus</a></li><li><a href="13-bode-plots.html"><span class="n">13</span>Frequency response and Bode plots</a></li><li><a href="14-nyquist.html"><span class="n">14</span>Nyquist stability criterion</a></li><li><a href="15-compensation.html"><span class="n">15</span>Lead, lag and lead-lag compensation</a></li></ol></div><div class="mod"><div class="modname">Module 4 · State space analysis</div><ol><li><a href="16-state-space-models.html"><span class="n">16</span>State variables and state models</a></li><li><a href="17-state-equation-solution.html"><span class="n">17</span>State diagrams and solution of the state equation</a></li><li><a href="18-controllability-observability.html"><span class="n">18</span>Controllability and observability</a></li><li><a href="19-nonlinear-systems.html"><span class="n">19</span>Introduction to nonlinear systems</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Write differential equations for RLC circuits and convert them to transfer functions</li><li>Use the impedance method and mesh analysis by inspection</li><li>Solve multi-loop networks with Cramer's rule and spot the loading effect</li></ul></div>
+    <p class="lesson-files"><a class="btnlink" href="module-1-notes.pdf" target="_blank">📄 Module 1 lecture notes and tutorial (PDF)</a> </p>
+    <section class="lsec"><h2>Notes</h2>
+    <article class="notes">
+<p>Kirchhoff's laws and the element laws give the equations. Two routes lead to the same transfer function: the <b>classical</b> route writes differential equations first, and the <b>impedance</b> route works directly in the $s$-domain.</p>
+<table class="tbl"><tr><th>Element</th><th>Voltage–current law</th><th>Impedance $Z(s)$</th></tr>
+<tr><td>Resistor</td><td>$v = Ri$</td><td>$R$</td></tr><tr><td>Inductor</td><td>$v = L\,di/dt$</td><td>$Ls$</td></tr><tr><td>Capacitor</td><td>$v = \frac{1}{C}\int i\,dt$</td><td>$1/(Cs)$</td></tr></table>
+
+<h3>Worked example 1: series RLC circuit (classical method)</h3>
+<p>Find $V_C(s)/V(s)$ for a series RLC circuit driven by $v(t)$.</p>
+<ol><li>KVL: $L\dfrac{di}{dt} + Ri + \dfrac1C\displaystyle\int_0^t i\,d\tau = v(t)$.</li>
+<li>Use charge, $i = dq/dt$: $L\ddot q + R\dot q + \dfrac1C q = v(t)$.</li>
+<li>Use $q = Cv_C$: $LC\ddot v_C + RC\dot v_C + v_C = v(t)$.</li>
+<li>Laplace transform with zero initial conditions: $(LCs^2 + RCs + 1)V_C(s) = V(s)$.</li></ol>
+<p class="eq">$$G(s) = \frac{V_C(s)}{V(s)} = \frac{1}{LCs^2 + RCs + 1} = \frac{1/LC}{s^2 + \frac RL s + \frac1{LC}}$$</p>
+<h3>The same circuit by the impedance method</h3>
+<ol><li>Impedances: $Z_R = R$, $Z_L = Ls$, $Z_C = 1/(Cs)$.</li>
+<li>Mesh equation by inspection: $\left(Ls + R + \frac1{Cs}\right)I(s) = V(s)$.</li>
+<li>Output: $V_C = I\cdot\frac1{Cs}$, so $I(s) = CsV_C(s)$.</li>
+<li>Substitute: $(LCs^2 + RCs + 1)V_C(s) = V(s)$, the same result with no calculus.</li></ol>
+<p class="tip">Open the <a href="#sim-rlc">RLC circuit simulation</a>. Set $R = 4\,\Omega$, $L = 1$ H, $C = 0.25$ F: then $\omega_n = 2$ rad/s and $\zeta = 1$. Lower $R$ and watch the response start to ring. Switch the output to $V_R$ or $V_L$ for Exercise Problems 2 and 3.</p>
+
+<h3>Mesh analysis by inspection</h3>
+<p>For each mesh, write</p>
+<p class="eq">$$\left[\begin{smallmatrix}\text{sum of impedances}\\\text{around this mesh}\end{smallmatrix}\right]I_k - \sum\left[\begin{smallmatrix}\text{impedances common}\\\text{to mesh } k \text{ and } j\end{smallmatrix}\right]I_j = \left[\begin{smallmatrix}\text{sum of applied voltages}\\\text{around this mesh}\end{smallmatrix}\right]$$</p>
+<p>then solve the simultaneous equations with Cramer's rule.</p>
+
+<h3>Worked example 2: two-loop RL–RC circuit</h3>
+<p>Loop 1 has $R_1$ and $L$; loop 2 has $R_2$ and $C$; the inductor is shared. Find $G(s) = I_2(s)/V(s)$.</p>
+<p class="eq">$$(R_1 + Ls)I_1 - LsI_2 = V, \qquad -LsI_1 + \left(Ls + R_2 + \tfrac1{Cs}\right)I_2 = 0$$</p>
+<p>By Cramer's rule, $I_2 = \dfrac{LsV}{\Delta}$ with $\Delta = (R_1 + Ls)\left(Ls + R_2 + \frac1{Cs}\right) - L^2s^2 = (R_1 + R_2)Ls + R_1R_2 + \dfrac{R_1}{Cs} + \dfrac LC$. Multiplying top and bottom by $Cs$:</p>
+<p class="eq">$$G(s) = \frac{I_2(s)}{V(s)} = \frac{LCs^2}{(R_1 + R_2)LCs^2 + (R_1R_2C + L)s + R_1}$$</p>
+
+<h3>Worked example 3: two-loop RC network</h3>
+<p>Two RC sections in cascade: $R_1$ then $C_1$ to ground, then $R_2$ then $C_2$ to ground, with $E_o$ across $C_2$.</p>
+<p class="eq">$$\left(R_1 + \tfrac1{C_1s}\right)I_1 - \tfrac1{C_1s}I_2 = E_i, \qquad -\tfrac1{C_1s}I_1 + \left(R_2 + \tfrac1{C_1s} + \tfrac1{C_2s}\right)I_2 = 0, \qquad E_o = \tfrac{I_2}{C_2s}$$</p>
+<p>Solving with Cramer's rule and clearing fractions:</p>
+<p class="eq">$$\frac{E_o(s)}{E_i(s)} = \frac{1}{(R_1C_1s + 1)(R_2C_2s + 1) + R_1C_2s}$$</p>
+<p>The extra $R_1C_2s$ term is the <b>loading effect</b>: the second stage draws current from the first, so the network is <i>not</i> just two first-order lags multiplied together.</p>
+<p class="tip">See it in the <a href="#sim-rc-ladder">two-loop RC network simulation</a>: the gap between the two curves is the loading effect.</p>
+
+<h3>Worked example 4: three-loop network by inspection</h3>
+<p>For the three-loop network in the notes, with clockwise loop currents, inspection gives</p>
+<p class="eq">$$\begin{aligned}(2s + 2)I_1 - (2s + 1)I_2 - I_3 &= V\\ -(2s + 1)I_1 + (9s + 1)I_2 - 4sI_3 &= 0\\ -I_1 - 4sI_2 + \left(4s + 1 + \tfrac1s\right)I_3 &= 0\end{aligned}$$</p>
+<p>Completing the solution with Cramer's rule is Exercise 3 below.</p>
+
+<h3>Armature-controlled DC motor</h3>
+<p class="eq">$$\frac{\Omega(s)}{V_a(s)} = \frac{K_t}{(L_as + R_a)(Js + B) + K_tK_b}$$</p>
+</article></section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the <div class="video-slot">...</div> below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section id="try-it" class="lsec"><h2>Try it</h2>
+    <div class="sim" id="sim-rlc" data-sim="rlc"></div>
+    <div class="sim" id="sim-rc-ladder" data-sim="rc-ladder"></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">Find $V_R(s)/V(s)$ and $V_L(s)/V(s)$ for the series RLC circuit.</div><details><summary>Show solution</summary><div class="sol">$\dfrac{V_R}{V} = \dfrac{RCs}{LCs^2 + RCs + 1}$ and $\dfrac{V_L}{V} = \dfrac{LCs^2}{LCs^2 + RCs + 1}$. Check both shapes in the RLC simulation: $V_R$ rises then falls to zero, $V_L$ jumps to 1 V then decays.</div></details></li><li><div class="q">For $R = 10\,\Omega$, $L = 1$ H, $C = 0.01$ F (output across $C$), find $\omega_n$ and $\zeta$.</div><details><summary>Show solution</summary><div class="sol">$\omega_n = 1/\sqrt{0.01} = 10$ rad/s. $\zeta = (10/2)\sqrt{0.01/1} = 0.5$.</div></details></li><li><div class="q">Complete worked example 4: write $I_3(s)/V(s)$ as a ratio of determinants.</div><details><summary>Show solution</summary><div class="sol">$I_3 = \Delta_3/\Delta$, where $\Delta$ is the determinant of the 3×3 coefficient matrix and $\Delta_3$ is the same matrix with its third column replaced by $[V\ 0\ 0]^T$, so $\Delta_3 = V\left[(2s+1)(4s) + (9s+1)\right]$ expanded along that column. Expand $\Delta$ the same way and simplify.</div></details></li><li><div class="q">In worked example 3, take $R_1 = R_2 = 1$ kΩ and $C_1 = C_2 = 1$ mF. Write $E_o/E_i$, and compare with the unloaded product.</div><details><summary>Show solution</summary><div class="sol">$R_1C_1 = R_2C_2 = R_1C_2 = 1$ s, so $E_o/E_i = 1/(s^2 + 3s + 1)$; the unloaded product would be $1/(s^2 + 2s + 1)$. The loaded network is slower, as the simulation shows.</div></details></li><li><div class="q">Neglecting $L_a$, write the DC motor transfer function as a first-order system.</div><details><summary>Show solution</summary><div class="sol">$\Omega/V_a = K/(\tau s + 1)$ with $K = K_t/(R_aB + K_tK_b)$ and $\tau = R_aJ/(R_aB + K_tK_b)$.</div></details></li></ol></section>
+    <nav class="prevnext"><a class="pn prev" href="02-laplace-and-partial-fractions.html"><small>← Lesson 2</small>Laplace transform and partial fractions</a><a class="pn next" href="04-mechanical-systems.html"><small>Lesson 4 →</small>Models of mechanical systems</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+<script src="../../assets/js/sims.js"></script>
+</body>
+</html>

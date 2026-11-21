@@ -7,6 +7,10 @@
      <div class="sim" data-sim="first-order"></div>
      <div class="sim" data-sim="tank"></div>
      <div class="sim" data-sim="frequency"></div>
+     <div class="sim" data-sim="rlc"></div>
+     <div class="sim" data-sim="rc-ladder"></div>
+     <div class="sim" data-sim="two-mass"></div>
+     <div class="sim" data-sim="laplace"></div>
 */
 (function () {
   function css(v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
@@ -368,6 +372,148 @@
       var f = fit(c); plot(f.ctx, { x: 0, y: 0, w: f.w, h: f.h }, [{ t: T, y: U, color: css('--muted'), width: 1.5, dash: [6, 5], name: 'Input sin(ωt)' }, { t: T, y: Y, color: css('--accent'), name: 'Output y(t)' }], { tmax: tmax, ymin: -2, ymax: 2, ny: 4 });
       var ar = k / Math.sqrt(1 + om * om * ta * ta), ph = -Math.atan(om * ta) * 180 / Math.PI;
       info.textContent = 'Amplitude ratio AR = ' + ar.toFixed(3) + '   ·   Phase lag φ = ' + ph.toFixed(1) + '°   ·   Corner frequency 1/τ = ' + (1 / ta).toFixed(2) + ' rad/s';
+    }
+    draw(); onTheme(draw);
+  };
+
+
+  function select(box, label, options, onChange) {
+    var l = el('label'); l.appendChild(document.createTextNode(label + ': '));
+    var s = el('select', { 'aria-label': label, style: 'display:block;width:100%;margin-top:4px;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit' });
+    options.forEach(function (o) { var op = el('option', { value: o[0] }, o[1]); s.appendChild(op); });
+    s.onchange = onChange; l.appendChild(s); box.appendChild(l); return s;
+  }
+  function niceMax(v) { var p = Math.pow(10, Math.floor(Math.log10(v))), m = v / p; return (m <= 1 ? 1 : m <= 2 ? 2 : m <= 2.5 ? 2.5 : m <= 5 ? 5 : 10) * p; }
+  function range(arrs, pad) { var lo = Infinity, hi = -Infinity; arrs.forEach(function (a) { a.forEach(function (v) { if (isFinite(v)) { lo = Math.min(lo, v); hi = Math.max(hi, v); } }); }); if (hi - lo < 1e-9) { hi += 1; lo -= 1; } var p = (hi - lo) * (pad || 0.1); return [lo - p, hi + p]; }
+  function r2(v) { return Math.abs(v) >= 100 ? v.toFixed(0) : Math.abs(v) >= 10 ? v.toFixed(1) : v.toFixed(2); }
+
+  /* 8. Series RLC circuit: step response of the capacitor, resistor or inductor voltage */
+  SIMS['rlc'] = function (root) {
+    root.appendChild(el('h3', {}, 'Series RLC circuit: step response'));
+    root.appendChild(el('p', { 'class': 'desc' }, 'A 1 V step is applied to a series RLC circuit. V<sub>C</sub>/V = (1/LC) / (s&sup2; + (R/L)s + 1/LC). Change R, L and C and see how &omega;<sub>n</sub> = 1/&radic;(LC) and &zeta; = (R/2)&radic;(C/L) shape the response. Pick which voltage to watch.'));
+    var box = el('div', { 'class': 'controls' }); root.appendChild(box);
+    var R = slider(box, 'Resistance R', 0.2, 40, 0.2, 4, ' Ω', draw);
+    var L = slider(box, 'Inductance L', 0.1, 5, 0.1, 1, ' H', draw);
+    var C = slider(box, 'Capacitance C', 0.01, 1, 0.01, 0.25, ' F', draw);
+    var out = select(box, 'Output voltage', [['c', 'Capacitor, V_C'], ['r', 'Resistor, V_R'], ['l', 'Inductor, V_L']], draw);
+    var c = canvas(root); var info = el('div', { 'class': 'readout' }); root.appendChild(info);
+    function draw() {
+      var r = +R.value, l = +L.value, cc = +C.value, wn = 1 / Math.sqrt(l * cc), z = r / 2 * Math.sqrt(cc / l);
+      var tmax = Math.min(60, Math.max(1, 10 / Math.max(z * wn, 0.15 * wn))), n = 4000, dt = tmax / n, q = 0, i = 0, T = [], Y = [], U = [], I = [];
+      for (var k = 0; k <= n; k++) {
+        var vc = q / cc, vr = r * i, vl = 1 - vr - vc;
+        T.push(k * dt); U.push(1); I.push(i); Y.push(out.value === 'c' ? vc : out.value === 'r' ? vr : vl);
+        var h = dt / 4; for (var j = 0; j < 4; j++) { var di = (1 - r * i - q / cc) / l; i += di * h; q += i * h; }
+      }
+      var rg = range([Y, U, I], 0.08), f = fit(c);
+      plot(f.ctx, { x: 0, y: 0, w: f.w, h: f.h }, [{ t: T, y: U, color: css('--muted'), dash: [6, 5], width: 1.5, name: 'Input v(t) = 1 V' }, { t: T, y: I, color: css('--gold'), width: 1.5, name: 'Current i(t) (A)' }, { t: T, y: Y, color: css('--accent'), name: out.value === 'c' ? 'V_C(t)' : out.value === 'r' ? 'V_R(t)' : 'V_L(t)' }], { tmax: tmax, ymin: rg[0], ymax: rg[1], ny: 5 });
+      var num = out.value === 'c' ? r2(1 / (l * cc)) : out.value === 'r' ? r2(r / l) + 's' : 's²', den = '(s² + ' + r2(r / l) + 's + ' + r2(1 / (l * cc)) + ')';
+      info.textContent = 'ωn = ' + r2(wn) + ' rad/s   ·   ζ = ' + z.toFixed(3) + ' (' + (z < 1 ? 'underdamped' : z === 1 ? 'critically damped' : 'overdamped') + ')   ·   ' + (out.value === 'c' ? 'V_C' : out.value === 'r' ? 'V_R' : 'V_L') + '/V = ' + num + ' / ' + den;
+    }
+    draw(); onTheme(draw);
+  };
+
+  /* 9. Two-loop RC ladder: loading effect */
+  SIMS['rc-ladder'] = function (root) {
+    root.appendChild(el('h3', {}, 'Two-loop RC network: the loading effect'));
+    root.appendChild(el('p', { 'class': 'desc' }, 'E<sub>o</sub>/E<sub>i</sub> = 1 / [(R<sub>1</sub>C<sub>1</sub>s + 1)(R<sub>2</sub>C<sub>2</sub>s + 1) + R<sub>1</sub>C<sub>2</sub>s]. The dashed curve is what you would get if the second RC stage did not draw current from the first: just the product of two first-order lags. The extra R<sub>1</sub>C<sub>2</sub>s term is the <b>loading effect</b>. Make R<sub>2</sub> large or C<sub>2</sub> small and the two curves meet.'));
+    var box = el('div', { 'class': 'controls' }); root.appendChild(box);
+    var R1 = slider(box, 'R1', 0.1, 10, 0.1, 1, ' kΩ', draw), C1 = slider(box, 'C1', 0.1, 10, 0.1, 1, ' mF', draw);
+    var R2 = slider(box, 'R2', 0.1, 10, 0.1, 1, ' kΩ', draw), C2 = slider(box, 'C2', 0.1, 10, 0.1, 1, ' mF', draw);
+    var c = canvas(root); var info = el('div', { 'class': 'readout' }); root.appendChild(info);
+    function draw() {
+      var t1 = +R1.value * +C1.value, t2 = +R2.value * +C2.value, t12 = +R1.value * +C2.value;
+      var a2 = t1 * t2, a1 = t1 + t2 + t12, tmax = Math.min(400, Math.max(5, 6 * a1)), n = 3000, dt = tmax / n;
+      var x = 0, v = 0, u1 = 0, u2 = 0, T = [], Y = [], Yn = [], U = [];
+      for (var k = 0; k <= n; k++) {
+        T.push(k * dt); Y.push(x); Yn.push(u2); U.push(1);
+        var hh = dt / 4; for (var j = 0; j < 4; j++) { var acc = (1 - a1 * v - x) / a2; v += acc * hh; x += v * hh; u1 += hh * (1 - u1) / t1; u2 += hh * (u1 - u2) / t2; }
+      }
+      var f = fit(c);
+      plot(f.ctx, { x: 0, y: 0, w: f.w, h: f.h }, [{ t: T, y: U, color: css('--muted'), dash: [6, 5], width: 1.5, name: 'Input Ei = 1 V' }, { t: T, y: Yn, color: css('--gold'), dash: [4, 4], width: 2, name: 'Without loading' }, { t: T, y: Y, color: css('--accent'), name: 'Actual Eo(t)' }], { tmax: tmax, ymin: 0, ymax: 1.2, ny: 6 });
+      info.textContent = 'Eo/Ei = 1 / (' + r2(a2) + 's² + ' + r2(a1) + 's + 1)   ·   R1C1 = ' + r2(t1) + ' s, R2C2 = ' + r2(t2) + ' s, loading term R1C2 = ' + r2(t12) + ' s';
+    }
+    draw(); onTheme(draw);
+  };
+
+  /* 10. Two-mass translational system (animated) */
+  SIMS['two-mass'] = function (root) {
+    root.appendChild(el('h3', {}, 'Two-mass mechanical system'));
+    root.appendChild(el('p', { 'class': 'desc' }, 'M<sub>1</sub> is tied to the wall by K<sub>1</sub> and B<sub>1</sub>, and to M<sub>2</sub> by the coupling spring K and damper B. M<sub>2</sub> has friction B<sub>2</sub> to ground. A step force F pushes M<sub>2</sub> to the right. Press Play, then change the values and watch both masses.'));
+    var box = el('div', { 'class': 'controls' }); root.appendChild(box);
+    var M1 = slider(box, 'M1', 0.2, 5, 0.1, 1, ' kg', reset), M2 = slider(box, 'M2', 0.2, 5, 0.1, 1, ' kg', reset);
+    var K1 = slider(box, 'K1', 0, 40, 1, 10, ' N/m', reset), K = slider(box, 'Coupling K', 1, 40, 1, 10, ' N/m', reset);
+    var B1 = slider(box, 'B1', 0, 10, 0.1, 0.5, ' N·s/m', reset), B = slider(box, 'Coupling B', 0, 10, 0.1, 0.5, ' N·s/m', reset);
+    var B2 = slider(box, 'B2', 0, 10, 0.1, 0.5, ' N·s/m', reset), F = slider(box, 'Force F', 1, 20, 1, 10, ' N', reset);
+    var btns = el('div', { 'class': 'btns' }); root.appendChild(btns);
+    var play = el('button', { type: 'button' }, '▶ Play'), rs = el('button', { type: 'button' }, '↺ Reset');
+    btns.appendChild(play); btns.appendChild(rs);
+    var c = canvas(root, 'spring'); var info = el('div', { 'class': 'readout' }); root.appendChild(info);
+    var x1, v1, x2, v2, t, H, running = false, last = 0, TM = 20;
+    function reset() { x1 = v1 = x2 = v2 = t = 0; H = { t: [0], a: [0], b: [0] }; render(); }
+    function step(dt) {
+      var h = 0.001;
+      for (var s = 0; s < dt / h; s++) {
+        var a1 = (-(+B1.value) * v1 - (+B.value) * (v1 - v2) - (+K1.value) * x1 - (+K.value) * (x1 - x2)) / +M1.value;
+        var a2 = (+F.value - (+B2.value) * v2 - (+B.value) * (v2 - v1) - (+K.value) * (x2 - x1)) / +M2.value;
+        v1 += a1 * h; v2 += a2 * h; x1 += v1 * h; x2 += v2 * h; t += h;
+      }
+      H.t.push(t); H.a.push(x1); H.b.push(x2);
+    }
+    function spring(ctx, xa, xb, y, n) { var seg = (xb - xa) / (n + 2); ctx.beginPath(); ctx.moveTo(xa, y); ctx.lineTo(xa + seg, y); for (var i = 0; i < n; i++) ctx.lineTo(xa + seg * (i + 1.5), y + (i % 2 ? 9 : -9)); ctx.lineTo(xb - seg, y); ctx.lineTo(xb, y); ctx.stroke(); }
+    function damper(ctx, xa, xb, y) { var m = (xa + xb) / 2; ctx.beginPath(); ctx.moveTo(xa, y); ctx.lineTo(m - 6, y); ctx.moveTo(m - 14, y - 9); ctx.lineTo(m + 4, y - 9); ctx.moveTo(m - 14, y + 9); ctx.lineTo(m + 4, y + 9); ctx.moveTo(m - 14, y - 9); ctx.lineTo(m - 14, y + 9); ctx.moveTo(m - 6, y - 6); ctx.lineTo(m - 6, y + 6); ctx.moveTo(m - 6, y); ctx.lineTo(xb, y); ctx.stroke(); }
+    function render() {
+      var f = fit(c), ctx = f.ctx, W = f.w, top = 20, bh = 64, gy = top + bh + 8;
+      var scale = Math.min(60, W * 0.06), bw = Math.min(64, W * 0.12), gap = Math.min(Math.max(90, W * 0.2), (W - 16 - 2 * bw - 60 - 2.2 * scale) / 1.8);
+      var wall = 16, h1 = wall + gap, h2 = h1 + bw + gap * 0.8, p1 = h1 + x1 * scale, p2 = h2 + x2 * scale;
+      var ink = css('--ink'), mu = css('--muted');
+      ctx.fillStyle = css('--line'); ctx.fillRect(4, top - 6, 12, bh + 18); ctx.fillRect(4, gy, W - 8, 3);
+      ctx.strokeStyle = mu; ctx.lineWidth = 1.6;
+      spring(ctx, wall, p1, top + 18, 8); damper(ctx, wall, p1, top + 46);
+      spring(ctx, p1 + bw, p2, top + 18, 8); damper(ctx, p1 + bw, p2, top + 46);
+      ctx.fillStyle = css('--accent'); ctx.fillRect(p1, top, bw, bh); ctx.fillStyle = css('--gold'); ctx.fillRect(p2, top, bw, bh);
+      ctx.fillStyle = '#fff'; ctx.font = '600 14px Inter, sans-serif'; ctx.textAlign = 'center'; ctx.fillText('M1', p1 + bw / 2, top + bh / 2 + 5); ctx.fillText('M2', p2 + bw / 2, top + bh / 2 + 5);
+      ctx.fillStyle = mu; ctx.font = '11px Inter, sans-serif'; ctx.fillText('K1, B1', (wall + p1) / 2, top - 2); ctx.fillText('K, B', (p1 + bw + p2) / 2, top - 2); ctx.fillText('B2 (friction)', p2 + bw / 2, gy + 16);
+      ctx.strokeStyle = ink; ctx.fillStyle = ink; ctx.lineWidth = 2; var ax = p2 + bw + 6; ctx.beginPath(); ctx.moveTo(ax, top + bh / 2); ctx.lineTo(ax + 36, top + bh / 2); ctx.stroke(); ctx.beginPath(); ctx.moveTo(ax + 42, top + bh / 2); ctx.lineTo(ax + 32, top + bh / 2 - 6); ctx.lineTo(ax + 32, top + bh / 2 + 6); ctx.fill(); ctx.textAlign = 'left'; ctx.fillText('F', ax + 14, top + bh / 2 - 8);
+      var rg = range([H.a, H.b, [0]], 0.15);
+      plot(ctx, { x: 0, y: gy + 24, w: W, h: f.h - gy - 24 }, [{ t: H.t, y: H.a, color: css('--accent'), name: 'x1(t), M1 (m)' }, { t: H.t, y: H.b, color: css('--gold'), name: 'x(t), M2 (m)' }], { tmax: TM, ymin: Math.min(0, rg[0]), ymax: Math.max(0.1, rg[1]), ny: 4 });
+      var k1 = +K1.value, k = +K.value, fv = +F.value;
+      info.textContent = k1 > 0 ? 'Final positions: x1 = F/K1 = ' + (fv / k1).toFixed(2) + ' m, x = F/K1 + F/K = ' + (fv / k1 + fv / k).toFixed(2) + ' m (dampers do not change where the masses settle, only how they get there)' : 'K1 = 0: nothing holds the masses to the wall, so they keep moving under the force.';
+    }
+    function loop(ts) { if (!running) return; var dt = Math.min(0.05, (ts - last) / 1000 || 0.016); last = ts; step(dt); render(); if (t > TM) { running = false; play.textContent = '▶ Play'; return; } requestAnimationFrame(loop); }
+    play.onclick = function () { if (t > TM) reset(); running = !running; play.textContent = running ? '❚❚ Pause' : '▶ Play'; if (running) { last = performance.now(); requestAnimationFrame(loop); } };
+    rs.onclick = function () { running = false; play.textContent = '▶ Play'; reset(); };
+    reset(); onTheme(render);
+  };
+
+  /* 11. Partial fractions explorer: the three root cases */
+  SIMS['laplace'] = function (root) {
+    root.appendChild(el('h3', {}, 'Partial fractions explorer'));
+    root.appendChild(el('p', { 'class': 'desc' }, 'Pick a case and move the poles. The page expands F(s) into partial fractions, and the plot shows f(t) (solid) and each term of the expansion (dashed). Real poles give exponentials; complex poles give a damped sinusoid.'));
+    var box = el('div', { 'class': 'controls' }); root.appendChild(box);
+    var mode = select(box, 'Case', [['d', '1: real and distinct roots'], ['r', '2: real and repeated roots'], ['c', '3: complex-conjugate roots']], draw);
+    var A = slider(box, 'a (or α)', 0.2, 4, 0.1, 1, '', draw), B = slider(box, 'b (or β)', 0.2, 6, 0.1, 2, '', draw);
+    var c = canvas(root); var info = el('div', { 'class': 'readout', style: 'white-space:pre-wrap' }); root.appendChild(info);
+    function draw() {
+      var a = +A.value, b = +B.value, m = mode.value, tmax = 8, T = [], Fs = [], t1 = [], t2 = [], t3 = [], txt;
+      if (m === 'd' && Math.abs(a - b) < 0.05) b = a + 0.1;
+      for (var k = 0; k <= 600; k++) {
+        var t = tmax * k / 600, f1, f2, f3 = NaN;
+        if (m === 'd') { var K1 = 1 / (b - a), K2 = 1 / (a - b); f1 = K1 * Math.exp(-a * t); f2 = K2 * Math.exp(-b * t); }
+        else if (m === 'r') { var D = b - a; if (Math.abs(D) < 0.05) D = 0.1; f1 = t * Math.exp(-a * t) / D; f2 = -Math.exp(-a * t) / (D * D); f3 = Math.exp(-b * t) / (D * D); }
+        else { f1 = Math.exp(-a * t) * Math.sin(b * t) / b; f2 = NaN; }
+        T.push(t); t1.push(f1); t2.push(f2); t3.push(f3); Fs.push(f1 + (isNaN(f2) ? 0 : f2) + (isNaN(f3) ? 0 : f3));
+      }
+      if (m === 'd') txt = 'F(s) = 1 / ((s + ' + a.toFixed(1) + ')(s + ' + b.toFixed(1) + '))  =  ' + (1 / (b - a)).toFixed(3) + '/(s + ' + a.toFixed(1) + ')  +  ' + (1 / (a - b)).toFixed(3) + '/(s + ' + b.toFixed(1) + ')\nf(t) = ' + (1 / (b - a)).toFixed(3) + ' e^(−' + a.toFixed(1) + 't) + ' + (1 / (a - b)).toFixed(3) + ' e^(−' + b.toFixed(1) + 't)     (residues Ki = lim (s + pi)F(s))';
+      else if (m === 'r') { var D2 = Math.abs(b - a) < 0.05 ? 0.1 : b - a; txt = 'F(s) = 1 / ((s + ' + a.toFixed(1) + ')² (s + ' + b.toFixed(1) + '))  =  ' + (1 / D2).toFixed(3) + '/(s + ' + a.toFixed(1) + ')²  +  ' + (-1 / (D2 * D2)).toFixed(3) + '/(s + ' + a.toFixed(1) + ')  +  ' + (1 / (D2 * D2)).toFixed(3) + '/(s + ' + b.toFixed(1) + ')\nThe repeated pole gives a t·e^(−at) term; K2 needs the derivative formula.'; }
+      else txt = 'F(s) = 1 / ((s + ' + a.toFixed(1) + ')² + ' + b.toFixed(1) + '²)  →  f(t) = (1/' + b.toFixed(1) + ') e^(−' + a.toFixed(1) + 't) sin(' + b.toFixed(1) + 't)\nα = ' + a.toFixed(1) + ' sets the decay, β = ' + b.toFixed(1) + ' rad/s sets the oscillation (poles at −α ± jβ).';
+      var rg = range([Fs, t1, t2.filter(isFinite), t3.filter(isFinite)], 0.1), f = fit(c);
+      var series = [{ t: T, y: t1, color: css('--gold'), dash: [5, 4], width: 1.6, name: m === 'c' ? 'Damped sinusoid' : 'Term 1' }];
+      if (m !== 'c') series.push({ t: T, y: t2, color: css('--signal') || css('--muted'), dash: [2, 4], width: 1.6, name: 'Term 2' });
+      if (m === 'r') series.push({ t: T, y: t3, color: css('--muted'), dash: [8, 4], width: 1.6, name: 'Term 3' });
+      series.push({ t: T, y: Fs, color: css('--accent'), name: 'f(t)' });
+      plot(f.ctx, { x: 0, y: 0, w: f.w, h: f.h }, series, { tmax: tmax, ymin: rg[0], ymax: rg[1], ny: 4 });
+      info.textContent = txt;
     }
     draw(); onTheme(draw);
   };
