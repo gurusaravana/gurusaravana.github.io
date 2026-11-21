@@ -89,3 +89,33 @@ If anything goes wrong, nothing is lost: GitHub keeps every earlier version. Jus
 ## 5. Change the website colours
 
 All colours are at the top of `assets/css/style.css` (the lines starting with `:root`). For example, change `--accent:#0077b6` to another colour code to change the blue used for links and highlights.
+
+---
+
+## 6. Add a photo to the Gallery (professional updates)
+
+**Step 1: Upload the photo**
+
+1. Go to https://github.com/gurusaravana/gurusaravana.github.io and open the `assets` folder, then `gallery`.
+2. Click **Add file → Upload files**, drag your photo in, and click **Commit changes**.
+   Tip: name it with the date and a word or two, like `2026-03-ieee-meeting.jpg` (no spaces). Photos from a phone are fine.
+
+**Step 2: Show it on the website**
+
+1. Open `index.html` and click the **pencil icon** (Edit).
+2. Press Ctrl+F (Cmd+F on Mac) and search for `<div class="gallery">`.
+3. On the line just below it, paste this block and change the words:
+
+```html
+<figure class="gitem">
+  <img src="assets/gallery/2026-03-ieee-meeting.jpg" alt="Short description of the photo" loading="lazy">
+  <figcaption><span class="gdate">March 2026 · Talk</span><b>Title of the event</b>One sentence about it.</figcaption>
+</figure>
+```
+
+   Newest items go first. The word after the date can be anything: Talk, Award, Conference, Workshop, Students, Visit.
+4. Click **Commit changes**. The gallery updates in about two minutes.
+
+**To change a caption:** search for the title text in `index.html` and edit the words.
+
+**To remove a card:** delete everything from its `<figure` line to its `</figure>` line.
