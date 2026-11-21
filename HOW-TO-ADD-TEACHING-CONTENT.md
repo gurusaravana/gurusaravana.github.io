@@ -116,6 +116,6 @@ All colours are at the top of `assets/css/style.css` (the lines starting with `:
    Newest items go first. The word after the date can be anything: Talk, Award, Conference, Workshop, Students, Visit.
 4. Click **Commit changes**. The gallery updates in about two minutes.
 
-**To replace a "Photo coming soon" card** with a real photo: find that card (search for its title), and replace the whole `<div class="phart">...</div>` part with an `<img ...>` line like the one above. Also change `class="gitem ph"` to `class="gitem"`.
+**To change a caption:** search for the title text in `index.html` and edit the words.
 
 **To remove a card:** delete everything from its `<figure` line to its `</figure>` line.
