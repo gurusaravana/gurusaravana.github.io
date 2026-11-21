@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 9: Feedback control and the PID controller · Process Dynamics and Control</title>
+<meta name="description" content="Feedback control and the PID controller">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 9: Feedback control and the PID controller
+  Edit the notes inside <article class="notes"> ... </article>.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Simulation: change data-sim="..." (choices: tank, first-order, second-order, frequency, pid, spring, pendulum).
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">S. Gurusamy</a>
+  <nav class="links"><a href="../process-dynamics-and-control.html">Course home</a><a href="../process-dynamics-and-control/syllabus.html">Syllabus</a><a href="../process-dynamics-and-control/schedule.html">Schedule</a><a href="../process-dynamics-and-control.html#lessons">Lessons</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../process-dynamics-and-control.html">← Process Dynamics and Control</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 9 of 14 · Module C: Feedback control</div>
+    <h1>Feedback control and the PID controller</h1>
+    <p>Process Dynamics and Control · EIE306</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">Module A · Foundations</div><ol><li><a href="01-introduction.html"><span class="n">1</span>Introduction to process control</a></li><li><a href="02-dynamic-modelling.html"><span class="n">2</span>Dynamic models from balance equations</a></li><li><a href="03-linearisation.html"><span class="n">3</span>Linearisation and deviation variables</a></li><li><a href="04-transfer-functions.html"><span class="n">4</span>Laplace transforms and transfer functions</a></li></ol></div><div class="mod"><div class="modname">Module B · Dynamic behaviour</div><ol><li><a href="05-first-order-systems.html"><span class="n">5</span>First-order systems</a></li><li><a href="06-second-order-systems.html"><span class="n">6</span>Second-order and higher-order systems</a></li><li><a href="07-dead-time-and-fopdt.html"><span class="n">7</span>Dead time and FOPDT model fitting</a></li><li><a href="08-frequency-response.html"><span class="n">8</span>Frequency response</a></li></ol></div><div class="mod"><div class="modname">Module C · Feedback control</div><ol><li class="on"><a href="09-pid-control.html"><span class="n">9</span>Feedback control and the PID controller</a></li><li><a href="10-controller-tuning.html"><span class="n">10</span>Controller tuning</a></li><li><a href="11-closed-loop-stability.html"><span class="n">11</span>Closed-loop stability</a></li></ol></div><div class="mod"><div class="modname">Module D · Advanced strategies</div><ol><li><a href="12-feedforward-and-cascade.html"><span class="n">12</span>Feedforward and cascade control</a></li><li><a href="13-level-control-case-study.html"><span class="n">13</span>Case study: tank level control</a></li><li><a href="14-introduction-to-mpc.html"><span class="n">14</span>Introduction to model predictive control</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Describe proportional, integral and derivative action</li><li>Explain offset and why integral action removes it</li><li>Know practical PID features: direct/reverse action, anti-windup, derivative on measurement</li></ul></div>
+    <section class="lsec"><h2>Notes</h2>
+    <article class="notes">
+<p>The PID controller is used in more than 90 % of industrial loops. In parallel (ISA) form:</p>
+<p class="eq">$$u(t) = \bar u + K_c\left[e(t) + \frac{1}{\tau_I}\int_0^t e\,dt + \tau_D\frac{de}{dt}\right]$$</p>
+<h3>The three actions</h3>
+<table class="tbl"><tr><th>Action</th><th>Responds to</th><th>Effect</th></tr>
+<tr><td>Proportional ($K_c$)</td><td>Present error</td><td>Fast correction, but leaves an <b>offset</b> for most processes</td></tr>
+<tr><td>Integral ($\tau_I$)</td><td>Past (accumulated) error</td><td>Removes offset, but adds oscillation</td></tr>
+<tr><td>Derivative ($\tau_D$)</td><td>Rate of change of error</td><td>Anticipates and damps, but amplifies noise</td></tr></table>
+<h3>Why P-only leaves an offset</h3>
+<p>To hold a new steady state the valve must sit at a new position. With P-only, the valve can only move away from $\bar u$ if there is an error, so some error must remain. Integral action keeps moving the valve until the error is exactly zero.</p>
+<h3>Practical details</h3>
+<ul><li><b>Direct or reverse action</b>: choose the sign so the controller pushes the right way (heater: temperature too low, increase power).</li>
+<li><b>Reset windup</b>: if the valve saturates, the integral keeps growing and causes a large overshoot later. Anti-windup stops integrating while the output is saturated.</li>
+<li><b>Derivative on measurement</b>: use $-dy/dt$ instead of $de/dt$ to avoid a "derivative kick" on set-point changes.</li></ul>
+<p class="tip">In the simulation, set $K_i = 0$ and $K_d = 0$ and raise $K_p$: the offset shrinks but never disappears. Then add a little $K_i$.</p>
+</article></section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the <div class="video-slot">...</div> below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section id="try-it" class="lsec"><h2>Try it</h2>
+    <div class="sim" data-sim="pid"></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">A P-only controller with $K_c = 4$ controls a process with $K = 0.5$. What fraction of a set-point step remains as offset?</div><details><summary>Show solution</summary><div class="sol">Offset $= 1/(1 + K_cK) = 1/(1 + 2) = 1/3$ of the step.</div></details></li><li><div class="q">Should a cooling-water valve on a reactor temperature loop be direct or reverse acting, if the valve opens on increasing signal?</div><details><summary>Show solution</summary><div class="sol">Direct acting: when the temperature rises above the set-point, the controller output must increase to open the cooling valve further.</div></details></li><li><div class="q">Why is derivative action rarely used on flow loops?</div><details><summary>Show solution</summary><div class="sol">Flow measurements are noisy and the loops are already fast, so derivative action mainly amplifies noise and wears the valve.</div></details></li></ol></section>
+    <nav class="prevnext"><a class="pn prev" href="08-frequency-response.html"><small>← Lesson 8</small>Frequency response</a><a class="pn next" href="10-controller-tuning.html"><small>Lesson 10 →</small>Controller tuning</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+<script src="../../assets/js/sims.js"></script>
+</body>
+</html>
