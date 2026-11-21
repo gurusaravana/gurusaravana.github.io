@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 3: Models of mechanical systems · Control System Engineering</title>
+<meta name="description" content="Models of mechanical systems">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 3: Models of mechanical systems
+  Edit the notes inside <article class="notes"> ... </article>.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Simulation: change data-sim="..." (choices: tank, first-order, second-order, frequency, pid, spring, pendulum).
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">S. Gurusamy</a>
+  <nav class="links"><a href="../control-system-engineering.html">Course home</a><a href="../control-system-engineering/syllabus.html">Syllabus</a><a href="../control-system-engineering/schedule.html">Schedule</a><a href="../control-system-engineering.html#lessons">Lessons</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../control-system-engineering.html">← Control System Engineering</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 3 of 18 · Module 1: System components and their representation</div>
+    <h1>Models of mechanical systems</h1>
+    <p>Control System Engineering · EEE2510 · Sessions 5–6 · CO1</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">Module 1 · System components and their representation</div><ol><li><a href="01-introduction.html"><span class="n">1</span>Introduction to control systems</a></li><li><a href="02-electrical-systems.html"><span class="n">2</span>Models of electrical systems</a></li><li class="on"><a href="03-mechanical-systems.html"><span class="n">3</span>Models of mechanical systems</a></li><li><a href="04-block-diagrams.html"><span class="n">4</span>Block diagram reduction</a></li><li><a href="05-signal-flow-graphs.html"><span class="n">5</span>Signal flow graphs and Mason's gain formula</a></li></ol></div><div class="mod"><div class="modname">Module 2 · Time response analysis</div><ol><li><a href="06-first-order-response.html"><span class="n">6</span>Standard test signals and first-order response</a></li><li><a href="07-second-order-response.html"><span class="n">7</span>Second-order response and time-domain specifications</a></li><li><a href="08-steady-state-errors.html"><span class="n">8</span>Steady-state errors and error constants</a></li><li><a href="09-p-pi-pid-controllers.html"><span class="n">9</span>P, PI and PID controllers</a></li></ol></div><div class="mod"><div class="modname">Module 3 · Stability analysis</div><ol><li><a href="10-routh-stability.html"><span class="n">10</span>Stability and the Routh criterion</a></li><li><a href="11-root-locus.html"><span class="n">11</span>Root locus</a></li><li><a href="12-bode-plots.html"><span class="n">12</span>Frequency response and Bode plots</a></li><li><a href="13-nyquist.html"><span class="n">13</span>Nyquist stability criterion</a></li><li><a href="14-compensation.html"><span class="n">14</span>Lead, lag and lead-lag compensation</a></li></ol></div><div class="mod"><div class="modname">Module 4 · State space analysis</div><ol><li><a href="15-state-space-models.html"><span class="n">15</span>State variables and state models</a></li><li><a href="16-state-equation-solution.html"><span class="n">16</span>State diagrams and solution of the state equation</a></li><li><a href="17-controllability-observability.html"><span class="n">17</span>Controllability and observability</a></li><li><a href="18-nonlinear-systems.html"><span class="n">18</span>Introduction to nonlinear systems</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Model translational and rotational mechanical systems</li><li>Draw free-body diagrams and write D'Alembert equations</li><li>Use force–voltage and force–current analogies</li></ul></div>
+    <section class="lsec"><h2>Notes</h2>
+    <article class="notes">
+<h3>Translational elements</h3>
+<table class="tbl"><tr><th>Element</th><th>Force</th><th>Laplace form</th></tr>
+<tr><td>Mass $M$</td><td>$M\,\ddot x$</td><td>$Ms^2X(s)$</td></tr><tr><td>Damper $B$</td><td>$B\,\dot x$</td><td>$BsX(s)$</td></tr><tr><td>Spring $K$</td><td>$Kx$</td><td>$KX(s)$</td></tr></table>
+<h3>Mass–spring–damper</h3>
+<p>A force $f(t)$ acts on a mass held by a spring and a damper. Summing forces on the mass:</p>
+<p class="eq">$$M\ddot x + B\dot x + Kx = f(t) \quad\Rightarrow\quad \frac{X(s)}{F(s)} = \frac{1}{Ms^2 + Bs + K}$$</p>
+<h3>Rotational elements</h3>
+<p>Inertia $J\ddot\theta$, rotational damping $B\dot\theta$ and torsional spring $K\theta$ play the same roles, with torque $T$ in place of force.</p>
+<h3>Analogies</h3>
+<table class="tbl"><tr><th>Mechanical</th><th>Force–voltage</th><th>Force–current</th></tr>
+<tr><td>Force $f$</td><td>Voltage $v$</td><td>Current $i$</td></tr><tr><td>Mass $M$</td><td>Inductance $L$</td><td>Capacitance $C$</td></tr>
+<tr><td>Damping $B$</td><td>Resistance $R$</td><td>Conductance $1/R$</td></tr><tr><td>Stiffness $K$</td><td>Elastance $1/C$</td><td>Reciprocal inductance $1/L$</td></tr>
+<tr><td>Displacement $x$</td><td>Charge $q$</td><td>Flux linkage $\psi$</td></tr></table>
+<p>So the mass–spring–damper behaves exactly like the series RLC circuit of Lesson 2.</p>
+<p class="tip">In the animation below, set damping to zero to see undamped oscillation, then raise it until the mass returns without overshoot (critical damping, $B = 2\sqrt{MK}$).</p>
+</article></section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the <div class="video-slot">...</div> below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section id="try-it" class="lsec"><h2>Try it</h2>
+    <div class="sim" data-sim="spring"></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">Two masses: $M_1$ connected to a wall by spring $K_1$, and to $M_2$ by spring $K_2$. Force $f$ acts on $M_2$. Write the equations.</div><details><summary>Show solution</summary><div class="sol">$M_1\ddot x_1 + K_1x_1 + K_2(x_1 - x_2) = 0$ and $M_2\ddot x_2 + K_2(x_2 - x_1) = f$.</div></details></li><li><div class="q">For $M = 1$ kg and $K = 10$ N/m, what damping gives critical damping?</div><details><summary>Show solution</summary><div class="sol">$B = 2\sqrt{MK} = 2\sqrt{10} = 6.32$ N·s/m.</div></details></li><li><div class="q">Write the force–voltage analogous circuit of $M\ddot x + B\dot x + Kx = f$.</div><details><summary>Show solution</summary><div class="sol">Series RLC circuit with $L = M$, $R = B$, $C = 1/K$, driven by voltage $v = f$; the loop charge $q$ corresponds to $x$.</div></details></li></ol></section>
+    <nav class="prevnext"><a class="pn prev" href="02-electrical-systems.html"><small>← Lesson 2</small>Models of electrical systems</a><a class="pn next" href="04-block-diagrams.html"><small>Lesson 4 →</small>Block diagram reduction</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+<script src="../../assets/js/sims.js"></script>
+</body>
+</html>
