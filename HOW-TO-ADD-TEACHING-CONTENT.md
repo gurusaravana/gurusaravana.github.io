@@ -42,6 +42,7 @@ These simulations are built in and work on any course page:
 | `<div class="sim" data-sim="second-order"></div>` | Step response of a second-order system (damping ratio and natural frequency sliders) |
 | `<div class="sim" data-sim="pid"></div>` | PID controller tuning on a process with dead time (Kp, Ki, Kd sliders) |
 | `<div class="sim" data-sim="spring"></div>` | Animated mass–spring–damper with a live displacement plot |
+| `<div class="sim" data-sim="pendulum"></div>` | Damped pendulum you can drag, with a live phase portrait (gravity, length, damping sliders) |
 
 On a course page that has no simulations yet, the simulations section is switched off with two "delete this line" notes.
 Delete those two lines (the one starting with `<!-- To show live simulations` and the one saying `delete this line too -->`), then put the simulation lines you want inside the section.
@@ -82,3 +83,9 @@ GitHub only accepts files up to 25 MB through the website, so put long videos on
 3. In `index.html`, find the Teaching section and copy one course line, changing the name and the link to `courses/my-new-course.html`.
 
 If anything goes wrong, nothing is lost: GitHub keeps every earlier version. Just ask Claude to fix it.
+
+---
+
+## 5. Change the website colours
+
+All colours are at the top of `assets/css/style.css` (the lines starting with `:root`). For example, change `--accent:#0077b6` to another colour code to change the blue used for links and highlights.
