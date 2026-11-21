@@ -1,4 +1,0 @@
-User-agent: *
-Disallow:
-
-Sitemap: https://gurusaravana.github.io/sitemap.xml
