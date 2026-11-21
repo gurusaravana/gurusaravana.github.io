@@ -12,6 +12,7 @@
         <div class="sim" data-sim="second-order"></div>
         <div class="sim" data-sim="pid"></div>
         <div class="sim" data-sim="spring"></div>
+        <div class="sim" data-sim="pendulum"></div>
 
   C) Add a YouTube video or an online simulation (PhET, GeoGebra, MATLAB Online...):
         <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div>
@@ -26,22 +27,24 @@
 <meta name="description" content="Analysis and design of control systems with nonlinear dynamics.">
 <link rel="icon" href="../assets/img/favicon1.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
 <header class="nav"><div class="wrap">
   <a class="brand" href="../index.html">S. Gurusamy</a>
-  <nav class="links"><a href="../index.html">Home</a><a href="../index.html#teaching">Courses</a><a href="#materials">Materials</a></nav>
+  <nav class="links"><a href="../index.html">Home</a><a href="../index.html#teaching">Courses</a><a href="#materials">Materials</a><a href="#simulations">Simulations</a></nav>
   <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
 </div></header>
-<main class="wrap">
+<div class="band course-band"><div class="wrap">
   <div class="crumb"><a href="../index.html#teaching">← Teaching</a></div>
   <div class="course-head">
     <div class="eyebrow">Postgraduate course · FTI (EACT 633)</div>
     <h1>Nonlinear Control</h1>
     <p>Analysis and design of control systems with nonlinear dynamics.</p>
   </div>
+</div></div>
+<main class="wrap">
   <section id="materials">
     <h2>Course materials</h2>
     <ul class="materials">
@@ -49,12 +52,11 @@
     </ul>
     <p class="note">Materials for this course will be added soon.</p>
   </section>
-  <!-- To show live simulations on this course, delete this line and the matching one below
   <section id="simulations">
     <h2>Live simulations &amp; animations</h2>
-    <div class="sim" data-sim="second-order"></div>
+    <p class="note" style="margin-top:-10px;margin-bottom:20px">The pendulum is the classic nonlinear system: small swings look linear, large ones do not. Explore equilibria, limit behaviour and the separatrix in the phase plane.</p>
+    <div class="sim" data-sim="pendulum"></div>
   </section>
-  delete this line too -->
 </main>
 <footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../index.html">Home</a></div></footer>
 <script src="../assets/js/site.js"></script>
