@@ -21,7 +21,7 @@
   Simulation: change data-sim="..." (choices: tank, first-order, second-order, frequency, pid, spring, pendulum, rlc, rc-ladder, two-mass, laplace).
 -->
 <header class="nav"><div class="wrap">
-  <a class="brand" href="../../index.html">S. Gurusamy</a>
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
   <nav class="links"><a href="../control-system-engineering.html">Course home</a><a href="../control-system-engineering/syllabus.html">Syllabus</a><a href="../control-system-engineering/schedule.html">Schedule</a><a href="../control-system-engineering.html#lessons">Lessons</a><a href="../../index.html#teaching">All courses</a></nav>
   <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
 </div></header>
@@ -47,6 +47,8 @@
 
 <h3>Worked example 1: series RLC circuit (classical method)</h3>
 <p>Find $V_C(s)/V(s)$ for a series RLC circuit driven by $v(t)$.</p>
+<figure class="diagram"><img src="../../assets/img/diagrams/rlc-series.svg" alt="Series RLC circuit: voltage source v(t), resistor R, inductor L and capacitor C in one loop, with output voltage v_C across the capacitor" loading="lazy"><figcaption>Series RLC circuit. One loop current $i(t)$ flows through $R$, $L$ and $C$; the output is the capacitor voltage $v_C(t)$.</figcaption></figure>
+
 <ol><li>KVL: $L\dfrac{di}{dt} + Ri + \dfrac1C\displaystyle\int_0^t i\,d\tau = v(t)$.</li>
 <li>Use charge, $i = dq/dt$: $L\ddot q + R\dot q + \dfrac1C q = v(t)$.</li>
 <li>Use $q = Cv_C$: $LC\ddot v_C + RC\dot v_C + v_C = v(t)$.</li>
@@ -86,6 +88,9 @@
 <h3>Armature-controlled DC motor</h3>
 <p class="eq">$$\frac{\Omega(s)}{V_a(s)} = \frac{K_t}{(L_as + R_a)(Js + B) + K_tK_b}$$</p>
 </article></section>
+    <!-- REAL-WORLD EXAMPLES: to add one, copy a <div class="card">...</div> block and change the text. -->
+    <section class="lsec" id="real-world"><h2>Real-world examples</h2>
+    <div class="examples"><div class="card"><h3>Output filter of a power converter</h3><p>A buck (step-down) DC-DC converter, as in a laptop charger or a solar charge controller, ends in an inductor and a capacitor feeding the load resistance. That is an RLC circuit, so its output can overshoot and ring after a load step, and the converter's controller is designed around this second-order model.</p></div><div class="card"><h3>Inverter LC filter</h3><p>Solar and UPS inverters switch at high frequency and use an LC filter to give a smooth 50 Hz sine wave. Designers place the filter's natural frequency $1/\sqrt{LC}$ well below the switching frequency and add damping so it does not resonate.</p></div><div class="card"><h3>Radio tuning circuit</h3><p>An RLC circuit passes signals near $\omega_n = 1/\sqrt{LC}$ and blocks others. Turning the tuning knob changes $C$, which moves $\omega_n$ to the station you want. Here a low damping ratio (sharp resonance) is the goal.</p></div><div class="card"><h3>DC motor drive</h3><p>The armature of a DC motor is an R–L circuit coupled to a mechanical load. The model at the end of these notes is used to tune speed controllers for electric vehicles, conveyors and robot joints.</p></div></div></section>
     <section class="lsec"><h2>Lecture</h2>
     <!-- LECTURE VIDEO: replace the <div class="video-slot">...</div> below with
      <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->

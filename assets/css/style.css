@@ -324,3 +324,11 @@ ul.lessons .t{flex:1;min-width:160px;font-weight:500}
 .pmeta dd{margin:0}
 .project .plinks{margin-top:auto}
 @media (max-width:800px){.rareas{grid-template-columns:1fr}}
+
+/* ===== Lesson diagrams and real-world example cards ===== */
+.diagram{margin:20px 0 24px;text-align:center}
+.diagram img{max-width:100%;height:auto;background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px;box-sizing:border-box}
+.diagram figcaption{font-size:14px;color:var(--muted);margin-top:8px;text-align:left}
+.examples{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.examples .card h3{font-size:16.5px;margin:0 0 6px}
+.examples .card p{margin:0;font-size:15px;color:var(--muted)}
