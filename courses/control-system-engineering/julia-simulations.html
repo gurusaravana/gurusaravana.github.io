@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Julia simulations · Control System Engineering</title>
+<meta name="description" content="Control system simulations in Julia: the code and interactive plots, notebook style, for Control System Engineering (EEE2510).">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],ignoredTags:['script','noscript','style','textarea','pre','code']})"></script>
+</head>
+<body>
+<!--
+  JULIA SIMULATIONS (notebook style) for Control System Engineering.
+
+  Each example is one <section class="nb" ...> block below. Inside it:
+    * the text goes in <div class="nb-md notes"> (LaTeX between $ ... $ works),
+    * the Julia code goes between <code class="julia"> and </code>.
+      Write < as &lt; and > as &gt; inside the code. Everything else can be typed as normal.
+  The sliders and the interactive plot are made by assets/js/julia-notebook.js.
+  To add a new example: copy the template at the end of this file (see HOW-TO-ADD-TEACHING-CONTENT.md, section 10).
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
+  <nav class="links"><a href="../control-system-engineering.html">Course home</a><a href="syllabus.html">Syllabus</a><a href="schedule.html">Schedule</a><a href="../control-system-engineering.html#lessons">Lessons</a><a href="julia-simulations.html">Julia</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../control-system-engineering.html">← Control System Engineering</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Control System Engineering · EEE2510 · Simulation lab</div>
+    <h1>Simulating control systems with Julia</h1>
+    <p>Six worked examples laid out like a Jupyter notebook: the Julia code, its printed output and the plot. Move the sliders and both the code and the plot change, right here in the browser. Then copy the code or download the notebook and run it yourself.</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>In this notebook</summary><ol><li><a href="#setup"><span class="n">0</span>Set up Julia</a></li><li><a href="#first-order"><span class="n">1</span>First-order step response</a></li><li><a href="#second-order"><span class="n">2</span>Second-order response and specifications</a></li><li><a href="#pid"><span class="n">3</span>PID control of a third-order plant</a></li><li><a href="#root-locus"><span class="n">4</span>Root locus</a></li><li><a href="#bode"><span class="n">5</span>Bode plot, gain margin and phase margin</a></li><li><a href="#tank"><span class="n">6</span>Tank level control with a PI controller (nonlinear)</a></li></ol></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <section class="lsec" id="setup" data-ipynb>
+      <div class="objectives card"><h3>By the end of this notebook you can</h3><ul><li>Build transfer functions in Julia and simulate their step response</li><li>Measure overshoot, settling time and steady-state error from code</li><li>Tune a PID controller and see its effect</li><li>Draw a root locus and a Bode plot and read stability margins</li><li>Write your own simulation loop for a nonlinear system</li></ul></div>
+      <h2>Set up Julia (once)</h2>
+      <div class="notes">
+        <p>Julia is a free, fast language for engineering and science. The plots on this page already work without it, but to run and change the code yourself:</p>
+        <ol class="nb-steps">
+          <li>Install Julia from <a href="https://julialang.org/downloads/" target="_blank" rel="noopener">julialang.org/downloads</a>.</li>
+          <li>Open Julia and run the cell below once. It installs the control toolbox, the plotting package and Jupyter support (it takes a few minutes the first time).</li>
+          <li>Download the notebook with the button below. In Julia run <code>using IJulia; notebook()</code>, open the file and press <b>Shift + Enter</b> to run each cell. You can also paste any example into VS Code with the Julia extension.</li>
+        </ol>
+      </div>
+      <div class="nb-cell"><div class="nb-prompt">In [0]:</div><div class="nb-code" data-file="00_setup.jl"><pre><code class="julia">using Pkg
+Pkg.add(["ControlSystems", "Plots", "IJulia"])   # run once
+
+using Plots
+plotly()      # optional: zoomable plots in Jupyter, like the ones on this page</code></pre></div></div>
+      <p class="nb-actions"><a class="nb-dl" href="#" data-download-notebook="control-systems-julia.ipynb">⬇ Download all examples as a Jupyter notebook (.ipynb)</a></p>
+      <p class="note">The notebook keeps the slider values you have chosen on this page. On this page the plots are computed in your browser with the same equations, so the numbers match what Julia prints.</p>
+    </section>
+
+    <!-- ===== EXAMPLE 1: First-order step response ===== -->
+    <section class="nb lsec" id="first-order" data-nb="first-order" data-ipynb>
+      <h2>1 · First-order step response</h2>
+      <div class="nb-md notes">
+<p>A first-order system $G(s) = \dfrac{K}{\tau s + 1}$ models an RC circuit, a thermometer or a small tank. Its step response is $y(t) = K\left(1 - e^{-t/\tau}\right)$: it reaches 63.2&nbsp;% of the final value $K$ at $t = \tau$ and settles (within 2&nbsp;%) after about $4\tau$.</p>
+<p>The code builds the transfer function with <code>tf</code>, simulates it with <code>step</code> and plots the result.</p>
+      </div>
+      <div class="nb-cell"><div class="nb-prompt">In [1]:</div><div class="nb-code" data-file="01_first_order.jl"><pre><code class="julia">using ControlSystems, Plots
+
+K = 2.0        # steady-state gain
+τ = 1.5        # time constant (s)   type \tau then press Tab
+
+G = tf(K, [τ, 1])              # G(s) = K / (τs + 1)
+t = 0:0.02:10                  # time from 0 to 10 s
+res = step(G, t)               # unit-step response
+y = res.y[1, :]
+
+println(&quot;Final value   = &quot;, K)
+println(&quot;Rise time     ≈ &quot;, round(2.2τ, digits = 2), &quot; s&quot;)
+println(&quot;Settling (2%) ≈ &quot;, round(4τ, digits = 2), &quot; s&quot;)
+
+plot(t, y, lw = 2, label = &quot;y(t)&quot;, xlabel = &quot;t (s)&quot;, ylabel = &quot;y&quot;,
+     title = &quot;First-order step response&quot;)
+hline!([0.632K], ls = :dash, label = &quot;63.2 % of K&quot;)
+vline!([τ], ls = :dot, label = &quot;t = τ&quot;)</code></pre></div></div>
+      <div class="nb-cell nb-out"><div class="nb-prompt">Out[1]:</div><div class="nb-outbox"></div></div>
+      <div class="notes"><p class="tip">Double $\tau$ and check that the curve now takes twice as long to reach the dashed 63.2&nbsp;% line. Does $K$ change the speed?</p></div>
+      <p class="nb-link">Theory: <a href="07-first-order-response.html">Lesson 7</a></p>
+    </section>
+    <!-- ===== EXAMPLE 2: Second-order response and specifications ===== -->
+    <section class="nb lsec" id="second-order" data-nb="second-order" data-ipynb>
+      <h2>2 · Second-order response and specifications</h2>
+      <div class="nb-md notes">
+<p>The standard second-order system is $G(s) = \dfrac{\omega_n^2}{s^2 + 2\zeta\omega_n s + \omega_n^2}$. For $0 &lt; \zeta &lt; 1$ (underdamped) the time-domain specifications are</p>
+<div class="eq">$$M_p = e^{-\zeta\pi/\sqrt{1-\zeta^2}}, \qquad t_p = \frac{\pi}{\omega_d}, \qquad t_s \approx \frac{4}{\zeta\omega_n}, \qquad \omega_d = \omega_n\sqrt{1-\zeta^2}$$</div>
+<p>The code computes them with these formulas and compares the peak with the simulated one.</p>
+      </div>
+      <div class="nb-cell"><div class="nb-prompt">In [2]:</div><div class="nb-code" data-file="02_second_order.jl"><pre><code class="julia">using ControlSystems, Plots
+
+ωn = 2.0       # natural frequency (rad/s)   type \omega Tab, then n
+ζ  = 0.4       # damping ratio               type \zeta Tab
+
+G = tf(ωn^2, [1, 2ζ*ωn, ωn^2])     # standard second-order system
+t = 0:0.01:10
+y = step(G, t).y[1, :]
+
+if 0 &lt; ζ &lt; 1                       # formulas hold for an underdamped system
+    ωd = ωn * sqrt(1 - ζ^2)
+    println(&quot;Peak overshoot Mp = &quot;, round(100 * exp(-ζ*π/sqrt(1 - ζ^2)), digits = 1), &quot; %&quot;)
+    println(&quot;Peak time      tp = &quot;, round(π/ωd, digits = 2), &quot; s&quot;)
+    println(&quot;Settling time  ts ≈ &quot;, round(4/(ζ*ωn), digits = 2), &quot; s  (2 % band)&quot;)
+end
+println(&quot;Measured peak     = &quot;, round(maximum(y), digits = 3))
+
+plot(t, y, lw = 2, label = &quot;ζ = $ζ&quot;, xlabel = &quot;t (s)&quot;, ylabel = &quot;y&quot;,
+     title = &quot;Second-order step response&quot;)
+hline!([0.98, 1.02], ls = :dash, color = :gray, label = &quot;±2 % band&quot;)</code></pre></div></div>
+      <div class="nb-cell nb-out"><div class="nb-prompt">Out[2]:</div><div class="nb-outbox"></div></div>
+      <div class="notes"><p class="tip">Set $\zeta = 0.05$, then $0.7$, then $1.5$. Watch the overshoot disappear and the system become sluggish. Which $\zeta$ settles fastest?</p></div>
+      <p class="nb-link">Theory: <a href="08-second-order-response.html">Lesson 8</a></p>
+    </section>
+    <!-- ===== EXAMPLE 3: PID control of a third-order plant ===== -->
+    <section class="nb lsec" id="pid" data-nb="pid" data-ipynb>
+      <h2>3 · PID control of a third-order plant</h2>
+      <div class="nb-md notes">
+<p>The plant $G(s) = \dfrac{1}{(s+1)^3}$ is controlled by a PID controller $C(s) = K_p + \dfrac{K_i}{s} + K_d s = \dfrac{K_d s^2 + K_p s + K_i}{s}$ in a unity-feedback loop. <code>feedback(C * G)</code> gives the closed loop $\dfrac{CG}{1 + CG}$.</p>
+<p>The dashed curve is P-only control with the same $K_p$, so you can see what the integral and derivative terms add.</p>
+      </div>
+      <div class="nb-cell"><div class="nb-prompt">In [3]:</div><div class="nb-code" data-file="03_pid.jl"><pre><code class="julia">using ControlSystems, Plots
+
+G = tf(1, [1, 3, 3, 1])        # plant: G(s) = 1/(s + 1)^3
+
+Kp = 2.0                       # proportional gain
+Ki = 0.5                       # integral gain
+Kd = 1.0                       # derivative gain
+
+C = tf([Kd, Kp, Ki], [1, 0])   # PID: C(s) = Kp + Ki/s + Kd·s
+T = feedback(C * G)            # closed loop: CG / (1 + CG)
+t = 0:0.05:30
+y  = step(T, t).y[1, :]
+yP = step(feedback(Kp * G), t).y[1, :]    # P only, for comparison
+
+println(&quot;Peak value         = &quot;, round(maximum(y), digits = 3))
+println(&quot;Steady-state error = &quot;, round(1 - y[end], digits = 3))
+println(&quot;Stable? &quot;, all(real.(poles(T)) .&lt; 0))
+
+plot(t, y, lw = 2, label = &quot;PID&quot;, xlabel = &quot;t (s)&quot;, ylabel = &quot;y&quot;,
+     title = &quot;PID control of 1/(s+1)³&quot;, ylims = (-0.5, 2.5))
+plot!(t, yP, ls = :dash, label = &quot;P only (Kp = $Kp)&quot;)
+hline!([1], color = :gray, ls = :dot, label = &quot;set-point&quot;)</code></pre></div></div>
+      <div class="nb-cell nb-out"><div class="nb-prompt">Out[3]:</div><div class="nb-outbox"></div></div>
+      <div class="notes"><p class="tip">Set $K_i = 0$ and $K_d = 0$: a steady-state error appears. Add a little $K_i$ to remove it, then use $K_d$ to cut the overshoot. Push $K_p$ to 10 with $K_d = 0$ and the loop goes unstable.</p></div>
+      <p class="nb-link">Theory: <a href="10-p-pi-pid-controllers.html">Lesson 10</a></p>
+    </section>
+    <!-- ===== EXAMPLE 4: Root locus ===== -->
+    <section class="nb lsec" id="root-locus" data-nb="root-locus" data-ipynb>
+      <h2>4 · Root locus</h2>
+      <div class="nb-md notes">
+<p>For the loop $KG(s)H(s) = \dfrac{K}{s(s+2)(s+4)}$ from the Lesson 12 exercises, the root locus shows where the closed-loop poles go as $K$ grows. The pink dots are the poles for the gain you choose, and the right-hand plot is the closed-loop step response for that gain.</p>
+<p>From the Routh array, the locus crosses the $j\omega$ axis at $K = 48$, $\omega = \sqrt{8} = 2.83$ rad/s.</p>
+      </div>
+      <div class="nb-cell"><div class="nb-prompt">In [4]:</div><div class="nb-code" data-file="04_root_locus.jl"><pre><code class="julia">using ControlSystems, Plots
+
+G = tf(1, [1, 6, 8, 0])          # G(s)H(s) = 1 / (s(s + 2)(s + 4))
+K = 10.0                         # controller gain
+
+cl = poles(feedback(K * G))      # closed-loop poles for this K
+println(&quot;Closed-loop poles: &quot;, round.(cl, digits = 3))
+println(all(real.(cl) .&lt; 0) ? &quot;Stable&quot; : &quot;Unstable&quot;)
+
+p1 = rlocusplot(G)               # the whole root locus, K from 0 to ∞
+scatter!(p1, real.(cl), imag.(cl), ms = 8, label = &quot;poles at K = $K&quot;)
+
+t = 0:0.05:20
+p2 = plot(t, step(feedback(K * G), t).y[1, :], lw = 2, label = &quot;y(t)&quot;,
+          xlabel = &quot;t (s)&quot;, title = &quot;Closed-loop step response&quot;)
+plot(p1, p2, layout = (1, 2), size = (900, 400))</code></pre></div></div>
+      <div class="nb-cell nb-out"><div class="nb-prompt">Out[4]:</div><div class="nb-outbox"></div></div>
+      <div class="notes"><p class="tip">Move $K$ slowly from 1 to 80. Find the gain where the two poles leave the real axis (the break-away point near $s = -0.85$), and the gain where they cross into the right half-plane.</p></div>
+      <p class="nb-link">Theory: <a href="12-root-locus.html">Lesson 12</a></p>
+    </section>
+    <!-- ===== EXAMPLE 5: Bode plot, gain margin and phase margin ===== -->
+    <section class="nb lsec" id="bode" data-nb="bode" data-ipynb>
+      <h2>5 · Bode plot, gain margin and phase margin</h2>
+      <div class="nb-md notes">
+<p>For the open loop $G(s) = \dfrac{K}{s(s+1)(s+5)}$, <code>margin</code> finds the gain margin (how much the gain can rise before instability, read at the phase crossover where the phase is $-180°$) and the phase margin (read at the gain crossover where $|G| = 0$ dB). <code>marginplot</code> draws the Bode plot with both margins marked.</p>
+      </div>
+      <div class="nb-cell"><div class="nb-prompt">In [5]:</div><div class="nb-code" data-file="05_bode.jl"><pre><code class="julia">using ControlSystems, Plots
+
+K = 10.0
+G = tf(K, [1, 6, 5, 0])          # G(s) = K / (s(s + 1)(s + 5))
+
+wgm, gm, wpm, pm = margin(G)     # crossover frequencies and margins
+println(&quot;Gain margin  = &quot;, round(20log10(gm[1]), digits = 2), &quot; dB  at ω = &quot;, round(wgm[1], digits = 3), &quot; rad/s&quot;)
+println(&quot;Phase margin = &quot;, round(pm[1], digits = 2), &quot;°   at ω = &quot;, round(wpm[1], digits = 3), &quot; rad/s&quot;)
+
+w = exp10.(range(-2, 2, length = 500))   # frequencies from 0.01 to 100 rad/s
+marginplot(G, w)                         # Bode plot with the margins marked</code></pre></div></div>
+      <div class="nb-cell nb-out"><div class="nb-prompt">Out[5]:</div><div class="nb-outbox"></div></div>
+      <div class="notes"><p class="tip">Raise $K$ until the gain margin reaches 0 dB. You should find $K = 30$, the same critical gain that the Routh criterion gives for this loop.</p></div>
+      <p class="nb-link">Theory: <a href="13-bode-plots.html">Lesson 13</a></p>
+    </section>
+    <!-- ===== EXAMPLE 6: Tank level control with a PI controller (nonlinear) ===== -->
+    <section class="nb lsec" id="tank" data-nb="tank" data-ipynb>
+      <h2>6 · Tank level control with a PI controller (nonlinear)</h2>
+      <div class="nb-md notes">
+<p>The tank from Lesson 1 obeys $A\,\dfrac{dh}{dt} = q_{in} - k\sqrt{h}$, which is nonlinear, so instead of a transfer function we write the simulation loop ourselves with Euler steps. A PI controller sets the inflow, the valve can only open between 0 and 100&nbsp;%, and at $t = 100$ s the outlet opens 30&nbsp;% wider (a disturbance).</p>
+<p>This example uses plain Julia and <code>Plots</code> only: it shows how to code any model you can write as a differential equation.</p>
+      </div>
+      <div class="nb-cell"><div class="nb-prompt">In [6]:</div><div class="nb-code" data-file="06_tank_level.jl"><pre><code class="julia">using Plots
+
+r  = 2.0             # level set-point (m)
+Kp = 1.5             # proportional gain
+Ki = 0.1             # integral gain
+
+# Tank:  A dh/dt = q_in - k*sqrt(h)
+function simulate_tank(r, Kp, Ki; A = 2.0, k = 0.4, q_max = 1.0, dt = 0.05, t_end = 200.0)
+    t = 0:dt:t_end
+    h = zeros(length(t));  h[1] = 0.5     # start at 0.5 m
+    q = zeros(length(t))
+    integral = 0.0
+    for i in 1:length(t)-1
+        kout = t[i] &lt; 100 ? k : 1.3k      # at t = 100 s the outlet opens 30 % more
+        e = r - h[i]                      # error
+        u = Kp*e + Ki*integral            # PI controller
+        q[i] = clamp(u, 0, q_max)         # the valve only opens 0 to 100 %
+        if u == q[i]                      # anti-windup: integrate only when not saturated
+            integral += e*dt
+        end
+        h[i+1] = max(h[i] + dt*(q[i] - kout*sqrt(h[i]))/A, 0.0)   # Euler step
+    end
+    q[end] = q[end-1]
+    return t, h, q
+end
+
+t, h, q = simulate_tank(r, Kp, Ki)
+println(&quot;Level at t = 99 s : &quot;, round(h[findfirst(≥(99), t)], digits = 3), &quot; m&quot;)
+println(&quot;Final level       : &quot;, round(h[end], digits = 3), &quot; m&quot;)
+
+p1 = plot(t, h, lw = 2, label = &quot;level h&quot;, ylabel = &quot;h (m)&quot;, title = &quot;Tank level with PI control&quot;)
+hline!(p1, [r], ls = :dash, label = &quot;set-point&quot;)
+vline!(p1, [100], ls = :dot, color = :gray, label = &quot;disturbance&quot;)
+p2 = plot(t, q, lw = 2, color = :orange, label = &quot;inflow q_in&quot;, xlabel = &quot;t (s)&quot;, ylabel = &quot;q (m³/s)&quot;)
+plot(p1, p2, layout = (2, 1), size = (750, 550))</code></pre></div></div>
+      <div class="nb-cell nb-out"><div class="nb-prompt">Out[6]:</div><div class="nb-outbox"></div></div>
+      <div class="notes"><p class="tip">Set $K_i = 0$: after the disturbance the level settles below the set-point (offset). Turn $K_i$ back up and the integral action removes the offset. Raise $K_i$ to 0.5 and watch the level oscillate.</p></div>
+      <p class="nb-link">Theory: <a href="01-introduction.html">Lesson 1</a></p>
+    </section>
+    <!--
+    ===== TEMPLATE: copy from <section ...> to </section>, paste above this comment, then edit. =====
+    A new example without data-nb="..." shows the code only (no sliders or live plot).
+    <section class="nb lsec" id="my-example" data-ipynb>
+      <h2>7 · My new example</h2>
+      <div class="nb-md notes">
+        <p>What this example shows. Equations work: $G(s) = 1/(s+1)$.</p>
+      </div>
+      <div class="nb-cell"><div class="nb-prompt">In [7]:</div><div class="nb-code" data-file="07_my_example.jl"><pre><code class="julia">using ControlSystems, Plots
+G = tf(1, [1, 1])
+plot(step(G, 10))</code></pre></div></div>
+    </section>
+    -->
+    <nav class="prevnext"><a class="pn prev" href="../control-system-engineering.html#lessons"><small>← Course</small>All lessons</a><a class="pn next" href="../control-system-engineering.html#sims"><small>More →</small>Browser simulations</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+<script src="../../assets/vendor/plotly/plotly-basic.min.js"></script>
+<script src="../../assets/js/julia-notebook.js"></script>
+</body>
+</html>
