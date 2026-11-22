@@ -21,7 +21,7 @@
   Simulation: change data-sim="..." (choices: tank, first-order, second-order, frequency, pid, spring, pendulum, rlc, rc-ladder, two-mass, laplace).
 -->
 <header class="nav"><div class="wrap">
-  <a class="brand" href="../../index.html">S. Gurusamy</a>
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
   <nav class="links"><a href="../control-system-engineering.html">Course home</a><a href="../control-system-engineering/syllabus.html">Syllabus</a><a href="../control-system-engineering/schedule.html">Schedule</a><a href="../control-system-engineering.html#lessons">Lessons</a><a href="../../index.html#teaching">All courses</a></nav>
   <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
 </div></header>
@@ -53,11 +53,15 @@
 <p>A quick check: in the $s$-domain each equation reads (sum of impedances on this mass) × $X_k$ − (impedances shared with the other mass) × $X_j$ = applied force, just like mesh analysis.</p>
 
 <h3>Worked example 1: single mass–spring–damper</h3>
+<figure class="diagram"><img src="../../assets/img/diagrams/mass-spring-damper.svg" alt="A block of mass M on rollers, tied to a wall by a spring K and a damper B, pushed to the right by force f(t)" loading="lazy"><figcaption>Mass–spring–damper. The spring force $Kx$ and the damper force $B\dot x$ both oppose the motion $x(t)$ caused by the applied force $f(t)$.</figcaption></figure>
+
 <p class="eq">$$M\ddot x + B\dot x + Kx = f(t) \quad\Rightarrow\quad \frac{X(s)}{F(s)} = \frac{1}{Ms^2 + Bs + K}$$</p>
 <p class="tip">In the <a href="#sim-spring">mass–spring–damper animation</a>, set damping to zero for undamped oscillation, then raise it until the mass returns without overshoot: critical damping is $B = 2\sqrt{MK}$.</p>
 
 <h3>Worked example 2: two masses coupled by a spring and a damper</h3>
 <p>$M_1$ is tied to the wall by $K_1$ and $B_1$, coupled to $M_2$ by $K$ and $B$; $M_2$ has friction $B_2$ and is pushed by $f(t)$. Find $X(s)/F(s)$ for the displacement $x$ of $M_2$.</p>
+
+<figure class="diagram"><img src="../../assets/img/diagrams/two-mass-system.svg" alt="Two masses on rollers: M1 tied to the wall by K1 and B1, coupled to M2 by K and B; M2 is pushed by f(t)" loading="lazy"><figcaption>Two-mass system of worked example 2. Each mass is one node: write one force balance for $M_1$ and one for $M_2$.</figcaption></figure>
 <p>Node 1: $M_1\ddot x_1 + B_1\dot x_1 + B(\dot x_1 - \dot x) + K_1x_1 + K(x_1 - x) = 0$</p>
 <p>Node 2: $M_2\ddot x + B_2\dot x + B(\dot x - \dot x_1) + K(x - x_1) = f(t)$</p>
 <p class="eq">$$\begin{aligned}\left[M_1s^2 + (B + B_1)s + (K_1 + K)\right]X_1 - (Bs + K)X &= 0\\ -(Bs + K)X_1 + \left[M_2s^2 + (B + B_2)s + K\right]X &= F\end{aligned}$$</p>
@@ -86,6 +90,9 @@
 <tr><td>Displacement $x$</td><td>Charge $q$</td><td>Flux linkage $\psi$</td></tr></table>
 <p>So the single mass–spring–damper behaves exactly like the series RLC circuit of Lesson 3.</p>
 </article></section>
+    <!-- REAL-WORLD EXAMPLES: to add one, copy a <div class="card">...</div> block and change the text. -->
+    <section class="lsec" id="real-world"><h2>Real-world examples</h2>
+    <div class="examples"><div class="card"><h3>Car suspension</h3><p>Each wheel of a car is a mass–spring–damper: the coil spring is $K$, the shock absorber is $B$ and a quarter of the car body is $M$. Engineers model the body and the wheel as two masses (a quarter-car model, much like worked example 2) to trade comfort against road grip.</p></div><div class="card"><h3>Door closer</h3><p>A hydraulic door closer is a spring with a damper. It is set close to critical damping, $B \approx 2\sqrt{MK}$, so the door shuts quickly without slamming or bouncing.</p></div><div class="card"><h3>Washing machine and machine mounts</h3><p>The drum of a washing machine hangs on springs with friction dampers. Motors, pumps and generators sit on rubber mounts for the same reason: to stop vibration reaching the floor.</p></div><div class="card"><h3>Tall buildings and bridges</h3><p>Some skyscrapers carry a very large tuned mass damper near the top: a heavy mass on springs and dampers that swings against the building and reduces sway in wind and earthquakes. It is a two-mass system like worked example 2.</p></div><div class="card"><h3>Measuring instruments</h3><p>The pointer of a moving-coil meter and the sensing mass of an accelerometer are mass–spring–damper systems. They are designed with a damping ratio near 0.6 to 0.7 so the reading settles fast with little overshoot.</p></div></div></section>
     <section class="lsec"><h2>Lecture</h2>
     <!-- LECTURE VIDEO: replace the <div class="video-slot">...</div> below with
      <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->

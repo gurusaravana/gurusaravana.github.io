@@ -21,7 +21,7 @@
   Simulation: change data-sim="..." (choices: tank, first-order, second-order, frequency, pid, spring, pendulum, rlc, rc-ladder, two-mass, laplace).
 -->
 <header class="nav"><div class="wrap">
-  <a class="brand" href="../../index.html">S. Gurusamy</a>
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
   <nav class="links"><a href="../control-system-engineering.html">Course home</a><a href="../control-system-engineering/syllabus.html">Syllabus</a><a href="../control-system-engineering/schedule.html">Schedule</a><a href="../control-system-engineering.html#lessons">Lessons</a><a href="../../index.html#teaching">All courses</a></nav>
   <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
 </div></header>
@@ -50,6 +50,9 @@
 <li><b>PD</b>: adds a zero, improving damping and speed; sensitive to noise.</li><li><b>PID</b>: combines all three; used in most industrial loops (motor speed, temperature, pressure, level).</li></ul>
 <p class="tip">In the simulation, start with $K_i = K_d = 0$ and raise $K_p$: the offset shrinks but stays. Add $K_i$ to remove it, then $K_d$ to reduce the overshoot.</p>
 </article></section>
+    <!-- REAL-WORLD EXAMPLES: to add one, copy a <div class="card">...</div> block and change the text. -->
+    <section class="lsec" id="real-world"><h2>Real-world examples</h2>
+    <div class="examples"><div class="card"><h3>Furnace and oven temperature (PID)</h3><p>Heat-treatment furnaces, plastic injection moulding barrels and lab incubators use PID temperature controllers. Integral action removes the steady offset, and derivative action helps because temperature responds slowly and would otherwise overshoot.</p></div><div class="card"><h3>Tank and boiler level (PI)</h3><p>Level loops in water treatment plants and boiler drums mostly use PI control. Derivative action is often left out because the level signal is noisy from waves and splashing.</p></div><div class="card"><h3>Flow control (PI)</h3><p>Flow loops in pipelines and chemical plants respond fast and the flow signal is noisy, so they nearly always use PI control with no derivative term.</p></div><div class="card"><h3>Motor speed (PI)</h3><p>Variable frequency drives on pumps, fans and conveyors run a PI speed loop. The integral term keeps the speed exactly at the setpoint when the load torque changes.</p></div><div class="card"><h3>Drone and robot position (PD or PID)</h3><p>A quadcopter holds its angle with fast PD or PID loops: derivative action damps the wobble. Robot joints use the same idea for position control.</p></div></div></section>
     <section class="lsec"><h2>Lecture</h2>
     <!-- LECTURE VIDEO: replace the <div class="video-slot">...</div> below with
      <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->

@@ -21,7 +21,7 @@
   Simulation: change data-sim="..." (choices: tank, first-order, second-order, frequency, pid, spring, pendulum, rlc, rc-ladder, two-mass, laplace).
 -->
 <header class="nav"><div class="wrap">
-  <a class="brand" href="../../index.html">S. Gurusamy</a>
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
   <nav class="links"><a href="../control-system-engineering.html">Course home</a><a href="../control-system-engineering/syllabus.html">Syllabus</a><a href="../control-system-engineering/schedule.html">Schedule</a><a href="../control-system-engineering.html#lessons">Lessons</a><a href="../../index.html#teaching">All courses</a></nav>
   <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
 </div></header>
@@ -51,11 +51,15 @@
 <tr><td>Cost</td><td>Low</td><td>Higher (sensor and controller)</td></tr></table>
 <p>For a closed loop with forward path $G(s)$ and feedback $H(s)$, the closed-loop transfer function is</p>
 <p class="eq">$$\frac{C(s)}{R(s)} = \frac{G(s)}{1 + G(s)H(s)}$$</p>
+<figure class="diagram"><img src="../../assets/img/diagrams/tank-level-control.svg" alt="Water tank with a level transmitter, a level controller and an inlet control valve forming a feedback loop" loading="lazy"><figcaption>A closed-loop level control system. The level transmitter (LT) measures the water level, the controller (LC) compares it with the setpoint, and the control valve changes the inflow until the error is zero.</figcaption></figure>
 <h3>Effects of feedback</h3>
 <ul><li>Reduces the sensitivity of the output to changes in $G(s)$.</li><li>Reduces the effect of disturbances and noise inside the loop.</li><li>Changes the speed of response and the bandwidth.</li><li>Reduces the overall gain, and can cause instability.</li></ul>
 <h3>Classification</h3>
 <p>Linear or nonlinear, time-invariant or time-varying, continuous or discrete (sampled-data), SISO or MIMO, and by application: regulators (hold a constant output) and servomechanisms (follow a changing reference).</p>
 </article></section>
+    <!-- REAL-WORLD EXAMPLES: to add one, copy a <div class="card">...</div> block and change the text. -->
+    <section class="lsec" id="real-world"><h2>Real-world examples</h2>
+    <div class="examples"><div class="card"><h3>Water level in a tank</h3><p>Overhead water tanks, boiler drums and process vessels hold their level with the loop in the figure above. The outflow (water used by people or the plant) is the disturbance, and the controller opens or closes the inlet valve to make up for it.</p></div><div class="card"><h3>Temperature of a room or an oven</h3><p>An air conditioner or an electric oven measures temperature with a thermistor or thermocouple and switches the compressor or heater. Simple units use on/off (thermostat) control; industrial furnaces for heat treatment use PID control to hold the temperature within a few degrees.</p></div><div class="card"><h3>Speed of a motor</h3><p>Conveyor belts, lifts and rolling mills keep motor speed constant as the load changes. A tachometer or encoder measures speed, and a drive (a variable frequency drive for AC motors, a chopper for DC motors) corrects the supply voltage.</p></div><div class="card"><h3>Generator voltage</h3><p>An automatic voltage regulator (AVR) measures the terminal voltage of a generator and adjusts the field current, so the voltage stays near its rated value when the load changes.</p></div><div class="card"><h3>Cruise control in a car</h3><p>The driver sets a speed; the controller measures the actual speed and opens or closes the throttle. Going uphill is a disturbance that the feedback loop rejects.</p></div><div class="card"><h3>Open loop in daily life</h3><p>A washing machine running a fixed timer cycle, a toaster and traffic lights on a fixed cycle do not measure their output. They are cheap and simple, but cannot correct for changes.</p></div></div></section>
     <section class="lsec"><h2>Lecture</h2>
     <!-- LECTURE VIDEO: replace the <div class="video-slot">...</div> below with
      <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->

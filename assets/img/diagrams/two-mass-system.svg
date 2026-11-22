@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 260" width="760" height="260" role="img" aria-label="Two masses: M1 tied to the wall by K1 and B1, coupled to M2 by K and B; M2 has friction B2 and is pushed by f(t)">
+<title>Two masses: M1 tied to the wall by K1 and B1, coupled to M2 by K and B; M2 has friction B2 and is pushed by f(t)</title>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker>
+<marker id="ai" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#4f46e5"/></marker>
+<pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#475569" stroke-width="1.5"/></pattern></defs>
+<rect width="760" height="260" fill="#ffffff"/>
+<g fill="none" stroke="#0f172a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" font-family="Inter, Arial, sans-serif">
+<rect x="34" y="40" width="16" height="160" fill="url(#hatch)" stroke="none"/><line x1="50" y1="40" x2="50" y2="200"/>
+<rect x="20" y="200" width="720" height="12" fill="url(#hatch)" stroke="none"/><line x1="20" y1="200" x2="740" y2="200"/>
+<polyline points="50.0,90.0 60.0,90.0 68.0,78.0 84.0,102.0 100.0,78.0 116.0,102.0 132.0,78.0 148.0,102.0 164.0,78.0 180.0,102.0 196.0,78.0 212.0,102.0 220.0,90.0 230.0,90.0"/>
+<path d="M50 150H104.0 M104.0 136V164 M104.0 136H158.0 M104.0 164H158.0 M140.0 140V160 M140.0 150H230"/>
+<rect x="230" y="60" width="100" height="120" rx="6" fill="#e0e7ff" stroke="#4f46e5"/>
+<text x="280.0" y="128.0" fill="#4f46e5" stroke="none" font-size="24" text-anchor="middle" font-weight="500" font-style="italic">M<tspan font-size="15" dy="5">1</tspan></text>
+<polyline points="330.0,90.0 340.0,90.0 347.5,78.0 362.5,102.0 377.5,78.0 392.5,102.0 407.5,78.0 422.5,102.0 437.5,78.0 452.5,102.0 467.5,78.0 482.5,102.0 490.0,90.0 500.0,90.0"/>
+<path d="M330 150H381.0 M381.0 136V164 M381.0 136H432.0 M381.0 164H432.0 M415.0 140V160 M415.0 150H500"/>
+<rect x="500" y="60" width="100" height="120" rx="6" fill="#e0e7ff" stroke="#4f46e5"/>
+<text x="550.0" y="128.0" fill="#4f46e5" stroke="none" font-size="24" text-anchor="middle" font-weight="500" font-style="italic">M<tspan font-size="15" dy="5">2</tspan></text>
+<circle cx="255" cy="190" r="9" fill="#fff"/><circle cx="305" cy="190" r="9" fill="#fff"/><circle cx="525" cy="190" r="9" fill="#fff"/><circle cx="575" cy="190" r="9" fill="#fff"/><path d="M600 120H680" stroke="#db2777" marker-end="url(#ar)"/><text x="662" y="108" fill="#db2777" stroke="none" font-size="17" text-anchor="middle" font-weight="500" font-style="italic">f(t)</text>
+<path d="M280 30V48 M280 39H330" stroke="#4f46e5" marker-end="url(#ai)"/><text x="340" y="44" fill="#4f46e5" stroke="none" font-size="17" text-anchor="start" font-weight="500" font-style="italic">x<tspan font-size="12" dy="4">1</tspan></text>
+<path d="M550 30V48 M550 39H600" stroke="#4f46e5" marker-end="url(#ai)"/><text x="610" y="44" fill="#4f46e5" stroke="none" font-size="17" text-anchor="start" font-weight="500" font-style="italic">x</text>
+<text x="140" y="66" fill="#0f172a" stroke="none" font-size="17" text-anchor="middle" font-weight="500" font-style="italic">K<tspan font-size="12" dy="4">1</tspan></text>
+<text x="122" y="128" fill="#0f172a" stroke="none" font-size="17" text-anchor="middle" font-weight="500" font-style="italic">B<tspan font-size="12" dy="4">1</tspan></text>
+<text x="415" y="66" fill="#0f172a" stroke="none" font-size="17" text-anchor="middle" font-weight="500" font-style="italic">K</text>
+<text x="400" y="128" fill="#0f172a" stroke="none" font-size="17" text-anchor="middle" font-weight="500" font-style="italic">B</text>
+<text x="550" y="232" fill="#475569" stroke="none" font-size="14" text-anchor="middle" font-weight="500" font-style="italic">friction B<tspan font-size="11" dy="4">2</tspan></text>
+</g></svg>

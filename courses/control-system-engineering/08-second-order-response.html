@@ -21,7 +21,7 @@
   Simulation: change data-sim="..." (choices: tank, first-order, second-order, frequency, pid, spring, pendulum, rlc, rc-ladder, two-mass, laplace).
 -->
 <header class="nav"><div class="wrap">
-  <a class="brand" href="../../index.html">S. Gurusamy</a>
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
   <nav class="links"><a href="../control-system-engineering.html">Course home</a><a href="../control-system-engineering/syllabus.html">Syllabus</a><a href="../control-system-engineering/schedule.html">Schedule</a><a href="../control-system-engineering.html#lessons">Lessons</a><a href="../../index.html#teaching">All courses</a></nav>
   <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
 </div></header>
@@ -54,6 +54,9 @@
 <ul><li>An extra left-half-plane <b>pole</b> slows the response and reduces overshoot. If it is more than five times farther from the axis than the dominant poles, it can be ignored.</li>
 <li>An extra left-half-plane <b>zero</b> speeds the response and increases overshoot.</li></ul>
 </article></section>
+    <!-- REAL-WORLD EXAMPLES: to add one, copy a <div class="card">...</div> block and change the text. -->
+    <section class="lsec" id="real-world"><h2>Real-world examples</h2>
+    <div class="examples"><div class="card"><h3>Lift (elevator) positioning</h3><p>A lift must stop level with the floor. Too little damping makes the car overshoot and bounce; too much makes the ride slow. Lift drives are tuned for small overshoot and a short settling time.</p></div><div class="card"><h3>Robot arm and CNC machine</h3><p>When a robot joint or a machine tool moves to a new position, overshoot means the tool cuts too deep or the gripper hits the part. These servo systems are usually tuned close to critical damping.</p></div><div class="card"><h3>Car suspension after a bump</h3><p>After a speed breaker the car body behaves like an underdamped second-order system. Worn shock absorbers lower $\zeta$, so the car keeps bouncing: a larger overshoot and a longer settling time.</p></div><div class="card"><h3>Voltage after a load change</h3><p>When a large load is switched on, the output voltage of a power supply dips and rings before settling. Datasheets quote this as overshoot and settling time, the same specifications as in these notes.</p></div></div></section>
     <section class="lsec"><h2>Lecture</h2>
     <!-- LECTURE VIDEO: replace the <div class="video-slot">...</div> below with
      <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->

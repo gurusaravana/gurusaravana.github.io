@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 250" width="540" height="250" role="img" aria-label="Series RLC circuit driven by a voltage source v(t), with the output taken across the capacitor">
+<title>Series RLC circuit driven by a voltage source v(t), with the output taken across the capacitor</title>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker>
+<marker id="ai" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#4f46e5"/></marker>
+<pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#475569" stroke-width="1.5"/></pattern></defs>
+<rect width="540" height="250" fill="#ffffff"/>
+<g fill="none" stroke="#0f172a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" font-family="Inter, Arial, sans-serif">
+<path d="M70 60H140"/><polyline points="140.0,60.0 148.0,60.0 151.7,48.0 159.1,72.0 166.5,48.0 173.9,72.0 181.3,48.0 188.7,72.0 196.1,48.0 203.5,72.0 210.9,48.0 218.3,72.0 222.0,60.0 230.0,60.0"/>
+<path d="M230 60H270"/><path d="M270 60 a12.5 12.5 0 0 1 25 0 a12.5 12.5 0 0 1 25 0 a12.5 12.5 0 0 1 25 0 a12.5 12.5 0 0 1 25 0"/><path d="M370 60H450V118 M430 118H470 M430 132H470 M450 132V200H70V142 M70 98V60"/><circle cx="70" cy="120" r="22" fill="#fff"/><text x="70" y="113" fill="#0f172a" stroke="none" font-size="16" text-anchor="middle" font-weight="500">+</text>
+<text x="70" y="138" fill="#0f172a" stroke="none" font-size="16" text-anchor="middle" font-weight="500">−</text>
+<path d="M95 40H125" stroke="#db2777" marker-end="url(#ar)"/><text x="110" y="32" fill="#db2777" stroke="none" font-size="15" text-anchor="middle" font-weight="500" font-style="italic">i(t)</text>
+<text x="185" y="38" fill="#0f172a" stroke="none" font-size="17" text-anchor="middle" font-weight="500" font-style="italic">R</text>
+<text x="320" y="38" fill="#0f172a" stroke="none" font-size="17" text-anchor="middle" font-weight="500" font-style="italic">L</text>
+<text x="418" y="131" fill="#0f172a" stroke="none" font-size="17" text-anchor="end" font-weight="500" font-style="italic">C</text>
+<text x="36" y="126" fill="#0f172a" stroke="none" font-size="17" text-anchor="end" font-weight="500" font-style="italic">v(t)</text>
+<text x="490" y="112" fill="#4f46e5" stroke="none" font-size="16" text-anchor="middle" font-weight="500">+</text>
+<text x="490" y="148" fill="#4f46e5" stroke="none" font-size="16" text-anchor="middle" font-weight="500">−</text>
+<text x="500" y="131" fill="#4f46e5" stroke="none" font-size="17" text-anchor="start" font-weight="500" font-style="italic">v<tspan font-size="12" dy="4">C</tspan></text>
+<text x="270" y="236" fill="#475569" stroke="none" font-size="14" text-anchor="middle" font-weight="400">KVL:  L di/dt + R i + (1/C)∫ i dt = v(t)</text>
+</g></svg>
