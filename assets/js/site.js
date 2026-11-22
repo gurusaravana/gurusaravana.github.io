@@ -23,3 +23,12 @@ q.oninput=run;btns.forEach(function(b){b.onclick=function(){btns.forEach(functio
     box.addEventListener('click',function(e){if(e.target!==big)close()});document.addEventListener('keydown',key);
   })});
 })();
+
+/* Research: clicking a topic fills the publication search with that word */
+(function(){
+  var q=document.getElementById('q');if(!q)return;
+  document.querySelectorAll('a[data-q]').forEach(function(a){a.addEventListener('click',function(){
+    var all=document.querySelector('.toolbar button[data-k="all"]');if(all)all.click();
+    q.value=a.dataset.q;q.oninput();
+  })});
+})();
