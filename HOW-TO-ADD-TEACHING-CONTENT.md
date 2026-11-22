@@ -148,3 +148,46 @@ On the home page, the Teaching section has **Current courses** (Presidency Unive
 ```html
 <li><a href="courses/control-systems.html">Control Systems</a></li>
 ```
+
+---
+
+## 9. Add a research project
+
+The Research section on the home page has **Research areas** and **Research projects**. Each project is one card with a title, status (Ongoing or Completed), period, funding, your role, a short description, and an optional photo and links.
+
+**Using VS Code and GitHub Desktop (on your computer)**
+
+1. In GitHub Desktop, click **Fetch origin** (or **Pull origin**) so your copy is up to date.
+2. Click **Open in Visual Studio Code**, then open `index.html`.
+3. Press Ctrl+F (Cmd+F on Mac) and search for `HOW TO ADD A RESEARCH PROJECT`. Just below it is a ready-made card.
+4. Copy the card, from `<article class="card project">` to `</article>`.
+5. Paste it on the line just below `<div class="projects">`, so the newest project shows first.
+6. Change the words. Delete any line you do not need, for example the photo, the Partners line or a link.
+   - For an ongoing project keep `<span class="rstatus on">Ongoing</span>` (it shows in green).
+   - For a finished one use `<span class="rstatus">Completed</span>`.
+7. **Optional photo:** copy the photo into the folder `assets/research/` (create it the first time) and put its file name after `src=`, for example `assets/research/2026-drone-lab.jpg`. Use no spaces in the name.
+8. Save the file. In GitHub Desktop, type a short summary such as "Add drone lab project", click **Commit to master**, then **Push origin**. The website updates in about two minutes.
+
+The ready-made card looks like this:
+
+```html
+<article class="card project">
+  <img class="pimg" src="assets/research/my-project.jpg" alt="Short description of the photo" loading="lazy">
+  <span class="rstatus on">Ongoing</span>
+  <h3>Title of the project</h3>
+  <dl class="pmeta">
+    <dt>Period</dt><dd>2026 – 2028</dd>
+    <dt>Funding</dt><dd>Name of the funding agency · amount (optional)</dd>
+    <dt>Role</dt><dd>Principal Investigator</dd>
+    <dt>Partners</dt><dd>Partner university or industry (optional)</dd>
+  </dl>
+  <p>Two or three sentences about the aim of the project and what it produced.</p>
+  <div class="plinks"><a href="https://example.com" target="_blank" rel="noopener">Project page</a></div>
+</article>
+```
+
+You can add any other line in the same style, such as `<dt>Students</dt><dd>2 MSc, 1 PhD</dd>`.
+
+**To change a project:** search for its title in `index.html` and edit the words.
+**To remove a project:** delete everything from its `<article` line to its `</article>` line.
+**To change a research area:** search for its title (for example `Autonomous vehicles and robotics`) and edit the text.

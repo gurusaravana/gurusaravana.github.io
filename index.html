@@ -14,7 +14,7 @@
 <header class="nav"><div class="wrap">
   <a class="brand" href="#top">S. Gurusamy</a>
   <nav class="links">
-    <a href="#about">About</a><a href="#publications">Publications</a><a href="#teaching">Teaching</a><a href="#experience">Experience</a><a href="#service">Service</a><a href="#gallery">Gallery</a><a href="#impact">Impact</a><a href="#contact">Contact</a>
+    <a href="#about">About</a><a href="#research">Research</a><a href="#publications">Publications</a><a href="#teaching">Teaching</a><a href="#experience">Experience</a><a href="#service">Service</a><a href="#gallery">Gallery</a><a href="#impact">Impact</a><a href="#contact">Contact</a>
   </nav>
   <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
 </div></header>
@@ -89,6 +89,89 @@
           <div><b>24</b><small>UG projects guided</small></div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section id="research">
+    <h2>Research</h2>
+    <p style="color:var(--muted);margin-top:-8px">Dr. Gurusamy's research applies optimisation, estimation and learning to the modelling and control of real engineering systems, from process plants and networked automation to autonomous vehicles and assistive robots. Click a topic below to see the related papers in the Publications list.</p>
+
+    <h3 class="teach-h">Research areas</h3>
+    <div class="rareas">
+      <div class="card rarea">
+        <span class="eyebrow">Area 01</span>
+        <h3>Metaheuristic optimisation for identification and tuning</h3>
+        <p>Genetic algorithms, differential evolution, the State Transition Algorithm and Jaya for nonlinear system identification and for tuning single and multivariable PID controllers. This was the subject of his Ph.D. thesis.</p>
+        <div class="rlinks"><a href="#publications" data-q="State Transition">State Transition Algorithm</a><a href="#publications" data-q="Genetic Algorithm">Genetic algorithms</a><a href="#publications" data-q="Differential Evolution">Differential evolution</a></div>
+      </div>
+      <div class="card rarea">
+        <span class="eyebrow">Area 02</span>
+        <h3>Advanced, adaptive and networked control</h3>
+        <p>Model reference adaptive control, model predictive control, fractional-order PID, cascade control of unstable processes with dead time, and control over networks with random communication delays.</p>
+        <div class="rlinks"><a href="#publications" data-q="Adaptive">Adaptive control</a><a href="#publications" data-q="Cascade">Cascade control</a><a href="#publications" data-q="Networked">Networked control</a></div>
+      </div>
+      <div class="card rarea">
+        <span class="eyebrow">Area 03</span>
+        <h3>Autonomous vehicles and robotics</h3>
+        <p>Path planning with nonlinear state estimation and infrastructure-to-vehicle communication, optimisation-based planning around moving obstacles, and sliding mode control for lower limb exoskeletons.</p>
+        <div class="rlinks"><a href="#publications" data-q="Path">Path planning</a><a href="#publications" data-q="Exoskeleton">Exoskeletons</a><a href="#publications" data-q="Vehicle">Electric vehicles</a></div>
+      </div>
+      <div class="card rarea">
+        <span class="eyebrow">Area 04</span>
+        <h3>AI, data-driven modelling and digital twins</h3>
+        <p>Machine learning and deep learning for forecasting, condition monitoring, cyber-physical systems and healthcare signals and images, building towards digital twins of engineering systems.</p>
+        <div class="rlinks"><a href="#publications" data-q="Learning">Machine &amp; deep learning</a><a href="#publications" data-q="Forecasting">Forecasting</a><a href="#publications" data-q="Classification">Classification</a></div>
+      </div>
+    </div>
+
+    <h3 class="teach-h">Research projects</h3>
+    <!--
+      HOW TO ADD A RESEARCH PROJECT (full guide: HOW-TO-ADD-TEACHING-CONTENT.md, section 9)
+      1. Copy the block below (from <article to </article>).
+      2. Paste it as the FIRST item inside <div class="projects"> (just below this note),
+         so the newest project appears first.
+      3. Change the words. Delete any line you do not need (for example the photo or a link).
+         For the status use  Ongoing  or  Completed  and keep  class="rstatus on"  only for Ongoing.
+      4. Optional photo: put it in the folder  assets/research/  and write its file name after src=.
+
+      <article class="card project">
+        <img class="pimg" src="assets/research/my-project.jpg" alt="Short description of the photo" loading="lazy">
+        <span class="rstatus on">Ongoing</span>
+        <h3>Title of the project</h3>
+        <dl class="pmeta">
+          <dt>Period</dt><dd>2026 – 2028</dd>
+          <dt>Funding</dt><dd>Name of the funding agency · amount (optional)</dd>
+          <dt>Role</dt><dd>Principal Investigator</dd>
+          <dt>Partners</dt><dd>Partner university or industry (optional)</dd>
+        </dl>
+        <p>Two or three sentences about the aim of the project and what it produced.</p>
+        <div class="plinks"><a href="https://example.com" target="_blank" rel="noopener">Project page</a><a href="assets/pdf/my-report.pdf">Report (PDF)</a></div>
+      </article>
+
+      To remove a project, delete everything from its <article line to its </article> line.
+    -->
+    <div class="projects">
+      <article class="card project">
+        <span class="rstatus">Completed</span>
+        <h3>Clean energy skills training for small-scale vendors in Ethiopia</h3>
+        <dl class="pmeta">
+          <dt>Period</dt><dd>2019 – 2025 (at FTI, Addis Ababa)</dd>
+          <dt>Funding</dt><dd>GIZ Energising Development (EnDev) Ethiopia</dd>
+          <dt>Role</dt><dd>Secured the grant and delivered the training</dd>
+        </dl>
+        <p>Technical training on electric stove standardisation and labelling, and on solar PV and solar thermal systems, for small-scale vendors. Part of the institute's technology transfer and community service work, supporting SDG 7 (affordable and clean energy).</p>
+      </article>
+      <article class="card project">
+        <span class="rstatus">Completed</span>
+        <h3>Metaheuristic algorithms for nonlinear system identification and multivariable PID tuning</h3>
+        <dl class="pmeta">
+          <dt>Period</dt><dd>2011 – 2017</dd>
+          <dt>Type</dt><dd>Doctoral research, Kalasalingam Academy of Research and Education</dd>
+          <dt>Role</dt><dd>Doctoral researcher</dd>
+        </dl>
+        <p>Developed and compared evolutionary and State Transition Algorithm based methods to identify nonlinear process models and to tune centralised and decentralised PID controllers for benchmark multivariable plants such as distillation columns.</p>
+        <div class="plinks"><a href="#publications" data-q="State Transition">Related papers</a></div>
+      </article>
     </div>
   </section>
 
