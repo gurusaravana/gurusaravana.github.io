@@ -216,3 +216,37 @@ Note: the sliders and live plot of the six built-in examples are worked out by `
 3. It appears with Copy and Download buttons, and is included in the downloadable notebook. (A live slider plot needs a small addition to the JavaScript; ask Claude.)
 
 **Running the code yourself:** install Julia from julialang.org, then in Julia run `using Pkg; Pkg.add(["ControlSystems", "Plots", "IJulia"])` once. Start Jupyter with `using IJulia; notebook()` and open the downloaded notebook.
+
+## 11. Show a Jupyter notebook on a page (read-only view)
+
+Students can read a whole Jupyter notebook (`.ipynb`) on the website, with its notes, equations, code and any saved plots, without installing anything or downloading the file. A **Download .ipynb** button sits at the top of the view, and every code cell has a **Copy code** button.
+
+The Julia notebook is already set up: `courses/control-system-engineering/julia-notebook.html` shows the file `courses/control-system-engineering/notebooks/control-systems-julia.ipynb`. The Julia simulations page links to it with **Read the notebook online (no download)**.
+
+**Show the plots too (recommended, once)**
+
+The notebook is saved without outputs, so for now the view shows text and code only. To add the plots:
+
+1. Open the notebook in Jupyter on your computer (`using IJulia; notebook()` in Julia) and choose **Run → Run All Cells** (or **Cell → Run All**).
+2. When every cell has finished, press **Save**.
+3. Copy the saved file over `courses/control-system-engineering/notebooks/control-systems-julia.ipynb` (keep the same name).
+4. In GitHub Desktop: **Commit to master**, then **Push origin**. The plots now appear on the website.
+
+**After you change an example on the Julia simulations page**
+
+Open the Julia simulations page in your browser, click **Download all examples as a Jupyter notebook**, and save the file over `notebooks/control-systems-julia.ipynb` as in step 3 (then run it again if you want the plots).
+
+**Add any other notebook (any course, Julia or Python)**
+
+1. Make a folder called `notebooks` next to the course page (for example `courses/control-system-engineering/notebooks/`) and put your `.ipynb` file in it.
+2. Make a copy of `julia-notebook.html` in the same folder as the page and give it a new name, for example `lab-3-notebook.html`.
+3. In the copy, change `data-src="notebooks/control-systems-julia.ipynb"` to your file name, and change the title and the first paragraph at the top.
+4. Link to the new page from the course page, for example `<a href="control-system-engineering/lab-3-notebook.html">Lab 3 notebook</a>`.
+5. Commit and push as usual.
+
+You can also put the view inside any existing page: add `<div class="ipynb" data-src="notebooks/my-notebook.ipynb"></div>` where it should appear and `<script src="../../assets/js/ipynb-view.js"></script>` just before `</body>`.
+
+Tips:
+- Keep notebooks small (under about 10 MB). Very large plots make the page slow.
+- Clear any cell output that shows private information before you save.
+- When you open a page straight from your computer (double-click), the browser blocks the notebook and shows a download link instead. It works on the live website. To preview locally, use the **Go Live** button of the VS Code "Live Server" extension.
