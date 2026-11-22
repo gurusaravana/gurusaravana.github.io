@@ -191,3 +191,28 @@ You can add any other line in the same style, such as `<dt>Students</dt><dd>2 MS
 **To change a project:** search for its title in `index.html` and edit the words.
 **To remove a project:** delete everything from its `<article` line to its `</article>` line.
 **To change a research area:** search for its title (for example `Autonomous vehicles and robotics`) and edit the text.
+
+---
+
+## 10. Julia simulations (notebook page)
+
+The Control System Engineering course has a notebook-style page, `courses/control-system-engineering/julia-simulations.html`. Each example shows the Julia code, what it prints and an interactive plot with sliders. The plots run in the visitor's browser, so nobody needs Julia installed to see them. Students can copy the code, download one example as a `.jl` file, or download all examples as one Jupyter notebook (`.ipynb`).
+
+**Change the text or the code of an example**
+
+1. In GitHub Desktop click **Fetch origin**, then **Open in Visual Studio Code**.
+2. Open `courses/control-system-engineering/julia-simulations.html`.
+3. Each example starts with a comment like `<!-- ===== EXAMPLE 3: PID control ... ===== -->`.
+   - The explanation is inside `<div class="nb-md notes">`. Equations work as on the lesson pages: `$ ... $`.
+   - The Julia code is between `<code class="julia">` and `</code>`. Type it normally, except write `<` as `&lt;` and `>` as `&gt;`.
+4. Save, then in GitHub Desktop **Commit to master** and **Push origin**.
+
+Note: the sliders and live plot of the six built-in examples are worked out by `assets/js/julia-notebook.js` with the same equations as the Julia code. If you change the model in the code (for example a different plant), the slider plot will not change with it. Ask Claude to update the live plot too.
+
+**Add a new example (code only)**
+
+1. Near the end of the file, search for `TEMPLATE`. Copy the example between the comment lines.
+2. Paste it just above the `TEMPLATE` comment, remove the `<!--` and `-->` around it, and change the number, title, text and code.
+3. It appears with Copy and Download buttons, and is included in the downloadable notebook. (A live slider plot needs a small addition to the JavaScript; ask Claude.)
+
+**Running the code yourself:** install Julia from julialang.org, then in Julia run `using Pkg; Pkg.add(["ControlSystems", "Plots", "IJulia"])` once. Start Jupyter with `using IJulia; notebook()` and open the downloaded notebook.

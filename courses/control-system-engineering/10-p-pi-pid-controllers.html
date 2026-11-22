@@ -59,6 +59,7 @@
     <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
     <section id="try-it" class="lsec"><h2>Try it</h2>
     <div class="sim" id="sim-pid" data-sim="pid"></div></section>
+    <p class="julia-link"><a href="julia-simulations.html#pid">▶ Julia version: see the code and an interactive plot</a></p>
     <section class="lsec" id="exercises"><h2>Exercises</h2>
     <ol class="exlist"><li><div class="q">A type-0 plant with steady-state gain 2 is under P control with gain 4. Find the step offset.</div><details><summary>Show solution</summary><div class="sol">$e_{ss} = 1/(1 + 8) = 0.111$.</div></details></li><li><div class="q">What does a PI controller do to the system type and why does that matter?</div><details><summary>Show solution</summary><div class="sol">It adds a pole at the origin, raising the type by one, so a type-0 plant becomes type 1 with zero step error.</div></details></li><li><div class="q">Find gains in the simulation that give under 10 % overshoot and IAE below 2.5.</div><details><summary>Show solution</summary><div class="sol">For example $K_p = 3$, $K_i = 0.5$, $K_d = 1$ gives almost no overshoot and IAE about 2.1.</div></details></li></ol></section>
     <nav class="prevnext"><a class="pn prev" href="09-steady-state-errors.html"><small>← Lesson 9</small>Steady-state errors and error constants</a><a class="pn next" href="11-routh-stability.html"><small>Lesson 11 →</small>Stability and the Routh criterion</a></nav>
