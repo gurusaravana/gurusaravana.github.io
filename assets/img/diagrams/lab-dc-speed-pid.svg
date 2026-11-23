@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 270" width="860" height="270" role="img" aria-label="DC motor speed control: PID controller on the speed error drives the armature, torque constant Kt, inertia and friction give the speed, back-emf Ke feeds back, and a load torque disturbance enters before the inertia">
+<title>DC motor speed control: PID controller on the speed error drives the armature, torque constant Kt, inertia and friction give the speed, back-emf Ke feeds back, and a load torque disturbance enters before the inertia</title>
+<defs><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker></defs>
+<rect width="860" height="270" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<text x="22" y="95" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">ω*</text>
+<path d="M42.0 90.0 L66.0 90.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<circle cx="80" cy="90" r="14" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M70.2 80.2L89.8 99.8M70.2 99.8L89.8 80.2" stroke="#0f172a" stroke-width="1.4"/>
+<text x="62" y="80" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">+</text>
+<text x="92" y="124" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">−</text>
+<path d="M94.0 90.0 L124.0 90.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<rect x="125.0" y="63.0" width="120" height="54" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+<text x="185" y="87.0" font-size="13" text-anchor="middle" fill="#0f172a">PID</text>
+<text x="185" y="103.0" font-size="13" text-anchor="middle" fill="#0f172a">Kₚ + Kᵢ/s + K<tspan dy="4" font-size="9">d</tspan><tspan dy="-4">​</tspan> s</text>
+<path d="M245.0 90.0 L296.0 90.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<text x="272" y="78" font-size="13" text-anchor="middle" fill="#db2777">Vₐ</text>
+<circle cx="310" cy="90" r="14" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M300.2 80.2L319.8 99.8M300.2 99.8L319.8 80.2" stroke="#0f172a" stroke-width="1.4"/>
+<text x="292" y="80" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">+</text>
+<text x="322" y="124" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">−</text>
+<path d="M324.0 90.0 L350.0 90.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<rect x="350.0" y="63.0" width="120" height="54" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+<text x="410" y="82" font-size="14" text-anchor="middle" fill="#0f172a">1</text>
+<path d="M359.0 88.0H461.0" stroke="#0f172a" stroke-width="1.4"/>
+<text x="410" y="104" font-size="14" text-anchor="middle" fill="#0f172a">0.0015s + 0.37</text>
+<path d="M470.0 90.0 L498.0 90.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<rect x="498.0" y="68.0" width="48" height="44" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+<text x="522" y="95.0" font-size="15" text-anchor="middle" fill="#0f172a">Kₜ</text>
+<path d="M546.0 90.0 L586.0 90.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<circle cx="600" cy="90" r="14" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M590.2 80.2L609.8 99.8M590.2 99.8L609.8 80.2" stroke="#0f172a" stroke-width="1.4"/>
+<text x="582" y="80" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">+</text>
+<text x="612" y="74" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">−</text>
+<path d="M600.0 30.0 L600.0 76.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<text x="612" y="30" font-size="13" text-anchor="start" fill="#db2777">T<tspan dy="4" font-size="9">L</tspan><tspan dy="-4">​</tspan> (load)</text>
+<path d="M614.0 90.0 L650.0 90.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<rect x="650.0" y="63.0" width="100" height="54" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+<text x="700" y="82" font-size="14" text-anchor="middle" fill="#0f172a">1</text>
+<path d="M678.2 88.0H721.8" stroke="#0f172a" stroke-width="1.4"/>
+<text x="700" y="104" font-size="14" text-anchor="middle" fill="#0f172a">Js + B</text>
+<path d="M750.0 90.0 L840.0 90.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<circle cx="790" cy="90" r="3.6" fill="#0f172a"/>
+<text x="822" y="78" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">ω</text>
+<path d="M790.0 90.0 L790.0 170.0 L535.0 170.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<rect x="485.0" y="150.0" width="50" height="40" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+<text x="510" y="175.0" font-size="15" text-anchor="middle" fill="#0f172a">Kₑ</text>
+<path d="M485.0 170.0 L310.0 170.0 L310.0 104.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<path d="M790.0 170.0 L790.0 230.0 L80.0 230.0 L80.0 104.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<text x="440" y="222" font-size="13" text-anchor="middle" fill="#475569">tachogenerator (speed sensor)</text>
+<text x="430" y="260" font-size="13" text-anchor="middle" fill="#475569">Example values: same motor as Experiment 8 (Kₜ = 0.5, Kₑ = 0.5, 1/J = 125) plus a small friction B</text>
+</g>
+</svg>

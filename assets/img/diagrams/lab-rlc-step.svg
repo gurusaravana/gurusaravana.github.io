@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 260" width="600" height="260" role="img" aria-label="Series RLC circuit driven by a square-wave generator; the output voltage across the capacitor goes to the oscilloscope">
+<title>Series RLC circuit driven by a square-wave generator; the output voltage across the capacitor goes to the oscilloscope</title>
+<defs><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker></defs>
+<rect width="600" height="260" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<path d="M70.0 60.0 L120.0 60.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<path d="M120.0 60.0 L128.0 60.0 L131.1 50.4 L137.2 69.6 L143.4 50.4 L149.6 69.6 L155.8 50.4 L161.9 69.6 L168.1 50.4 L174.2 69.6 L180.4 50.4 L186.6 69.6 L192.8 50.4 L198.9 69.6 L202.0 60.0 L210.0 60.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<text x="165" y="40" font-size="15" text-anchor="middle" fill="#0f172a">R</text>
+<path d="M210.0 60.0 L260.0 60.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<path d="M260 60H268 a10.50 10.50 0 0 1 21.00 0 a10.50 10.50 0 0 1 21.00 0 a10.50 10.50 0 0 1 21.00 0 a10.50 10.50 0 0 1 21.00 0 H360" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<text x="310" y="40" font-size="15" text-anchor="middle" fill="#0f172a">L</text>
+<path d="M360.0 60.0 L450.0 60.0 L450.0 112.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<path d="M450.0 112.0 L450.0 124.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<path d="M450.0 136.0 L450.0 148.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<path d="M434.0 124.0 L466.0 124.0" fill="none" stroke="#0f172a" stroke-width="2.6"/>
+<path d="M434.0 136.0 L466.0 136.0" fill="none" stroke="#0f172a" stroke-width="2.6"/>
+<text x="478" y="135" font-size="15" text-anchor="start" fill="#0f172a">C</text>
+<path d="M450.0 148.0 L450.0 200.0 L70.0 200.0 L70.0 152.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<path d="M70.0 108.0 L70.0 60.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<circle cx="70" cy="130" r="22" fill="#fff" stroke="#0f172a" stroke-width="2.2"/>
+<polyline points="57,137 63,137 63,123 72,123 72,137 81,137 81,123" fill="none" stroke="#db2777" stroke-width="2"/>
+<text x="20" y="236" font-size="13" text-anchor="start" fill="#475569">Function generator (square wave)</text>
+<circle cx="450" cy="60" r="3.6" fill="#0f172a"/>
+<circle cx="450" cy="200" r="3.6" fill="#0f172a"/>
+<path d="M450.0 60.0 L540.0 60.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<path d="M450.0 200.0 L540.0 200.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<path d="M540 64V196" stroke="#db2777" stroke-width="1.6" marker-start="url(#ap)" marker-end="url(#ap)"/>
+<text x="550" y="135.0" font-size="15" text-anchor="start" fill="#db2777" font-weight="600">v₀(t)</text>
+<text x="30" y="135" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">vᵢ(t)</text>
+<text x="560" y="236" font-size="13" text-anchor="end" fill="#475569">to DSO</text>
+</g>
+</svg>

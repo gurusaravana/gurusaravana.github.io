@@ -250,3 +250,15 @@ Tips:
 - Keep notebooks small (under about 10 MB). Very large plots make the page slow.
 - Clear any cell output that shows private information before you save.
 - When you open a page straight from your computer (double-click), the browser blocks the notebook and shows a download link instead. It works on the live website. To preview locally, use the **Go Live** button of the VS Code "Live Server" extension.
+
+## 12. Lab experiments page (Control System Engineering Laboratory)
+
+The page is `courses/control-system-engineering-laboratory/experiments.html`. Each experiment is one `<section class="lsec labexp" id="expN">` block with:
+
+- the aim in `<p class="aim">`,
+- a diagram: `<figure class="diagram"><img src="../../assets/img/diagrams/lab-....svg" ...></figure>`,
+- the simulation: `<div class="sim labsim" data-lab="expN"></div>` (sliders and maths are in `assets/js/lab-experiments.js`),
+- the practice questions: the `<ol>` inside `<div class="card questions">`.
+
+To add or change a question, copy one `<li>...</li>` line and change the words. LaTeX between `$ ... $` works.
+To change a default slider value, open `assets/js/lab-experiments.js`, find `LAB.expN` and change `val:` for that slider.

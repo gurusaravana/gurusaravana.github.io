@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 670 290" width="670" height="290" role="img" aria-label="RC lead compensating network: R1 in parallel with C in the series arm, R2 across the output">
+<title>RC lead compensating network: R1 in parallel with C in the series arm, R2 across the output</title>
+<defs><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker></defs>
+<rect width="670" height="290" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="60" cy="150" r="22" fill="#fff" stroke="#0f172a" stroke-width="2.2"/>
+<polyline points="48.0,150.0 49.0,148.2 50.0,146.5 51.0,145.1 52.0,143.9 53.0,143.2 54.0,143.0 55.0,143.2 56.0,143.9 57.0,145.1 58.0,146.5 59.0,148.2 60.0,150.0 61.0,151.8 62.0,153.5 63.0,154.9 64.0,156.1 65.0,156.8 66.0,157.0 67.0,156.8 68.0,156.1 69.0,154.9 70.0,153.5 71.0,151.8 72.0,150.0" fill="none" stroke="#db2777" stroke-width="2"/>
+<path d="M60.0 128.0 L60.0 70.0 L90.0 70.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<path d="M90.0 70.0 L98.0 70.0 L100.2 60.4 L104.8 79.6 L109.2 60.4 L113.8 79.6 L118.2 60.4 L122.8 79.6 L127.2 60.4 L131.8 79.6 L136.2 60.4 L140.8 79.6 L145.2 60.4 L149.8 79.6 L152.0 70.0 L160.0 70.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<text x="125" y="48" font-size="13" text-anchor="middle" fill="#0f172a">Rₛ = 50 Ω</text>
+<path d="M60.0 172.0 L60.0 230.0 L590.0 230.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<path d="M160.0 70.0 L200.0 70.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<circle cx="200" cy="70" r="3.6" fill="#0f172a"/>
+<circle cx="200" cy="230" r="3.6" fill="#0f172a"/>
+<path d="M200 74V226" stroke="#db2777" stroke-width="1.6" marker-start="url(#ap)" marker-end="url(#ap)"/>
+<text x="210" y="155.0" font-size="15" text-anchor="start" fill="#db2777" font-weight="600">Vᵢₙ</text>
+<path d="M200.0 70.0 L250.0 70.0 L250.0 70.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<path d="M250.0 70.0 L250.0 70.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<path d="M250.0 70.0 L258.0 70.0 L262.3 60.4 L271.0 79.6 L279.7 60.4 L288.3 79.6 L297.0 60.4 L305.7 79.6 L314.3 60.4 L323.0 79.6 L331.7 60.4 L340.3 79.6 L349.0 60.4 L357.7 79.6 L362.0 70.0 L370.0 70.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<text x="310" y="48" font-size="13" text-anchor="middle" fill="#0f172a">R₁ = 15 kΩ</text>
+<path d="M250.0 70.0 L250.0 120.0 L290.0 120.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<path d="M290.0 120.0 L304.0 120.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<path d="M316.0 120.0 L330.0 120.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<path d="M304.0 104.0 L304.0 136.0" fill="none" stroke="#0f172a" stroke-width="2.6"/>
+<path d="M316.0 104.0 L316.0 136.0" fill="none" stroke="#0f172a" stroke-width="2.6"/>
+<path d="M330.0 120.0 L370.0 120.0 L370.0 70.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<text x="310" y="158" font-size="13" text-anchor="middle" fill="#0f172a">C = 0.01 µF</text>
+<circle cx="250" cy="70" r="3.6" fill="#0f172a"/>
+<circle cx="370" cy="70" r="3.6" fill="#0f172a"/>
+<path d="M370.0 70.0 L470.0 70.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<circle cx="470" cy="70" r="3.6" fill="#0f172a"/>
+<circle cx="470" cy="230" r="3.6" fill="#0f172a"/>
+<path d="M470.0 70.0 L470.0 78.0 L460.0 84.0 L480.0 96.0 L460.0 108.0 L480.0 120.0 L460.0 132.0 L480.0 144.0 L460.0 156.0 L480.0 168.0 L460.0 180.0 L480.0 192.0 L460.0 204.0 L480.0 216.0 L470.0 222.0 L470.0 230.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<text x="492" y="155" font-size="13" text-anchor="start" fill="#0f172a">R₂ = 1.5 kΩ</text>
+<path d="M470.0 70.0 L610.0 70.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<path d="M590.0 230.0 L610.0 230.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<path d="M610 74V226" stroke="#db2777" stroke-width="1.6" marker-start="url(#ap)" marker-end="url(#ap)"/>
+<text x="620" y="155.0" font-size="15" text-anchor="start" fill="#db2777" font-weight="600">V₀</text>
+<text x="20" y="270" font-size="13" text-anchor="start" fill="#475569">Sine wave, 2 V peak</text>
+<text x="650" y="270" font-size="13" text-anchor="end" fill="#475569">CH1: Vᵢₙ   CH2: V₀</text>
+</g>
+</svg>
