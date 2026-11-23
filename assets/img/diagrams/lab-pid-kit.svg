@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 300" width="700" height="300" role="img" aria-label="PID controller trainer: the error drives P, I and D actions in parallel, their sum drives the process, and the output is fed back">
+<title>PID controller trainer: the error drives P, I and D actions in parallel, their sum drives the process, and the output is fed back</title>
+<defs><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker></defs>
+<rect width="700" height="300" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<text x="30" y="125" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">Vᵢ</text>
+<path d="M45.0 120.0 L106.0 120.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<circle cx="120" cy="120" r="14" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M110.2 110.2L129.8 129.8M110.2 129.8L129.8 110.2" stroke="#0f172a" stroke-width="1.4"/>
+<text x="100" y="110" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">+</text>
+<text x="132" y="154" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">−</text>
+<path d="M134.0 120.0 L200.0 120.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<text x="175" y="110" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">Vₑ</text>
+<path d="M200.0 50.0 L200.0 190.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<circle cx="200" cy="120" r="3.6" fill="#0f172a"/>
+<path d="M200.0 50.0 L250.0 50.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<rect x="250.0" y="27.0" width="140" height="46" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+<text x="320" y="55.0" font-size="14" text-anchor="middle" fill="#0f172a">P   Kₚ e(t)</text>
+<path d="M390.0 50.0 L440.0 50.0 L440.0 50.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<path d="M200.0 120.0 L250.0 120.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<rect x="250.0" y="97.0" width="140" height="46" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+<text x="320" y="125.0" font-size="14" text-anchor="middle" fill="#0f172a">I   Kᵢ ∫ e dt</text>
+<path d="M390.0 120.0 L440.0 120.0 L440.0 120.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<path d="M200.0 190.0 L250.0 190.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<rect x="250.0" y="167.0" width="140" height="46" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+<text x="320" y="195.0" font-size="14" text-anchor="middle" fill="#0f172a">D   K<tspan dy="4" font-size="10">d</tspan><tspan dy="-4">​</tspan> de/dt</text>
+<path d="M390.0 190.0 L440.0 190.0 L440.0 190.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<path d="M440.0 50.0 L440.0 106.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<path d="M390.0 120.0 L426.0 120.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<path d="M440.0 190.0 L440.0 134.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<circle cx="440" cy="120" r="14" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M430.2 110.2L449.8 129.8M430.2 129.8L449.8 110.2" stroke="#0f172a" stroke-width="1.4"/>
+<text x="418" y="110" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">+</text>
+<text x="456" y="106" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">+</text>
+<text x="418" y="152" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">+</text>
+<path d="M454.0 120.0 L510.0 120.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<rect x="515.0" y="95.0" width="100" height="50" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+<text x="565" y="125.0" font-size="15" text-anchor="middle" fill="#0f172a">Process</text>
+<path d="M615.0 120.0 L680.0 120.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<circle cx="650" cy="120" r="3.6" fill="#0f172a"/>
+<text x="665" y="108" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">V<tspan dy="4" font-size="11">f</tspan><tspan dy="-4">​</tspan></text>
+<path d="M650.0 120.0 L650.0 260.0 L120.0 260.0 L120.0 134.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<text x="385" y="288" font-size="13" text-anchor="middle" fill="#475569">Kit meter reads Vᵢ (set-point), V<tspan dy="4" font-size="9">f</tspan><tspan dy="-4">​</tspan> (feedback) and Vₑ = Vᵢ − V<tspan dy="4" font-size="9">f</tspan><tspan dy="-4">​</tspan> (error)</text>
+</g>
+</svg>
