@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 210" width="620" height="210" role="img" aria-label="Unity feedback loop with a variable gain K in series with the open-loop transfer function G(s)">
+<title>Unity feedback loop with a variable gain K in series with the open-loop transfer function G(s)</title>
+<defs><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker></defs>
+<rect width="620" height="210" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<text x="30" y="85" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">R(s)</text>
+<path d="M60.0 80.0 L126.0 80.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<circle cx="140" cy="80" r="14" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M130.2 70.2L149.8 89.8M130.2 89.8L149.8 70.2" stroke="#0f172a" stroke-width="1.4"/>
+<text x="120" y="70" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">+</text>
+<text x="152" y="114" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">−</text>
+<path d="M154.0 80.0 L200.0 80.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<rect x="205.0" y="55.0" width="60" height="50" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+<text x="235" y="85.0" font-size="17" text-anchor="middle" fill="#0f172a">K</text>
+<path d="M265.0 80.0 L310.0 80.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<rect x="315.0" y="50.0" width="140" height="60" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+<text x="385" y="85.0" font-size="17" text-anchor="middle" fill="#0f172a">G(s)</text>
+<path d="M455.0 80.0 L550.0 80.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<circle cx="500" cy="80" r="3.6" fill="#0f172a"/>
+<text x="580" y="85" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">C(s)</text>
+<path d="M500.0 80.0 L500.0 170.0 L140.0 170.0 L140.0 94.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<text x="310" y="200" font-size="13" text-anchor="middle" fill="#475569">Root locus: G = 1/(s⁴ + 8s³ + 36s² + 80s)    Bode: G = (s + 10)/(s(s + 20)(s² + 2.4s + 16))</text>
+</g>
+</svg>

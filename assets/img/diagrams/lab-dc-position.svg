@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" width="900" height="300" role="img" aria-label="DC position control system: PI position controller, current loop with gain Kc, armature 1 over 0.0015 s plus 0.37, torque constant Kt, inertia 1 over J, two integrators, back-emf feedback Ke">
+<title>DC position control system: PI position controller, current loop with gain Kc, armature 1 over 0.0015 s plus 0.37, torque constant Kt, inertia 1 over J, two integrators, back-emf feedback Ke</title>
+<defs><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker></defs>
+<rect width="900" height="300" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<text x="22" y="95" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">θ*</text>
+<path d="M40.0 90.0 L66.0 90.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<circle cx="80" cy="90" r="14" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M70.2 80.2L89.8 99.8M70.2 99.8L89.8 80.2" stroke="#0f172a" stroke-width="1.4"/>
+<text x="62" y="80" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">+</text>
+<text x="92" y="124" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">−</text>
+<path d="M94.0 90.0 L124.0 90.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<rect x="124.0" y="63.0" width="92" height="54" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+<text x="170" y="82" font-size="14" text-anchor="middle" fill="#0f172a">Kₚs + Kᵢ</text>
+<path d="M140.9 88.0H199.1" stroke="#0f172a" stroke-width="1.4"/>
+<text x="170" y="104" font-size="14" text-anchor="middle" fill="#0f172a">s</text>
+<path d="M216.0 90.0 L244.0 90.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<text x="230" y="68" font-size="13" text-anchor="middle" fill="#db2777">iₐ*</text>
+<circle cx="258" cy="90" r="14" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M248.2 80.2L267.8 99.8M248.2 99.8L267.8 80.2" stroke="#0f172a" stroke-width="1.4"/>
+<text x="240" y="80" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">+</text>
+<text x="270" y="124" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">−</text>
+<path d="M272.0 90.0 L296.0 90.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<rect x="296.0" y="68.0" width="52" height="44" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+<text x="322" y="95.0" font-size="15" text-anchor="middle" fill="#0f172a">K<tspan dy="4" font-size="11">c</tspan><tspan dy="-4">​</tspan></text>
+<path d="M348.0 90.0 L374.0 90.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<circle cx="388" cy="90" r="14" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M378.2 80.2L397.8 99.8M378.2 99.8L397.8 80.2" stroke="#0f172a" stroke-width="1.4"/>
+<text x="370" y="80" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">+</text>
+<text x="400" y="124" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">−</text>
+<path d="M402.0 90.0 L424.0 90.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<rect x="424.0" y="63.0" width="120" height="54" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+<text x="484" y="82" font-size="14" text-anchor="middle" fill="#0f172a">1</text>
+<path d="M433.0 88.0H535.0" stroke="#0f172a" stroke-width="1.4"/>
+<text x="484" y="104" font-size="14" text-anchor="middle" fill="#0f172a">0.0015s + 0.37</text>
+<path d="M544.0 90.0 L574.0 90.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<circle cx="560" cy="90" r="3.6" fill="#0f172a"/>
+<text x="560" y="72" font-size="13" text-anchor="middle" fill="#db2777">iₐ</text>
+<rect x="574.0" y="68.0" width="48" height="44" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+<text x="598" y="95.0" font-size="15" text-anchor="middle" fill="#0f172a">Kₜ</text>
+<path d="M622.0 90.0 L644.0 90.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<rect x="644.0" y="63.0" width="52" height="54" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+<text x="670" y="82" font-size="14" text-anchor="middle" fill="#0f172a">1</text>
+<path d="M662.7 88.0H677.3" stroke="#0f172a" stroke-width="1.4"/>
+<text x="670" y="104" font-size="14" text-anchor="middle" fill="#0f172a">Js</text>
+<path d="M696.0 90.0 L730.0 90.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<circle cx="712" cy="90" r="3.6" fill="#0f172a"/>
+<text x="712" y="78" font-size="14" text-anchor="middle" fill="#db2777">ω</text>
+<rect x="730.0" y="63.0" width="44" height="54" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+<text x="752" y="82" font-size="14" text-anchor="middle" fill="#0f172a">1</text>
+<path d="M748.4 88.0H755.6" stroke="#0f172a" stroke-width="1.4"/>
+<text x="752" y="104" font-size="14" text-anchor="middle" fill="#0f172a">s</text>
+<path d="M774.0 90.0 L880.0 90.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<circle cx="830" cy="90" r="3.6" fill="#0f172a"/>
+<text x="862" y="78" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">θ</text>
+<path d="M560.0 90.0 L560.0 150.0 L258.0 150.0 L258.0 104.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<path d="M712.0 90.0 L712.0 200.0 L530.0 200.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<rect x="480.0" y="180.0" width="50" height="40" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+<text x="505" y="205.0" font-size="15" text-anchor="middle" fill="#0f172a">Kₑ</text>
+<path d="M480.0 200.0 L388.0 200.0 L388.0 104.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<path d="M830.0 90.0 L830.0 250.0 L80.0 250.0 L80.0 104.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<text x="450" y="288" font-size="13" text-anchor="middle" fill="#475569">Manual values (Fig. 8.3): Kₚ = 5, Kᵢ = 0.2, K<tspan dy="4" font-size="9">c</tspan><tspan dy="-4">​</tspan> = 2, Kₜ = 0.5, 1/J = 125, Kₑ = 0.5</text>
+</g>
+</svg>

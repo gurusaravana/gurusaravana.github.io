@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab experiments · Control System Engineering Laboratory</title>
+<meta name="description" content="All experiments of the Control System Engineering Laboratory (EEE2563): aim, circuit or block diagram, interactive simulation and open practice questions.">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],ignoredTags:['script','noscript','style','textarea','pre','code']})"></script>
+</head>
+<body>
+<!--
+  LAB EXPERIMENTS PAGE (EEE2563)
+  Each experiment is one <section class="lsec labexp" id="expN"> block below. Inside it:
+    * the aim goes in <p class="aim">,
+    * the diagram is a <figure class="diagram"> (SVG files are in assets/img/diagrams/lab-*.svg),
+    * <div class="sim labsim" data-lab="expN"></div> becomes the interactive simulation
+      (the maths and sliders are in assets/js/lab-experiments.js),
+    * the practice questions are the <ol> inside <div class="card questions">.
+      To add a question, copy one <li>...</li> line and change the words.
+  Full guide: HOW-TO-ADD-TEACHING-CONTENT.md, section 12.
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
+  <nav class="links"><a href="../control-system-engineering-laboratory.html">Lab home</a><a href="#exp1">Cycle 1</a><a href="#exp6">Cycle 2</a><a href="#exp11">Additional</a><a href="../control-system-engineering.html">Theory course</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../control-system-engineering-laboratory.html">← Control System Engineering Laboratory</a></div>
+  <div class="course-head">
+    <div class="eyebrow">EEE2563 · Control System Engineering Laboratory · AY 2026-27</div>
+    <h1>Lab experiments: diagrams, simulations and practice questions</h1>
+    <p>All twelve experiments from the lab manual. For each one: the aim, the circuit or block diagram, a simulation you can play with in the browser, and open questions to think through before and after the lab.</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>Experiments</summary>
+    <div class="modname">Cycle 1 · Hardware</div><ol><li><a href="#exp1"><span class="n">1</span>Time response of a second-order system</a></li><li><a href="#exp2"><span class="n">2</span>RC lead network</a></li><li><a href="#exp3"><span class="n">3</span>RC lag network</a></li><li><a href="#exp4"><span class="n">4</span>RC lag-lead network</a></li><li><a href="#exp5"><span class="n">5</span>P, PI, PD, PID (hardware kit)</a></li></ol>
+    <div class="modname">Cycle 2 · MATLAB</div><ol><li><a href="#exp6"><span class="n">6</span>Step response</a></li><li><a href="#exp7"><span class="n">7</span>P, PD, PI, PID</a></li><li><a href="#exp8"><span class="n">8</span>DC position control (Simulink)</a></li><li><a href="#exp9"><span class="n">9</span>Root locus and Bode</a></li><li><a href="#exp10"><span class="n">10</span>State space, controllability, observability</a></li></ol>
+    <div class="modname">Additional</div><ol><li><a href="#exp11"><span class="n">11</span>DC position control (hardware)</a></li><li><a href="#exp12"><span class="n">12</span>PID speed control of a DC motor</a></li></ol>
+  </details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>How to use this page</h3><ul>
+      <li><b>Before the lab:</b> read the aim, study the diagram and use the simulation to predict what you will measure.</li>
+      <li><b>During the lab:</b> compare your readings with the simulation. A big difference is a clue: check the wiring, the component values and the instrument settings.</li>
+      <li><b>After the lab:</b> answer the open questions in your record. They have no single right answer and no answers are given here: explain your reasoning with your own readings.</li>
+    </ul></div>
+    <p class="note">The simulations use the circuit and model values printed in the lab manual. Where the manual gives no values (Experiments 5, 11 and 12), an <span class="lab-example">example</span> model is used and clearly labelled. Simulated numbers are a guide, not a substitute for your own readings.</p>
+
+    <!-- ===================== CYCLE 1 ===================== -->
+    <section class="lsec labexp" id="exp1">
+      <div class="exp-tag">Cycle 1 · Hardware · Experiment 1</div>
+      <h2>Time response of a second-order system</h2>
+      <p class="aim"><b>Aim.</b> Find the step response of a series RLC circuit when it is underdamped, critically damped and overdamped, and measure the time-domain specifications (delay, rise, peak and settling time, peak overshoot).</p>
+      <figure class="diagram"><img src="../../assets/img/diagrams/lab-rlc-step.svg" alt="Series RLC circuit fed by a square-wave generator, output across the capacitor to the oscilloscope" loading="lazy"><figcaption>Fig. 1.1 Series RLC circuit. The square wave acts as a repeated step; the DSO shows $v_0(t)$ across $C$.</figcaption></figure>
+      <div class="notes"><p class="eq">$$\frac{V_0(s)}{V_i(s)} = \frac{1/LC}{s^2 + (R/L)\,s + 1/LC}, \qquad \omega_n = \frac{1}{\sqrt{LC}}, \qquad \zeta = \frac{R}{2}\sqrt{\frac{C}{L}}$$</p>
+      <p>Manual design: $L = 100$ mH, $C = 0.1\ \mu$F, so $\omega_n = 10\,000$ rad/s. $R = 200\ \Omega$ gives $\zeta = 0.1$, $R = 2$ kΩ gives $\zeta = 1$ and $R = 4$ kΩ gives $\zeta = 2$. Use the buttons to load each case.</p></div>
+      <h3 class="simhead">Interactive simulation</h3>
+      <div class="sim labsim" data-lab="exp1"></div>
+      <div class="card questions"><h3>Open questions for practice</h3><ol>
+        <li>If your measured overshoot for the $\zeta = 0.1$ setting is much smaller than theory predicts, which parts of the real circuit (the inductor's own resistance, the generator's output resistance, the probe) could be adding damping? How would you test each one?</li>
+        <li>Why must half the square-wave period be at least $5\tau$? Predict what the DSO trace would look like at ten times that frequency, and explain which specification you would then measure wrongly.</li>
+        <li>Keep $\zeta$ fixed and double both $L$ and $C$. What happens to $\omega_n$, to the overshoot and to the settling time? Check your prediction in the simulation and explain why only some specifications change.</li>
+        <li>The manual uses 0–100 % rise time for the underdamped case but 10–90 % for the overdamped case. Why can one definition not serve all three cases? Which would you choose for a datasheet, and why?</li>
+        <li>For a servo that must stop at a position without hitting a mechanical end-stop, would you choose $\zeta = 0.1$, $0.7$ or $2$? Argue using at least two specifications, not overshoot alone.</li>
+      </ol></div>
+    </section>
+
+    <section class="lsec labexp" id="exp2">
+      <div class="exp-tag">Cycle 1 · Hardware · Experiment 2</div>
+      <h2>Frequency response of an RC lead compensation network</h2>
+      <p class="aim"><b>Aim.</b> Obtain the gain and phase of a passive RC lead network over a range of frequencies, and find its corner frequencies and maximum phase lead.</p>
+      <figure class="diagram"><img src="../../assets/img/diagrams/lab-lead-network.svg" alt="Lead network: source with 50 ohm, R1 15 kilo-ohm in parallel with C 0.01 microfarad in the series arm, R2 1.5 kilo-ohm across the output" loading="lazy"><figcaption>Fig. 2.1 Lead compensating network with the manual's values.</figcaption></figure>
+      <div class="notes"><p class="eq">$$G_c(s) = \frac{V_0(s)}{V_{in}(s)} = \alpha\,\frac{1 + sT}{1 + s\alpha T}, \qquad T = R_1C, \qquad \alpha = \frac{R_2}{R_1 + R_2} < 1, \qquad \phi_{max} = \sin^{-1}\frac{1-\alpha}{1+\alpha}$$</p>
+      <p>Move the <b>test frequency</b> slider to see what the oscilloscope should show at each step of your tabular column. The table under the plots gives the calculated values at the manual's frequencies.</p></div>
+      <h3 class="simhead">Interactive simulation</h3>
+      <div class="sim labsim" data-lab="exp2"></div>
+      <div class="card questions"><h3>Open questions for practice</h3><ol>
+        <li>At low frequency the network passes only a fraction $\alpha$ of the signal. In a real control loop this loss must be made up. Where would you add the extra gain, and what goes wrong if you forget it?</li>
+        <li>Your DSO measures a time difference $\Delta t$, not a phase. At high frequency $\Delta t$ becomes tiny. How does the accuracy of your phase reading change across the range, and how could you improve it?</li>
+        <li>The 50 Ω source resistance does not appear in the transfer function. Under what conditions would it start to matter, and how would you include it in the analysis?</li>
+        <li>Suppose a design needs 55° of phase lead at 2 kHz. Use the sliders to decide whether one stage of this network can provide it. If not, what would you propose, and what does it cost you?</li>
+        <li>Using the Bode plot, explain why a lead network makes a closed-loop system faster but also more sensitive to high-frequency sensor noise.</li>
+      </ol></div>
+    </section>
+
+    <section class="lsec labexp" id="exp3">
+      <div class="exp-tag">Cycle 1 · Hardware · Experiment 3</div>
+      <h2>Frequency response of an RC lag compensation network</h2>
+      <p class="aim"><b>Aim.</b> Obtain the gain and phase of a passive RC lag network over a range of frequencies, and find its corner frequencies and maximum phase lag.</p>
+      <figure class="diagram"><img src="../../assets/img/diagrams/lab-lag-network.svg" alt="Lag network: source with 50 ohm, R1 15 kilo-ohm in the series arm, R2 100 ohm in series with C 0.01 microfarad across the output" loading="lazy"><figcaption>Fig. 3.1 Lag compensating network with the manual's values.</figcaption></figure>
+      <div class="notes"><p class="eq">$$G_c(s) = \frac{1 + s\tau}{1 + s\beta\tau}, \qquad \tau = R_2C, \qquad \beta = \frac{R_1 + R_2}{R_2} > 1, \qquad \omega_1 = \frac{1}{\beta\tau}, \quad \omega_2 = \frac{1}{\tau}$$</p>
+      <p>With the manual's values the two corners are far apart ($\beta \approx 151$), so the phase lag gets very large between them.</p></div>
+      <h3 class="simhead">Interactive simulation</h3>
+      <div class="sim labsim" data-lab="exp3"></div>
+      <div class="card questions"><h3>Open questions for practice</h3><ol>
+        <li>In a compensated system, designers place both corner frequencies of the lag network well below the gain crossover frequency. Why? What would happen to the phase margin if they did not?</li>
+        <li>At high frequency the gain levels off at $R_2/(R_1+R_2)$. What sets this value physically, and how can a network that attenuates still improve the steady-state error of a loop?</li>
+        <li>Change $R_2$ from 100 Ω to 1 kΩ. Describe how the maximum lag and the frequency where it occurs move, and relate this to $\beta$.</li>
+        <li>The manual's theory calls it "positive phase lag". Is the phase positive or negative on your measured plot? Write a clear sign convention for your lab record and explain why it matters.</li>
+        <li>What kind of network would you have if the zero came before the pole? Without calculating, sketch how its Bode plot would look.</li>
+      </ol></div>
+    </section>
+
+    <section class="lsec labexp" id="exp4">
+      <div class="exp-tag">Cycle 1 · Hardware · Experiment 4</div>
+      <h2>Frequency response of an RC lag-lead compensation network</h2>
+      <p class="aim"><b>Aim.</b> Draw the frequency response of a lag-lead network and find its corner frequencies, maximum phase lag and maximum phase lead.</p>
+      <figure class="diagram"><img src="../../assets/img/diagrams/lab-lag-lead-network.svg" alt="Lag-lead network: R1 15 kilo-ohm parallel C1 0.01 microfarad in the series arm, R2 1.5 kilo-ohm in series with C2 0.01 microfarad across the output" loading="lazy"><figcaption>Fig. 4.1 Lag-lead compensating network with the manual's values.</figcaption></figure>
+      <div class="notes"><p class="eq">$$G_c(s) = \frac{(1 + sR_1C_1)(1 + sR_2C_2)}{(1 + sR_1C_1)(1 + sR_2C_2) + sR_1C_2}$$</p>
+      <p>At low frequency the network lags, at high frequency it leads, and the gain is 0 dB at both ends.</p></div>
+      <h3 class="simhead">Interactive simulation</h3>
+      <div class="sim labsim" data-lab="exp4"></div>
+      <div class="card questions"><h3>Open questions for practice</h3><ol>
+        <li>From the Bode plot, mark the frequency band where the network acts as lag and the band where it acts as lead. Why does the lag band come first and not the other way round?</li>
+        <li>Make $C_2$ ten times larger. Predict first, then check: which corner frequencies move, and which part of the network have you mainly changed?</li>
+        <li>The two sections share the same current, so they load each other. Why can you not simply multiply the lead network of Experiment 2 by the lag network of Experiment 3? When would that shortcut be acceptable?</li>
+        <li>Theory says the gain is 0 dB at very low frequency. If you read −1 dB at 10 Hz, list the possible causes and how you would find the real one.</li>
+        <li>Name one practical system where you would choose a lag-lead network instead of a PID controller, and justify the choice.</li>
+      </ol></div>
+    </section>
+
+    <section class="lsec labexp" id="exp5">
+      <div class="exp-tag">Cycle 1 · Hardware · Experiment 5</div>
+      <h2>Effect of P, PI, PD and PID controllers on a second-order system (hardware)</h2>
+      <p class="aim"><b>Aim.</b> Study the steady-state performance of analog P, PI, PD and PID controllers using the PID controller kit, by reading the set-point $V_i$, feedback $V_f$ and error $V_e$ for different gains.</p>
+      <figure class="diagram"><img src="../../assets/img/diagrams/lab-pid-kit.svg" alt="PID trainer block diagram: error goes to P, I and D blocks in parallel, their sum drives the process, output fed back" loading="lazy"><figcaption>Fig. 5.1 Block diagram of the PID controller kit. Each action is built with an op-amp; the kit's meter reads $V_i$, $V_f$ and $V_e$.</figcaption></figure>
+      <div class="notes"><p class="eq">$$u(t) = K_p\,e(t) + K_i\int_0^t e(\tau)\,d\tau + K_d\,\frac{de(t)}{dt}$$</p>
+      <p><span class="lab-example">Example plant</span> The manual does not give the kit's internal process, so the simulation uses an example second-order process $G(s) = \dfrac{1}{(0.2s+1)(0.1s+1)}$ with a DC gain of 1. Your kit's numbers will differ, but the trends should be the same.</p></div>
+      <h3 class="simhead">Interactive simulation</h3>
+      <div class="sim labsim" data-lab="exp5"></div>
+      <div class="card questions"><h3>Open questions for practice</h3><ol>
+        <li>With P alone, $V_e$ never reaches zero. From your readings, find how $V_e$ depends on P. Why does a larger P reduce the error but never remove it?</li>
+        <li>With I added, the meter shows $V_e \approx 0$. What happens on the way to steady state? Why can integral action be dangerous when the actuator has a limit (integrator wind-up)?</li>
+        <li>The D action does not change the steady-state readings in your table. So why do industrial controllers include it? What measurement would you need to see its effect?</li>
+        <li>The kit's D action differentiates the error. What happens to the controller output when the set-point is changed suddenly, and how do real controllers avoid this?</li>
+        <li>Design a short test, using only P-controller readings on the kit, to estimate the DC gain of the kit's internal process.</li>
+      </ol></div>
+    </section>
+
+    <!-- ===================== CYCLE 2 ===================== -->
+    <section class="lsec labexp" id="exp6">
+      <div class="exp-tag">Cycle 2 · MATLAB · Experiment 6</div>
+      <h2>Unit step response of a second-order system using MATLAB</h2>
+      <p class="aim"><b>Aim.</b> Obtain the unit step response of a given transfer function in MATLAB and compare the underdamped, critically damped and overdamped cases.</p>
+      <figure class="diagram"><img src="../../assets/img/diagrams/lab-second-order-loop.svg" alt="Unity feedback loop giving the standard second-order closed-loop transfer function" loading="lazy"><figcaption>The standard second-order system. The manual's program uses the RLC values of Experiment 1, so $\omega_n^2 = 10^8$ and $2\zeta\omega_n = 2000$, $20\,000$ or $40\,000$.</figcaption></figure>
+      <div class="notes"><p class="eq">$$G(s) = \frac{\omega_n^2}{s^2 + 2\zeta\omega_n s + \omega_n^2}$$</p>
+      <p>The grey curves are the three systems in the manual's program. The coloured curve is yours: change $\zeta$ and $\omega_n$, then copy the MATLAB code below the plot and run it.</p></div>
+      <h3 class="simhead">Interactive simulation</h3>
+      <div class="sim labsim" data-lab="exp6"></div>
+      <div class="card questions"><h3>Open questions for practice</h3><ol>
+        <li>The manual's systems use $\omega_n = 10\,000$ rad/s. How would the time vector <code>t</code> have to change if $\omega_n$ were 10 rad/s, and what goes wrong if you forget to change it?</li>
+        <li>Raise $\zeta$ from 0.2 to 0.8 in steps. Which specification changes the most, and which hardly changes? Explain using the formulas.</li>
+        <li>MATLAB's <code>stepinfo</code> uses a 10–90 % rise time, while Experiment 1 used 0–100 % for the underdamped case. What errors could this cause if you compare the two experiments?</li>
+        <li>Textbooks often call $\zeta \approx 0.7$ "optimal". Optimal for what? Describe a situation where you would deliberately choose $\zeta \ge 1$.</li>
+        <li>If your DSO trace from Experiment 1 shows less overshoot than MATLAB for the same R, L and C, which do you trust, and how would you decide?</li>
+      </ol></div>
+    </section>
+
+    <section class="lsec labexp" id="exp7">
+      <div class="exp-tag">Cycle 2 · MATLAB · Experiment 7</div>
+      <h2>Effect of P, PD, PI and PID controllers using MATLAB</h2>
+      <p class="aim"><b>Aim.</b> Simulate the effect of P, PI, PD and PID controllers on the second-order plant $G(s) = 1/(s^2 + 10s + 20)$ for a unit step input.</p>
+      <figure class="diagram"><img src="../../assets/img/diagrams/lab-pid-loop.svg" alt="Unity feedback loop: PID controller in series with the plant 1 over s squared plus 10 s plus 20" loading="lazy"><figcaption>Closed loop used in the manual's programs. The preset buttons load the manual's gains: P (300), PD (300, 10), PI (30, 70) and PID (350, 300, 50).</figcaption></figure>
+      <div class="notes"><p class="eq">$$T(s) = \frac{K_d s^2 + K_p s + K_i}{s^3 + (10 + K_d)s^2 + (20 + K_p)s + K_i}$$</p></div>
+      <h3 class="simhead">Interactive simulation</h3>
+      <div class="sim labsim" data-lab="exp7"></div>
+      <div class="card questions"><h3>Open questions for practice</h3><ol>
+        <li>With P control ($K_p = 300$) the final value is not 1. Explain why from the closed-loop transfer function, and find the $K_p$ needed for less than 2 % error. What do you lose by using that gain?</li>
+        <li>At the same $K_p$, PD gives less overshoot than P. Explain this with the movement of the closed-loop poles (use the pole readout).</li>
+        <li>The PI controller ($K_p = 30$, $K_i = 70$) removes the steady-state error but responds slowly. Why does a small $K_p$ make it slow, and what happens if you raise only $K_i$?</li>
+        <li>The manual says the PID controller gives "no overshoot". Look closely at the simulated curve. Is that strictly true? How can the zeros added by a PID controller cause overshoot even when all poles are well damped?</li>
+        <li>On real hardware, $K_d = 50$ with a noisy sensor would cause trouble. How would you change the derivative term in practice, and what would you give up?</li>
+      </ol></div>
+    </section>
+
+    <section class="lsec labexp" id="exp8">
+      <div class="exp-tag">Cycle 2 · MATLAB Simulink · Experiment 8</div>
+      <h2>Simulation of a DC position control system using MATLAB Simulink</h2>
+      <p class="aim"><b>Aim.</b> Build a closed-loop DC position control system in Simulink, obtain its step response and find the rise time, peak time, settling time, maximum overshoot and steady-state error.</p>
+      <figure class="diagram"><img src="../../assets/img/diagrams/lab-dc-position.svg" alt="DC position control block diagram with PI position controller, current loop, armature, torque constant, inertia, two integrators and back-emf feedback" loading="lazy"><figcaption>Fig. 8.3 of the manual, redrawn. An outer PI position loop sets the current reference; an inner loop with gain $K_c$ controls the armature current; $K_e$ is the back-emf feedback.</figcaption></figure>
+      <div class="notes"><p>The simulation solves exactly this block diagram with the manual's values. It also shows the armature current and speed inside the loop, which you can see in Simulink by adding a Scope to those signals.</p></div>
+      <h3 class="simhead">Interactive simulation</h3>
+      <div class="sim labsim" data-lab="exp8"></div>
+      <div class="card questions"><h3>Open questions for practice</h3><ol>
+        <li>The model has an inner current loop inside an outer position loop. Why do engineers use this cascade structure instead of one controller driving the motor voltage directly?</li>
+        <li>Make the load heavier (lower 1/J). How do the overshoot and settling time change? What would a technician have to retune on the real drive?</li>
+        <li>The motor already contains an integrator (speed to position). Why does the controller still need $K_i$? Which kind of disturbance makes $K_i$ essential?</li>
+        <li>Compare the peak armature current for a small and a large $K_p$. Why is current, not voltage, usually what limits how fast a real servo can move?</li>
+        <li>This model is linear, so a 2 rad step gives exactly twice the 1 rad response. List the real-world effects that make a large step behave differently on hardware.</li>
+      </ol></div>
+    </section>
+
+    <section class="lsec labexp" id="exp9">
+      <div class="exp-tag">Cycle 2 · MATLAB · Experiment 9</div>
+      <h2>Stability analysis (root locus and Bode plot) of an LTI system using MATLAB</h2>
+      <p class="aim"><b>Aim.</b> Find the stability of the given systems by plotting the root locus and the Bode plot in MATLAB, and read the gain margin, phase margin and crossover frequencies.</p>
+      <figure class="diagram"><img src="../../assets/img/diagrams/lab-gain-loop.svg" alt="Unity feedback loop with a gain K in series with G(s)" loading="lazy"><figcaption>Both parts use a gain $K$ in a unity feedback loop. Root locus: $G(s) = \dfrac{1}{s(s^3 + 8s^2 + 36s + 80)}$. Bode: $G(s)H(s) = \dfrac{K(s+10)}{s(s+20)(s^2+2.4s+16)}$ with $K = 48$ in the manual.</figcaption></figure>
+      <h3 class="simhead">Part A · Root locus</h3>
+      <div class="notes"><p>Move $K$ and watch the four closed-loop poles travel along the locus. The open-loop poles are at $0$, $-4$ and $-2 \pm j4$.</p></div>
+      <div class="sim labsim" data-lab="exp9a"></div>
+      <h3 class="simhead">Part B · Bode plot and margins</h3>
+      <div class="sim labsim" data-lab="exp9b"></div>
+      <div class="card questions"><h3>Open questions for practice</h3><ol>
+        <li>From the root locus, find where the branches cross the $j\omega$ axis and the gain at that point. Confirm the gain with the Routh criterion and compare the two answers.</li>
+        <li>Describe how the dominant closed-loop poles move as $K$ rises from 1 to 200, and how the step response would change along the way.</li>
+        <li>In Part B, find the $K$ that gives a phase margin of about 45°. What is the gain margin at that $K$, and would you accept the design? Why?</li>
+        <li>Changing $K$ moves the magnitude plot but leaves the phase plot unchanged. What does that tell you about using gain alone as a design tool?</li>
+        <li>A system can have a comfortable gain margin but a very small phase margin. What would its step response look like, and which margin would you trust more for a motor drive with a time delay?</li>
+      </ol></div>
+    </section>
+
+    <section class="lsec labexp" id="exp10">
+      <div class="exp-tag">Cycle 2 · MATLAB · Experiment 10</div>
+      <h2>Transfer function ⇄ state space, controllability and observability using MATLAB</h2>
+      <p class="aim"><b>Aim.</b> Convert a transfer function to a state-space model and a state-space model back to a transfer function, and check controllability and observability using the ranks of $Q_c$ and $Q_o$.</p>
+      <figure class="diagram"><img src="../../assets/img/diagrams/lab-state-space.svg" alt="State-space block diagram with matrices A, B, C, D and an integrator" loading="lazy"><figcaption>State model $\dot x = Ax + Bu$, $y = Cx + Du$. The system is controllable if $Q_c = [B\ \ AB]$ has full rank and observable if $Q_o = [C;\ CA]$ has full rank.</figcaption></figure>
+      <h3 class="simhead">Part A · Transfer function to state space (tf2ss)</h3>
+      <div class="notes"><p>Type the coefficients of $G(s) = \dfrac{b_1 s + b_0}{s^2 + a_1 s + a_0}$. The page builds the same $A, B, C, D$ that MATLAB's <code>tf2ss</code> returns.</p></div>
+      <div class="sim labsim" data-lab="exp10a"></div>
+      <h3 class="simhead">Part B · State space to transfer function (ss2tf)</h3>
+      <div class="notes"><p>Type any 2 × 2 state model. The manual's example is loaded.</p></div>
+      <div class="sim labsim" data-lab="exp10b"></div>
+      <div class="card questions"><h3>Open questions for practice</h3><ol>
+        <li>The manual's Part A converts $\dfrac{2s+5}{s^2+4s+5}$, and Part B starts from $A = [0\ \ 1;\ -5\ \ -4]$, $B = [0;\ 1]$, $C = [2\ \ 5]$. Run Part B: do you get back the transfer function of Part A? If not, what change to $C$ would make the two models equivalent, and what does this tell you about how the order of the states matters?</li>
+        <li>In Part A, set the numerator to $s + 1$ and the denominator to $s^2 + 3s + 2$. What happens to the observability rank? Explain how the transfer function can "hide" a state.</li>
+        <li>A system is controllable but not observable. Can you still stabilise it using only its output? What extra tool would you need?</li>
+        <li>The eigenvalues of $A$ are poles of $G(s)$. Is the reverse always true: does every eigenvalue appear as a pole? Use your result from question 2.</li>
+        <li>For a DC motor with states current and speed, explain in plain words what it would mean physically if the system were not controllable from the voltage input.</li>
+      </ol></div>
+    </section>
+
+    <!-- ===================== ADDITIONAL ===================== -->
+    <section class="lsec labexp" id="exp11">
+      <div class="exp-tag">Additional · Hardware · Experiment 11</div>
+      <h2>Position control of a DC motor using the DC position control module</h2>
+      <p class="aim"><b>Aim.</b> Study and analyse the position control characteristics of a DC motor using the DC position control hardware module.</p>
+      <figure class="diagram"><img src="../../assets/img/diagrams/lab-dc-position-hardware.svg" alt="DC position control trainer: reference potentiometer, error amplifier, power amplifier, DC motor, gear and feedback potentiometer" loading="lazy"><figcaption>Typical layout of a DC position control trainer. Two potentiometers turn the reference and shaft angles into voltages; the error amplifier drives the motor until they match.</figcaption></figure>
+      <div class="notes"><p><span class="lab-example">Example model</span> The manual lists this experiment but gives no procedure or values. The simulation uses the motor of Experiment 8 with a proportional error amplifier, a potentiometer gain of 10 V/rad and an amplifier that saturates at ± its supply. Use it to explore trends, then compare with your module.</p></div>
+      <h3 class="simhead">Interactive simulation</h3>
+      <div class="sim labsim" data-lab="exp11"></div>
+      <div class="card questions"><h3>Open questions for practice</h3><ol>
+        <li>With a large gain $K$ the amplifier hits its limit. How does saturation change the response compared with the linear model of Experiment 8?</li>
+        <li>Keep $K$ the same and compare a 20° step with a 180° step. Why are the overshoot and settling time different, even though the controller has not changed?</li>
+        <li>Real gearboxes have backlash and motors have static friction. Predict how each would show up in the final position error and in the way the shaft settles.</li>
+        <li>How would you measure the potentiometer sensitivity (V/rad) on the module before starting, and why does it matter for the loop gain?</li>
+      </ol></div>
+    </section>
+
+    <section class="lsec labexp" id="exp12">
+      <div class="exp-tag">Additional · MATLAB Simulink · Experiment 12</div>
+      <h2>Design of a PID controller for speed control of a DC motor using Simulink</h2>
+      <p class="aim"><b>Aim.</b> Design a PID controller that holds the speed of a DC motor at its set-point, and test how it rejects a sudden load torque.</p>
+      <figure class="diagram"><img src="../../assets/img/diagrams/lab-dc-speed-pid.svg" alt="DC motor speed control loop: PID controller, armature, torque constant, load torque disturbance, inertia and friction, back-emf and tachogenerator feedback" loading="lazy"><figcaption>Speed control loop. The load torque $T_L$ enters between the motor torque and the inertia, so the controller only sees it through the speed.</figcaption></figure>
+      <div class="notes"><p><span class="lab-example">Example model</span> The manual lists this experiment but gives no procedure or values. The simulation uses the motor of Experiment 8 ($K_t = K_e = 0.5$, $1/J = 125$, armature $1/(0.0015s + 0.37)$) with a small friction $B = 0.002$. The derivative acts on the measured speed, as most drives do, so a set-point step gives no derivative kick. A load torque is applied at $t = 1.5$ s.</p></div>
+      <h3 class="simhead">Interactive simulation</h3>
+      <div class="sim labsim" data-lab="exp12"></div>
+      <div class="card questions"><h3>Open questions for practice</h3><ol>
+        <li>With P only, the speed never reaches the set-point and drops further when the load is applied. Explain why from the steady-state equations, and why integral action fixes both problems.</li>
+        <li>The load torque enters after the controller. Why is the speed dip after the load a better test of a speed controller than the start-up response?</li>
+        <li>The armature voltage must come from a real converter with a limit. Look at the voltage plot: how would the response change if the limit were 60 V?</li>
+        <li>Here the derivative acts on the measured speed, not on the error. Why is this common in drives, and what does $K_d$ do to the speed dip?</li>
+        <li>How would you build this model in Simulink? List the blocks, and say where the load torque step enters and how you would set its step time.</li>
+      </ol></div>
+    </section>
+    <p class="note">Source: Control Systems Engineering Lab Manual, AY 2026-27, Department of EEE, Presidency University. Diagrams redrawn from the manual; simulations computed in your browser.</p>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+<script src="../../assets/vendor/plotly/plotly-basic.min.js"></script>
+<script src="../../assets/js/lab-experiments.js"></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 210" width="680" height="210" role="img" aria-label="Unity feedback loop with a PID controller and the plant 1 over s squared plus 10 s plus 20">
+<title>Unity feedback loop with a PID controller and the plant 1 over s squared plus 10 s plus 20</title>
+<defs><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker></defs>
+<rect width="680" height="210" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<text x="30" y="85" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">R(s)</text>
+<path d="M60.0 80.0 L126.0 80.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<circle cx="140" cy="80" r="14" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M130.2 70.2L149.8 89.8M130.2 89.8L149.8 70.2" stroke="#0f172a" stroke-width="1.4"/>
+<text x="120" y="70" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">+</text>
+<text x="152" y="114" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">−</text>
+<path d="M154.0 80.0 L210.0 80.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<text x="182" y="70" font-size="14" text-anchor="middle" fill="#db2777">E</text>
+<rect x="210.0" y="48.0" width="180" height="64" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+<text x="300" y="85.0" font-size="14" text-anchor="middle" fill="#0f172a">Gc(s) = Kₚ + Kᵢ/s + K<tspan dy="4" font-size="10">d</tspan><tspan dy="-4">​</tspan> s</text>
+<path d="M390.0 80.0 L440.0 80.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<text x="415" y="70" font-size="14" text-anchor="middle" fill="#db2777">U</text>
+<rect x="440.0" y="45.0" width="160" height="70" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+<text x="520" y="72" font-size="15" text-anchor="middle" fill="#0f172a">1</text>
+<path d="M469.3 78.0H570.7" stroke="#0f172a" stroke-width="1.4"/>
+<text x="520" y="95" font-size="15" text-anchor="middle" fill="#0f172a">s² + 10s + 20</text>
+<path d="M600.0 80.0 L660.0 80.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<circle cx="630" cy="80" r="3.6" fill="#0f172a"/>
+<text x="650" y="66" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">Y(s)</text>
+<path d="M630.0 80.0 L630.0 170.0 L140.0 170.0 L140.0 94.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<text x="340" y="200" font-size="13" text-anchor="middle" fill="#475569">Set Kᵢ = 0 and K<tspan dy="4" font-size="9">d</tspan><tspan dy="-4">​</tspan> = 0 for P control, Kᵢ = 0 for PD, K<tspan dy="4" font-size="9">d</tspan><tspan dy="-4">​</tspan> = 0 for PI</text>
+</g>
+</svg>

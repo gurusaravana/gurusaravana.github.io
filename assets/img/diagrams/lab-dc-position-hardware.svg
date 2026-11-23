@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 270" width="760" height="270" role="img" aria-label="DC position control trainer: a reference potentiometer and a feedback potentiometer on the motor shaft feed an error amplifier that drives the DC motor through a power amplifier and gears">
+<title>DC position control trainer: a reference potentiometer and a feedback potentiometer on the motor shaft feed an error amplifier that drives the DC motor through a power amplifier and gears</title>
+<defs><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker></defs>
+<rect width="760" height="270" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<rect x="25.0" y="73.0" width="110" height="54" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+<text x="80" y="96.5" font-size="14" text-anchor="middle" fill="#0f172a">Reference</text>
+<text x="80" y="113.5" font-size="14" text-anchor="middle" fill="#0f172a">pot θᵣ</text>
+<path d="M135.0 100.0 L186.0 100.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<circle cx="200" cy="100" r="14" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M190.2 90.2L209.8 109.8M190.2 109.8L209.8 90.2" stroke="#0f172a" stroke-width="1.4"/>
+<text x="180" y="90" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">+</text>
+<text x="212" y="134" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">−</text>
+<path d="M214.0 100.0 L250.0 100.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<rect x="250.0" y="73.0" width="100" height="54" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+<text x="300" y="96.5" font-size="14" text-anchor="middle" fill="#0f172a">Error amp</text>
+<text x="300" y="113.5" font-size="14" text-anchor="middle" fill="#0f172a">gain K</text>
+<path d="M350.0 100.0 L390.0 100.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<rect x="390.0" y="73.0" width="100" height="54" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+<text x="440" y="96.5" font-size="14" text-anchor="middle" fill="#0f172a">Power</text>
+<text x="440" y="113.5" font-size="14" text-anchor="middle" fill="#0f172a">amplifier</text>
+<path d="M490.0 100.0 L526.0 100.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<rect x="526.0" y="73.0" width="88" height="54" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+<text x="570" y="96.5" font-size="14" text-anchor="middle" fill="#0f172a">DC</text>
+<text x="570" y="113.5" font-size="14" text-anchor="middle" fill="#0f172a">motor</text>
+<path d="M614.0 100.0 L646.0 100.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<rect x="646.0" y="73.0" width="68" height="54" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+<text x="680" y="96.5" font-size="14" text-anchor="middle" fill="#0f172a">Gear</text>
+<text x="680" y="113.5" font-size="14" text-anchor="middle" fill="#0f172a">1:n</text>
+<path d="M714.0 100.0 L745.0 100.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<circle cx="730" cy="100" r="3.6" fill="#0f172a"/>
+<text x="740" y="86" font-size="15" text-anchor="middle" fill="#db2777" font-weight="600">θ₀</text>
+<path d="M730.0 100.0 L730.0 200.0 L420.0 200.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<rect x="300.0" y="177.0" width="120" height="46" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+<text x="360" y="205.0" font-size="14" text-anchor="middle" fill="#0f172a">Feedback pot</text>
+<path d="M300.0 200.0 L200.0 200.0 L200.0 114.0" fill="none" stroke="#0f172a" stroke-width="2.2" marker-end="url(#ab)"/>
+<text x="380" y="258" font-size="13" text-anchor="middle" fill="#475569">Both potentiometers turn angle into voltage; the motor turns until θ₀ ≈ θᵣ</text>
+</g>
+</svg>
