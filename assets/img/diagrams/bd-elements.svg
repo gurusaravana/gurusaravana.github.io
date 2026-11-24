@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 200" width="860" height="200" role="img" aria-label="The four elements of a block diagram: a signal arrow, a block that multiplies by its transfer function, a summing junction and a take-off point">
+<title>The four elements of a block diagram: a signal arrow, a block that multiplies by its transfer function, a summing junction and a take-off point</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker></defs>
+<rect width="860" height="200" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<text x="105" y="28" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="700">Signal</text>
+<path d="M30.0 100.0 L180.0 100.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="105" y="88" font-size="16" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">X(s)</text>
+<text x="105" y="150.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">a variable in the</text>
+<text x="105" y="165.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">Laplace domain</text>
+<text x="320" y="28" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="700">Block</text>
+<path d="M230.0 100.0 L272.0 100.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="275.0" y="78.0" width="90.0" height="44" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="320" y="105.6" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400">G(s)</text>
+<path d="M365.0 100.0 L410.0 100.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="250" y="90" font-size="14" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">A</text>
+<text x="395" y="90" font-size="14" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">B</text>
+<text x="320" y="150.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">output = input × G</text>
+<text x="320" y="165.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">B = A·G(s)</text>
+<text x="535" y="28" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="700">Summing junction</text>
+<path d="M460.0 100.0 L521.0 100.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<circle cx="535" cy="100" r="13" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M525.9 90.9L544.1 109.1M525.9 109.1L544.1 90.9" stroke="#0f172a" stroke-width="1.3"/>
+<text x="514" y="93" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">+</text>
+<text x="548" y="126" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">−</text>
+<path d="M549.0 100.0 L605.0 100.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<path d="M535.0 145.0 L535.0 114.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="470" y="90" font-size="14" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">A</text>
+<text x="548" y="140" font-size="14" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">B</text>
+<text x="585" y="90" font-size="14" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">A − B</text>
+<text x="535" y="175.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">adds or subtracts signals</text>
+<text x="750" y="28" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="700">Take-off point</text>
+<path d="M660.0 100.0 L835.0 100.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<circle cx="730" cy="100" r="5" fill="#0f172a"/>
+<path d="M730.0 100.0 L730.0 140.0 L835.0 140.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="680" y="90" font-size="14" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">A</text>
+<text x="815" y="90" font-size="14" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">A</text>
+<text x="815" y="132" font-size="14" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">A</text>
+<text x="750" y="175.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">copies the signal unchanged</text>
+</g>
+</svg>

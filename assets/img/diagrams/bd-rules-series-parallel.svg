@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="760" height="300" role="img" aria-label="Rule 1: blocks in series multiply, G1 G2. Rule 2: blocks in parallel add or subtract, G1 plus or minus G2">
+<title>Rule 1: blocks in series multiply, G1 G2. Rule 2: blocks in parallel add or subtract, G1 plus or minus G2</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker></defs>
+<rect width="760" height="300" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<text x="20" y="26" font-size="15" text-anchor="start" fill="#0f172a" font-weight="700">Rule 1: blocks in cascade (series)</text>
+<text x="20" y="80" font-size="16" text-anchor="start" fill="#0f172a" font-weight="400" font-style="italic">X</text>
+<path d="M38.0 75.0 L82.0 75.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="83.0" y="55.0" width="64.0" height="40" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="115" y="80.6" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400">G<tspan font-size="72%" baseline-shift="sub">1</tspan></text>
+<path d="M147.0 75.0 L192.0 75.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="193.0" y="55.0" width="64.0" height="40" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="225" y="80.6" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400">G<tspan font-size="72%" baseline-shift="sub">2</tspan></text>
+<path d="M257.0 75.0 L300.0 75.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="316" y="80" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">Y</text>
+<path d="M378 68 L406 68 L406 60 L424 75 L406 90 L406 82 L378 82 z" fill="#ea7a1f"/>
+<text x="452" y="80" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">X</text>
+<path d="M470.0 75.0 L530.0 75.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="535.0" y="55.0" width="110.0" height="40" rx="4" fill="#fff" stroke="#ea7a1f" stroke-width="2"/>
+<text x="590" y="80.6" font-size="16" text-anchor="middle" fill="#ea7a1f" font-weight="400">G<tspan font-size="72%" baseline-shift="sub">1</tspan>G<tspan font-size="72%" baseline-shift="sub">2</tspan></text>
+<path d="M645.0 75.0 L700.0 75.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="716" y="80" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">Y</text>
+<text x="20" y="146" font-size="15" text-anchor="start" fill="#0f172a" font-weight="700">Rule 2: blocks in parallel</text>
+<text x="20" y="225" font-size="16" text-anchor="start" fill="#0f172a" font-weight="400" font-style="italic">X</text>
+<path d="M38.0 220.0 L70.0 220.0" fill="none" stroke="#0f172a" stroke-width="2"/>
+<circle cx="70" cy="220" r="4" fill="#0f172a"/>
+<path d="M70.0 220.0 L70.0 180.0 L93.0 180.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="93.0" y="160.0" width="64.0" height="40" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="125" y="185.6" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400">G<tspan font-size="72%" baseline-shift="sub">1</tspan></text>
+<path d="M70.0 220.0 L70.0 260.0 L93.0 260.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="93.0" y="240.0" width="64.0" height="40" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="125" y="265.6" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400">G<tspan font-size="72%" baseline-shift="sub">2</tspan></text>
+<path d="M157.0 180.0 L230.0 180.0 L230.0 206.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<path d="M157.0 260.0 L230.0 260.0 L230.0 234.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<circle cx="230" cy="220" r="13" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M220.9 210.9L239.1 229.1M220.9 229.1L239.1 210.9" stroke="#0f172a" stroke-width="1.3"/>
+<text x="244" y="208" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">+</text>
+<text x="243" y="246" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">±</text>
+<path d="M244.0 220.0 L300.0 220.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="316" y="225" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">Y</text>
+<path d="M378 213 L406 213 L406 205 L424 220 L406 235 L406 227 L378 227 z" fill="#ea7a1f"/>
+<text x="452" y="225" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">X</text>
+<path d="M470.0 220.0 L530.0 220.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="535.0" y="200.0" width="110.0" height="40" rx="4" fill="#fff" stroke="#ea7a1f" stroke-width="2"/>
+<text x="590" y="225.6" font-size="16" text-anchor="middle" fill="#ea7a1f" font-weight="400">G<tspan font-size="72%" baseline-shift="sub">1</tspan> ± G<tspan font-size="72%" baseline-shift="sub">2</tspan></text>
+<path d="M645.0 220.0 L700.0 220.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="716" y="225" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">Y</text>
+</g>
+</svg>

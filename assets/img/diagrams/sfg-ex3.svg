@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 340" width="760" height="340" role="img" aria-label="Signal flow graph for exercise 3: forward G1 to G4 between unity branches; G9 feeds back over G1 G2 and G10 over G3 G4; a lower node is reached from after G1 by G5, returns by G6, has a self-loop G7 and goes by G8 to the node after G3">
+<title>Signal flow graph for exercise 3: forward G1 to G4 between unity branches; G9 feeds back over G1 G2 and G10 over G3 G4; a lower node is reached from after G1 by G5, returns by G6, has a self-loop G7 and goes by G8 to the node after G3</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker></defs>
+<rect width="760" height="340" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<path d="M46.0 120.0 Q65.5 120.0 85.0 120.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<path d="M85.0 120.0 Q104.5 120.0 124.0 120.0" fill="none" stroke="#0f172a" stroke-width="2"/>
+<text x="85.0" y="106.0" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="400">1</text>
+<path d="M136.0 120.0 Q164.2 120.0 192.5 120.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<path d="M192.5 120.0 Q220.8 120.0 249.0 120.0" fill="none" stroke="#0f172a" stroke-width="2"/>
+<text x="192.5" y="106.0" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="400">G<tspan font-size="72%" baseline-shift="sub">1</tspan></text>
+<path d="M261.0 120.0 Q289.2 120.0 317.5 120.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<path d="M317.5 120.0 Q345.8 120.0 374.0 120.0" fill="none" stroke="#0f172a" stroke-width="2"/>
+<text x="317.5" y="106.0" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="400">G<tspan font-size="72%" baseline-shift="sub">2</tspan></text>
+<path d="M386.0 120.0 Q414.2 120.0 442.5 120.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<path d="M442.5 120.0 Q470.8 120.0 499.0 120.0" fill="none" stroke="#0f172a" stroke-width="2"/>
+<text x="442.5" y="106.0" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="400">G<tspan font-size="72%" baseline-shift="sub">3</tspan></text>
+<path d="M511.0 120.0 Q539.2 120.0 567.5 120.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<path d="M567.5 120.0 Q595.8 120.0 624.0 120.0" fill="none" stroke="#0f172a" stroke-width="2"/>
+<text x="567.5" y="106.0" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="400">G<tspan font-size="72%" baseline-shift="sub">4</tspan></text>
+<path d="M636.0 120.0 Q655.5 120.0 675.0 120.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<path d="M675.0 120.0 Q694.5 120.0 714.0 120.0" fill="none" stroke="#0f172a" stroke-width="2"/>
+<text x="675.0" y="106.0" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="400">1</text>
+<path d="M375.6 115.9 Q315.3 60.0 255.0 60.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<path d="M255.0 60.0 Q194.7 60.0 134.4 115.9" fill="none" stroke="#0f172a" stroke-width="2"/>
+<text x="255.0" y="41.0" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="400">G<tspan font-size="72%" baseline-shift="sub">9</tspan></text>
+<path d="M625.6 115.9 Q565.3 60.0 505.0 60.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<path d="M505.0 60.0 Q444.7 60.0 384.4 115.9" fill="none" stroke="#0f172a" stroke-width="2"/>
+<text x="505.0" y="41.0" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="400">G<tspan font-size="72%" baseline-shift="sub">10</tspan></text>
+<path d="M252.2 125.3 Q237.6 152.6 237.6 180.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<path d="M237.6 180.0 Q237.6 207.4 252.2 234.7" fill="none" stroke="#0f172a" stroke-width="2"/>
+<text x="221.6" y="185.0" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="400">G<tspan font-size="72%" baseline-shift="sub">5</tspan></text>
+<path d="M257.8 234.7 Q272.4 207.4 272.4 180.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<path d="M272.4 180.0 Q272.4 152.6 257.8 125.3" fill="none" stroke="#0f172a" stroke-width="2"/>
+<text x="288.4" y="185.0" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="400">G<tspan font-size="72%" baseline-shift="sub">6</tspan></text>
+<path d="M251 245 C225 295, 285 295, 259 245" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="285" y="280" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="400">G<tspan font-size="72%" baseline-shift="sub">7</tspan></text>
+<path d="M260.8 238.5 Q326.5 221.9 386.3 193.2" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<path d="M386.3 193.2 Q446.2 164.4 500.2 123.6" fill="none" stroke="#0f172a" stroke-width="2"/>
+<text x="393.2" y="212.6" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="400">G<tspan font-size="72%" baseline-shift="sub">8</tspan></text>
+<circle cx="40" cy="120" r="6" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<circle cx="130" cy="120" r="6" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<circle cx="255" cy="120" r="6" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<circle cx="380" cy="120" r="6" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<circle cx="505" cy="120" r="6" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<circle cx="630" cy="120" r="6" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<circle cx="720" cy="120" r="6" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<circle cx="255" cy="240" r="6" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="40" y="104" font-size="14" text-anchor="middle" fill="#db2777" font-weight="600">R(s)</text>
+<text x="720" y="104" font-size="14" text-anchor="middle" fill="#db2777" font-weight="600">C(s)</text>
+</g>
+</svg>

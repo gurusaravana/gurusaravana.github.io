@@ -262,3 +262,15 @@ The page is `courses/control-system-engineering-laboratory/experiments.html`. Ea
 
 To add or change a question, copy one `<li>...</li>` line and change the words. LaTeX between `$ ... $` works.
 To change a default slider value, open `assets/js/lab-experiments.js`, find `LAB.expN` and change `val:` for that slider.
+
+## 13. Module 1 lecture content (Control System Engineering, Lessons 1, 5 and 6)
+
+The Module 1 slide decks (Lecture 1, block diagram reduction, signal flow graphs) are written out as web pages in:
+
+- `courses/control-system-engineering/01-introduction.html` (what a control system is, open vs closed loop, thermostat, bimetallic strip, classification, regulator vs servo, design process),
+- `courses/control-system-engineering/05-block-diagrams.html` (elements, RLC example, the nine reduction rules, superposition, the "knot" case study and 7 figure problems),
+- `courses/control-system-engineering/06-signal-flow-graphs.html` (terms, Mason's gain formula, block diagram to SFG conversion, worked example and 4 problems).
+
+All diagrams are SVG files in `assets/img/diagrams/` whose names start with `cs-` (Lesson 1), `bd-` (Lesson 5) or `sfg-` (Lesson 6). To add a problem with a figure, copy one `<li>...</li>` from the Exercises list. The figure goes inside the question like this:
+`<figure class="diagram"><img src="../../assets/img/diagrams/bd-ex1.svg" alt="describe the figure"></figure>`
+and the worked answer goes inside `<div class="sol">...</div>`.
