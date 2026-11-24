@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 3: Time-domain analysis · Linear Control Systems</title>
+<meta name="description" content="Time-domain analysis">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 3: Time-domain analysis  (Linear Control Systems, EACT 533)
+  Edit the notes between the NOTES START and NOTES END markers below.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Figures live in assets/img/diagrams/ and are shown with a figure of class "diagram".
+  To add an exercise, copy one list item inside the list of class "exlist".
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
+  <nav class="links"><a href="../linear-control-systems.html">Course home</a><a href="../linear-control-systems.html#lessons">Lessons</a><a href="../linear-control-systems.html#figures">Figures</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../linear-control-systems.html">← Linear Control Systems</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 3 of 6 · Chapter 2</div>
+    <h1>Time-domain analysis</h1>
+    <p>Linear Control Systems · EACT 533 · Postgraduate course</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">EACT 533 · Linear Control Systems</div><ol><li><a href="01-transfer-functions.html"><span class="n">1</span>Control systems, models and block diagrams</a></li><li><a href="02-mechanical-translational.html"><span class="n">2</span>Mechanical translational systems</a></li><li class="on"><a href="03-time-domain-analysis.html"><span class="n">3</span>Time-domain analysis</a></li><li><a href="04-stability-routh-hurwitz.html"><span class="n">4</span>Stability and the Routh–Hurwitz criterion</a></li><li><a href="05-root-locus.html"><span class="n">5</span>Root locus method</a></li><li><a href="06-frequency-response.html"><span class="n">6</span>Frequency response: Bode, polar and Nyquist plots</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Derive the Laplace transforms of the standard test signals</li><li>Find first- and second-order step responses</li><li>Derive the underdamped step response by partial fractions</li><li>Compute rise time, peak time, overshoot, settling time and steady-state error</li></ul></div>
+    <nav class="figstrip" aria-label="Figures in this lesson"><a href="#fig-signals"><img src="../../assets/img/diagrams/tr-test-signals.svg" alt="" loading="lazy"><span>Test signals</span></a><a href="#fig-damping"><img src="../../assets/img/diagrams/tr-damping-responses.svg" alt="" loading="lazy"><span>Damping cases</span></a><a href="#fig-specs"><img src="../../assets/img/diagrams/tr-specs.svg" alt="" loading="lazy"><span>Specifications</span></a><a href="#fig-sse-example"><img src="../../assets/img/diagrams/lcs-sse-example.svg" alt="" loading="lazy"><span>Steady-state error example</span></a></nav>
+    <section class="lsec"><h2>Notes</h2>
+    <!-- NOTES START -->
+    <article class="notes">
+<p>Time-domain analysis asks how the output $c(t)$ of a system evolves after a test input is applied. The total response has a <b>transient</b> part, which dies away in a stable system, and a <b>steady-state</b> part, which remains: $c(t) = c_{tr}(t) + c_{ss}(t)$.</p>
+<figure class="diagram" id="fig-signals"><img src="../../assets/img/diagrams/tr-test-signals.svg" alt="Standard test signals" loading="lazy"><figcaption>The standard test signals: impulse, step, ramp and parabola.</figcaption></figure>
+
+<h3 id="laplace">Laplace transforms of the test signals</h3>
+<p>From the definition $F(s) = \int_0^\infty f(t)e^{-st}\,dt$:</p>
+<ul>
+<li><b>Unit step</b>, $u(t) = 1$ for $t \ge 0$: $\displaystyle\int_0^\infty e^{-st}\,dt = \left[\frac{e^{-st}}{-s}\right]_0^\infty = 0 - \frac{1}{-s} = \frac{1}{s}$.</li>
+<li><b>Unit ramp</b>, $r(t) = t$: integrate by parts with $u = t$, $dv = e^{-st}dt$: $\displaystyle\int_0^\infty te^{-st}\,dt = \left[-\frac{te^{-st}}{s}\right]_0^\infty + \frac{1}{s}\int_0^\infty e^{-st}\,dt = \frac{1}{s^2}$.</li>
+<li><b>Unit parabola</b>, $t^2/2$: $1/s^3$.</li>
+<li><b>Unit impulse</b> $\delta(t)$: a pulse of height $1/\varepsilon$ and width $\varepsilon$, so $\displaystyle\int_0^\varepsilon \frac{1}{\varepsilon}e^{-st}\,dt = \frac{1 - e^{-\varepsilon s}}{\varepsilon s} \to 1$ as $\varepsilon \to 0$ (L'Hôpital). The impulse response is therefore the transfer function itself.</li>
+</ul>
+
+<h3 id="first">First-order systems</h3>
+<figure class="diagram" id="fig-first"><img src="../../assets/img/diagrams/tr-first-order.svg" alt="First-order step response" loading="lazy"><figcaption>$c(t) = 1 - e^{-t/T}$ reaches 63.2% at $t = T$ and 98% at $t = 4T$.</figcaption></figure>
+<p>$G(s) = \dfrac{1}{Ts + 1}$, a single pole at $-1/T$. For a unit step, $C(s) = \dfrac{1}{s(Ts + 1)} = \dfrac{1}{s} - \dfrac{T}{Ts + 1}$, so</p>
+<p class="eq">$$c(t) = 1 - e^{-t/T}, \qquad \text{slope at } t = 0 \text{ is } 1/T, \qquad t_r = 2.2T, \quad t_s = 4T\ (2\%)$$</p>
+<p>The ramp response is $c(t) = t - T + Te^{-t/T}$: it lags the input by $T$ for ever, so the steady-state ramp error is $T$.</p>
+
+<h3 id="second">Second-order systems</h3>
+<figure class="diagram" id="fig-loop"><img src="../../assets/img/diagrams/tr-second-order-loop.svg" alt="Standard second-order loop" loading="lazy"><figcaption>The standard second-order loop.</figcaption></figure>
+<p class="eq">$$\frac{C(s)}{R(s)} = \frac{\omega_n^2}{s^2 + 2\zeta\omega_n s + \omega_n^2}, \qquad s_{1,2} = -\zeta\omega_n \pm j\omega_n\sqrt{1 - \zeta^2}$$</p>
+<p>$\omega_n$ is the natural frequency, $\zeta$ the damping ratio, $\sigma = \zeta\omega_n$ the decay rate and $\omega_d = \omega_n\sqrt{1 - \zeta^2}$ the damped frequency.</p>
+<figure class="diagram" id="fig-poles"><img src="../../assets/img/diagrams/tr-damping-poles.svg" alt="Pole positions for each damping case" loading="lazy"><figcaption>Where the poles sit for each value of $\zeta$.</figcaption></figure>
+<figure class="diagram" id="fig-damping"><img src="../../assets/img/diagrams/tr-damping-responses.svg" alt="Step responses for each damping case" loading="lazy"><figcaption>Undamped ($\zeta = 0$), underdamped ($0 &lt; \zeta &lt; 1$), critically damped ($\zeta = 1$) and overdamped ($\zeta &gt; 1$).</figcaption></figure>
+
+<h3 id="derivation">Deriving the underdamped step response</h3>
+<p>This is the derivation from the class notebook, step by step. For a unit step,</p>
+<p class="eq">$$C(s) = \frac{\omega_n^2}{s(s^2 + 2\zeta\omega_n s + \omega_n^2)} = \frac{A}{s} + \frac{Bs + C}{s^2 + 2\zeta\omega_n s + \omega_n^2}$$</p>
+<ol>
+<li><b>Find $A$</b>: multiply by $s$ and set $s = 0$: $A = \omega_n^2/\omega_n^2 = 1$.</li>
+<li><b>Find $B$ and $C$</b>: clear fractions, $\omega_n^2 = (s^2 + 2\zeta\omega_n s + \omega_n^2) + (Bs + C)s$. Comparing the $s^2$ terms gives $B = -1$; comparing the $s$ terms gives $C = -2\zeta\omega_n$. So
+$$C(s) = \frac{1}{s} - \frac{s + 2\zeta\omega_n}{s^2 + 2\zeta\omega_n s + \omega_n^2}$$</li>
+<li><b>Complete the square</b>: $s^2 + 2\zeta\omega_n s + \omega_n^2 = (s + \zeta\omega_n)^2 + \omega_n^2(1 - \zeta^2) = (s + \zeta\omega_n)^2 + \omega_d^2$.</li>
+<li><b>Split the numerator</b> to match standard pairs: $s + 2\zeta\omega_n = (s + \zeta\omega_n) + \zeta\omega_n$, and write $\zeta\omega_n = \dfrac{\zeta\omega_n}{\omega_d}\,\omega_d$:
+$$C(s) = \frac{1}{s} - \frac{s + \zeta\omega_n}{(s + \zeta\omega_n)^2 + \omega_d^2} - \frac{\zeta\omega_n}{\omega_d}\cdot\frac{\omega_d}{(s + \zeta\omega_n)^2 + \omega_d^2}$$</li>
+<li><b>Invert</b> using $\mathcal{L}^{-1}\left\{\dfrac{s + a}{(s + a)^2 + \omega^2}\right\} = e^{-at}\cos\omega t$ and $\mathcal{L}^{-1}\left\{\dfrac{\omega}{(s + a)^2 + \omega^2}\right\} = e^{-at}\sin\omega t$:</li>
+</ol>
+<p class="eq">$$c(t) = 1 - e^{-\zeta\omega_n t}\left(\cos\omega_d t + \frac{\zeta}{\sqrt{1 - \zeta^2}}\sin\omega_d t\right) = 1 - \frac{e^{-\zeta\omega_n t}}{\sqrt{1 - \zeta^2}}\sin(\omega_d t + \theta), \quad \theta = \cos^{-1}\zeta$$</p>
+<p class="key">The envelope $e^{-\zeta\omega_n t}$ is set by the real part of the poles; the ripple frequency $\omega_d$ by the imaginary part. Everything about the transient can be read from the pole positions.</p>
+
+<h3 id="specs">Time-domain specifications</h3>
+<figure class="diagram" id="fig-specs"><img src="../../assets/img/diagrams/tr-specs.svg" alt="Step response with specifications marked" loading="lazy"><figcaption>Delay, rise, peak and settling times, and the maximum overshoot.</figcaption></figure>
+<table class="tbl"><tr><th>Specification</th><th>Formula (underdamped)</th></tr>
+<tr><td>Rise time (0 to 100%)</td><td>$t_r = \dfrac{\pi - \theta}{\omega_d}$, $\theta = \cos^{-1}\zeta$</td></tr>
+<tr><td>Peak time</td><td>$t_p = \dfrac{\pi}{\omega_d}$</td></tr>
+<tr><td>Maximum overshoot</td><td>$M_p = e^{-\zeta\pi/\sqrt{1 - \zeta^2}} \times 100\%$</td></tr>
+<tr><td>Settling time</td><td>$t_s = \dfrac{4}{\zeta\omega_n}$ (2%), $\dfrac{3}{\zeta\omega_n}$ (5%)</td></tr>
+<tr><td>Delay time (to 50%)</td><td>$t_d \approx \dfrac{1 + 0.7\zeta}{\omega_n}$</td></tr></table>
+<p><b>Worked example.</b> For $\dfrac{C}{R} = \dfrac{25}{s^2 + 6s + 25}$: $\omega_n = 5$, $\zeta = 0.6$, $\omega_d = 4$, $\theta = 53.13° = 0.927$ rad. So $t_r = (3.1416 - 0.927)/4 = 0.554$ s, $t_p = 0.785$ s, $M_p = e^{-0.6\pi/0.8} = 9.48\%$ and $t_s = 4/3 = 1.33$ s.</p>
+
+<h3 id="sse">Steady-state error</h3>
+<figure class="diagram" id="fig-sse-loops"><img src="../../assets/img/diagrams/sse-loops.svg" alt="Unity and non-unity feedback loops" loading="lazy"><figcaption>$e_{ss} = \lim_{s\to0}sE(s)$, with $E(s) = R(s)/[1 + G(s)]$ for unity feedback.</figcaption></figure>
+<p>The <b>type</b> of a unity-feedback system is the number of open-loop poles at the origin. The static error constants are $K_p = \lim_{s\to0}G(s)$, $K_v = \lim_{s\to0}sG(s)$ and $K_a = \lim_{s\to0}s^2G(s)$:</p>
+<table class="tbl"><tr><th>Type</th><th>Step $1/s$</th><th>Ramp $1/s^2$</th><th>Parabola $1/s^3$</th></tr>
+<tr><td>0</td><td>$1/(1 + K_p)$</td><td>$\infty$</td><td>$\infty$</td></tr>
+<tr><td>1</td><td>0</td><td>$1/K_v$</td><td>$\infty$</td></tr>
+<tr><td>2</td><td>0</td><td>0</td><td>$1/K_a$</td></tr></table>
+<p><b>Worked example from class.</b> $G(s) = \dfrac{100(0.3s + 1)}{(0.5s + 1)(s^2 + 2s + 5)}$ with unity feedback.</p>
+<ol>
+<li><b>Check stability first.</b> The characteristic polynomial is $(0.5s + 1)(s^2 + 2s + 5) + 100(0.3s + 1) = 0.5s^3 + 2s^2 + 34.5s + 105$. All coefficients are positive and $2 \times 34.5 = 69 &gt; 0.5 \times 105 = 52.5$, so it is stable (Lesson 4) and the final value theorem applies.</li>
+<li><b>Type 0</b>: no pole at the origin. $K_p = G(0) = 100/5 = 20$.</li>
+<li>Step: $e_{ss} = \dfrac{1}{1 + 20} = \dfrac{1}{21} = 0.0476$. Ramp: $K_v = 0$, so $e_{ss} = \infty$. Parabola: $e_{ss} = \infty$.</li>
+</ol>
+<figure class="diagram" id="fig-sse-example"><img src="../../assets/img/diagrams/lcs-sse-example.svg" alt="Step response of the class example" loading="lazy"><figcaption>The class example settles at $20/21$, not at 1. The light damping comes from the high loop gain.</figcaption></figure>
+</article>
+    <!-- NOTES END -->
+    </section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the div below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">A thermometer behaves as $1/(Ts + 1)$ and reads 98% of a step change after 1 minute. Find $T$ and the reading error when the bath temperature rises steadily at 10 °C/min.</div><details><summary>Show solution</summary><div class="sol">$4T = 60$ s gives $T = 15$ s $= 0.25$ min. The ramp error is $T \times$ rate $= 0.25 \times 10 = 2.5$ °C.</div></details></li><li><div class="q">For $\dfrac{C}{R} = \dfrac{36}{s^2 + 4.2s + 36}$ find $\zeta$, $\omega_n$, $t_r$, $t_p$, $M_p$ and $t_s$ (2%).</div><details><summary>Show solution</summary><div class="sol">$\omega_n = 6$, $\zeta = 4.2/12 = 0.35$, $\omega_d = 6\sqrt{1 - 0.1225} = 5.62$, $\theta = \cos^{-1}0.35 = 1.213$ rad. $t_r = (3.1416 - 1.213)/5.62 = 0.343$ s, $t_p = 0.559$ s, $M_p = e^{-0.35\pi/0.937} = 30.9\%$, $t_s = 4/2.1 = 1.90$ s.</div></details></li><li><div class="q">Using the derivation above, show that the peak time is $\pi/\omega_d$.</div><details><summary>Show solution</summary><div class="sol">Differentiate: $\dot{c}(t) = \dfrac{\omega_n}{\sqrt{1 - \zeta^2}}e^{-\zeta\omega_n t}\sin\omega_d t$ (the cosine terms cancel). This is zero when $\sin\omega_d t = 0$; the first peak is at $\omega_d t = \pi$.</div></details></li><li><div class="q">What value of $\zeta$ gives 5% overshoot? With that $\zeta$, what $\omega_n$ gives a 2% settling time of 2 s?</div><details><summary>Show solution</summary><div class="sol">$\zeta = \dfrac{-\ln 0.05}{\sqrt{\pi^2 + \ln^2 0.05}} = \dfrac{3.0}{\sqrt{9.87 + 8.97}} = 0.69$. Then $\omega_n = 4/(0.69 \times 2) = 2.9$ rad/s.</div></details></li><li><div class="q">For the class example, add an integrator: $G(s) = \dfrac{100(0.3s + 1)}{s(0.5s + 1)(s^2 + 2s + 5)}$. What are the new step and ramp errors? Is the loop still stable?</div><details><summary>Show solution</summary><div class="sol">Type 1: step error 0, $K_v = 100/5 = 20$, ramp error $1/20 = 0.05$. But the characteristic polynomial is $0.5s^4 + 2s^3 + 4.5s^2 + 35s + 100$; the Routh column is $0.5, 2, -4.25, \dots$, with two sign changes, so the loop is <b>unstable</b> and these errors are meaningless. The gain must be lowered (or a compensator added) first.</div></details></li></ol></section>
+    <nav class="prevnext"><a class="pn prev" href="02-mechanical-translational.html"><small>← Lesson 2</small>Mechanical translational systems</a><a class="pn next" href="04-stability-routh-hurwitz.html"><small>Lesson 4 →</small>Stability and the Routh–Hurwitz criterion</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

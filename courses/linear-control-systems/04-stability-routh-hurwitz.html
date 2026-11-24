@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 4: Stability and the Routh–Hurwitz criterion · Linear Control Systems</title>
+<meta name="description" content="Stability and the Routh–Hurwitz criterion">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 4: Stability and the Routh–Hurwitz criterion  (Linear Control Systems, EACT 533)
+  Edit the notes between the NOTES START and NOTES END markers below.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Figures live in assets/img/diagrams/ and are shown with a figure of class "diagram".
+  To add an exercise, copy one list item inside the list of class "exlist".
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
+  <nav class="links"><a href="../linear-control-systems.html">Course home</a><a href="../linear-control-systems.html#lessons">Lessons</a><a href="../linear-control-systems.html#figures">Figures</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../linear-control-systems.html">← Linear Control Systems</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 4 of 6 · Chapter 3a</div>
+    <h1>Stability and the Routh–Hurwitz criterion</h1>
+    <p>Linear Control Systems · EACT 533 · Postgraduate course</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">EACT 533 · Linear Control Systems</div><ol><li><a href="01-transfer-functions.html"><span class="n">1</span>Control systems, models and block diagrams</a></li><li><a href="02-mechanical-translational.html"><span class="n">2</span>Mechanical translational systems</a></li><li><a href="03-time-domain-analysis.html"><span class="n">3</span>Time-domain analysis</a></li><li class="on"><a href="04-stability-routh-hurwitz.html"><span class="n">4</span>Stability and the Routh–Hurwitz criterion</a></li><li><a href="05-root-locus.html"><span class="n">5</span>Root locus method</a></li><li><a href="06-frequency-response.html"><span class="n">6</span>Frequency response: Bode, polar and Nyquist plots</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Define stable, marginally stable and unstable systems</li><li>Build a Routh array and count right-half-plane roots</li><li>Handle a zero in the first column (epsilon and reverse coefficients) and a row of zeros</li><li>Find gain ranges and oscillation frequencies for design</li></ul></div>
+    <nav class="figstrip" aria-label="Figures in this lesson"><a href="#fig-regions"><img src="../../assets/img/diagrams/lcs-stability-regions.svg" alt="" loading="lazy"><span>Poles and stability</span></a><a href="#fig-ex4"><img src="../../assets/img/diagrams/lcs-rh-ex4.svg" alt="" loading="lazy"><span>Example 4 loop</span></a><a href="#fig-sfg-k"><img src="../../assets/img/diagrams/lcs-sfg-k1k2.svg" alt="" loading="lazy"><span>Design with k₁, k₂</span></a><a href="#fig-exercise"><img src="../../assets/img/diagrams/lcs-rh-exercise.svg" alt="" loading="lazy"><span>Class exercise</span></a></nav>
+    <section class="lsec"><h2>Notes</h2>
+    <!-- NOTES START -->
+    <article class="notes">
+<p>For a linear time-invariant system, stability is defined through the <b>natural response</b> (the part that does not depend on the input):</p>
+<ul>
+<li><b>Stable</b>: the natural response approaches zero as $t \to \infty$.</li>
+<li><b>Unstable</b>: it grows without bound.</li>
+<li><b>Marginally stable</b>: it neither decays nor grows, but stays constant or oscillates.</li>
+</ul>
+<p>An equivalent view is <b>BIBO stability</b>: every bounded input produces a bounded output.</p>
+<figure class="diagram" id="fig-regions"><img src="../../assets/img/diagrams/lcs-stability-regions.svg" alt="Pole positions and the matching responses" loading="lazy"><figcaption>Stability is decided entirely by where the closed-loop poles sit.</figcaption></figure>
+<p>A system is stable when all closed-loop poles are in the <b>left half-plane</b> (negative real parts). Any pole in the right half-plane makes it unstable. Simple poles on the $j\omega$ axis (and none in the right half-plane) make it marginally stable; <b>repeated</b> poles on the $j\omega$ axis give responses like $t\sin\omega t$ and are unstable.</p>
+<h4>Stability from the poles: answers to the class table</h4>
+<table class="tbl"><tr><th>$G(s)$ (closed loop)</th><th>Poles</th><th>Verdict</th></tr>
+<tr><td>$\dfrac{5(s + 2)}{(s + 1)(s^2 + s + 1)}$</td><td>$-1$, $-0.5 \pm j0.87$</td><td>Stable</td></tr>
+<tr><td>$\dfrac{5(-s + 2)}{(s + 1)(s^2 + s + 1)}$</td><td>same poles</td><td>Stable (a right-half-plane <i>zero</i> does not affect stability)</td></tr>
+<tr><td>$\dfrac{5}{(s - 2)(s^2 + 3)}$</td><td>$+2$, $\pm j1.73$</td><td>Unstable</td></tr>
+<tr><td>$\dfrac{s^2 + 2}{(s + 1)(s^2 - s + 1)}$</td><td>$-1$, $0.5 \pm j0.87$</td><td>Unstable</td></tr>
+<tr><td>$\dfrac{5}{(s + 2)(s^2 + 1)^2}$</td><td>$-2$, $\pm j$ twice</td><td>Unstable (repeated $j\omega$ poles)</td></tr>
+<tr><td>$\dfrac{1}{(s^2 - 1)(s + 1)}$</td><td>$+1$, $-1$ twice</td><td>Unstable</td></tr></table>
+
+<h3 id="routh">The Routh–Hurwitz criterion</h3>
+<p>Finding the roots of a high-order polynomial by hand is hard. The Routh–Hurwitz criterion tells us <b>how many</b> roots lie in the left half-plane, the right half-plane and on the $j\omega$ axis (how many, not where) using only arithmetic:</p>
+<p class="key">The number of roots of the characteristic equation with positive real parts equals the number of sign changes in the first column of the Routh array.</p>
+<p>For $a_ns^n + a_{n-1}s^{n-1} + \dots + a_1s + a_0 = 0$:</p>
+<ol>
+<li>Label the rows $s^n, s^{n-1}, \dots, s^0$.</li>
+<li>Row 1: $a_n, a_{n-2}, a_{n-4}, \dots$ Row 2: $a_{n-1}, a_{n-3}, \dots$</li>
+<li>Each new entry is a negative 2×2 determinant divided by the first entry of the row above: $b_1 = \dfrac{a_{n-1}a_{n-2} - a_na_{n-3}}{a_{n-1}}$, $b_2 = \dfrac{a_{n-1}a_{n-4} - a_na_{n-5}}{a_{n-1}}$, $c_1 = \dfrac{b_1a_{n-3} - a_{n-1}b_2}{b_1}$, and so on.</li>
+<li>Any row may be multiplied or divided by a <b>positive</b> constant to simplify the numbers.</li>
+</ol>
+<p>A necessary (not sufficient) condition is that all coefficients are present and have the same sign. Two useful special cases:</p>
+<ul>
+<li>Second order $a_2s^2 + a_1s + a_0$: stable if and only if all coefficients have the same sign.</li>
+<li>Third order $a_3s^3 + a_2s^2 + a_1s + a_0$: stable if and only if all coefficients are positive and $a_2a_1 &gt; a_0a_3$. Equality gives a pair of roots on the $j\omega$ axis.</li>
+</ul>
+
+<h3 id="case1">Case I: no zero in the first column</h3>
+<p><b>Example 1.</b> $s^3 + 6s^2 + 12s + 8 = 0$:</p>
+<div class="tblwrap"><table class="tbl routh"><tr><th>$s^{3}$</th><td>1</td><td>12</td></tr><tr><th>$s^{2}$</th><td>6</td><td>8</td></tr><tr><th>$s^{1}$</th><td>$64/6 = 10.67$</td><td>0</td></tr><tr><th>$s^{0}$</th><td>8</td><td></td></tr></table></div>
+<p>No sign change, so all roots are in the left half-plane: stable. (In fact $(s + 2)^3$.)</p>
+<p><b>Example 2.</b> $s^3 + s^2 + 2s + 24 = 0$:</p>
+<div class="tblwrap"><table class="tbl routh"><tr><th>$s^{3}$</th><td>1</td><td>2</td></tr><tr><th>$s^{2}$</th><td>1</td><td>24</td></tr><tr><th>$s^{1}$</th><td>$-22$</td><td>0</td></tr><tr><th>$s^{0}$</th><td>24</td><td></td></tr></table></div>
+<p>Two sign changes ($+1 \to -22 \to +24$): two roots in the right half-plane, unstable. The roots are $-3$ and $1 \pm j2.65$.</p>
+<p><b>Example 3 (range of K).</b> $s^3 + 3s^2 + 3s + 1 + K = 0$:</p>
+<div class="tblwrap"><table class="tbl routh"><tr><th>$s^{3}$</th><td>1</td><td>3</td></tr><tr><th>$s^{2}$</th><td>3</td><td>$1 + K$</td></tr><tr><th>$s^{1}$</th><td>$\dfrac{8 - K}{3}$</td><td>0</td></tr><tr><th>$s^{0}$</th><td>$1 + K$</td><td></td></tr></table></div>
+<p>Stability needs $8 - K &gt; 0$ and $1 + K &gt; 0$, so $-1 &lt; K &lt; 8$.</p>
+<figure class="diagram" id="fig-ex4"><img src="../../assets/img/diagrams/lcs-rh-ex4.svg" alt="Unity feedback loop with 1000 over (s+2)(s+3)(s+5)" loading="lazy"><figcaption>Example 4: a unity loop with a large gain.</figcaption></figure>
+<p><b>Example 4.</b> The closed loop is $\dfrac{1000}{s^3 + 10s^2 + 31s + 1030}$:</p>
+<div class="tblwrap"><table class="tbl routh"><tr><th>$s^{3}$</th><td>1</td><td>31</td></tr><tr><th>$s^{2}$</th><td>$10 \to 1$</td><td>$1030 \to 103$</td></tr><tr class="rnote"><td colspan="3">the $s^2$ row was divided by 10</td></tr><tr><th>$s^{1}$</th><td>$-72$</td><td>0</td></tr><tr><th>$s^{0}$</th><td>103</td><td></td></tr></table></div>
+<p>Two sign changes: unstable with two right-half-plane poles. The gain of 1000 is far above the limit $K &lt; 10 \times 31 - 30 = 280$.</p>
+<p><b>Example 5.</b> $2s^4 + s^3 + 3s^2 + 5s + 10 = 0$:</p>
+<div class="tblwrap"><table class="tbl routh"><tr><th>$s^{4}$</th><td>2</td><td>3</td><td>10</td></tr><tr><th>$s^{3}$</th><td>1</td><td>5</td><td>0</td></tr><tr><th>$s^{2}$</th><td>$-7$</td><td>10</td><td></td></tr><tr><th>$s^{1}$</th><td>$6.43$</td><td>0</td><td></td></tr><tr><th>$s^{0}$</th><td>10</td><td></td><td></td></tr></table></div>
+<p>The $s^2$ entry is $\dfrac{(1)(3) - (2)(5)}{1} = -7$ and the $s^1$ entry $\dfrac{(-7)(5) - (1)(10)}{-7} = 6.43$. Two sign changes: unstable, two roots in the right half-plane.</p>
+
+<h3 id="case2">Case II: a zero only in the first column</h3>
+<p>If the first entry of a row is zero but others in that row are not, the next row would need a division by zero. Two remedies:</p>
+<p><b>Epsilon method.</b> Replace the zero by a small number $\varepsilon$, finish the table, then let $\varepsilon \to 0$ and count sign changes.</p>
+<p><b>Example 6.</b> $s^5 + 2s^4 + 2s^3 + 4s^2 + 11s + 10 = 0$:</p>
+<div class="tblwrap"><table class="tbl routh"><tr><th>$s^{5}$</th><td>1</td><td>2</td><td>11</td></tr><tr><th>$s^{4}$</th><td>2</td><td>4</td><td>10</td></tr><tr><th>$s^{3}$</th><td>$\varepsilon$</td><td>6</td><td></td></tr><tr><th>$s^{2}$</th><td>$\dfrac{4\varepsilon - 12}{\varepsilon} \to -\dfrac{12}{\varepsilon}$</td><td>10</td><td></td></tr><tr><th>$s^{1}$</th><td>$\dfrac{6c_1 - 10\varepsilon}{c_1} \to 6$</td><td>0</td><td></td></tr><tr><th>$s^{0}$</th><td>10</td><td></td><td></td></tr></table></div>
+<p>As $\varepsilon \to 0^+$ the column reads $+, +, +, -, +, +$: two sign changes, so two roots in the right half-plane.</p>
+<p><b>Example 7.</b> $s^4 + s^3 + s^2 + s + K = 0$:</p>
+<div class="tblwrap"><table class="tbl routh"><tr><th>$s^{4}$</th><td>1</td><td>1</td><td>$K$</td></tr><tr><th>$s^{3}$</th><td>1</td><td>1</td><td>0</td></tr><tr><th>$s^{2}$</th><td>$\varepsilon$</td><td>$K$</td><td></td></tr><tr><th>$s^{1}$</th><td>$\dfrac{\varepsilon - K}{\varepsilon} \to -\dfrac{K}{\varepsilon}$</td><td>0</td><td></td></tr><tr><th>$s^{0}$</th><td>$K$</td><td></td><td></td></tr></table></div>
+<p>For $K &gt; 0$ the $s^1$ entry is large and negative: two sign changes. For $K &lt; 0$ the last entry is negative. The system is <b>unstable for every value of K</b>.</p>
+<p><b>Example 8.</b> $T(s) = \dfrac{10}{s^5 + 2s^4 + 3s^3 + 6s^2 + 5s + 3}$. The $s^3$ row starts with zero; with $\varepsilon$ the first column is $1, 2, \varepsilon, \dfrac{6\varepsilon - 7}{\varepsilon}, \dfrac{42\varepsilon - 49 - 6\varepsilon^2}{12\varepsilon - 14}, 3$. Whether $\varepsilon$ is taken positive ($+,+,+,-,+,+$) or negative ($+,+,-,+,+,+$), there are two sign changes: two right-half-plane poles.</p>
+<p><b>Reverse-coefficient method.</b> The polynomial with the coefficients written in reverse order has the reciprocal roots $1/s_i$, which lie in the same half-plane. Its Routh table often has no zero.</p>
+<p><b>Example 9</b> (example 8 again). $D(s) = 3s^5 + 5s^4 + 6s^3 + 3s^2 + 2s + 1$:</p>
+<div class="tblwrap"><table class="tbl routh"><tr><th>$s^{5}$</th><td>3</td><td>6</td><td>2</td></tr><tr><th>$s^{4}$</th><td>5</td><td>3</td><td>1</td></tr><tr><th>$s^{3}$</th><td>4.2</td><td>1.4</td><td></td></tr><tr><th>$s^{2}$</th><td>1.33</td><td>1</td><td></td></tr><tr><th>$s^{1}$</th><td>$-1.75$</td><td>0</td><td></td></tr><tr><th>$s^{0}$</th><td>1</td><td></td><td></td></tr></table></div>
+<p>Two sign changes, the same answer as the epsilon method, with no limits to take.</p>
+
+<h3 id="case3">Case III: an entire row of zeros</h3>
+<p>A row of zeros means the polynomial has an <b>even factor</b> (roots placed symmetrically about the origin: a pair on the real axis, a pair on the $j\omega$ axis, or a quadruple). Form the <b>auxiliary polynomial</b> $U(s)$ from the row above the zeros, replace the zero row by the coefficients of $dU/ds$, and continue. The roots of $U(s)$ are also roots of the original polynomial.</p>
+<p><b>Example 10.</b> $q(s) = s^3 + 2s^2 + 4s + K$:</p>
+<div class="tblwrap"><table class="tbl routh"><tr><th>$s^{3}$</th><td>1</td><td>4</td></tr><tr><th>$s^{2}$</th><td>2</td><td>$K$</td></tr><tr><th>$s^{1}$</th><td>$\dfrac{8 - K}{2}$</td><td>0</td></tr><tr><th>$s^{0}$</th><td>$K$</td><td></td></tr></table></div>
+<p>Stable for $0 &lt; K &lt; 8$. At $K = 8$ the $s^1$ row is all zeros; $U(s) = 2s^2 + 8 = 2(s^2 + 4)$, so two roots sit at $\pm j2$ and the system is marginally stable. Dividing, $q(s) = (s + 2)(s + j2)(s - j2)$.</p>
+<p><b>Example 11.</b> $q(s) = s^5 + s^4 + 4s^3 + 24s^2 + 3s + 63$:</p>
+<div class="tblwrap"><table class="tbl routh"><tr><th>$s^{5}$</th><td>1</td><td>4</td><td>3</td></tr><tr><th>$s^{4}$</th><td>1</td><td>24</td><td>63</td></tr><tr><th>$s^{3}$</th><td>$-20$</td><td>$-60$</td><td></td></tr><tr><th>$s^{2}$</th><td>21</td><td>63</td><td></td></tr><tr><th>$s^{1}$</th><td>0</td><td>0</td><td></td></tr><tr class="rnote"><td colspan="4">row of zeros: use $U(s) = 21s^2 + 63$, $dU/ds = 42s$</td></tr><tr><th>$s^{1}$</th><td>42</td><td>0</td><td></td></tr><tr><th>$s^{0}$</th><td>63</td><td></td><td></td></tr></table></div>
+<p>$U(s) = 21s^2 + 63 = 21(s^2 + 3)$ gives two roots at $\pm j\sqrt{3}$. The column $1, 1, -20, 21, 42, 63$ has two sign changes, so two roots are in the right half-plane. Check by division: $q(s)/(s^2 + 3) = s^3 + s^2 + s + 21$, whose roots are $-3$ and $1 \pm j\sqrt{6}$. The system is unstable.</p>
+<h3 id="case4">Case IV: repeated roots on the jω axis</h3>
+<p>If the $j\omega$ roots are repeated, the response contains $t\sin(\omega t + \phi)$, which grows. The Routh table alone does not reveal this: it looks marginally stable. Check whether the auxiliary polynomial itself has repeated roots, for example $U(s) = (s^2 + 1)^2$.</p>
+
+<h3 id="design">Using Routh for design</h3>
+<figure class="diagram" id="fig-sfg-k"><img src="../../assets/img/diagrams/lcs-sfg-k1k2.svg" alt="Signal flow graph with parameters k1 and k2" loading="lazy"><figcaption>Choose $k_1$ and $k_2$ for this signal flow graph.</figcaption></figure>
+<p><b>Problem.</b> (a) Find $k_1$ and $k_2$ so that the system oscillates at $\omega_c = 9$ rad/s (critical stability). (b) Find $k_1$ and $k_2$ so that two poles are at $-2 \pm j2$.</p>
+<p>Mason's rule: one forward path $T_1 = \dfrac{8k_1}{s(s + 4)(s + 5)}$; two touching loops, $-\dfrac{8k_2s}{s(s + 4)(s + 5)}$ and $-\dfrac{8k_1}{s(s + 4)(s + 5)}$. So</p>
+<p class="eq">$$G(s) = \frac{8k_1}{s(s + 4)(s + 5) + 8k_2s + 8k_1}, \qquad s^3 + 9s^2 + (20 + 8k_2)s + 8k_1 = 0$$</p>
+<div class="tblwrap"><table class="tbl routh"><tr><th>$s^{3}$</th><td>1</td><td>$20 + 8k_2$</td></tr><tr><th>$s^{2}$</th><td>9</td><td>$8k_1$</td></tr><tr><th>$s^{1}$</th><td>$\dfrac{180 + 72k_2 - 8k_1}{9}$</td><td>0</td></tr><tr><th>$s^{0}$</th><td>$8k_1$</td><td></td></tr></table></div>
+<p>(a) Oscillation needs the $s^1$ row to vanish, and the $s^2$ row then gives the frequency: $9s^2 + 8k_1 = 0$, so $\omega_c^2 = 8k_1/9 = 81$ and $k_1 = 91.125$. Then $180 + 72k_2 - 8(91.125) = 0$ gives $k_2 = 7.625$.</p>
+<p>(b) With poles at $-2 \pm j2$, the factor is $(s + 2)^2 + 4 = s^2 + 4s + 8$. Dividing $s^3 + 9s^2 + (20 + 8k_2)s + 8k_1$ by it leaves the quotient $s + 5$ and the remainder $(8k_2 - 8)s + (8k_1 - 40)$, which must vanish: $k_2 = 1$, $k_1 = 5$. The third pole is at $-5$, so all poles are in the left half-plane and the system is stable.</p>
+<figure class="diagram" id="fig-exercise"><img src="../../assets/img/diagrams/lcs-rh-exercise.svg" alt="Loop with gain k and feedbacks of one eighth and three eighths" loading="lazy"><figcaption>Class exercise: find the range of $k$ for stability (solution in the exercises).</figcaption></figure>
+</article>
+    <!-- NOTES END -->
+    </section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the div below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">Class exercise (figure above): find the values of the amplifier gain $k$ for which the system is stable.</div><details><summary>Show solution</summary><div class="sol">The three loops have gains $-\dfrac{k}{8(s + 4)}$, $-\dfrac{3k}{8(s + 4)(s + 1)}$ and $-\dfrac{k}{s(s + 1)(s + 4)}$, all touching. Multiplying $1 - \sum L$ by $8s(s + 1)(s + 4)$ gives $8s^3 + (40 + k)s^2 + (32 + 4k)s + 8k = 0$. Third-order test: $(40 + k)(32 + 4k) &gt; 64k$, i.e. $4k^2 + 128k + 1280 &gt; 0$, which holds for every $k &gt; 0$. So the system is stable for <b>all</b> $k &gt; 0$ (and unstable for $k &lt; 0$, where the last coefficient is negative).</div></details></li><li><div class="q">Find the range of $K$ for stability of $s^4 + 4s^3 + 6s^2 + 4s + K = 0$.</div><details><summary>Show solution</summary><div class="sol">Column: $1, 4, 5, (20 - 4K)/5, K$. Stable for $0 &lt; K &lt; 5$. At $K = 5$, $U(s) = 5s^2 + 5$ gives oscillation at 1 rad/s.</div></details></li><li><div class="q">Use the reverse-coefficient method on $s^4 + s^3 + 2s^2 + 2s + 3 = 0$.</div><details><summary>Show solution</summary><div class="sol">Reverse: $3s^4 + 2s^3 + 2s^2 + s + 1$. Column: $3, 2, 0.5, -3, 1$: two sign changes, so two right-half-plane roots. (The original table has a zero in the $s^2$ row.)</div></details></li><li><div class="q">How many roots of $s^4 + 2s^3 + 3s^2 + 2s + 2 = 0$ lie in each region?</div><details><summary>Show solution</summary><div class="sol">Column: $1, 2, 2, 0$ (row of zeros). $U(s) = 2s^2 + 2$, $dU/ds = 4s$; continuing gives $4, 2$: no sign changes. So two roots at $\pm j$ (from $U$) and two in the left half-plane ($s^2 + 2s + 2$: $-1 \pm j$). Marginally stable.</div></details></li><li><div class="q">For unity feedback with $G(s) = \dfrac{K}{s(s + 2)(s + 4)}$, find the critical gain and the frequency of oscillation.</div><details><summary>Show solution</summary><div class="sol">$s^3 + 6s^2 + 8s + K = 0$; $s^1$ row $(48 - K)/6$. $K_{cr} = 48$; $U = 6s^2 + 48$ gives $\omega = \sqrt{8} = 2.83$ rad/s.</div></details></li></ol></section>
+    <nav class="prevnext"><a class="pn prev" href="03-time-domain-analysis.html"><small>← Lesson 3</small>Time-domain analysis</a><a class="pn next" href="05-root-locus.html"><small>Lesson 5 →</small>Root locus method</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

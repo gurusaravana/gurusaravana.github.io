@@ -470,3 +470,4 @@ ul.lessons .t{flex:1;min-width:160px;font-weight:500}
 @media (max-width:900px){.lesson-layout{grid-template-columns:minmax(0,1fr)}}
 .notes .eq,.notes table.tbl,.tblwrap,.sol,.katex-display{position:relative}
 .figgroup{font-size:16px;margin:22px 0 4px}
+.notes .katex-display{overflow-x:auto;overflow-y:hidden;padding:2px 0}

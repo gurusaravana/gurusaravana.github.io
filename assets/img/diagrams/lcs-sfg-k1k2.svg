@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 215" width="700" height="215" role="img" aria-label="Signal flow graph: X to node 1 with gain 1, node 1 to node 2 with gain k1, node 2 to node 3 with gain 8 over s(s+4)(s+5), node 3 to Y with gain 1; a loop of gain minus k2 s from node 3 back to node 2 and a loop of gain minus 1 from node 3 back to node 1">
+<title>Signal flow graph: X to node 1 with gain 1, node 1 to node 2 with gain k1, node 2 to node 3 with gain 8 over s(s+4)(s+5), node 3 to Y with gain 1; a loop of gain minus k2 s from node 3 back to node 2 and a loop of gain minus 1 from node 3 back to node 1</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker></defs>
+<rect width="700" height="215" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<path d="M56.0 90.0 L116.0 90.0" fill="none" stroke="#0077b6" stroke-width="2" marker-end="url(#ab)"/>
+<path d="M110.0 90.0 L164.0 90.0" fill="none" stroke="#0077b6" stroke-width="2"/>
+<text x="110.0" y="76.0" font-size="14" text-anchor="middle" fill="#0077b6" font-weight="400" font-style="italic">1</text>
+<path d="M176.0 90.0 L241.0 90.0" fill="none" stroke="#0077b6" stroke-width="2" marker-end="url(#ab)"/>
+<path d="M235.0 90.0 L294.0 90.0" fill="none" stroke="#0077b6" stroke-width="2"/>
+<text x="235.0" y="76.0" font-size="14" text-anchor="middle" fill="#0077b6" font-weight="400" font-style="italic">k₁</text>
+<path d="M306.0 90.0 L406.0 90.0" fill="none" stroke="#0077b6" stroke-width="2" marker-end="url(#ab)"/>
+<path d="M400.0 90.0 L494.0 90.0" fill="none" stroke="#0077b6" stroke-width="2"/>
+<text x="400.0" y="76.0" font-size="14" text-anchor="middle" fill="#0077b6" font-weight="400" font-style="italic">8 / [s(s+4)(s+5)]</text>
+<path d="M506.0 90.0 L571.0 90.0" fill="none" stroke="#0077b6" stroke-width="2" marker-end="url(#ab)"/>
+<path d="M565.0 90.0 L624.0 90.0" fill="none" stroke="#0077b6" stroke-width="2"/>
+<text x="565.0" y="76.0" font-size="14" text-anchor="middle" fill="#0077b6" font-weight="400" font-style="italic">1</text>
+<circle cx="50.0" cy="90.0" r="6" fill="#0f172a"/>
+<text x="50.0" y="118.0" font-size="15" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">X(s)</text>
+<circle cx="170.0" cy="90.0" r="6" fill="#0f172a"/>
+<circle cx="300.0" cy="90.0" r="6" fill="#0f172a"/>
+<circle cx="500.0" cy="90.0" r="6" fill="#0f172a"/>
+<circle cx="630.0" cy="90.0" r="6" fill="#0f172a"/>
+<text x="630.0" y="118.0" font-size="15" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">Y(s)</text>
+<path d="M500 96 Q400 170 306 98" fill="none" stroke="#ea7a1f" stroke-width="2" marker-end="url(#ao)"/>
+<text x="400.0" y="148.0" font-size="14" text-anchor="middle" fill="#ea7a1f" font-weight="600" font-style="italic">−k₂s</text>
+<path d="M500 96 Q335 280 176 98" fill="none" stroke="#059669" stroke-width="2" marker-end="url(#ag)"/>
+<text x="335.0" y="202.0" font-size="14" text-anchor="middle" fill="#059669" font-weight="600" font-style="italic">−1</text>
+</g>
+</svg>

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 2: Mechanical translational systems · Linear Control Systems</title>
+<meta name="description" content="Mechanical translational systems">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 2: Mechanical translational systems  (Linear Control Systems, EACT 533)
+  Edit the notes between the NOTES START and NOTES END markers below.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Figures live in assets/img/diagrams/ and are shown with a figure of class "diagram".
+  To add an exercise, copy one list item inside the list of class "exlist".
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
+  <nav class="links"><a href="../linear-control-systems.html">Course home</a><a href="../linear-control-systems.html#lessons">Lessons</a><a href="../linear-control-systems.html#figures">Figures</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../linear-control-systems.html">← Linear Control Systems</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 2 of 6 · Chapter 1</div>
+    <h1>Mechanical translational systems</h1>
+    <p>Linear Control Systems · EACT 533 · Postgraduate course</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">EACT 533 · Linear Control Systems</div><ol><li><a href="01-transfer-functions.html"><span class="n">1</span>Control systems, models and block diagrams</a></li><li class="on"><a href="02-mechanical-translational.html"><span class="n">2</span>Mechanical translational systems</a></li><li><a href="03-time-domain-analysis.html"><span class="n">3</span>Time-domain analysis</a></li><li><a href="04-stability-routh-hurwitz.html"><span class="n">4</span>Stability and the Routh–Hurwitz criterion</a></li><li><a href="05-root-locus.html"><span class="n">5</span>Root locus method</a></li><li><a href="06-frequency-response.html"><span class="n">6</span>Frequency response: Bode, polar and Nyquist plots</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Write force laws and impedances for springs, dampers and masses</li><li>Draw free-body diagrams and write Newton's law for each mass</li><li>Find transfer functions of one- and two-mass systems and a car suspension</li><li>Use force-voltage analogies</li></ul></div>
+    <nav class="figstrip" aria-label="Figures in this lesson"><a href="#fig-elements"><img src="../../assets/img/diagrams/lcs-mech-elements.svg" alt="" loading="lazy"><span>The three elements</span></a><a href="#fig-response"><img src="../../assets/img/diagrams/lcs-mech-response.svg" alt="" loading="lazy"><span>Effect of damping</span></a><a href="#fig-two-mass"><img src="../../assets/img/diagrams/lcs-two-mass.svg" alt="" loading="lazy"><span>Two masses</span></a><a href="#fig-suspension"><img src="../../assets/img/diagrams/lcs-suspension.svg" alt="" loading="lazy"><span>Car suspension</span></a></nav>
+    <section class="lsec"><h2>Notes</h2>
+    <!-- NOTES START -->
+    <article class="notes">
+<p>Mechanical systems, like electrical ones, have three passive linear elements. The <b>spring</b> and the <b>mass</b> store energy; the <b>viscous damper</b> dissipates it. Translational motion takes place along a straight or curved path and is described by displacement $x$, velocity $\dot{x}$ and acceleration $\ddot{x}$.</p>
+<figure class="diagram" id="fig-elements"><img src="../../assets/img/diagrams/lcs-mech-elements.svg" alt="Spring, damper and mass with their force laws" loading="lazy"><figcaption>The three translational elements, their force laws and their s-domain impedances.</figcaption></figure>
+<table class="tbl"><tr><th>Element</th><th>Force–displacement</th><th>Force–velocity</th><th>Impedance $F(s)/X(s)$</th></tr>
+<tr><td>Spring, stiffness $K$ (N/m)</td><td>$f = K(x_1 - x_2)$</td><td>$f = K\int(v_1 - v_2)\,dt$</td><td>$K$</td></tr>
+<tr><td>Damper, coefficient $B$ or $C$ (N·s/m)</td><td>$f = B(\dot{x}_1 - \dot{x}_2)$</td><td>$f = B(v_1 - v_2)$</td><td>$Bs$</td></tr>
+<tr><td>Mass $M$ (kg)</td><td>$f = M\ddot{x}$</td><td>$f = M\dot{v}$</td><td>$Ms^2$</td></tr></table>
+<p>Dashpots are added where natural damping is too small: door closers, vehicle suspensions, bridge and flyover bearings.</p>
+
+<h3 id="method">The method</h3>
+<p><b>Newton's second law</b>: the algebraic sum of external forces on a rigid body in a given direction equals its mass times its acceleration in that direction, $\sum F = Ma$. For each mass:</p>
+<ol>
+<li>Draw a <b>free-body diagram</b>: imagine the mass moving in the positive direction and draw every force that opposes or drives it.</li>
+<li>Write $\sum(\text{applied forces}) = \sum(\text{opposing forces})$.</li>
+<li>Take Laplace transforms with zero initial conditions and solve for the ratio you need.</li>
+</ol>
+<p class="key">A quick way to write each equation in the s-domain: [sum of impedances connected to this mass] × (its displacement) − [sum of impedances between this mass and each neighbour] × (that neighbour's displacement) = [applied force on this mass]. This is the mechanical twin of nodal analysis.</p>
+
+<h3 id="ex1">Example 1: mass and spring</h3>
+<p>A force $f(t)$ pushes a mass $M$ held by a spring $K$ on a frictionless surface. Forces opposing the motion are $f_M = M\ddot{x}$ and $f_K = Kx$, so</p>
+<p class="eq">$$f = M\ddot{x} + Kx \;\Rightarrow\; F(s) = (Ms^2 + K)X(s) \;\Rightarrow\; \frac{X(s)}{F(s)} = \frac{1}{Ms^2 + K}$$</p>
+<p>With $M = 1000$ kg and $K = 2000$ N/m: $\dfrac{X(s)}{F(s)} = \dfrac{0.001}{s^2 + 2}$. The poles are at $\pm j\sqrt{2}$, so a step force makes the mass oscillate for ever at $\sqrt{2} = 1.41$ rad/s.</p>
+
+<h3 id="ex2">Example 2: mass, spring and damper</h3>
+<figure class="diagram" id="fig-msd"><img src="../../assets/img/diagrams/mass-spring-damper.svg" alt="Mass-spring-damper" loading="lazy"><figcaption>Adding a damper: $f = f_M + f_B + f_K$.</figcaption></figure>
+<p class="eq">$$f = M\ddot{x} + B\dot{x} + Kx \;\Rightarrow\; \frac{X(s)}{F(s)} = \frac{1}{Ms^2 + Bs + K}$$</p>
+<p>With $M = 1000$, $B = 1000$ and $K = 2000$: $\dfrac{X(s)}{F(s)} = \dfrac{0.001}{s^2 + s + 2}$, so $\omega_n = \sqrt{2} = 1.41$ rad/s and $\zeta = \dfrac{1}{2\sqrt{2}} = 0.354$.</p>
+<p class="warn">The original slide writes this as $0.001/(s^2 + s + 1000)$. Dividing $1000s^2 + 1000s + 2000$ by 1000 gives $s^2 + s + 2$, so the constant term must be 2.</p>
+<figure class="diagram" id="fig-response"><img src="../../assets/img/diagrams/lcs-mech-response.svg" alt="Step responses with and without the damper" loading="lazy"><figcaption>A 1000 N step force. Without the damper the mass swings between 0 and 1 m; with it the mass settles at $F/K = 0.5$ m.</figcaption></figure>
+
+<h3 id="ex3">Example 3: a force applied through a spring</h3>
+<p>A force acts on the free end $x_1$ of a spring $K$; the other end drives a mass $M$ with friction $B$ (position $x_2$). With no mass at node $x_1$, the spring passes the force straight on:</p>
+<p class="eq">$$f = K(x_1 - x_2), \qquad 0 = K(x_2 - x_1) + M\ddot{x}_2 + B\dot{x}_2$$</p>
+<p>Adding the two equations gives $f = M\ddot{x}_2 + B\dot{x}_2$, so $\dfrac{X_2(s)}{F(s)} = \dfrac{1}{s(Ms + B)}$. The spring only stretches by $f/K$; the mass keeps moving at the constant velocity $f/B$ under a constant force.</p>
+
+<h3 id="ex4">Example 4: two masses</h3>
+<figure class="diagram" id="fig-two-mass"><img src="../../assets/img/diagrams/lcs-two-mass.svg" alt="Two-mass system" loading="lazy"><figcaption>$M_1$ is held by $K_1$ and $B$ and pushed by $f$; spring $K_2$ couples it to a frictionless $M_2$.</figcaption></figure>
+<p>One equation per mass:</p>
+<p class="eq">$$M_1\ddot{y}_1 + B\dot{y}_1 + K_1y_1 + K_2(y_1 - y_2) = f, \qquad M_2\ddot{y}_2 + K_2(y_2 - y_1) = 0$$</p>
+<p>In matrix form, with zero initial conditions:</p>
+<p class="eq">$$\begin{bmatrix} M_1s^2 + Bs + K_1 + K_2 & -K_2 \\ -K_2 & M_2s^2 + K_2 \end{bmatrix}\begin{bmatrix} Y_1 \\ Y_2 \end{bmatrix} = \begin{bmatrix} F \\ 0 \end{bmatrix}$$</p>
+<p>By Cramer's rule,</p>
+<p class="eq">$$\frac{Y_2(s)}{F(s)} = \frac{K_2}{(M_1s^2 + Bs + K_1 + K_2)(M_2s^2 + K_2) - K_2^2}, \qquad \frac{Y_1(s)}{F(s)} = \frac{M_2s^2 + K_2}{\text{same denominator}}$$</p>
+<p>The denominator (the determinant) is the characteristic polynomial: fourth order, because two masses store kinetic energy and two springs store potential energy. A more general two-mass arrangement with dampers on both masses is drawn in <a href="../control-system-engineering/04-mechanical-systems.html">Control System Engineering, Lesson 4</a>.</p>
+
+<h3 id="ex5">Example 5: car suspension</h3>
+<figure class="diagram" id="fig-suspension"><img src="../../assets/img/diagrams/lcs-suspension.svg" alt="Quarter-car suspension" loading="lazy"><figcaption>A quarter-car model. The road moves the bottom of the spring and damper; the body follows.</figcaption></figure>
+<p>The spring and damper forces depend on the <i>relative</i> motion $x_o - x_i$:</p>
+<p class="eq">$$m\ddot{x}_o + b(\dot{x}_o - \dot{x}_i) + k(x_o - x_i) = 0 \;\Rightarrow\; m\ddot{x}_o + b\dot{x}_o + kx_o = b\dot{x}_i + kx_i$$</p>
+<p class="eq">$$\frac{X_o(s)}{X_i(s)} = \frac{bs + k}{ms^2 + bs + k}$$</p>
+<p>The DC gain is 1: on a long ramp in the road the body simply follows. The damper adds a zero at $-k/b$, which is why a stiff damper passes sharp bumps through to the body.</p>
+
+<h3 id="rotational">Rotational systems and analogies</h3>
+<p>Rotational systems have the same three elements, with torque $T$ in place of force and angle $\theta$ in place of displacement: torsional spring $T = K(\theta_1 - \theta_2)$, rotational damper $T = B(\dot{\theta}_1 - \dot{\theta}_2)$ and moment of inertia $T = J\ddot{\theta}$. A single inertia on a shaft gives $\dfrac{\Theta(s)}{T(s)} = \dfrac{1}{Js^2 + Bs + K}$.</p>
+<table class="tbl"><tr><th>Mechanical</th><th>Electrical, force–voltage</th><th>Electrical, force–current</th></tr>
+<tr><td>Force $f$ (torque $T$)</td><td>Voltage $v$</td><td>Current $i$</td></tr>
+<tr><td>Velocity $\dot{x}$ ($\dot{\theta}$)</td><td>Current $i$</td><td>Voltage $v$</td></tr>
+<tr><td>Mass $M$ (inertia $J$)</td><td>Inductance $L$</td><td>Capacitance $C$</td></tr>
+<tr><td>Damper $B$</td><td>Resistance $R$</td><td>Conductance $1/R$</td></tr>
+<tr><td>Spring $K$</td><td>Elastance $1/C$</td><td>Reciprocal inductance $1/L$</td></tr></table>
+<p>So $M\ddot{x} + B\dot{x} + Kx = f$ and $L\ddot{q} + R\dot{q} + q/C = v$ are the same equation: the mass-spring-damper and the series RLC circuit are analogous systems.</p>
+</article>
+    <!-- NOTES END -->
+    </section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the div below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">A mass-spring-damper has $M = 2$ kg, $B = 4$ N·s/m, $K = 10$ N/m. Find $X(s)/F(s)$, $\omega_n$, $\zeta$ and the final displacement for a 1 N step force.</div><details><summary>Show solution</summary><div class="sol">$\dfrac{X}{F} = \dfrac{1}{2s^2 + 4s + 10} = \dfrac{0.5}{s^2 + 2s + 5}$. $\omega_n = \sqrt{5} = 2.24$ rad/s, $2\zeta\omega_n = 2$ so $\zeta = 0.447$. Final value $1/K = 0.1$ m.</div></details></li><li><div class="q">In example 4 take $M_1 = M_2 = 1$, $B = 1$, $K_1 = K_2 = 1$. Find $Y_2(s)/F(s)$ and its DC gain. Explain the DC gain physically.</div><details><summary>Show solution</summary><div class="sol">$(s^2 + s + 2)(s^2 + 1) - 1 = s^4 + s^3 + 3s^2 + s + 1$, so $\dfrac{Y_2}{F} = \dfrac{1}{s^4 + s^3 + 3s^2 + s + 1}$, DC gain 1 m/N. At rest $M_2$ needs no force, so $K_2$ is unstretched; $K_1$ carries the whole 1 N and stretches 1 m, and both masses move 1 m.</div></details></li><li><div class="q">A quarter-car has $m = 250$ kg, $k = 10\,000$ N/m, $b = 1000$ N·s/m. Find $X_o/X_i$, $\omega_n$ and $\zeta$.</div><details><summary>Show solution</summary><div class="sol">$\dfrac{X_o}{X_i} = \dfrac{1000s + 10\,000}{250s^2 + 1000s + 10\,000} = \dfrac{4s + 40}{s^2 + 4s + 40}$. $\omega_n = \sqrt{40} = 6.32$ rad/s, $\zeta = 4/(2 \times 6.32) = 0.316$.</div></details></li><li><div class="q">Write the force-voltage analogue circuit for example 2 and give its element values.</div><details><summary>Show solution</summary><div class="sol">A series RLC loop driven by $v(t) \leftrightarrow f(t)$: $L = M = 1000$ H, $R = B = 1000\ \Omega$, $1/C = K = 2000$ so $C = 0.5$ mF. The loop current is the analogue of the velocity.</div></details></li><li><div class="q">A rotor with $J = 0.5$ kg·m² and bearing friction $B = 2$ N·m·s/rad (no spring) is driven by a torque $T$. Find $\Omega(s)/T(s)$ for the speed and the time constant.</div><details><summary>Show solution</summary><div class="sol">$J\dot{\omega} + B\omega = T$ gives $\dfrac{\Omega}{T} = \dfrac{1}{0.5s + 2} = \dfrac{0.5}{0.25s + 1}$: time constant $J/B = 0.25$ s, steady speed 0.5 rad/s per N·m.</div></details></li></ol></section>
+    <nav class="prevnext"><a class="pn prev" href="01-transfer-functions.html"><small>← Lesson 1</small>Control systems, models and block diagrams</a><a class="pn next" href="03-time-domain-analysis.html"><small>Lesson 3 →</small>Time-domain analysis</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

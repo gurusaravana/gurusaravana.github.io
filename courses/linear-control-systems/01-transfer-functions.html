@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 1: Control systems, models and block diagrams · Linear Control Systems</title>
+<meta name="description" content="Control systems, models and block diagrams">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 1: Control systems, models and block diagrams  (Linear Control Systems, EACT 533)
+  Edit the notes between the NOTES START and NOTES END markers below.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Figures live in assets/img/diagrams/ and are shown with a figure of class "diagram".
+  To add an exercise, copy one list item inside the list of class "exlist".
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
+  <nav class="links"><a href="../linear-control-systems.html">Course home</a><a href="../linear-control-systems.html#lessons">Lessons</a><a href="../linear-control-systems.html#figures">Figures</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../linear-control-systems.html">← Linear Control Systems</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 1 of 6 · Chapter 1</div>
+    <h1>Control systems, models and block diagrams</h1>
+    <p>Linear Control Systems · EACT 533 · Postgraduate course</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">EACT 533 · Linear Control Systems</div><ol><li class="on"><a href="01-transfer-functions.html"><span class="n">1</span>Control systems, models and block diagrams</a></li><li><a href="02-mechanical-translational.html"><span class="n">2</span>Mechanical translational systems</a></li><li><a href="03-time-domain-analysis.html"><span class="n">3</span>Time-domain analysis</a></li><li><a href="04-stability-routh-hurwitz.html"><span class="n">4</span>Stability and the Routh–Hurwitz criterion</a></li><li><a href="05-root-locus.html"><span class="n">5</span>Root locus method</a></li><li><a href="06-frequency-response.html"><span class="n">6</span>Frequency response: Bode, polar and Nyquist plots</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Say what a control system is and trace its history from the water clock to state space</li><li>Compare open-loop and closed-loop control and classify a system</li><li>Derive a transfer function from a differential equation</li><li>Reduce block diagrams and apply Mason's gain formula</li></ul></div>
+    <nav class="figstrip" aria-label="Figures in this lesson"><a href="#fig-closed"><img src="../../assets/img/diagrams/cs-closed-loop.svg" alt="" loading="lazy"><span>Closed loop</span></a><a href="#fig-class"><img src="../../assets/img/diagrams/cs-classification.svg" alt="" loading="lazy"><span>Classification</span></a><a href="#fig-canonical"><img src="../../assets/img/diagrams/bd-canonical.svg" alt="" loading="lazy"><span>Canonical form</span></a><a href="#fig-ex11"><img src="../../assets/img/diagrams/lcs-bd-ex11.svg" alt="" loading="lazy"><span>Reduction example A</span></a><a href="#fig-ex12"><img src="../../assets/img/diagrams/lcs-bd-ex12.svg" alt="" loading="lazy"><span>Reduction example B</span></a></nav>
+    <section class="lsec"><h2>Notes</h2>
+    <!-- NOTES START -->
+    <article class="notes">
+<p>Control is everywhere: aircraft and spacecraft, process plants, homes and buildings, cars and trains, mobile networks. It also exists in nature. The pancreas regulates blood sugar, adrenaline raises the heart rate in "fight or flight", our eyes follow a moving object and our hands place an object precisely where we want it.</p>
+<p>A <b>system</b> is an organised collection of parts that work together toward one goal: inputs go through processes and produce outputs. A <b>control system</b> is a set of subsystems and processes (plants) assembled to obtain a <b>desired output with desired performance</b> for a specified input.</p>
+
+<h3>A short history</h3>
+<table class="tbl"><tr><th>When</th><th>Milestone</th></tr>
+<tr><td>about 300 BC</td><td>Ktesibios' water clock: liquid-level control with a float valve.</td></tr>
+<tr><td>1600s</td><td>Drebbel's incubator for hatching eggs (temperature control); Papin's safety valve for steam pressure (1681).</td></tr>
+<tr><td>1745 to 1788</td><td>Windmill speed control by pitching the blades; Watt's fly-ball governor for steam engines.</td></tr>
+<tr><td>1868 and 1877</td><td>Maxwell's stability analysis of governors; Routh's stability criterion (Adams Prize, 1877); Lyapunov's theory (1892).</td></tr>
+<tr><td>1912</td><td>Nils Gustaf Dalén receives the Nobel Prize in Physics for automatic regulators used with gas accumulators in lighthouses and buoys.</td></tr>
+<tr><td>1920s to 1930s</td><td>Automatic ship steering (1922), the PID controller (described by Callender and others in 1936), Nyquist's (1932) and Bode's feedback amplifier theory.</td></tr>
+<tr><td>1948</td><td>Evans' root locus method.</td></tr>
+<tr><td>1960s onward</td><td>State-variable ("modern") control: Bellman and Kalman in the USA, Pontryagin in the USSR. Today: navigation, space, smart homes, chemical processes, entertainment.</td></tr></table>
+
+<h3 id="loops">Open loop and closed loop</h3>
+<figure class="diagram" id="fig-open"><img src="../../assets/img/diagrams/cs-open-loop.svg" alt="Open-loop control system" loading="lazy"><figcaption>Open loop: the controller acts on the plant, but nothing checks the output.</figcaption></figure>
+<p>An <b>open-loop</b> system cannot correct for disturbances because it never measures what it produced. Everyday examples: a hand dryer (blows as long as your hand is there, however dry it is), a timer-based washing machine, a bread toaster, a timer clothes dryer, a light switch and the volume knob on a stereo.</p>
+<figure class="diagram" id="fig-closed"><img src="../../assets/img/diagrams/cs-closed-loop.svg" alt="Closed-loop control system" loading="lazy"><figcaption>Closed loop: a sensor feeds the output back, and the controller acts on the error.</figcaption></figure>
+<p>A <b>closed-loop</b> (feedback) system measures the output, compares it with the reference and acts on the difference. Examples are room temperature control with a thermostat, an electric iron with a bimetallic strip, and the human body's temperature regulation. Feedback makes a system less sensitive to disturbances and parameter changes, at the cost of more parts and a possible loss of stability.</p>
+<table class="tbl"><tr><th>Open loop</th><th>Closed loop</th></tr>
+<tr><td>Simple, cheap, easy to build</td><td>More complex and costly</td></tr>
+<tr><td>Cannot correct disturbances</td><td>Corrects disturbances and parameter changes</td></tr>
+<tr><td>Accuracy depends on calibration</td><td>Accurate, because the error is measured</td></tr>
+<tr><td>Always stable if the plant is stable</td><td>Can become unstable if the gain is too high</td></tr></table>
+<p>A <b>regulator</b> holds the output steady against unknown disturbances; a <b>servo</b> (tracking) system follows a changing reference. Control done by a person (driving a car, a fan switched by hand) is <b>manual</b>; control done by machines alone (a thermostat, an air conditioner) is <b>automatic</b>.</p>
+
+<h3 id="classes">Classifying control systems</h3>
+<figure class="diagram" id="fig-class"><img src="../../assets/img/diagrams/cs-classification.svg" alt="Classification of control systems" loading="lazy"><figcaption>A system is described by several independent labels at once.</figcaption></figure>
+<ul>
+<li><b>Linear or nonlinear.</b> A linear system obeys superposition: additivity, $f(x_1 + x_2) = f(x_1) + f(x_2)$, and homogeneity, $f(ax) = af(x)$. Strictly linear systems do not exist in practice, but most components are linear over a limited range of signals, so we model them as linear (for example $y = 3u$ or $y = -2u$). Road adhesion against wheel creep, or a valve's opening against temperature, are nonlinear.</li>
+<li><b>Time-invariant or time-varying.</b> $y(t) = -2u(t)$ is time-invariant; $y(t) = 2u(t) - 3t$ has a parameter that changes with time.</li>
+<li><b>Lumped or distributed.</b> Lumped systems are described by ordinary differential equations, such as $M\ddot{x} + C\dot{x} + kx = f$. Distributed systems (a long transmission line, heat flow in a rod) need partial differential equations.</li>
+<li><b>Continuous or discrete.</b> All signals are functions of continuous time $t$, or some are known only at sampling instants $x[n]$ (a microprocessor speed controller).</li>
+<li><b>Deterministic or stochastic.</b> The response to a given input is predictable and repeatable, or it is random.</li>
+<li><b>SISO or MIMO.</b> One input and one output, or several of each.</li>
+</ul>
+<p>Two systems are <b>analogous</b> when their models have the same mathematical form, even though the variables mean different things. A spring-mass-damper and a series RLC circuit are the classic pair (Lesson 2).</p>
+
+<h3 id="models">Mathematical models</h3>
+<p>A model is a set of equations, usually differential equations, that describes how the outputs respond to the inputs. We use models for simulation, prediction, diagnosis, performance evaluation and controller design. Physical laws give the structure (linear or nonlinear, and the order); experiments estimate or validate the parameters.</p>
+<ul>
+<li><b>Black box</b>: only the input and output data are known. For example, a room heater's valve position $x$ (0 to 10) against room temperature $y$ (0, 3, 6, 12, 20, 33 °C at $x$ = 0, 2, 4, 6, 8, 10) is fitted well by $y \approx 0.31x^2 + 0.046x + 0.64$.</li>
+<li><b>Grey box</b>: the data plus some knowledge of the internal behaviour.</li>
+<li><b>White box</b>: complete knowledge of the internal dynamics, so the model comes from physical laws.</li>
+</ul>
+<p>The approach is always the same: define the system and its parts, state the assumptions, write the differential equations, solve for the outputs, check the solutions against the assumptions, and redesign if needed. Plant models come in two forms: a <b>transfer function</b> $G(s)$ (frequency domain) or <b>state-space</b> equations $\dot{x} = Ax + Bu$, $y = Cx + Du$ (time domain).</p>
+
+<h3 id="tf">The transfer function</h3>
+<p>The Laplace transform turns linear constant-coefficient differential equations into algebraic equations: differentiation in time becomes multiplication by $s$. The <b>transfer function</b> is the ratio of the Laplace transform of the output to that of the input, <b>with all initial conditions zero</b>:</p>
+<p class="eq">$$G(s) = \frac{C(s)}{R(s)} = \frac{b_m s^m + b_{m-1}s^{m-1} + \dots + b_0}{a_n s^n + a_{n-1}s^{n-1} + \dots + a_0}$$</p>
+<p><b>Worked example.</b> Find the transfer function of $\ddot{y} + 12\dot{y} + 32y = 32u(t)$ and its unit-step response.</p>
+<p>Transform with zero initial conditions: $s^2Y(s) + 12sY(s) + 32Y(s) = 32U(s)$, so</p>
+<p class="eq">$$G(s) = \frac{Y(s)}{U(s)} = \frac{32}{s^2 + 12s + 32} = \frac{32}{(s + 4)(s + 8)}$$</p>
+<p>For a unit step, $U(s) = 1/s$ and partial fractions give $Y(s) = \dfrac{1}{s} - \dfrac{2}{s + 4} + \dfrac{1}{s + 8}$, so $y(t) = 1 - 2e^{-4t} + e^{-8t}$. Partial fractions come in three flavours: real distinct roots, real repeated roots and complex roots.</p>
+
+<h3 id="bd">Block diagrams</h3>
+<p>A block diagram is a shorthand picture of the cause-and-effect relations in a system. It has four components: <b>signals</b> (arrows), <b>blocks</b> (the transfer function multiplies its input), <b>summing junctions</b> (add or subtract signals) and <b>pick-off (take-off) points</b> (send the same signal, undiminished, to several places).</p>
+<figure class="diagram" id="fig-canonical"><img src="../../assets/img/diagrams/bd-canonical.svg" alt="Canonical feedback loop" loading="lazy"><figcaption>The canonical form of a feedback control system.</figcaption></figure>
+<table class="tbl"><tr><th>Name</th><th>Expression</th></tr>
+<tr><td>Feed-forward transfer function</td><td>$C(s)/E(s) = G(s)$</td></tr>
+<tr><td>Open-loop transfer function</td><td>$B(s)/E(s) = G(s)H(s)$</td></tr>
+<tr><td>Closed-loop transfer function (control ratio)</td><td>$C(s)/R(s) = \dfrac{G(s)}{1 \pm G(s)H(s)}$</td></tr>
+<tr><td>Feedback ratio (primary feedback ratio)</td><td>$B(s)/R(s) = \dfrac{G(s)H(s)}{1 \pm G(s)H(s)}$</td></tr>
+<tr><td>Error ratio (actuating signal ratio)</td><td>$E(s)/R(s) = \dfrac{1}{1 \pm G(s)H(s)}$</td></tr>
+<tr><td>Characteristic equation</td><td>$1 \pm G(s)H(s) = 0$</td></tr></table>
+<p>The upper sign is for negative feedback. The denominator of the closed-loop transfer function, set to zero, is the <b>characteristic equation</b>; its roots are the closed-loop poles. With $H(s) = 1$ the loop is a <b>unity feedback</b> system.</p>
+<h4>Reduction rules</h4>
+<figure class="diagram" id="fig-rules"><img src="../../assets/img/diagrams/bd-rules-series-parallel.svg" alt="Series and parallel blocks" loading="lazy"><figcaption>Blocks in cascade multiply; blocks in parallel add.</figcaption></figure>
+<ol>
+<li>Blocks in cascade: $G_1G_2$.</li>
+<li>Blocks in parallel: $G_1 \pm G_2$.</li>
+<li>Moving a summing point behind a block: multiply the other input by $G$. Moving it ahead of a block: divide by $G$.</li>
+<li>Moving a pick-off point behind a block: add $1/G$ on the branch. Moving it ahead of a block: add $G$ on the branch.</li>
+<li>Eliminating a feedback loop: $\dfrac{G}{1 \pm GH}$.</li>
+<li>Two neighbouring summing points can be swapped.</li>
+</ol>
+<p>Reduce in this order: combine cascades, combine parallels, eliminate inner loops, move summing and pick-off points to untangle overlapping loops, and repeat.</p>
+<figure class="diagram" id="fig-ex11"><img src="../../assets/img/diagrams/lcs-bd-ex11.svg" alt="Block diagram with three blocks and three feedback paths" loading="lazy"><figcaption>Worked example A: three forward blocks, a positive loop through $H_1$, a negative loop through $H_2$ and unity feedback.</figcaption></figure>
+<p><b>Worked example A.</b> The $H_2$ loop starts at the output but ends between $G_1$ and $G_2$, so it overlaps the $H_1$ loop. Move the $H_2$ summing point back, ahead of $G_1$: the signal now passes through $G_1$, so the branch becomes $H_2/G_1$. The two summing points ahead of $G_1$ can be swapped, and the loops untangle:</p>
+<ol>
+<li>Positive loop $G_1G_2$ with $H_1$: $\dfrac{G_1G_2}{1 - G_1G_2H_1}$.</li>
+<li>Cascade with $G_3$ and close the $H_2/G_1$ loop: $\dfrac{G_1G_2G_3}{1 - G_1G_2H_1 + G_2G_3H_2}$.</li>
+<li>Close the unity loop:</li>
+</ol>
+<p class="eq">$$\frac{C(s)}{R(s)} = \frac{G_1G_2G_3}{1 - G_1G_2H_1 + G_2G_3H_2 + G_1G_2G_3}$$</p>
+<figure class="diagram" id="fig-ex12"><img src="../../assets/img/diagrams/lcs-bd-ex12.svg" alt="Block diagram with two blocks and three feedback paths" loading="lazy"><figcaption>Worked example B: two loops that do not touch, inside an outer loop through $H_3$.</figcaption></figure>
+<p><b>Worked example B.</b> The inner loop around $G_2$ gives $\dfrac{G_2}{1 + G_2H_2}$. The loop through $H_1$ around $G_1$ gives $\dfrac{G_1}{1 + G_1H_1}$. These are in cascade, and $H_3$ closes the outer loop:</p>
+<p class="eq">$$\frac{Y(s)}{R(s)} = \frac{G_1G_2}{1 + G_1H_1 + G_2H_2 + G_1G_2H_3 + G_1G_2H_1H_2}$$</p>
+<p class="key">The last term $G_1G_2H_1H_2$ is the product of two loops that share no node. Mason's gain formula below produces such terms automatically.</p>
+<h4>Several inputs</h4>
+<p>For a linear system, find the output due to each input with the other inputs set to zero, then add the results (superposition). With a reference $R$ and a disturbance $U$ entering between $G_1$ and $G_2$ of a unity loop, $C = \dfrac{G_1G_2}{1 + G_1G_2}R + \dfrac{G_2}{1 + G_1G_2}U$.</p>
+
+<h3 id="sfg">Signal flow graphs and Mason's rule</h3>
+<figure class="diagram" id="fig-sfg"><img src="../../assets/img/diagrams/sfg-basics.svg" alt="Block and signal flow graph equivalents" loading="lazy"><figcaption>A signal flow graph replaces blocks with branches and signals with nodes.</figcaption></figure>
+<p>S. J. Mason's signal flow graph (SFG) represents a set of linear algebraic equations as nodes (variables) joined by directed branches (gains). Terms: <b>input node</b> (only outgoing branches), <b>output node</b>, <b>chain node</b> (in and out), <b>forward path</b> (input to output, no node twice), <b>loop</b> (closed path), <b>self loop</b>, <b>path gain</b> and <b>loop gain</b> (product of branch gains), <b>touching</b> and <b>non-touching</b> loops. Mason's gain formula gives the transfer function in one step:</p>
+<p class="eq">$$T = \frac{1}{\Delta}\sum_k P_k\Delta_k, \qquad \Delta = 1 - \sum L_i + \sum L_iL_j - \sum L_iL_jL_k + \dots$$</p>
+<p>$P_k$ is the gain of forward path $k$, the sums run over single loops, pairs of non-touching loops, triples, and so on, and $\Delta_k$ is $\Delta$ with every loop that touches path $k$ removed. Check example B: $P_1 = G_1G_2$; loops $-G_1H_1$, $-G_2H_2$, $-G_1G_2H_3$; one non-touching pair $(-G_1H_1)(-G_2H_2)$; every loop touches the path, so $\Delta_1 = 1$. The same answer appears at once.</p>
+</article>
+    <!-- NOTES END -->
+    </section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the div below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">Give two open-loop and two closed-loop systems from your home or workplace, and say what the feedback sensor is in each closed-loop one.</div><details><summary>Show solution</summary><div class="sol">Open loop: toaster, timer washing machine, hand dryer, light switch. Closed loop: refrigerator or air conditioner (temperature sensor), electric iron (bimetallic strip), water tank with float valve (float), cruise control (speed sensor).</div></details></li><li><div class="q">Is $y(t) = 3u(t) + 5$ linear in the strict sense? Explain.</div><details><summary>Show solution</summary><div class="sol">No. Homogeneity fails: doubling $u$ gives $6u + 5$, not $2(3u + 5)$. It is <b>affine</b>; it becomes linear in the deviation variables $\Delta y = 3\Delta u$ around an operating point.</div></details></li><li><div class="q">Find $G(s) = C(s)/R(s)$ for $c''' + 3c'' + 7c' + 5c = r'' + 4r' + 3r$.</div><details><summary>Show solution</summary><div class="sol">$G(s) = \dfrac{s^2 + 4s + 3}{s^3 + 3s^2 + 7s + 5}$ (zero initial conditions).</div></details></li><li><div class="q">For the canonical loop with $G = \dfrac{K}{s(s + 1)}$ and $H = \dfrac{1}{s + 2}$, write the open-loop TF, the closed-loop TF and the characteristic equation, and give the closed-loop poles and zeros when $K = 10$.</div><details><summary>Show solution</summary><div class="sol">Open loop $GH = \dfrac{K}{s(s + 1)(s + 2)}$. Closed loop $\dfrac{K(s + 2)}{s(s + 1)(s + 2) + K} = \dfrac{K(s + 2)}{s^3 + 3s^2 + 2s + K}$. Characteristic equation $s^3 + 3s^2 + 2s + K = 0$. For $K = 10$: zero at $-2$; poles at $-3.31$ and $0.15 \pm j1.73$. Two poles are in the right half-plane, so the loop is unstable (it is stable only for $0 < K < 6$, Lesson 4).</div></details></li><li><div class="q">Reduce example A by Mason's rule and confirm the result.</div><details><summary>Show solution</summary><div class="sol">One forward path $G_1G_2G_3$. Loops: $+G_1G_2H_1$, $-G_2G_3H_2$, $-G_1G_2G_3$; all touch each other and the path. $\Delta = 1 - G_1G_2H_1 + G_2G_3H_2 + G_1G_2G_3$, $\Delta_1 = 1$, giving the same $C/R$.</div></details></li><li><div class="q">In a unity loop $G = G_1G_2$ with $G_1 = 10$, $G_2 = \dfrac{1}{s + 1}$, a step disturbance $U = 1/s$ enters between $G_1$ and $G_2$. Find the steady-state output due to the disturbance alone.</div><details><summary>Show solution</summary><div class="sol">$C_U = \dfrac{G_2}{1 + G_1G_2}U = \dfrac{1}{s + 11}\cdot\dfrac{1}{s}$, so $c_U(\infty) = 1/11 = 0.091$. Without feedback it would be 1; feedback cuts the disturbance effect by $1 + G_1G_2(0) = 11$.</div></details></li></ol></section>
+    <nav class="prevnext"><a class="pn prev" href="../linear-control-systems.html"><small>← Course home</small>Linear Control Systems</a><a class="pn next" href="02-mechanical-translational.html"><small>Lesson 2 →</small>Mechanical translational systems</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>
