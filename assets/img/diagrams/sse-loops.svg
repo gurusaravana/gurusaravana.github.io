@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 210" width="720" height="210" role="img" aria-label="Left: unity feedback loop where the error E(s) equals R(s) minus C(s). Right: non-unity feedback with H(s) in the feedback path, where the true error is R(s) minus C(s), found from E(s) = R(s) times 1 minus T(s)">
+<title>Left: unity feedback loop where the error E(s) equals R(s) minus C(s). Right: non-unity feedback with H(s) in the feedback path, where the true error is R(s) minus C(s), found from E(s) = R(s) times 1 minus T(s)</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker></defs>
+<rect width="720" height="210" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<text x="30.0" y="58.0" font-size="14" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">R(s)</text>
+<path d="M15.0 70.0 L76.0 70.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<circle cx="90.0" cy="70.0" r="12" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M81.6 61.6L98.4 78.4M81.6 78.4L98.4 61.6" stroke="#0f172a" stroke-width="1.3"/>
+<text x="70.0" y="63.0" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">+</text>
+<text x="102.0" y="95.0" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">−</text>
+<path d="M102.0 70.0 L160.0 70.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="130.0" y="58.0" font-size="14" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">E(s)</text>
+<rect x="161.0" y="48.0" width="78.0" height="44.0" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="200.0" y="75.6" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400">G(s)</text>
+<path d="M239.0 70.0 L330.0 70.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="312.0" y="58.0" font-size="14" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">C(s)</text>
+<circle cx="285.0" cy="70.0" r="4" fill="#0f172a"/>
+<path d="M285.0 70.0 L285.0 135.0 L90.0 135.0 L90.0 82.0" fill="none" stroke="#0077b6" stroke-width="2" marker-end="url(#ab)"/>
+<text x="175.0" y="180.0" font-size="13.5" text-anchor="middle" fill="#0f172a" font-weight="400">Unity feedback: E(s) = R(s) − C(s)</text>
+<text x="400.0" y="58.0" font-size="14" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">R(s)</text>
+<path d="M385.0 70.0 L446.0 70.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<circle cx="460.0" cy="70.0" r="12" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M451.6 61.6L468.4 78.4M451.6 78.4L468.4 61.6" stroke="#0f172a" stroke-width="1.3"/>
+<text x="440.0" y="63.0" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">+</text>
+<text x="472.0" y="95.0" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">−</text>
+<path d="M472.0 70.0 L530.0 70.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="500.0" y="58.0" font-size="14" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">E<tspan baseline-shift="sub" font-size="70%">a</tspan>(s)</text>
+<rect x="531.0" y="48.0" width="78.0" height="44.0" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="570.0" y="75.6" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400">G(s)</text>
+<path d="M609.0 70.0 L700.0 70.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="682.0" y="58.0" font-size="14" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">C(s)</text>
+<circle cx="655.0" cy="70.0" r="4" fill="#0f172a"/>
+<path d="M655.0 70.0 L655.0 135.0 L609.0 135.0" fill="none" stroke="#0077b6" stroke-width="2" marker-end="url(#ab)"/>
+<rect x="531.0" y="115.0" width="78.0" height="40.0" rx="4" fill="#fff" stroke="#0077b6" stroke-width="2"/>
+<text x="570.0" y="140.6" font-size="16" text-anchor="middle" fill="#0077b6" font-weight="400">H(s)</text>
+<path d="M531.0 135.0 L460.0 135.0 L460.0 82.0" fill="none" stroke="#0077b6" stroke-width="2" marker-end="url(#ab)"/>
+<text x="545.0" y="180.0" font-size="13.5" text-anchor="middle" fill="#0f172a" font-weight="400">Non-unity: use E(s) = R(s)[1 − T(s)]</text>
+</g>
+</svg>

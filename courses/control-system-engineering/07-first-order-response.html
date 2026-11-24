@@ -37,19 +37,47 @@
   <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">Module 1 · System components and their representation</div><ol><li><a href="01-introduction.html"><span class="n">1</span>Introduction to control systems</a></li><li><a href="02-laplace-and-partial-fractions.html"><span class="n">2</span>Laplace transform and partial fractions</a></li><li><a href="03-electrical-systems.html"><span class="n">3</span>Models of electrical systems</a></li><li><a href="04-mechanical-systems.html"><span class="n">4</span>Models of mechanical systems</a></li><li><a href="05-block-diagrams.html"><span class="n">5</span>Block diagram reduction</a></li><li><a href="06-signal-flow-graphs.html"><span class="n">6</span>Signal flow graphs and Mason's gain formula</a></li></ol></div><div class="mod"><div class="modname">Module 2 · Time response analysis</div><ol><li class="on"><a href="07-first-order-response.html"><span class="n">7</span>Standard test signals and first-order response</a></li><li><a href="08-second-order-response.html"><span class="n">8</span>Second-order response and time-domain specifications</a></li><li><a href="09-steady-state-errors.html"><span class="n">9</span>Steady-state errors and error constants</a></li><li><a href="10-p-pi-pid-controllers.html"><span class="n">10</span>P, PI and PID controllers</a></li></ol></div><div class="mod"><div class="modname">Module 3 · Stability analysis</div><ol><li><a href="11-routh-stability.html"><span class="n">11</span>Stability and the Routh criterion</a></li><li><a href="12-root-locus.html"><span class="n">12</span>Root locus</a></li><li><a href="13-bode-plots.html"><span class="n">13</span>Frequency response and Bode plots</a></li><li><a href="14-nyquist.html"><span class="n">14</span>Nyquist stability criterion</a></li><li><a href="15-compensation.html"><span class="n">15</span>Lead, lag and lead-lag compensation</a></li></ol></div><div class="mod"><div class="modname">Module 4 · State space analysis</div><ol><li><a href="16-state-space-models.html"><span class="n">16</span>State variables and state models</a></li><li><a href="17-state-equation-solution.html"><span class="n">17</span>State diagrams and solution of the state equation</a></li><li><a href="18-controllability-observability.html"><span class="n">18</span>Controllability and observability</a></li><li><a href="19-nonlinear-systems.html"><span class="n">19</span>Introduction to nonlinear systems</a></li></ol></div></details></aside>
   <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
   <div class="lmain">
-    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Use step, ramp, impulse and parabolic test inputs</li><li>Derive the step response of a first-order system</li><li>Find the time constant from a response</li></ul></div>
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Separate the transient and steady-state parts of a response</li><li>Tell system order from system type</li><li>Use the impulse, step, ramp and parabolic test inputs</li><li>Find the time constant, rise time and settling time of a first-order system</li></ul></div>
+    <nav class="figstrip" aria-label="Figures in this lesson"><a href="#transient"><img src="../../assets/img/diagrams/tr-transient-steady.svg" alt="" loading="lazy"><span>Transient vs steady state</span></a><a href="#fig-signals"><img src="../../assets/img/diagrams/tr-test-signals.svg" alt="" loading="lazy"><span>Test signals</span></a><a href="#fig-first-order"><img src="../../assets/img/diagrams/tr-first-order.svg" alt="" loading="lazy"><span>First-order response</span></a></nav>
     
     <section class="lsec"><h2>Notes</h2>
     <article class="notes">
-<h3>Standard test signals</h3>
-<table class="tbl"><tr><th>Input</th><th>$r(t)$</th><th>$R(s)$</th></tr>
-<tr><td>Impulse</td><td>$\delta(t)$</td><td>$1$</td></tr><tr><td>Step</td><td>$A$</td><td>$A/s$</td></tr><tr><td>Ramp</td><td>$At$</td><td>$A/s^2$</td></tr><tr><td>Parabolic</td><td>$At^2/2$</td><td>$A/s^3$</td></tr></table>
-<h3>First-order system</h3>
-<p>Unity feedback around $G = 1/(Ts)$ gives $\dfrac{C(s)}{R(s)} = \dfrac{1}{Ts + 1}$. For a unit step:</p>
-<p class="eq">$$c(t) = 1 - e^{-t/T}$$</p>
-<ul><li>At $t = T$ the output reaches 63.2 % of its final value.</li><li>Initial slope $= 1/T$.</li>
-<li>Rise time (10–90 %) $= 2.2T$. Settling time $\approx 4T$ (2 %) or $3T$ (5 %).</li>
-<li>Unit ramp response: $c(t) = t - T + Te^{-t/T}$, with a steady error of $T$.</li></ul>
+<p>Module 2 is about <b>time response</b>: what the output of a control system does, moment by moment, after the input changes. Every control system has to solve two problems over time. It must <b>get there safely</b> (the transient response: speed and stability, like a lift moving between floors without a jolt) and then <b>stay there accurately</b> (the steady-state response: tracking accuracy, like an autopilot holding a set altitude).</p>
+<h3 id="transient">Transient and steady-state response</h3>
+<p>The total response is the sum of two parts:</p>
+<p class="eq">$$c(t) = c_{tr}(t) + c_{ss}(t)$$</p>
+<ul><li><b>Transient response</b> $c_{tr}(t)$: the initial, dynamic reaction as the system tries to reach the desired output. It varies strongly with time and dies away in a stable system.</li>
+<li><b>Steady-state response</b> $c_{ss}(t)$: the long-term behaviour after the transient oscillations have completely decayed.</li></ul>
+<figure class="diagram"><img src="../../assets/img/diagrams/tr-transient-steady.svg" alt="A decaying oscillation that settles at 1, with a dashed line separating the transient part from the steady-state part" loading="lazy"><figcaption>The transient part decides speed and stability; the steady-state part decides accuracy.</figcaption></figure>
+<h3>Poles, zeros and the characteristic equation</h3>
+<p>Write a transfer function as $G(s) = N(s)/D(s)$.</p>
+<ul><li><b>Zeros</b> are the roots of the numerator $N(s)$.</li>
+<li><b>Poles</b> are the roots of the denominator $D(s)$. Setting the closed-loop denominator to zero gives the <b>characteristic equation</b>; its roots are the closed-loop poles.</li>
+<li>The number of closed-loop poles (the highest power of $s$ in the denominator) is the <b>order</b> of the system.</li></ul>
+<p class="key">The roots of the characteristic equation are the poles of the system. They act as the "DNA" of its time response: from their positions alone you can predict speed, overshoot and stability.</p>
+<h3>System order versus system type</h3>
+<table class="tbl"><tr><th>System order</th><th>System type</th></tr>
+<tr><td>The highest power of $s$ in the denominator of the <b>closed-loop</b> transfer function.</td><td>The number of poles exactly at the origin ($s = 0$) in the <b>open-loop</b> transfer function.</td></tr>
+<tr><td>Equals the number of closed-loop poles.</td><td>Decides how well the system can track different inputs.</td></tr>
+<tr><td>Decides the transient shape and dynamic behaviour.</td><td>Decides steady-state accuracy (Lesson 9).</td></tr></table>
+<p>Writing the open loop as $G(s)H(s) = \dfrac{K(1 + T_as)(1 + T_bs)\cdots}{s^N(1 + T_1s)(1 + T_2s)\cdots}$, the system is <b>type $N$</b>. For $N = 0$ (no pole at the origin) it is a type 0 system.</p>
+<h3 id="signals">Standard test signals</h3>
+<p>Real inputs are unpredictable, so we test systems with four standard signals of increasing "intensity". Each one is the integral of the one before it.</p>
+<figure class="diagram" id="fig-signals"><img src="../../assets/img/diagrams/tr-test-signals.svg" alt="Impulse, step, ramp and parabolic signals with their Laplace transforms A, A over s, A over s squared and A over s cubed" loading="lazy"><figcaption>The four standard test signals. Integrating one gives the next; differentiating gives the previous one.</figcaption></figure>
+<table class="tbl"><tr><th>Input</th><th>$r(t)$</th><th>$R(s)$</th><th>Physical meaning</th></tr>
+<tr><td>Impulse</td><td>$A\,\delta(t)$</td><td>$A$</td><td>A sudden shock or kick</td></tr>
+<tr><td>Step</td><td>$A$</td><td>$A/s$</td><td>A constant target position</td></tr>
+<tr><td>Ramp</td><td>$At$</td><td>$A/s^2$</td><td>A target moving at constant velocity</td></tr>
+<tr><td>Parabolic</td><td>$At^2/2$</td><td>$A/s^3$</td><td>A target moving with constant acceleration</td></tr></table>
+<h3 id="first-order">The first-order system</h3>
+<p>The simplest dynamic model is $\dfrac{C(s)}{R(s)} = \dfrac{a}{s + a}$, with one pole at $s = -a$. The position of that pole completely governs the natural response. For a unit step, $C(s) = \dfrac{a}{s(s + a)}$ and</p>
+<p class="eq">$$c(t) = 1 - e^{-at}$$</p>
+<figure class="diagram" id="fig-first-order"><img src="../../assets/img/diagrams/tr-first-order.svg" alt="Block a over s plus a, and its step response rising to 0.632 at one time constant and settling by four time constants" loading="lazy"><figcaption>First-order step response. Every metric is a simple multiple of the time constant $\tau = 1/a$.</figcaption></figure>
+<table class="tbl"><tr><th>Metric</th><th>Formula</th><th>Meaning</th></tr>
+<tr><td>Time constant $\tau$</td><td>$\tau = 1/a$</td><td>Time to reach 63.2 % of the final value; the initial slope is $a = 1/\tau$.</td></tr>
+<tr><td>Rise time $T_r$</td><td>$T_r = \dfrac{2.2}{a} = 2.2\tau$</td><td>Time to go from 10 % to 90 % of the final value.</td></tr>
+<tr><td>Settling time $T_s$</td><td>$T_s = \dfrac{4}{a} = 4\tau$</td><td>Time to reach and stay within 2 % of the final value ($3\tau$ for 5 %).</td></tr></table>
+<p>For a unit ramp the output is $c(t) = t - \tau + \tau e^{-t/\tau}$, which lags the input by a steady error of $\tau$.</p>
 <p class="tip">Set the dead time to zero in the simulation. Change $\tau$ and check that the gold dot always sits at 63.2 % of the final value.</p>
 </article></section>
     <section class="lsec"><h2>Lecture</h2>
@@ -60,7 +88,7 @@
     <div class="sim" id="sim-first-order" data-sim="first-order"></div></section>
     <p class="julia-link"><a href="julia-simulations.html#first-order">▶ Julia version: see the code and an interactive plot</a></p>
     <section class="lsec" id="exercises"><h2>Exercises</h2>
-    <ol class="exlist"><li><div class="q">A first-order system reaches 95 % of its final value in 6 s. Find $T$.</div><details><summary>Show solution</summary><div class="sol">$1 - e^{-6/T} = 0.95 \Rightarrow 6/T = 3 \Rightarrow T = 2$ s.</div></details></li><li><div class="q">Find the steady-state error of $1/(Ts + 1)$ to a unit ramp.</div><details><summary>Show solution</summary><div class="sol">$e_{ss} = T$, from $c(t) = t - T + Te^{-t/T}$.</div></details></li><li><div class="q">A thermometer with $T = 10$ s is put into a bath whose temperature rises at 1 °C/s. What is its lag after a long time?</div><details><summary>Show solution</summary><div class="sol">$e_{ss} = T \times 1 = 10$ °C below the bath temperature.</div></details></li></ol></section>
+    <ol class="exlist"><li><div class="q">A first-order system reaches 95 % of its final value in 6 s. Find $T$.</div><details><summary>Show solution</summary><div class="sol">$1 - e^{-6/T} = 0.95 \Rightarrow 6/T = 3 \Rightarrow T = 2$ s.</div></details></li><li><div class="q">Find the steady-state error of $1/(Ts + 1)$ to a unit ramp.</div><details><summary>Show solution</summary><div class="sol">$e_{ss} = T$, from $c(t) = t - T + Te^{-t/T}$.</div></details></li><li><div class="q">A thermometer with $T = 10$ s is put into a bath whose temperature rises at 1 °C/s. What is its lag after a long time?</div><details><summary>Show solution</summary><div class="sol">$e_{ss} = T \times 1 = 10$ °C below the bath temperature.</div></details></li><li><div class="q">A first-order system is $G(s) = \dfrac{5}{s + 5}$. Find the time constant, rise time and settling time (2 %).</div><details><summary>Show solution</summary><div class="sol">$a = 5$, so $\tau = 0.2$ s, $T_r = 2.2/5 = 0.44$ s and $T_s = 4/5 = 0.8$ s.</div></details></li><li><div class="q">Find the type of each open-loop system: (a) $\dfrac{s + 4}{(s + 6)(s^2 + 4s + 8)}$, (b) $\dfrac{15}{s(s^2 + 3s + 12)}$, (c) $\dfrac{s + 5}{s^2(s + 3)(s + 7)}$.</div><details><summary>Show solution</summary><div class="sol">Count the poles at $s = 0$: (a) none, type 0; (b) one, type 1; (c) two, type 2.</div></details></li><li><div class="q">A closed-loop transfer function is $\dfrac{10}{s^3 + 6s^2 + 11s + 6}$. What is its order, and where are its poles?</div><details><summary>Show solution</summary><div class="sol">Third order. $s^3 + 6s^2 + 11s + 6 = (s + 1)(s + 2)(s + 3)$, so the poles are at $-1$, $-2$ and $-3$.</div></details></li></ol></section>
     <nav class="prevnext"><a class="pn prev" href="06-signal-flow-graphs.html"><small>← Lesson 6</small>Signal flow graphs and Mason's gain formula</a><a class="pn next" href="08-second-order-response.html"><small>Lesson 8 →</small>Second-order response and time-domain specifications</a></nav>
   </div>
 </main>

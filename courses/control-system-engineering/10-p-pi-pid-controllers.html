@@ -37,17 +37,123 @@
   <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">Module 1 · System components and their representation</div><ol><li><a href="01-introduction.html"><span class="n">1</span>Introduction to control systems</a></li><li><a href="02-laplace-and-partial-fractions.html"><span class="n">2</span>Laplace transform and partial fractions</a></li><li><a href="03-electrical-systems.html"><span class="n">3</span>Models of electrical systems</a></li><li><a href="04-mechanical-systems.html"><span class="n">4</span>Models of mechanical systems</a></li><li><a href="05-block-diagrams.html"><span class="n">5</span>Block diagram reduction</a></li><li><a href="06-signal-flow-graphs.html"><span class="n">6</span>Signal flow graphs and Mason's gain formula</a></li></ol></div><div class="mod"><div class="modname">Module 2 · Time response analysis</div><ol><li><a href="07-first-order-response.html"><span class="n">7</span>Standard test signals and first-order response</a></li><li><a href="08-second-order-response.html"><span class="n">8</span>Second-order response and time-domain specifications</a></li><li><a href="09-steady-state-errors.html"><span class="n">9</span>Steady-state errors and error constants</a></li><li class="on"><a href="10-p-pi-pid-controllers.html"><span class="n">10</span>P, PI and PID controllers</a></li></ol></div><div class="mod"><div class="modname">Module 3 · Stability analysis</div><ol><li><a href="11-routh-stability.html"><span class="n">11</span>Stability and the Routh criterion</a></li><li><a href="12-root-locus.html"><span class="n">12</span>Root locus</a></li><li><a href="13-bode-plots.html"><span class="n">13</span>Frequency response and Bode plots</a></li><li><a href="14-nyquist.html"><span class="n">14</span>Nyquist stability criterion</a></li><li><a href="15-compensation.html"><span class="n">15</span>Lead, lag and lead-lag compensation</a></li></ol></div><div class="mod"><div class="modname">Module 4 · State space analysis</div><ol><li><a href="16-state-space-models.html"><span class="n">16</span>State variables and state models</a></li><li><a href="17-state-equation-solution.html"><span class="n">17</span>State diagrams and solution of the state equation</a></li><li><a href="18-controllability-observability.html"><span class="n">18</span>Controllability and observability</a></li><li><a href="19-nonlinear-systems.html"><span class="n">19</span>Introduction to nonlinear systems</a></li></ol></div></details></aside>
   <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
   <div class="lmain">
-    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Write the transfer functions of P, PI, PD and PID controllers</li><li>Explain the effect of each action on the response</li><li>Tune a PID controller by observation</li></ul></div>
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Describe the parts of a control loop and direct and reverse action</li><li>Compare ON/OFF, floating, P, I, D and composite modes</li><li>Explain offset, proportional band and the effect of each PID gain</li><li>Build an electronic PI controller with op-amps</li><li>Tune a PID controller with Ziegler–Nichols and Cohen–Coon rules</li></ul></div>
+    <nav class="figstrip" aria-label="Figures in this lesson"><a href="#fig-anatomy"><img src="../../assets/img/diagrams/pid-loop-anatomy.svg" alt="" loading="lazy"><span>Control loop</span></a><a href="#fig-onoff"><img src="../../assets/img/diagrams/pid-onoff.svg" alt="" loading="lazy"><span>ON/OFF</span></a><a href="#fig-offset"><img src="../../assets/img/diagrams/pid-offset.svg" alt="" loading="lazy"><span>Offset</span></a><a href="#fig-build"><img src="../../assets/img/diagrams/pid-sequential.svg" alt="" loading="lazy"><span>P → PD → PID</span></a><a href="#fig-opamp"><img src="../../assets/img/diagrams/pid-opamp-pi.svg" alt="" loading="lazy"><span>Op-amp PI</span></a><a href="#fig-reaction"><img src="../../assets/img/diagrams/pid-reaction-curve.svg" alt="" loading="lazy"><span>Reaction curve</span></a><a href="#fig-zn-step"><img src="../../assets/img/diagrams/pid-zn-step.svg" alt="" loading="lazy"><span>Z–N example</span></a></nav>
     
     <section class="lsec"><h2>Notes</h2>
     <article class="notes">
-<p class="eq">$$G_c(s) = K_p + \frac{K_i}{s} + K_ds$$</p>
+<p>The idea of feedback is simple and yet extremely powerful. Feedback can <b>reduce the effect of disturbances</b>, make a system <b>insensitive to process variations</b>, and make a system <b>follow commands faithfully</b>. The PID controller is the simplest practical form of feedback, combining three modes: proportional, integral and derivative.</p>
+<h3 id="anatomy">Anatomy of a control loop</h3>
+<figure class="diagram" id="fig-anatomy"><img src="../../assets/img/diagrams/pid-loop-anatomy.svg" alt="Process control loop: setpoint, error detector, controller, final control element, process, sensor and transmitter" loading="lazy"><figcaption>The prime directive of a controller: regulate a dynamic variable against changes from many sources.</figcaption></figure>
+<p class="eq">$$e = r - b$$</p>
+<p>The error is setpoint minus measurement. A positive error means the measurement is below the target; a negative error means it is above. Measurements and controller outputs are usually carried as standard signals (4–20 mA, 3–15 psi) or as percentages of range, so the same equations work for any physical variable.</p>
+<h4>Direct and reverse action</h4>
+<ul><li><b>Direct action</b>: when the process variable goes up, the controller output goes up (for example, a level loop that opens an outlet valve as the level rises).</li>
+<li><b>Reverse action</b>: when the process variable goes up, the controller output goes down (for example, a furnace whose fuel is cut back as the temperature rises).</li></ul>
+<h4>The physics of the process</h4>
+<ul><li><b>Load change</b>: a shift in some background parameter (inflow, ambient temperature) that pushes the controlled variable away from the setpoint.</li>
+<li><b>Self-regulation</b>: some processes settle at a new value by themselves after a load change. Others (a tank pumped at a fixed rate) overflow or run dry without control.</li>
+<li><b>Dead time</b>: the time before any corrective action is felt at all (for example, transport down a pipe). <b>Lag</b>: the further time the process (or the valve) takes to respond. Delays decide which controller mode will succeed.</li></ul>
+<h3 id="modes">The controller landscape</h3>
+<table class="tbl"><tr><th>Discontinuous modes (jumps)</th><th>Continuous modes (smooth)</th></tr>
+<tr><td>Two-position (ON/OFF), multiposition, floating</td><td>Base modes: proportional (P), integral (I), derivative (D).<br>Composite modes: PI, PD, PID.</td></tr></table>
+<h4>Two-position (ON/OFF) control</h4>
+<figure class="diagram" id="fig-onoff"><img src="../../assets/img/diagrams/pid-onoff.svg" alt="Temperature cycling around the setpoint inside a neutral zone as the heater switches on and off" loading="lazy"><figcaption>ON/OFF control: the output is either 0 % or 100 %, so the variable cycles.</figcaption></figure>
+<p>The most elementary control: the output is either 0 % or 100 %. Because of process lag the variable keeps oscillating about the setpoint, giving steady cycling. A <b>neutral zone</b> (hysteresis) stops the output chattering. It suits large-capacity, slow processes such as room heating (HVAC) and large liquid baths.</p>
+<ul><li><b>Multiposition control</b> adds intermediate output levels (for example 50 %), so the cycling is smaller, but it is still discontinuous.</li>
+<li><b>Single-speed floating control</b>: the error sets the <i>rate</i> at which the output changes, not its size. With zero error the output "floats" and holds its setting.</li></ul>
+<h4>Proportional (P) mode</h4>
+<p>The output is in one-to-one proportion to the error:</p>
+<p class="eq">$$p = K_p\,e_p + p_0, \qquad PB = \frac{100}{K_p}\ \%$$</p>
+<p>Here $K_p$ is the proportional gain, $e_p$ is the error in percent and $p_0$ is the output with zero error. The <b>proportional band</b> (PB) is the range of error that drives the output from 0 to 100 %; it is inversely related to the gain.</p>
+<figure class="diagram" id="fig-pb"><img src="../../assets/img/diagrams/pid-prop-band.svg" alt="Controller output against error for a narrow and a wide proportional band" loading="lazy"><figcaption>A narrow band is a high gain; a wide band is a low gain.</figcaption></figure>
+<p><b>The proportional flaw: offset.</b> After a load change the controller needs a new output to hold the process. The equation can only give an output different from $p_0$ if an error exists. So the variable settles with a permanent <b>offset</b>, parallel to but below the setpoint.</p>
+<figure class="diagram" id="fig-offset"><img src="../../assets/img/diagrams/pid-offset.svg" alt="P-only response settling at 0.75 below the setpoint, and a PI response reaching the setpoint" loading="lazy"><figcaption>P control leaves an offset; integral action removes it.</figcaption></figure>
+<h4>Integral (I) mode: the offset killer</h4>
+<p class="eq">$$p(t) = K_i\int_0^t e\,dt + p(0)$$</p>
+<p>As long as the error is not zero, the integral output keeps ramping up or down: it uses the <b>past</b> (accumulated error) to push the system. Because it never stops while an error exists, integral action guarantees that the offset is eventually removed. The price is a slower, more oscillatory response.</p>
+<h4>Derivative (D) mode: anticipation</h4>
+<p class="eq">$$p(t) = K_p T_d\frac{de}{dt}$$</p>
+<p>The derivative term reacts to the <b>rate of change</b> of the error: it looks into the future and applies braking before the overshoot happens. It has no effect on a constant error, so it is never used alone. It amplifies measurement noise, and a sudden setpoint step gives a large output spike ("derivative kick").</p>
+<h3 id="pid">The ideal PID controller</h3>
+<p class="eq">$$u(t) = K_c\left[e(t) + \frac{1}{T_i}\int_0^t e(\tau)\,d\tau + T_d\frac{de(t)}{dt}\right] + u_0 \qquad\Longleftrightarrow\qquad G_c(s) = K_p + \frac{K_i}{s} + K_ds$$</p>
+<table class="tbl"><tr><th>Proportional (P)</th><th>Integral (I)</th><th>Derivative (D)</th></tr>
+<tr><td>Reacts to the <b>present</b> error size.</td><td>Accumulates the <b>past</b> error (removes offset).</td><td>Anticipates the <b>future</b> from the rate of change.</td></tr></table>
+<p>With $K_i = K_c/T_i$ and $K_d = K_cT_d$, increasing $K_i$ is the same as decreasing the integral time $T_i$.</p>
+<figure class="diagram" id="fig-forms"><img src="../../assets/img/diagrams/pid-forms.svg" alt="Parallel PID with P, I and D paths summed, and series PID with a PI block followed by a PD block" loading="lazy"><figcaption>Two implementation forms of PID.</figcaption></figure>
+<h4>Textbook illusion and industrial reality</h4>
+<p>Theory assumes infinite actuator bandwidth, smooth setpoints and noise-free measurements. Real loops meet <b>actuator saturation</b>, <b>valve stiction</b>, <b>sensor noise</b>, <b>derivative kick</b> and <b>transport delay</b>. Industrial controllers add anti-windup, derivative filtering and "derivative on measurement" to protect the hardware and keep the loop stable.</p>
+<h3 id="build">Building up P, PD and PID</h3>
+<p>Take the plant $G(s) = \dfrac{1}{s^2 + 10s + 20}$ with unity feedback and a unit step. P provides the muscle, D provides the brakes, and I provides the final precision.</p>
+<figure class="diagram" id="fig-build"><img src="../../assets/img/diagrams/pid-sequential.svg" alt="Four step responses: open loop, P, PD and PID" loading="lazy"><figcaption>Open loop: steady-state error 0.95. P ($K_p = 300$): fast, but overshoot and an error remain. PD: the overshoot is damped. PID: zero error and almost no overshoot.</figcaption></figure>
 <table class="tbl"><tr><th>Increase</th><th>Rise time</th><th>Overshoot</th><th>Settling time</th><th>Steady-state error</th></tr>
 <tr><td>$K_p$</td><td>Decreases</td><td>Increases</td><td>Small change</td><td>Decreases</td></tr>
 <tr><td>$K_i$</td><td>Decreases</td><td>Increases</td><td>Increases</td><td>Eliminated</td></tr>
-<tr><td>$K_d$</td><td>Small change</td><td>Decreases</td><td>Decreases</td><td>No effect</td></tr></table>
-<ul><li><b>P</b>: simple; leaves an offset in type-0 systems.</li><li><b>PI</b>: adds a pole at the origin (type increases by one), removing step offset; may add oscillation.</li>
-<li><b>PD</b>: adds a zero, improving damping and speed; sensitive to noise.</li><li><b>PID</b>: combines all three; used in most industrial loops (motor speed, temperature, pressure, level).</li></ul>
+<tr><td>$K_d$</td><td>Small change</td><td>Decreases</td><td>Decreases</td><td>No change</td></tr></table>
+<p>These are trends, not laws: the gains interact, so changing one can alter the effect of another.</p>
+<h4>Choosing a controller</h4>
+<table class="tbl"><tr><th>Mode</th><th>Complexity</th><th>Behaviour</th><th>Offset?</th><th>Ideal use</th></tr>
+<tr><td>Two-position (ON/OFF)</td><td>Low</td><td>Steady cycling</td><td>n/a</td><td>Large, slow processes (HVAC)</td></tr>
+<tr><td>Floating</td><td>Medium</td><td>Cyclic transient</td><td>No</td><td>Small capacity, little lag</td></tr>
+<tr><td>Proportional (P)</td><td>Medium</td><td>Smooth</td><td><b>Yes, permanent</b></td><td>Moderate lag, rare load changes</td></tr>
+<tr><td>PI</td><td>High</td><td>Smooth</td><td>Eliminated</td><td>Frequent load changes (flow, level)</td></tr>
+<tr><td>PID</td><td>Highest</td><td>Highly responsive</td><td>Eliminated</td><td>Complex, fast-changing systems (temperature)</td></tr></table>
+<p>A good loop balances five criteria: <b>stability</b> (the baseline), <b>disturbance rejection</b>, <b>smooth tracking</b> of setpoint changes, <b>minimum error</b> and <b>robustness</b> to unknown changes in the plant. They conflict, so control engineering is the art of balance.</p>
+<h3 id="electronic">Electronic PI controller with op-amps</h3>
+<p>An error-detector circuit compares the transmitter signal with a setpoint voltage set by a potentiometer, giving $V_e = V_{sp} - IR$. Op-amps then build the controller:</p>
+<figure class="diagram" id="fig-opamp"><img src="../../assets/img/diagrams/pid-opamp-pi.svg" alt="Op-amp PI controller: inverting amplifier, integrator and summing amplifier" loading="lazy"><figcaption>Electronic PI controller. A derivative stage (capacitor at the input, resistor in the feedback) can be added in the same way to make a full PID circuit.</figcaption></figure>
+<p class="eq">$$V_{out} = \underbrace{\frac{R_f}{R_{s1}}\frac{R_p}{R_1}}_{K_p}V_e + \underbrace{\frac{R_f}{R_{s2}}\frac{1}{R_iC_i}}_{K_i}\int V_e\,dt$$</p>
+<p>In a temperature loop this output drives the steam valve of a heated tank, so the electronic PI controller continuously adjusts the heat input to hold the tank at its setpoint.</p>
+<h3>Pneumatic controllers</h3>
+<p>Before electronics, and still in hazardous areas, controllers ran on 3–15 psi air. A <b>flapper (baffle) and nozzle</b> detects tiny movements of a lever. The process variable and setpoint act on opposing <b>bellows</b>; any imbalance tilts the beam about its <b>fulcrum</b>, changing how much the flapper blocks the nozzle. The nozzle back-pressure, boosted by a relay, becomes the output to the control valve. A <b>feedback bellows</b> pushes back on the beam until the forces balance again: this <b>force-balance</b> principle gives proportional action, and restrictors in the feedback line add integral and derivative action.</p>
+<h3 id="tuning">Tuning: finding the gains in practice</h3>
+<p>Perfect mathematical models of real plants are rarely available. Engineers use empirical rules, first published in the 1940s and 1950s, to get starting values of $K_p$, $T_i$ and $T_d$ from simple experiments on the plant.</p>
+<table class="tbl"><tr><th></th><th>Ziegler–Nichols 1st method</th><th>Ziegler–Nichols 2nd method</th><th>Cohen–Coon</th></tr>
+<tr><td>Test</td><td>Open loop (reaction curve)</td><td>Closed loop (sustained oscillation)</td><td>Open loop (reaction curve)</td></tr>
+<tr><td>Rule of use</td><td>S-shaped response; dead time less than about half the time constant</td><td>Plant can be driven to sustained oscillation under P control only</td><td>Handles dead time up to about twice the time constant</td></tr>
+<tr><td>Output</td><td>$L$ and $T$</td><td>$K_{cr}$ and $P_{cr}$</td><td>$K$, $L$ and $T$; explicit PD rules too</td></tr></table>
+<h4 id="zn1">Ziegler–Nichols first method (reaction curve)</h4>
+<ol><li>Put the controller in manual and apply a step change to the controller output.</li>
+<li>Record the process variable: it should rise in an S shape.</li>
+<li>Draw the tangent at the steepest point (the inflection point).</li>
+<li>Where the tangent crosses the time axis gives the dead time $L$; where it reaches the final value gives $L + T$.</li></ol>
+<figure class="diagram" id="fig-reaction"><img src="../../assets/img/diagrams/pid-reaction-curve.svg" alt="S-shaped reaction curve with the tangent at the inflection point giving L and T" loading="lazy"><figcaption>Process reaction curve.</figcaption></figure>
+<table class="tbl"><tr><th>Controller</th><th>$K_p$</th><th>$T_i$</th><th>$T_d$</th></tr>
+<tr><td>P</td><td>$T/L$</td><td>$\infty$</td><td>0</td></tr>
+<tr><td>PI</td><td>$0.9\,T/L$</td><td>$L/0.3$</td><td>0</td></tr>
+<tr><td>PID</td><td>$1.2\,T/L$</td><td>$2L$</td><td>$0.5L$</td></tr></table>
+<p>For PID this gives $G_c(s) = 1.2\dfrac{T}{L}\left(1 + \dfrac{1}{2Ls} + 0.5Ls\right) = 0.6T\dfrac{(s + 1/L)^2}{s}$: a pole at the origin and a double zero at $s = -1/L$. (For a process with steady-state gain $K$, divide $K_p$ by $K$.)</p>
+<h4>Cohen–Coon rules</h4>
+<p>Ziegler–Nichols struggles when the dead time is large. Cohen–Coon copes with dead time up to about twice the time constant, and it also gives rules for PD controllers. With process gain $K$:</p>
+<table class="tbl"><tr><th>Controller</th><th>$K_c$</th><th>$T_i$</th><th>$T_d$</th></tr>
+<tr><td>P</td><td>$\dfrac{1}{K}\dfrac{T}{L}\left(1 + \dfrac{L}{3T}\right)$</td><td>–</td><td>–</td></tr>
+<tr><td>PI</td><td>$\dfrac{1}{K}\dfrac{T}{L}\left(0.9 + \dfrac{L}{12T}\right)$</td><td>$L\dfrac{30 + 3L/T}{9 + 20L/T}$</td><td>–</td></tr>
+<tr><td>PD</td><td>$\dfrac{1}{K}\dfrac{T}{L}\left(1.25 + \dfrac{L}{6T}\right)$</td><td>–</td><td>$L\dfrac{6 - 2L/T}{22 + 3L/T}$</td></tr>
+<tr><td>PID</td><td>$\dfrac{1}{K}\dfrac{T}{L}\left(1.33 + \dfrac{L}{4T}\right)$</td><td>$L\dfrac{32 + 6L/T}{13 + 8L/T}$</td><td>$L\dfrac{4}{11 + 2L/T}$</td></tr></table>
+<h4 id="zn2">Ziegler–Nichols second method (ultimate gain)</h4>
+<ol><li>Disable integral action ($T_i = \infty$).</li>
+<li>Disable derivative action ($T_d = 0$).</li>
+<li>Run the loop with proportional control only.</li>
+<li>Raise $K_p$ slowly from 0 until the output oscillates with constant amplitude: the critical edge of instability.</li></ol>
+<figure class="diagram" id="fig-sustained"><img src="../../assets/img/diagrams/pid-sustained.svg" alt="Constant-amplitude oscillation with the period Pcr marked between two peaks" loading="lazy"><figcaption>The critical gain $K_{cr}$ and critical period $P_{cr}$.</figcaption></figure>
+<table class="tbl"><tr><th>Controller</th><th>$K_p$</th><th>$T_i$</th><th>$T_d$</th></tr>
+<tr><td>P</td><td>$0.5K_{cr}$</td><td>$\infty$</td><td>0</td></tr>
+<tr><td>PI</td><td>$0.45K_{cr}$</td><td>$P_{cr}/1.2$</td><td>0</td></tr>
+<tr><td>PID</td><td>$0.6K_{cr}$</td><td>$0.5P_{cr}$</td><td>$0.125P_{cr}$</td></tr></table>
+<h4 id="zn-example">Worked example: Ziegler–Nichols second method</h4>
+<figure class="diagram" id="fig-zn-loop"><img src="../../assets/img/diagrams/pid-zn-loop.svg" alt="PID controller in unity feedback with the plant 1 over s(s+1)(s+5)" loading="lazy"><figcaption>Plant $G(s) = \dfrac{1}{s(s + 1)(s + 5)}$ with a PID controller.</figcaption></figure>
+<p><b>Step 1, characteristic equation</b> with P control only: $s(s + 1)(s + 5) + K_p = s^3 + 6s^2 + 5s + K_p = 0$.</p>
+<p><b>Step 2, Routh array</b>: rows $s^3$: 1, 5; $s^2$: 6, $K_p$; $s^1$: $(30 - K_p)/6$; $s^0$: $K_p$. Sustained oscillation happens when the $s^1$ entry is zero: $K_{cr} = 30$.</p>
+<p><b>Step 3, frequency</b>: put $s = j\omega$: $6(j\omega)^2 + 30 = 0 \Rightarrow \omega = \sqrt5$ rad/s, so $P_{cr} = 2\pi/\sqrt5 = 2.8099$ s.</p>
+<p><b>Step 4, gains</b>: $K_p = 0.6 \times 30 = 18$, $T_i = 0.5 \times 2.8099 = 1.405$ s, $T_d = 0.125 \times 2.8099 = 0.3512$ s.</p>
+<p class="eq">$$G_c(s) = 18\left(1 + \frac{1}{1.405s} + 0.3512s\right) = \frac{6.3223(s + 1.4235)^2}{s}$$</p>
+<p><b>Step 5, check</b>: the closed loop is $\dfrac{C(s)}{R(s)} = \dfrac{6.3223s^2 + 18s + 12.811}{s^4 + 6s^3 + 11.3223s^2 + 18s + 12.811}$.</p>
+<figure class="diagram" id="fig-zn-step"><img src="../../assets/img/diagrams/pid-zn-step.svg" alt="Closed-loop step response with about 62 percent overshoot" loading="lazy"><figcaption>Ziegler–Nichols gives a stable, offset-free loop, but the overshoot (about 62 %) is too large. These rules give a starting point; the engineer then fine-tunes on site.</figcaption></figure>
+<pre class="code"><code>% MATLAB check of the unit-step response
+num = [0 0 6.3223 18 12.811];
+den = [1 6 11.3223 18 12.811];
+step(num, den), grid
+title('Unit-step response')</code></pre>
 <p class="tip">In the simulation, start with $K_i = K_d = 0$ and raise $K_p$: the offset shrinks but stays. Add $K_i$ to remove it, then $K_d$ to reduce the overshoot.</p>
 </article></section>
     <!-- REAL-WORLD EXAMPLES: to add one, copy a <div class="card">...</div> block and change the text. -->
@@ -61,7 +167,7 @@
     <div class="sim" id="sim-pid" data-sim="pid"></div></section>
     <p class="julia-link"><a href="julia-simulations.html#pid">▶ Julia version: see the code and an interactive plot</a></p>
     <section class="lsec" id="exercises"><h2>Exercises</h2>
-    <ol class="exlist"><li><div class="q">A type-0 plant with steady-state gain 2 is under P control with gain 4. Find the step offset.</div><details><summary>Show solution</summary><div class="sol">$e_{ss} = 1/(1 + 8) = 0.111$.</div></details></li><li><div class="q">What does a PI controller do to the system type and why does that matter?</div><details><summary>Show solution</summary><div class="sol">It adds a pole at the origin, raising the type by one, so a type-0 plant becomes type 1 with zero step error.</div></details></li><li><div class="q">Find gains in the simulation that give under 10 % overshoot and IAE below 2.5.</div><details><summary>Show solution</summary><div class="sol">For example $K_p = 3$, $K_i = 0.5$, $K_d = 1$ gives almost no overshoot and IAE about 2.1.</div></details></li></ol></section>
+    <ol class="exlist"><li><div class="q">A type-0 plant with steady-state gain 2 is under P control with gain 4. Find the step offset.</div><details><summary>Show solution</summary><div class="sol">$e_{ss} = 1/(1 + 8) = 0.111$.</div></details></li><li><div class="q">What does a PI controller do to the system type and why does that matter?</div><details><summary>Show solution</summary><div class="sol">It adds a pole at the origin, raising the type by one, so a type-0 plant becomes type 1 with zero step error.</div></details></li><li><div class="q">Find gains in the simulation that give under 10 % overshoot and IAE below 2.5.</div><details><summary>Show solution</summary><div class="sol">For example $K_p = 3$, $K_i = 0.5$, $K_d = 1$ gives almost no overshoot and IAE about 2.1.</div></details></li><li><div class="q">A proportional controller has a proportional band of 40 %. What is its gain? If $p_0 = 50\,\%$, what is the output for an error of $+8\,\%$?</div><details><summary>Show solution</summary><div class="sol">$K_p = 100/PB = 2.5$. $p = 2.5 \times 8 + 50 = 70\,\%$.</div></details></li><li><div class="q">A reaction-curve test on a process with unit steady-state gain gives $L = 1$ s and $T = 5$ s. Find (a) Ziegler–Nichols PID settings and (b) Cohen–Coon PI settings.</div><details><summary>Show solution</summary><div class="sol">(a) $K_p = 1.2 \times 5/1 = 6$, $T_i = 2L = 2$ s, $T_d = 0.5L = 0.5$ s.<br>(b) $K_c = 5(0.9 + 1/60) = 4.58$, $T_i = 1 \times \dfrac{30 + 0.6}{9 + 4} = 2.35$ s.</div></details></li><li><div class="q">Use the Ziegler–Nichols second method to tune a PID controller for $G(s) = \dfrac{1}{s(s + 2)(s + 4)}$.</div><details><summary>Show solution</summary><div class="sol">$s^3 + 6s^2 + 8s + K_p = 0$. The $s^1$ row is $(48 - K_p)/6$, so $K_{cr} = 48$. From $6s^2 + 48 = 0$, $\omega = \sqrt8 = 2.83$ rad/s and $P_{cr} = 2\pi/2.83 = 2.22$ s.<br>$K_p = 0.6 \times 48 = 28.8$, $T_i = 1.11$ s, $T_d = 0.278$ s.</div></details></li><li><div class="q">In the electronic PI controller, $R_1 = 10$ kΩ, $R_p = 20$ kΩ, $R_{s1} = R_{s2} = R_f = 10$ kΩ, $R_i = 100$ kΩ and $C_i = 10$ µF. Find $K_p$ and $K_i$.</div><details><summary>Show solution</summary><div class="sol">$K_p = (R_f/R_{s1})(R_p/R_1) = 1 \times 2 = 2$. $K_i = (R_f/R_{s2})/(R_iC_i) = 1/(10^5 \times 10^{-5}) = 1$ s$^{-1}$.</div></details></li><li><div class="q">Why is derivative action almost never used on flow loops, and why is it never used alone?</div><details><summary>Show solution</summary><div class="sol">Flow signals are fast and noisy, and derivative action amplifies noise, so flow loops use PI. Derivative alone gives zero output for any constant error, so it cannot hold the process at the setpoint.</div></details></li></ol></section>
     <nav class="prevnext"><a class="pn prev" href="09-steady-state-errors.html"><small>← Lesson 9</small>Steady-state errors and error constants</a><a class="pn next" href="11-routh-stability.html"><small>Lesson 11 →</small>Stability and the Routh criterion</a></nav>
   </div>
 </main>

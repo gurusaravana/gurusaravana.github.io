@@ -37,19 +37,49 @@
   <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">Module 1 · System components and their representation</div><ol><li><a href="01-introduction.html"><span class="n">1</span>Introduction to control systems</a></li><li><a href="02-laplace-and-partial-fractions.html"><span class="n">2</span>Laplace transform and partial fractions</a></li><li><a href="03-electrical-systems.html"><span class="n">3</span>Models of electrical systems</a></li><li><a href="04-mechanical-systems.html"><span class="n">4</span>Models of mechanical systems</a></li><li><a href="05-block-diagrams.html"><span class="n">5</span>Block diagram reduction</a></li><li><a href="06-signal-flow-graphs.html"><span class="n">6</span>Signal flow graphs and Mason's gain formula</a></li></ol></div><div class="mod"><div class="modname">Module 2 · Time response analysis</div><ol><li><a href="07-first-order-response.html"><span class="n">7</span>Standard test signals and first-order response</a></li><li><a href="08-second-order-response.html"><span class="n">8</span>Second-order response and time-domain specifications</a></li><li><a href="09-steady-state-errors.html"><span class="n">9</span>Steady-state errors and error constants</a></li><li><a href="10-p-pi-pid-controllers.html"><span class="n">10</span>P, PI and PID controllers</a></li></ol></div><div class="mod"><div class="modname">Module 3 · Stability analysis</div><ol><li><a href="11-routh-stability.html"><span class="n">11</span>Stability and the Routh criterion</a></li><li class="on"><a href="12-root-locus.html"><span class="n">12</span>Root locus</a></li><li><a href="13-bode-plots.html"><span class="n">13</span>Frequency response and Bode plots</a></li><li><a href="14-nyquist.html"><span class="n">14</span>Nyquist stability criterion</a></li><li><a href="15-compensation.html"><span class="n">15</span>Lead, lag and lead-lag compensation</a></li></ol></div><div class="mod"><div class="modname">Module 4 · State space analysis</div><ol><li><a href="16-state-space-models.html"><span class="n">16</span>State variables and state models</a></li><li><a href="17-state-equation-solution.html"><span class="n">17</span>State diagrams and solution of the state equation</a></li><li><a href="18-controllability-observability.html"><span class="n">18</span>Controllability and observability</a></li><li><a href="19-nonlinear-systems.html"><span class="n">19</span>Introduction to nonlinear systems</a></li></ol></div></details></aside>
   <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
   <div class="lmain">
-    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Explain the root locus as the path of closed-loop poles as K varies</li><li>Apply the construction rules</li><li>Read gain, damping and stability limits from a root locus</li></ul></div>
-    
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Explain the root locus as the path of closed-loop poles as $K$ varies</li><li>Apply the construction rules, including asymptotes, break points and departure angles</li><li>Use the complementary rules for negative $K$</li><li>Read gain, damping and stability limits from a root locus</li></ul></div>
+    <nav class="figstrip" aria-label="Figures in this lesson"><a href="#fig-rl1"><img src="../../assets/img/diagrams/rl-example.svg" alt="" loading="lazy"><span>Example 1: three poles</span></a><a href="#fig-rl2"><img src="../../assets/img/diagrams/rl-departure.svg" alt="" loading="lazy"><span>Example 2: departure angle</span></a></nav>
+        
     <section class="lsec"><h2>Notes</h2>
     <article class="notes">
-<p>For $1 + KG(s)H(s) = 0$, the root locus plots the closed-loop poles as $K$ goes from 0 to $\infty$. A point is on the locus if $\angle G(s)H(s) = \pm180°(2q + 1)$; the gain there is $K = 1/|G(s)H(s)|$.</p>
-<h3>Construction rules</h3>
-<ol><li>The locus starts ($K = 0$) at open-loop poles and ends ($K\to\infty$) at open-loop zeros or at infinity.</li>
-<li>Number of branches = number of open-loop poles; the locus is symmetric about the real axis.</li>
-<li>A real-axis point is on the locus if the number of poles plus zeros to its right is odd.</li>
-<li>Asymptotes: $n - m$ of them, at angles $\dfrac{(2q + 1)180°}{n - m}$, meeting at the centroid $\sigma = \dfrac{\sum p - \sum z}{n - m}$.</li>
-<li>Break-away and break-in points: solve $dK/ds = 0$.</li>
-<li>Imaginary-axis crossings: from the Routh array (Lesson 11).</li>
-<li>Angles of departure from complex poles and arrival at complex zeros: from the angle condition.</li></ol>
+<p>Consider a loop with an adjustable gain $K$ in the forward path, plant $G(s)$ and feedback $H(s)$. The closed-loop transfer function is $T(s) = \dfrac{KG(s)}{1 + KG(s)H(s)}$, so the characteristic equation is</p>
+<p class="eq">$$1 + KG(s)H(s) = 1 + K\frac{N(s)}{D(s)} = 0 \qquad\Longleftrightarrow\qquad D(s) + K\,N(s) = 0$$</p>
+<p>As $K$ changes, the closed-loop poles move. The <b>root locus</b> is the path they trace as $K$ goes from 0 to $\infty$. A point $s$ is on the locus when the <b>angle condition</b> $\angle G(s)H(s) = \pm180°(2q + 1)$ holds; the gain there follows from the <b>magnitude condition</b> $K = 1/|G(s)H(s)|$.</p>
+<h3 id="rules">Rules for sketching the root locus ($K \ge 0$)</h3>
+<table class="tbl"><tr><th>Rule</th><th>What to do</th></tr>
+<tr><td>Definitions</td><td>The loop gain is $KN(s)/D(s)$. $N(s)$ has order $m$ with zeros $z_i$; $D(s)$ has order $n$ with poles $p_i$. Let $q = n - m \ge 0$.</td></tr>
+<tr><td>Symmetry</td><td>The locus is symmetric about the real axis (complex poles come in conjugate pairs).</td></tr>
+<tr><td>Number of branches</td><td>There are $n$ branches, one for each closed-loop pole.</td></tr>
+<tr><td>Start and end points</td><td>Branches start ($K = 0$) at the open-loop poles and end ($K \to \infty$) at the open-loop zeros. The remaining $q$ branches go to infinity.</td></tr>
+<tr><td>Locus on the real axis</td><td>A real-axis point is on the locus if the total number of real poles and zeros to its <b>right</b> is odd.</td></tr>
+<tr><td>Asymptotes</td><td>The $q$ branches that go to infinity follow straight lines from the centroid $\sigma_A = \dfrac{\sum p_i - \sum z_i}{q}$ at angles $\theta = \dfrac{r \cdot 180°}{q}$, $r = 1, 3, 5, \dots$</td></tr>
+<tr><td>Break-away and break-in points</td><td>On the real axis, where $N(s)D'(s) - N'(s)D(s) = 0$ (the same as $dK/ds = 0$).</td></tr>
+<tr><td>Angle of departure from a complex pole $p_j$</td><td>$\theta_{dep} = 180° + \sum_i \angle(p_j - z_i) - \sum_{i \ne j}\angle(p_j - p_i)$</td></tr>
+<tr><td>Angle of arrival at a complex zero $z_j$</td><td>$\theta_{arr} = 180° - \sum_{i \ne j}\angle(z_j - z_i) + \sum_i \angle(z_j - p_i)$</td></tr>
+<tr><td>Crossing the imaginary axis</td><td>Use the Routh array (Lesson 11) to find the marginal $K$ and the crossing frequency.</td></tr>
+<tr><td>Poles for a given $K$</td><td>Put the value of $K$ into $D(s) + KN(s) = 0$ and find the roots (a computer may be needed).</td></tr>
+<tr><td>$K$ for a given pole</td><td>Write $K = -D(s)/N(s)$ and substitute the pole location. If the point is not exactly on the locus, $K$ comes out slightly complex: use its real part.</td></tr></table>
+<h4>Complementary root locus ($K \le 0$)</h4>
+<p>For negative $K$ (positive feedback), most rules are unchanged. These change:</p>
+<ul><li>Real axis: the locus is to the left of an <b>even</b> number of real poles and zeros (that is, to the right of an odd number).</li>
+<li>Asymptote angles: $\theta = \dfrac{r \cdot 180°}{q}$ with $r = 0, 2, 4, \dots$ (same centroid).</li>
+<li>Angle of departure: $\theta_{dep} = \sum_i \angle(p_j - z_i) - \sum_{i \ne j}\angle(p_j - p_i)$; angle of arrival: $\theta_{arr} = \sum_i \angle(z_j - p_i) - \sum_{i \ne j}\angle(z_j - z_i)$ (the 180° is dropped).</li></ul>
+<h3 id="ex1">Worked example 1: three real poles</h3>
+<p>$KG(s)H(s) = \dfrac{K}{s(s + 1)(s + 5)}$ (the same plant as the Ziegler–Nichols example in Lesson 10).</p>
+<ol><li>Poles at $0, -1, -5$; no zeros. $n = 3$, $m = 0$, $q = 3$ branches go to infinity.</li>
+<li>Real axis: the locus lies on $[-1, 0]$ and $(-\infty, -5]$.</li>
+<li>Asymptotes: $\sigma_A = \dfrac{0 - 1 - 5}{3} = -2$, angles $60°$, $180°$, $300°$.</li>
+<li>Break-away: $K = -(s^3 + 6s^2 + 5s)$, $dK/ds = -(3s^2 + 12s + 5) = 0 \Rightarrow s = -0.47$ (the other root, $-3.53$, is not on the locus). There $K = 1.13$.</li>
+<li>Imaginary-axis crossing: $s^3 + 6s^2 + 5s + K = 0$ gives $K = 30$ and $\omega = \sqrt5 = 2.24$ rad/s. For $K &gt; 30$ the system is unstable.</li></ol>
+<figure class="diagram" id="fig-rl1"><img src="../../assets/img/diagrams/rl-example.svg" alt="Root locus of K over s(s+1)(s+5)" loading="lazy"><figcaption>Root locus of $K/[s(s + 1)(s + 5)]$, drawn from the computed closed-loop poles.</figcaption></figure>
+<h3 id="ex2">Worked example 2: complex poles and a zero</h3>
+<p>$KG(s)H(s) = \dfrac{K(s + 2)}{s^2 + 2s + 2}$: poles at $-1 \pm j$, zero at $-2$.</p>
+<ol><li>Two branches. One ends at the zero $-2$; $q = 1$, so the other goes to $-\infty$ along the negative real axis.</li>
+<li>Real axis: the locus lies on $(-\infty, -2]$.</li>
+<li>Departure from $p_1 = -1 + j$: the angle from the zero is $\angle(p_1 + 2) = \angle(1 + j) = 45°$; the angle from the other pole is $\angle(p_1 - p_2) = \angle(2j) = 90°$. So $\theta_{dep} = 180° + 45° - 90° = 135°$.</li>
+<li>Break-in: $N'D - ND' = (s^2 + 2s + 2) - (s + 2)(2s + 2) = -(s^2 + 4s + 2) = 0 \Rightarrow s = -2 - \sqrt2 = -3.41$.</li>
+<li>The complex part of the locus is a circle of radius $\sqrt2$ centred on the zero.</li></ol>
+<figure class="diagram" id="fig-rl2"><img src="../../assets/img/diagrams/rl-departure.svg" alt="Root locus of K(s+2) over s squared + 2s + 2, a circle round the zero" loading="lazy"><figcaption>Root locus with complex poles: branches leave at ±135° and meet at −3.41.</figcaption></figure>
 <p class="tip">Peer learning (Jigsaw): each group masters two rules, then teaches them to a mixed group that sketches a full locus together.</p>
 </article></section>
     <section class="lsec"><h2>Lecture</h2>
@@ -59,7 +89,7 @@
     
     <p class="julia-link"><a href="julia-simulations.html#root-locus">▶ Julia version: see the code and an interactive plot</a></p>
     <section class="lsec" id="exercises"><h2>Exercises</h2>
-    <ol class="exlist"><li><div class="q">$G H = K/(s(s + 2)(s + 4))$. Find the centroid and asymptote angles.</div><details><summary>Show solution</summary><div class="sol">$n - m = 3$. $\sigma = (0 - 2 - 4)/3 = -2$. Angles 60°, 180°, 300°.</div></details></li><li><div class="q">For the same system, find the break-away point.</div><details><summary>Show solution</summary><div class="sol">$K = -s(s+2)(s+4) = -(s^3 + 6s^2 + 8s)$. $dK/ds = 0 \Rightarrow 3s^2 + 12s + 8 = 0 \Rightarrow s = -0.845$ (the root between 0 and −2).</div></details></li><li><div class="q">Find where it crosses the $j\omega$ axis.</div><details><summary>Show solution</summary><div class="sol">$s^3 + 6s^2 + 8s + K = 0$: marginal at $K = 48$, $\omega = \sqrt8 = 2.83$ rad/s.</div></details></li></ol></section>
+    <ol class="exlist"><li><div class="q">$G H = K/(s(s + 2)(s + 4))$. Find the centroid and asymptote angles.</div><details><summary>Show solution</summary><div class="sol">$n - m = 3$. $\sigma = (0 - 2 - 4)/3 = -2$. Angles 60°, 180°, 300°.</div></details></li><li><div class="q">For the same system, find the break-away point.</div><details><summary>Show solution</summary><div class="sol">$K = -s(s+2)(s+4) = -(s^3 + 6s^2 + 8s)$. $dK/ds = 0 \Rightarrow 3s^2 + 12s + 8 = 0 \Rightarrow s = -0.845$ (the root between 0 and −2).</div></details></li><li><div class="q">Find where it crosses the $j\omega$ axis.</div><details><summary>Show solution</summary><div class="sol">$s^3 + 6s^2 + 8s + K = 0$: marginal at $K = 48$, $\omega = \sqrt8 = 2.83$ rad/s.</div></details></li><li><div class="q">For $KG(s)H(s) = \dfrac{K}{s(s + 1)(s + 5)}$, find the gain at the break-away point $s = -0.47$.</div><details><summary>Show solution</summary><div class="sol">$K = |s(s + 1)(s + 5)| = 0.4725 \times 0.5275 \times 4.5275 = 1.13$. For $0 &lt; K &lt; 1.13$ the two dominant poles are real; above it they become a complex pair.</div></details></li><li><div class="q">For $KG(s)H(s) = \dfrac{K(s + 2)}{s^2 + 2s + 2}$, find the angle of departure from the pole at $-1 - j$.</div><details><summary>Show solution</summary><div class="sol">By symmetry it is $-135°$: $180° + \angle(1 - j) - \angle(-2j) = 180° - 45° + 90° = 225° \equiv -135°$.</div></details></li><li><div class="q">For the complementary root locus ($K &lt; 0$) of $\dfrac{K}{s(s + 2)(s + 4)}$, what are the asymptote angles and which parts of the real axis are on the locus?</div><details><summary>Show solution</summary><div class="sol">Angles $0°$, $120°$, $240°$ (from $r = 0, 2, 4$), same centroid $-2$. Real axis: $[-4, -2]$ and $[0, \infty)$, where an even number of poles lie to the right.</div></details></li></ol></section>
     <nav class="prevnext"><a class="pn prev" href="11-routh-stability.html"><small>← Lesson 11</small>Stability and the Routh criterion</a><a class="pn next" href="13-bode-plots.html"><small>Lesson 13 →</small>Frequency response and Bode plots</a></nav>
   </div>
 </main>
