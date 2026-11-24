@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 250" width="780" height="250" role="img" aria-label="Parts of a feedback loop: setpoint SP, error, controller, manipulated variable MV, process, controlled variable CV, sensor and process variable PV">
+<title>Parts of a feedback loop: setpoint SP, error, controller, manipulated variable MV, process, controlled variable CV, sensor and process variable PV</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker></defs>
+<rect width="780" height="250" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<text x="60" y="83" font-size="13" text-anchor="middle" fill="#db2777" font-weight="600">Setpoint (SP)</text>
+<path d="M20.0 95.0 L176.0 95.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<circle cx="190" cy="95" r="13" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M180.9 85.9L199.1 104.1M180.9 104.1L199.1 85.9" stroke="#0f172a" stroke-width="1.3"/>
+<text x="169" y="88" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">+</text>
+<text x="203" y="121" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">−</text>
+<path d="M204.0 95.0 L290.0 95.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="247" y="83" font-size="13" text-anchor="middle" fill="#64748b" font-weight="400">Error e</text>
+<rect x="292.0" y="72.0" width="116.0" height="46" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="350" y="99.9" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400">Controller</text>
+<path d="M408.0 95.0 L518.0 95.0" fill="none" stroke="#0077b6" stroke-width="2" marker-end="url(#ab)"/>
+<text x="463" y="69.0" font-size="12" text-anchor="middle" fill="#0077b6" font-weight="600">Manipulated</text>
+<text x="463" y="84.0" font-size="12" text-anchor="middle" fill="#0077b6" font-weight="600">variable (MV)</text>
+<rect x="522.0" y="72.0" width="116.0" height="46" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="580" y="91.75" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="400">Process /</text>
+<text x="580" y="107.35" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="400">plant</text>
+<path d="M638.0 95.0 L760.0 95.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="705" y="69.0" font-size="12" text-anchor="middle" fill="#db2777" font-weight="600">Controlled</text>
+<text x="705" y="84.0" font-size="12" text-anchor="middle" fill="#db2777" font-weight="600">variable (CV)</text>
+<circle cx="690" cy="95" r="4" fill="#0f172a"/>
+<path d="M690.0 95.0 L690.0 190.0 L448.0 190.0" fill="none" stroke="#0077b6" stroke-width="2" marker-end="url(#ab)"/>
+<rect x="332.0" y="170.0" width="116.0" height="40" rx="4" fill="#fff" stroke="#0077b6" stroke-width="2"/>
+<text x="390" y="194.9" font-size="14" text-anchor="middle" fill="#0077b6" font-weight="400">Sensor</text>
+<path d="M332.0 190.0 L190.0 190.0 L190.0 109.0" fill="none" stroke="#0077b6" stroke-width="2" marker-end="url(#ab)"/>
+<text x="262" y="182" font-size="12" text-anchor="middle" fill="#0077b6" font-weight="600">Process variable (PV)</text>
+<text x="190" y="232" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="600">e = SP − PV</text>
+</g>
+</svg>

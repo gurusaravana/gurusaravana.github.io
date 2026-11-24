@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 300" width="820" height="300" role="img" aria-label="Map of control systems: natural or man-made; man-made are manual or automatic; automatic are open-loop or closed-loop; any system is also linear or nonlinear, time-variant or invariant, lumped or distributed, continuous or discrete, deterministic or stochastic, SISO or MIMO">
+<title>Map of control systems: natural or man-made; man-made are manual or automatic; automatic are open-loop or closed-loop; any system is also linear or nonlinear, time-variant or invariant, lumped or distributed, continuous or discrete, deterministic or stochastic, SISO or MIMO</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker></defs>
+<rect width="820" height="300" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<rect x="138" y="16" width="124" height="36" rx="10" fill="#fff" stroke="#0f172a" stroke-width="1.8"/>
+<text x="200" y="39" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400">Control systems</text>
+<path d="M200 52 L200 67.0" stroke="#0f172a" stroke-width="1.6" fill="none"/>
+<path d="M100 67.0 L290 67.0" stroke="#0f172a" stroke-width="1.6" fill="none"/>
+<path d="M100 67.0 L100 82" stroke="#0f172a" stroke-width="1.6" fill="none"/>
+<path d="M290 67.0 L290 82" stroke="#0f172a" stroke-width="1.6" fill="none"/>
+<rect x="38" y="82" width="124" height="36" rx="10" fill="#fff" stroke="#0f172a" stroke-width="1.8"/>
+<text x="100" y="105" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400">Natural</text>
+<rect x="228" y="82" width="124" height="36" rx="10" fill="#fff" stroke="#ea7a1f" stroke-width="2.4"/>
+<text x="290" y="105" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400">Man-made</text>
+<path d="M290 118 L290 135.0" stroke="#0f172a" stroke-width="1.6" fill="none"/>
+<path d="M200 135.0 L380 135.0" stroke="#0f172a" stroke-width="1.6" fill="none"/>
+<path d="M200 135.0 L200 152" stroke="#0f172a" stroke-width="1.6" fill="none"/>
+<path d="M380 135.0 L380 152" stroke="#0f172a" stroke-width="1.6" fill="none"/>
+<rect x="138" y="152" width="124" height="36" rx="10" fill="#fff" stroke="#0f172a" stroke-width="1.8"/>
+<text x="200" y="175" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400">Manual</text>
+<rect x="318" y="152" width="124" height="36" rx="10" fill="#fff" stroke="#ea7a1f" stroke-width="2.4"/>
+<text x="380" y="175" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400">Automatic</text>
+<path d="M380 188 L380 205.0" stroke="#0f172a" stroke-width="1.6" fill="none"/>
+<path d="M300 205.0 L460 205.0" stroke="#0f172a" stroke-width="1.6" fill="none"/>
+<path d="M300 205.0 L300 222" stroke="#0f172a" stroke-width="1.6" fill="none"/>
+<path d="M460 205.0 L460 222" stroke="#0f172a" stroke-width="1.6" fill="none"/>
+<rect x="238" y="222" width="124" height="36" rx="10" fill="#fff" stroke="#0f172a" stroke-width="1.8"/>
+<text x="300" y="245" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400">Open-loop</text>
+<rect x="398" y="222" width="124" height="36" rx="10" fill="#fff" stroke="#0f172a" stroke-width="1.8"/>
+<text x="460" y="245" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400">Closed-loop</text>
+<path d="M548 40 Q565 40 565 60 L565 140 Q565 150 578 150 Q565 150 565 160 L565 250 Q565 270 548 270" fill="none" stroke="#0f172a" stroke-width="2"/>
+<text x="700" y="34" font-size="13" text-anchor="middle" fill="#64748b" font-weight="600">Every system is also:</text>
+<text x="592" y="66" font-size="14" text-anchor="start" fill="#0f172a" font-weight="400">Linear / Nonlinear</text>
+<path d="M592 80 L800 80" stroke="#e2e8f0" stroke-width="1.2"/>
+<text x="592" y="104" font-size="14" text-anchor="start" fill="#0f172a" font-weight="400">Time-variant / Time-invariant</text>
+<path d="M592 118 L800 118" stroke="#e2e8f0" stroke-width="1.2"/>
+<text x="592" y="142" font-size="14" text-anchor="start" fill="#0f172a" font-weight="400">Lumped / Distributed parameter</text>
+<path d="M592 156 L800 156" stroke="#e2e8f0" stroke-width="1.2"/>
+<text x="592" y="180" font-size="14" text-anchor="start" fill="#0f172a" font-weight="400">Continuous / Discrete data</text>
+<path d="M592 194 L800 194" stroke="#e2e8f0" stroke-width="1.2"/>
+<text x="592" y="218" font-size="14" text-anchor="start" fill="#0f172a" font-weight="400">Deterministic / Stochastic</text>
+<path d="M592 232 L800 232" stroke="#e2e8f0" stroke-width="1.2"/>
+<text x="592" y="256" font-size="14" text-anchor="start" fill="#0f172a" font-weight="400">SISO / MIMO</text>
+</g>
+</svg>

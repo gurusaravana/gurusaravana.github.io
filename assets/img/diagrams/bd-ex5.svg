@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 270" width="860" height="270" role="img" aria-label="Exercise 5 block diagram: unity outer feedback, H1 from after G2 subtracted before G1, H2 from the output subtracted after G1, and G4 feeding forward from after that summing point to the output summing point">
+<title>Exercise 5 block diagram: unity outer feedback, H1 from after G2 subtracted before G1, H2 from the output subtracted after G1, and G4 feeding forward from after that summing point to the output summing point</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker></defs>
+<rect width="860" height="270" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<text x="26" y="115" font-size="15" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">R(s)</text>
+<path d="M48.0 110.0 L66.0 110.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<circle cx="80" cy="110" r="13" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M70.9 100.9L89.1 119.1M70.9 119.1L89.1 100.9" stroke="#0f172a" stroke-width="1.3"/>
+<text x="59" y="103" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">+</text>
+<text x="93" y="136" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">−</text>
+<path d="M94.0 110.0 L136.0 110.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<circle cx="150" cy="110" r="13" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M140.9 100.9L159.1 119.1M140.9 119.1L159.1 100.9" stroke="#0f172a" stroke-width="1.3"/>
+<text x="129" y="103" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">+</text>
+<text x="163" y="136" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">−</text>
+<path d="M164.0 110.0 L203.0 110.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="203.0" y="90.0" width="54.0" height="40" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="230" y="115.6" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400">G<tspan font-size="72%" baseline-shift="sub">1</tspan></text>
+<path d="M257.0 110.0 L296.0 110.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<circle cx="310" cy="110" r="13" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M300.9 100.9L319.1 119.1M300.9 119.1L319.1 100.9" stroke="#0f172a" stroke-width="1.3"/>
+<text x="289" y="103" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">+</text>
+<text x="323" y="136" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">−</text>
+<path d="M324.0 110.0 L413.0 110.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<circle cx="370" cy="110" r="4" fill="#0f172a"/>
+<rect x="413.0" y="90.0" width="54.0" height="40" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="440" y="115.6" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400">G<tspan font-size="72%" baseline-shift="sub">2</tspan></text>
+<path d="M467.0 110.0 L563.0 110.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<circle cx="510" cy="110" r="4" fill="#0f172a"/>
+<rect x="563.0" y="90.0" width="54.0" height="40" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="590" y="115.6" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400">G<tspan font-size="72%" baseline-shift="sub">3</tspan></text>
+<path d="M617.0 110.0 L666.0 110.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<circle cx="680" cy="110" r="13" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M670.9 100.9L689.1 119.1M670.9 119.1L689.1 100.9" stroke="#0f172a" stroke-width="1.3"/>
+<text x="659" y="103" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">+</text>
+<text x="694" y="98" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">+</text>
+<path d="M694.0 110.0 L810.0 110.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="826" y="115" font-size="16" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">C</text>
+<circle cx="750" cy="110" r="4" fill="#0f172a"/>
+<path d="M370.0 110.0 L370.0 40.0 L513.0 40.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="513.0" y="20.0" width="54.0" height="40" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="540" y="45.6" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400">G<tspan font-size="72%" baseline-shift="sub">4</tspan></text>
+<path d="M567.0 40.0 L680.0 40.0 L680.0 96.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<path d="M750.0 110.0 L750.0 245.0" fill="none" stroke="#0f172a" stroke-width="2"/>
+<circle cx="750" cy="170" r="4" fill="#0f172a"/>
+<path d="M750.0 170.0 L647.0 170.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="593.0" y="150.0" width="54.0" height="40" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="620" y="175.6" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400">H<tspan font-size="72%" baseline-shift="sub">2</tspan></text>
+<path d="M593.0 170.0 L310.0 170.0 L310.0 124.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<path d="M510 110 L510 163 A7 7 0 0 1 510 177 L510 205" fill="none" stroke="#0f172a" stroke-width="2"/>
+<path d="M510.0 205.0 L467.0 205.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="413.0" y="185.0" width="54.0" height="40" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="440" y="210.6" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400">H<tspan font-size="72%" baseline-shift="sub">1</tspan></text>
+<path d="M413.0 205.0 L150.0 205.0 L150.0 124.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<path d="M750.0 245.0 L80.0 245.0 L80.0 124.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+</g>
+</svg>

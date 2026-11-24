@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 290" width="860" height="290" role="img" aria-label="Exercise 3 block diagram: R feeds a positive summing point and G4 straight to the output summing point; H1 from after G2 is added at the first summing point and subtracted at the second; H2 from after G3 is subtracted at the second summing point">
+<title>Exercise 3 block diagram: R feeds a positive summing point and G4 straight to the output summing point; H1 from after G2 is added at the first summing point and subtracted at the second; H2 from after G3 is subtracted at the second summing point</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker></defs>
+<rect width="860" height="290" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<text x="22" y="115" font-size="15" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">R(s)</text>
+<path d="M44.0 110.0 L126.0 110.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<circle cx="80" cy="110" r="4" fill="#0f172a"/>
+<circle cx="140" cy="110" r="13" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M130.9 100.9L149.1 119.1M130.9 119.1L149.1 100.9" stroke="#0f172a" stroke-width="1.3"/>
+<text x="119" y="103" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">+</text>
+<text x="153" y="136" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">+</text>
+<path d="M154.0 110.0 L193.0 110.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="193.0" y="90.0" width="54.0" height="40" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="220" y="115.6" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400">G<tspan font-size="72%" baseline-shift="sub">1</tspan></text>
+<path d="M247.0 110.0 L296.0 110.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<circle cx="310" cy="110" r="13" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M300.9 100.9L319.1 119.1M300.9 119.1L319.1 100.9" stroke="#0f172a" stroke-width="1.3"/>
+<text x="289" y="103" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">+</text>
+<text x="324" y="98" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">−</text>
+<text x="323" y="136" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">−</text>
+<path d="M324.0 110.0 L363.0 110.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="363.0" y="90.0" width="54.0" height="40" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="390" y="115.6" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400">G<tspan font-size="72%" baseline-shift="sub">2</tspan></text>
+<path d="M417.0 110.0 L513.0 110.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<circle cx="460" cy="110" r="4" fill="#0f172a"/>
+<rect x="513.0" y="90.0" width="54.0" height="40" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="540" y="115.6" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400">G<tspan font-size="72%" baseline-shift="sub">3</tspan></text>
+<path d="M567.0 110.0 L676.0 110.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<circle cx="620" cy="110" r="4" fill="#0f172a"/>
+<circle cx="690" cy="110" r="13" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M680.9 100.9L699.1 119.1M680.9 119.1L699.1 100.9" stroke="#0f172a" stroke-width="1.3"/>
+<text x="669" y="103" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">+</text>
+<text x="703" y="136" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">+</text>
+<path d="M704.0 110.0 L800.0 110.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="818" y="115" font-size="15" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">C(s)</text>
+<path d="M620.0 110.0 L620.0 40.0 L487.0 40.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="433.0" y="20.0" width="54.0" height="40" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="460" y="45.6" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400">H<tspan font-size="72%" baseline-shift="sub">2</tspan></text>
+<path d="M433.0 40.0 L310.0 40.0 L310.0 96.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<path d="M460.0 110.0 L460.0 190.0 L417.0 190.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="363.0" y="170.0" width="54.0" height="40" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="390" y="195.6" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400">H<tspan font-size="72%" baseline-shift="sub">1</tspan></text>
+<path d="M363.0 190.0 L140.0 190.0 L140.0 124.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<circle cx="310" cy="190" r="4" fill="#0f172a"/>
+<path d="M310.0 190.0 L310.0 124.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<path d="M80.0 110.0 L80.0 255.0 L467.0 255.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="468.0" y="235.0" width="54.0" height="40" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="495" y="260.6" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400">G<tspan font-size="72%" baseline-shift="sub">4</tspan></text>
+<path d="M522.0 255.0 L690.0 255.0 L690.0 124.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+</g>
+</svg>
