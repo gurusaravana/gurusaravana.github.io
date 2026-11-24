@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 6: Frequency response: Bode, polar and Nyquist plots · Linear Control Systems</title>
+<meta name="description" content="Frequency response: Bode, polar and Nyquist plots">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 6: Frequency response: Bode, polar and Nyquist plots  (Linear Control Systems, EACT 533)
+  Edit the notes between the NOTES START and NOTES END markers below.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Figures live in assets/img/diagrams/ and are shown with a figure of class "diagram".
+  To add an exercise, copy one list item inside the list of class "exlist".
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
+  <nav class="links"><a href="../linear-control-systems.html">Course home</a><a href="../linear-control-systems.html#lessons">Lessons</a><a href="../linear-control-systems.html#figures">Figures</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../linear-control-systems.html">← Linear Control Systems</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 6 of 6 · Chapter 4</div>
+    <h1>Frequency response: Bode, polar and Nyquist plots</h1>
+    <p>Linear Control Systems · EACT 533 · Postgraduate course</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">EACT 533 · Linear Control Systems</div><ol><li><a href="01-transfer-functions.html"><span class="n">1</span>Control systems, models and block diagrams</a></li><li><a href="02-mechanical-translational.html"><span class="n">2</span>Mechanical translational systems</a></li><li><a href="03-time-domain-analysis.html"><span class="n">3</span>Time-domain analysis</a></li><li><a href="04-stability-routh-hurwitz.html"><span class="n">4</span>Stability and the Routh–Hurwitz criterion</a></li><li><a href="05-root-locus.html"><span class="n">5</span>Root locus method</a></li><li class="on"><a href="06-frequency-response.html"><span class="n">6</span>Frequency response: Bode, polar and Nyquist plots</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Find the steady-state response to a sinusoid</li><li>Sketch asymptotic Bode plots and read gain and phase margins</li><li>Draw polar plots and find real-axis crossings</li><li>Apply the Nyquist criterion Z = N + P</li></ul></div>
+    <nav class="figstrip" aria-label="Figures in this lesson"><a href="#fig-bode"><img src="../../assets/img/diagrams/lcs-bode-ex.svg" alt="" loading="lazy"><span>Bode plot</span></a><a href="#fig-polar"><img src="../../assets/img/diagrams/lcs-polar-ex.svg" alt="" loading="lazy"><span>Polar plot</span></a><a href="#fig-nyquist"><img src="../../assets/img/diagrams/lcs-nyquist-ex.svg" alt="" loading="lazy"><span>Nyquist plot</span></a></nav>
+    <section class="lsec"><h2>Notes</h2>
+    <!-- NOTES START -->
+    <article class="notes">
+<p>The <b>frequency response</b> is the steady-state output of a system to a sinusoidal input. For a stable linear system $G(s)$ driven by $r(t) = A\sin\omega t$, the output settles to</p>
+<p class="eq">$$c_{ss}(t) = A\,|G(j\omega)|\sin\big(\omega t + \angle G(j\omega)\big)$$</p>
+<p>so the sinusoid keeps its frequency but is scaled by the <b>magnitude</b> $|G(j\omega)|$ and shifted by the <b>phase</b> $\angle G(j\omega)$. Substituting $s = j\omega$ is all it takes. Frequency methods are popular because the response can be measured directly on real hardware with a signal generator, and because the open-loop plot predicts closed-loop stability.</p>
+
+<h3 id="specs">Frequency-domain specifications</h3>
+<p>For the standard second-order loop $\dfrac{\omega_n^2}{s^2 + 2\zeta\omega_n s + \omega_n^2}$:</p>
+<table class="tbl"><tr><th>Specification</th><th>Formula</th><th>Meaning</th></tr>
+<tr><td>Resonant frequency</td><td>$\omega_r = \omega_n\sqrt{1 - 2\zeta^2}$</td><td>Where the closed-loop gain peaks (exists for $\zeta &lt; 0.707$)</td></tr>
+<tr><td>Resonant peak</td><td>$M_r = \dfrac{1}{2\zeta\sqrt{1 - \zeta^2}}$</td><td>Large $M_r$ means large overshoot</td></tr>
+<tr><td>Bandwidth</td><td>$\omega_b = \omega_n\sqrt{1 - 2\zeta^2 + \sqrt{4\zeta^4 - 4\zeta^2 + 2}}$</td><td>Where the gain falls 3 dB below its DC value; larger bandwidth means a faster response</td></tr>
+<tr><td>Gain and phase margins</td><td>see below</td><td>Distance from instability</td></tr></table>
+
+<h3 id="bode">Bode plots</h3>
+<p>A Bode plot draws $20\log_{10}|G(j\omega)|$ in decibels and $\angle G(j\omega)$ in degrees against $\log\omega$. Because logs turn products into sums, the plot of a product of factors is the <b>sum</b> of the plots of the factors:</p>
+<table class="tbl"><tr><th>Factor</th><th>Magnitude</th><th>Phase</th></tr>
+<tr><td>Gain $K$</td><td>flat at $20\log K$</td><td>$0°$ (or $-180°$ if $K &lt; 0$)</td></tr>
+<tr><td>Integrator $1/s$ (pole at origin)</td><td>$-20$ dB/decade, 0 dB at $\omega = 1$</td><td>$-90°$</td></tr>
+<tr><td>Differentiator $s$</td><td>$+20$ dB/decade</td><td>$+90°$</td></tr>
+<tr><td>$1/(1 + sT)$</td><td>0 dB, then $-20$ dB/decade after the corner $1/T$ (exact: $-3$ dB at the corner)</td><td>0° to $-90°$, $-45°$ at the corner</td></tr>
+<tr><td>$1 + sT$</td><td>0 dB, then $+20$ dB/decade</td><td>0° to $+90°$</td></tr>
+<tr><td>$\dfrac{\omega_n^2}{s^2 + 2\zeta\omega_n s + \omega_n^2}$</td><td>0 dB, then $-40$ dB/decade after $\omega_n$; peak near $\omega_n$ for small $\zeta$</td><td>0° to $-180°$, $-90°$ at $\omega_n$</td></tr></table>
+<p><b>Steps for a hand sketch:</b> write $G$ in time-constant form; list the corner frequencies in order; start the asymptote at low frequency with slope $-20N$ dB/decade (for $N$ integrators) through $20\log K$ at $\omega = 1$; change the slope by $\mp 20$ dB/decade at each first-order corner ($\mp 40$ at a quadratic corner); add the phase of each factor.</p>
+
+<h3 id="margins">Gain margin and phase margin</h3>
+<ul>
+<li><b>Gain crossover frequency</b> $\omega_{gc}$: where $|G(j\omega)H(j\omega)| = 1$ (0 dB).</li>
+<li><b>Phase crossover frequency</b> $\omega_{pc}$: where $\angle G(j\omega)H(j\omega) = -180°$.</li>
+<li><b>Gain margin</b> $GM = \dfrac{1}{|GH(j\omega_{pc})|}$, or $-20\log|GH(j\omega_{pc})|$ dB: how much the gain can rise before instability.</li>
+<li><b>Phase margin</b> $PM = 180° + \angle GH(j\omega_{gc})$: how much extra phase lag the loop can take.</li>
+</ul>
+<p>For a minimum-phase system the closed loop is stable when both margins are positive. Good designs typically have $GM \ge 6$ dB and $PM$ between $30°$ and $60°$.</p>
+<figure class="diagram" id="fig-bode"><img src="../../assets/img/diagrams/lcs-bode-ex.svg" alt="Bode plot of 10 over s(1+0.4s)(1+0.1s)" loading="lazy"><figcaption>Bode plot of $G(s) = \dfrac{10}{s(1 + 0.4s)(1 + 0.1s)}$.</figcaption></figure>
+<p><b>Worked example.</b> $G(s) = \dfrac{10}{s(1 + 0.4s)(1 + 0.1s)}$, corners at $1/0.4 = 2.5$ and $1/0.1 = 10$ rad/s.</p>
+<ol>
+<li>Asymptotic magnitude: $20\log(10/\omega)$ gives 40 dB at $\omega = 0.1$ and 12 dB at $\omega = 2.5$; then $-40$ dB/decade to $12 - 40\log 4 = -12$ dB at $\omega = 10$; then $-60$ dB/decade to $-12 - 60\log 5 = -54$ dB at $\omega = 50$.</li>
+<li>Phase: $\phi = -90° - \tan^{-1}0.4\omega - \tan^{-1}0.1\omega$. Setting $\phi = -180°$: $\tan^{-1}0.4\omega + \tan^{-1}0.1\omega = 90°$ means $0.4\omega \times 0.1\omega = 1$, so $\omega_{pc} = 5$ rad/s.</li>
+<li>At $\omega = 5$: $|G| = \dfrac{10}{5\sqrt{1 + 4}\sqrt{1 + 0.25}} = 0.8$, so $GM = 1/0.8 = 1.25 = 1.94$ dB.</li>
+<li>$|G| = 1$ at $\omega_{gc} = 4.46$ rad/s, where $\phi = -174.8°$, so $PM = 5.2°$.</li>
+</ol>
+<p>The asymptotes put both crossovers near 5 rad/s, suggesting the loop is on the edge. The exact values confirm it is stable, but only just: a 25% gain increase makes it oscillate.</p>
+<p><b>Finding K from a crossover.</b> For $G(s) = \dfrac{Ks^2}{(1 + 0.2s)(1 + 0.02s)}$ with the gain crossover required at 5 rad/s: below the first corner (5 rad/s) the asymptote is $K\omega^2$, so $25K = 1$ and $K = 0.04$ from the asymptotic plot. Using the exact magnitude, $\dfrac{25K}{\sqrt{2}\sqrt{1.01}} = 1$ gives $K = 0.057$.</p>
+<p><b>Another example.</b> $G(s) = \dfrac{75(1 + 0.2s)}{s(s^2 + 16s + 100)}$: the zero at $-5$ lifts the phase, which approaches but never reaches $-180°$. So the gain margin is infinite, and with $\omega_{gc} \approx 0.76$ rad/s the phase margin is about $92°$.</p>
+
+<h3 id="polar">Polar plots</h3>
+<p>A polar (Nyquist) plot draws $G(j\omega)$ as a single curve in the complex plane as $\omega$ goes from 0 to $\infty$, with $\omega$ marked along it. The type of the system sets where the plot starts: type 0 starts on the positive real axis at $K$; type 1 starts at infinity along $-90°$; type 2 along $-180°$. The order minus the number of zeros sets how it ends: at the origin, arriving at $-90°(n - m)$.</p>
+<figure class="diagram" id="fig-polar"><img src="../../assets/img/diagrams/lcs-polar-ex.svg" alt="Polar plot of 1 over s(1+s)(1+2s)" loading="lazy"><figcaption>Polar plot of $G(s) = \dfrac{1}{s(1 + s)(1 + 2s)}$.</figcaption></figure>
+<p><b>Worked example.</b> $G(j\omega) = \dfrac{1}{j\omega(1 + j\omega)(1 + 2j\omega)}$. Rationalising, $\operatorname{Re}G = \dfrac{-3}{(1 + \omega^2)(1 + 4\omega^2)}$, so as $\omega \to 0$ the plot approaches the vertical asymptote $\operatorname{Re} = -3$. The imaginary part vanishes where $1 - 2\omega^2 = 0$, $\omega = 0.707$ rad/s, and there $G = -2/3$. So $GM = 1.5$ (3.5 dB). The plot meets the unit circle at $\omega = 0.572$ rad/s, giving $PM = 11.4°$.</p>
+<p class="warn">The slide reads $GM \approx 1.43$ off a hand-drawn plot. The exact value is 1.5.</p>
+<p>For $G(s) = \dfrac{10}{s(s + 1)(s + 5)}$ the same method gives a real-axis crossing where $\omega^2 = 5$: $G(j\sqrt{5}) = \dfrac{10}{-30} = -\dfrac{1}{3}$, so $GM = 3$ (9.5 dB).</p>
+
+<h3 id="nyquist">The Nyquist stability criterion</h3>
+<p>The Nyquist criterion uses the open-loop plot to count closed-loop poles in the right half-plane. Map the Nyquist contour (the whole right half-plane, going round any poles on the $j\omega$ axis) through $G(s)H(s)$ and count encirclements of the point $-1$:</p>
+<p class="eq">$$Z = N + P$$</p>
+<p>$Z$ is the number of closed-loop poles in the right half-plane, $P$ the number of open-loop poles in the right half-plane, and $N$ the number of <b>clockwise</b> encirclements of $-1$ (counter-clockwise counts as negative). For stability $Z = 0$. When the open loop is stable ($P = 0$), the plot must <b>not encircle</b> $-1$.</p>
+<figure class="diagram" id="fig-nyquist"><img src="../../assets/img/diagrams/lcs-nyquist-ex.svg" alt="Nyquist plot of 500 over (s+1)(s+3)(s+10)" loading="lazy"><figcaption>Nyquist plot of $G(s) = \dfrac{500}{(s + 1)(s + 3)(s + 10)}$.</figcaption></figure>
+<p><b>Worked example.</b> $G(s) = \dfrac{500}{(s + 1)(s + 3)(s + 10)}$, stable open loop ($P = 0$).</p>
+<ul>
+<li>$\omega = 0$: $G = 500/30 = 16.67$.</li>
+<li>Expanding, $G(j\omega) = \dfrac{500}{(30 - 14\omega^2) + j\omega(43 - \omega^2)}$. The imaginary part of the denominator is zero at $\omega^2 = 43$, $\omega = 6.56$ rad/s, where $G = \dfrac{500}{30 - 602} = -0.874$.</li>
+<li>The real part of the denominator is zero at $\omega^2 = 30/14$, $\omega = 1.46$ rad/s, where $G = -j8.36$.</li>
+<li>$\omega \to \infty$: $G \to 0$ arriving at $-270°$.</li>
+</ul>
+<p>The curve crosses the negative real axis at $-0.874$, to the right of $-1$, so $N = 0$ and $Z = 0$: the closed loop is stable with $GM = 1/0.874 = 1.14$ (1.17 dB). Raising the gain from 500 to $500/0.874 = 572$ would put the crossing exactly on $-1$.</p>
+<p class="key">The type-3 system $G(s) = \dfrac{(1 + 0.2s)(1 + 0.025s)}{s^3(1 + 0.005s)(1 + 0.001s)}$ has a phase that starts at $-270°$; at its gain crossover the phase margin is about $-77°$. A negative phase margin means the closed loop is unstable, which the Nyquist plot confirms by encircling $-1$.</p>
+</article>
+    <!-- NOTES END -->
+    </section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the div below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">A system $G(s) = \dfrac{10}{s + 5}$ is driven by $r(t) = 2\sin 5t$. Find the steady-state output.</div><details><summary>Show solution</summary><div class="sol">$G(j5) = \dfrac{10}{5 + j5}$: $|G| = 10/7.07 = 1.414$, $\angle G = -45°$. So $c_{ss} = 2.83\sin(5t - 45°)$.</div></details></li><li><div class="q">For $\zeta = 0.4$ and $\omega_n = 10$ rad/s find $\omega_r$, $M_r$ and the bandwidth.</div><details><summary>Show solution</summary><div class="sol">$\omega_r = 10\sqrt{1 - 0.32} = 8.25$ rad/s. $M_r = \dfrac{1}{2(0.4)\sqrt{0.84}} = 1.36$ (2.7 dB). $\omega_b = 10\sqrt{1 - 0.32 + \sqrt{0.1024 - 0.64 + 2}} = 10\sqrt{0.68 + 1.209} = 13.7$ rad/s.</div></details></li><li><div class="q">Sketch the asymptotic Bode magnitude of $G(s) = \dfrac{100(s + 2)}{s(s + 10)}$ and give its value at $\omega = 1$, 2 and 10 rad/s.</div><details><summary>Show solution</summary><div class="sol">Time-constant form $\dfrac{20(1 + s/2)}{s(1 + s/10)}$. Slope $-20$ through 26 dB at $\omega = 1$; 20 dB at $\omega = 2$; flat at 20 dB from 2 to 10 rad/s; then $-20$ dB/decade. Value 20 dB at $\omega = 10$.</div></details></li><li><div class="q">In the Bode example, by what factor can $K = 10$ be raised before the loop becomes unstable? What is the critical gain?</div><details><summary>Show solution</summary><div class="sol">By the gain margin, $1.25$. The critical gain is $12.5$; check with Routh on $0.04s^3 + 0.5s^2 + s + K$: $0.5 \times 1 &gt; 0.04K$ gives $K &lt; 12.5$, oscillating at $\omega = 5$ rad/s.</div></details></li><li><div class="q">Use the Nyquist criterion for $G(s)H(s) = \dfrac{K}{(s + 1)(s + 3)(s + 10)}$: find the largest $K$ for stability.</div><details><summary>Show solution</summary><div class="sol">The real-axis crossing at $\omega = \sqrt{43}$ is $\dfrac{K}{30 - 14(43)} = -\dfrac{K}{572}$. It stays to the right of $-1$ while $K &lt; 572$. Routh agrees: $14 \times 43 &gt; 30 + K$.</div></details></li><li><div class="q">For $G(s) = \dfrac{1}{s(1 + s)(1 + 2s)}$, what gain $K$ in front of $G$ gives a gain margin of 6 dB?</div><details><summary>Show solution</summary><div class="sol">Now the crossing is at $-2K/3$. A 6 dB margin means $|GH(j\omega_{pc})| = 0.5$, so $2K/3 = 0.5$ and $K = 0.75$.</div></details></li></ol></section>
+    <nav class="prevnext"><a class="pn prev" href="05-root-locus.html"><small>← Lesson 5</small>Root locus method</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 270" width="720" height="270" role="img" aria-label="Block diagram example: R minus C into a summer, plus H1 positive feedback, then G1; a second summer subtracts H2 times C; then G2 and G3 give C. H1 is taken from the output of G2.">
+<title>Block diagram example: R minus C into a summer, plus H1 positive feedback, then G1; a second summer subtracts H2 times C; then G2 and G3 give C. H1 is taken from the output of G2.</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker></defs>
+<rect width="720" height="270" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<text x="28.0" y="110.0" font-size="15" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">R(s)</text>
+<path d="M20.0 120.0 L78.0 120.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<circle cx="92.0" cy="120.0" r="13" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M82.9 110.9L101.1 129.1M82.9 129.1L101.1 110.9" stroke="#0f172a" stroke-width="1.3"/>
+<text x="71.0" y="113.0" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">+</text>
+<text x="105.0" y="146.0" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">−</text>
+<path d="M105.0 120.0 L162.0 120.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<circle cx="176.0" cy="120.0" r="13" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M166.9 110.9L185.1 129.1M166.9 129.1L185.1 110.9" stroke="#0f172a" stroke-width="1.3"/>
+<text x="155.0" y="113.0" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">+</text>
+<text x="189.0" y="146.0" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">+</text>
+<path d="M189.0 120.0 L220.0 120.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="220.0" y="97.0" width="64.0" height="46.0" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="252.0" y="125.6" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400">G₁</text>
+<path d="M284.0 120.0 L326.0 120.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<circle cx="340.0" cy="120.0" r="13" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M330.9 110.9L349.1 129.1M330.9 129.1L349.1 110.9" stroke="#0f172a" stroke-width="1.3"/>
+<text x="319.0" y="113.0" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">+</text>
+<text x="359.0" y="108.0" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">−</text>
+<path d="M353.0 120.0 L384.0 120.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="384.0" y="97.0" width="64.0" height="46.0" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="416.0" y="125.6" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400">G₂</text>
+<path d="M448.0 120.0 L520.0 120.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<circle cx="480.0" cy="120.0" r="4" fill="#0f172a"/>
+<rect x="520.0" y="97.0" width="64.0" height="46.0" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="552.0" y="125.6" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400">G₃</text>
+<path d="M584.0 120.0 L700.0 120.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="684.0" y="110.0" font-size="15" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">C(s)</text>
+<circle cx="630.0" cy="120.0" r="4" fill="#0f172a"/>
+<path d="M630.0 120.0 L630.0 40.0 L520.0 40.0" fill="none" stroke="#0077b6" stroke-width="2" marker-end="url(#ab)"/>
+<rect x="460.0" y="22.0" width="60.0" height="36.0" rx="4" fill="#fff" stroke="#0077b6" stroke-width="2"/>
+<text x="490.0" y="45.6" font-size="16" text-anchor="middle" fill="#0077b6" font-weight="400">H₂</text>
+<path d="M460.0 40.0 L340.0 40.0 L340.0 105.0" fill="none" stroke="#0077b6" stroke-width="2" marker-end="url(#ab)"/>
+<path d="M480.0 120.0 L480.0 185.0 L345.0 185.0" fill="none" stroke="#059669" stroke-width="2" marker-end="url(#ag)"/>
+<rect x="285.0" y="167.0" width="60.0" height="36.0" rx="4" fill="#fff" stroke="#059669" stroke-width="2"/>
+<text x="315.0" y="190.6" font-size="16" text-anchor="middle" fill="#059669" font-weight="400">H₁</text>
+<path d="M285.0 185.0 L176.0 185.0 L176.0 135.0" fill="none" stroke="#059669" stroke-width="2" marker-end="url(#ag)"/>
+<path d="M630.0 120.0 L630.0 245.0 L92.0 245.0 L92.0 135.0" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#am)"/>
+</g>
+</svg>
