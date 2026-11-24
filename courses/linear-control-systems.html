@@ -24,7 +24,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Linear Control Systems · Dr. Saravanakumar Gurusamy</title>
-<meta name="description" content="Linear control theory, state-space methods and their applications.">
+<meta name="description" content="Modelling, time response, stability, root locus and frequency-response methods for linear control systems.">
 <link rel="icon" href="../assets/img/favicon1.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -33,7 +33,7 @@
 <body>
 <header class="nav"><div class="wrap">
   <a class="brand" href="../index.html">Saravanakumar G</a>
-  <nav class="links"><a href="../index.html">Home</a><a href="../index.html#teaching">Courses</a><a href="#materials">Materials</a></nav>
+  <nav class="links"><a href="../index.html">Home</a><a href="../index.html#teaching">Courses</a><a href="#lessons">Lessons</a><a href="#figures">Figures</a><a href="#materials">Materials</a></nav>
   <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
 </div></header>
 <div class="band course-band"><div class="wrap">
@@ -41,16 +41,31 @@
   <div class="course-head">
     <div class="eyebrow">Postgraduate course · FTI (EACT 533)</div>
     <h1>Linear Control Systems</h1>
-    <p>Linear control theory, state-space methods and their applications.</p>
+    <p>Modelling, time response, stability, root locus and frequency-response methods for linear control systems.</p>
   </div>
 </div></div>
 <main class="wrap">
+  <section id="lessons">
+    <h2>Lessons</h2>
+    <p class="note">Each lesson has notes with worked examples, redrawn figures and exercises with solutions. Open a lesson and use "Show solution" to check your work.</p>
+    <div class="modgrid"><div class="modcard"><div class="mhead"><span class="mcode">1</span><div><h3>Modelling</h3><p>Open and closed loops, classification, transfer functions, block diagrams, signal flow graphs and mechanical systems.</p></div></div><ul class="lessons"><li><a href="linear-control-systems/01-transfer-functions.html"><span class="n">01</span><span class="t">Control systems, models and block diagrams</span></a></li><li><a href="linear-control-systems/02-mechanical-translational.html"><span class="n">02</span><span class="t">Mechanical translational systems</span></a></li></ul></div><div class="modcard"><div class="mhead"><span class="mcode">2</span><div><h3>Time response and stability</h3><p>Test signals, first- and second-order responses, specifications, steady-state error and the Routh–Hurwitz criterion.</p></div></div><ul class="lessons"><li><a href="linear-control-systems/03-time-domain-analysis.html"><span class="n">03</span><span class="t">Time-domain analysis</span></a></li><li><a href="linear-control-systems/04-stability-routh-hurwitz.html"><span class="n">04</span><span class="t">Stability and the Routh–Hurwitz criterion</span></a></li></ul></div><div class="modcard"><div class="mhead"><span class="mcode">3</span><div><h3>Root locus and frequency response</h3><p>Root locus construction, root contours, Bode, polar and Nyquist plots, gain and phase margins.</p></div></div><ul class="lessons"><li><a href="linear-control-systems/05-root-locus.html"><span class="n">05</span><span class="t">Root locus method</span></a></li><li><a href="linear-control-systems/06-frequency-response.html"><span class="n">06</span><span class="t">Frequency response: Bode, polar and Nyquist plots</span></a></li></ul></div></div>
+  </section>
+  <section id="figures">
+    <h2>Figures and worked problems</h2>
+    <p class="note">Every diagram is drawn for this course. Click one to jump to it in its lesson.</p>
+    <h3 class="figgroup">Modelling (Lessons 1 and 2)</h3>
+    <nav class="figstrip"><a href="linear-control-systems/01-transfer-functions.html#fig-ex11"><img src="../assets/img/diagrams/lcs-bd-ex11.svg" alt="" loading="lazy"><span>Block diagram reduction</span></a><a href="linear-control-systems/01-transfer-functions.html#fig-ex12"><img src="../assets/img/diagrams/lcs-bd-ex12.svg" alt="" loading="lazy"><span>Non-touching loops</span></a><a href="linear-control-systems/02-mechanical-translational.html#fig-elements"><img src="../assets/img/diagrams/lcs-mech-elements.svg" alt="" loading="lazy"><span>Spring, damper, mass</span></a><a href="linear-control-systems/02-mechanical-translational.html#fig-two-mass"><img src="../assets/img/diagrams/lcs-two-mass.svg" alt="" loading="lazy"><span>Two masses</span></a><a href="linear-control-systems/02-mechanical-translational.html#fig-suspension"><img src="../assets/img/diagrams/lcs-suspension.svg" alt="" loading="lazy"><span>Car suspension</span></a></nav>
+    <h3 class="figgroup">Time response and stability (Lessons 3 and 4)</h3>
+    <nav class="figstrip"><a href="linear-control-systems/03-time-domain-analysis.html#fig-damping"><img src="../assets/img/diagrams/tr-damping-responses.svg" alt="" loading="lazy"><span>Damping cases</span></a><a href="linear-control-systems/03-time-domain-analysis.html#fig-sse-example"><img src="../assets/img/diagrams/lcs-sse-example.svg" alt="" loading="lazy"><span>Steady-state error</span></a><a href="linear-control-systems/04-stability-routh-hurwitz.html#fig-regions"><img src="../assets/img/diagrams/lcs-stability-regions.svg" alt="" loading="lazy"><span>Poles and stability</span></a><a href="linear-control-systems/04-stability-routh-hurwitz.html#fig-sfg-k"><img src="../assets/img/diagrams/lcs-sfg-k1k2.svg" alt="" loading="lazy"><span>Routh design problem</span></a><a href="linear-control-systems/04-stability-routh-hurwitz.html#fig-exercise"><img src="../assets/img/diagrams/lcs-rh-exercise.svg" alt="" loading="lazy"><span>Gain range exercise</span></a></nav>
+    <h3 class="figgroup">Root locus and frequency response (Lessons 5 and 6)</h3>
+    <nav class="figstrip"><a href="linear-control-systems/05-root-locus.html#fig-rl1"><img src="../assets/img/diagrams/lcs-rl-ex1.svg" alt="" loading="lazy"><span>Departure angle</span></a><a href="linear-control-systems/05-root-locus.html#fig-rl3"><img src="../assets/img/diagrams/lcs-rl-ex3.svg" alt="" loading="lazy"><span>Fourth-order locus</span></a><a href="linear-control-systems/05-root-locus.html#fig-tau"><img src="../assets/img/diagrams/lcs-rl-tau.svg" alt="" loading="lazy"><span>Root contour</span></a><a href="linear-control-systems/06-frequency-response.html#fig-bode"><img src="../assets/img/diagrams/lcs-bode-ex.svg" alt="" loading="lazy"><span>Bode plot and margins</span></a><a href="linear-control-systems/06-frequency-response.html#fig-polar"><img src="../assets/img/diagrams/lcs-polar-ex.svg" alt="" loading="lazy"><span>Polar plot</span></a><a href="linear-control-systems/06-frequency-response.html#fig-nyquist"><img src="../assets/img/diagrams/lcs-nyquist-ex.svg" alt="" loading="lazy"><span>Nyquist plot</span></a></nav>
+  </section>
   <section id="materials">
     <h2>Course materials</h2>
     <ul class="materials">
       <!-- Add your files here (see the instructions at the top of this file) -->
     </ul>
-    <p class="note">Materials for this course will be added soon.</p>
+    <p class="note">Lecture slides and handouts can be added here as files.</p>
   </section>
   <!-- To show live simulations on this course, delete this line and the matching one below
   <section id="simulations">

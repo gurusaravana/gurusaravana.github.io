@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 5: Root locus method · Linear Control Systems</title>
+<meta name="description" content="Root locus method">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 5: Root locus method  (Linear Control Systems, EACT 533)
+  Edit the notes between the NOTES START and NOTES END markers below.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Figures live in assets/img/diagrams/ and are shown with a figure of class "diagram".
+  To add an exercise, copy one list item inside the list of class "exlist".
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
+  <nav class="links"><a href="../linear-control-systems.html">Course home</a><a href="../linear-control-systems.html#lessons">Lessons</a><a href="../linear-control-systems.html#figures">Figures</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../linear-control-systems.html">← Linear Control Systems</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 5 of 6 · Chapter 3b</div>
+    <h1>Root locus method</h1>
+    <p>Linear Control Systems · EACT 533 · Postgraduate course</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">EACT 533 · Linear Control Systems</div><ol><li><a href="01-transfer-functions.html"><span class="n">1</span>Control systems, models and block diagrams</a></li><li><a href="02-mechanical-translational.html"><span class="n">2</span>Mechanical translational systems</a></li><li><a href="03-time-domain-analysis.html"><span class="n">3</span>Time-domain analysis</a></li><li><a href="04-stability-routh-hurwitz.html"><span class="n">4</span>Stability and the Routh–Hurwitz criterion</a></li><li class="on"><a href="05-root-locus.html"><span class="n">5</span>Root locus method</a></li><li><a href="06-frequency-response.html"><span class="n">6</span>Frequency response: Bode, polar and Nyquist plots</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>State the angle and magnitude conditions</li><li>Apply the construction rules: real axis, asymptotes, break points, departure angles</li><li>Find the jω-axis crossing with Routh</li><li>Draw a root contour for a parameter other than the gain</li></ul></div>
+    <nav class="figstrip" aria-label="Figures in this lesson"><a href="#fig-rl1"><img src="../../assets/img/diagrams/lcs-rl-ex1.svg" alt="" loading="lazy"><span>Departure angle</span></a><a href="#fig-rl2"><img src="../../assets/img/diagrams/lcs-rl-ex2.svg" alt="" loading="lazy"><span>Break-away point</span></a><a href="#fig-rl3"><img src="../../assets/img/diagrams/lcs-rl-ex3.svg" alt="" loading="lazy"><span>Fourth-order locus</span></a><a href="#fig-tau"><img src="../../assets/img/diagrams/lcs-rl-tau.svg" alt="" loading="lazy"><span>Root contour</span></a></nav>
+    <section class="lsec"><h2>Notes</h2>
+    <!-- NOTES START -->
+    <article class="notes">
+<p>The transient response of a closed loop is set by the location of its closed-loop poles. When a loop gain $K$ can be adjusted, the poles move. The <b>root locus</b> is the path of the closed-loop poles as $K$ goes from 0 to $\infty$. It shows at a glance whether the loop is stable, how damped it is, and whether a gain change is enough or a compensator (extra poles and zeros) is needed.</p>
+<h3 id="first">A first example</h3>
+<p>For $G(s) = \dfrac{K}{s(s + 2)}$ with unity feedback, the characteristic equation is $s^2 + 2s + K = 0$, with roots $s = -1 \pm \sqrt{1 - K}$.</p>
+<ul>
+<li>$K = 0$: the poles are the open-loop poles 0 and $-2$.</li>
+<li>$0 &lt; K &lt; 1$: two real poles moving toward each other (overdamped).</li>
+<li>$K = 1$: both at $-1$ (critically damped). This is a <b>break-away point</b>.</li>
+<li>$K &gt; 1$: $-1 \pm j\sqrt{K - 1}$. The real part stays at $-1$ (same settling time) while the imaginary part grows (more overshoot). The loop is never unstable.</li>
+</ul>
+<p>Observations: there are as many branches as poles; branches start at the open-loop poles and end at the open-loop zeros (some at infinity).</p>
+
+<h3 id="conditions">Angle and magnitude conditions</h3>
+<p>The closed-loop poles satisfy $1 + KG(s)H(s) = 0$, that is $KG(s)H(s) = -1$. Split into two conditions:</p>
+<p class="eq">$$\angle G(s)H(s) = \sum\angle(s + z_i) - \sum\angle(s + p_j) = (2k + 1)180°, \qquad K = \frac{\prod|s + p_j|}{\prod|s + z_i|}$$</p>
+<p>A point $s_1$ is on the locus if the angle condition holds there; the magnitude condition then gives the gain at that point. Geometrically, $K$ = (product of lengths from the poles to $s_1$) / (product of lengths from the zeros to $s_1$).</p>
+
+<h3 id="rules">Construction rules</h3>
+<ol>
+<li><b>Start and end.</b> The $n$ branches start ($K = 0$) at the open-loop poles and end ($K \to \infty$) at the $m$ open-loop zeros; $n - m$ branches go to infinity.</li>
+<li><b>Symmetry.</b> The locus is symmetrical about the real axis.</li>
+<li><b>Real axis.</b> A point on the real axis is on the locus if the number of real poles plus zeros to its <b>right</b> is odd.</li>
+<li><b>Asymptotes.</b> The $n - m$ far branches follow straight lines at angles $\theta_a = \dfrac{(2k + 1)180°}{n - m}$ from the centroid $\sigma_a = \dfrac{\sum \text{poles} - \sum \text{zeros}}{n - m}$.</li>
+<li><b>Break-away and break-in points</b> are double roots: solve $\dfrac{dK}{ds} = 0$, or equivalently $N(s)D'(s) - N'(s)D(s) = 0$ for $GH = N/D$. Keep only roots that lie on the locus. $k$ branches meeting at a point separate at $180°/k$.</li>
+<li><b>Angle of departure</b> from a complex pole: $\theta_d = 180° + \sum\angle(\text{from zeros}) - \sum\angle(\text{from other poles})$. <b>Angle of arrival</b> at a complex zero: $\theta_a = 180° - \sum\angle(\text{from other zeros}) + \sum\angle(\text{from poles})$.</li>
+<li><b>Imaginary-axis crossing.</b> Use Routh: the gain that makes a row zero is the critical gain, and the auxiliary equation gives the crossing frequency.</li>
+<li><b>Gain at a point</b>: use the magnitude condition.</li>
+</ol>
+
+<h3 id="ex1">Example 1: departure angle and jω crossing</h3>
+<figure class="diagram" id="fig-rl1"><img src="../../assets/img/diagrams/lcs-rl-ex1.svg" alt="Root locus of K(s+4) over s(s squared + 2s + 5)" loading="lazy"><figcaption>$GH = \dfrac{K(s + 4)}{s(s + 1 + j2)(s + 1 - j2)}$.</figcaption></figure>
+<ul>
+<li>Poles $0$, $-1 \pm j2$; zero $-4$. Real-axis locus between 0 and $-4$.</li>
+<li>Asymptotes: $n - m = 2$, angles $\pm 90°$, centroid $\sigma_a = \dfrac{(0 - 1 - 1) - (-4)}{2} = +1$. The two complex branches head into the right half-plane.</li>
+<li>Departure from $-1 + j2$: from the zero, $\tan^{-1}(2/3) = 33.7°$; from the pole at 0, $180° - \tan^{-1}2 = 116.6°$; from $-1 - j2$, $90°$. So $\theta_d = 180° + 33.7° - 116.6° - 90° = 7.1°$.</li>
+<li>Crossing: $s^3 + 2s^2 + (5 + K)s + 4K = 0$. The $s^1$ entry is $5 - K$, so $K = 5$; then $2s^2 + 20 = 0$ gives $s = \pm j3.16$.</li>
+</ul>
+<p>So the loop is stable for $0 &lt; K &lt; 5$.</p>
+
+<h3 id="ex2">Example 2: break-away point</h3>
+<figure class="diagram" id="fig-rl2"><img src="../../assets/img/diagrams/lcs-rl-ex2.svg" alt="Root locus of K over s(s+3) squared" loading="lazy"><figcaption>$GH = \dfrac{K}{s(s + 3)^2}$.</figcaption></figure>
+<ul>
+<li>Poles 0, $-3$, $-3$. The whole negative real axis is on the locus (one pole to the right of $(-3, 0)$; three to the left of $-3$).</li>
+<li>Asymptotes at $60°$, $180°$, $300°$ from $\sigma_a = (-3 - 3 - 0)/3 = -2$.</li>
+<li>$K = -(s^3 + 6s^2 + 9s)$, so $\dfrac{dK}{ds} = -(3s^2 + 12s + 9) = 0$, giving $(s + 1)(s + 3) = 0$. The break-away point is $s = -1$ with $K = 4$ ($s = -3$ is the double pole itself, $K = 0$).</li>
+<li>Crossing: $s^3 + 6s^2 + 9s + K$; $6 \times 9 = K$ gives $K = 54$ at $\pm j3$.</li>
+</ul>
+
+<h3 id="ex3">Example 3: a fourth-order locus</h3>
+<figure class="diagram" id="fig-rl3"><img src="../../assets/img/diagrams/lcs-rl-ex3.svg" alt="Root locus of K over s(s+4)(s squared + 4s + 20)" loading="lazy"><figcaption>$GH = \dfrac{K}{s(s + 4)(s^2 + 4s + 20)}$.</figcaption></figure>
+<ul>
+<li>Poles $0$, $-4$, $-2 \pm j4$. Real-axis segment from 0 to $-4$.</li>
+<li>Asymptotes at $\pm45°$ and $\pm135°$ from $\sigma_a = (0 - 4 - 2 - 2)/4 = -2$.</li>
+<li>Break points: $\dfrac{d}{ds}(s^4 + 8s^3 + 36s^2 + 80s) = 4(s^3 + 6s^2 + 18s + 20) = 0$, so $(s + 2)(s^2 + 4s + 10) = 0$: $s = -2$ ($K = 64$) and $s = -2 \pm j2.45$ ($K = 100$). All three are on the locus; at each, branches meet and leave at $90°$.</li>
+<li>Crossing: $s^4 + 8s^3 + 36s^2 + 80s + K$. Routh: $s^2$ row $26, K$; $s^1$ entry $80 - 8K/26$, zero at $K = 260$. Then $26s^2 + 260 = 0$ gives $\pm j3.16$.</li>
+</ul>
+<p class="key">At $K = 100$ the characteristic polynomial is exactly $(s^2 + 4s + 10)^2$: two pairs of equal roots, which is why the branches from the real axis and from the complex poles collide there.</p>
+
+<h3 id="contour">Root contours: varying another parameter</h3>
+<p>The root locus works for any parameter that enters the characteristic equation linearly. For $G(s) = \dfrac{10(1 + \tau s)}{s(s + 2)}$, the characteristic equation $s^2 + 2s + 10 + 10\tau s = 0$ can be rewritten as</p>
+<p class="eq">$$1 + \tau\,\frac{10s}{s^2 + 2s + 10} = 0$$</p>
+<p>which is a root locus in $\tau$ with "poles" $-1 \pm j3$ and a "zero" at the origin.</p>
+<figure class="diagram" id="fig-tau"><img src="../../assets/img/diagrams/lcs-rl-tau.svg" alt="Root contour for tau" loading="lazy"><figcaption>As the time constant $\tau$ of the zero grows, the poles move round a circle of radius $\sqrt{10}$.</figcaption></figure>
+<ul>
+<li>Departure from $-1 + j3$: $\theta_d = 180° + \angle(\text{from zero}) - \angle(\text{from other pole}) = 180° + 108.4° - 90° = 198.4°$, which is the same direction as $-161.6°$.</li>
+<li>Break-in: $\dfrac{d}{ds}\left(\dfrac{s^2 + 2s + 10}{s}\right) = 0$ gives $s^2 = 10$, $s = -3.16$, reached when $\tau = 0.43$.</li>
+</ul>
+<p class="warn">The original slide quotes $\theta_d = -198°$. The sign is slipped: $-198°$ would point into the right half-plane. The correct value is $+198.4°$ (that is, $-161.6°$), which points down and to the left, as the plot shows.</p>
+</article>
+    <!-- NOTES END -->
+    </section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the div below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">Sketch the root locus of $\dfrac{K(s + 2)}{s^2 + 2s + 3}$. Find the departure angle and the break-in point.</div><details><summary>Show solution</summary><div class="sol">Poles $-1 \pm j\sqrt{2}$, zero $-2$. $\theta_d = 180° + \tan^{-1}(\sqrt{2}/1) - 90° = 180° + 54.7° - 90° = 144.7°$. Break-in: $s^2 + 4s + 1 = 0$, $s = -2 - \sqrt{3} = -3.73$ ($K = 5.46$). The locus is a circle of radius $\sqrt{3}$ about the zero; one branch then goes to $-2$, the other to $-\infty$.</div></details></li><li><div class="q">For $\dfrac{K(s + 3)}{s(s + 1)(s + 2)(s + 4)}$, find the asymptotes and the break-away point.</div><details><summary>Show solution</summary><div class="sol">$n - m = 3$: angles $60°$, $180°$, $300°$; $\sigma_a = \dfrac{(0 - 1 - 2 - 4) - (-3)}{3} = -4/3$. Break-away between 0 and $-1$ at $s = -0.435$ ($K = 0.535$).</div></details></li><li><div class="q">For $\dfrac{K(s + 1)}{s(s + 2)(s + 4)^2}$, find the centroid and the break-away point.</div><details><summary>Show solution</summary><div class="sol">$\sigma_a = \dfrac{(-2 - 8) - (-1)}{3} = -3$. The real-axis segments are $(-1, 0)$, $(-4, -2)$ and $(-\infty, -4)$ (the double pole at $-4$ counts twice). The break-away point is $s = -2.60$, between the poles at $-2$ and $-4$ ($K = 1.91$).</div></details></li><li><div class="q">For $\dfrac{K(s + 3)}{(s + 1)(s + 2)(s + 4)}$, find the break-away point.</div><details><summary>Show solution</summary><div class="sol">Real-axis segments $(-2, -1)$ and $(-4, -3)$. Break-away at $s = -1.53$ ($K = 0.42$); the branches then follow $\pm90°$ asymptotes from $\sigma_a = (-7 + 3)/2 = -2$. (The slide's $-1.55$ is a graphical estimate.)</div></details></li><li><div class="q">For $\dfrac{K(s - 3)(s - 5)}{(s + 1)(s + 2)}$, find the break-away and break-in points, and the range of $K$ for stability.</div><details><summary>Show solution</summary><div class="sol">Break-away at $-1.45$ (between the poles), break-in at $+3.82$ (between the zeros). The characteristic equation is $(1 + K)s^2 + (3 - 8K)s + (2 + 15K) = 0$, stable while $3 - 8K &gt; 0$, i.e. $0 &lt; K &lt; 0.375$; at $K = 0.375$ the locus crosses the $j\omega$ axis at $\pm j2.36$.</div></details></li><li><div class="q">For $\dfrac{K(s + 1)}{s^2(s + 3.6)}$, find the centroid of the asymptotes. Is $-1.65 + j0.937$ on the locus?</div><details><summary>Show solution</summary><div class="sol">$\sigma_a = \dfrac{(0 + 0 - 3.6) - (-1)}{2} = -1.3$. Angle at $-1.65 + j0.937$: from the zero $180° - 55.3° = 124.7°$; from the double pole $2 \times (180° - 29.6°) = 300.8°$; from $-3.6$: $25.7°$. Net $124.7° - 300.8° - 25.7° = -201.8°$, not an odd multiple of $180°$, so the point is <b>not</b> on the locus.</div></details></li></ol></section>
+    <nav class="prevnext"><a class="pn prev" href="04-stability-routh-hurwitz.html"><small>← Lesson 4</small>Stability and the Routh–Hurwitz criterion</a><a class="pn next" href="06-frequency-response.html"><small>Lesson 6 →</small>Frequency response: Bode, polar and Nyquist plots</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

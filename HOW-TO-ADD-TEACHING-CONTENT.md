@@ -293,3 +293,18 @@ The row of small pictures at the top of each lesson is a "figure strip": each pi
 Boxes in the notes: `<p class="key">` shows "Key insight", `<p class="warn">` shows "Watch out" and `<p class="tip">` shows "Try this".
 
 Three textbook exercises in the source slides have an unstable closed loop (Lesson 9: problem 1(c), problem 2 and problem 4). The pages give the formula answer and then explain why it does not hold.
+
+## 15. Linear Control Systems (EACT 533) lessons
+
+The FTI course materials (Chapter 1, Mechanical Translational Systems, Time Domain Analysis, Chapters 3a, 3b and 4, and the handwritten OneNote class notebook) are written out as six lesson pages in `courses/linear-control-systems/`:
+
+- `01-transfer-functions.html` (control systems, history, open and closed loop, classification, models, transfer functions, block diagram reduction, Mason's rule),
+- `02-mechanical-translational.html` (spring, damper and mass, one- and two-mass systems, car suspension, rotational systems and analogies),
+- `03-time-domain-analysis.html` (test signals, first- and second-order responses, the step-by-step derivation from the class notebook, specifications, steady-state error with the class example),
+- `04-stability-routh-hurwitz.html` (stability, Routh array, the four special cases, examples 1 to 11, the k1/k2 signal flow graph problem and the class exercise),
+- `05-root-locus.html` (angle and magnitude conditions, construction rules, three worked loci, root contours),
+- `06-frequency-response.html` (frequency specifications, Bode plots with margins, polar plots, the Nyquist criterion).
+
+The course home page `courses/linear-control-systems.html` lists the lessons and has a "Figures and worked problems" gallery. New diagrams start with `lcs-` in `assets/img/diagrams/`; the pages also reuse some Control System Engineering diagrams. Edit a lesson's notes between the `NOTES START` and `NOTES END` comments.
+
+The phone number and email addresses on the original title slides are not on the site. Where a slide had a slip, the page gives the corrected value and says so in a "Watch out" box (Lesson 2: the damped mass-spring denominator; Lesson 5: the departure angle in the root contour example; Lesson 6: the polar plot gain margin).
