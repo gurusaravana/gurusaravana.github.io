@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 260" width="760" height="260" role="img" aria-label="The four standard test signals: impulse, step, ramp and parabola, with their Laplace transforms. Each signal is the integral of the one before it.">
+<title>The four standard test signals: impulse, step, ramp and parabola, with their Laplace transforms. Each signal is the integral of the one before it.</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker></defs>
+<rect width="760" height="260" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<text x="110.0" y="26.0" font-size="15" text-anchor="middle" fill="#0077b6" font-weight="600">Impulse</text>
+<path d="M45.0 150.0 L185.0 150.0" fill="none" stroke="#0f172a" stroke-width="1.6" marker-end="url(#ak)"/>
+<path d="M45.0 150.0 L45.0 40.0" fill="none" stroke="#0f172a" stroke-width="1.6" marker-end="url(#ak)"/>
+<text x="183.0" y="170.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">t</text>
+<text x="51.0" y="38.0" font-size="14" text-anchor="start" fill="#0f172a" font-weight="400" font-style="italic"></text>
+<path d="M77.5 150.0 L77.5 55.0" fill="none" stroke="#db2777" stroke-width="2.6" marker-end="url(#ap)"/>
+<text x="110.0" y="182.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">r(t) = δ(t)</text>
+<text x="110.0" y="204.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">R(s) = A</text>
+<text x="295.0" y="26.0" font-size="15" text-anchor="middle" fill="#0077b6" font-weight="600">Step</text>
+<path d="M230.0 150.0 L370.0 150.0" fill="none" stroke="#0f172a" stroke-width="1.6" marker-end="url(#ak)"/>
+<path d="M230.0 150.0 L230.0 40.0" fill="none" stroke="#0f172a" stroke-width="1.6" marker-end="url(#ak)"/>
+<text x="368.0" y="170.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">t</text>
+<text x="236.0" y="38.0" font-size="14" text-anchor="start" fill="#0f172a" font-weight="400" font-style="italic"></text>
+<path d="M230.0 150.0 L262.5 150.0 L262.5 80.0 L360.0 80.0" fill="none" stroke="#db2777" stroke-width="2.6"/>
+<text x="295.0" y="182.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">r(t) = A·u(t)</text>
+<text x="295.0" y="204.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">R(s) = A / s</text>
+<text x="480.0" y="26.0" font-size="15" text-anchor="middle" fill="#0077b6" font-weight="600">Ramp</text>
+<path d="M415.0 150.0 L555.0 150.0" fill="none" stroke="#0f172a" stroke-width="1.6" marker-end="url(#ak)"/>
+<path d="M415.0 150.0 L415.0 40.0" fill="none" stroke="#0f172a" stroke-width="1.6" marker-end="url(#ak)"/>
+<text x="553.0" y="170.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">t</text>
+<text x="421.0" y="38.0" font-size="14" text-anchor="start" fill="#0f172a" font-weight="400" font-style="italic"></text>
+<path d="M415.0 150.0 L447.5 150.0 L545.0 60.0" fill="none" stroke="#db2777" stroke-width="2.6"/>
+<text x="480.0" y="182.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">r(t) = A·t</text>
+<text x="480.0" y="204.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">R(s) = A / s<tspan baseline-shift="super" font-size="70%">2</tspan></text>
+<text x="665.0" y="26.0" font-size="15" text-anchor="middle" fill="#0077b6" font-weight="600">Parabola</text>
+<path d="M600.0 150.0 L740.0 150.0" fill="none" stroke="#0f172a" stroke-width="1.6" marker-end="url(#ak)"/>
+<path d="M600.0 150.0 L600.0 40.0" fill="none" stroke="#0f172a" stroke-width="1.6" marker-end="url(#ak)"/>
+<text x="738.0" y="170.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">t</text>
+<text x="606.0" y="38.0" font-size="14" text-anchor="start" fill="#0f172a" font-weight="400" font-style="italic"></text>
+<path d="M600.0 150.0 L632.5 150.0 L632.5 150.0 L634.5 150.0 L636.5 149.9 L638.5 149.7 L640.5 149.4 L642.4 149.1 L644.4 148.7 L646.4 148.2 L648.4 147.6 L650.4 147.0 L652.4 146.3 L654.4 145.5 L656.4 144.6 L658.4 143.7 L660.4 142.7 L662.3 141.6 L664.3 140.4 L666.3 139.2 L668.3 137.9 L670.3 136.5 L672.3 135.0 L674.3 133.5 L676.3 131.9 L678.3 130.2 L680.3 128.4 L682.2 126.6 L684.2 124.7 L686.2 122.7 L688.2 120.6 L690.2 118.5 L692.2 116.3 L694.2 114.0 L696.2 111.6 L698.2 109.2 L700.2 106.7 L702.1 104.1 L704.1 101.4 L706.1 98.7 L708.1 95.9 L710.1 93.0 L712.1 90.0 L714.1 87.0 L716.1 83.9 L718.1 80.7 L720.1 77.4 L722.0 74.1 L724.0 70.7 L726.0 67.2 L728.0 63.6 L730.0 60.0" fill="none" stroke="#db2777" stroke-width="2.6"/>
+<text x="665.0" y="182.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">r(t) = A·t<tspan baseline-shift="super" font-size="70%">2</tspan> / 2</text>
+<text x="665.0" y="204.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">R(s) = A / s<tspan baseline-shift="super" font-size="70%">3</tspan></text>
+<path d="M110.0 232.0 L650.0 232.0" fill="none" stroke="#0077b6" stroke-width="1.8" marker-end="url(#ab)"/>
+<text x="380.0" y="252.0" font-size="13" text-anchor="middle" fill="#64748b" font-weight="400">integrate to get the next signal  →   ·   ←  differentiate to get the previous one</text>
+</g>
+</svg>
