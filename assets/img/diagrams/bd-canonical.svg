@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" width="600" height="200" role="img" aria-label="Canonical feedback loop: R(s) minus B(s) gives the error E(s), G(s) gives C(s), and H(s) feeds C back as B(s)">
+<title>Canonical feedback loop: R(s) minus B(s) gives the error E(s), G(s) gives C(s), and H(s) feeds C back as B(s)</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker></defs>
+<rect width="600" height="200" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<text x="40" y="58" font-size="15" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">R(s)</text>
+<path d="M20.0 70.0 L116.0 70.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<circle cx="130" cy="70" r="13" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M120.9 60.9L139.1 79.1M120.9 79.1L139.1 60.9" stroke="#0f172a" stroke-width="1.3"/>
+<text x="109" y="63" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">+</text>
+<text x="143" y="96" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">−</text>
+<path d="M144.0 70.0 L250.0 70.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="195" y="58" font-size="15" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">E(s)</text>
+<rect x="252.0" y="48.0" width="96.0" height="44" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="300" y="75.6" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400">G(s)</text>
+<path d="M348.0 70.0 L570.0 70.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="540" y="58" font-size="15" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">C(s)</text>
+<circle cx="450" cy="70" r="4" fill="#0f172a"/>
+<path d="M450.0 70.0 L450.0 160.0 L348.0 160.0" fill="none" stroke="#0077b6" stroke-width="2" marker-end="url(#ab)"/>
+<rect x="252.0" y="138.0" width="96.0" height="44" rx="4" fill="#fff" stroke="#0077b6" stroke-width="2"/>
+<text x="300" y="165.6" font-size="16" text-anchor="middle" fill="#0077b6" font-weight="400">H(s)</text>
+<path d="M252.0 160.0 L130.0 160.0 L130.0 84.0" fill="none" stroke="#0077b6" stroke-width="2" marker-end="url(#ab)"/>
+<text x="190" y="152" font-size="15" text-anchor="middle" fill="#0077b6" font-weight="400" font-style="italic">B(s)</text>
+</g>
+</svg>
