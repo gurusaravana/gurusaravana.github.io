@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 415" width="760" height="415" role="img" aria-label="Electronic PI controller built from three op-amp stages. The error voltage Ve feeds an inverting amplifier (R1, Rp) giving Vp = minus Rp over R1 times Ve, and an integrator (Ri, Ci) giving Vi = minus 1 over Ri Ci times the integral of Ve. A summing amplifier (Rs1, Rs2, Rf) adds them, so Vout = (Rf/Rs1)(Rp/R1) Ve + (Rf/Rs2)(1/RiCi) integral of Ve dt.">
+<title>Electronic PI controller built from three op-amp stages. The error voltage Ve feeds an inverting amplifier (R1, Rp) giving Vp = minus Rp over R1 times Ve, and an integrator (Ri, Ci) giving Vi = minus 1 over Ri Ci times the integral of Ve. A summing amplifier (Rs1, Rs2, Rf) adds them, so Vout = (Rf/Rs1)(Rp/R1) Ve + (Rf/Rs2)(1/RiCi) integral of Ve dt.</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker></defs>
+<rect width="760" height="415" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<text x="20.0" y="184.0" font-size="16" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">Vₑ</text>
+<path d="M40.0 180.0 L70.0 180.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<circle cx="70.0" cy="180.0" r="3.5" fill="#0f172a"/>
+<path d="M70.0 180.0 L70.0 90.0 L90.0 90.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<path d="M70.0 180.0 L70.0 270.0 L90.0 270.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<path d="M200.0 79.0 L200.0 125.0 L248.3 102.0 L200.0 79.0" fill="#fff" fill-opacity="1" stroke="#0f172a" stroke-width="2"/>
+<text x="209.0" y="95.5" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="700">−</text>
+<text x="209.0" y="119.5" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="700">+</text>
+<path d="M90.0 90.0 L106.0 90.0 L110.0 84.0 L118.0 96.0 L126.0 84.0 L134.0 96.0 L142.0 84.0 L150.0 96.0 L154.0 90.0 L170.0 90.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<text x="130.0" y="78.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">R₁</text>
+<path d="M170.0 90.0 L200.0 90.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<path d="M185.0 90.0 L185.0 50.0 L225.0 50.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<path d="M225.0 50.0 L237.0 50.0 L240.0 44.0 L246.0 56.0 L252.0 44.0 L258.0 56.0 L264.0 44.0 L270.0 56.0 L273.0 50.0 L285.0 50.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<text x="255.0" y="38.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">Rₚ</text>
+<path d="M285.0 50.0 L265.0 50.0" fill="none" stroke="#0f172a" stroke-width="0"/>
+<path d="M285.0 50.0 L290.0 50.0 L290.0 102.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<path d="M200.0 114.0 L190.0 114.0 L190.0 130.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<path d="M190.0 130.0 L190.0 138.0" fill="none" stroke="#0f172a" stroke-width="1.6"/>
+<path d="M180.0 138.0 L200.0 138.0" fill="none" stroke="#0f172a" stroke-width="1.6"/>
+<path d="M184.0 142.0 L196.0 142.0" fill="none" stroke="#0f172a" stroke-width="1.6"/>
+<path d="M188.0 146.0 L192.0 146.0" fill="none" stroke="#0f172a" stroke-width="1.6"/>
+<path d="M248.3 102.0 L330.0 102.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<circle cx="330.0" cy="102.0" r="3.5" fill="#0f172a"/>
+<text x="210.0" y="178.0" font-size="13" text-anchor="middle" fill="#0077b6" font-weight="400">Vₚ = −(Rₚ/R₁)Vₑ</text>
+<rect x="80.0" y="30.0" width="260.0" height="130.0" rx="10" fill="none" stroke="#ea7a1f" stroke-width="1.4" stroke-dasharray="5 4"/>
+<text x="90.0" y="24.0" font-size="12" text-anchor="start" fill="#ea7a1f" font-weight="400">proportional path</text>
+<path d="M200.0 259.0 L200.0 305.0 L248.3 282.0 L200.0 259.0" fill="#fff" fill-opacity="1" stroke="#0f172a" stroke-width="2"/>
+<text x="209.0" y="275.5" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="700">−</text>
+<text x="209.0" y="299.5" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="700">+</text>
+<path d="M90.0 270.0 L106.0 270.0 L110.0 264.0 L118.0 276.0 L126.0 264.0 L134.0 276.0 L142.0 264.0 L150.0 276.0 L154.0 270.0 L170.0 270.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<text x="130.0" y="258.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">Rᵢ</text>
+<path d="M170.0 270.0 L200.0 270.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<path d="M185.0 270.0 L185.0 230.0 L225.0 230.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<path d="M225.0 230.0 L251.0 230.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<path d="M259.0 230.0 L285.0 230.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<path d="M251.0 219.0 L251.0 241.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<path d="M259.0 219.0 L259.0 241.0" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+<text x="255.0" y="214.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">Cᵢ</text>
+<path d="M285.0 230.0 L290.0 230.0 L290.0 282.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<path d="M200.0 294.0 L190.0 294.0 L190.0 310.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<path d="M190.0 310.0 L190.0 318.0" fill="none" stroke="#0f172a" stroke-width="1.6"/>
+<path d="M180.0 318.0 L200.0 318.0" fill="none" stroke="#0f172a" stroke-width="1.6"/>
+<path d="M184.0 322.0 L196.0 322.0" fill="none" stroke="#0f172a" stroke-width="1.6"/>
+<path d="M188.0 326.0 L192.0 326.0" fill="none" stroke="#0f172a" stroke-width="1.6"/>
+<path d="M248.3 282.0 L330.0 282.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<circle cx="330.0" cy="282.0" r="3.5" fill="#0f172a"/>
+<text x="210.0" y="342.0" font-size="13" text-anchor="middle" fill="#0077b6" font-weight="400">Vᵢ = −(1/RᵢCᵢ)∫Vₑ dt</text>
+<rect x="80.0" y="210.0" width="260.0" height="110.0" rx="10" fill="none" stroke="#059669" stroke-width="1.4" stroke-dasharray="5 4"/>
+<text x="90.0" y="204.0" font-size="12" text-anchor="start" fill="#059669" font-weight="400">integral path</text>
+<path d="M530.0 169.0 L530.0 215.0 L578.3 192.0 L530.0 169.0" fill="#fff" fill-opacity="1" stroke="#0f172a" stroke-width="2"/>
+<text x="539.0" y="185.5" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="700">−</text>
+<text x="539.0" y="209.5" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="700">+</text>
+<path d="M330.0 102.0 L380.0 102.0 L380.0 180.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<path d="M380.0 180.0 L398.0 180.0 L402.5 174.0 L411.5 186.0 L420.5 174.0 L429.5 186.0 L438.5 174.0 L447.5 186.0 L452.0 180.0 L470.0 180.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<text x="425.0" y="168.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">Rₛ₁</text>
+<path d="M330.0 282.0 L380.0 282.0 L380.0 235.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<path d="M380.0 235.0 L398.0 235.0 L402.5 229.0 L411.5 241.0 L420.5 229.0 L429.5 241.0 L438.5 229.0 L447.5 241.0 L452.0 235.0 L470.0 235.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<text x="425.0" y="223.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">Rₛ₂</text>
+<path d="M470.0 235.0 L490.0 235.0 L490.0 180.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<circle cx="490.0" cy="180.0" r="3.5" fill="#0f172a"/>
+<path d="M470.0 180.0 L530.0 180.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<path d="M505.0 180.0 L505.0 140.0 L550.0 140.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<path d="M550.0 140.0 L562.0 140.0 L565.0 134.0 L571.0 146.0 L577.0 134.0 L583.0 146.0 L589.0 134.0 L595.0 146.0 L598.0 140.0 L610.0 140.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<text x="580.0" y="128.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">Rf</text>
+<path d="M610.0 140.0 L620.0 140.0 L620.0 192.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<path d="M530.0 204.0 L520.0 204.0 L520.0 222.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<path d="M520.0 222.0 L520.0 230.0" fill="none" stroke="#0f172a" stroke-width="1.6"/>
+<path d="M510.0 230.0 L530.0 230.0" fill="none" stroke="#0f172a" stroke-width="1.6"/>
+<path d="M514.0 234.0 L526.0 234.0" fill="none" stroke="#0f172a" stroke-width="1.6"/>
+<path d="M518.0 238.0 L522.0 238.0" fill="none" stroke="#0f172a" stroke-width="1.6"/>
+<path d="M578.3 192.0 L670.0 192.0" fill="none" stroke="#0f172a" stroke-width="1.8" marker-end="url(#ak)"/>
+<text x="700.0" y="197.0" font-size="16" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">V<tspan baseline-shift="sub" font-size="70%">out</tspan></text>
+<rect x="365.0" y="115.0" width="285.0" height="150.0" rx="10" fill="none" stroke="#db2777" stroke-width="1.4" stroke-dasharray="5 4"/>
+<text x="640.0" y="109.0" font-size="12" text-anchor="end" fill="#db2777" font-weight="400">summing amplifier</text>
+<text x="400.0" y="380.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400">Vₒᵤₜ = (Rf/Rₛ₁)(Rₚ/R₁)Vₑ + (Rf/Rₛ₂)(1/RᵢCᵢ)∫Vₑ dt</text>
+<text x="400.0" y="400.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">(two inversions cancel, so both terms are positive)</text>
+</g>
+</svg>

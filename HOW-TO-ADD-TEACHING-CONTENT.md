@@ -274,3 +274,22 @@ The Module 1 slide decks (Lecture 1, block diagram reduction, signal flow graphs
 All diagrams are SVG files in `assets/img/diagrams/` whose names start with `cs-` (Lesson 1), `bd-` (Lesson 5) or `sfg-` (Lesson 6). To add a problem with a figure, copy one `<li>...</li>` from the Exercises list. The figure goes inside the question like this:
 `<figure class="diagram"><img src="../../assets/img/diagrams/bd-ex1.svg" alt="describe the figure"></figure>`
 and the worked answer goes inside `<div class="sol">...</div>`.
+
+## 14. Module 2 and 3 lecture content (Control System Engineering, Lessons 7 to 12)
+
+The Module 2 PDF (time response, steady-state error, PID), the PID slide deck, the Routh-Hurwitz solved problems and the root locus rules are written out as web pages in:
+
+- `07-first-order-response.html` (transient vs steady state, poles and zeros, order vs type, test signals, first-order system),
+- `08-second-order-response.html` (standard form, the four damping cases, time specifications, worked example, case study, exercise problems 1 to 3 and the homework),
+- `09-steady-state-errors.html` (final value theorem, system type, error constants, error matrix, non-unity feedback, the four exercise problems),
+- `10-p-pi-pid-controllers.html` (control loop, ON/OFF, P, I, D, PID forms, op-amp PI circuit, pneumatic controller, Ziegler–Nichols and Cohen–Coon tuning with a worked example),
+- `11-routh-stability.html` (stability definitions, Routh array, the three solved practice problems),
+- `12-root-locus.html` (rules table, complementary root locus, two worked examples).
+
+All diagrams are SVG files in `assets/img/diagrams/` whose names start with `tr-` (time response), `sse-` (steady-state error), `pid-`, `rh-` (Routh-Hurwitz) or `rl-` (root locus). The plots were computed from the real transfer functions, so they match the numbers in the notes.
+
+The row of small pictures at the top of each lesson is a "figure strip": each picture jumps to that figure. To add one, copy an `<a href="#...">...</a>` inside `<nav class="figstrip">` and point it at the `id` of a figure. The course home page has the same kind of strip in its "Figures and worked problems" section.
+
+Boxes in the notes: `<p class="key">` shows "Key insight", `<p class="warn">` shows "Watch out" and `<p class="tip">` shows "Try this".
+
+Three textbook exercises in the source slides have an unstable closed loop (Lesson 9: problem 1(c), problem 2 and problem 4). The pages give the formula answer and then explain why it does not hold.
