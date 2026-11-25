@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Industrial process simulations · Control System Engineering</title>
+<meta name="description" content="Interactive simulations of typical industrial control problems: tank level, two interacting tanks, steam-heated tank temperature, conveyor drive speed and PID tuning, with sources cited.">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],ignoredTags:['script','noscript','style','textarea','pre','code']})"></script>
+</head>
+<body>
+<!--
+  INDUSTRIAL PROCESS SIMULATIONS (Control System Engineering, EEE2510)
+  Each simulation is one <section class="lsec labexp indsim" id="..."> block below. Inside it:
+    * the problem in <p class="aim">,
+    * the diagram in <figure class="diagram"> (SVG files in assets/img/diagrams/ind-*.svg),
+    * the model in <div class="notes"> (LaTeX between $ ... $ works),
+    * <div class="sim labsim" data-lab="ind-..."></div> becomes the simulation
+      (the maths and sliders are in assets/js/industrial-sims.js),
+    * the sources in <p class="cite">, and the questions in <div class="card questions">.
+  Full guide: HOW-TO-ADD-TEACHING-CONTENT.md, section 18.
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
+  <nav class="links"><a href="../control-system-engineering.html">Course home</a><a href="../control-system-engineering.html#lessons">Lessons</a><a href="#tank">Level</a><a href="#temperature">Temperature</a><a href="#tuning">PID tuning</a><a href="#references">References</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../control-system-engineering.html">← Control System Engineering</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Control System Engineering · EEE2510 · Simulation lab</div>
+    <h1>Industrial process simulations</h1>
+    <p>Five control problems you meet in real plants: holding a tank level, two tanks in series, heating a tank with steam, keeping a conveyor at speed, and tuning a PID loop. Each one has the process diagram, the model, a simulation that runs in your browser, the sources it is based on and questions to think through.</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>Simulations</summary>
+    <ol><li><a href="#tank"><span class="n">1</span>Tank level control</a></li><li><a href="#two-tank"><span class="n">2</span>Two interacting tanks</a></li><li><a href="#temperature"><span class="n">3</span>Steam-heated tank temperature</a></li><li><a href="#conveyor"><span class="n">4</span>Conveyor drive speed</a></li><li><a href="#tuning"><span class="n">5</span>PID tuning workbench</a></li><li><a href="#references"><span class="n">★</span>References</a></li></ol>
+  </details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>How to use this page</h3><ul>
+      <li>Read the problem and look at the diagram. Before you touch a slider, predict what will happen.</li>
+      <li>Start with the preset buttons. They show the main lesson of each simulation in one click.</li>
+      <li>Each simulation gives MATLAB code for the same settings, so you can check the result in the lab.</li>
+    </ul></div>
+    <p class="note"><span class="lab-example">Example values</span> The models follow the textbooks cited under each simulation. The numbers (tank sizes, motor constants, time constants) are example values chosen for teaching. They are realistic in size but are not data from a particular plant.</p>
+
+    <!-- ===================== 1. TANK LEVEL ===================== -->
+    <section class="lsec labexp indsim" id="tank">
+      <div class="exp-tag">Simulation 1 · Lessons 7 and 10 · water treatment, process plants</div>
+      <h2>Level control of a tank that drains through a valve</h2>
+      <p class="aim"><b>Problem.</b> A storage tank is filled through a control valve and drains through an outlet valve to the next unit. The level must stay at its set-point when the operator changes the set-point and when the downstream unit suddenly draws more liquid.</p>
+      <figure class="diagram"><img src="../../assets/img/diagrams/tank-level-control.svg" alt="Closed-loop level control: level transmitter LT measures the level, controller LC compares it with the set-point and moves the inlet control valve" loading="lazy"><figcaption>Level loop: transmitter (LT), controller (LC) and inlet control valve.</figcaption></figure>
+      <div class="notes">
+        <p>Mass balance, with the outflow through the outlet valve following Torricelli's law:</p>
+        <p class="eq">$$A\frac{dh}{dt} = q_{in} - q_{out}, \qquad q_{in} = q_{max}\frac{v}{100}, \qquad q_{out} = k\,\sqrt{h}$$</p>
+        <p>This is nonlinear because of $\sqrt h$. Near an operating level $h_0$, the outlet behaves like a linear flow resistance $R = 2\sqrt{h_0}/k$, so the tank becomes the first-order system $H(s)/Q_{in}(s) = R/(ARs + 1)$ with time constant $\tau = AR$. The time constant grows with the level, which is why one fixed set of controller gains behaves differently at different levels. The inlet valve has a 3 s lag, and a PI controller with anti-windup sets the valve between 0 % and 100 %.</p>
+      </div>
+      <h3 class="simhead">Interactive simulation</h3>
+      <div class="sim labsim" data-lab="ind-tank"></div>
+      <p class="cite"><b>Sources.</b> Liquid-level model and flow resistance: D'Azzo, Houpis and Sheldon (2003), Section 2.11. Linearisation about an operating point: Nise (2015), Section 2.11. Offset under P control and integral action: Nise (2015), Section 9.2. Integrator anti-windup: Åström and Hägglund (1995), Chapter 3.</p>
+      <div class="card questions"><h3>Questions to think through</h3><ol>
+        <li>With P only, the level settles below the set-point. Use the steady-state mass balance to explain why, and why a larger $K_c$ makes the offset smaller but never zero.</li>
+        <li>Press "PI too aggressive". Why does the level oscillate, and what happens to the valve?</li>
+        <li>Make the tank area 4 m². How do the time constant and the response change, and why?</li>
+        <li>Set the new set-point to 0.5 m and then to 3.5 m with the same PI gains. Is the response the same? Explain with the linearised time constant.</li>
+      </ol></div>
+    </section>
+
+    <!-- ===================== 2. TWO TANKS ===================== -->
+    <section class="lsec labexp indsim" id="two-tank">
+      <div class="exp-tag">Simulation 2 · Lessons 4, 8 and 16 · chemical and water plants</div>
+      <h2>Two interacting tanks</h2>
+      <p class="aim"><b>Problem.</b> Two tanks are joined by a pipe at the bottom. Liquid enters tank 1, flows through the pipe into tank 2 and leaves tank 2 through an outlet. The level of tank 2 must be controlled by changing the inflow to tank 1.</p>
+      <figure class="diagram"><img src="../../assets/img/diagrams/ind-two-tank.svg" alt="Two interacting tanks joined by a pipe with resistance R1; tank 2 drains through resistance R2; a level controller on tank 2 sets the inflow valve of tank 1" loading="lazy"><figcaption>Two-tank liquid-level system (after D'Azzo, Houpis and Sheldon, 2003, Fig. 2.23).</figcaption></figure>
+      <div class="notes">
+        <p>With linear flow resistances ($q = \Delta h/R$), the mass balances of the two tanks are</p>
+        <p class="eq">$$A_1\frac{dh_1}{dt} = q_i - \frac{h_1 - h_2}{R_1}, \qquad A_2\frac{dh_2}{dt} = \frac{h_1 - h_2}{R_1} - \frac{h_2}{R_2}$$</p>
+        <p>Taking $x_1 = h_1$, $x_2 = h_2$ and $u = q_i$ gives a two-state model. Eliminating $h_1$ gives</p>
+        <p class="eq">$$\frac{H_2(s)}{Q_i(s)} = \frac{R_2}{R_1R_2A_1A_2\,s^2 + (R_1A_1 + R_2A_1 + R_2A_2)\,s + 1}$$</p>
+        <p>The poles are always real and distinct (the damping ratio is always above 1), so the open-loop step response never overshoots. The flow between the tanks depends on both levels, which is what "interacting" means.</p>
+      </div>
+      <h3 class="simhead">Interactive simulation</h3>
+      <div class="sim labsim" data-lab="ind-twotank"></div>
+      <p class="cite"><b>Sources.</b> Model and state equations: D'Azzo, Houpis and Sheldon (2003), Section 2.11, Eqs. (2.116)–(2.121). Second-order step response and the overdamped case: Nise (2015), Sections 4.5 and 4.6. State-space form: Nise (2015), Section 3.4.</p>
+      <div class="card questions"><h3>Questions to think through</h3><ol>
+        <li>Derive the transfer function above from the two mass balances. Check your answer against the time constants the simulation prints.</li>
+        <li>Show that the damping ratio is always greater than 1 for any positive $A_1$, $A_2$, $R_1$, $R_2$.</li>
+        <li>Why does $h_1$ rise first and $h_2$ follow with an S-shaped curve? What would a reaction-curve test (Simulation 5) give for this process?</li>
+        <li>Switch to PI control and raise $K_c$. Why can a second-order process with a PI controller overshoot even though the open loop never does?</li>
+      </ol></div>
+    </section>
+
+    <!-- ===================== 3. TEMPERATURE ===================== -->
+    <section class="lsec labexp indsim" id="temperature">
+      <div class="exp-tag">Simulation 3 · Lessons 1, 7 and 10 · food, dairy, chemical and pharmaceutical plants</div>
+      <h2>Temperature control of a steam-heated tank</h2>
+      <p class="aim"><b>Problem.</b> Liquid flows through a stirred tank and is heated by steam in a coil. A thermocouple measures the tank temperature and a controller moves the steam valve. The temperature must follow a set-point step from 50 °C to 60 °C and must recover when the incoming liquid suddenly becomes colder.</p>
+      <figure class="diagram"><img src="../../assets/img/diagrams/ind-steam-tank.svg" alt="Steam-heated stirred tank with steam control valve, heating coil, thermocouple TT and temperature controller TC" loading="lazy"><figcaption>Industrial process temperature control system (after D'Azzo, Houpis and Sheldon, 2003, Section 5.2, Example 1).</figcaption></figure>
+      <div class="notes">
+        <p>Treating the well-stirred liquid as one thermal capacitance $C$ that loses heat through a thermal resistance $R$ (heat balance: heat in = heat stored + heat carried away):</p>
+        <p class="eq">$$RC\frac{d\theta}{dt} + \theta = \theta_{in} + R\,K_Q\,v(t - L)$$</p>
+        <p>Here $RC = 300$ s, the steam valve adds 0.5 °C per % opening at steady state, and the valve and thermocouple each add a small lag (5 s and 10 s). The dead time $L$ is the time the heat takes to mix through the tank and reach the thermocouple. Dead time adds phase lag without changing the gain, so it is the main thing that limits how fast the loop can be.</p>
+        <p>You can choose on/off control with a hysteresis band (as in a simple thermostat), P, PI or PID. The derivative acts on the measured temperature, not on the error, so a set-point step does not give a "derivative kick".</p>
+      </div>
+      <h3 class="simhead">Interactive simulation</h3>
+      <div class="sim labsim" data-lab="ind-temp"></div>
+      <p class="cite"><b>Sources.</b> The process and its block diagram: D'Azzo, Houpis and Sheldon (2003), Section 5.2, Example 1 ("A temperature control system"). Thermal capacitance and resistance: D'Azzo, Houpis and Sheldon (2003), Section 2.9. Effect of a time delay on phase: Nise (2015), Section 10.12. On/off control, derivative on measurement and anti-windup: Åström and Hägglund (1995), Chapter 3.</p>
+      <div class="card questions"><h3>Questions to think through</h3><ol>
+        <li>With on/off control the temperature keeps cycling. How do the hysteresis band and the dead time each change the size of the cycle?</li>
+        <li>Increase the dead time from 20 s to 60 s with the PID preset. What happens, and how far must you lower $K_c$ to get a calm response again?</li>
+        <li>Why does P control leave an offset after the inlet becomes colder, while PI does not?</li>
+        <li>Compare the IAE of P, PI and PID. Which part of the response (set-point step or disturbance) does derivative action help most here?</li>
+      </ol></div>
+    </section>
+
+    <!-- ===================== 4. CONVEYOR ===================== -->
+    <section class="lsec labexp indsim" id="conveyor">
+      <div class="exp-tag">Simulation 4 · Lessons 4 and 10 · mining, packaging and bottling lines</div>
+      <h2>Conveyor drive speed control with a voltage limit</h2>
+      <p class="aim"><b>Problem.</b> A dc motor drives a conveyor belt. A PI controller sets the armature voltage, which the drive can only supply up to ±100 V. The belt must reach its speed quickly and hold it when material is dropped on the belt.</p>
+      <figure class="diagram"><img src="../../assets/img/diagrams/ind-conveyor.svg" alt="Conveyor speed loop: PI controller, ±100 V limit, dc motor, belt with load torque, tachometer feedback" loading="lazy"><figcaption>Conveyor drive speed loop with actuator limit.</figcaption></figure>
+      <div class="notes">
+        <p>Armature circuit and shaft (inertia $J$ includes the belt and load, reflected to the motor shaft):</p>
+        <p class="eq">$$L_a\frac{di_a}{dt} = v - R_a i_a - K_b\,\omega, \qquad J\frac{d\omega}{dt} = K_t\, i_a - D\,\omega - T_L$$</p>
+        <p>Example values: $R_a = 1\ \Omega$, $L_a = 0.01$ H, $K_t = K_b = 0.5$, $D = 0.05$ N·m·s/rad, $J = 0.02 + J_{load}$. With the 100 V limit the motor can never run faster than $100/K_b = 200$ rad/s, and less than that under load. When the voltage is at its limit, the integral term keeps growing unless it is stopped: this is <b>integrator windup</b>, and it causes a large overshoot once the speed finally arrives.</p>
+      </div>
+      <h3 class="simhead">Interactive simulation</h3>
+      <div class="sim labsim" data-lab="ind-conveyor"></div>
+      <p class="cite"><b>Sources.</b> Armature-controlled dc motor model: Nise (2015), Section 2.8, and D'Azzo, Houpis and Sheldon (2003), Section 2.13. Reflecting the load through gears: Nise (2015), Section 2.7. Actuator saturation: Nise (2015), Section 4.9. Integrator windup and anti-windup: Åström and Hägglund (1995), Chapter 3.</p>
+      <div class="card questions"><h3>Questions to think through</h3><ol>
+        <li>Compare anti-windup on and off at a set-point of 100 rad/s. Why is the overshoot so much bigger with it off?</li>
+        <li>Press "P only" and add the load. Use the steady-state motor equations to find the speed drop you expect, and compare with the simulation.</li>
+        <li>Press "Heavy load at high speed". Does the motor still reach the set-point? Use the 100 V limit, the load torque and the steady-state motor equations to explain.</li>
+        <li>The MATLAB code ignores the voltage limit. When does the linear model give the same answer as the simulation, and when not?</li>
+      </ol></div>
+    </section>
+
+    <!-- ===================== 5. PID TUNING ===================== -->
+    <section class="lsec labexp indsim" id="tuning">
+      <div class="exp-tag">Simulation 5 · Lesson 10 · every process plant</div>
+      <h2>PID tuning workbench: reaction curve and tuning rules</h2>
+      <p class="aim"><b>Problem.</b> A new loop must be tuned on site. The engineer puts the controller in manual, steps the valve, records the process reaction curve and uses a tuning rule to get first settings. Compare three well-known rules on three typical processes.</p>
+      <figure class="diagram"><img src="../../assets/img/diagrams/pid-reaction-curve.svg" alt="Process reaction curve with the tangent at the steepest point giving the dead time L and time constant T" loading="lazy"><figcaption>Reading $L$ and $T$ from the reaction curve (from Lesson 10).</figcaption></figure>
+      <div class="notes">
+        <p>Each process is a gain, a dead time and two or three lags, $G(s) = K e^{-\theta s}/\prod(\tau_i s + 1)$. The workbench draws the tangent at the steepest point of the step response and reads the apparent dead time $L$ and time constant $T$, as you would on a chart recorder. The controller is the ideal (ISA) PID, $u = K_c\left[e + \frac{1}{T_i}\int e\,dt - T_d\frac{dy}{dt}\right]$.</p>
+        <table class="tbl"><thead><tr><th>Rule</th><th>$K_c$</th><th>$T_i$</th><th>$T_d$</th></tr></thead><tbody>
+          <tr><td>Ziegler–Nichols, reaction curve</td><td>$1.2\,T/(KL)$</td><td>$2L$</td><td>$0.5L$</td></tr>
+          <tr><td>Cohen–Coon</td><td>$\frac{T}{KL}\left(\frac43 + \frac{L}{4T}\right)$</td><td>$L\,\frac{32 + 6L/T}{13 + 8L/T}$</td><td>$L\,\frac{4}{11 + 2L/T}$</td></tr>
+          <tr><td>AMIGO</td><td>$\frac{1}{K}\left(0.2 + 0.45\frac{T}{L}\right)$</td><td>$L\,\frac{0.4L + 0.8T}{L + 0.1T}$</td><td>$\frac{0.5LT}{0.3L + T}$</td></tr>
+        </tbody></table>
+        <p>The closed-loop test applies a set-point step at $t = 0$ and a load disturbance halfway through the run. Use the gain multiplier to "detune" a rule: many plants run their loops at 50 % to 70 % of the Ziegler–Nichols gain.</p>
+      </div>
+      <h3 class="simhead">Interactive simulation</h3>
+      <div class="sim labsim" data-lab="ind-tuning"></div>
+      <p class="cite"><b>Sources.</b> Reaction-curve method: Ziegler and Nichols (1942). Cohen–Coon rule: Cohen and Coon (1953). AMIGO rule: Åström and Hägglund (2006), Chapter 7. PID control and tuning: Nise (2015), Section 9.4, and Åström and Hägglund (1995).</p>
+      <div class="card questions"><h3>Questions to think through</h3><ol>
+        <li>For each process, which rule gives the smallest overshoot and which the smallest IAE? Is it the same rule for all three processes?</li>
+        <li>The Ziegler–Nichols rule was designed for a quarter-amplitude decay. Do you see that in the closed-loop plot? What gain multiplier gives an overshoot below 10 %?</li>
+        <li>The column tray process has a large $L/T$. Why do all the rules give a lower gain for it, and why is its response still slow?</li>
+        <li>The tangent method gives only an approximate $L$ and $T$. Change the process and see how far the tangent model is from the real curve. How would this error affect the tuning?</li>
+      </ol></div>
+    </section>
+
+    <section class="lsec" id="references"><h2>References</h2>
+      <ol class="refs">
+        <li>Åström, K. J. and Hägglund, T. (1995). <i>PID Controllers: Theory, Design, and Tuning</i>, 2nd ed. Research Triangle Park, NC: Instrument Society of America.</li>
+        <li>Åström, K. J. and Hägglund, T. (2006). <i>Advanced PID Control</i>. Research Triangle Park, NC: ISA, The Instrumentation, Systems, and Automation Society.</li>
+        <li>Cohen, G. H. and Coon, G. A. (1953). Theoretical consideration of retarded control. <i>Transactions of the ASME</i>, 75, 827–834.</li>
+        <li>D'Azzo, J. J., Houpis, C. H. and Sheldon, S. N. (2003). <i>Linear Control System Analysis and Design with MATLAB</i>, 5th ed., revised and expanded. New York: Marcel Dekker.</li>
+        <li>Nise, N. S. (2015). <i>Control Systems Engineering</i>, 7th ed. Hoboken, NJ: John Wiley &amp; Sons.</li>
+        <li>Ziegler, J. G. and Nichols, N. B. (1942). Optimum settings for automatic controllers. <i>Transactions of the ASME</i>, 64, 759–768.</li>
+      </ol>
+      <p class="note">The diagrams were drawn for this course. The simulations are computed in your browser with a fourth-order Runge–Kutta method (the tuning workbench uses exact discrete steps for each lag); the dead time is a delay buffer of past controller outputs.</p>
+    </section>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+<script src="../../assets/js/industrial-sims.js"></script>
+<script src="../../assets/vendor/plotly/plotly-basic.min.js"></script>
+<script src="../../assets/js/lab-experiments.js"></script>
+</body>
+</html>
