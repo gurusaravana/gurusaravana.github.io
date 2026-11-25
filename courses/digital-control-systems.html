@@ -33,7 +33,7 @@
 <body>
 <header class="nav"><div class="wrap">
   <a class="brand" href="../index.html">Saravanakumar G</a>
-  <nav class="links"><a href="../index.html">Home</a><a href="../index.html#teaching">Courses</a><a href="#materials">Materials</a></nav>
+  <nav class="links"><a href="../index.html">Home</a><a href="../index.html#teaching">Courses</a><a href="#lessons">Lessons</a><a href="#figures">Figures</a><a href="#materials">Materials</a></nav>
   <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
 </div></header>
 <div class="band course-band"><div class="wrap">
@@ -45,12 +45,25 @@
   </div>
 </div></div>
 <main class="wrap">
+  <!-- LESSONS START (generated list; to add a lesson copy one <li> inside a "lessons" list) -->
+  <section id="lessons">
+    <h2>Lessons</h2>
+    <p class="note">Each lesson has notes with worked examples, redrawn figures and exercises with solutions. Open a lesson and use "Show solution" to check your work.</p>
+    <div class="modgrid"><div class="modcard"><div class="mhead"><span class="mcode">1</span><div><h3>Discrete-time signals and sampled-data systems</h3><p>Why digital control, difference equations, the z-transform, s-to-z mapping, sampling, ADC and DAC models and the pulse transfer function.</p></div></div><ul class="lessons"><li><a href="digital-control-systems/01-discrete-time-and-z-transform.html"><span class="n">01</span><span class="t">Discrete-time systems and the z-transform</span></a></li><li><a href="digital-control-systems/02-sampling-and-pulse-transfer.html"><span class="n">02</span><span class="t">Sampling, ADC and DAC models, and the pulse transfer function</span></a></li></ul></div></div>
+  </section>
+  <section id="figures">
+    <h2>Figures and worked problems</h2>
+    <p class="note">Every diagram is drawn for this course. Click one to jump to it in its lesson.</p>
+    <h3 class="figgroup">Discrete-time signals and sampled-data systems (Lessons 1 and 2)</h3>
+    <nav class="figstrip"><a href="digital-control-systems/01-discrete-time-and-z-transform.html#fig-digital-loop"><img src="../assets/img/diagrams/dcs-digital-loop.svg" alt="" loading="lazy"><span>Digital loop</span></a><a href="digital-control-systems/01-discrete-time-and-z-transform.html#fig-s-z"><img src="../assets/img/diagrams/dcs-s-z-cases.svg" alt="" loading="lazy"><span>s to z mapping</span></a><a href="digital-control-systems/01-discrete-time-and-z-transform.html#fig-strips"><img src="../assets/img/diagrams/dcs-strips.svg" alt="" loading="lazy"><span>Primary strip</span></a><a href="digital-control-systems/01-discrete-time-and-z-transform.html#fig-pole-resp"><img src="../assets/img/diagrams/dcs-pole-responses.svg" alt="" loading="lazy"><span>Pole location and response</span></a><a href="digital-control-systems/02-sampling-and-pulse-transfer.html#fig-aliasing"><img src="../assets/img/diagrams/dcs-aliasing.svg" alt="" loading="lazy"><span>Same samples, two signals</span></a><a href="digital-control-systems/02-sampling-and-pulse-transfer.html#fig-zoh"><img src="../assets/img/diagrams/dcs-zoh.svg" alt="" loading="lazy"><span>Zero-order hold</span></a><a href="digital-control-systems/02-sampling-and-pulse-transfer.html#fig-zas"><img src="../assets/img/diagrams/dcs-zas-response.svg" alt="" loading="lazy"><span>Step minus delayed step</span></a><a href="digital-control-systems/02-sampling-and-pulse-transfer.html#fig-closed-z"><img src="../assets/img/diagrams/dcs-closed-loop-z.svg" alt="" loading="lazy"><span>Digital closed loop</span></a></nav>
+  </section>
+  <!-- LESSONS END -->
   <section id="materials">
     <h2>Course materials</h2>
     <ul class="materials">
       <!-- Add your files here (see the instructions at the top of this file) -->
     </ul>
-    <p class="note">Materials for this course will be added soon.</p>
+    <p class="note">Lecture slides and handouts can be added here as files.</p>
   </section>
   <!-- To show live simulations on this course, delete this line and the matching one below
   <section id="simulations">

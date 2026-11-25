@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 230" width="720" height="230" role="img" aria-label="Analog control loop: reference input, summing junction, compensator or controller, actuator and process, controlled variable, with a sensor in the feedback path.">
+<title>Analog control loop: reference input, summing junction, compensator or controller, actuator and process, controlled variable, with a sensor in the feedback path.</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker></defs>
+<rect width="720" height="230" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<text x="40.0" y="66.0" font-size="13" text-anchor="middle" fill="#db2777" font-weight="400">Reference</text>
+<text x="40.0" y="110.0" font-size="13" text-anchor="middle" fill="#db2777" font-weight="400">input</text>
+<path d="M20.0 80.0 L118.0 80.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<circle cx="132.0" cy="80.0" r="13.0" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M122.9 70.9L141.1 89.1M122.9 89.1L141.1 70.9" stroke="#0f172a" stroke-width="1.3"/>
+<text x="111.0" y="73.0" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">+</text>
+<text x="146.0" y="106.0" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">−</text>
+<path d="M145.0 80.0 L200.0 80.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="200.0" y="52.0" width="140.0" height="56.0" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="270.0" y="76.5" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400">Compensator /</text>
+<text x="270.0" y="93.5" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400">controller</text>
+<path d="M340.0 80.0 L400.0 80.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="400.0" y="52.0" width="140.0" height="56.0" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="470.0" y="76.5" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400">Actuator</text>
+<text x="470.0" y="93.5" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400">and process</text>
+<path d="M540.0 80.0 L700.0 80.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="640.0" y="66.0" font-size="13" text-anchor="middle" fill="#db2777" font-weight="400">Controlled</text>
+<text x="640.0" y="108.0" font-size="13" text-anchor="middle" fill="#db2777" font-weight="400">variable</text>
+<circle cx="600.0" cy="80.0" r="4" fill="#0f172a"/>
+<path d="M600.0 80.0 L600.0 180.0 L450.0 180.0" fill="none" stroke="#0077b6" stroke-width="2" marker-end="url(#ab)"/>
+<rect x="350.0" y="160.0" width="100.0" height="40.0" rx="4" fill="#fff" stroke="#0077b6" stroke-width="2"/>
+<text x="400.0" y="185.0" font-size="14" text-anchor="middle" fill="#0077b6" font-weight="400">Sensor</text>
+<path d="M350.0 180.0 L132.0 180.0 L132.0 93.0" fill="none" stroke="#0077b6" stroke-width="2" marker-end="url(#ab)"/>
+<text x="360.0" y="222.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400" font-style="italic">All signals are continuous functions of time</text>
+</g>
+</svg>

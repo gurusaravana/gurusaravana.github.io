@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 220" width="760" height="220" role="img" aria-label="Four standard sequences: unit impulse, sampled unit step, sampled ramp, and exponential a to the power k with a = 0.8, each with its z-transform.">
+<title>Four standard sequences: unit impulse, sampled unit step, sampled ramp, and exponential a to the power k with a = 0.8, each with its z-transform.</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker></defs>
+<rect width="760" height="220" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<rect x="30.0" y="34.0" width="160.0" height="120.0" rx="0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<text x="41.7" y="170.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">0</text>
+<text x="80.7" y="170.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">2</text>
+<text x="119.8" y="170.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">4</text>
+<text x="158.8" y="170.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">6</text>
+<path d="M41.7 154.0 L41.7 61.7" fill="none" stroke="#0077b6" stroke-width="2"/>
+<circle cx="41.7" cy="61.7" r="3.5" fill="#0077b6"/>
+<path d="M61.2 154.0 L61.2 154.0" fill="none" stroke="#0077b6" stroke-width="2"/>
+<circle cx="61.2" cy="154.0" r="3.5" fill="#0077b6"/>
+<path d="M80.7 154.0 L80.7 154.0" fill="none" stroke="#0077b6" stroke-width="2"/>
+<circle cx="80.7" cy="154.0" r="3.5" fill="#0077b6"/>
+<path d="M100.2 154.0 L100.2 154.0" fill="none" stroke="#0077b6" stroke-width="2"/>
+<circle cx="100.2" cy="154.0" r="3.5" fill="#0077b6"/>
+<path d="M119.8 154.0 L119.8 154.0" fill="none" stroke="#0077b6" stroke-width="2"/>
+<circle cx="119.8" cy="154.0" r="3.5" fill="#0077b6"/>
+<path d="M139.3 154.0 L139.3 154.0" fill="none" stroke="#0077b6" stroke-width="2"/>
+<circle cx="139.3" cy="154.0" r="3.5" fill="#0077b6"/>
+<path d="M158.8 154.0 L158.8 154.0" fill="none" stroke="#0077b6" stroke-width="2"/>
+<circle cx="158.8" cy="154.0" r="3.5" fill="#0077b6"/>
+<path d="M178.3 154.0 L178.3 154.0" fill="none" stroke="#0077b6" stroke-width="2"/>
+<circle cx="178.3" cy="154.0" r="3.5" fill="#0077b6"/>
+<text x="110.0" y="24.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="700">Unit impulse δ(k)</text>
+<text x="110.0" y="200.0" font-size="13" text-anchor="middle" fill="#0077b6" font-weight="400">Z = 1</text>
+<rect x="216.0" y="34.0" width="160.0" height="120.0" rx="0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<text x="227.7" y="170.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">0</text>
+<text x="266.7" y="170.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">2</text>
+<text x="305.8" y="170.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">4</text>
+<text x="344.8" y="170.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">6</text>
+<path d="M227.7 154.0 L227.7 61.7" fill="none" stroke="#059669" stroke-width="2"/>
+<circle cx="227.7" cy="61.7" r="3.5" fill="#059669"/>
+<path d="M247.2 154.0 L247.2 61.7" fill="none" stroke="#059669" stroke-width="2"/>
+<circle cx="247.2" cy="61.7" r="3.5" fill="#059669"/>
+<path d="M266.7 154.0 L266.7 61.7" fill="none" stroke="#059669" stroke-width="2"/>
+<circle cx="266.7" cy="61.7" r="3.5" fill="#059669"/>
+<path d="M286.2 154.0 L286.2 61.7" fill="none" stroke="#059669" stroke-width="2"/>
+<circle cx="286.2" cy="61.7" r="3.5" fill="#059669"/>
+<path d="M305.8 154.0 L305.8 61.7" fill="none" stroke="#059669" stroke-width="2"/>
+<circle cx="305.8" cy="61.7" r="3.5" fill="#059669"/>
+<path d="M325.3 154.0 L325.3 61.7" fill="none" stroke="#059669" stroke-width="2"/>
+<circle cx="325.3" cy="61.7" r="3.5" fill="#059669"/>
+<path d="M344.8 154.0 L344.8 61.7" fill="none" stroke="#059669" stroke-width="2"/>
+<circle cx="344.8" cy="61.7" r="3.5" fill="#059669"/>
+<path d="M364.3 154.0 L364.3 61.7" fill="none" stroke="#059669" stroke-width="2"/>
+<circle cx="364.3" cy="61.7" r="3.5" fill="#059669"/>
+<text x="296.0" y="24.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="700">Sampled step 1(k)</text>
+<text x="296.0" y="200.0" font-size="13" text-anchor="middle" fill="#059669" font-weight="400">Z = z/(z − 1)</text>
+<rect x="402.0" y="34.0" width="160.0" height="120.0" rx="0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<text x="413.7" y="170.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">0</text>
+<text x="452.7" y="170.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">2</text>
+<text x="491.8" y="170.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">4</text>
+<text x="530.8" y="170.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">6</text>
+<path d="M413.7 154.0 L413.7 154.0" fill="none" stroke="#ea7a1f" stroke-width="2"/>
+<circle cx="413.7" cy="154.0" r="3.5" fill="#ea7a1f"/>
+<path d="M433.2 154.0 L433.2 139.0" fill="none" stroke="#ea7a1f" stroke-width="2"/>
+<circle cx="433.2" cy="139.0" r="3.5" fill="#ea7a1f"/>
+<path d="M452.7 154.0 L452.7 124.0" fill="none" stroke="#ea7a1f" stroke-width="2"/>
+<circle cx="452.7" cy="124.0" r="3.5" fill="#ea7a1f"/>
+<path d="M472.2 154.0 L472.2 109.0" fill="none" stroke="#ea7a1f" stroke-width="2"/>
+<circle cx="472.2" cy="109.0" r="3.5" fill="#ea7a1f"/>
+<path d="M491.8 154.0 L491.8 94.0" fill="none" stroke="#ea7a1f" stroke-width="2"/>
+<circle cx="491.8" cy="94.0" r="3.5" fill="#ea7a1f"/>
+<path d="M511.3 154.0 L511.3 79.0" fill="none" stroke="#ea7a1f" stroke-width="2"/>
+<circle cx="511.3" cy="79.0" r="3.5" fill="#ea7a1f"/>
+<path d="M530.8 154.0 L530.8 64.0" fill="none" stroke="#ea7a1f" stroke-width="2"/>
+<circle cx="530.8" cy="64.0" r="3.5" fill="#ea7a1f"/>
+<path d="M550.3 154.0 L550.3 49.0" fill="none" stroke="#ea7a1f" stroke-width="2"/>
+<circle cx="550.3" cy="49.0" r="3.5" fill="#ea7a1f"/>
+<text x="482.0" y="24.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="700">Sampled ramp k</text>
+<text x="482.0" y="200.0" font-size="13" text-anchor="middle" fill="#ea7a1f" font-weight="400">Z = z/(z − 1)²</text>
+<rect x="588.0" y="34.0" width="160.0" height="120.0" rx="0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<text x="599.7" y="170.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">0</text>
+<text x="638.7" y="170.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">2</text>
+<text x="677.8" y="170.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">4</text>
+<text x="716.8" y="170.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">6</text>
+<path d="M599.7 154.0 L599.7 61.7" fill="none" stroke="#db2777" stroke-width="2"/>
+<circle cx="599.7" cy="61.7" r="3.5" fill="#db2777"/>
+<path d="M619.2 154.0 L619.2 80.2" fill="none" stroke="#db2777" stroke-width="2"/>
+<circle cx="619.2" cy="80.2" r="3.5" fill="#db2777"/>
+<path d="M638.7 154.0 L638.7 94.9" fill="none" stroke="#db2777" stroke-width="2"/>
+<circle cx="638.7" cy="94.9" r="3.5" fill="#db2777"/>
+<path d="M658.2 154.0 L658.2 106.7" fill="none" stroke="#db2777" stroke-width="2"/>
+<circle cx="658.2" cy="106.7" r="3.5" fill="#db2777"/>
+<path d="M677.8 154.0 L677.8 116.2" fill="none" stroke="#db2777" stroke-width="2"/>
+<circle cx="677.8" cy="116.2" r="3.5" fill="#db2777"/>
+<path d="M697.3 154.0 L697.3 123.8" fill="none" stroke="#db2777" stroke-width="2"/>
+<circle cx="697.3" cy="123.8" r="3.5" fill="#db2777"/>
+<path d="M716.8 154.0 L716.8 129.8" fill="none" stroke="#db2777" stroke-width="2"/>
+<circle cx="716.8" cy="129.8" r="3.5" fill="#db2777"/>
+<path d="M736.3 154.0 L736.3 134.6" fill="none" stroke="#db2777" stroke-width="2"/>
+<circle cx="736.3" cy="134.6" r="3.5" fill="#db2777"/>
+<text x="668.0" y="24.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="700">Exponential aᵏ (a = 0.8)</text>
+<text x="668.0" y="200.0" font-size="13" text-anchor="middle" fill="#db2777" font-weight="400">Z = z/(z − a)</text>
+</g>
+</svg>

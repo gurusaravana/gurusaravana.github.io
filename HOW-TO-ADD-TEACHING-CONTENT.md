@@ -364,3 +364,14 @@ All of it is drawn by `assets/js/course-map.js` from the data block inside `<div
 Keep the quotes and commas exactly as they are. If the data has a typing error, the page shows a short message in place of the map.
 
 To add a map to another course page, copy the whole `<section id="map">` block, change the data, and add `<script src="../assets/js/course-map.js"></script>` before `</body>`.
+
+## 20. Digital Control Systems (EACT 534) lessons
+
+The FTI EACT534 slide decks are written out as lesson pages in `courses/digital-control-systems/`. Chapter 1 (96 slides) is split into two lessons:
+
+- `01-discrete-time-and-z-transform.html` (why digital control, analog and digital loops, drug delivery and turbojet examples, difference equations, the z-transform, $z = e^{sT}$ and s-to-z mapping, aliasing strips, the constant ζ / ωn grid, pole position and response, standard z-transforms and properties, inverse z-transform),
+- `02-sampling-and-pulse-transfer.html` (sampling theorem, choosing the sampling period, ADC as ideal sampler, DAC as zero-order hold, $G_{ZAS}(z) = (1 - z^{-1})\mathcal{Z}\{G(s)/s\}$, cruise control, position control and R-L circuit examples, digital closed loop).
+
+The course page `courses/digital-control-systems.html` lists the lessons and has a "Figures and worked problems" gallery between the `LESSONS START` and `LESSONS END` comments. New diagrams start with `dcs-` in `assets/img/diagrams/`. Edit a lesson's notes between the `NOTES START` and `NOTES END` comments, and add exercises by copying a list item in the `exlist` list.
+
+The email address, institute name and logos on the original slides are not on the site. Where a slide had a slip, the page gives the corrected value in a "Watch out" box (Lesson 1: the exponential sequence a^k and its region of convergence, and the sequence 4, 8, 16, 32; Lesson 2: the gain at 7ωb, 2π written as "2 × 3141", and T = 1 in the position-control result).
