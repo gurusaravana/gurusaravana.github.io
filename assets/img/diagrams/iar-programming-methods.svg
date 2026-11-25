@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" width="800" height="300" role="img" aria-label="Ways to program a robot: leadthrough programming (powered leadthrough with a teach pendant for point-to-point work, or manual leadthrough for continuous paths), textual robot programming languages, and simulation with off-line programming.">
+<title>Ways to program a robot: leadthrough programming (powered leadthrough with a teach pendant for point-to-point work, or manual leadthrough for continuous paths), textual robot programming languages, and simulation with off-line programming.</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker><marker id="av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#7c3aed"/></marker></defs>
+<rect width="800" height="300" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<rect x="300.0" y="16.0" width="200.0" height="46.0" rx="6" fill="#f1f5f9" stroke="#0f172a" stroke-width="2"/>
+<text x="400.0" y="44.2" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="600">Robot programming</text>
+<rect x="20.0" y="100.0" width="230.0" height="60.0" rx="6" fill="#ffedd5" stroke="#ea7a1f" stroke-width="2"/>
+<text x="135.0" y="126.2" font-size="14" text-anchor="middle" fill="#ea7a1f" font-weight="600">Leadthrough</text>
+<text x="135.0" y="143.7" font-size="14" text-anchor="middle" fill="#ea7a1f" font-weight="400">on-line, robot is taught</text>
+<rect x="285.0" y="100.0" width="230.0" height="60.0" rx="6" fill="#e0f2fe" stroke="#0077b6" stroke-width="2"/>
+<text x="400.0" y="126.2" font-size="14" text-anchor="middle" fill="#0077b6" font-weight="600">Textual languages</text>
+<text x="400.0" y="143.7" font-size="14" text-anchor="middle" fill="#0077b6" font-weight="400">VAL, RAPID, KRL ...</text>
+<rect x="550.0" y="100.0" width="230.0" height="60.0" rx="6" fill="#d1fae5" stroke="#059669" stroke-width="2"/>
+<text x="665.0" y="126.2" font-size="14" text-anchor="middle" fill="#059669" font-weight="600">Off-line + simulation</text>
+<text x="665.0" y="143.7" font-size="14" text-anchor="middle" fill="#059669" font-weight="400">program away from the robot</text>
+<path d="M400.0 62.0 L135.0 98.0" fill="none" stroke="#0f172a" stroke-width="1.6" marker-end="url(#ak)"/>
+<path d="M400.0 62.0 L400.0 98.0" fill="none" stroke="#0f172a" stroke-width="1.6" marker-end="url(#ak)"/>
+<path d="M400.0 62.0 L665.0 98.0" fill="none" stroke="#0f172a" stroke-width="1.6" marker-end="url(#ak)"/>
+<rect x="20.0" y="200.0" width="110.0" height="80.0" rx="6" fill="#ffffff" stroke="#ea7a1f" stroke-width="2"/>
+<text x="75.0" y="229.2" font-size="12" text-anchor="middle" fill="#ea7a1f" font-weight="600">Powered</text>
+<text x="75.0" y="244.2" font-size="12" text-anchor="middle" fill="#ea7a1f" font-weight="400">teach pendant</text>
+<text x="75.0" y="259.2" font-size="12" text-anchor="middle" fill="#ea7a1f" font-weight="400">point-to-point</text>
+<rect x="140.0" y="200.0" width="110.0" height="80.0" rx="6" fill="#ffffff" stroke="#ea7a1f" stroke-width="2"/>
+<text x="195.0" y="229.2" font-size="12" text-anchor="middle" fill="#ea7a1f" font-weight="600">Manual</text>
+<text x="195.0" y="244.2" font-size="12" text-anchor="middle" fill="#ea7a1f" font-weight="400">move the arm</text>
+<text x="195.0" y="259.2" font-size="12" text-anchor="middle" fill="#ea7a1f" font-weight="400">continuous path</text>
+<path d="M100.0 160.0 L75.0 198.0" fill="none" stroke="#ea7a1f" stroke-width="1.5" marker-end="url(#ao)"/>
+<path d="M170.0 160.0 L195.0 198.0" fill="none" stroke="#ea7a1f" stroke-width="1.5" marker-end="url(#ao)"/>
+<rect x="285.0" y="200.0" width="230.0" height="80.0" rx="6" fill="#ffffff" stroke="#0077b6" stroke-width="2"/>
+<text x="400.0" y="229.2" font-size="12" text-anchor="middle" fill="#0077b6" font-weight="600">Adds</text>
+<text x="400.0" y="244.2" font-size="12" text-anchor="middle" fill="#0077b6" font-weight="400">logic, sensors, I/O,</text>
+<text x="400.0" y="259.2" font-size="12" text-anchor="middle" fill="#0077b6" font-weight="400">calculations, networks</text>
+<rect x="550.0" y="200.0" width="230.0" height="80.0" rx="6" fill="#ffffff" stroke="#059669" stroke-width="2"/>
+<text x="665.0" y="229.2" font-size="12" text-anchor="middle" fill="#059669" font-weight="600">Adds</text>
+<text x="665.0" y="244.2" font-size="12" text-anchor="middle" fill="#059669" font-weight="400">no downtime, collision checks,</text>
+<text x="665.0" y="259.2" font-size="12" text-anchor="middle" fill="#059669" font-weight="400">cycle-time and layout studies</text>
+<path d="M400.0 160.0 L400.0 198.0" fill="none" stroke="#0077b6" stroke-width="1.5" marker-end="url(#ab)"/>
+<path d="M665.0 160.0 L665.0 198.0" fill="none" stroke="#059669" stroke-width="1.5" marker-end="url(#ag)"/>
+</g>
+</svg>

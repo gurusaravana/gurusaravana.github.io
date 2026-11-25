@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 240" width="720" height="240" role="img" aria-label="A gear pair: a small pinion of radius r0 on the motor drives a larger gear of radius r1. Torque rises and speed falls by the ratio r1 over r0; a 1 to 6 train multiplies torque by 6 and divides speed by 6.">
+<title>A gear pair: a small pinion of radius r0 on the motor drives a larger gear of radius r1. Torque rises and speed falls by the ratio r1 over r0; a 1 to 6 train multiplies torque by 6 and divides speed by 6.</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker><marker id="av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#7c3aed"/></marker></defs>
+<rect width="720" height="240" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="170.0" cy="120.0" r="40.0" fill="#e0f2fe" stroke="#0077b6" stroke-width="2"/>
+<circle cx="170.0" cy="120.0" r="5.0" fill="#0077b6" stroke="#0077b6" stroke-width="1"/>
+<circle cx="310.0" cy="120.0" r="100.0" fill="#ffedd5" stroke="#ea7a1f" stroke-width="2"/>
+<circle cx="310.0" cy="120.0" r="6.0" fill="#ea7a1f" stroke="#ea7a1f" stroke-width="1"/>
+<path d="M170.0 120.0 L170.0 80.0" fill="none" stroke="#0077b6" stroke-width="1.6"/>
+<text x="160.0" y="104.0" font-size="14" text-anchor="end" fill="#0077b6" font-weight="600">r₀</text>
+<path d="M310.0 120.0 L310.0 20.0" fill="none" stroke="#ea7a1f" stroke-width="1.6"/>
+<text x="320.0" y="72.0" font-size="14" text-anchor="start" fill="#ea7a1f" font-weight="600">r₁</text>
+<text x="170.0" y="190.0" font-size="13" text-anchor="middle" fill="#0077b6" font-weight="600">pinion (motor)</text>
+<text x="310.0" y="236.0" font-size="13" text-anchor="middle" fill="#ea7a1f" font-weight="600">driven gear (wheel / joint)</text>
+<path d="M205.0 136.0 L214.0 104.0" fill="none" stroke="#0f172a" stroke-width="1.6" marker-end="url(#ak)"/>
+<text x="222.0" y="158.0" font-size="14" text-anchor="start" fill="#0f172a" font-weight="700">F</text>
+<text x="450.0" y="70.0" font-size="14" text-anchor="start" fill="#0f172a" font-weight="400">Same tangential force F and</text>
+<text x="450.0" y="90.0" font-size="14" text-anchor="start" fill="#0f172a" font-weight="400">same pitch-line speed:</text>
+<text x="450.0" y="124.0" font-size="16" text-anchor="start" fill="#0f172a" font-weight="700">T₁ / T₀ = r₁ / r₀</text>
+<text x="450.0" y="154.0" font-size="16" text-anchor="start" fill="#0f172a" font-weight="700">ω₁ / ω₀ = r₀ / r₁</text>
+<text x="450.0" y="186.0" font-size="13" text-anchor="start" fill="#64748b" font-weight="400">Power T·ω is unchanged</text>
+<text x="450.0" y="204.0" font-size="13" text-anchor="start" fill="#64748b" font-weight="400">(less a little friction)</text>
+</g>
+</svg>

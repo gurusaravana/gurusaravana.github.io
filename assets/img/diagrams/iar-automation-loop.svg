@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 250" width="660" height="250" role="img" aria-label="A truly automated system: decision making leads to physical action, which is evaluated and fed back to the next decision. Mechanization plus control technology gives automation.">
+<title>A truly automated system: decision making leads to physical action, which is evaluated and fed back to the next decision. Mechanization plus control technology gives automation.</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker><marker id="av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#7c3aed"/></marker></defs>
+<rect width="660" height="250" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<rect x="40.0" y="40.0" width="170.0" height="64.0" rx="6" fill="#e0f2fe" stroke="#0077b6" stroke-width="2"/>
+<text x="125.0" y="68.2" font-size="14" text-anchor="middle" fill="#0077b6" font-weight="600">Decision making</text>
+<text x="125.0" y="85.7" font-size="14" text-anchor="middle" fill="#0077b6" font-weight="400">what to do next</text>
+<rect x="250.0" y="150.0" width="170.0" height="64.0" rx="6" fill="#ffedd5" stroke="#ea7a1f" stroke-width="2"/>
+<text x="335.0" y="178.2" font-size="14" text-anchor="middle" fill="#ea7a1f" font-weight="600">Physical action</text>
+<text x="335.0" y="195.7" font-size="14" text-anchor="middle" fill="#ea7a1f" font-weight="400">carry out the decision</text>
+<rect x="40.0" y="150.0" width="170.0" height="64.0" rx="6" fill="#d1fae5" stroke="#059669" stroke-width="2"/>
+<text x="125.0" y="178.2" font-size="14" text-anchor="middle" fill="#059669" font-weight="600">Evaluation</text>
+<text x="125.0" y="195.7" font-size="14" text-anchor="middle" fill="#059669" font-weight="400">and feedback</text>
+<path d="M210 72 C 300 72 335 100 335 148" fill="none" stroke="#0077b6" stroke-width="2" marker-end="url(#ab)"/>
+<path d="M250.0 182.0 L212.0 182.0" fill="none" stroke="#ea7a1f" stroke-width="2" marker-end="url(#ao)"/>
+<path d="M125.0 150.0 L125.0 106.0" fill="none" stroke="#059669" stroke-width="2" marker-end="url(#ag)"/>
+<rect x="470.0" y="40.0" width="150.0" height="46.0" rx="6" fill="#f1f5f9" stroke="#0f172a" stroke-width="2"/>
+<text x="545.0" y="68.2" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="600">Mechanization</text>
+<text x="545.0" y="106.0" font-size="22" text-anchor="middle" fill="#0f172a" font-weight="700">+</text>
+<rect x="470.0" y="116.0" width="150.0" height="46.0" rx="6" fill="#f1f5f9" stroke="#0f172a" stroke-width="2"/>
+<text x="545.0" y="144.2" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="600">Control technology</text>
+<text x="545.0" y="184.0" font-size="22" text-anchor="middle" fill="#0f172a" font-weight="700">=</text>
+<rect x="470.0" y="194.0" width="150.0" height="46.0" rx="6" fill="#e0f2fe" stroke="#0077b6" stroke-width="2"/>
+<text x="545.0" y="222.6" font-size="16" text-anchor="middle" fill="#0077b6" font-weight="600">Automation</text>
+</g>
+</svg>

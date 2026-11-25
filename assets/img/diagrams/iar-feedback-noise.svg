@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 230" width="780" height="230" role="img" aria-label="Closed-loop control with a sensor: the controller D(s) acts on the error between the reference R and the measured output; the sensor adds noise N, so the output follows R minus N and sensor noise cannot be removed by feedback.">
+<title>Closed-loop control with a sensor: the controller D(s) acts on the error between the reference R and the measured output; the sensor adds noise N, so the output follows R minus N and sensor noise cannot be removed by feedback.</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker><marker id="av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#7c3aed"/></marker></defs>
+<rect width="780" height="230" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<path d="M30.0 100.0 L110.0 100.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="40.0" y="90.0" font-size="14" text-anchor="start" fill="#0f172a" font-weight="700">R(s)</text>
+<circle cx="130.0" cy="100.0" r="18.0" fill="#ffffff" stroke="#0f172a" stroke-width="2"/>
+<text x="118.0" y="90.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="700">+</text>
+<text x="142.0" y="128.0" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="700">−</text>
+<path d="M148.0 100.0 L220.0 100.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="220.0" y="74.0" width="110.0" height="52.0" rx="6" fill="#e0f2fe" stroke="#0077b6" stroke-width="2"/>
+<text x="275.0" y="96.2" font-size="14" text-anchor="middle" fill="#0077b6" font-weight="600">D(s)</text>
+<text x="275.0" y="113.7" font-size="14" text-anchor="middle" fill="#0077b6" font-weight="400">controller</text>
+<path d="M330.0 100.0 L400.0 100.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="400.0" y="74.0" width="110.0" height="52.0" rx="6" fill="#ffedd5" stroke="#ea7a1f" stroke-width="2"/>
+<text x="455.0" y="96.2" font-size="14" text-anchor="middle" fill="#ea7a1f" font-weight="600">G(s)</text>
+<text x="455.0" y="113.7" font-size="14" text-anchor="middle" fill="#ea7a1f" font-weight="400">robot joint</text>
+<path d="M510.0 100.0 L700.0 100.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="705.0" y="105.0" font-size="14" text-anchor="start" fill="#0f172a" font-weight="700">Y(s)</text>
+<path d="M620.0 100.0 L620.0 190.0 L480.0 190.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="370.0" y="166.0" width="110.0" height="48.0" rx="6" fill="#d1fae5" stroke="#059669" stroke-width="2"/>
+<text x="425.0" y="194.9" font-size="14" text-anchor="middle" fill="#059669" font-weight="600">sensor</text>
+<circle cx="270.0" cy="190.0" r="14.0" fill="#ffffff" stroke="#db2777" stroke-width="2"/>
+<text x="270.0" y="195.0" font-size="13" text-anchor="middle" fill="#db2777" font-weight="700">+</text>
+<path d="M370.0 190.0 L286.0 190.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<path d="M256.0 190.0 L130.0 190.0 L130.0 120.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<path d="M270.0 150.0 L270.0 174.0" fill="none" stroke="#db2777" stroke-width="2" marker-end="url(#ap)"/>
+<text x="270.0" y="145.0" font-size="13" text-anchor="middle" fill="#db2777" font-weight="700">noise N(s)</text>
+</g>
+</svg>

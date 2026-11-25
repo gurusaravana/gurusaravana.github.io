@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 250" width="800" height="250" role="img" aria-label="Gripper types: an external gripper closes its fingers on the outside of a part, an internal gripper expands inside a hole, a vacuum cup holds flat thin parts by suction and a magnetic gripper holds ferrous parts.">
+<title>Gripper types: an external gripper closes its fingers on the outside of a part, an internal gripper expands inside a hole, a vacuum cup holds flat thin parts by suction and a magnetic gripper holds ferrous parts.</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker><marker id="av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#7c3aed"/></marker></defs>
+<rect width="800" height="250" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<rect x="60.0" y="30.0" width="80.0" height="24.0" rx="3" fill="#f1f5f9" stroke="#0f172a" stroke-width="2"/>
+<path d="M70.0 54.0 L70.0 150.0" fill="none" stroke="#0f172a" stroke-width="8"/>
+<path d="M130.0 54.0 L130.0 150.0" fill="none" stroke="#0f172a" stroke-width="8"/>
+<rect x="76.0" y="100.0" width="48.0" height="70.0" rx="3" fill="#e0f2fe" stroke="#0077b6" stroke-width="2"/>
+<path d="M42.0 125.0 L64.0 125.0" fill="none" stroke="#ea7a1f" stroke-width="2" marker-end="url(#ao)"/>
+<path d="M158.0 125.0 L136.0 125.0" fill="none" stroke="#ea7a1f" stroke-width="2" marker-end="url(#ao)"/>
+<text x="100.0" y="222.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="700">External</text>
+<text x="100.0" y="240.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">grips the outside</text>
+<rect x="230.0" y="110.0" width="140.0" height="70.0" rx="3" fill="#e0f2fe" stroke="#0077b6" stroke-width="2"/>
+<rect x="270.0" y="110.0" width="60.0" height="50.0" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="0"/>
+<path d="M270.0 110.0 L270.0 160.0" fill="none" stroke="#0077b6" stroke-width="2"/>
+<path d="M330.0 110.0 L330.0 160.0" fill="none" stroke="#0077b6" stroke-width="2"/>
+<path d="M270.0 160.0 L330.0 160.0" fill="none" stroke="#0077b6" stroke-width="2"/>
+<rect x="260.0" y="30.0" width="80.0" height="24.0" rx="3" fill="#f1f5f9" stroke="#0f172a" stroke-width="2"/>
+<path d="M285.0 54.0 L278.0 150.0" fill="none" stroke="#0f172a" stroke-width="7"/>
+<path d="M315.0 54.0 L322.0 150.0" fill="none" stroke="#0f172a" stroke-width="7"/>
+<path d="M292.0 135.0 L276.0 135.0" fill="none" stroke="#ea7a1f" stroke-width="2" marker-end="url(#ao)"/>
+<path d="M308.0 135.0 L324.0 135.0" fill="none" stroke="#ea7a1f" stroke-width="2" marker-end="url(#ao)"/>
+<text x="300.0" y="222.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="700">Internal</text>
+<text x="300.0" y="240.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">expands inside a hole</text>
+<path d="M500.0 30.0 L500.0 100.0" fill="none" stroke="#0f172a" stroke-width="8"/>
+<path d="M460 140 Q500 90 540 140 Z" fill="#fce7f3" stroke="#0f172a" stroke-width="2"/>
+<rect x="420.0" y="140.0" width="160.0" height="14.0" rx="2" fill="#e0f2fe" stroke="#0077b6" stroke-width="2"/>
+<path d="M506.0 60.0 L550.0 60.0" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#am)"/>
+<text x="554.0" y="64.0" font-size="11" text-anchor="start" fill="#64748b" font-weight="400">to vacuum pump</text>
+<text x="554.0" y="78.0" font-size="11" text-anchor="start" fill="#64748b" font-weight="400">or venturi</text>
+<text x="500.0" y="222.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="700">Vacuum cup</text>
+<text x="500.0" y="240.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">thin, flat, smooth parts</text>
+<path d="M700.0 30.0 L700.0 90.0" fill="none" stroke="#0f172a" stroke-width="8"/>
+<rect x="660.0" y="90.0" width="80.0" height="40.0" rx="3" fill="#ffedd5" stroke="#ea7a1f" stroke-width="2"/>
+<text x="700.0" y="115.0" font-size="13" text-anchor="middle" fill="#ea7a1f" font-weight="700">N   S</text>
+<rect x="640.0" y="130.0" width="120.0" height="16.0" rx="2" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
+<text x="700.0" y="222.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="700">Magnetic</text>
+<text x="700.0" y="240.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">ferrous parts only</text>
+</g>
+</svg>

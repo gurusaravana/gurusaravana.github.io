@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 2: Modelling automated manufacturing systems · Industrial Automation and Robotics</title>
+<meta name="description" content="What an automated manufacturing system is, why it is modelled as a discrete event system, performance measures, simulation and analytical models.">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 2: Modelling automated manufacturing systems  (Industrial Automation and Robotics, EACT 536)
+  Edit the notes between the NOTES START and NOTES END markers below.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Figures live in assets/img/diagrams/ (names start with iar-) and are shown with a figure of class "diagram".
+  A live simulation is a line like  <div class="sim" data-rsim="arm2r"></div>  (see assets/js/robotics-sims.js).
+  To add an exercise, copy one list item inside the list of class "exlist".
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
+  <nav class="links"><a href="../industrial-automation-and-robotics.html">Course home</a><a href="../industrial-automation-and-robotics.html#lessons">Lessons</a><a href="../industrial-automation-and-robotics.html#figures">Figures</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../industrial-automation-and-robotics.html">← Industrial Automation and Robotics</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 2 of 6 · Chapter 2</div>
+    <h1>Modelling automated manufacturing systems</h1>
+    <p>Industrial Automation and Robotics · EACT 536 · Postgraduate course</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">EACT 536 · Industrial Automation and Robotics</div><ol><li><a href="01-automation-and-flow-lines.html"><span class="n">1</span>Automation, production systems and automated flow lines</a></li><li class="on"><a href="02-modelling-automated-manufacturing.html"><span class="n">2</span>Modelling automated manufacturing systems</a></li><li><a href="03-robot-anatomy-and-end-effectors.html"><span class="n">3</span>Robots: anatomy, configurations and end effectors</a></li><li><a href="04-actuators-sensors-dh.html"><span class="n">4</span>Actuators, sensors and the Denavit–Hartenberg convention</a></li><li><a href="05-configuration-space-kinematics.html"><span class="n">5</span>Configuration space and forward kinematics</a></li><li><a href="06-programming-and-applications.html"><span class="n">6</span>Robot programming and industrial applications</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Describe an automated manufacturing system (AMS), its subsystems and the people who run it</li><li>Explain why an AMS is a discrete event dynamic system</li><li>List the decisions that performance models support in design and in operation</li><li>Use throughput, utilisation, work-in-process and Little's law</li><li>Compare discrete event simulation with analytical (queueing) models and name the classic tools</li></ul></div>
+    <nav class="figstrip" aria-label="Figures in this lesson"><a href="#fig-ams"><img src="../../assets/img/diagrams/iar-ams-structure.svg" alt="" loading="lazy"><span>AMS subsystems</span></a><a href="#fig-deds"><img src="../../assets/img/diagrams/iar-deds.svg" alt="" loading="lazy"><span>Discrete events</span></a><a href="#fig-tools"><img src="../../assets/img/diagrams/iar-model-tools.svg" alt="" loading="lazy"><span>Modelling tools</span></a><a href="#fig-sim"><img src="../../assets/img/diagrams/iar-sim-study.svg" alt="" loading="lazy"><span>Simulation study</span></a></nav>
+    <section class="lsec"><h2>Notes</h2>
+    <!-- NOTES START -->
+    <article class="notes">
+<h3 id="ams">1. Automated manufacturing systems</h3>
+<p><b>Manufacturing</b> is the process of producing a product that meets a specific purpose. An <b>automated manufacturing system (AMS)</b> has computerised control built into the manufacturing equipment. Because so many manufacturing tasks repeat, they suit computer control well.</p>
+<p>AMS are used more and more in modern industry: aircraft-part manufacturing, surface treatment of metal parts, printed circuit boards in electroplating plants, wet etching of wafers in semiconductor fabs, food processing and medical laboratories.</p>
+<p>In its most developed form an AMS controls every stage of a product, from its design to its dispatch. Most are used for <b>inventory tracking, record keeping, production scheduling and production control</b>.</p>
+<figure class="diagram" id="fig-ams"><img src="../../assets/img/diagrams/iar-ams-structure.svg" alt="Cell computer linked to machines, robots, AGVs, conveyors, storage and sensors" loading="lazy"><figcaption>An AMS is a complex interconnection of subsystems under a cell or supervisory computer.</figcaption></figure>
+<p><b>Common features of an AMS:</b></p>
+<ul><li><b>Shared data.</b> Design data go to the accounting department for a cost–benefit analysis; the design and cost data go to management for approval; the whole set then goes to production so it can tool up.</li>
+<li><b>Sensors</b> collect data from the process, most often temperature, pressure, motion, flow and light. The data are turned into information the AMS uses to do its task.</li>
+<li><b>CAD and CAM.</b> Computer-aided design (CAD) gives the designer precise drawing tools, standard drawing layouts and rotatable 3D views; CAD uses vector graphics, so each part of the design can be viewed and changed on its own. Computer-aided manufacturing (CAM) turns the CAD design into instructions and data for the computer-controlled machines.</li></ul>
+<table class="tbl"><tr><th>People in an AMS</th><th>Role</th></tr>
+<tr><td>Supervisors</td><td>oversee the system and deal with minor problems</td></tr>
+<tr><td>Production planners</td><td>adjust production to current and new customer needs</td></tr>
+<tr><td>Product designers</td><td>design products, usually with CAD</td></tr>
+<tr><td>Maintenance engineers</td><td>repair the system and keep it running efficiently</td></tr></table>
+<p><b>Motives for using an AMS:</b> repetitive tasks bore people, who then make mistakes; an AMS responds faster to change, removes people from dangerous and dirty work, makes operating costs predictable, controls material use and waste, gives consistent quality and precision, runs almost continuously (no sick days, holidays or sleep) and lets designs be tested on the computer first. These gains have to be balanced against the social cost, such as lost jobs and the need for new skills.</p>
+<p>An AMS must be <b>flexible</b> enough to survive several product life cycles, <b>fault tolerant</b> to keep up production when something fails, and <b>resilient</b> to changes in design, demand and product mix. It is also highly capital intensive, so it must give high quality at low cost to repay the investment in a competitive market. That calls for careful design and operating strategies, and those need models.</p>
+
+<h3 id="deds">2. An AMS is a discrete event dynamic system</h3>
+<p>The state of an AMS (how many parts wait at each machine, which machines are up, where each pallet is) does not change continuously like a temperature. It changes only at the instants when <b>events</b> happen: a raw part arrives, a finished part leaves, a machine fails, a repair ends. Between events nothing changes. Such a system is a <b>discrete event dynamic system (DEDS)</b>, and its behaviour depends on the complex interaction of the timing of these events.</p>
+<figure class="diagram" id="fig-deds"><img src="../../assets/img/diagrams/iar-deds.svg" alt="Staircase plot of parts in a buffer changing only at arrivals, departures, failures and repairs" loading="lazy"><figcaption>The number of parts in a buffer is a staircase: it jumps at arrivals and departures. While the machine is down, parts pile up.</figcaption></figure>
+<p>Models of an AMS are therefore either <b>analytical</b> (equations that give the performance directly) or <b>discrete event simulation</b> models (a program that steps from event to event). The main quantitative (performance) models are:</p>
+<ul><li>discrete event simulation,</li><li>min–max (max-plus) algebra, for deterministic timed systems,</li><li>Markov chains,</li><li>stochastic Petri nets,</li><li>queues and queueing networks.</li></ul>
+
+<h3 id="role">3. What performance models are for</h3>
+<p>Models support decisions at every stage.</p>
+<p><b>Planning and design:</b> the number and type of machines; the number of material-handling devices, buffers, pallets and fixtures; the best layout; tool-storage capacity; evaluating candidate configurations; part-type selection, machine grouping, batching, line balancing and scheduling policies.</p>
+<p><b>Operation:</b> after a failure or breakdown, finding the best routes; predicting the effect of adding or removing resources and parts; finding optimal schedules when a machine fails or the part mix or demand changes suddenly.</p>
+<p><b>Basic design questions:</b> central or local storage? push or pull production? shared or distributed resources? how much flexibility is worth paying for? A faithful model that predicts performance also increases customers' confidence, and gives operators and designers insight into the system.</p>
+<h3 id="measures">4. Performance measures</h3>
+<table class="tbl"><tr><th>Measure</th><th>Meaning</th></tr>
+<tr><td>Throughput (production rate)</td><td>finished parts per unit time</td></tr>
+<tr><td>Manufacturing lead time</td><td>time a part spends in the system, from arrival to departure</td></tr>
+<tr><td>Work-in-process (WIP)</td><td>number of parts in the system at a time</td></tr>
+<tr><td>Utilisation</td><td>fraction of time a machine or robot is busy</td></tr>
+<tr><td>Queue length and waiting time</td><td>how many parts wait at a resource, and for how long</td></tr>
+<tr><td>Due-date performance</td><td>fraction of orders delivered on time</td></tr></table>
+<p>Two relations hold for almost any stable system:</p>
+<p class="eq">$$\text{utilisation } \rho = \frac{\lambda}{\mu}, \qquad \text{Little's law: } L = \lambda W$$</p>
+<p>where $\lambda$ is the arrival (= throughput) rate, $\mu$ the service rate of the machine, $L$ the average number of parts in the system and $W$ the average time each part spends there. For a single machine with random (Poisson) arrivals and random (exponential) service times, the <b>M/M/1 queue</b>, theory gives $L = \rho/(1-\rho)$.</p>
+<p class="key">Worked example. Parts arrive at 0.8 per minute at a machine that can do 1 per minute. Utilisation $\rho = 0.8$. M/M/1 gives $L = 0.8/0.2 = 4$ parts in the system on average, and Little's law gives $W = L/\lambda = 4/0.8 = 5$ minutes per part, although the machine needs only 1 minute. Waiting, not machining, dominates the lead time. At $\rho = 0.9$, $L$ jumps to 9: a busy machine builds long queues.</p>
+<div class="sim" id="sim-station" data-rsim="station"></div>
+
+<h3 id="tools">5. Tools: measurement, simulation and analytical models</h3>
+<figure class="diagram" id="fig-tools"><img src="../../assets/img/diagrams/iar-model-tools.svg" alt="Performance evaluation split into measurement and modelling, modelling split into simulation and analytical models" loading="lazy"><figcaption>Performance evaluation either measures an existing system or models one.</figcaption></figure>
+<p><b>Performance measurement</b> is done on an existing system: monitoring key variables, diagnosing failures, deciding how to reconfigure. <b>Performance modelling</b> works before the system exists or alongside it, by simulation or by analytical models.</p>
+<p><b>Discrete event simulation</b> is used in nearly every factory for analysis and decisions. It can model the system in great detail, and with enough runs its estimates are very accurate. But it is computationally expensive, and a detailed model (all part mixes, machine states, routings, flow control and sequencing rules) takes a long time to write.</p>
+<figure class="diagram" id="fig-sim"><img src="../../assets/img/diagrams/iar-sim-study.svg" alt="Steps of a simulation study from the real system to statistical analysis" loading="lazy"><figcaption>A simulation study feeds synthetic random inputs into the model and analyses the outputs statistically.</figcaption></figure>
+<p>A simulation study has these steps: build the model; code it as a program; validate the model and debug the program; run it for many random inputs; analyse the outputs statistically to get the performance measures.</p>
+<table class="tbl"><tr><th>Simulation language</th><th>Notes</th></tr>
+<tr><td>SIMSCRIPT</td><td>for decision-support models: military and C4ISR systems, communication networks, transport and manufacturing, inventory and logistics, financial markets</td></tr>
+<tr><td>GPSS (General-Purpose Simulation System)</td><td>process-oriented; the model is a block diagram of standard blocks that GPSS interprets. Easy, but interpretation is slow, so not for very large models</td></tr>
+<tr><td>SLAM II (Simulation Language for Alternative Modelling)</td><td>the first to combine three world views: process-oriented networks, discrete events and continuous variables, in one model</td></tr>
+<tr><td>GASP, GASP II, GASP IV (General Activity Simulation Program)</td><td>FORTRAN-based simulation languages</td></tr></table>
+<p><b>Analytical models</b> (Markov chains, queues, queueing networks, Petri nets) give results in seconds and show how the performance depends on each parameter, but they need simplifying assumptions. Packages written for manufacturing include <b>CAN-Q</b>, <b>MVAQ</b> and <b>MANUPLAN</b>. A common practice is to screen many configurations quickly with an analytical model, then check the best few in detail by simulation.</p>
+</article>
+    <!-- NOTES END -->
+    </section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the div below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">A robot cell receives on average 12 parts per hour and each part stays in the cell 25 minutes on average. How many parts are in the cell on average?</div><details><summary>Show solution</summary><div class="sol">Little's law: $L = \lambda W = (12/60\ \text{per min}) \times 25\ \text{min} = 5$ parts.</div></details></li><li><div class="q">A machine with mean processing time 4 min gets parts at random, on average one every 5 min. Treat it as M/M/1. Find the utilisation, the average number of parts at the machine and the average time a part spends there.</div><details><summary>Show solution</summary><div class="sol">$\mu = 0.25$/min, $\lambda = 0.2$/min, $\rho = 0.8$. $L = 0.8/0.2 = 4$ parts. $W = L/\lambda = 20$ min, of which 4 min is processing and 16 min is waiting.</div></details></li><li><div class="q">List the events and the state variables you would use to simulate a line of two machines with a buffer between them, where machine 2 sometimes breaks down.</div><details><summary>Show solution</summary><div class="sol">State: parts in the buffer, status of each machine (idle, busy, blocked, down). Events: part arrival at machine 1, end of processing at machine 1 (part moves to buffer, or machine 1 is blocked if the buffer is full), start and end of processing at machine 2, failure of machine 2, end of repair of machine 2, departure of a finished part.</div></details></li><li><div class="q">In the simulation above, set λ = 0.8, μ = 1, K = 20 and the repair time to 0. Press "New random run" five times and note the average number in the system. Why do the runs differ, and how does the average compare with the M/M/1 value of 4?</div><details><summary>Show solution</summary><div class="sol">Each run uses different random arrival and service times, so a single 8-hour run gives only an estimate. The values scatter around 4 (some well above, some below). That is why simulation studies use many runs, or long runs, and report averages with confidence intervals.</div></details></li><li><div class="q">Give one decision each that a performance model helps with (a) when designing an AMS, (b) while running it.</div><details><summary>Show solution</summary><div class="sol">(a) For example how many machines, pallets or buffer spaces to buy, or which layout to use. (b) For example how to reroute parts and reschedule when a machine fails, or what happens if the product mix changes.</div></details></li><li><div class="q">When would you choose an analytical queueing model rather than discrete event simulation?</div><details><summary>Show solution</summary><div class="sol">Early in design, when many alternatives must be compared quickly and approximate answers are enough, or when you need to see how the result depends on each parameter. Use simulation when details (routing rules, failures, blocking, non-random timing) matter and you need accurate numbers for a few final candidates.</div></details></li></ol></section>
+    <section class="lsec" id="sources"><h2>Sources and further reading</h2>
+    <ul class="srclist"><li>Chapter 2 slides of this course (EACT536), redrawn and rewritten.</li><li>N. Viswanadham and Y. Narahari, <i>Performance Modeling of Automated Manufacturing Systems</i>, Prentice Hall (discrete event view of an AMS, the role of performance models, simulation and analytical tools).</li><li>Little's law and the M/M/1 results are standard queueing theory, for example W. J. Hopp and M. L. Spearman, <i>Factory Physics</i>.</li></ul></section>
+    <nav class="prevnext"><a class="pn prev" href="01-automation-and-flow-lines.html"><small>← Lesson 1</small>Automation, production systems and automated flow lines</a><a class="pn next" href="03-robot-anatomy-and-end-effectors.html"><small>Lesson 3 →</small>Robots: anatomy, configurations and end effectors</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+<script src="../../assets/js/robotics-sims.js"></script>
+</body>
+</html>

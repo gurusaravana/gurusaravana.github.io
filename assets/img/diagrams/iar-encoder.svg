@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280" width="800" height="280" role="img" aria-label="Incremental optical encoder: an LED shines through a slotted disc onto photodiodes, giving square waves A and B a quarter period apart and one index pulse I per revolution. Whether A leads or lags B gives the direction.">
+<title>Incremental optical encoder: an LED shines through a slotted disc onto photodiodes, giving square waves A and B a quarter period apart and one index pulse I per revolution. Whether A leads or lags B gives the direction.</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker><marker id="av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#7c3aed"/></marker></defs>
+<rect width="800" height="280" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="150.0" cy="140.0" r="100.0" fill="#f1f5f9" stroke="#0f172a" stroke-width="2"/>
+<path d="M228.0 140.0 L244.0 140.0" fill="none" stroke="#ffffff" stroke-width="5"/>
+<path d="M228.0 140.0 L244.0 140.0" fill="none" stroke="#0f172a" stroke-width="0.6"/>
+<path d="M225.3 119.8 L240.8 115.7" fill="none" stroke="#ffffff" stroke-width="5"/>
+<path d="M225.3 119.8 L240.8 115.7" fill="none" stroke="#0f172a" stroke-width="0.6"/>
+<path d="M217.5 101.0 L231.4 93.0" fill="none" stroke="#ffffff" stroke-width="5"/>
+<path d="M217.5 101.0 L231.4 93.0" fill="none" stroke="#0f172a" stroke-width="0.6"/>
+<path d="M205.2 84.8 L216.5 73.5" fill="none" stroke="#ffffff" stroke-width="5"/>
+<path d="M205.2 84.8 L216.5 73.5" fill="none" stroke="#0f172a" stroke-width="0.6"/>
+<path d="M189.0 72.5 L197.0 58.6" fill="none" stroke="#ffffff" stroke-width="5"/>
+<path d="M189.0 72.5 L197.0 58.6" fill="none" stroke="#0f172a" stroke-width="0.6"/>
+<path d="M170.2 64.7 L174.3 49.2" fill="none" stroke="#ffffff" stroke-width="5"/>
+<path d="M170.2 64.7 L174.3 49.2" fill="none" stroke="#0f172a" stroke-width="0.6"/>
+<path d="M150.0 62.0 L150.0 46.0" fill="none" stroke="#ffffff" stroke-width="5"/>
+<path d="M150.0 62.0 L150.0 46.0" fill="none" stroke="#0f172a" stroke-width="0.6"/>
+<path d="M129.8 64.7 L125.7 49.2" fill="none" stroke="#ffffff" stroke-width="5"/>
+<path d="M129.8 64.7 L125.7 49.2" fill="none" stroke="#0f172a" stroke-width="0.6"/>
+<path d="M111.0 72.5 L103.0 58.6" fill="none" stroke="#ffffff" stroke-width="5"/>
+<path d="M111.0 72.5 L103.0 58.6" fill="none" stroke="#0f172a" stroke-width="0.6"/>
+<path d="M94.8 84.8 L83.5 73.5" fill="none" stroke="#ffffff" stroke-width="5"/>
+<path d="M94.8 84.8 L83.5 73.5" fill="none" stroke="#0f172a" stroke-width="0.6"/>
+<path d="M82.5 101.0 L68.6 93.0" fill="none" stroke="#ffffff" stroke-width="5"/>
+<path d="M82.5 101.0 L68.6 93.0" fill="none" stroke="#0f172a" stroke-width="0.6"/>
+<path d="M74.7 119.8 L59.2 115.7" fill="none" stroke="#ffffff" stroke-width="5"/>
+<path d="M74.7 119.8 L59.2 115.7" fill="none" stroke="#0f172a" stroke-width="0.6"/>
+<path d="M72.0 140.0 L56.0 140.0" fill="none" stroke="#ffffff" stroke-width="5"/>
+<path d="M72.0 140.0 L56.0 140.0" fill="none" stroke="#0f172a" stroke-width="0.6"/>
+<path d="M74.7 160.2 L59.2 164.3" fill="none" stroke="#ffffff" stroke-width="5"/>
+<path d="M74.7 160.2 L59.2 164.3" fill="none" stroke="#0f172a" stroke-width="0.6"/>
+<path d="M82.5 179.0 L68.6 187.0" fill="none" stroke="#ffffff" stroke-width="5"/>
+<path d="M82.5 179.0 L68.6 187.0" fill="none" stroke="#0f172a" stroke-width="0.6"/>
+<path d="M94.8 195.2 L83.5 206.5" fill="none" stroke="#ffffff" stroke-width="5"/>
+<path d="M94.8 195.2 L83.5 206.5" fill="none" stroke="#0f172a" stroke-width="0.6"/>
+<path d="M111.0 207.5 L103.0 221.4" fill="none" stroke="#ffffff" stroke-width="5"/>
+<path d="M111.0 207.5 L103.0 221.4" fill="none" stroke="#0f172a" stroke-width="0.6"/>
+<path d="M129.8 215.3 L125.7 230.8" fill="none" stroke="#ffffff" stroke-width="5"/>
+<path d="M129.8 215.3 L125.7 230.8" fill="none" stroke="#0f172a" stroke-width="0.6"/>
+<path d="M150.0 218.0 L150.0 234.0" fill="none" stroke="#ffffff" stroke-width="5"/>
+<path d="M150.0 218.0 L150.0 234.0" fill="none" stroke="#0f172a" stroke-width="0.6"/>
+<path d="M170.2 215.3 L174.3 230.8" fill="none" stroke="#ffffff" stroke-width="5"/>
+<path d="M170.2 215.3 L174.3 230.8" fill="none" stroke="#0f172a" stroke-width="0.6"/>
+<path d="M189.0 207.5 L197.0 221.4" fill="none" stroke="#ffffff" stroke-width="5"/>
+<path d="M189.0 207.5 L197.0 221.4" fill="none" stroke="#0f172a" stroke-width="0.6"/>
+<path d="M205.2 195.2 L216.5 206.5" fill="none" stroke="#ffffff" stroke-width="5"/>
+<path d="M205.2 195.2 L216.5 206.5" fill="none" stroke="#0f172a" stroke-width="0.6"/>
+<path d="M217.5 179.0 L231.4 187.0" fill="none" stroke="#ffffff" stroke-width="5"/>
+<path d="M217.5 179.0 L231.4 187.0" fill="none" stroke="#0f172a" stroke-width="0.6"/>
+<path d="M225.3 160.2 L240.8 164.3" fill="none" stroke="#ffffff" stroke-width="5"/>
+<path d="M225.3 160.2 L240.8 164.3" fill="none" stroke="#0f172a" stroke-width="0.6"/>
+<circle cx="150.0" cy="140.0" r="70.0" fill="none" stroke="#0f172a" stroke-width="1"/>
+<path d="M150.0 88.0 L150.0 74.0" fill="none" stroke="#ffffff" stroke-width="5"/>
+<circle cx="150.0" cy="140.0" r="12.0" fill="#ffffff" stroke="#0f172a" stroke-width="2"/>
+<rect x="220.0" y="20.0" width="40.0" height="26.0" rx="4" fill="#ffedd5" stroke="#ea7a1f" stroke-width="2"/>
+<text x="240.0" y="38.0" font-size="11" text-anchor="middle" fill="#ea7a1f" font-weight="700">LED</text>
+<text x="260.0" y="262.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">slotted disc on the shaft</text>
+<path d="M340.0 70.0 L340.0 70.0 L340.0 34.0 L370.0 34.0 L370.0 70.0 L400.0 70.0 L400.0 34.0 L430.0 34.0 L430.0 70.0 L460.0 70.0 L460.0 34.0 L490.0 34.0 L490.0 70.0 L520.0 70.0 L520.0 34.0 L550.0 34.0 L550.0 70.0 L580.0 70.0 L580.0 34.0 L610.0 34.0 L610.0 70.0 L640.0 70.0 L640.0 34.0 L670.0 34.0 L670.0 70.0 L700.0 70.0 L700.0 34.0 L730.0 34.0 L730.0 70.0 L760.0 70.0" fill="none" stroke="#0077b6" stroke-width="2"/>
+<text x="328.0" y="58.0" font-size="15" text-anchor="end" fill="#0077b6" font-weight="700">A</text>
+<path d="M340.0 140.0 L355.0 140.0 L355.0 104.0 L385.0 104.0 L385.0 140.0 L415.0 140.0 L415.0 104.0 L445.0 104.0 L445.0 140.0 L475.0 140.0 L475.0 104.0 L505.0 104.0 L505.0 140.0 L535.0 140.0 L535.0 104.0 L565.0 104.0 L565.0 140.0 L595.0 140.0 L595.0 104.0 L625.0 104.0 L625.0 140.0 L655.0 140.0 L655.0 104.0 L685.0 104.0 L685.0 140.0 L715.0 140.0 L715.0 104.0 L745.0 104.0 L745.0 140.0 L760.0 140.0" fill="none" stroke="#ea7a1f" stroke-width="2"/>
+<text x="328.0" y="128.0" font-size="15" text-anchor="end" fill="#ea7a1f" font-weight="700">B</text>
+<path d="M340.0 210.0 L540.0 210.0 L540.0 174.0 L570.0 174.0 L570.0 210.0 L760.0 210.0" fill="none" stroke="#059669" stroke-width="2"/>
+<text x="328.0" y="198.0" font-size="15" text-anchor="end" fill="#059669" font-weight="700">I</text>
+<path d="M400.0 154.0 L415.0 154.0" fill="none" stroke="#0f172a" stroke-width="1.2" marker-end="url(#ak)" marker-start="url(#ak)"/>
+<text x="422.0" y="158.0" font-size="11" text-anchor="start" fill="#0f172a" font-weight="400">90° (quarter period)</text>
+<text x="555.0" y="232.0" font-size="11" text-anchor="middle" fill="#059669" font-weight="400">one index pulse per revolution</text>
+</g>
+</svg>

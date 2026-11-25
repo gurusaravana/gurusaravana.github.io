@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 5: Configuration space and forward kinematics · Industrial Automation and Robotics</title>
+<meta name="description" content="Configuration space and degrees of freedom, Grübler&#x27;s formula for planar and spatial mechanisms, the torus and loop-closure equations, and forward kinematics by link frames, the product of exponentials and the modified Denavit-Hartenberg convention.">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 5: Configuration space and forward kinematics  (Industrial Automation and Robotics, EACT 536)
+  Edit the notes between the NOTES START and NOTES END markers below.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Figures live in assets/img/diagrams/ (names start with iar-) and are shown with a figure of class "diagram".
+  A live simulation is a line like  <div class="sim" data-rsim="arm2r"></div>  (see assets/js/robotics-sims.js).
+  To add an exercise, copy one list item inside the list of class "exlist".
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
+  <nav class="links"><a href="../industrial-automation-and-robotics.html">Course home</a><a href="../industrial-automation-and-robotics.html#lessons">Lessons</a><a href="../industrial-automation-and-robotics.html#figures">Figures</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../industrial-automation-and-robotics.html">← Industrial Automation and Robotics</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 5 of 6 · Chapter 5 (parts A and B)</div>
+    <h1>Configuration space and forward kinematics</h1>
+    <p>Industrial Automation and Robotics · EACT 536 · Postgraduate course</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">EACT 536 · Industrial Automation and Robotics</div><ol><li><a href="01-automation-and-flow-lines.html"><span class="n">1</span>Automation, production systems and automated flow lines</a></li><li><a href="02-modelling-automated-manufacturing.html"><span class="n">2</span>Modelling automated manufacturing systems</a></li><li><a href="03-robot-anatomy-and-end-effectors.html"><span class="n">3</span>Robots: anatomy, configurations and end effectors</a></li><li><a href="04-actuators-sensors-dh.html"><span class="n">4</span>Actuators, sensors and the Denavit–Hartenberg convention</a></li><li class="on"><a href="05-configuration-space-kinematics.html"><span class="n">5</span>Configuration space and forward kinematics</a></li><li><a href="06-programming-and-applications.html"><span class="n">6</span>Robot programming and industrial applications</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Define the configuration of a robot, its configuration space and its degrees of freedom</li><li>Count the degrees of freedom of a rigid body by "freedoms minus independent constraints"</li><li>Apply Grübler's formula to planar and spatial mechanisms, and spot the cases where it fails</li><li>Describe a configuration space by explicit joint coordinates or by implicit loop-closure equations</li><li>Write the forward kinematics of a planar 3R arm by trigonometry, by link frames and by the product of exponentials</li><li>Build modified (Craig) Denavit–Hartenberg tables for spatial open chains</li></ul></div>
+    <nav class="figstrip" aria-label="Figures in this lesson"><a href="#fig-cspace"><img src="../../assets/img/diagrams/iar-cspace.svg" alt="" loading="lazy"><span>Configuration</span></a><a href="#fig-joints"><img src="../../assets/img/diagrams/iar-joints-dof.svg" alt="" loading="lazy"><span>Joints and dof</span></a><a href="#fig-mech"><img src="../../assets/img/diagrams/iar-mechanisms.svg" alt="" loading="lazy"><span>Planar mechanisms</span></a><a href="#fig-stewart"><img src="../../assets/img/diagrams/iar-stewart.svg" alt="" loading="lazy"><span>Stewart platform</span></a><a href="#fig-torus"><img src="../../assets/img/diagrams/iar-torus.svg" alt="" loading="lazy"><span>Torus</span></a><a href="#fig-3r"><img src="../../assets/img/diagrams/iar-3r-planar.svg" alt="" loading="lazy"><span>3R planar arm</span></a></nav>
+    <section class="lsec"><h2>Notes</h2>
+    <!-- NOTES START -->
+    <article class="notes">
+<p>Lesson 4 described a robot by its Denavit–Hartenberg table. This lesson steps back and asks the most basic question, <i>where is the robot?</i> Part A answers it with the <a href="#cspace">configuration space</a> and a formula that counts the degrees of freedom of any mechanism. Part B answers it with <a href="#fk">forward kinematics</a>: the position and orientation of the tool as a function of the joint values.</p>
+
+<h3 id="cspace">Part A. Configuration and degrees of freedom</h3>
+<p>The <b>configuration</b> of a robot is a complete specification of the position of every point of the robot. Because the links are rigid and of known shape, a few numbers are enough. The smallest number $n$ of real-valued coordinates needed is the robot's <b>degrees of freedom</b> (dof), and the $n$-dimensional space of all configurations is the <b>configuration space</b> (C-space).</p>
+<figure class="diagram" id="fig-cspace"><img src="../../assets/img/diagrams/iar-cspace.svg" alt="A door described by one angle, a point by two coordinates, a coin by x, y and an angle" loading="lazy"><figcaption>A door needs one number, a point in the plane two, a coin lying on a table three.</figcaption></figure>
+<p>A coin that can lie heads or tails up still has 3 dof: the side that is up takes only two discrete values, not a continuous range.</p>
+
+<h4>Counting freedoms of a rigid body</h4>
+<p>Pick three points $A$, $B$, $C$ on the coin. Placed freely in the plane they would have 6 coordinates, but the body is rigid, so the three distances $d_{AB}$, $d_{BC}$, $d_{AC}$ cannot change:</p>
+<p class="eq">$$(x_A - x_B)^2 + (y_A - y_B)^2 = d_{AB}^2 \quad\text{and similarly for } BC,\ AC.$$</p>
+<p>$A$ can go anywhere (2 freedoms). $B$ must lie on a circle round $A$ (2 − 1 = 1 freedom, the angle $\phi_{AB}$). $C$ is then fixed by two distance constraints (2 − 2 = 0). So the coin has 3 dof, described by $(x_A, y_A, \phi_{AB})$. A fourth point $D$ adds three distance equations but only two of them are independent, so it adds nothing. The general rule is</p>
+<p class="key">dof = (sum of freedoms of the points) − (number of <b>independent</b> constraints) = (number of variables) − (number of independent equations).</p>
+<p>The same count in space: $A$ has 3 freedoms, $B$ lies on a sphere round $A$ (2), and $C$ lies on the circle where two spheres meet (1). A <b>spatial rigid body has 6 dof</b> (three linear, three angular) and a <b>planar rigid body has 3</b> (two linear, one angular).</p>
+<p class="warn">The rigid-body constraint in equation 2.12 of the slides is printed as $(x_A - y_A)^2 + (x_B - y_B)^2 = d_{AB}$, which mixes the coordinates. It should read $(x_A - x_B)^2 + (y_A - y_B)^2 = d_{AB}^2$, as above.</p>
+
+<h4>Joints</h4>
+<p>Every joint connects <b>exactly two</b> links. A joint with $f$ freedoms removes $6 - f$ freedoms in space, or $3 - f$ in the plane.</p>
+<figure class="diagram" id="fig-joints"><img src="../../assets/img/diagrams/iar-joints-dof.svg" alt="Revolute, prismatic, helical, cylindrical, universal and spherical joints with their degrees of freedom" loading="lazy"><figcaption>The common joints and their freedoms (from Lesson 3).</figcaption></figure>
+<table class="tbl"><tr><th>Joint</th><th>Symbol</th><th>dof $f$</th><th>Constraints in space</th><th>Constraints in the plane</th></tr>
+<tr><td>Revolute (hinge)</td><td>R</td><td>1</td><td>5</td><td>2</td></tr>
+<tr><td>Prismatic (slider)</td><td>P</td><td>1</td><td>5</td><td>2</td></tr>
+<tr><td>Helical (screw)</td><td>H</td><td>1</td><td>5</td><td>—</td></tr>
+<tr><td>Cylindrical</td><td>C</td><td>2</td><td>4</td><td>—</td></tr>
+<tr><td>Universal</td><td>U</td><td>2</td><td>4</td><td>—</td></tr>
+<tr><td>Spherical (ball)</td><td>S</td><td>3</td><td>3</td><td>—</td></tr></table>
+
+<h4 id="grubler">Grübler's formula</h4>
+<p>Take a mechanism with $N$ links, <b>counting the ground as a link</b>, and $J$ joints, where joint $i$ has $f_i$ freedoms. Each moving link has $m$ freedoms ($m = 3$ in the plane, $6$ in space) and each joint removes $m - f_i$ of them:</p>
+<p class="eq">$$\text{dof} = m(N - 1) - \sum_{i=1}^{J}(m - f_i) = m(N - 1 - J) + \sum_{i=1}^{J} f_i$$</p>
+<figure class="diagram" id="fig-mech"><img src="../../assets/img/diagrams/iar-mechanisms.svg" alt="Four-bar, slider-crank, five-bar and parallelogram linkages with their link and joint counts" loading="lazy"><figcaption>Classical planar mechanisms ($m = 3$, all joints with $f = 1$).</figcaption></figure>
+<table class="tbl"><tr><th>Mechanism</th><th>$m$</th><th>$N$</th><th>$J$</th><th>$\sum f_i$</th><th>dof</th></tr>
+<tr><td>Four-bar linkage (4 R)</td><td>3</td><td>4</td><td>4</td><td>4</td><td>$3(4-1-4)+4 = 1$</td></tr>
+<tr><td>Slider-crank (3 R + 1 P)</td><td>3</td><td>4</td><td>4</td><td>4</td><td>1</td></tr>
+<tr><td>Slider-crank, slider seen as one RP joint ($f = 2$)</td><td>3</td><td>3</td><td>3</td><td>4</td><td>$3(3-1-3)+4 = 1$</td></tr>
+<tr><td>$k$-link planar serial chain</td><td>3</td><td>$k+1$</td><td>$k$</td><td>$k$</td><td>$k$</td></tr>
+<tr><td>Five-bar linkage</td><td>3</td><td>5</td><td>5</td><td>5</td><td>2</td></tr>
+<tr><td>Stephenson or Watt six-bar</td><td>3</td><td>6</td><td>7</td><td>7</td><td>1</td></tr>
+<tr><td>Stewart–Gough platform (6 UPS legs)</td><td>6</td><td>14</td><td>18</td><td>36</td><td>$6(14-1-18)+36 = 6$</td></tr>
+<tr><td>Stewart platform with S joints at the base (6 SPS legs)</td><td>6</td><td>14</td><td>18</td><td>42</td><td>12</td></tr>
+<tr><td>3 × UPU platform</td><td>6</td><td>8</td><td>9</td><td>15</td><td>3</td></tr></table>
+<p class="key">Where three links meet at one pin, count <b>two</b> revolute joints, not one, because each joint connects exactly two links. Forgetting this is the most common Grübler mistake.</p>
+<p class="warn">The slides' "planar mechanism with overlapping joints" example gives counts that do not agree with each other ($N = 8$ in one line and $N = 7$ in the next, with the same $J$). It is left out here; use the rule in the box above instead.</p>
+<figure class="diagram" id="fig-stewart"><img src="../../assets/img/diagrams/iar-stewart.svg" alt="Stewart-Gough platform: fixed base, moving platform and six legs, each U-P-S" loading="lazy"><figcaption>Stewart–Gough platform: 14 links (base, platform and two parts per leg) and 18 joints give 6 dof.</figcaption></figure>
+<p>The 12 dof of the SPS version looks surprising, but it is right: each leg can now spin about its own axis. That spin does not move the platform, so the platform itself still has 6 dof.</p>
+<p><b>When Grübler's formula fails.</b> The formula only counts; it assumes the constraints are independent. The <b>parallelogram linkage</b> ($N = 5$, $J = 6$) gives $3(5-1-6) + 6 = 0$, a rigid structure, yet if the three parallel links have equal length it moves with 1 dof, because one constraint is redundant. A five-bar linkage with its two ground joints locked should be rigid, but if the two middle links overlap they can still swing together. Prototypes of the 3 × UPU platform also show extra freedoms. These are <b>singularities</b> of closed chains, and Grübler's formula cannot see them.</p>
+
+<h4 id="torus">Describing the configuration space</h4>
+<p>An <b>explicit</b> parametrisation lists independent coordinates, such as $(x, y, \theta)$ for a planar body. An <b>implicit</b> one lists more coordinates plus the equations that tie them together, such as the four coordinates of two points plus the distance equation above.</p>
+<p>For an <b>open chain</b> the joint values are an explicit parametrisation. For the planar 2R arm each angle runs from 0 to $2\pi$ and wraps round, so the C-space is $S^1 \times S^1$, a <b>torus</b>. Cut the torus along two circles and it opens into a square whose opposite edges are glued: the "flat torus".</p>
+<figure class="diagram" id="fig-torus"><img src="../../assets/img/diagrams/iar-torus.svg" alt="The 2R arm's configuration space as a torus and as a flat square with glued edges" loading="lazy"><figcaption>Each point on the torus (or in the square) is one pose of the 2R arm.</figcaption></figure>
+<p>For a <b>closed chain</b> an implicit description is easier. Treat the four-bar linkage as a 4R serial chain whose tip must come back to the base, pointing along the ground link. This gives three <b>loop-closure equations</b> in four angles:</p>
+<p class="eq">$$\begin{aligned} L_1\cos\theta_1 + L_2\cos(\theta_1+\theta_2) + L_3\cos(\theta_1+\theta_2+\theta_3) + L_4\cos(\theta_1+\dots+\theta_4) &= 0 \\ L_1\sin\theta_1 + L_2\sin(\theta_1+\theta_2) + L_3\sin(\theta_1+\theta_2+\theta_3) + L_4\sin(\theta_1+\dots+\theta_4) &= 0 \\ \theta_1+\theta_2+\theta_3+\theta_4 + \pi &= 0 \end{aligned}$$</p>
+<p>Four unknowns and three independent equations leave a curve in the four-dimensional joint space: 1 dof, as Grübler said. In general $k$ independent loop-closure equations $g(\theta) = 0$ in $n$ joint variables (called <b>holonomic constraints</b>) leave a C-space of dimension $n - k$.</p>
+
+<h3 id="fk">Part B. Forward kinematics</h3>
+<p><b>Forward kinematics</b> computes the position and orientation of the end-effector frame from the joint values. For the planar 3R arm, plain trigonometry is enough:</p>
+<figure class="diagram" id="fig-3r"><img src="../../assets/img/diagrams/iar-3r-planar.svg" alt="Planar three-link arm with lengths L1, L2, L3, joint angles and tool frame 4" loading="lazy"><figcaption>The planar 3R open chain with its tool frame {4}.</figcaption></figure>
+<p class="eq">$$x = L_1c_1 + L_2c_{12} + L_3c_{123}, \qquad y = L_1s_1 + L_2s_{12} + L_3s_{123}, \qquad \phi = \theta_1+\theta_2+\theta_3$$</p>
+<p>where $c_{12} = \cos(\theta_1+\theta_2)$ and so on. If only the tool position matters, the task space is the $x$–$y$ plane and the first two equations are the forward kinematics.</p>
+<p><b>Worked example.</b> $L_1 = 1$, $L_2 = 0.8$, $L_3 = 0.5$ m with $\theta = (30°, 45°, -30°)$: the cumulative angles are 30°, 75° and 45°, so $x = 0.866 + 0.207 + 0.354 = 1.427$ m, $y = 0.500 + 0.773 + 0.354 = 1.626$ m and $\phi = 45°$.</p>
+
+<h4>Method 1: link frames</h4>
+<p>For general spatial chains, trigonometry gets messy. Attach a frame to each link and multiply the transforms between neighbours. For the 3R arm, using $3\times3$ planar ($SE(2)$) matrices:</p>
+<p class="eq">$$T_{04} = T_{01}T_{12}T_{23}T_{34}, \quad T_{01} = \begin{bmatrix} c_1 & -s_1 & 0 \\ s_1 & c_1 & 0 \\ 0 & 0 & 1\end{bmatrix},\ T_{12} = \begin{bmatrix} c_2 & -s_2 & L_1 \\ s_2 & c_2 & 0 \\ 0 & 0 & 1\end{bmatrix},\ T_{23} = \begin{bmatrix} c_3 & -s_3 & L_2 \\ s_3 & c_3 & 0 \\ 0 & 0 & 1\end{bmatrix},\ T_{34} = \begin{bmatrix} 1 & 0 & L_3 \\ 0 & 1 & 0 \\ 0 & 0 & 1\end{bmatrix}$$</p>
+<p>$T_{34}$ is constant; every other $T_{i-1,i}$ depends only on its own joint angle.</p>
+
+<h4>Method 2: product of exponentials</h4>
+<p>Instead of link frames, treat each joint axis as a <b>screw axis</b>. Let $M$ be the tool pose with all joints at zero (arm stretched along $x$): $M$ has identity rotation and position $(L_1+L_2+L_3, 0)$. Turning joint 3 alone moves the tool by a screw motion about axis 3, then joint 2 moves links 2 and 3 together, then joint 1 moves everything:</p>
+<p class="eq">$$T_{04} = e^{[S_1]\theta_1}\,e^{[S_2]\theta_2}\,e^{[S_3]\theta_3}\,M, \qquad [S_i] = \begin{bmatrix} 0 & -1 & y_i \\ 1 & 0 & -x_i \\ 0 & 0 & 0\end{bmatrix}$$</p>
+<p>where $(x_i, y_i)$ is a point on joint axis $i$ in the zero pose: $(0, 0)$, $(L_1, 0)$ and $(L_1+L_2, 0)$, so the third columns of $[S_2]$ and $[S_3]$ are $(0, -L_1, 0)$ and $(0, -(L_1+L_2), 0)$. This is the <b>product of exponentials</b> (PoE) formula. It needs no link frames, only the base frame, the tool frame and the joint axes.</p>
+<table class="tbl"><tr><th></th><th>Denavit–Hartenberg</th><th>Product of exponentials</th></tr>
+<tr><td>Parameters per joint</td><td>4 (the minimum possible)</td><td>6 (a screw axis)</td></tr>
+<tr><td>Link frames</td><td>one per link, with strict rules</td><td>none, only base and tool</td></tr>
+<tr><td>Prismatic and revolute joints</td><td>treated differently</td><td>treated the same way</td></tr>
+<tr><td>Used by</td><td>most textbooks and robot data sheets</td><td>modern robotics texts and software</td></tr></table>
+
+<h4 id="mdh">Method 3: modified Denavit–Hartenberg</h4>
+<p>Chapter 5B uses the <b>modified</b> (Craig) form of D-H, not the standard form of Lesson 4. Frame $\{i\}$ sits on joint axis $i$, with $\hat z_i$ along the axis, and the four parameters describe how to get from $\{i-1\}$ to $\{i\}$:</p>
+<ul>
+<li><b>Link length</b> $a_{i-1}$: the length of the common perpendicular from axis $i-1$ to axis $i$ (not necessarily the length of the physical link).</li>
+<li><b>Link twist</b> $\alpha_{i-1}$: the angle from $\hat z_{i-1}$ to $\hat z_i$, measured about $\hat x_{i-1}$.</li>
+<li><b>Link offset</b> $d_i$: the distance along $\hat z_i$ from where $\hat x_{i-1}$ meets it to the origin of $\{i\}$.</li>
+<li><b>Joint angle</b> $\theta_i$: the angle from $\hat x_{i-1}$ to $\hat x_i$, measured about $\hat z_i$.</li></ul>
+<p class="eq">$$T_{i-1,i} = \text{Rot}(\hat x, \alpha_{i-1})\,\text{Trans}(\hat x, a_{i-1})\,\text{Trans}(\hat z, d_i)\,\text{Rot}(\hat z, \theta_i) = \begin{bmatrix} c\theta_i & -s\theta_i & 0 & a_{i-1} \\ s\theta_i\, c\alpha_{i-1} & c\theta_i\, c\alpha_{i-1} & -s\alpha_{i-1} & -d_i\, s\alpha_{i-1} \\ s\theta_i\, s\alpha_{i-1} & c\theta_i\, s\alpha_{i-1} & c\alpha_{i-1} & d_i\, c\alpha_{i-1} \\ 0 & 0 & 0 & 1 \end{bmatrix}$$</p>
+<p class="warn">Two of the elementary matrices in the slides have sign or index slips. In $\text{Rot}(\hat x, \alpha)$ (eq. 5.13) the entry in row 3, column 2 is $+\sin\alpha$, not $-\sin\alpha$. In $\text{Rot}(\hat z, \theta_i)$ (eq. 5.16) the angle is $\theta_i$, not $\theta_{i-1}$, and the entry in row 2, column 1 is $+\sin\theta_i$. With those two fixes the product above is correct.</p>
+<p><b>Special cases.</b> If two neighbouring axes <i>intersect</i>, set $a_{i-1} = 0$ and point $\hat x_{i-1}$ perpendicular to the plane of the two axes (either sign is fine). If they are <i>parallel</i>, many common perpendiculars exist: pick the one that makes the most parameters zero. For a <i>prismatic</i> joint, $\hat z$ points along the sliding direction and $d_i$ becomes the joint variable. Choose $\{0\}$ to coincide with $\{1\}$ at the zero position, so $a_0 = \alpha_0 = 0$ and $d_1 = 0$ (or $\theta_1 = 0$ for a prismatic first joint).</p>
+<p><b>Why only four parameters?</b> A general frame-to-frame displacement needs six numbers, but the D-H rules only allow rotations and translations along $\hat x$ and $\hat z$. That is why some frame pairs, for example a pure sideways shift along $\hat y$, <i>cannot</i> be written as D-H parameters, and why a table must always come with a sketch of the frames.</p>
+
+<h4>Examples from Chapter 5B</h4>
+<p>Each table lists $\alpha_{i-1}$, $a_{i-1}$, $d_i$, $\theta_i$ with the robot in its zero position.</p>
+<div class="tblwrap"><table class="tbl"><tr><th colspan="5">3R spatial open chain</th></tr><tr><th>$i$</th><th>$\alpha_{i-1}$</th><th>$a_{i-1}$</th><th>$d_i$</th><th>$\theta_i$</th></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>0</td><td>$\theta_1$</td></tr>
+<tr><td>2</td><td>90°</td><td>$L_1$</td><td>0</td><td>$\theta_2 - 90°$</td></tr>
+<tr><td>3</td><td>−90°</td><td>$L_2$</td><td>0</td><td>$\theta_3$</td></tr></table></div>
+<div class="tblwrap"><table class="tbl"><tr><th colspan="5">RRRP spatial open chain (4 dof)</th></tr><tr><th>$i$</th><th>$\alpha_{i-1}$</th><th>$a_{i-1}$</th><th>$d_i$</th><th>$\theta_i$</th></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>0</td><td>$\theta_1$</td></tr>
+<tr><td>2</td><td>90°</td><td>0</td><td>0</td><td>$\theta_2$</td></tr>
+<tr><td>3</td><td>0</td><td>$L_2$</td><td>0</td><td>$\theta_3 + 90°$</td></tr>
+<tr><td>4</td><td>90°</td><td>0</td><td>$\theta_4$ (slide)</td><td>0</td></tr></table></div>
+<div class="tblwrap"><table class="tbl"><tr><th colspan="5">6R arm: three positioning joints and a ZYZ wrist</th></tr><tr><th>$i$</th><th>$\alpha_{i-1}$</th><th>$a_{i-1}$</th><th>$d_i$</th><th>$\theta_i$</th></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>0</td><td>$\theta_1$</td></tr>
+<tr><td>2</td><td>90°</td><td>0</td><td>0</td><td>$\theta_2$</td></tr>
+<tr><td>3</td><td>0</td><td>$L_1$</td><td>0</td><td>$\theta_3 + 90°$</td></tr>
+<tr><td>4</td><td>90°</td><td>0</td><td>$L_2$</td><td>$\theta_4 + 180°$</td></tr>
+<tr><td>5</td><td>90°</td><td>0</td><td>0</td><td>$\theta_5 + 180°$</td></tr>
+<tr><td>6</td><td>90°</td><td>0</td><td>0</td><td>$\theta_6$</td></tr></table></div>
+<p>The constant offsets such as $-90°$ or $+180°$ appear because the robot's zero position does not line up all the $\hat x$ axes. Try the two-link case interactively with the <a href="04-actuators-sensors-dh.html#ik">arm simulation in Lesson 4</a>.</p>
+</article>
+    <!-- NOTES END -->
+    </section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the div below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">How many degrees of freedom does each have: (a) a sliding door; (b) a chess piece on the board, allowing it to turn; (c) an aircraft in flight; (d) a train on its track?</div><details><summary>Show solution</summary><div class="sol">(a) 1, (b) 3 ($x$, $y$ and the turn), (c) 6, (d) 1 (its distance along the track).</div></details></li><li><div class="q">Use "freedoms minus independent constraints" to show that two planar bodies joined by a revolute joint have 4 dof.</div><details><summary>Show solution</summary><div class="sol">Four points give 8 coordinates. Each body has one distance constraint (2), and the revolute joint makes two points coincide, $x_B = x_C$ and $y_B = y_C$ (2 more). $8 - 4 = 4$, described by $(x_A, y_A, \phi_{AB}, \theta)$.</div></details></li><li><div class="q">Find the dof of a planar mechanism with 7 links (including ground) joined by 8 revolute joints and 1 prismatic joint.</div><details><summary>Show solution</summary><div class="sol">$3(7 - 1 - 9) + 9 = -9 + 9 = 0$. It is a structure (unless some constraint is redundant). Check: if instead it had $N = 8$ links with the same 9 joints, $3(8-1-9)+9 = 3$.</div></details></li><li><div class="q">A delta (parallel) robot has a base, a moving platform and three legs. Each leg is a revolute joint at the base, an upper arm, and a parallelogram forearm made of two rods with four spherical joints. Ignoring the spin of each rod about its own axis, count the dof. (Hint: count each parallelogram as 2 rods.)</div><details><summary>Show solution</summary><div class="sol">Links: base, platform, 3 upper arms, 6 rods: $N = 11$. Joints: 3 R + 12 S: $J = 15$, $\sum f = 3 + 36 = 39$. Grübler: $6(11 - 1 - 15) + 39 = 9$. Each rod can spin about its own axis (6 spins), so the useful dof is $9 - 6 = 3$: the platform translates in $x$, $y$, $z$.</div></details></li><li><div class="q">What is the configuration space of (a) a 3R planar arm with no joint limits, (b) a PR arm (prismatic then revolute) in the plane, (c) a 2R arm whose first joint can only move from 0 to 180°?</div><details><summary>Show solution</summary><div class="sol">(a) $S^1 \times S^1 \times S^1$, a 3-torus. (b) $\mathbb{R} \times S^1$ (or an interval times $S^1$), a cylinder. (c) An interval times $S^1$: a band, not a torus, because the first angle no longer wraps round.</div></details></li><li><div class="q">For the planar 3R arm with $L_1 = L_2 = 1$ m, $L_3 = 0.2$ m, find the tool pose for $\theta = (90°, -90°, 0°)$ and for $\theta = (0°, 90°, 90°)$.</div><details><summary>Show solution</summary><div class="sol">First: cumulative angles 90°, 0°, 0°: $x = 0 + 1 + 0.2 = 1.2$ m, $y = 1 + 0 + 0 = 1$ m, $\phi = 0$. Second: cumulative 0°, 90°, 180°: $x = 1 + 0 - 0.2 = 0.8$ m, $y = 0 + 1 + 0 = 1$ m, $\phi = 180°$.</div></details></li><li><div class="q">Write $[S_1]$, $[S_2]$, $[S_3]$ and $M$ for the planar 3R arm and use them to check that the PoE formula gives the right tool position when $\theta_1 = \theta_2 = 0$ and $\theta_3 = 90°$.</div><details><summary>Show solution</summary><div class="sol">$[S_1]$ has third column $(0, 0, 0)$, $[S_2]$ has $(0, -L_1, 0)$, $[S_3]$ has $(0, -(L_1+L_2), 0)$; all have $\begin{bmatrix}0&-1\\1&0\end{bmatrix}$ top-left. With only $\theta_3 = 90°$, the tool rotates 90° about the point $(L_1+L_2, 0)$, so it moves from $(L_1+L_2+L_3, 0)$ to $(L_1+L_2, L_3)$, pointing along $+y$. This matches $x = L_1 + L_2 + L_3\cos 90°$, $y = L_3\sin 90°$.</div></details></li><li><div class="q">Using the modified D-H matrix, write $T_{01}$ and $T_{12}$ for the first two rows of the 3R spatial chain table.</div><details><summary>Show solution</summary><div class="sol">Row 1 ($\alpha_0 = 0$, $a_0 = 0$, $d_1 = 0$): $T_{01} = \text{Rot}(\hat z, \theta_1)$. Row 2 ($\alpha_1 = 90°$, $a_1 = L_1$, $d_2 = 0$, angle $\theta_2 - 90°$): with $c\alpha = 0$, $s\alpha = 1$, $T_{12} = \begin{bmatrix} \cos\psi & -\sin\psi & 0 & L_1 \\ 0 & 0 & -1 & 0 \\ \sin\psi & \cos\psi & 0 & 0 \\ 0&0&0&1\end{bmatrix}$, $\psi = \theta_2 - 90°$, so $\cos\psi = \sin\theta_2$ and $\sin\psi = -\cos\theta_2$.</div></details></li></ol></section>
+    <section class="lsec" id="sources"><h2>Sources and further reading</h2>
+    <ul class="srclist"><li>Chapter 5 slides of this course (EACT536), parts A and B, redrawn and rewritten.</li><li>K. M. Lynch and F. C. Park, <i>Modern Robotics: Mechanics, Planning, and Control</i>, Cambridge University Press, 2017, chapters 2 and 4 (an early draft of which the Chapter 5 slides follow). Free preprint and videos at <a href="https://modernrobotics.org" target="_blank" rel="noopener">modernrobotics.org</a>.</li><li>J. J. Craig, <i>Introduction to Robotics: Mechanics and Control</i>, Pearson (the modified D-H convention).</li><li>M. W. Spong, S. Hutchinson and M. Vidyasagar, <i>Robot Modeling and Control</i>, Wiley (the standard D-H convention used in Lesson 4).</li></ul></section>
+    <nav class="prevnext"><a class="pn prev" href="04-actuators-sensors-dh.html"><small>← Lesson 4</small>Actuators, sensors and the Denavit–Hartenberg convention</a><a class="pn next" href="06-programming-and-applications.html"><small>Lesson 6 →</small>Robot programming and industrial applications</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

@@ -364,3 +364,22 @@ All of it is drawn by `assets/js/course-map.js` from the data block inside `<div
 Keep the quotes and commas exactly as they are. If the data has a typing error, the page shows a short message in place of the map.
 
 To add a map to another course page, copy the whole `<section id="map">` block, change the data, and add `<script src="../assets/js/course-map.js"></script>` before `</body>`.
+
+## 21. Industrial Automation and Robotics (EACT 536) lessons
+
+The FTI chapter slides (Chapters 1, 2, 3a, 3b, 4a, 4b, 5a, 5b and 6b) are written out as six lesson pages in `courses/industrial-automation-and-robotics/`. The a and b parts of a chapter share one lesson:
+
+- `01-automation-and-flow-lines.html` (production systems, automation types, flow lines, transfer mechanisms, Geneva mechanism),
+- `02-modelling-automated-manufacturing.html` (discrete-event systems, queues, modelling tools, simulation studies),
+- `03-robot-anatomy-and-end-effectors.html` (anatomy, joints, configurations, workspace, accuracy, grippers, robot economics),
+- `04-actuators-sensors-dh.html` (actuators, DC motor and PWM, sensors, Denavit–Hartenberg convention, two-link inverse kinematics),
+- `05-configuration-space-kinematics.html` (configuration space, Grübler's formula, torus and loop closure, forward kinematics, product of exponentials, modified D-H tables),
+- `06-programming-and-applications.html` (programming methods, off-line simulation, a generic robot language, welding, machine loading and other applications).
+
+Chapter 6 part A was not received. When it arrives it can go into Lesson 6 or become a new Lesson 7: copy a lesson page, change its title and notes, and add it to the module list on the course page between `LESSONS START` and `LESSONS END`, and to the "All lessons" list at the top-left of every lesson page.
+
+The course home page `courses/industrial-automation-and-robotics.html` lists the lessons, a figure gallery and the simulations. New diagrams start with `iar-` in `assets/img/diagrams/`. Edit a lesson's notes between the `NOTES START` and `NOTES END` comments.
+
+Four simulations live in `assets/js/robotics-sims.js`. Put one on any page with a line like `<div class="sim" id="sim-arm2r" data-rsim="arm2r"></div>` and add `<script src="../../assets/js/robotics-sims.js"></script>` before `</body>`. The names are `geneva` (Geneva mechanism), `station` (machine and buffer, discrete-event), `payback` (robot payback and rate of return) and `arm2r` (two-link arm, forward and inverse kinematics).
+
+The email addresses, institute address and logos on the original slides are not on the site, and every diagram was redrawn. Where a slide had a slip, the page gives the corrected value in a "Watch out" box. Examples: the robot payback example in Lesson 3 (3.81 years and 9.61 %), the H-bridge reverse transistors, motor speed and encoder count in Lesson 4, the rigid-body equation and two rotation matrices in Lesson 5, and the "lead-through" label in Lesson 6.

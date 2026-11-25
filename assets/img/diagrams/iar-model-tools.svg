@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 340" width="780" height="340" role="img" aria-label="Tools for studying an automated manufacturing system: performance measurement on an existing system, or performance modelling by discrete event simulation or by analytical models such as Markov chains, queues, queueing networks, Petri nets and min-max algebra.">
+<title>Tools for studying an automated manufacturing system: performance measurement on an existing system, or performance modelling by discrete event simulation or by analytical models such as Markov chains, queues, queueing networks, Petri nets and min-max algebra.</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker><marker id="av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#7c3aed"/></marker></defs>
+<rect width="780" height="340" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<rect x="290.0" y="16.0" width="200.0" height="46.0" rx="6" fill="#f1f5f9" stroke="#0f172a" stroke-width="2"/>
+<text x="390.0" y="44.2" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="600">Performance evaluation</text>
+<rect x="40.0" y="110.0" width="220.0" height="64.0" rx="6" fill="#d1fae5" stroke="#059669" stroke-width="2"/>
+<text x="150.0" y="138.2" font-size="14" text-anchor="middle" fill="#059669" font-weight="600">Performance measurement</text>
+<text x="150.0" y="155.7" font-size="14" text-anchor="middle" fill="#059669" font-weight="400">on the existing system</text>
+<rect x="450.0" y="110.0" width="240.0" height="64.0" rx="6" fill="#e0f2fe" stroke="#0077b6" stroke-width="2"/>
+<text x="570.0" y="138.2" font-size="14" text-anchor="middle" fill="#0077b6" font-weight="600">Performance modelling</text>
+<text x="570.0" y="155.7" font-size="14" text-anchor="middle" fill="#0077b6" font-weight="400">before or while you build</text>
+<path d="M350.0 62.0 L170.0 108.0" fill="none" stroke="#0f172a" stroke-width="1.8" marker-end="url(#ak)"/>
+<path d="M430.0 62.0 L560.0 108.0" fill="none" stroke="#0f172a" stroke-width="1.8" marker-end="url(#ak)"/>
+<rect x="330.0" y="220.0" width="210.0" height="104.0" rx="6" fill="#ffedd5" stroke="#ea7a1f" stroke-width="2"/>
+<text x="435.0" y="252.2" font-size="13" text-anchor="middle" fill="#ea7a1f" font-weight="600">Simulation models</text>
+<text x="435.0" y="268.4" font-size="13" text-anchor="middle" fill="#ea7a1f" font-weight="400">discrete event simulation</text>
+<text x="435.0" y="284.7" font-size="13" text-anchor="middle" fill="#ea7a1f" font-weight="400">SIMSCRIPT, GPSS, SLAM, GASP</text>
+<text x="435.0" y="300.9" font-size="13" text-anchor="middle" fill="#ea7a1f" font-weight="400">detailed, accurate, slow</text>
+<rect x="560.0" y="220.0" width="210.0" height="104.0" rx="6" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+<text x="665.0" y="252.2" font-size="13" text-anchor="middle" fill="#7c3aed" font-weight="600">Analytical models</text>
+<text x="665.0" y="268.4" font-size="13" text-anchor="middle" fill="#7c3aed" font-weight="400">Markov chains, queues,</text>
+<text x="665.0" y="284.7" font-size="13" text-anchor="middle" fill="#7c3aed" font-weight="400">queueing networks, Petri nets</text>
+<text x="665.0" y="300.9" font-size="13" text-anchor="middle" fill="#7c3aed" font-weight="400">CAN-Q, MVAQ, MANUPLAN</text>
+<path d="M530.0 174.0 L450.0 218.0" fill="none" stroke="#0077b6" stroke-width="1.8" marker-end="url(#ab)"/>
+<path d="M600.0 174.0 L660.0 218.0" fill="none" stroke="#0077b6" stroke-width="1.8" marker-end="url(#ab)"/>
+<rect x="40.0" y="220.0" width="220.0" height="104.0" rx="6" fill="#ffffff" stroke="#059669" stroke-width="2"/>
+<text x="150.0" y="252.2" font-size="13" text-anchor="middle" fill="#059669" font-weight="600">Uses</text>
+<text x="150.0" y="268.4" font-size="13" text-anchor="middle" fill="#059669" font-weight="400">monitoring key variables</text>
+<text x="150.0" y="284.7" font-size="13" text-anchor="middle" fill="#059669" font-weight="400">diagnosing failures</text>
+<text x="150.0" y="300.9" font-size="13" text-anchor="middle" fill="#059669" font-weight="400">reconfiguring the line</text>
+<path d="M150.0 174.0 L150.0 218.0" fill="none" stroke="#059669" stroke-width="1.8" marker-end="url(#ag)"/>
+</g>
+</svg>

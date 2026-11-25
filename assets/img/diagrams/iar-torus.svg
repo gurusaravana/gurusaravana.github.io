@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="760" height="300" role="img" aria-label="The configuration space of a two-joint planar arm is a torus: the square of joint angles from 0 to 2 pi, with opposite edges glued together because 0 and 2 pi are the same angle.">
+<title>The configuration space of a two-joint planar arm is a torus: the square of joint angles from 0 to 2 pi, with opposite edges glued together because 0 and 2 pi are the same angle.</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker><marker id="av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#7c3aed"/></marker></defs>
+<rect width="760" height="300" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<rect x="70.0" y="40.0" width="220.0" height="220.0" rx="2" fill="#e0f2fe" stroke="#0077b6" stroke-width="2"/>
+<path d="M160.0 260.0 L200.0 260.0" fill="none" stroke="#ea7a1f" stroke-width="3" marker-end="url(#ao)"/>
+<path d="M160.0 40.0 L200.0 40.0" fill="none" stroke="#ea7a1f" stroke-width="3" marker-end="url(#ao)"/>
+<path d="M70.0 170.0 L70.0 130.0" fill="none" stroke="#059669" stroke-width="3" marker-end="url(#ag)"/>
+<path d="M70.0 160.0 L70.0 120.0" fill="none" stroke="#059669" stroke-width="3" marker-end="url(#ag)"/>
+<path d="M290.0 170.0 L290.0 130.0" fill="none" stroke="#059669" stroke-width="3" marker-end="url(#ag)"/>
+<path d="M290.0 160.0 L290.0 120.0" fill="none" stroke="#059669" stroke-width="3" marker-end="url(#ag)"/>
+<text x="180.0" y="286.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="600">θ₁ from 0 to 2π</text>
+<text x="44" y="150" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="600" transform="rotate(-90 44 150)">θ₂ from 0 to 2π</text>
+<circle cx="200.0" cy="120.0" r="5.0" fill="#db2777" stroke="#db2777" stroke-width="1"/>
+<text x="210.0" y="114.0" font-size="12" text-anchor="start" fill="#db2777" font-weight="600">one arm pose</text>
+<text x="180.0" y="30.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">flat torus: glue matching edges</text>
+<path d="M320.0 150.0 L400.0 150.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<ellipse cx="570" cy="150" rx="160" ry="80" fill="#e0f2fe" stroke="#0077b6" stroke-width="2"/>
+<path d="M500 145 Q570 185 640 145" fill="none" stroke="#0077b6" stroke-width="2"/>
+<path d="M515 155 Q570 125 625 155" fill="none" stroke="#0077b6" stroke-width="2"/>
+<ellipse cx="570" cy="150" rx="118" ry="50" fill="none" stroke="#ea7a1f" stroke-width="1.6" stroke-dasharray="6 4"/>
+<path d="M440 150 A 22 70 0 0 0 484 150" fill="none" stroke="#059669" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="570.0" y="262.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="700">torus T² = S¹ × S¹</text>
+</g>
+</svg>

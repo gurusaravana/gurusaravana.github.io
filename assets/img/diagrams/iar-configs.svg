@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 270" width="850" height="270" role="img" aria-label="Common robot body-and-arm configurations: Cartesian LOO with three sliding axes, cylindrical TLO with a column, polar TRL with a sliding arm on a tilting body, jointed arm TRR like a human arm, and SCARA VRO with vertical shoulder and elbow axes.">
+<title>Common robot body-and-arm configurations: Cartesian LOO with three sliding axes, cylindrical TLO with a column, polar TRL with a sliding arm on a tilting body, jointed arm TRR like a human arm, and SCARA VRO with vertical shoulder and elbow axes.</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker><marker id="av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#7c3aed"/></marker></defs>
+<rect width="850" height="270" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<rect x="25.0" y="70.0" width="120.0" height="120.0" rx="2" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4"/>
+<path d="M25.0 70.0 L145.0 70.0" fill="none" stroke="#0f172a" stroke-width="6"/>
+<rect x="75.0" y="62.0" width="26.0" height="16.0" rx="2" fill="#e0f2fe" stroke="#0077b6" stroke-width="2"/>
+<path d="M88.0 78.0 L88.0 150.0" fill="none" stroke="#0077b6" stroke-width="6"/>
+<path d="M25.0 70.0 L25.0 200.0" fill="none" stroke="#0f172a" stroke-width="4"/>
+<path d="M145.0 70.0 L145.0 200.0" fill="none" stroke="#0f172a" stroke-width="4"/>
+<path d="M45.0 44.0 L125.0 44.0" fill="none" stroke="#ea7a1f" stroke-width="1.8" marker-end="url(#ao)" marker-start="url(#ao)"/>
+<path d="M115.0 110.0 L115.0 160.0" fill="none" stroke="#ea7a1f" stroke-width="1.8" marker-end="url(#ao)" marker-start="url(#ao)"/>
+<path d="M15.0 200.0 L155.0 200.0" fill="none" stroke="#0f172a" stroke-width="2.5"/>
+<path d="M19.0 200.0 L11.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M31.0 200.0 L23.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M43.0 200.0 L35.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M55.0 200.0 L47.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M67.0 200.0 L59.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M79.0 200.0 L71.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M91.0 200.0 L83.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M103.0 200.0 L95.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M115.0 200.0 L107.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M127.0 200.0 L119.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M139.0 200.0 L131.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M151.0 200.0 L143.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<text x="85.0" y="236.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="700">Cartesian</text>
+<text x="85.0" y="254.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">LOO · x-y-z</text>
+<rect x="215.0" y="185.0" width="60.0" height="15.0" rx="2" fill="#f1f5f9" stroke="#0f172a" stroke-width="2"/>
+<path d="M245.0 185.0 L245.0 50.0" fill="none" stroke="#0f172a" stroke-width="10"/>
+<rect x="231.0" y="100.0" width="28.0" height="24.0" rx="2" fill="#e0f2fe" stroke="#0077b6" stroke-width="2"/>
+<path d="M245.0 112.0 L325.0 112.0" fill="none" stroke="#0077b6" stroke-width="8"/>
+<ellipse cx="245" cy="190" rx="38" ry="9" fill="none" stroke="#ea7a1f" stroke-width="1.6"/>
+<path d="M221.0 80.0 L221.0 140.0" fill="none" stroke="#ea7a1f" stroke-width="1.8" marker-end="url(#ao)" marker-start="url(#ao)"/>
+<path d="M275.0 96.0 L321.0 96.0" fill="none" stroke="#ea7a1f" stroke-width="1.8" marker-end="url(#ao)" marker-start="url(#ao)"/>
+<path d="M195.0 200.0 L295.0 200.0" fill="none" stroke="#0f172a" stroke-width="2.5"/>
+<path d="M199.0 200.0 L191.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M211.0 200.0 L203.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M223.0 200.0 L215.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M235.0 200.0 L227.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M247.0 200.0 L239.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M259.0 200.0 L251.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M271.0 200.0 L263.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M283.0 200.0 L275.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<text x="245.0" y="236.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="700">Cylindrical</text>
+<text x="245.0" y="254.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">TLO</text>
+<rect x="375.0" y="170.0" width="60.0" height="30.0" rx="2" fill="#f1f5f9" stroke="#0f172a" stroke-width="2"/>
+<circle cx="405.0" cy="150.0" r="16.0" fill="#ffedd5" stroke="#ea7a1f" stroke-width="2"/>
+<path d="M405.0 150.0 L495.0 100.0" fill="none" stroke="#0f172a" stroke-width="12"/>
+<path d="M445.0 128.0 L515.0 89.0" fill="none" stroke="#0077b6" stroke-width="7"/>
+<ellipse cx="405" cy="190" rx="38" ry="9" fill="none" stroke="#ea7a1f" stroke-width="1.6"/>
+<path d="M435.6 124.3 A40 40 0 0 0 411.9 110.6" fill="none" stroke="#ea7a1f" stroke-width="1.6" marker-end="url(#ao)"/>
+<path d="M355.0 200.0 L455.0 200.0" fill="none" stroke="#0f172a" stroke-width="2.5"/>
+<path d="M359.0 200.0 L351.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M371.0 200.0 L363.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M383.0 200.0 L375.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M395.0 200.0 L387.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M407.0 200.0 L399.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M419.0 200.0 L411.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M431.0 200.0 L423.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M443.0 200.0 L435.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<text x="405.0" y="236.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="700">Polar (spherical)</text>
+<text x="405.0" y="254.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">TRL</text>
+<rect x="537.0" y="175.0" width="56.0" height="25.0" rx="2" fill="#f1f5f9" stroke="#0f172a" stroke-width="2"/>
+<path d="M565.0 175.0 L565.0 150.0" fill="none" stroke="#0f172a" stroke-width="10"/>
+<circle cx="565.0" cy="145.0" r="10.0" fill="#ffedd5" stroke="#ea7a1f" stroke-width="2"/>
+<path d="M565.0 145.0 L605.0 70.0" fill="none" stroke="#0f172a" stroke-width="10"/>
+<circle cx="605.0" cy="70.0" r="9.0" fill="#ffedd5" stroke="#ea7a1f" stroke-width="2"/>
+<path d="M605.0 70.0 L665.0 110.0" fill="none" stroke="#0077b6" stroke-width="8"/>
+<ellipse cx="565" cy="190" rx="36" ry="9" fill="none" stroke="#ea7a1f" stroke-width="1.6"/>
+<path d="M515.0 200.0 L615.0 200.0" fill="none" stroke="#0f172a" stroke-width="2.5"/>
+<path d="M519.0 200.0 L511.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M531.0 200.0 L523.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M543.0 200.0 L535.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M555.0 200.0 L547.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M567.0 200.0 L559.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M579.0 200.0 L571.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M591.0 200.0 L583.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M603.0 200.0 L595.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<text x="565.0" y="236.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="700">Jointed arm</text>
+<text x="565.0" y="254.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">TRR · articulated</text>
+<rect x="713.0" y="70.0" width="44.0" height="130.0" rx="3" fill="#f1f5f9" stroke="#0f172a" stroke-width="2"/>
+<path d="M735.0 80.0 L790.0 80.0" fill="none" stroke="#0f172a" stroke-width="12"/>
+<circle cx="790.0" cy="80.0" r="8.0" fill="#ffedd5" stroke="#ea7a1f" stroke-width="2"/>
+<path d="M790.0 80.0 L820.0 80.0" fill="none" stroke="#0077b6" stroke-width="10"/>
+<path d="M820.0 70.0 L820.0 150.0" fill="none" stroke="#0077b6" stroke-width="5"/>
+<path d="M732.0 58.0 L732.0 98.0" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="3 3"/>
+<path d="M790.0 58.0 L790.0 98.0" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="3 3"/>
+<path d="M833.0 112.0 L833.0 150.0" fill="none" stroke="#ea7a1f" stroke-width="1.8" marker-end="url(#ao)" marker-start="url(#ao)"/>
+<path d="M685.0 200.0 L795.0 200.0" fill="none" stroke="#0f172a" stroke-width="2.5"/>
+<path d="M689.0 200.0 L681.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M701.0 200.0 L693.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M713.0 200.0 L705.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M725.0 200.0 L717.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M737.0 200.0 L729.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M749.0 200.0 L741.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M761.0 200.0 L753.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M773.0 200.0 L765.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M785.0 200.0 L777.0 209.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<text x="735.0" y="236.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="700">SCARA</text>
+<text x="735.0" y="254.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">VRO · vertical axes</text>
+</g>
+</svg>
