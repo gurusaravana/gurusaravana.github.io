@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 260" width="720" height="260" role="img" aria-label="State feedback with integral control: the error y(k) − r is accumulated in the integral state v(k) = v(k−1) + y(k) − r, which is fed back through ki, while the plant state is fed back through kp; u(k) = −kp x(k) − ki v(k).">
+<title>State feedback with integral control: the error y(k) − r is accumulated in the integral state v(k) = v(k−1) + y(k) − r, which is fed back through ki, while the plant state is fed back through kp; u(k) = −kp x(k) − ki v(k).</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker></defs>
+<rect width="720" height="260" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<text x="28.0" y="58.0" font-size="15" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">r</text>
+<path d="M14.0 70.0 L62.0 70.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<circle cx="75.0" cy="70.0" r="13.0" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="75.0" y="75.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="400">Σ</text>
+<text x="52.0" y="56.0" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">−</text>
+<text x="88.0" y="102.0" font-size="15" text-anchor="middle" fill="#db2777" font-weight="700">+</text>
+<path d="M88.0 70.0 L147.0 70.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<circle cx="160.0" cy="70.0" r="13.0" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="160.0" y="75.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="400">Σ</text>
+<path d="M173.0 70.0 L262.0 70.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="220.0" y="60.0" font-size="13" text-anchor="middle" fill="#64748b" font-weight="400" font-style="italic">v(k)</text>
+<circle cx="235.0" cy="70.0" r="4" fill="#0f172a"/>
+<path d="M235.0 70.0 L235.0 150.0 L212.0 150.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="161.0" y="133.0" width="50.0" height="34.0" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="186.0" y="155.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400">z⁻¹</text>
+<path d="M161.0 150.0 L160.0 150.0 L160.0 83.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="130.0" y="176.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400" font-style="italic">v(k−1)</text>
+<rect x="263.0" y="52.0" width="54.0" height="36.0" rx="4" fill="#fff" stroke="#ea7a1f" stroke-width="2"/>
+<text x="290.0" y="75.0" font-size="15" text-anchor="middle" fill="#ea7a1f" font-weight="400">kᵢ</text>
+<path d="M317.0 70.0 L387.0 70.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<circle cx="400.0" cy="70.0" r="13.0" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="400.0" y="75.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="400">Σ</text>
+<text x="376.0" y="56.0" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">−</text>
+<text x="412.0" y="102.0" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">−</text>
+<path d="M413.0 70.0 L490.0 70.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="452.0" y="60.0" font-size="13" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">u(k)</text>
+<rect x="490.0" y="45.0" width="92.0" height="50.0" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="536.0" y="67.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="400">plant</text>
+<text x="536.0" y="83.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="400">F, g, c</text>
+<path d="M582.0 70.0 L706.0 70.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="688.0" y="58.0" font-size="14" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">y(k)</text>
+<circle cx="640.0" cy="70.0" r="4" fill="#0f172a"/>
+<path d="M536.0 95.0 L536.0 150.0 L440.0 150.0" fill="none" stroke="#ea7a1f" stroke-width="2" marker-end="url(#ao)"/>
+<text x="546.0" y="125.0" font-size="13" text-anchor="start" fill="#64748b" font-weight="400" font-style="italic">x(k)</text>
+<rect x="385.0" y="133.0" width="54.0" height="34.0" rx="4" fill="#fff" stroke="#ea7a1f" stroke-width="2"/>
+<text x="412.0" y="155.0" font-size="15" text-anchor="middle" fill="#ea7a1f" font-weight="400">kₚ</text>
+<path d="M385.0 150.0 L360.0 150.0 L360.0 110.0 L400.0 110.0 L400.0 83.0" fill="none" stroke="#ea7a1f" stroke-width="2" marker-end="url(#ao)"/>
+<path d="M640.0 70.0 L640.0 220.0 L75.0 220.0 L75.0 83.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="360.0" y="250.0" font-size="13" text-anchor="middle" fill="#64748b" font-weight="400" font-style="italic">v(k) = v(k−1) + y(k) − r,    u(k) = −kₚ x(k) − kᵢ v(k)</text>
+</g>
+</svg>

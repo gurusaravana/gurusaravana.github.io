@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 7: Controllability, pole placement and observer design · Digital Control Systems</title>
+<meta name="description" content="Controllability, pole placement and observer design">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 7: Controllability, pole placement and observer design  (Digital Control Systems, EACT 534, Chapter 5 and Chapter 5 tutorials)
+  Edit the notes between the NOTES START and NOTES END markers below.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Figures live in assets/img/diagrams/ (names start with dcs-) and are shown with a figure of class "diagram".
+  To add an exercise, copy one list item inside the list of class "exlist".
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
+  <nav class="links"><a href="../digital-control-systems.html">Course home</a><a href="../digital-control-systems.html#lessons">Lessons</a><a href="../digital-control-systems.html#figures">Figures</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../digital-control-systems.html">← Digital Control Systems</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 7 of 7 · Chapter 5 and Chapter 5 tutorials</div>
+    <h1>Controllability, pole placement and observer design</h1>
+    <p>Digital Control Systems · EACT 534 · Postgraduate course</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">EACT 534 · Digital Control Systems</div><ol><li><a href="01-discrete-time-and-z-transform.html"><span class="n">1</span>Discrete-time systems and the z-transform</a></li><li><a href="02-sampling-and-pulse-transfer.html"><span class="n">2</span>Sampling, ADC and DAC models, and the pulse transfer function</a></li><li><a href="03-pulse-transfer-and-discretization.html"><span class="n">3</span>Pulse transfer functions and discretization</a></li><li><a href="04-stability.html"><span class="n">4</span>Stability of discrete-time systems</a></li><li><a href="05-state-space-analysis.html"><span class="n">5</span>State-space analysis of discrete-time systems</a></li><li><a href="06-state-space-preliminaries.html"><span class="n">6</span>State-space preliminaries: canonical forms, controllability and observability</a></li><li class="on"><a href="07-pole-placement-and-observers.html"><span class="n">7</span>Controllability, pole placement and observer design</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Test a discrete state model for controllability and observability, and explain how sampling can destroy them</li><li>Place all closed-loop poles with state feedback by matching coefficients and by Ackermann's formula</li><li>Design full-order (prediction) and reduced-order observers and combine them with the control law</li><li>Add integral action for zero steady-state error</li><li>Design deadbeat control that settles in $n$ samples</li></ul></div>
+    <nav class="figstrip" aria-label="Figures in this lesson"><a href="#fig-satellite"><img src="../../assets/img/diagrams/dcs-satellite.svg" alt="" loading="lazy"><span>Satellite loop</span></a><a href="#fig-sat-step"><img src="../../assets/img/diagrams/dcs-sat-step.svg" alt="" loading="lazy"><span>Satellite responses</span></a><a href="#fig-observer"><img src="../../assets/img/diagrams/dcs-observer.svg" alt="" loading="lazy"><span>Prediction observer</span></a><a href="#fig-combined"><img src="../../assets/img/diagrams/dcs-combined.svg" alt="" loading="lazy"><span>Observer-based control</span></a><a href="#fig-integral"><img src="../../assets/img/diagrams/dcs-integral.svg" alt="" loading="lazy"><span>Integral control</span></a></nav>
+    <section class="lsec"><h2>Notes</h2>
+    <!-- NOTES START -->
+    <article class="notes">
+<p>This lesson turns the state model into a design tool. It starts with the questions a designer must ask first (is the system stable, can the input move every state, can the output reveal every state), then places the closed-loop poles with state feedback, builds observers for states that cannot be measured, and adds integral action and deadbeat response. The worked examples come from the Chapter 5 tutorial sheet, mostly the satellite attitude problem.</p>
+
+<h3 id="stability">Stability from the state model</h3>
+<p>For $x(k+1) = Fx(k) + gu(k)$, $y(k) = cx(k)$, the transfer function is</p>
+<p class="eq">$$G(z) = c(zI - F)^{-1}g = c\,\frac{\operatorname{adj}(zI - F)}{\det(zI - F)}\,g$$</p>
+<p>so the poles of $G(z)$ are roots of $\det(zI - F) = 0$, the eigenvalues of $F$. The system is asymptotically stable when every eigenvalue of $F$ lies inside the unit circle (Lesson 4).</p>
+
+<h3 id="ctrb">Controllability</h3>
+<p>A system is <b>completely state controllable</b> if some input sequence moves it from any initial state to any desired state in a finite number of samples. If a state is unaffected by the input, no control signal can steer it.</p>
+<p>With the input held constant over each sampling period (ZOH), the solution from Lesson 5 is</p>
+<p class="eq">$$x(n) = F^nx(0) + F^{n-1}gu(0) + F^{n-2}gu(1) + \dots + gu(n-1)$$</p>
+<p class="eq">$$x(n) - F^nx(0) = \begin{bmatrix} g &amp; Fg &amp; \cdots &amp; F^{n-1}g \end{bmatrix}\begin{bmatrix} u(n-1) \\ u(n-2) \\ \vdots \\ u(0) \end{bmatrix}$$</p>
+<p>For a single input each column $F^ig$ is $n \times 1$, so the bracketed matrix is $n \times n$. If it is invertible, the input sequence that reaches any target $x(n)$ in $n$ steps is found by inverting it. Hence</p>
+<p class="eq">$$W_C = \begin{bmatrix} g &amp; Fg &amp; F^2g &amp; \cdots &amp; F^{n-1}g \end{bmatrix}, \qquad \text{controllable} \iff \operatorname{rank}W_C = n \iff \det W_C \ne 0$$</p>
+<p class="warn">The slides say $[g\ \ Fg\ \cdots\ F^{k-1}g]$ is "$k \times k$" and needs "rank $k$". Its size is fixed by the order of the system: it is $n \times n$ and needs rank $n$. The number of steps $k$ can be larger, but $n$ steps are always enough.</p>
+<p><b>Example 1.</b> $G(z) = \dfrac{z + 2}{z^2 + z + 0.16}$. In the first companion form $F = \begin{bmatrix} 0 &amp; 1 \\ -0.16 &amp; -1 \end{bmatrix}$, $g = \begin{bmatrix} 0 \\ 1 \end{bmatrix}$, $c = [2\ \ 1]$. Then $Fg = \begin{bmatrix} 1 \\ -1 \end{bmatrix}$ and</p>
+<p class="eq">$$W_C = \begin{bmatrix} 0 &amp; 1 \\ 1 &amp; -1 \end{bmatrix}, \qquad \det W_C = -1 \ne 0$$</p>
+<p>so the system is controllable (as every first companion realization is).</p>
+
+<h3 id="obsv">Observability</h3>
+<p>A system is <b>completely observable</b> if the initial state $x(0)$ can be found from the input and output over a finite number of samples. State feedback needs every state, but sensors are often missing or too expensive, so unmeasured states must be estimated. That is only possible if the system is observable.</p>
+<p>Write $y(k) = cx(k)$ for $k = 0, 1, \dots, n-1$:</p>
+<p class="eq">$$\begin{bmatrix} y(0) \\ y(1) \\ \vdots \\ y(n-1) \end{bmatrix} = \begin{bmatrix} c \\ cF \\ \vdots \\ cF^{n-1} \end{bmatrix}x(0) + \begin{bmatrix} 0 &amp; 0 &amp; \cdots &amp; 0 \\ 0 &amp; 0 &amp; \cdots &amp; cg \\ \vdots &amp; &amp; &amp; \vdots \\ 0 &amp; cg &amp; \cdots &amp; cF^{n-2}g \end{bmatrix}\begin{bmatrix} u(n-1) \\ \vdots \\ u(0) \end{bmatrix}$$</p>
+<p>The input terms are known, so $x(0)$ can be solved for if the first matrix is invertible:</p>
+<p class="eq">$$W_O = \begin{bmatrix} c \\ cF \\ \vdots \\ cF^{n-1} \end{bmatrix}, \qquad \text{observable} \iff \operatorname{rank}W_O = n \iff \det W_O \ne 0$$</p>
+<p><b>Example 2.</b> $F = \begin{bmatrix} 1.1 &amp; -0.3 \\ 1 &amp; 0 \end{bmatrix}$, $g = \begin{bmatrix} 1 \\ -0.5 \end{bmatrix}$, $c = [1\ \ -0.5]$. $cF = [1.1 - 0.5\ \ \ -0.3] = [0.6\ \ -0.3]$, so</p>
+<p class="eq">$$W_O = \begin{bmatrix} 1 &amp; -0.5 \\ 0.6 &amp; -0.3 \end{bmatrix}, \qquad \det W_O = -0.3 + 0.3 = 0$$</p>
+<p>The system is not observable: the second row is $0.6$ times the first, so the output never separates the two states. (The eigenvalues of $F$ are $0.5$ and $0.6$, and $c$ is a left eigenvector for $0.6$, so the mode $0.5^k$ is invisible.)</p>
+
+<h4>Sampling can destroy controllability and observability</h4>
+<p class="key">A continuous plant that is controllable and observable can lose both properties when it is sampled. For an undamped oscillator $\ddot y + \omega^2y = u$, the ZOH model has $F = \begin{bmatrix} \cos\omega T &amp; \sin(\omega T)/\omega \\ -\omega\sin\omega T &amp; \cos\omega T \end{bmatrix}$. If $\omega T = \pi$ (two samples per period), $F = -I$, so $Fg = -g$ and $W_C$ has rank 1. A pole-zero cancellation appears in the pulse transfer function. Choose $T$ so that $\omega T$ is not a multiple of $\pi$ for any lightly damped mode.</p>
+
+<h3 id="pole-placement">Pole placement by state feedback</h3>
+<p>Root locus lets the designer move the two dominant closed-loop poles. <b>Pole placement</b> sets <i>all</i> $n$ closed-loop poles, at the cost of feeding back every state. When a state cannot be measured, an observer supplies an estimate (the second half of this lesson). The design is done in two phases: assume all states are available and design the control law, then design the observer and use the estimates in its place.</p>
+<p>With the control law</p>
+<p class="eq">$$u(k) = -kx(k) = -\begin{bmatrix} k_1 &amp; k_2 &amp; \cdots &amp; k_n \end{bmatrix}x(k)$$</p>
+<p>the closed loop is $x(k+1) = (F - gk)x(k)$ with characteristic equation $|zI - (F - gk)| = 0$. Choose the desired poles $\lambda_1, \dots, \lambda_n$ inside the unit circle, form</p>
+<p class="eq">$$\alpha_c(z) = (z - \lambda_1)(z - \lambda_2)\cdots(z - \lambda_n) = z^n + a_1z^{n-1} + \dots + a_n$$</p>
+<p>and match coefficients: $|zI - F + gk| = \alpha_c(z)$. The poles can be placed anywhere if and only if $(F, g)$ is controllable.</p>
+<p class="warn">One slide writes the matching condition as $\det(sI - (F - gk)) = \prod(s - \lambda_i)$. For the discrete model the variable is $z$, and the $\lambda_i$ are $z$-plane poles: inside the unit circle, found from $s$-plane specifications with $z = e^{sT}$.</p>
+<h4>Ackermann's formula</h4>
+<p>For a controllable single-input system, the gain can be written in one line:</p>
+<p class="eq">$$k = \begin{bmatrix} 0 &amp; 0 &amp; \cdots &amp; 1 \end{bmatrix}W_C^{-1}\,\alpha_c(F), \qquad \alpha_c(F) = F^n + a_1F^{n-1} + \dots + a_{n-1}F + a_nI$$</p>
+
+<h3 id="satellite">Example 3: satellite attitude control</h3>
+<p>A satellite's antennas must point at the Earth and its solar panels at the Sun. Taking one axis at a time, reaction jets apply a torque $T_c = Fd$ (force times distance from the mass centre) and $J\ddot\theta = T_c$. With $u = T_c/J$ the plant is a double integrator, $\theta(s)/U(s) = 1/s^2$:</p>
+<p class="eq">$$\dot x = \begin{bmatrix} 0 &amp; 1 \\ 0 &amp; 0 \end{bmatrix}x + \begin{bmatrix} 0 \\ 1 \end{bmatrix}u, \qquad x_1 = \theta, \quad x_2 = \dot\theta = \omega$$</p>
+<figure class="diagram" id="fig-satellite"><img src="../../assets/img/diagrams/dcs-satellite.svg" alt="Satellite attitude loop with ZOH, two integrators and state feedback gains k1 and k2" loading="lazy"><figcaption>Satellite attitude loop. Both states are sampled and fed back; the ZOH holds $u(k)$ over each period.</figcaption></figure>
+<p>With a ZOH, $F = e^{AT} = \begin{bmatrix} 1 &amp; T \\ 0 &amp; 1 \end{bmatrix}$ and $g = \displaystyle\int_0^T e^{A\tau}b\,d\tau = \begin{bmatrix} T^2/2 \\ T \end{bmatrix}$. For $T = 0.1$ s, $F = \begin{bmatrix} 1 &amp; 0.1 \\ 0 &amp; 1 \end{bmatrix}$, $g = \begin{bmatrix} 0.005 \\ 0.1 \end{bmatrix}$. The open loop has a double pole at $z = 1$: it is not stable.</p>
+<p>The closed-loop characteristic equation is</p>
+<p class="eq">$$|zI - (F - gk)| = z^2 + \left(Tk_2 + \frac{T^2}{2}k_1 - 2\right)z + \left(\frac{T^2}{2}k_1 - Tk_2 + 1\right) = 0$$</p>
+<p>The specification $\zeta = 0.5$, $\omega_n = 3.6$ rad/s gives $s = -1.8 \pm j3.12$, and $z = e^{sT} = e^{-0.18}e^{\pm j0.312} = 0.795 \pm j0.256$, so $\alpha_c(z) = z^2 - 1.6z + 0.70$. Matching coefficients with $T = 0.1$:</p>
+<p class="eq">$$0.005k_1 + 0.1k_2 = 0.4, \qquad 0.005k_1 - 0.1k_2 = -0.3 \quad\Rightarrow\quad k_1 = 10, \quad k_2 = 3.5$$</p>
+<p class="warn">The tutorial sheet gives the desired poles as $0.875 \pm j0.273$. Those do not produce $z^2 - 1.6z + 0.70$ (their product is $0.84$). The specification $\zeta = 0.5$, $\omega_n = 3.6$ gives $0.795 \pm j0.256$, which does. The gains $k = [10\ \ 3.5]$ are right.</p>
+<figure class="diagram" id="fig-sat-step"><img src="../../assets/img/diagrams/dcs-sat-step.svg" alt="Step responses of the satellite angle for pole placement and deadbeat gains" loading="lazy"><figcaption>Satellite angle for a unit step command, using the shifted state $x_1 - \theta_r$ (see the deadbeat section). Dots mark the samples; the curve between them is the continuous motion under the held input.</figcaption></figure>
+
+<h3 id="observer">State observers</h3>
+<p>An <b>open-loop estimator</b> runs a copy of the model, $\hat x(k+1) = F\hat x(k) + gu(k)$, beside the plant. Its error $\tilde x = x - \hat x$ obeys $\tilde x(k+1) = F\tilde x(k)$: it never corrects a wrong initial guess faster than the plant itself, and if $F$ is unstable it diverges. The fix is to feed back the difference between the measured and predicted outputs.</p>
+<figure class="diagram" id="fig-observer"><img src="../../assets/img/diagrams/dcs-observer.svg" alt="Prediction observer block diagram with model F, g, c and correction gain m" loading="lazy"><figcaption>Prediction observer: a model of the plant corrected by $m$ times the output error.</figcaption></figure>
+<p>The <b>prediction observer</b> is</p>
+<p class="eq">$$\hat x(k+1) = F\hat x(k) + gu(k) + m\left[y(k) - c\hat x(k)\right]$$</p>
+<p>It is called a prediction observer because $\hat x(k+1)$ is computed from measurements up to $y(k)$, one step ahead. Subtracting it from the plant equation gives the error dynamics</p>
+<p class="eq">$$\tilde x(k+1) = (F - mc)\,\tilde x(k)$$</p>
+<p>Choose the observer poles, form $\alpha_e(z)$, and pick $m$ so that $|zI - F + mc| = \alpha_e(z)$. This is possible for any $\alpha_e$ if and only if $(F, c)$ is observable. By duality with Ackermann's formula,</p>
+<p class="eq">$$m = \alpha_e(F)\,W_O^{-1}\begin{bmatrix} 0 \\ \vdots \\ 0 \\ 1 \end{bmatrix}$$</p>
+<p>A common rule is to make the observer poles two to six times faster than the controller poles, so the estimate settles before it matters to the loop, but not so fast that sensor noise is amplified.</p>
+<p><b>Example 4.</b> A full-order observer for the satellite with $c = [1\ \ 0]$ (angle measured) and both observer poles at $z = 0.5$: $\alpha_e(F) = F^2 - F + 0.25I = \begin{bmatrix} 0.25 &amp; 0.1 \\ 0 &amp; 0.25 \end{bmatrix}$, $W_O = \begin{bmatrix} 1 &amp; 0 \\ 1 &amp; 0.1 \end{bmatrix}$, $W_O^{-1}\begin{bmatrix} 0 \\ 1 \end{bmatrix} = \begin{bmatrix} 0 \\ 10 \end{bmatrix}$, so $m = \begin{bmatrix} 1 \\ 2.5 \end{bmatrix}$. Check: $F - mc = \begin{bmatrix} 0 &amp; 0.1 \\ -2.5 &amp; 1 \end{bmatrix}$ has trace 1 and determinant 0.25, so $|zI - F + mc| = z^2 - z + 0.25 = (z - 0.5)^2$.</p>
+
+<h4>Combining the observer with the control law</h4>
+<figure class="diagram" id="fig-combined"><img src="../../assets/img/diagrams/dcs-combined.svg" alt="Plant with observer and control law forming a compensator" loading="lazy"><figcaption>Observer-based control. The observer and the control law form one dynamic compensator from $y$ to $u$.</figcaption></figure>
+<p>Use the estimate in the control law, $u(k) = -k\hat x(k)$. The compensator is</p>
+<p class="eq">$$\hat x(k+1) = (F - gk - mc)\,\hat x(k) + m\,y(k), \qquad u(k) = -k\,\hat x(k)$$</p>
+<p class="key"><b>Separation principle.</b> In the coordinates $(x, \tilde x)$ the closed loop is block triangular, so its characteristic polynomial is $\alpha_c(z)\,\alpha_e(z)$. The control law and the observer can be designed separately: the controller poles stay where they were placed, and the observer adds its own poles.</p>
+
+<h3 id="reduced">Reduced-order observer</h3>
+<p>If some states are measured directly, there is no need to estimate them. Partition the state into the measured part $x_1$ ($y = x_1$) and the part to estimate $x_e$:</p>
+<p class="eq">$$\begin{bmatrix} x_1(k+1) \\ x_e(k+1) \end{bmatrix} = \begin{bmatrix} f_{11} &amp; f_{1e} \\ f_{e1} &amp; F_{ee} \end{bmatrix}\begin{bmatrix} x_1(k) \\ x_e(k) \end{bmatrix} + \begin{bmatrix} g_1 \\ g_e \end{bmatrix}u(k), \qquad y(k) = \begin{bmatrix} 1 &amp; 0 \end{bmatrix}x(k)$$</p>
+<p>The unmeasured states obey $x_e(k+1) = F_{ee}x_e(k) + f_{e1}x_1(k) + g_eu(k)$, where the last two terms are known. The first row gives a "measurement" of $x_e$:</p>
+<p class="eq">$$y(k+1) - f_{11}y(k) - g_1u(k) = f_{1e}x_e(k)$$</p>
+<p>The reduced-order observer runs the $x_e$ model and corrects it with this measurement:</p>
+<p class="eq">$$\hat x_e(k+1) = F_{ee}\hat x_e(k) + f_{e1}y(k) + g_eu(k) + m\left[y(k+1) - f_{11}y(k) - g_1u(k) - f_{1e}\hat x_e(k)\right]$$</p>
+<p class="eq">$$\tilde x_e(k+1) = (F_{ee} - mf_{1e})\,\tilde x_e(k)$$</p>
+<p>Choose $m$ to place the eigenvalues of $F_{ee} - mf_{1e}$. The observer has order $n - 1$ for one measured state, and it uses the current measurement $y(k+1)$.</p>
+<p><b>Example 5.</b> Satellite with the angle measured and the velocity estimated, $T = 0.1$ s. The partitions are $f_{11} = 1$, $f_{1e} = T$, $f_{e1} = 0$, $F_{ee} = 1$, $g_1 = T^2/2$, $g_e = T$:</p>
+<p class="eq">$$\hat x_2(k+1) = \hat x_2(k) + Tu(k) + m\left[y(k+1) - y(k) - \frac{T^2}{2}u(k) - T\hat x_2(k)\right]$$</p>
+<p>The error pole is $z = 1 - mT$. The controller poles have radius $0.835$; four times faster means radius $0.835^4 \approx 0.49$, so put the observer pole at $z = 0.5$: $1 - 0.1m = 0.5$, $m = 5$. Then</p>
+<p class="eq">$$\hat x_2(k+1) = 0.5\hat x_2(k) + 5\left[y(k+1) - y(k)\right] + 0.075u(k)$$</p>
+<p>With the control law from Example 3, $u(k) = -10y(k) - 3.5\hat x_2(k)$, the observer becomes</p>
+<p class="eq">$$\hat x_2(k+1) = 0.2375\hat x_2(k) + 5y(k+1) - 5.75y(k)$$</p>
+<p>Z-transforming both equations, $\hat X_2(z) = \dfrac{5z - 5.75}{z - 0.2375}Y(z)$ and</p>
+<p class="eq">$$\frac{U(z)}{Y(z)} = -10 - 3.5\,\frac{5z - 5.75}{z - 0.2375} = -\frac{27.5z - 22.5}{z - 0.2375} = -27.5\,\frac{z - 0.818}{z - 0.2375}$$</p>
+<p>A zero at $0.818$ and a pole at $0.2375$: a discrete lead compensator, the classical answer for a $1/s^2$ plant.</p>
+<p class="warn">The tutorial sheet gives this compensator as $\dfrac{U(z)}{Y(z)} = \dfrac{27.5z}{z - 0.2375}$, which drops the $-10y(k)$ term (the zero at $0.818$) and the minus sign of negative feedback. In its Ex-3 version, the last line also swaps $\hat x_2$ and $y$ ("$0.2375y(k) + \dots - 5.75\hat x_2(k)$"); the correct form is the one above.</p>
+
+<h3 id="integral">State feedback with integral control</h3>
+<p>State feedback alone gives a steady-state error to a constant reference when the plant has no integrator, or when there is a constant disturbance. Add an integral state that sums the error:</p>
+<p class="eq">$$v(k) = v(k-1) + y(k) - r \quad\Rightarrow\quad v(k+1) = v(k) + c\left[Fx(k) + gu(k)\right] - r$$</p>
+<figure class="diagram" id="fig-integral"><img src="../../assets/img/diagrams/dcs-integral.svg" alt="State feedback with integral control block diagram" loading="lazy"><figcaption>State feedback with integral control: $u(k) = -k_px(k) - k_iv(k)$.</figcaption></figure>
+<p>The augmented system is</p>
+<p class="eq">$$\begin{bmatrix} x(k+1) \\ v(k+1) \end{bmatrix} = \begin{bmatrix} F &amp; 0 \\ cF &amp; 1 \end{bmatrix}\begin{bmatrix} x(k) \\ v(k) \end{bmatrix} + \begin{bmatrix} g \\ cg \end{bmatrix}u(k) + \begin{bmatrix} 0 \\ -1 \end{bmatrix}r$$</p>
+<p>If the loop is stable and $r$ is constant, the states settle to constants $x_s$, $v_s$, $u_s$, and then $v(k+1) = v(k)$ forces $y = r$: zero steady-state error. Subtracting the steady-state equations gives a standard regulator in the deviations $\tilde x = [x - x_s;\ v - v_s]$, $\tilde u = u - u_s$:</p>
+<p class="eq">$$\tilde x(k+1) = \tilde F\tilde x(k) + \tilde g\tilde u(k), \qquad \tilde F = \begin{bmatrix} F &amp; 0 \\ cF &amp; 1 \end{bmatrix}, \quad \tilde g = \begin{bmatrix} g \\ cg \end{bmatrix}$$</p>
+<p>Place the poles of $\tilde F - \tilde g\tilde k$ as before and split $\tilde k = [k_p\ \ k_i]$.</p>
+<p><b>Example 6.</b> $G(s) = \dfrac{1}{s + 3}$, $T = 0.1$ s. With a ZOH, $G(z) = \dfrac{(1 - e^{-0.3})/3}{z - e^{-0.3}} = \dfrac{0.0864}{z - 0.741}$, so $y(k+1) = 0.741y(k) + 0.0864u(k)$ (here the state is $y$ itself). The specification $\zeta = 0.5$, $\omega_n = 5$ rad/s gives</p>
+<p class="eq">$$z = e^{-\zeta\omega_nT}e^{\pm j\omega_nT\sqrt{1 - \zeta^2}} = e^{-0.25}e^{\pm j0.433} = 0.7788\angle \pm 24.8^\circ = 0.707 \pm j0.327, \qquad \alpha_c(z) = z^2 - 1.4136z + 0.6065$$</p>
+<p class="eq">$$\tilde F = \begin{bmatrix} 0.741 &amp; 0 \\ 0.741 &amp; 1 \end{bmatrix}, \quad \tilde g = \begin{bmatrix} 0.0864 \\ 0.0864 \end{bmatrix}, \quad W_C = \begin{bmatrix} 0.0864 &amp; 0.0640 \\ 0.0864 &amp; 0.1504 \end{bmatrix}, \quad \alpha_c(\tilde F) = \begin{bmatrix} 0.108 &amp; 0 \\ 0.2425 &amp; 0.1929 \end{bmatrix}$$</p>
+<p>Ackermann's formula gives $\tilde k = [0\ \ 1]W_C^{-1}\alpha_c(\tilde F) = [1.55\ \ 2.23]$, so</p>
+<p class="eq">$$u(k) = -1.55\,y(k) - 2.23\,v(k)$$</p>
+<p>Check: $\tilde F - \tilde g\tilde k$ has eigenvalues $0.707 \pm j0.327$.</p>
+<p class="warn">Three small slips on the tutorial sheet: the integral state is written $v(k+1) = v(k) + y(k) - r$, but the augmented matrices it then uses belong to $v(k+1) = v(k) + y(k+1) - r$ (the chapter's definition); the radius is written $e^{-0.5}$ where $e^{-0.25} = 0.7788$ is meant, and the angle uses $0.75$ in place of $\sqrt{0.75}$ (the numbers that follow are right); and the gains $[1.564\ \ 2.243]$ should be about $[1.55\ \ 2.23]$, which places the poles exactly.</p>
+
+<h3 id="deadbeat">Deadbeat control</h3>
+<p>A discrete system can do something no continuous one can: reach the target exactly in a finite number of steps. Put all $n$ closed-loop poles at the origin,</p>
+<p class="eq">$$\alpha_c(z) = z^n \quad (a_1 = a_2 = \dots = a_n = 0)$$</p>
+<p>By the Cayley-Hamilton theorem $(F - gk)^n = 0$, so $x(n) = (F - gk)^nx(0) = 0$: any initial state is driven to the origin in at most $n$ samples. Ackermann's formula becomes $k = [0\ \cdots\ 0\ \ 1]\,W_C^{-1}F^n$. A <b>deadbeat observer</b> likewise puts all eigenvalues of $F - mc$ at $z = 0$, so the estimation error vanishes in $n$ steps.</p>
+<p><b>Example 7.</b> Deadbeat control of the satellite to a step command $\theta_r$. The target state is $x_s = [\theta_r\ \ 0]^T$, and because the plant integrates, the steady input is $u_s = 0$. With the shifted state $\tilde x_1 = x_1 - \theta_r$, $\tilde x_2 = x_2$ the model is unchanged, $\tilde x(k+1) = F\tilde x(k) + gu(k)$. Then</p>
+<p class="eq">$$F^2 = \begin{bmatrix} 1 &amp; 2T \\ 0 &amp; 1 \end{bmatrix}, \quad W_C = \begin{bmatrix} T^2/2 &amp; 3T^2/2 \\ T &amp; T \end{bmatrix}, \quad \det W_C = -T^3, \quad W_C^{-1} = \frac{1}{T^3}\begin{bmatrix} -T &amp; 3T^2/2 \\ T &amp; -T^2/2 \end{bmatrix}$$</p>
+<p class="eq">$$k = \begin{bmatrix} 0 &amp; 1 \end{bmatrix}W_C^{-1}F^2 = \begin{bmatrix} \dfrac{1}{T^2} &amp; \dfrac{3}{2T} \end{bmatrix} = \begin{bmatrix} 100 &amp; 15 \end{bmatrix} \text{ for } T = 0.1 \text{ s}$$</p>
+<p class="eq">$$u(k) = -100\left(x_1(k) - \theta_r\right) - 15x_2(k)$$</p>
+<p>The figure above shows the angle reaching $\theta_r$ exactly at the second sample and staying there.</p>
+<p class="warn">The tutorial sheet writes $Fg = [3T^2/2\ \ \ T + T^2]^T$ and carries $T + T^2$ into $W_C$ and its determinant. With $F = \begin{bmatrix} 1 &amp; T \\ 0 &amp; 1 \end{bmatrix}$ the second entry is just $T$, so $\det W_C = -T^3$. The final gain $k = [100\ \ 15]$ printed on the sheet is right.</p>
+<p class="key">Deadbeat control is the fastest possible response, but it is aggressive: the gains grow as $1/T^2$, so a short sampling period demands large inputs that may saturate the actuator, and the response between samples can overshoot. In practice the sampling period is chosen with the actuator limits in mind.</p>
+</article>
+    <!-- NOTES END -->
+    </section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the div below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">For $F = \begin{bmatrix} 1 &amp; 1 \\ -0.25 &amp; 0 \end{bmatrix}$, $g = \begin{bmatrix} 1 \\ -0.5 \end{bmatrix}$, $c = [1\ \ 1]$, test controllability and observability.</div><details><summary>Show solution</summary><div class="sol">$Fg = \begin{bmatrix} 0.5 \\ -0.25 \end{bmatrix}$, $W_C = \begin{bmatrix} 1 &amp; 0.5 \\ -0.5 &amp; -0.25 \end{bmatrix}$, $\det W_C = -0.25 + 0.25 = 0$: <b>not controllable</b> ($g$ is an eigenvector of $F$ for the double eigenvalue $0.5$).<br>$cF = [0.75\ \ 1]$, $W_O = \begin{bmatrix} 1 &amp; 1 \\ 0.75 &amp; 1 \end{bmatrix}$, $\det W_O = 0.25 \ne 0$: <b>observable</b>.</div></details></li>
+<li><div class="q">(Drone attitude.) For the double integrator with $T = 0.1$ s, $F = \begin{bmatrix} 1 &amp; 0.1 \\ 0 &amp; 1 \end{bmatrix}$, $g = \begin{bmatrix} 0.005 \\ 0.1 \end{bmatrix}$, find $k$ that places the closed-loop poles at $z = 0.85 \pm j0.15$.</div><details><summary>Show solution</summary><div class="sol">$\alpha_c(z) = z^2 - 1.7z + 0.745$. Matching with the characteristic equation of Example 3: $0.005k_1 + 0.1k_2 = 0.3$ and $0.005k_1 - 0.1k_2 = -0.255$. Adding, $0.01k_1 = 0.045$, so $k_1 = 4.5$ and $k_2 = 2.775$.<br>Note: these poles have radius $0.863$, so $\zeta\omega_n = -\ln(0.863)/0.1 \approx 1.47$ s⁻¹ and the settling time is about $4/1.47 \approx 2.7$ s, not the 0.5 s quoted in the tutorial's problem statement.</div></details></li>
+<li><div class="q">(Robot arm, deadbeat.) With $T = 0.05$ s, $F = \begin{bmatrix} 1 &amp; 0.05 \\ 0 &amp; 1 \end{bmatrix}$, $g = \begin{bmatrix} 0.00125 \\ 0.05 \end{bmatrix}$, check controllability and find the deadbeat gain.</div><details><summary>Show solution</summary><div class="sol">$\det W_C = -T^3 = -1.25\times10^{-4} \ne 0$, so the system is controllable. From Example 7, $k = [1/T^2\ \ \ 3/(2T)] = [400\ \ 30]$. The arm reaches the commanded position in two samples (0.1 s), but the gain is four times larger than at $T = 0.1$ s, so check the actuator limits.</div></details></li>
+<li><div class="q">(UAV velocity.) For the double integrator with $y = x_1$ and sampling period $T$, design a reduced-order observer for $x_2$ with its pole at $z = 0.6$.</div><details><summary>Show solution</summary><div class="sol">As in Example 5 the error pole is $1 - mT$, so $m = 0.4/T$ ($m = 4$ for $T = 0.1$ s). The observer is $\hat x_2(k+1) = \hat x_2(k) + Tu(k) + m\left[y(k+1) - y(k) - \tfrac{T^2}{2}u(k) - T\hat x_2(k)\right]$; for $T = 0.1$: $\hat x_2(k+1) = 0.6\hat x_2(k) + 4[y(k+1) - y(k)] + 0.08u(k)$.</div></details></li>
+<li><div class="q">(Greenhouse temperature.) $G(s) = \dfrac{1}{s + 2}$, $T = 0.1$ s. Discretize with a ZOH, augment with an integral state, and place the poles at $z = 0.7 \pm j0.2$.</div><details><summary>Show solution</summary><div class="sol">$G(z) = \dfrac{(1 - e^{-0.2})/2}{z - e^{-0.2}} = \dfrac{0.0906}{z - 0.8187}$. (The tutorial sheet prints $0.095$ for the numerator.) $\tilde F = \begin{bmatrix} 0.8187 &amp; 0 \\ 0.8187 &amp; 1 \end{bmatrix}$, $\tilde g = \begin{bmatrix} 0.0906 \\ 0.0906 \end{bmatrix}$, $\alpha_c(z) = z^2 - 1.4z + 0.53$. Ackermann's formula gives $\tilde k \approx [3.19\ \ 1.43]$, so $u(k) = -3.19y(k) - 1.43v(k)$. (With the sheet's $0.095$ the gains would be $[3.04\ \ 1.37]$.)</div></details></li>
+<li><div class="q">Example 4's observer (poles at 0.5, 0.5) is used with Example 3's control law. What are the poles of the complete closed loop?</div><details><summary>Show solution</summary><div class="sol">By the separation principle they are the controller poles and the observer poles together: $0.795 \pm j0.256$ and $0.5$ (twice). The characteristic polynomial is $(z^2 - 1.6z + 0.70)(z - 0.5)^2$.</div></details></li>
+<li><div class="q">Why does the satellite need the shifted state $\tilde x_1 = x_1 - \theta_r$ to follow a step, while Example 6 needs an integral state?</div><details><summary>Show solution</summary><div class="sol">The satellite is a double integrator: a constant angle needs zero input, so $u_s = 0$ and feeding back the error $x_1 - \theta_r$ is enough. The plant $1/(s + 3)$ has no integrator: holding $y = r$ needs a non-zero $u_s$, and any error in the model or a constant disturbance would leave an offset. The integral state supplies $u_s$ automatically and removes the offset.</div></details></li></ol>
+    </section>
+    <nav class="prevnext"><a class="pn prev" href="06-state-space-preliminaries.html"><small>← Lesson 6</small>State-space preliminaries: canonical forms, controllability and observability</a><a class="pn next" href="../digital-control-systems.html"><small>Course home →</small>Digital Control Systems</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

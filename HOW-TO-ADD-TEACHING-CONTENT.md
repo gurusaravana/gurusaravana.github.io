@@ -367,11 +367,26 @@ To add a map to another course page, copy the whole `<section id="map">` block, 
 
 ## 20. Digital Control Systems (EACT 534) lessons
 
-The FTI EACT534 slide decks are written out as lesson pages in `courses/digital-control-systems/`. Chapter 1 (96 slides) is split into two lessons:
+The FTI EACT534 slide decks are written out as seven lesson pages in `courses/digital-control-systems/`, in three modules:
 
-- `01-discrete-time-and-z-transform.html` (why digital control, analog and digital loops, drug delivery and turbojet examples, difference equations, the z-transform, $z = e^{sT}$ and s-to-z mapping, aliasing strips, the constant ζ / ωn grid, pole position and response, standard z-transforms and properties, inverse z-transform),
-- `02-sampling-and-pulse-transfer.html` (sampling theorem, choosing the sampling period, ADC as ideal sampler, DAC as zero-order hold, $G_{ZAS}(z) = (1 - z^{-1})\mathcal{Z}\{G(s)/s\}$, cruise control, position control and R-L circuit examples, digital closed loop).
+| Lesson | Page | From |
+|---|---|---|
+| 1 | `01-discrete-time-and-z-transform.html`: why digital control, difference equations, z-transform, s-to-z mapping, inverse z-transform | Chapter 1, first half |
+| 2 | `02-sampling-and-pulse-transfer.html`: sampling theorem, choosing T, ADC and DAC (ZOH) models, $G_{ZAS}(z)$, digital closed loop | Chapter 1, second half |
+| 3 | `03-pulse-transfer-and-discretization.html`: pulse transfer functions of sampled loops, eight loop configurations, impulse/step invariance, forward/backward difference, Tustin | Chapter 2 |
+| 4 | `04-stability.html`: BIBO and internal stability, pole-zero cancellation, Routh test with $w = (z-1)/(z+1)$, Jury test | Chapter 3 |
+| 5 | `05-state-space-analysis.html`: discrete state model, state space to transfer function, companion and Jordan forms, state transition matrix | Chapter 4 |
+| 6 | `06-state-space-preliminaries.html`: continuous state-space review, canonical forms, eigenvalues, similarity transforms, controllability and observability tests | Chapter 5a (preliminaries) |
+| 7 | `07-pole-placement-and-observers.html`: discrete controllability and observability, pole placement, Ackermann, prediction and reduced-order observers, integral control, deadbeat control | Chapter 5 and the Chapter 5 tutorial sheet |
 
-The course page `courses/digital-control-systems.html` lists the lessons and has a "Figures and worked problems" gallery between the `LESSONS START` and `LESSONS END` comments. New diagrams start with `dcs-` in `assets/img/diagrams/`. Edit a lesson's notes between the `NOTES START` and `NOTES END` comments, and add exercises by copying a list item in the `exlist` list.
+The course page `courses/digital-control-systems.html` lists the lessons and has a "Figures and worked problems" gallery between the `LESSONS START` and `LESSONS END` comments. New diagrams start with `dcs-` in `assets/img/diagrams/` (Lesson 6 also reuses `mass-spring-damper.svg` and `rlc-series.svg`). Edit a lesson's notes between the `NOTES START` and `NOTES END` comments, and add exercises by copying a list item in the `exlist` list.
 
-The email address, institute name and logos on the original slides are not on the site. Where a slide had a slip, the page gives the corrected value in a "Watch out" box (Lesson 1: the exponential sequence a^k and its region of convergence, and the sequence 4, 8, 16, 32; Lesson 2: the gain at 7ωb, 2π written as "2 × 3141", and T = 1 in the position-control result).
+The email address, institute name and logos on the original slides are not on the site. Every worked number on the pages was checked by calculation. Where a slide had a slip, the page gives the corrected value in a "Watch out" box:
+
+- Lesson 1: the exponential sequence $a^k$ and its region of convergence; the sequence 4, 8, 16, 32.
+- Lesson 2: the gain at 7ωb; 2π written as "2 × 3141"; T = 1 in the position-control result.
+- Lesson 3: cascade figure (b); the closed-loop formula missing $X(z)$; loop configuration 4; backward-difference numerator; forward-difference $G(z)$; trapezoid limits.
+- Lesson 4: $G_{ZAS}(z)$ and the sign of $D$ in the internal-stability loop; the w-polynomial of the Routh example; $b_4$ and the $|d_0| > |d_2|$ check in the Jury example.
+- Lesson 5: the output row of the first companion form; the state matrix of the second companion form (it is the transpose of the first).
+- Lesson 6: state order in the observable form example; the matrix $A$ in the diagonalization example (+4, not −4); $CA = [0\ -8]$ in the observability example.
+- Lesson 7: desired poles in the satellite example (0.795 ± j0.256); the lead compensator $-27.5(z - 0.818)/(z - 0.2375)$; swapped terms in the reduced-order observer; the integral-state definition, $e^{-0.25}$ and the gains in the integral-control example; $Fg$ in the deadbeat example.
