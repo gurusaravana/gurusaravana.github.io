@@ -29,13 +29,13 @@
 <div class="band course-band"><div class="wrap">
   <div class="crumb"><a href="../digital-control-systems.html">← Digital Control Systems</a></div>
   <div class="course-head">
-    <div class="eyebrow">Lesson 4 of 4 · Chapter 3</div>
+    <div class="eyebrow">Lesson 4 of 5 · Chapter 3</div>
     <h1>Stability of discrete-time systems</h1>
     <p>Digital Control Systems · EACT 534 · Postgraduate course</p>
   </div>
 </div></div>
 <main class="wrap lesson-layout">
-  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">EACT 534 · Digital Control Systems</div><ol><li><a href="01-discrete-time-and-z-transform.html"><span class="n">1</span>Discrete-time systems and the z-transform</a></li><li><a href="02-sampling-and-pulse-transfer.html"><span class="n">2</span>Sampling, ADC and DAC models, and the pulse transfer function</a></li><li><a href="03-pulse-transfer-and-discretization.html"><span class="n">3</span>Pulse transfer functions and discretization</a></li><li class="on"><a href="04-stability.html"><span class="n">4</span>Stability of discrete-time systems</a></li></ol></div></details></aside>
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">EACT 534 · Digital Control Systems</div><ol><li><a href="01-discrete-time-and-z-transform.html"><span class="n">1</span>Discrete-time systems and the z-transform</a></li><li><a href="02-sampling-and-pulse-transfer.html"><span class="n">2</span>Sampling, ADC and DAC models, and the pulse transfer function</a></li><li><a href="03-pulse-transfer-and-discretization.html"><span class="n">3</span>Pulse transfer functions and discretization</a></li><li class="on"><a href="04-stability.html"><span class="n">4</span>Stability of discrete-time systems</a></li><li><a href="05-state-space-analysis.html"><span class="n">5</span>State-space analysis of discrete-time systems</a></li></ol></div></details></aside>
   <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
   <div class="lmain">
     <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Define asymptotic, marginal, BIBO and internal stability for discrete-time LTI systems</li><li>Judge stability from pole locations, including the effect of pole-zero cancellation</li><li>Apply the Routh–Hurwitz test after the bilinear change of variable $z = (1 + w)/(1 - w)$</li><li>Build a Jury table and apply the Jury conditions, including the quick second-order triangle</li></ul></div>
@@ -150,7 +150,7 @@
 <li><div class="q">Plant $G_{ZAS}(z) = \dfrac{1}{z - 2}$, controller $C(z) = \dfrac{0.5(z - 2)}{z - 0.5}$. Is the loop stable from $R$ to $Y$? Is it internally stable?</div><details><summary>Show solution</summary><div class="sol">$CG = \dfrac{0.5}{z - 0.5}$ and $1 + CG = \dfrac{z}{z - 0.5}$, so $Y/R = 0.5/z$: stable. But $Y/D = \dfrac{G}{1 + CG} = \dfrac{z - 0.5}{z(z - 2)}$ has a pole at $z = 2$. Any disturbance at the plant input makes the output grow, so the loop is <b>not internally stable</b>. The controller tried to cancel an unstable pole.</div></details></li>
 <li><div class="q">For the ZOH loop of Lesson 3, Example 1, the characteristic equation is $z - e^{-T} + K(1 - e^{-T}) = 0$. Confirm the gain limit with the Jury conditions for $T = 0.2$ s.</div><details><summary>Show solution</summary><div class="sol">For a first-order polynomial $z + a_0$ the only condition is $|a_0| &lt; 1$. Here $a_0 = -e^{-0.2} + K(1 - e^{-0.2}) = -0.8187 + 0.1813K$. Then $-1 &lt; a_0 &lt; 1$ gives $-1 &lt; K &lt; 10.03$. With positive gains: $0 &lt; K &lt; 10.03$. Faster sampling allows more gain.</div></details></li></ol>
     </section>
-    <nav class="prevnext"><a class="pn prev" href="03-pulse-transfer-and-discretization.html"><small>← Lesson 3</small>Pulse transfer functions and discretization</a><a class="pn next" href="../digital-control-systems.html"><small>Course home →</small>Digital Control Systems</a></nav>
+    <nav class="prevnext"><a class="pn prev" href="03-pulse-transfer-and-discretization.html"><small>← Lesson 3</small>Pulse transfer functions and discretization</a><a class="pn next" href="05-state-space-analysis.html"><small>Lesson 5 →</small>State-space analysis of discrete-time systems</a></nav>
   </div>
 </main>
 <footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>

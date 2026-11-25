@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" width="720" height="320" role="img" aria-label="Second companion (observable canonical) form for n = 3: three summing junctions and delays in a chain from x1 to x3; the input enters each junction through β3, β2, β1, and the output x3 is fed back to each junction through α3, α2, α1.">
+<title>Second companion (observable canonical) form for n = 3: three summing junctions and delays in a chain from x1 to x3; the input enters each junction through β3, β2, β1, and the output x3 is fed back to each junction through α3, α2, α1.</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker></defs>
+<rect width="720" height="320" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<path d="M30.0 40.0 L640.0 40.0" fill="none" stroke="#059669" stroke-width="2"/>
+<text x="30.0" y="30.0" font-size="14" text-anchor="start" fill="#db2777" font-weight="400" font-style="italic">u(k)</text>
+<circle cx="100.0" cy="160.0" r="11.0" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="100.0" y="165.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="400">Σ</text>
+<path d="M100.0 40.0 L100.0 70.0" fill="none" stroke="#059669" stroke-width="2" marker-end="url(#ag)"/>
+<rect x="75.0" y="71.0" width="50.0" height="34.0" rx="4" fill="#fff" stroke="#059669" stroke-width="2"/>
+<text x="100.0" y="93.0" font-size="14" text-anchor="middle" fill="#059669" font-weight="400">β₃</text>
+<path d="M100.0 105.0 L100.0 149.0" fill="none" stroke="#059669" stroke-width="2" marker-end="url(#ag)"/>
+<path d="M100.0 270.0 L100.0 250.0" fill="none" stroke="#ea7a1f" stroke-width="2" marker-end="url(#ao)"/>
+<rect x="75.0" y="215.0" width="50.0" height="34.0" rx="4" fill="#fff" stroke="#ea7a1f" stroke-width="2"/>
+<text x="100.0" y="237.0" font-size="14" text-anchor="middle" fill="#ea7a1f" font-weight="400">α₃</text>
+<path d="M100.0 215.0 L100.0 171.0" fill="none" stroke="#ea7a1f" stroke-width="2" marker-end="url(#ao)"/>
+<text x="116.0" y="188.0" font-size="15" text-anchor="middle" fill="#db2777" font-weight="700">−</text>
+<path d="M111.0 160.0 L146.0 160.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="146.0" y="140.0" width="56.0" height="40.0" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="174.0" y="165.0" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="400">z⁻¹</text>
+<text x="228.0" y="150.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400" font-style="italic">x₁(k)</text>
+<circle cx="300.0" cy="160.0" r="11.0" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="300.0" y="165.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="400">Σ</text>
+<path d="M202.0 160.0 L289.0 160.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<path d="M300.0 40.0 L300.0 70.0" fill="none" stroke="#059669" stroke-width="2" marker-end="url(#ag)"/>
+<rect x="275.0" y="71.0" width="50.0" height="34.0" rx="4" fill="#fff" stroke="#059669" stroke-width="2"/>
+<text x="300.0" y="93.0" font-size="14" text-anchor="middle" fill="#059669" font-weight="400">β₂</text>
+<path d="M300.0 105.0 L300.0 149.0" fill="none" stroke="#059669" stroke-width="2" marker-end="url(#ag)"/>
+<path d="M300.0 270.0 L300.0 250.0" fill="none" stroke="#ea7a1f" stroke-width="2" marker-end="url(#ao)"/>
+<rect x="275.0" y="215.0" width="50.0" height="34.0" rx="4" fill="#fff" stroke="#ea7a1f" stroke-width="2"/>
+<text x="300.0" y="237.0" font-size="14" text-anchor="middle" fill="#ea7a1f" font-weight="400">α₂</text>
+<path d="M300.0 215.0 L300.0 171.0" fill="none" stroke="#ea7a1f" stroke-width="2" marker-end="url(#ao)"/>
+<text x="316.0" y="188.0" font-size="15" text-anchor="middle" fill="#db2777" font-weight="700">−</text>
+<path d="M311.0 160.0 L346.0 160.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="346.0" y="140.0" width="56.0" height="40.0" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="374.0" y="165.0" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="400">z⁻¹</text>
+<text x="428.0" y="150.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400" font-style="italic">x₂(k)</text>
+<circle cx="500.0" cy="160.0" r="11.0" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="500.0" y="165.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="400">Σ</text>
+<path d="M402.0 160.0 L489.0 160.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<path d="M500.0 40.0 L500.0 70.0" fill="none" stroke="#059669" stroke-width="2" marker-end="url(#ag)"/>
+<rect x="475.0" y="71.0" width="50.0" height="34.0" rx="4" fill="#fff" stroke="#059669" stroke-width="2"/>
+<text x="500.0" y="93.0" font-size="14" text-anchor="middle" fill="#059669" font-weight="400">β₁</text>
+<path d="M500.0 105.0 L500.0 149.0" fill="none" stroke="#059669" stroke-width="2" marker-end="url(#ag)"/>
+<path d="M500.0 270.0 L500.0 250.0" fill="none" stroke="#ea7a1f" stroke-width="2" marker-end="url(#ao)"/>
+<rect x="475.0" y="215.0" width="50.0" height="34.0" rx="4" fill="#fff" stroke="#ea7a1f" stroke-width="2"/>
+<text x="500.0" y="237.0" font-size="14" text-anchor="middle" fill="#ea7a1f" font-weight="400">α₁</text>
+<path d="M500.0 215.0 L500.0 171.0" fill="none" stroke="#ea7a1f" stroke-width="2" marker-end="url(#ao)"/>
+<text x="516.0" y="188.0" font-size="15" text-anchor="middle" fill="#db2777" font-weight="700">−</text>
+<path d="M511.0 160.0 L546.0 160.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="546.0" y="140.0" width="56.0" height="40.0" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="574.0" y="165.0" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="400">z⁻¹</text>
+<text x="628.0" y="150.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400" font-style="italic">x₃(k)</text>
+<path d="M602.0 160.0 L700.0 160.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="680.0" y="148.0" font-size="14" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">y(k)</text>
+<circle cx="640.0" cy="160.0" r="4" fill="#0f172a"/>
+<path d="M640.0 160.0 L640.0 270.0 L100.0 270.0" fill="none" stroke="#ea7a1f" stroke-width="2"/>
+<circle cx="100.0" cy="270.0" r="3" fill="#ea7a1f"/>
+<circle cx="300.0" cy="270.0" r="3" fill="#ea7a1f"/>
+<circle cx="500.0" cy="270.0" r="3" fill="#ea7a1f"/>
+<text x="360.0" y="312.0" font-size="11" text-anchor="middle" fill="#64748b" font-weight="400" font-style="italic">drawn for β₀ = 0;  y(k) = x₃(k) + β₀u(k) in general</text>
+</g>
+</svg>

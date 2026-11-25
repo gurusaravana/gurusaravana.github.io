@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 5: State-space analysis of discrete-time systems · Digital Control Systems</title>
+<meta name="description" content="State-space analysis of discrete-time systems">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 5: State-space analysis of discrete-time systems  (Digital Control Systems, EACT 534, Chapter 4)
+  Edit the notes between the NOTES START and NOTES END markers below.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Figures live in assets/img/diagrams/ (names start with dcs-) and are shown with a figure of class "diagram".
+  To add an exercise, copy one list item inside the list of class "exlist".
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
+  <nav class="links"><a href="../digital-control-systems.html">Course home</a><a href="../digital-control-systems.html#lessons">Lessons</a><a href="../digital-control-systems.html#figures">Figures</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../digital-control-systems.html">← Digital Control Systems</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 5 of 5 · Chapter 4</div>
+    <h1>State-space analysis of discrete-time systems</h1>
+    <p>Digital Control Systems · EACT 534 · Postgraduate course</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">EACT 534 · Digital Control Systems</div><ol><li><a href="01-discrete-time-and-z-transform.html"><span class="n">1</span>Discrete-time systems and the z-transform</a></li><li><a href="02-sampling-and-pulse-transfer.html"><span class="n">2</span>Sampling, ADC and DAC models, and the pulse transfer function</a></li><li><a href="03-pulse-transfer-and-discretization.html"><span class="n">3</span>Pulse transfer functions and discretization</a></li><li><a href="04-stability.html"><span class="n">4</span>Stability of discrete-time systems</a></li><li class="on"><a href="05-state-space-analysis.html"><span class="n">5</span>State-space analysis of discrete-time systems</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Write a discrete-time system as $x(k+1) = Fx(k) + gu(k)$, $y(k) = cx(k) + du(k)$</li><li>Find the transfer function $G(z) = c(zI - F)^{-1}g + d$ and the characteristic equation $|zI - F| = 0$</li><li>Realize a transfer function in the first companion, second companion and Jordan forms</li><li>Solve the state equation by recursion and by the z-transform</li><li>Compute the state transition matrix $\Phi(k) = F^k$</li></ul></div>
+    <nav class="figstrip" aria-label="Figures in this lesson"><a href="#fig-ss-block"><img src="../../assets/img/diagrams/dcs-ss-block.svg" alt="" loading="lazy"><span>State-space model</span></a><a href="#fig-ctrl-canonical"><img src="../../assets/img/diagrams/dcs-ctrl-canonical.svg" alt="" loading="lazy"><span>First companion form</span></a><a href="#fig-obs-canonical"><img src="../../assets/img/diagrams/dcs-obs-canonical.svg" alt="" loading="lazy"><span>Second companion form</span></a><a href="#fig-jordan"><img src="../../assets/img/diagrams/dcs-jordan.svg" alt="" loading="lazy"><span>Jordan form</span></a><a href="#fig-free-response"><img src="../../assets/img/diagrams/dcs-free-response.svg" alt="" loading="lazy"><span>Free response</span></a></nav>
+    <section class="lsec"><h2>Notes</h2>
+    <!-- NOTES START -->
+    <article class="notes">
+<p>So far every model has been a transfer function. State-space models describe the same systems with first-order difference equations in vector form. They handle several inputs and outputs, expose the internal behaviour (controllability, observability) and lead to the design methods of the next lessons.</p>
+
+<h3 id="dt-systems">Discrete-time systems</h3>
+<p>A discrete-time system transforms an input sequence $u(k)$ into an output sequence $y(k)$. There are two kinds:</p>
+<ul>
+<li><b>Inherently discrete systems</b>, such as digital processors, where only the sampling instants matter and what happens in between is irrelevant.</li>
+<li><b>Sampled continuous systems</b>: a continuous plant viewed only at the sampling instants, usually together with its DAC and ADC.</li>
+</ul>
+<p>A digital controller is a program that turns one sequence into another; it is a signal processor that happens to control a plant. Its state variable model has first-order difference equations for the state variables and an algebraic equation for the output. The input sequence $u(k)$ and the initial state $x(0)$ together fix all future behaviour.</p>
+
+<h3 id="model">The state variable model</h3>
+<figure class="diagram" id="fig-ss-block"><img src="../../assets/img/diagrams/dcs-ss-block.svg" alt="Block diagram of x(k+1) = F x(k) + g u(k), y(k) = c x(k) + d u(k)" loading="lazy"><figcaption>The single-input single-output state-space model. The only dynamic element is the delay $z^{-1}$.</figcaption></figure>
+<p class="eq">$$x(k+1) = Fx(k) + gu(k), \qquad y(k) = cx(k) + du(k)$$</p>
+<p>with $x(k)$ the $n \times 1$ state vector, $F$ the $n \times n$ state matrix, $g$ the $n \times 1$ input vector, $c$ the $1 \times n$ output vector and $d$ a scalar (direct transmission).</p>
+
+<h3 id="ss-to-tf">From state space to transfer function</h3>
+<p>Z-transform the state equation, keeping the initial state: $zX(z) - zx(0) = FX(z) + gU(z)$, so</p>
+<p class="eq">$$X(z) = (zI - F)^{-1}z\,x(0) + (zI - F)^{-1}g\,U(z)$$</p>
+<p class="eq">$$Y(z) = c(zI - F)^{-1}z\,x(0) + \left[c(zI - F)^{-1}g + d\right]U(z)$$</p>
+<p>With $x(0) = 0$ the transfer function is</p>
+<p class="eq">$$G(z) = \frac{Y(z)}{U(z)} = c(zI - F)^{-1}g + d = c\,\frac{\operatorname{adj}(zI - F)}{|zI - F|}\,g + d$$</p>
+<p>The <b>characteristic polynomial</b> $|zI - F|$ has the eigenvalues of $F$ as roots. These are the poles of $G(z)$; for a system that is both controllable and observable (no cancellation), the eigenvalues of $F$ and the poles of $G(z)$ are exactly the same set.</p>
+<p><b>Example 1.</b> $x(k+1) = Ax(k) + Bu(k)$, $y(k) = Cx(k)$ with $A = \begin{bmatrix} 1 &amp; 1 \\ 0 &amp; 3 \end{bmatrix}$, $B = \begin{bmatrix} 1 \\ 2 \end{bmatrix}$, $C = \begin{bmatrix} 0 &amp; 1 \end{bmatrix}$, $D = 0$, $x(0) = \begin{bmatrix} 1 \\ 1 \end{bmatrix}$. (a) Find the transfer function. (b) Find the step response.</p>
+<p class="eq">$$(zI - A)^{-1} = \frac{1}{(z - 1)(z - 3)}\begin{bmatrix} z - 3 &amp; 1 \\ 0 &amp; z - 1 \end{bmatrix}, \qquad G(z) = \frac{\begin{bmatrix} 0 &amp; z - 1 \end{bmatrix}\begin{bmatrix} 1 \\ 2 \end{bmatrix}}{(z - 1)(z - 3)} = \frac{2(z - 1)}{(z - 1)(z - 3)} = \frac{2}{z - 3}$$</p>
+<p>The eigenvalue $z = 1$ cancels: it cannot be seen from the output. For the step response with zero initial state,</p>
+<p class="eq">$$Y(z) = \frac{2}{z - 3}\cdot\frac{z}{z - 1}, \qquad \frac{Y(z)}{z} = \frac{1}{z - 3} - \frac{1}{z - 1} \quad\Longrightarrow\quad y(k) = 3^k - 1, \quad k \ge 0$$</p>
+<p>The response has a transient term $3^k$ and a steady-state term from the step. Here the "transient" grows, because the pole at 3 is outside the unit circle.</p>
+<p class="warn">The slides compute only this zero-state response, although they also give $x(0) = [1\ \ 1]^T$. The initial state adds $c(zI - A)^{-1}z\,x(0) = z/(z - 3)$, that is $3^k$, so the total step response is $y(k) = 2\cdot3^k - 1$. Check: $y(0) = x_2(0) = 1$ and $y(1) = 5$.</p>
+
+<h3 id="canonical">From transfer function to state space: canonical forms</h3>
+<p>Going from a transfer function to a state model is called <b>realization</b>. There are infinitely many realizations; three standard ("canonical") ones are especially useful. They make controllability, observability and stability easy to read, they map directly onto delay-adder-multiplier hardware or code, and they are the starting point for pole placement and controller design. All three start from</p>
+<p class="eq">$$G(z) = \frac{\beta_0z^n + \beta_1z^{n-1} + \dots + \beta_{n-1}z + \beta_n}{z^n + \alpha_1z^{n-1} + \dots + \alpha_{n-1}z + \alpha_n}$$</p>
+
+<h4>First companion form (controllable canonical form)</h4>
+<figure class="diagram" id="fig-ctrl-canonical"><img src="../../assets/img/diagrams/dcs-ctrl-canonical.svg" alt="Controllable canonical form block diagram for n = 3" loading="lazy"><figcaption>First companion form for $n = 3$: one chain of delays, feedback through the $\alpha_i$, output through the $\beta_i$.</figcaption></figure>
+<p class="eq">$$x_1(k+1) = x_2(k), \quad \dots, \quad x_{n-1}(k+1) = x_n(k), \quad x_n(k+1) = -\alpha_nx_1(k) - \alpha_{n-1}x_2(k) - \dots - \alpha_1x_n(k) + u(k)$$</p>
+<p class="eq">$$F = \begin{bmatrix} 0 &amp; 1 &amp; 0 &amp; \cdots &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; \cdots &amp; 0 \\ \vdots &amp; &amp; &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; 0 &amp; \cdots &amp; 1 \\ -\alpha_n &amp; -\alpha_{n-1} &amp; -\alpha_{n-2} &amp; \cdots &amp; -\alpha_1 \end{bmatrix}, \quad g = \begin{bmatrix} 0 \\ 0 \\ \vdots \\ 0 \\ 1 \end{bmatrix}$$</p>
+<p class="eq">$$c = \begin{bmatrix} \beta_n - \alpha_n\beta_0 &amp; \beta_{n-1} - \alpha_{n-1}\beta_0 &amp; \cdots &amp; \beta_1 - \alpha_1\beta_0 \end{bmatrix}, \qquad d = \beta_0$$</p>
+<p>The last row of $F$ holds the denominator coefficients in reverse order; the output row holds the numerator coefficients. When $G(z)$ is strictly proper ($\beta_0 = 0$), $c = [\beta_n\ \ \beta_{n-1}\ \cdots\ \beta_1]$ and $d = 0$.</p>
+<p class="warn">The slides give the output as $y(k) = \beta_0u(k) + \beta_1x_1(k) + \dots + \beta_nx_n(k)$, so $c = [\beta_1\ \cdots\ \beta_n]$. With $x_1$ the deepest delay, the coefficients run the other way ($\beta_n$ multiplies $x_1$), and when $\beta_0 \ne 0$ each one is reduced by $\alpha_i\beta_0$, as above.</p>
+
+<h4>Second companion form (observable canonical form)</h4>
+<figure class="diagram" id="fig-obs-canonical"><img src="../../assets/img/diagrams/dcs-obs-canonical.svg" alt="Observable canonical form block diagram for n = 3" loading="lazy"><figcaption>Second companion form for $n = 3$: the input enters every adder, and the output is fed back to every adder.</figcaption></figure>
+<p class="eq">$$\begin{aligned} x_1(k+1) &amp;= -\alpha_n\left(x_n(k) + \beta_0u(k)\right) + \beta_nu(k) \\ x_2(k+1) &amp;= x_1(k) - \alpha_{n-1}\left(x_n(k) + \beta_0u(k)\right) + \beta_{n-1}u(k) \\ &amp;\ \ \vdots \\ x_n(k+1) &amp;= x_{n-1}(k) - \alpha_1\left(x_n(k) + \beta_0u(k)\right) + \beta_1u(k) \\ y(k) &amp;= x_n(k) + \beta_0u(k) \end{aligned}$$</p>
+<p class="eq">$$F = \begin{bmatrix} 0 &amp; 0 &amp; \cdots &amp; 0 &amp; -\alpha_n \\ 1 &amp; 0 &amp; \cdots &amp; 0 &amp; -\alpha_{n-1} \\ 0 &amp; 1 &amp; \cdots &amp; 0 &amp; -\alpha_{n-2} \\ \vdots &amp; &amp; \ddots &amp; &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; 1 &amp; -\alpha_1 \end{bmatrix}, \quad g = \begin{bmatrix} \beta_n - \alpha_n\beta_0 \\ \beta_{n-1} - \alpha_{n-1}\beta_0 \\ \vdots \\ \beta_1 - \alpha_1\beta_0 \end{bmatrix}, \quad c = \begin{bmatrix} 0 &amp; \cdots &amp; 0 &amp; 1 \end{bmatrix}, \quad d = \beta_0$$</p>
+<p>This $F$ is the transpose of the first companion matrix, and $g$, $c$ swap roles: the two forms are <b>duals</b>.</p>
+<p class="warn">The slides print the same $F$ (last row $-\alpha_i$) for both companion forms. The equations of the second form above give ones on the sub-diagonal and the $-\alpha_i$ in the last column, the transpose of the first form's matrix.</p>
+
+<h4>Jordan canonical form</h4>
+<p>Split off the direct term, $G(z) = \beta_0 + G'(z)$, and expand $G'(z)$ in partial fractions. With distinct poles $\lambda_1, \dots, \lambda_n$:</p>
+<p class="eq">$$G(z) = \beta_0 + \frac{r_1}{z - \lambda_1} + \frac{r_2}{z - \lambda_2} + \dots + \frac{r_n}{z - \lambda_n}$$</p>
+<figure class="diagram" id="fig-jordan"><img src="../../assets/img/diagrams/dcs-jordan.svg" alt="Parallel realization with three first-order loops" loading="lazy"><figcaption>Jordan (diagonal) form for distinct poles: $n$ independent first-order loops in parallel.</figcaption></figure>
+<p class="eq">$$\Lambda = \begin{bmatrix} \lambda_1 &amp; 0 &amp; \cdots &amp; 0 \\ 0 &amp; \lambda_2 &amp; \cdots &amp; 0 \\ \vdots &amp; &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; \lambda_n \end{bmatrix}, \quad g = \begin{bmatrix} 1 \\ 1 \\ \vdots \\ 1 \end{bmatrix}, \quad c = \begin{bmatrix} r_1 &amp; r_2 &amp; \cdots &amp; r_n \end{bmatrix}, \quad d = \beta_0$$</p>
+<p>Each state is one <b>mode</b> of the system, which makes stability obvious: the system is stable when every $|\lambda_i| &lt; 1$.</p>
+<p><b>Repeated poles.</b> If $\lambda_1$ has multiplicity $m$, its part of the expansion is $H_1(z) = \dfrac{r_{11}}{(z - \lambda_1)^m} + \dfrac{r_{12}}{(z - \lambda_1)^{m-1}} + \dots + \dfrac{r_{1m}}{z - \lambda_1}$. Its states form a chain (the output of one delay loop feeds the next), and $\Lambda$ becomes block diagonal, $\Lambda = \operatorname{diag}(\Lambda_1, \lambda_{m+1}, \dots, \lambda_n)$, with the $m \times m$ <b>Jordan block</b></p>
+<p class="eq">$$\Lambda_1 = \begin{bmatrix} \lambda_1 &amp; 1 &amp; 0 &amp; \cdots &amp; 0 \\ 0 &amp; \lambda_1 &amp; 1 &amp; \cdots &amp; 0 \\ \vdots &amp; &amp; \ddots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; \lambda_1 &amp; 1 \\ 0 &amp; 0 &amp; \cdots &amp; 0 &amp; \lambda_1 \end{bmatrix}, \quad g = [0\ \cdots\ 0\ 1 \mid 1\ \cdots\ 1]^T, \quad c = [r_{11}\ \cdots\ r_{1m} \mid r_{m+1}\ \cdots\ r_n]$$</p>
+<p><b>Example 2.</b> Realize $G(z) = \dfrac{2z + 1}{z^2 + 0.3z + 0.02}$ in all three forms. Here $\beta_0 = 0$, $\beta_1 = 2$, $\beta_2 = 1$, $\alpha_1 = 0.3$, $\alpha_2 = 0.02$, and the poles are $-0.1$ and $-0.2$.</p>
+<table class="tbl"><tr><th>Form</th><th>$F$</th><th>$g$</th><th>$c$</th></tr>
+<tr><td>First companion</td><td>$\begin{bmatrix} 0 &amp; 1 \\ -0.02 &amp; -0.3 \end{bmatrix}$</td><td>$\begin{bmatrix} 0 \\ 1 \end{bmatrix}$</td><td>$\begin{bmatrix} 1 &amp; 2 \end{bmatrix}$</td></tr>
+<tr><td>Second companion</td><td>$\begin{bmatrix} 0 &amp; -0.02 \\ 1 &amp; -0.3 \end{bmatrix}$</td><td>$\begin{bmatrix} 1 \\ 2 \end{bmatrix}$</td><td>$\begin{bmatrix} 0 &amp; 1 \end{bmatrix}$</td></tr>
+<tr><td>Jordan</td><td>$\begin{bmatrix} -0.1 &amp; 0 \\ 0 &amp; -0.2 \end{bmatrix}$</td><td>$\begin{bmatrix} 1 \\ 1 \end{bmatrix}$</td><td>$\begin{bmatrix} 8 &amp; -6 \end{bmatrix}$</td></tr></table>
+<p>For the Jordan form, $r_1 = \left.\dfrac{2z + 1}{z + 0.2}\right|_{z=-0.1} = 8$ and $r_2 = \left.\dfrac{2z + 1}{z + 0.1}\right|_{z=-0.2} = -6$. All three give the same $G(z)$, with $d = 0$.</p>
+
+<h3 id="solution">Solving the state difference equation</h3>
+<p>Given $x(k+1) = Fx(k) + gu(k)$ and $x(0)$, simply iterate:</p>
+<p class="eq">$$x(1) = Fx(0) + gu(0), \quad x(2) = F^2x(0) + Fgu(0) + gu(1), \quad x(3) = F^3x(0) + F^2gu(0) + Fgu(1) + gu(2)$$</p>
+<p>The pattern gives the closed form</p>
+<p class="eq">$$x(k) = F^kx(0) + \sum_{i=0}^{k-1} F^{k-1-i}g\,u(i)$$</p>
+<p>The first term is the contribution of the initial state (the free response); the second is the accumulated contribution of the inputs, each $u(i)$ propagated forward $k - 1 - i$ steps.</p>
+
+<h3 id="stm">The state transition matrix</h3>
+<p>$\Phi(k) = F^k$, with $\Phi(0) = I$, is the <b>state transition matrix</b>. It carries the state from $x(0)$ to $x(k)$ when there is no input, $x(k) = \Phi(k)x(0)$, and it captures the dynamics of the system independent of the input. In its terms,</p>
+<p class="eq">$$x(k) = \Phi(k)x(0) + \sum_{i=0}^{k-1}\Phi(k - 1 - i)\,g\,u(i)$$</p>
+<p><b>Computing $F^k$ with the z-transform.</b> With $u = 0$, $zX(z) - zx(0) = FX(z)$, so $X(z) = (zI - F)^{-1}z\,x(0)$. Comparing with $x(k) = F^kx(0)$:</p>
+<p class="eq">$$\Phi(k) = F^k = \mathcal{Z}^{-1}\left[(zI - F)^{-1}z\right]$$</p>
+<p>$(zI - F)^{-1}$ is called the <b>resolvent matrix</b>. Expand each entry of $(zI - F)^{-1}z$ in partial fractions and invert term by term.</p>
+<p><b>Example 3.</b> $F = \begin{bmatrix} 0 &amp; 1 \\ -0.16 &amp; -1 \end{bmatrix}$. Then $|zI - F| = z^2 + z + 0.16 = (z + 0.2)(z + 0.8)$ and</p>
+<p class="eq">$$(zI - F)^{-1} = \frac{1}{(z + 0.2)(z + 0.8)}\begin{bmatrix} z + 1 &amp; 1 \\ -0.16 &amp; z \end{bmatrix} = \begin{bmatrix} \dfrac{4/3}{z + 0.2} - \dfrac{1/3}{z + 0.8} &amp; \dfrac{5/3}{z + 0.2} - \dfrac{5/3}{z + 0.8} \\[2mm] \dfrac{-0.8/3}{z + 0.2} + \dfrac{0.8/3}{z + 0.8} &amp; \dfrac{-1/3}{z + 0.2} + \dfrac{4/3}{z + 0.8} \end{bmatrix}$$</p>
+<p>Multiplying by $z$ and inverting each $z/(z + a)$ to $(-a)^k$:</p>
+<p class="eq">$$\Phi(k) = F^k = \begin{bmatrix} \tfrac43(-0.2)^k - \tfrac13(-0.8)^k &amp; \tfrac53(-0.2)^k - \tfrac53(-0.8)^k \\[1mm] -\tfrac{0.8}{3}(-0.2)^k + \tfrac{0.8}{3}(-0.8)^k &amp; -\tfrac13(-0.2)^k + \tfrac43(-0.8)^k \end{bmatrix}$$</p>
+<p>Check: at $k = 0$ this is the identity, and at $k = 1$ it is $F$.</p>
+<figure class="diagram" id="fig-free-response"><img src="../../assets/img/diagrams/dcs-free-response.svg" alt="Free response of the two states from x(0) = [1, 1]" loading="lazy"><figcaption>$x(k) = \Phi(k)x(0)$ for Example 3 with $x(0) = [1\ \ 1]^T$. Negative eigenvalues make the states alternate in sign while they decay.</figcaption></figure>
+<p><b>Example 4.</b> $x(k+1) = \begin{bmatrix} 0 &amp; 1 \\ -2 &amp; -3 \end{bmatrix}x(k) + \begin{bmatrix} 0 \\ 1 \end{bmatrix}(-1)^k$, $x_1(0) = x_2(0) = 1$, $y(k) = x_1(k)$. Find $y(k)$.</p>
+<p>The eigenvalues are $-1$ and $-2$, and the same method gives</p>
+<p class="eq">$$\Phi(k) = \begin{bmatrix} 2(-1)^k - (-2)^k &amp; (-1)^k - (-2)^k \\ -2(-1)^k + 2(-2)^k &amp; -(-1)^k + 2(-2)^k \end{bmatrix}$$</p>
+<p>The free part of $x_1$ is $\Phi_{11} + \Phi_{12} = 3(-1)^k - 2(-2)^k$. The forced part is $\sum_{i=0}^{k-1}\Phi_{12}(k-1-i)(-1)^i = \sum_{i=0}^{k-1}\left[(-1)^{k-1-i} - (-2)^{k-1-i}\right](-1)^i$. The first sum is $k(-1)^{k-1}$; the second is $(-2)^{k-1}\sum_{i=0}^{k-1}(1/2)^i = -(-2)^k\left[1 - (1/2)^k\right]$ with the sign pulled out. Collecting terms:</p>
+<p class="eq">$$y(k) = 3(-1)^k - 2(-2)^k - k(-1)^k + (-2)^k - (-1)^k = (2 - k)(-1)^k - (-2)^k$$</p>
+<p>Check by iteration: $y = 1, 1, -4, 9, -18, 35, \dots$ for $k = 0, 1, 2, \dots$, which matches the formula.</p>
+</article>
+    <!-- NOTES END -->
+    </section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the div below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">Find the transfer function of $x(k+1) = \begin{bmatrix} 0 &amp; 1 \\ -0.5 &amp; 1.5 \end{bmatrix}x(k) + \begin{bmatrix} 0 \\ 1 \end{bmatrix}u(k)$, $y(k) = \begin{bmatrix} 1 &amp; 0 \end{bmatrix}x(k)$. Is the system asymptotically stable?</div><details><summary>Show solution</summary><div class="sol">This is the first companion form with $\alpha_1 = -1.5$, $\alpha_2 = 0.5$ and $c = [\beta_2\ \ \beta_1] = [1\ \ 0]$, so $G(z) = \dfrac{1}{z^2 - 1.5z + 0.5} = \dfrac{1}{(z - 1)(z - 0.5)}$. The eigenvalues of $F$ are $1$ and $0.5$. The pole on the unit circle makes it marginally stable, not asymptotically stable.</div></details></li>
+<li><div class="q">Realize $G(z) = \dfrac{z + 0.5}{z^2 - 0.5z + 0.06}$ in the first companion, second companion and Jordan forms.</div><details><summary>Show solution</summary><div class="sol">$\alpha_1 = -0.5$, $\alpha_2 = 0.06$, $\beta_0 = 0$, $\beta_1 = 1$, $\beta_2 = 0.5$; the poles are $0.2$ and $0.3$.<br>First companion: $F = \begin{bmatrix} 0 &amp; 1 \\ -0.06 &amp; 0.5 \end{bmatrix}$, $g = \begin{bmatrix} 0 \\ 1 \end{bmatrix}$, $c = [0.5\ \ 1]$.<br>Second companion: $F = \begin{bmatrix} 0 &amp; -0.06 \\ 1 &amp; 0.5 \end{bmatrix}$, $g = \begin{bmatrix} 0.5 \\ 1 \end{bmatrix}$, $c = [0\ \ 1]$.<br>Jordan: $G(z) = \dfrac{-7}{z - 0.2} + \dfrac{8}{z - 0.3}$, so $\Lambda = \mathrm{diag}(0.2,\ 0.3)$, $g = [1\ \ 1]^T$, $c = [-7\ \ 8]$.</div></details></li>
+<li><div class="q">Realize $G(z) = \dfrac{z^2 + 1}{z^2 - 0.5z + 0.06}$ in the first companion form.</div><details><summary>Show solution</summary><div class="sol">Now $\beta_0 = 1$, $\beta_1 = 0$, $\beta_2 = 1$. $F$ and $g$ are as in the previous problem; $c = [\beta_2 - \alpha_2\beta_0\ \ \ \beta_1 - \alpha_1\beta_0] = [0.94\ \ 0.5]$ and $d = 1$. Check: $G(z) = 1 + \dfrac{0.5z + 0.94}{z^2 - 0.5z + 0.06}$, which recombines to the given fraction.</div></details></li>
+<li><div class="q">Find the state transition matrix $\Phi(k)$ for $F = \begin{bmatrix} 0 &amp; 1 \\ -0.06 &amp; 0.5 \end{bmatrix}$ and check it at $k = 0$ and $k = 1$.</div><details><summary>Show solution</summary><div class="sol">$(zI - F)^{-1} = \dfrac{1}{(z - 0.2)(z - 0.3)}\begin{bmatrix} z - 0.5 &amp; 1 \\ -0.06 &amp; z \end{bmatrix}$. Expand $z(zI - F)^{-1}$ term by term in partial fractions:<br>$\Phi(k) = \begin{bmatrix} 3(0.2)^k - 2(0.3)^k &amp; -10(0.2)^k + 10(0.3)^k \\ 0.6(0.2)^k - 0.6(0.3)^k &amp; -2(0.2)^k + 3(0.3)^k \end{bmatrix}$.<br>At $k = 0$ this is $I$; at $k = 1$ it is $\begin{bmatrix} 0 &amp; 1 \\ -0.06 &amp; 0.5 \end{bmatrix} = F$.</div></details></li>
+<li><div class="q">For the first companion realization in problem 2, find the unit step response from $x(0) = 0$.</div><details><summary>Show solution</summary><div class="sol">$\dfrac{Y(z)}{z} = \dfrac{z + 0.5}{(z - 1)(z - 0.2)(z - 0.3)} = \dfrac{75/28}{z - 1} + \dfrac{35/4}{z - 0.2} - \dfrac{80/7}{z - 0.3}$, so $y(k) = \tfrac{75}{28} + \tfrac{35}{4}(0.2)^k - \tfrac{80}{7}(0.3)^k$: $\{0, 1, 2, 2.44, 2.60, \dots\} \to G(1) = 2.68$. Iterating $x(k+1) = Fx(k) + g$ gives the same numbers.</div></details></li>
+<li><div class="q">Show that the change of state $x = Pw$ ($P$ invertible) changes neither the eigenvalues nor the transfer function.</div><details><summary>Show solution</summary><div class="sol">The new model is $w(k+1) = P^{-1}FPw(k) + P^{-1}gu(k)$, $y = cPw + du$. Then $|zI - P^{-1}FP| = |P^{-1}(zI - F)P| = |zI - F|$, and $cP(zI - P^{-1}FP)^{-1}P^{-1}g + d = cP\,P^{-1}(zI - F)^{-1}P\,P^{-1}g + d = c(zI - F)^{-1}g + d$. This is why one $G(z)$ has many state models, the canonical forms among them.</div></details></li>
+<li><div class="q">Example 1 has two states but a first-order transfer function $2/(z - 3)$. Where did the second mode go, and does it still affect the states?</div><details><summary>Show solution</summary><div class="sol">The factor $(z - 1)$ cancels between numerator and denominator. The mode $1^k$ is still in $x_1(k)$ (it appears in the response from $x(0)$), but the output $y = x_2$ never sees it, because $x_2$ does not depend on $x_1$. A transfer function only shows the modes that are both excited by $u$ and seen at $y$; Lesson 7 makes this precise with controllability and observability.</div></details></li></ol>
+    </section>
+    <nav class="prevnext"><a class="pn prev" href="04-stability.html"><small>← Lesson 4</small>Stability of discrete-time systems</a><a class="pn next" href="../digital-control-systems.html"><small>Course home →</small>Digital Control Systems</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>
