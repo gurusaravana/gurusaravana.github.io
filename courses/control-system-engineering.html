@@ -35,7 +35,407 @@
 <main class="wrap">
   <section id="start">
     <h2>Start here</h2>
-    <div class="qgrid"><a class="qcard card" href="control-system-engineering/syllabus.html"><span class="qi">📘</span><b>Syllabus</b><span>Aims, outcomes, textbooks and grading</span></a><a class="qcard card" href="control-system-engineering/schedule.html"><span class="qi">🗓️</span><b>Schedule</b><span>Week-by-week plan, assignments and exams</span></a><a class="qcard card" href="control-system-engineering/01-introduction.html"><span class="qi">🚀</span><b>Start lesson 1</b><span>Introduction to control systems</span></a><a class="qcard card" href="#sims"><span class="qi">🎛️</span><b>Simulations</b><span>Interactive models you can run in the browser</span></a><a class="qcard card" href="control-system-engineering-laboratory/experiments.html"><span class="qi">🔬</span><b>Lab experiments (EEE2563)</b><span>Diagrams, simulations and practice questions for every lab experiment</span></a><a class="qcard card" href="control-system-engineering/industrial-simulations.html"><span class="qi">🏭</span><b>Industrial simulations</b><span>Tank level, temperature, conveyor drive and PID tuning, with sources</span></a><a class="qcard card" href="control-system-engineering/julia-simulations.html"><span class="qi">💻</span><b>Julia simulations</b><span>Code and interactive plots, notebook style</span></a><a class="qcard card" href="control-system-engineering/course-plan.pdf"><span class="qi">📄</span><b>Course plan (PDF)</b><span>The official 2026-27 course plan</span></a><a class="qcard card" href="control-system-engineering/module-1-notes.pdf"><span class="qi">📝</span><b>Module 1 notes (PDF)</b><span>Lecture notes and tutorial: Laplace review, electrical and mechanical modelling</span></a></div>
+    <div class="qgrid"><a class="qcard card" href="control-system-engineering/syllabus.html"><span class="qi">📘</span><b>Syllabus</b><span>Aims, outcomes, textbooks and grading</span></a><a class="qcard card" href="control-system-engineering/schedule.html"><span class="qi">🗓️</span><b>Schedule</b><span>Week-by-week plan, assignments and exams</span></a><a class="qcard card" href="control-system-engineering/01-introduction.html"><span class="qi">🚀</span><b>Start lesson 1</b><span>Introduction to control systems</span></a><a class="qcard card" href="#map"><span class="qi">🧭</span><b>Course map</b><span>Mind map of all topics, linked to the course outcomes (OBE)</span></a><a class="qcard card" href="#sims"><span class="qi">🎛️</span><b>Simulations</b><span>Interactive models you can run in the browser</span></a><a class="qcard card" href="control-system-engineering-laboratory/experiments.html"><span class="qi">🔬</span><b>Lab experiments (EEE2563)</b><span>Diagrams, simulations and practice questions for every lab experiment</span></a><a class="qcard card" href="control-system-engineering/industrial-simulations.html"><span class="qi">🏭</span><b>Industrial simulations</b><span>Tank level, temperature, conveyor drive and PID tuning, with sources</span></a><a class="qcard card" href="control-system-engineering/julia-simulations.html"><span class="qi">💻</span><b>Julia simulations</b><span>Code and interactive plots, notebook style</span></a><a class="qcard card" href="control-system-engineering/course-plan.pdf"><span class="qi">📄</span><b>Course plan (PDF)</b><span>The official 2026-27 course plan</span></a><a class="qcard card" href="control-system-engineering/module-1-notes.pdf"><span class="qi">📝</span><b>Module 1 notes (PDF)</b><span>Lecture notes and tutorial: Laplace review, electrical and mechanical modelling</span></a></div>
+  </section>
+  <section id="map">
+    <h2>Course map and outcomes</h2>
+    <p class="note" style="margin-top:-10px;margin-bottom:18px">All nineteen topics on one map. Select a topic to open its lesson, or pick a course outcome (CO) to see which topics build it. The mapping follows the official course plan.</p>
+    <!-- COURSE MAP: edit the data below (outcomes, lessons and their "co" / "also" lists). Guide section 19. -->
+    <div class="cmap">
+<script type="application/json">
+{
+ "title": "Control System\nEngineering",
+ "outcomes": [
+  {
+   "id": "CO1",
+   "text": "Derive transfer function models of basic electrical and mechanical systems.",
+   "bloom": "Apply",
+   "assess": "CA1, midterm, CA3 mini project, end-term",
+   "map": {
+    "PO1": "H",
+    "PO2": "M",
+    "PO3": "L",
+    "PSO1": "H"
+   }
+  },
+  {
+   "id": "CO2",
+   "text": "Solve for the transfer function of control systems using block diagram reduction and signal flow graphs by Mason's gain formula.",
+   "bloom": "Apply",
+   "assess": "Midterm, CA3 mini project, end-term",
+   "map": {
+    "PO1": "H",
+    "PO2": "M",
+    "PO3": "L",
+    "PO5": "M",
+    "PSO1": "H",
+    "PSO2": "M"
+   }
+  },
+  {
+   "id": "CO3",
+   "text": "Analyse the time response of first and second-order systems for standard test inputs, and the effect of P, PI and PID controllers.",
+   "bloom": "Analyse",
+   "assess": "Midterm, CA3 mini project, end-term",
+   "map": {
+    "PO1": "H",
+    "PO2": "M",
+    "PO3": "L",
+    "PO5": "M",
+    "PO9": "L",
+    "PO10": "L",
+    "PO12": "L",
+    "PSO1": "H",
+    "PSO2": "M"
+   }
+  },
+  {
+   "id": "CO4",
+   "text": "Analyse the stability and performance of control systems using time-domain and frequency-domain approaches.",
+   "bloom": "Analyse",
+   "assess": "CA2, CA3 mini project, end-term",
+   "map": {
+    "PO1": "H",
+    "PO2": "M",
+    "PO3": "L",
+    "PO5": "M",
+    "PO9": "L",
+    "PO10": "L",
+    "PO12": "L",
+    "PSO1": "H",
+    "PSO2": "M"
+   }
+  },
+  {
+   "id": "CO5",
+   "text": "Select lead, lag and lead-lag compensators to achieve desired performance specifications.",
+   "bloom": "Apply",
+   "assess": "End-term",
+   "map": {
+    "PO1": "H",
+    "PO2": "M",
+    "PO3": "L",
+    "PO5": "M",
+    "PSO1": "H",
+    "PSO2": "M"
+   }
+  },
+  {
+   "id": "CO6",
+   "text": "Determine state-space models and system properties for linear and nonlinear dynamic systems.",
+   "bloom": "Apply",
+   "assess": "End-term",
+   "map": {
+    "PO1": "H",
+    "PO2": "M",
+    "PO3": "L",
+    "PO5": "M",
+    "PSO1": "H",
+    "PSO2": "L"
+   }
+  }
+ ],
+ "po": [
+  {
+   "id": "PO1",
+   "name": "Engineering knowledge"
+  },
+  {
+   "id": "PO2",
+   "name": "Problem analysis"
+  },
+  {
+   "id": "PO3",
+   "name": "Design and development of solutions"
+  },
+  {
+   "id": "PO4",
+   "name": "Investigation of complex problems"
+  },
+  {
+   "id": "PO5",
+   "name": "Modern tool usage"
+  },
+  {
+   "id": "PO6",
+   "name": "The engineer and society"
+  },
+  {
+   "id": "PO7",
+   "name": "Environment and sustainability"
+  },
+  {
+   "id": "PO8",
+   "name": "Ethics"
+  },
+  {
+   "id": "PO9",
+   "name": "Individual and team work"
+  },
+  {
+   "id": "PO10",
+   "name": "Communication"
+  },
+  {
+   "id": "PO11",
+   "name": "Project management and finance"
+  },
+  {
+   "id": "PO12",
+   "name": "Life-long learning"
+  },
+  {
+   "id": "PSO1",
+   "name": "Solve complex problems in power systems, electronics, machines, renewable energy, embedded systems, electric vehicles and industrial automation"
+  },
+  {
+   "id": "PSO2",
+   "name": "Use modern hardware and software tools and engage in life-long learning"
+  },
+  {
+   "id": "PSO3",
+   "name": "Engineering solutions considering sustainability, society and professional ethics"
+  }
+ ],
+ "modules": [
+  {
+   "n": 1,
+   "title": "System components and their representation",
+   "short": "Modelling",
+   "lessons": [
+    {
+     "n": 1,
+     "title": "Introduction to control systems",
+     "label": "Introduction",
+     "href": "control-system-engineering/01-introduction.html",
+     "co": [
+      "CO1"
+     ],
+     "also": []
+    },
+    {
+     "n": 2,
+     "title": "Laplace transform and partial fractions",
+     "label": "Laplace & partial fractions",
+     "href": "control-system-engineering/02-laplace-and-partial-fractions.html",
+     "co": [
+      "CO1"
+     ],
+     "also": [
+      "CO3"
+     ]
+    },
+    {
+     "n": 3,
+     "title": "Models of electrical systems",
+     "label": "Electrical systems",
+     "href": "control-system-engineering/03-electrical-systems.html",
+     "co": [
+      "CO1"
+     ],
+     "also": []
+    },
+    {
+     "n": 4,
+     "title": "Models of mechanical systems",
+     "label": "Mechanical systems",
+     "href": "control-system-engineering/04-mechanical-systems.html",
+     "co": [
+      "CO1"
+     ],
+     "also": []
+    },
+    {
+     "n": 5,
+     "title": "Block diagram reduction",
+     "label": "Block diagram reduction",
+     "href": "control-system-engineering/05-block-diagrams.html",
+     "co": [
+      "CO2"
+     ],
+     "also": []
+    },
+    {
+     "n": 6,
+     "title": "Signal flow graphs and Mason's gain formula",
+     "label": "Signal flow graphs",
+     "href": "control-system-engineering/06-signal-flow-graphs.html",
+     "co": [
+      "CO2"
+     ],
+     "also": []
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "title": "Time response analysis",
+   "short": "Time response",
+   "lessons": [
+    {
+     "n": 7,
+     "title": "Standard test signals and first-order response",
+     "label": "First-order response",
+     "href": "control-system-engineering/07-first-order-response.html",
+     "co": [
+      "CO3"
+     ],
+     "also": []
+    },
+    {
+     "n": 8,
+     "title": "Second-order response and time-domain specifications",
+     "label": "Second-order response",
+     "href": "control-system-engineering/08-second-order-response.html",
+     "co": [
+      "CO3"
+     ],
+     "also": [
+      "CO4"
+     ]
+    },
+    {
+     "n": 9,
+     "title": "Steady-state errors and error constants",
+     "label": "Steady-state errors",
+     "href": "control-system-engineering/09-steady-state-errors.html",
+     "co": [
+      "CO3"
+     ],
+     "also": []
+    },
+    {
+     "n": 10,
+     "title": "P, PI and PID controllers",
+     "label": "P, PI and PID control",
+     "href": "control-system-engineering/10-p-pi-pid-controllers.html",
+     "co": [
+      "CO3"
+     ],
+     "also": [
+      "CO5"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "title": "Stability analysis",
+   "short": "Stability",
+   "lessons": [
+    {
+     "n": 11,
+     "title": "Stability and the Routh criterion",
+     "label": "Routh criterion",
+     "href": "control-system-engineering/11-routh-stability.html",
+     "co": [
+      "CO4"
+     ],
+     "also": []
+    },
+    {
+     "n": 12,
+     "title": "Root locus",
+     "label": "Root locus",
+     "href": "control-system-engineering/12-root-locus.html",
+     "co": [
+      "CO4"
+     ],
+     "also": [
+      "CO5"
+     ]
+    },
+    {
+     "n": 13,
+     "title": "Frequency response and Bode plots",
+     "label": "Bode plots",
+     "href": "control-system-engineering/13-bode-plots.html",
+     "co": [
+      "CO4"
+     ],
+     "also": [
+      "CO5"
+     ]
+    },
+    {
+     "n": 14,
+     "title": "Nyquist stability criterion",
+     "label": "Nyquist criterion",
+     "href": "control-system-engineering/14-nyquist.html",
+     "co": [
+      "CO4"
+     ],
+     "also": []
+    },
+    {
+     "n": 15,
+     "title": "Lead, lag and lead-lag compensation",
+     "label": "Lead–lag compensation",
+     "href": "control-system-engineering/15-compensation.html",
+     "co": [
+      "CO5"
+     ],
+     "also": [
+      "CO4"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "title": "State space analysis",
+   "short": "State space",
+   "lessons": [
+    {
+     "n": 16,
+     "title": "State variables and state models",
+     "label": "State models",
+     "href": "control-system-engineering/16-state-space-models.html",
+     "co": [
+      "CO6"
+     ],
+     "also": [
+      "CO1"
+     ]
+    },
+    {
+     "n": 17,
+     "title": "State diagrams and solution of the state equation",
+     "label": "State equation solution",
+     "href": "control-system-engineering/17-state-equation-solution.html",
+     "co": [
+      "CO6"
+     ],
+     "also": [
+      "CO3"
+     ]
+    },
+    {
+     "n": 18,
+     "title": "Controllability and observability",
+     "label": "Controllability & observability",
+     "href": "control-system-engineering/18-controllability-observability.html",
+     "co": [
+      "CO6"
+     ],
+     "also": []
+    },
+    {
+     "n": 19,
+     "title": "Introduction to nonlinear systems",
+     "label": "Nonlinear systems",
+     "href": "control-system-engineering/19-nonlinear-systems.html",
+     "co": [
+      "CO6"
+     ],
+     "also": []
+    }
+   ]
+  }
+ ]
+}
+</script>
+    </div>
   </section>
   <section id="lessons">
     <h2>Lessons</h2>
@@ -72,5 +472,6 @@
 <footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../index.html">Home</a> · <a href="../index.html#teaching">Teaching</a></div></footer>
 <script src="../assets/js/site.js"></script>
 <script src="../assets/js/sims.js"></script>
+<script src="../assets/js/course-map.js"></script>
 </body>
 </html>

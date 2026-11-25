@@ -343,3 +343,24 @@ Each simulation is one `<section class="lsec labexp indsim">` block with the pro
 The maths is in `assets/js/industrial-sims.js`. It uses the same slider engine as the lab experiments page (`assets/js/lab-experiments.js`), so the page must load `industrial-sims.js` first, then Plotly, then `lab-experiments.js`. To change a default value, find the simulation in `industrial-sims.js` (for example `LAB['ind-tank']`) and change `val:` for that slider. Drop-down lists use `type: 'select'` with an `options` list.
 
 The process numbers are example values chosen for teaching and are labelled as such on the page. Lessons 1, 4, 7, 8 and 10 link to the matching simulation, and the course home page lists them under Simulations.
+
+## 19. Course map and outcome (OBE) mapping (Control System Engineering)
+
+The course home page has a **Course map and outcomes** section. It shows:
+
+- a mind map of all 19 lessons grouped by module. Clicking a topic opens its lesson. On a phone the map turns into a branching list.
+- buttons CO1 to CO6. Pressing one lights up the topics that build that outcome (solid outline = main outcome, dashed = the topic also supports it) and shows the outcome statement, Bloom level, assessments and programme outcomes.
+- a lesson × CO table and the CO × PO/PSO table (H, M, L from Tables 2a and 2b of the course plan).
+
+You can link straight to one outcome: `control-system-engineering.html#co4` opens the page with CO4 lit up.
+
+All of it is drawn by `assets/js/course-map.js` from the data block inside `<div class="cmap">` on the course page. To change the mapping, edit only that data block:
+
+- `"co": ["CO3"]` is the main outcome of a lesson (taken from the lesson plan table of the course plan),
+- `"also": ["CO5"]` lists outcomes the lesson also supports (my reading of the lesson content; change freely),
+- `"label"` is the short name shown on the map, `"title"` the full name used in the list and tables,
+- each outcome has `"text"`, `"bloom"`, `"assess"` and `"map"` (its PO/PSO levels).
+
+Keep the quotes and commas exactly as they are. If the data has a typing error, the page shows a short message in place of the map.
+
+To add a map to another course page, copy the whole `<section id="map">` block, change the data, and add `<script src="../assets/js/course-map.js"></script>` before `</body>`.
