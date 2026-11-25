@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 1: Automation, production systems and automated flow lines · Industrial Automation and Robotics</title>
+<meta name="description" content="What automation is, the automation hierarchy, fixed, programmable and flexible automation, production systems and automated flow lines with their transfer mechanisms.">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 1: Automation, production systems and automated flow lines  (Industrial Automation and Robotics, EACT 536)
+  Edit the notes between the NOTES START and NOTES END markers below.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Figures live in assets/img/diagrams/ (names start with iar-) and are shown with a figure of class "diagram".
+  A live simulation is a line like  <div class="sim" data-rsim="arm2r"></div>  (see assets/js/robotics-sims.js).
+  To add an exercise, copy one list item inside the list of class "exlist".
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
+  <nav class="links"><a href="../industrial-automation-and-robotics.html">Course home</a><a href="../industrial-automation-and-robotics.html#lessons">Lessons</a><a href="../industrial-automation-and-robotics.html#figures">Figures</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../industrial-automation-and-robotics.html">← Industrial Automation and Robotics</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 1 of 6 · Chapter 1</div>
+    <h1>Automation, production systems and automated flow lines</h1>
+    <p>Industrial Automation and Robotics · EACT 536 · Postgraduate course</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">EACT 536 · Industrial Automation and Robotics</div><ol><li class="on"><a href="01-automation-and-flow-lines.html"><span class="n">1</span>Automation, production systems and automated flow lines</a></li><li><a href="02-modelling-automated-manufacturing.html"><span class="n">2</span>Modelling automated manufacturing systems</a></li><li><a href="03-robot-anatomy-and-end-effectors.html"><span class="n">3</span>Robots: anatomy, configurations and end effectors</a></li><li><a href="04-actuators-sensors-dh.html"><span class="n">4</span>Actuators, sensors and the Denavit–Hartenberg convention</a></li><li><a href="05-configuration-space-kinematics.html"><span class="n">5</span>Configuration space and forward kinematics</a></li><li><a href="06-programming-and-applications.html"><span class="n">6</span>Robot programming and industrial applications</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Define automation and name the three abilities of a truly automated system</li><li>Place a device or task on the six levels of the automation hierarchy</li><li>Choose between fixed, programmable and flexible automation for a product</li><li>Apply the USA principle and the ten automation strategies</li><li>Tell job shop, batch and mass production apart and list the functions in manufacturing</li><li>Describe automated flow line layouts, transfer methods and indexing mechanisms such as the Geneva wheel</li></ul></div>
+    <nav class="figstrip" aria-label="Figures in this lesson"><a href="#fig-loop"><img src="../../assets/img/diagrams/iar-automation-loop.svg" alt="" loading="lazy"><span>Truly automated system</span></a><a href="#fig-hierarchy"><img src="../../assets/img/diagrams/iar-hierarchy.svg" alt="" loading="lazy"><span>Automation hierarchy</span></a><a href="#fig-response"><img src="../../assets/img/diagrams/iar-response-time.svg" alt="" loading="lazy"><span>Response time by level</span></a><a href="#fig-types"><img src="../../assets/img/diagrams/iar-automation-types.svg" alt="" loading="lazy"><span>Fixed, programmable, flexible</span></a><a href="#fig-info"><img src="../../assets/img/diagrams/iar-info-cycle.svg" alt="" loading="lazy"><span>Information cycle</span></a><a href="#fig-configs"><img src="../../assets/img/diagrams/iar-flowline-configs.svg" alt="" loading="lazy"><span>Flow line layouts</span></a><a href="#fig-transfer"><img src="../../assets/img/diagrams/iar-transfer-modes.svg" alt="" loading="lazy"><span>Transfer methods</span></a><a href="#fig-geneva"><img src="../../assets/img/diagrams/iar-geneva.svg" alt="" loading="lazy"><span>Geneva mechanism</span></a></nav>
+    <section class="lsec"><h2>Notes</h2>
+    <!-- NOTES START -->
+    <article class="notes">
+<h3 id="what">1. What is automation?</h3>
+<p><b>Automation</b> is the use of control systems and information technology to reduce the human work needed to produce goods and services. Machinery, factory processes, boilers, heat-treating ovens, telephone switching and the steering and stabilisation of ships and aircraft are all run this way with little or no human intervention.</p>
+<p>For manufacturing, a more precise definition is: <i>all measures that make a process run wholly or partly according to a previously set program, without a human having to control it.</i> A classic phrase sums up where automation sits: <b>automation begins where mass production leaves off.</b> It is mass production taken to the point where human labour and human control are replaced, completely or nearly completely, by mechanical labour and mechanical (today: computer) control.</p>
+<figure class="diagram" id="fig-loop"><img src="../../assets/img/diagrams/iar-automation-loop.svg" alt="Decision making, physical action and evaluation with feedback form a loop; mechanization plus control technology equals automation" loading="lazy"><figcaption>A truly automated system closes the loop: it decides, acts and checks its own result. Mechanization alone (machines doing the work) is not yet automation; the control technology that decides and corrects is what turns it into automation.</figcaption></figure>
+<p>A <b>truly automated system</b> has three abilities:</p>
+<ol><li>the ability to <b>make a decision</b>,</li><li>the ability to <b>carry out</b> that decision,</li><li>the ability to <b>evaluate and correct</b> its own performance (feedback).</li></ol>
+<p>Manual assembly has all three, but in the worker's head and hands. Mechanization gives the machine the second ability only; adding control technology gives it the first and third.</p>
+
+<h3 id="human-machine">2. Humans and machines: who is good at what?</h3>
+<table class="tbl"><tr><th>Machines are better at</th><th>Humans are better at</th></tr>
+<tr><td>repeating the same task without tiring</td><td>noticing unexpected events</td></tr>
+<tr><td>storing large amounts of data and recalling it exactly</td><td>finding new solutions to problems</td></tr>
+<tr><td>doing several tasks at the same time</td><td>adapting to change</td></tr>
+<tr><td>applying large forces and power</td><td>coping with abstract problems</td></tr>
+<tr><td>simple calculations, fast</td><td>generalising from observations and learning from experience</td></tr>
+<tr><td>routine decisions, fast</td><td>difficult decisions on incomplete data</td></tr></table>
+<p class="key">Good automation gives the left column to the machine and keeps people for the right column: supervision, problem solving and improvement.</p>
+<p>The technology of automation includes automatic machine tools, automatic assembly machines, industrial robots, automatic material handling and storage, automatic inspection and quality control, feedback and computer process control, and computer systems for planning, data collection and decision making.</p>
+
+<h3 id="applications">3. Where automation is used</h3>
+<table class="tbl"><tr><th>Field</th><th>Examples</th></tr>
+<tr><td>Power generation</td><td>hydro, coal, gas, oil, nuclear, wind, solar plants</td></tr>
+<tr><td>Transmission and distribution</td><td>electricity, gas, oil, water networks</td></tr>
+<tr><td>Process industry</td><td>paper, food, pharmaceuticals, metals, glass, cement, chemicals, refineries, oil and gas</td></tr>
+<tr><td>Manufacturing</td><td>computer-integrated manufacturing, flexible fabrication, appliances, cars, aircraft</td></tr>
+<tr><td>Storage</td><td>silos, elevators, harbours, warehouses, luggage handling</td></tr>
+<tr><td>Buildings</td><td>heating, ventilation and air conditioning, access control, fire, energy supply, tunnels, car parks</td></tr>
+<tr><td>Transportation</td><td>trains, trams, buses, cars, ships, aircraft, rockets, satellites</td></tr></table>
+<p>Each field brings its own demands. <b>Oil and gas</b> plants work in explosive atmospheres; the upstream side (from the well to the refinery, often under the sea) adds high pressure, salt water and poor access. <b>Process industries</b> such as steel, cement, glass and paper run a continuous flow of material, often 24 hours a day. <b>Power plants</b> must control fuel supply and the primary process, protect people and the neighbourhood, watch the environmental impact, hold voltage and frequency and be available 24/365.</p>
+
+<h3 id="hierarchy">4. The automation hierarchy</h3>
+<p>A large plant is not run by one controller. Control is split into levels, each with its own job, time scale and amount of data.</p>
+<figure class="diagram" id="fig-hierarchy"><img src="../../assets/img/diagrams/iar-hierarchy.svg" alt="Six-level automation pyramid from field to enterprise" loading="lazy"><figcaption>The automation pyramid. Lower levels are fast and close to the hardware; upper levels are slow and close to the business.</figcaption></figure>
+<table class="tbl"><tr><th>Level</th><th>What it does</th></tr>
+<tr><td>5 · Administration</td><td>finance, human resources, documentation, long-term planning</td></tr>
+<tr><td>4 · Enterprise / manufacturing</td><td>sets production goals, plans resources, coordinates sites, manages orders; manages execution, workflow, quality supervision, scheduling and maintenance (MES)</td></tr>
+<tr><td>3 · Supervisory</td><td>supervises production and the site, optimises, shows the plant to operators, stores process data, logs operations and history (open loop)</td></tr>
+<tr><td>2 · Group (area)</td><td>controls a well-defined part of the plant: coordinates subgroups, adjusts set-points and parameters, commands several units as a whole (closed loop, except when an operator steps in)</td></tr>
+<tr><td>1 · Unit (cell)</td><td>controls part of a group: <i>measure</i> (sampling, scaling, calibration), <i>control</i> (regulation, set-points) and <i>command</i> (sequencing, protection, interlocking)</td></tr>
+<tr><td>0 · Field</td><td>sensors and actuators: data acquisition and transmission, no processing beyond measurement correction and built-in protection</td></tr></table>
+<p>The <b>field level</b> is in direct contact with the plant hardware (the "primary technology"). The <b>group level</b> coordinates several unit controllers; it is often hierarchical, but group controllers can also talk peer to peer, which is the idea of a <b>distributed control system (DCS)</b>. A group can have its own local operator panel, for example a cement-packaging line with a console and an emergency panel for maintenance.</p>
+<p>At the <b>supervisory level</b> the operator works through a human–machine interface. In the 1970s every instrument was wired directly to a mimic wall in the control room. Today a <b>SCADA</b> system (Supervisory Control And Data Acquisition) and large projection screens replace the mimic wall, and nothing is wired directly to the plant any more. SCADA:</p>
+<ul><li>shows the current state of the process (visualisation),</li><li>shows alarms and events (alarm log, logbook),</li><li>shows and analyses trends from the historian,</li><li>gives access to handbooks, data sheets, inventory and expert systems,</li><li>exchanges data with other control centres.</li></ul>
+<p>Above it, <b>plant management</b> keeps plant and product data safely so that processes can be tracked and products traced (a Plant Information Management System, PIMS) and predicts future behaviour, especially equipment maintenance, while tracking key performance indicators (asset optimisation). The <b>engineering workplace</b> manages the control system itself rather than the plant: it configures networks and devices, loads software, sets access rights and troubleshoots.</p>
+<figure class="diagram" id="fig-response"><img src="../../assets/img/diagrams/iar-response-time.svg" alt="Time scales of PLC, DCS, SCADA, MES and ERP" loading="lazy"><figcaption>Each layer works on its own time scale, from milliseconds for a PLC to months and years for enterprise resource planning (ERP).</figcaption></figure>
+<p><b>Data and the hierarchy.</b> The lowest levels need the fastest response and handle the most raw data, but the processing is simple (it was once done in hardware). Going up, data are condensed into summary information, timing becomes relaxed, the processing becomes more complex (it needs models), and history is stored. The SCADA level presents complex data to the operator and helps with decisions and maintenance, which needs a knowledge base besides the plant database.</p>
+<p class="key">Why data reduction matters: a plant sends more than 5 kbit/s of information towards its staff, but a person can process only about 25 bit/s. A power plant once needed some 200 engineers to watch it; with computers doing the reduction, about three are enough. A modern nuclear plant has around 10 000 points (8 000 measurements and 2 000 actuators) and about 1 000 controllers; an electricity distribution network has roughly three times more points than a conventional power plant.</p>
+
+<h3 id="types">5. Fixed, programmable and flexible automation</h3>
+<figure class="diagram" id="fig-types"><img src="../../assets/img/diagrams/iar-automation-types.svg" alt="Fixed automation at high quantity and low variety, programmable at low quantity and high variety, flexible in between" loading="lazy"><figcaption>The right type depends on how many parts you make and how many different products you make.</figcaption></figure>
+<p><b>Fixed automation</b> (also called hard automation): the sequence of operations is fixed by the equipment itself. It suits very high quantities, needs a high initial investment in custom-built equipment, gives high production rates and copes poorly with product variety. Examples: automated assembly machines, chemical processes, conveyor systems, machining transfer lines, paint and coating lines, web handling. A lamp factory turning out more than a billion bulbs a year is the classic case.</p>
+<p><b>Programmable automation</b>: the sequence can be changed by reprogramming, so different product configurations can be made. It needs a high investment in general-purpose programmable equipment (CNC machines, robots), gives lower production rates than fixed automation, and suits <i>batch</i> production. Between batches the physical set-up (tools, fixtures) and the part program must be changed, which costs time.</p>
+<p><b>Flexible automation</b>: an extension of programmable automation that changes over from one job to the next with almost no lost time, so a mix of different products can flow continuously. It needs a high investment in a custom-engineered system and gives medium production rates. One motorcycle maker is reported to have launched more than a hundred models in 18 months on flexible lines.</p>
+<table class="tbl"><tr><th>Type</th><th>When to consider</th><th>Advantages</th><th>Disadvantages</th></tr>
+<tr><td>Fixed</td><td>high demand, long product life</td><td>maximum efficiency, low unit cost</td><td>large investment, inflexible</td></tr>
+<tr><td>Programmable</td><td>batch production, products with options</td><td>copes with product changes, low cost for large batches</td><td>long set-up for a new product, higher unit cost than fixed</td></tr>
+<tr><td>Flexible</td><td>low rates, varying demand, short product life</td><td>handles design variations, customised products</td><td>large investment, highest unit cost of the three</td></tr></table>
+<p>The automated flow line, sometimes called <b>"Detroit-type" automation</b> after the car engine lines where it began, is the typical fixed system. Its objectives are to reduce labour cost, raise production rates, reduce work-in-process, shorten the distances parts travel and integrate operations.</p>
+
+<h3 id="why">6. Why automate, and how to go about it</h3>
+<p><b>Reasons for automating:</b> (1) raise labour productivity, (2) reduce labour cost, (3) ease labour shortages, (4) remove routine manual and clerical tasks, (5) improve worker safety, (6) improve product quality, (7) reduce manufacturing lead time, (8) do what cannot be done by hand, (9) avoid the high cost of <i>not</i> automating (losing to competitors).</p>
+<p>Automation is not always the right answer. Three approaches help decide.</p>
+<p><b>The USA principle</b> is a common-sense recipe:</p>
+<ol><li><b>U</b>nderstand the existing process: what are the inputs and outputs, what happens between them, what is the function of the process, how does it add value, what is the sequence of operations? (Tools: input/output analysis, value-chain analysis, charting, mathematical models.)</li>
+<li><b>S</b>implify it: what is the purpose of each step and each move? Is it necessary? Can it be removed, combined with another step or done with better technology?</li>
+<li><b>A</b>utomate what is left, using the ten strategies and the migration strategy below.</li></ol>
+<p><b>Ten strategies for automation and process improvement:</b></p>
+<table class="tbl"><tr><th>#</th><th>Strategy</th><th>Idea</th></tr>
+<tr><td>1</td><td>Specialisation of operations</td><td>special-purpose equipment for one operation</td></tr>
+<tr><td>2</td><td>Combined operations</td><td>several operations at one machine: fewer workstations</td></tr>
+<tr><td>3</td><td>Simultaneous operations</td><td>do the combined operations at the same time: less processing time</td></tr>
+<tr><td>4</td><td>Integration of operations</td><td>link workstations with automatic handling</td></tr>
+<tr><td>5</td><td>Increased flexibility</td><td>make the most of the equipment across products</td></tr>
+<tr><td>6</td><td>Better material handling and storage</td><td>cut non-productive waiting and moving time</td></tr>
+<tr><td>7</td><td>On-line inspection</td><td>check during the process and correct at once</td></tr>
+<tr><td>8</td><td>Process control and optimisation</td><td>run each process and machine more efficiently</td></tr>
+<tr><td>9</td><td>Plant operations control</td><td>control at the level of the whole plant</td></tr>
+<tr><td>10</td><td>Computer-integrated manufacturing (CIM)</td><td>link design, planning and the factory through computers</td></tr></table>
+<p><b>Automation migration strategy</b> for a new product: <b>Phase 1</b> manual production in single-station manned cells (quick to start, low risk); <b>Phase 2</b> automated single-station cells working independently, once demand is proven; <b>Phase 3</b> an integrated multi-station automated system with automated material handling, once demand is large and stable.</p>
+
+<h3 id="production">7. Industries, production systems and types of production</h3>
+<p>There are two kinds of industry. <b>Manufacturing industries</b> make discrete items such as cars, computers and machine tools and their parts. <b>Process industries</b> make chemicals, plastics, petroleum products, food, soap, steel and cement. Companies can also be grouped by what they do with material:</p>
+<ul><li><b>basic producers</b> turn natural resources into raw materials (iron ore into steel ingots),</li><li><b>converters</b> turn raw materials into industrial products (ingots into bar stock and sheet; petroleum into plastics),</li><li><b>fabricators</b> make and assemble final products (bar stock into engine parts, sheet into car body panels).</li></ul>
+<p><b>Manufacturing</b> turns raw materials into goods using machines, on a large scale; the output is always tangible. <b>Production</b> is wider: any transformation of material and non-material inputs (ideas, skills, information) into something useful, goods or services, with or without machines. All manufacturing is production, but not all production is manufacturing.</p>
+<p>A <b>production system</b> is the people, equipment and procedures that do the manufacturing. It has two parts: the <b>facilities</b> (factory, equipment, layout) and the <b>manufacturing support systems</b> (the procedures used to manage production). Automation can be applied to both: automation of the manufacturing systems and computerisation of the support systems. Where the two overlap through computers we speak of <b>computer-integrated manufacturing (CIM)</b>.</p>
+<table class="tbl"><tr><th>Type of production</th><th>Volume and variety</th><th>Equipment and people</th><th>Examples</th></tr>
+<tr><td>Job shop</td><td>low volume, often one of a kind, great variety, to customer order</td><td>general-purpose, flexible equipment; highly skilled workers</td><td>aircraft, space vehicles, machine tools, special tools, prototypes</td></tr>
+<tr><td>Batch</td><td>medium-sized lots, made once or at intervals; the plant can produce faster than demand, so it builds stock and then changes over</td><td>general-purpose equipment with set-ups between batches</td><td>industrial equipment, furniture, textbooks, parts for household appliances</td></tr>
+<tr><td>Mass</td><td>continuous production of identical products at very high rates and demand</td><td>special-purpose equipment dedicated to the product; high investment</td><td><i>quantity</i> production of single parts (presses, moulding machines); <i>flow</i> production in refineries, chemical and food plants and engine or car assembly lines</td></tr></table>
+<p><b>Functions in manufacturing.</b> Whatever the type of production, five functions turn raw material into finished product:</p>
+<ol><li><b>Processing</b> adds energy (mechanical, heat, electrical, chemical) to change the part, without adding components. Four kinds: <i>basic processes</i> give the initial shape (casting, moulding); <i>secondary processes</i> give the final geometry (turning, drilling, milling, blanking, forming, drawing); <i>property-enhancing operations</i> improve the material, not its shape (heat treatment, pre-shrinking cloth); <i>finishing operations</i> improve appearance or protect (polishing, painting, chrome plating). A process needs five inputs (raw material, equipment, tooling and fixtures, energy, labour) and gives two outputs (the finished part, and scrap and waste).</li>
+<li><b>Assembly</b> joins two or more components: mechanical fastening (screws, nuts, rivets) and joining (welding, brazing, soldering).</li>
+<li><b>Material handling and storage</b>: parts spend far more time being moved and stored than being processed, and much of the cost of production goes here.</li>
+<li><b>Inspection and test</b>: checks that the product meets its design standards and specifications.</li>
+<li><b>Control</b>: regulates each processing and assembly operation to meet its targets, and manages the plant as a whole (labour, maintenance, moving materials).</li></ol>
+
+<h3 id="info">8. Information processing in manufacturing</h3>
+<p>A company may make hundreds of products, each with thousands of components. Coordinating everything needed to make the parts, assemble them and deliver the product is a problem in <b>information processing</b>. Four functions form a cycle:</p>
+<figure class="diagram" id="fig-info"><img src="../../assets/img/diagrams/iar-info-cycle.svg" alt="Information cycle: customer, business functions, product design, manufacturing planning, manufacturing control, factory operations" loading="lazy"><figcaption>The information-processing cycle: it starts and ends with the customer.</figcaption></figure>
+<ul><li><b>Business functions</b> talk to the customer and are the start and end of the cycle: sales, marketing, forecasting, order entry, cost accounting and billing.</li>
+<li><b>Product design</b> turns customer specifications or a new idea from sales into a design: research and development, design engineering, drafting and prototypes.</li>
+<li><b>Manufacturing planning</b> decides how to make it: manufacturing engineering, industrial engineering, production planning and control.</li>
+<li><b>Manufacturing control</b> runs the physical operations to carry out the plan: shop-floor control, quality control and inventory control.</li></ul>
+
+<h3 id="afl">9. Automated flow lines</h3>
+<p>An <b>automated flow line (AFL)</b> is a set of workstations linked by work-handling devices that transfer parts from station to station. Transfer and processing are both automatic. Manual stations can be included for operations that are hard or uneconomical to automate. The objectives are to reduce labour cost, raise production rates, reduce work-in-process, minimise distances between operations, and achieve specialisation and integration of operations.</p>
+<figure class="diagram" id="fig-configs"><img src="../../assets/img/diagrams/iar-flowline-configs.svg" alt="In-line, U-shaped segmented and rotary flow line layouts" loading="lazy"><figcaption>Three layouts. A segmented line may turn through several 90° corners (L, U or rectangle) because of floor space or to re-orient the parts, and it still counts as a straight line.</figcaption></figure>
+<ul><li><b>In-line</b>: stations in a more or less straight line.</li>
+<li><b>Segmented in-line</b>: two or more straight sections, usually at right angles (L, U or rectangular shapes).</li>
+<li><b>Rotary</b> (dial indexing machine): parts ride on a round table that indexes them to fixed stations around its edge.</li></ul>
+<p><b>Methods of work-part transport.</b> The transfer system must not only move the parts but also orient and locate them correctly at each station.</p>
+<figure class="diagram" id="fig-transfer"><img src="../../assets/img/diagrams/iar-transfer-modes.svg" alt="Position against time for continuous, intermittent and asynchronous transfer" loading="lazy"><figcaption>Position of a part against time for the three transfer methods.</figcaption></figure>
+<ul><li><b>Continuous transfer</b>: parts move at constant speed, so the workheads must move with them while they work. This is impractical for heavy machining heads (inertia), but ideal for bottling, packaging, manual assembly where the worker walks with the line, and simple automatic assembly. In a bottling machine the bottles ride round a rotating drum while spouts fill them; the liquid moves steadily, so there is no inertia problem.</li>
+<li><b>Intermittent (synchronous) transfer</b>: all parts move together, stop, are registered at their stations, worked on, then move again.</li>
+<li><b>Asynchronous (power-and-free) transfer</b>: each part moves on as soon as its own station is finished, independently of the others. Some parts are being worked while others are travelling.</li></ul>
+<p>The best choice depends on the operations, the number of stations, the size and weight of the parts, whether there are manual stations, the production rate required and how well the station times are balanced.</p>
+<p><b>Transfer mechanisms.</b> <i>Linear</i> mechanisms for in-line machines:</p>
+<ul><li><b>Walking beam</b>: a transfer bar lifts the parts from their stations, moves them one station forward and lowers them into nests that locate them accurately. The beam motion usually comes from a motor-driven camshaft or a hydraulic cylinder.</li>
+<li><b>Powered roller conveyor</b>: rollers driven by a flat belt underneath (friction) or by a chain carry parts or pallets with flat bottoms. Easy to divert pallets into stations or side tracks.</li>
+<li><b>Chain-drive conveyor</b>: a chain or flexible steel belt pulls work carriers, running "over and under" (pulleys on horizontal axes) or "around the corner" (pulleys on vertical axes). It can give continuous, intermittent or asynchronous motion; in asynchronous use the parts are dragged by friction or float on an oil film, and need a final locating device at each station.</li></ul>
+<p><i>Rotary</i> mechanisms index a dial table through equal angles:</p>
+<ul><li><b>Rack and pinion</b>: a piston drives a rack that turns a pinion on the table; a clutch gives one direction. Simple but not suited to high speed.</li>
+<li><b>Ratchet and pawl</b>: a toothed wheel and a spring-loaded pawl allow motion one way only; the pawl clicks over the teeth one way and locks against them the other.</li>
+<li><b>Geneva mechanism</b>: a continuously turning driver indexes the table (below).</li>
+<li><b>Cam mechanisms</b>: a cam can be shaped to give almost any velocity and dwell profile.</li></ul>
+<figure class="diagram" id="fig-geneva"><img src="../../assets/img/diagrams/iar-geneva.svg" alt="Six-slot Geneva mechanism with driver, pin and locking disc" loading="lazy"><figcaption>A six-slot Geneva mechanism in the middle of an index. The pin turns the wheel by one slot; the locking disc holds it during the dwell.</figcaption></figure>
+<p>With $n$ slots the wheel turns $360°/n$ per revolution of the driver. The pin enters and leaves each slot along the slot's centre line, which gives</p>
+<p class="eq">$$\text{index angle of the driver} = 180° - \frac{360°}{n}, \qquad \text{dwell angle} = 180° + \frac{360°}{n}$$</p>
+<p>For $n = 6$: index $120°$, dwell $240°$. For $n = 4$: index $90°$, dwell $270°$. Four, five, six and eight slots are the usual choices. The distance between the shafts $c$ fixes the crank radius $r = c\sin(180°/n)$ and the wheel radius $R = c\cos(180°/n)$.</p>
+<p class="warn">The slide on cam mechanisms says that "Geneva mechanisms provide probably the most accurate and reliable method of indexing the dial". In the source text (Groover) this sentence is about <b>cam</b> mechanisms: they are the most accurate and reliable indexers and are widely used even though they cost more than the alternatives.</p>
+<div class="sim" id="sim-geneva" data-rsim="geneva"></div>
+
+<h3 id="control">10. Control functions of an automated flow line</h3>
+<p>A flow line carries out a huge number of steps in sequence, so its control has three main functions:</p>
+<ol><li><b>Sequence control</b> coordinates the actions of the transfer system and the stations with split-second timing.</li>
+<li><b>Safety monitoring</b> makes sure the line never runs in an unsafe state: for example sensors check that a cutting tool is still in good condition before the next part is machined, and that critical steps were all done, in the right order.</li>
+<li><b>Quality monitoring</b> checks quality attributes of the parts so that defective parts and assemblies are found and possibly rejected, either inside existing stations or at separate inspection stations.</li></ol>
+<p>When a fault is found, the controller can react in two ways. <b>Instantaneous control</b> stops the line at once and finds the cause, which protects the line but loses production. <b>Memory control</b> lets the faulty part continue but remembers it: later stations skip it, and it is rejected at the end, so the line keeps running.</p>
+</article>
+    <!-- NOTES END -->
+    </section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the div below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">A dial table is indexed by an eight-slot Geneva mechanism whose driver turns at 30 rpm. Find the index and dwell angles of the driver, and the index and dwell times per cycle.</div><details><summary>Show solution</summary><div class="sol">Index angle $= 180° - 360°/8 = 135°$; dwell $= 225°$. One driver revolution takes $60/30 = 2$ s, so index time $= 2 \times 135/360 = 0.75$ s and dwell time $= 1.25$ s. The stations have 1.25 s to work on each part.</div></details></li><li><div class="q">Classify each as fixed, programmable or flexible automation: (a) a soft-drink bottling line; (b) a CNC machining centre that makes 50 brackets, then 30 flanges after a tool and program change; (c) a welding line that builds three car models in any order without stopping.</div><details><summary>Show solution</summary><div class="sol">(a) Fixed: one product, very high volume, sequence built into the machine. (b) Programmable: batch production with set-up between batches. (c) Flexible: a mix of products with no lost changeover time.</div></details></li><li><div class="q">In a cement plant, put each item on its hierarchy level: a thermocouple in the kiln; the PID loop that holds kiln temperature; the coordination of the kiln, cooler and mill sections; the operator alarm screen; order tracking and the shift production schedule; the yearly budget.</div><details><summary>Show solution</summary><div class="sol">Thermocouple: level 0 (field). PID loop: level 1 (unit). Coordinating the kiln, cooler and mill: level 2 (group). Alarm screen: level 3 (supervisory, SCADA). Order tracking and shift schedule: level 4 (MES). Yearly budget: level 5 (administration and enterprise, ERP).</div></details></li><li><div class="q">A plant has 10 000 measurement points, each sampled once a second as a 16-bit value. Compare the raw data rate with the 25 bit/s a person can take in. What does this tell you about the supervisory level?</div><details><summary>Show solution</summary><div class="sol">Raw rate $= 10\,000 \times 16 = 160\,000$ bit/s, which is $6400$ times what a person can absorb. The supervisory level must condense the data (alarms, trends, summaries, exception reports) before showing it to the operator.</div></details></li><li><div class="q">For each product, name the most likely type of production: (a) a prototype satellite; (b) school textbooks reprinted every year; (c) motor oil; (d) M8 bolts by the million.</div><details><summary>Show solution</summary><div class="sol">(a) Job shop (one of a kind). (b) Batch (medium lots repeated at intervals). (c) Mass, flow production (continuous process). (d) Mass, quantity production of a single part on standard machines.</div></details></li><li><div class="q">Apply the USA principle to manual drilling of four holes in a plate: the worker marks the holes, centre-punches, drills them one at a time on a pillar drill and then deburrs. Suggest a simplification before automating.</div><details><summary>Show solution</summary><div class="sol">Understand: input plate, output plate with four deburred holes; marking and punching only locate the holes. Simplify: a drill jig removes marking and punching; a multi-spindle head drills all four at once (combined and simultaneous operations); a drill with a chamfer step removes the separate deburring. Only then automate the simplified process, for example a pneumatic clamp and a power feed on the multi-spindle head.</div></details></li></ol></section>
+    <section class="lsec" id="sources"><h2>Sources and further reading</h2>
+    <ul class="srclist"><li>Chapter 1 slides of this course (EACT536), redrawn and rewritten.</li><li>M. P. Groover, <i>Automation, Production Systems, and Computer-Integrated Manufacturing</i>, Pearson (types of automation, USA principle, ten strategies, migration strategy, flow lines and transfer mechanisms).</li><li>Automation hierarchy and SCADA material follows the usual industrial-automation course treatment of the levels from field to enterprise (for example the ISA-95 model).</li></ul></section>
+    <nav class="prevnext"><a class="pn prev" href="../industrial-automation-and-robotics.html"><small>← Course home</small>Industrial Automation and Robotics</a><a class="pn next" href="02-modelling-automated-manufacturing.html"><small>Lesson 2 →</small>Modelling automated manufacturing systems</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+<script src="../../assets/js/robotics-sims.js"></script>
+</body>
+</html>

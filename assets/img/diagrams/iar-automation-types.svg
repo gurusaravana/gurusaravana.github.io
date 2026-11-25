@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" role="img" aria-label="Fixed automation suits very high quantity and low product variety, programmable automation suits low to medium quantity and high variety, flexible automation sits in between.">
+<title>Fixed automation suits very high quantity and low product variety, programmable automation suits low to medium quantity and high variety, flexible automation sits in between.</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker><marker id="av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#7c3aed"/></marker></defs>
+<rect width="600" height="400" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<path d="M80.0 330.0 L560.0 330.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<path d="M80.0 330.0 L80.0 30.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="320.0" y="360.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="600">Product variety</text>
+<text x="320.0" y="380.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">one product  →  many different products</text>
+<text x="34" y="180" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="600" transform="rotate(-90 34 180)">Production quantity</text>
+<text x="72.0" y="50.0" font-size="12" text-anchor="end" fill="#64748b" font-weight="400">high</text>
+<text x="72.0" y="322.0" font-size="12" text-anchor="end" fill="#64748b" font-weight="400">low</text>
+<ellipse cx="170" cy="90" rx="80" ry="50" fill="#fce7f3" stroke="#db2777" stroke-width="2"/>
+<text x="170.0" y="86.0" font-size="15" text-anchor="middle" fill="#db2777" font-weight="700">Fixed</text>
+<text x="170.0" y="104.0" font-size="13" text-anchor="middle" fill="#db2777" font-weight="400">automation</text>
+<ellipse cx="300" cy="180" rx="95" ry="55" fill="#d1fae5" stroke="#059669" stroke-width="2" fill-opacity="0.85"/>
+<text x="300.0" y="176.0" font-size="15" text-anchor="middle" fill="#059669" font-weight="700">Flexible</text>
+<text x="300.0" y="194.0" font-size="13" text-anchor="middle" fill="#059669" font-weight="400">automation</text>
+<ellipse cx="440" cy="265" rx="105" ry="50" fill="#e0f2fe" stroke="#0077b6" stroke-width="2" fill-opacity="0.85"/>
+<text x="440.0" y="261.0" font-size="15" text-anchor="middle" fill="#0077b6" font-weight="700">Programmable</text>
+<text x="440.0" y="279.0" font-size="13" text-anchor="middle" fill="#0077b6" font-weight="400">automation</text>
+</g>
+</svg>

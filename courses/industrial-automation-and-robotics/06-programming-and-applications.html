@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 6: Robot programming and industrial applications · Industrial Automation and Robotics</title>
+<meta name="description" content="Leadthrough, textual and off-line robot programming, simulation of robot cells, a generic robot language, and industrial applications: welding, machine loading, forging, spray painting, drilling and assembly.">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 6: Robot programming and industrial applications  (Industrial Automation and Robotics, EACT 536)
+  Edit the notes between the NOTES START and NOTES END markers below.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Figures live in assets/img/diagrams/ (names start with iar-) and are shown with a figure of class "diagram".
+  A live simulation is a line like  <div class="sim" data-rsim="arm2r"></div>  (see assets/js/robotics-sims.js).
+  To add an exercise, copy one list item inside the list of class "exlist".
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
+  <nav class="links"><a href="../industrial-automation-and-robotics.html">Course home</a><a href="../industrial-automation-and-robotics.html#lessons">Lessons</a><a href="../industrial-automation-and-robotics.html#figures">Figures</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../industrial-automation-and-robotics.html">← Industrial Automation and Robotics</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 6 of 6 · Chapter 6 (part B)</div>
+    <h1>Robot programming and industrial applications</h1>
+    <p>Industrial Automation and Robotics · EACT 536 · Postgraduate course</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">EACT 536 · Industrial Automation and Robotics</div><ol><li><a href="01-automation-and-flow-lines.html"><span class="n">1</span>Automation, production systems and automated flow lines</a></li><li><a href="02-modelling-automated-manufacturing.html"><span class="n">2</span>Modelling automated manufacturing systems</a></li><li><a href="03-robot-anatomy-and-end-effectors.html"><span class="n">3</span>Robots: anatomy, configurations and end effectors</a></li><li><a href="04-actuators-sensors-dh.html"><span class="n">4</span>Actuators, sensors and the Denavit–Hartenberg convention</a></li><li><a href="05-configuration-space-kinematics.html"><span class="n">5</span>Configuration space and forward kinematics</a></li><li class="on"><a href="06-programming-and-applications.html"><span class="n">6</span>Robot programming and industrial applications</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Compare powered and manual leadthrough, textual languages and off-line programming</li><li>Explain the trade-off between on-line and off-line programming and what a cell simulation checks</li><li>Read and write a short robot program with motion, interlock, sensor and gripper commands</li><li>Classify industrial robot applications and give the reasons for using a robot in each</li><li>Work out the productivity of a robot machine-loading cell and the benefit of a two-station welding cell</li></ul></div>
+    <nav class="figstrip" aria-label="Figures in this lesson"><a href="#fig-methods"><img src="../../assets/img/diagrams/iar-programming-methods.svg" alt="" loading="lazy"><span>Programming methods</span></a><a href="#fig-olp"><img src="../../assets/img/diagrams/iar-offline-workflow.svg" alt="" loading="lazy"><span>Simulation workflow</span></a><a href="#fig-weld"><img src="../../assets/img/diagrams/iar-arcweld-cell.svg" alt="" loading="lazy"><span>Arc-welding cell</span></a><a href="#fig-load"><img src="../../assets/img/diagrams/iar-machine-loading.svg" alt="" loading="lazy"><span>Machine loading</span></a></nav>
+    <section class="lsec"><h2>Notes</h2>
+    <!-- NOTES START -->
+    <article class="notes">
+<p>The last lesson of the course turns from how a robot moves to how we tell it what to do, and where it earns its keep. Part 1 covers <a href="#programming">programming methods</a> and a <a href="#language">generic robot language</a>; Part 2 covers <a href="#applications">industrial applications</a> with two worked productivity problems.</p>
+<p class="key">Chapter 6 part A was not part of the material received for this course page. When it is available it will be added here or as its own lesson.</p>
+
+<h3 id="programming">Part 1. Programming methods</h3>
+<p>There are three ways to program an industrial robot:</p>
+<figure class="diagram" id="fig-methods"><img src="../../assets/img/diagrams/iar-programming-methods.svg" alt="Tree of robot programming methods: leadthrough (powered and manual), textual languages and off-line programming with simulation" loading="lazy"><figcaption>The three programming methods and what each adds.</figcaption></figure>
+<ol>
+<li><b>Leadthrough programming.</b> The work cycle is taught by moving the manipulator through the motions while the controller records them for later playback.
+<ul><li><i>Powered leadthrough</i>: the programmer drives the joints with buttons or a joystick on a <b>teach pendant</b>. It suits <b>point-to-point</b> robots (spot welding, machine loading).</li>
+<li><i>Manual leadthrough</i>: the programmer physically moves the arm, or a light replica of it, along the path. It suits <b>continuous-path</b> robots (spray painting, arc welding), where a smooth human motion is the program.</li></ul></li>
+<li><b>Textual robot languages.</b> Commands are typed into the controller, as in VAL, RAPID (ABB), KRL (KUKA) or KAREL (FANUC). Points are usually still taught with the pendant, but the language adds program logic, sensor input, control of external equipment, calculations and communication with supervisory computers.</li>
+<li><b>Simulation and off-line programming (OLP).</b> The program is written and tested on a computer model of the cell, then downloaded to the controller, with no need to tie up the robot.</li></ol>
+
+<h4>Leadthrough: pros and cons</h4>
+<table class="tbl"><tr><th>Advantages</th><th>Disadvantages</th></tr>
+<tr><td>Easily learned by shop-floor staff</td><td>The robot is out of production while it is being taught</td></tr>
+<tr><td>A natural, logical way to teach a motion</td><td>Little program logic: few decisions, loops or calculations</td></tr>
+<tr><td>No computer programming needed</td><td>Hard to link with sensors and supervisory (cell or plant) control</td></tr></table>
+<p>Whatever the method, programming involves four activities: power-up and preparation, entering and editing the program, compiling it (error checks and post-processing), and running it. Not every robot needs all four as separate steps. Robots are taught through <b>teach pendants</b>, teach terminals or the controller's front panel.</p>
+
+<h4>On-line versus off-line</h4>
+<table class="tbl"><tr><th></th><th>On-line (at the robot)</th><th>Off-line (away from the robot)</th></tr>
+<tr><td>Connection</td><td>real-time link between programmer and manipulator</td><td>no physical connection while programming</td></tr>
+<tr><td>Downtime</td><td>the robot produces nothing while it is taught</td><td>cell keeps running; downtime only for final touch-up</td></tr>
+<tr><td>What you get</td><td>what you see is what you get</td><td>model and real cell can differ, so points need calibration or touch-up</td></tr>
+<tr><td>Testing alternatives</td><td>limited: each try costs robot time</td><td>many what-if scenarios can be scripted quickly</td></tr>
+<tr><td>Complex paths</td><td>slow to teach point by point</td><td>easy, especially from CAD geometry</td></tr>
+<tr><td>Existing programs</td><td>edited at the robot</td><td>uploaded, checked and changed while the robot works</td></tr></table>
+<p class="warn">One slide labels structured languages "AKA lead-through programming". That label belongs to the third method, <b>manual real-time (on-line)</b> programming. Structured languages are normally used off line, together with simulation.</p>
+
+<h4 id="olp">Simulation of robot cells</h4>
+<p>A cell simulation is a model of the real system on which we run experiments, then carry the best solution back to the real cell.</p>
+<figure class="diagram" id="fig-olp"><img src="../../assets/img/diagrams/iar-offline-workflow.svg" alt="Simulation loop: real system, model, experiments, results, apply to real system" loading="lazy"><figcaption>Simulation in production: model, experiment, then apply the result to the real cell.</figcaption></figure>
+<p>Simulation is used for four tasks:</p>
+<ul>
+<li><b>Off-line programming</b>: paths, I/O logic and cycle times prepared and debugged before the robot exists or while it works.</li>
+<li><b>Evaluation and set-up</b>: what-if studies of robot position and model, part entry and exit, conveyor positions and interference with the plant layout. The whole cell can be "walked through" virtually.</li>
+<li><b>Ergonomics and safety</b>: operators can be modelled with the equipment, safety devices tested, and the cell viewed from every angle before it is built. Nobody has to stand in the work envelope while programming.</li>
+<li><b>Demonstration</b>: showing customers and management the cell before money is spent.</li></ul>
+<p>Commercial packages include ABB RobotStudio, KUKA.Sim and FANUC Roboguide. They use the real controller software in a "virtual robot", so motion and cycle times match the real robot closely. Typical features:</p>
+<table class="tbl"><tr><th>Feature</th><th>What it does</th></tr>
+<tr><td>Cycle-time check</td><td>times the program as the real controller would run it</td></tr>
+<tr><td>Reach check</td><td>tests whether every target is inside the workspace</td></tr>
+<tr><td>Collision detection</td><td>flags contact between robot, tool, part and fixtures</td></tr>
+<tr><td>Axis configuration</td><td>chooses among the multiple inverse kinematics solutions (Lesson 4) for each target</td></tr>
+<tr><td>CAD import</td><td>brings in part and cell geometry, so paths can follow edges and surfaces</td></tr>
+<tr><td>I/O simulation and event manager</td><td>simulates sensors, conveyors and PLC signals</td></tr>
+<tr><td>TCP tracing and axis supervision</td><td>draws the tool path; watches joint limits and speeds</td></tr>
+<tr><td>Mechanism modeller and scripting</td><td>adds custom fixtures and grippers; automates tasks by script</td></tr>
+<tr><td>Multi-robot and external axes</td><td>several robots on one controller, plus <b>track motions</b> (a rail that lets one robot serve many machines) and <b>workpiece positioners</b> coordinated with the robot</td></tr>
+<tr><td>Application packages</td><td>arc welding, painting, machining, machine tending, bending</td></tr></table>
+
+<h3 id="language">A generic robot language</h3>
+<p>The commands below are in the style of VAL, the first widely used robot language. Every commercial language has the same groups of commands under different names.</p>
+<div class="tblwrap"><table class="tbl"><tr><th>Command</th><th>Meaning</th></tr>
+<tr><th colspan="2">Motion</th></tr>
+<tr><td><code>HERE P1</code></td><td>record the present position as point P1 (used during leadthrough)</td></tr>
+<tr><td><code>MOVE P1</code></td><td>move to P1 by joint interpolation (fastest, path not straight)</td></tr>
+<tr><td><code>MOVES P1</code></td><td>move to P1 along a straight line</td></tr>
+<tr><td><code>DMOVE(4, 125)</code></td><td>move joint 4 by an increment of 125 (degrees or mm)</td></tr>
+<tr><td><code>APPROACH P1, 40 MM</code></td><td>go to a point 40 mm from P1 along the tool axis</td></tr>
+<tr><td><code>DEPART 40 MM</code></td><td>back away 40 mm along the tool axis</td></tr>
+<tr><td><code>DEFINE PATH123 = PATH(P1, P2, P3)</code> then <code>MOVE PATH123</code></td><td>define and follow a path through several points</td></tr>
+<tr><td><code>SPEED 75</code></td><td>run later moves at 75 % of full speed</td></tr>
+<tr><th colspan="2">Interlocks and sensors</th></tr>
+<tr><td><code>WAIT 20, ON</code></td><td>wait until input 20 is on (for example, "machine finished")</td></tr>
+<tr><td><code>SIGNAL 10, ON</code></td><td>switch output 10 on (for example, "start machine")</td></tr>
+<tr><td><code>SIGNAL 10, 6.0</code></td><td>set analogue output 10 to 6.0 V</td></tr>
+<tr><td><code>REACT 25, SAFESTOP</code></td><td>watch input 25 all the time; if it changes, stop safely</td></tr>
+<tr><th colspan="2">Gripper</th></tr>
+<tr><td><code>OPEN</code>, <code>CLOSE</code></td><td>open or close the gripper</td></tr>
+<tr><td><code>CLOSE 25 MM</code></td><td>close to an opening of 25 mm</td></tr>
+<tr><td><code>CLOSE 2.0 N</code></td><td>close with a gripping force of 2 N</td></tr></table></div>
+<p><b>Example: load and unload one machine.</b> The robot takes a blank from P1, loads it at P2, waits for the machine and puts the finished part at P3. Input 20 means "machine done", output 10 starts the machine, and input 25 is the safety-fence door.</p>
+<pre><code>REACT 25, SAFESTOP        ; stop at once if the fence door opens
+SPEED 75
+10 APPROACH P1, 40 MM     ; above the blank
+   OPEN
+   MOVES P1
+   CLOSE 2.0 N
+   DEPART 40 MM
+   APPROACH P2, 40 MM     ; into the machine
+   MOVES P2
+   OPEN
+   DEPART 40 MM
+   SIGNAL 10, ON          ; start the cycle
+   WAIT 20, ON            ; wait for "done"
+   SIGNAL 10, OFF
+   APPROACH P2, 40 MM
+   MOVES P2
+   CLOSE 2.0 N
+   DEPART 40 MM
+   MOVE P3                ; to the out conveyor
+   OPEN
+   GOTO 10</code></pre>
+<p>Straight-line moves (<code>MOVES</code>) are used near the part, where the path matters, and joint moves (<code>MOVE</code>) in free space, where speed matters.</p>
+
+<h3 id="applications">Part 2. Industrial applications</h3>
+<p>Industrial robot applications fall into three groups:</p>
+<ol>
+<li><b>Material handling</b>: material transfer (pick-and-place, palletising) and machine loading and unloading.</li>
+<li><b>Processing operations</b>: spot and arc welding, spray coating, cutting (including plasma arc), grinding and deburring, adhesive application, drilling.</li>
+<li><b>Assembly and inspection</b>.</li></ol>
+<p>Why use a robot at all? Robots can work in hazardous or sterile environments, work 24 hours a day, 7 days a week, repeat a task exactly, be more precise than people, and be reprogrammed for a new job. They come in many sizes, are fast, and cost little per hour to run.</p>
+
+<h4 id="welding">Welding</h4>
+<p>Robots do both <b>spot welding</b> (point-to-point, very common on car bodies) and <b>arc welding</b> (continuous path). Welding suits robots because it is hazardous (fumes, ultraviolet light, sparks), it is an unpleasant job in heavy protective clothing, loads can be heavy, and a robot gives uniform quality.</p>
+<p>The main gain is <b>arc-on time</b>, the fraction of the shift during which the arc is actually burning. A manual welder manages only 20–30 %, because of setting up, repositioning, changing rods and resting. A robot in a well-designed cell is close to the production of four welders. Robots can also follow <b>weave patterns</b> (a zigzag across the joint for wide welds) and, with line tracking, weld parts on a moving assembly line.</p>
+<figure class="diagram" id="fig-weld"><img src="../../assets/img/diagrams/iar-arcweld-cell.svg" alt="Two-station arc-welding cell: robot at the centre, welding station A, load and unload station B, safety fence and screen" loading="lazy"><figcaption>A two-station arc-welding cell: the robot welds at one station while the fitter unloads and loads the other.</figcaption></figure>
+<p>In the cell above the robot performs flux-cored arc welding (FCAW) at one station while a fitter changes parts at the other, behind a screen. Loading time is hidden inside welding time, so the robot hardly ever waits.</p>
+
+<h4 id="loading">Machine loading and unloading</h4>
+<p>Robots load presses, machine tools, forging presses and die-casting machines. The reasons are safety (heavy parts, the risk of losing fingers or hands at a press), avoiding slowdowns, high operating speed, small clearances that make hand feeding tricky, and less scrap. The common layouts are:</p>
+<ol>
+<li>one robot loading and unloading one machine;</li>
+<li>one robot serving several machines doing the same job in <b>parallel</b>;</li>
+<li><b>sequential</b> loading: one robot moves each part from machine to machine;</li>
+<li>robots in forging and die-casting.</li></ol>
+<figure class="diagram" id="fig-load"><img src="../../assets/img/diagrams/iar-machine-loading.svg" alt="(a) One robot serving four milling machines in parallel; (b) one robot loading three machines in sequence between an in conveyor and an out conveyor" loading="lazy"><figcaption>(a) Parallel machine loading. (b) Sequential machine loading with two conveyors.</figcaption></figure>
+<p><b>Worked problem.</b> A robot serves four milling machines. The cell has an 8 s cycle time and makes over 28 000 parts in two 8-hour shifts. Do the four mills work in series (each part visits all four) or in parallel (each mill machines complete parts)?</p>
+<p class="eq">$$\text{Series: } \frac{1\ \text{part}}{8\ \text{s}} \times 3600\ \tfrac{\text{s}}{\text{h}} \times 16\ \tfrac{\text{h}}{\text{day}} = 7200\ \text{parts/day}$$</p>
+<p class="eq">$$\text{Parallel: } 7200 \times 4\ \text{machines} = 28\,800\ \text{parts/day}$$</p>
+<p>Only the parallel layout reaches 28 000, so the mills work in parallel. In series the line can never be faster than one part per cycle, however many machines it has.</p>
+<p><b>Positioning problems.</b> A polar robot with axis limits may struggle to pick and place at several heights. Remedies are a bigger work envelope, suction-cup pick-up, better rack design, a more flexible end effector, or <b>double grippers</b> that unload the finished part and load the next blank in one visit.</p>
+<p><b>Sequential loading.</b> In the slides' example one robot loads three machines, with an in-conveyor and an out-conveyor, and production rises by about 60 %. Double grippers are of little value here, because only one part is worked at a time and there is no room in the cell for half-finished parts.</p>
+<p><b>Forging and die-casting.</b> Parts are hot, the environment is hot and noisy, and hand feeding risks amputation. A forging robot is programmed to dip its hand in a cooling bath at intervals, and the gripper must cope with the part changing shape as it is forged.</p>
+
+<h4>Spray painting</h4>
+<p>Paint booths are hard to keep within health and safety limits, and people find it hard to paint consistently. A skilled painter teaches the robot once, usually by manual leadthrough, and it repeats the path exactly. Line tracking lets it paint parts on a continuously moving conveyor. Some failures are expected, so a manual touch-up area is often kept, and keeping the robot busy (equipment utilisation) is an important factor in the economics. Adhesive and sealant application is similar.</p>
+
+<h4>Fabrication: drilling</h4>
+<p>Robots drill small fixtured parts and circuit boards, and large parts such as aircraft panels. The drill must be perpendicular to the surface. A person judges this by eye, which is a source of error; a robot computes the surface normal from the part model and holds it exactly.</p>
+
+<h4>Assembly and inspection</h4>
+<p>The usual "3D" reasons for robots (dull, dirty, dangerous) say little about assembly. Assembly needs precision, repeatability, a variety of motions and sophisticated, sometimes compound, grippers. Robots are chosen for it to save labour, to take over a boring repetitive job, to work fast, to be accurate, and to prevent omitted or substituted parts, whether accidental or deliberate.</p>
+<ul>
+<li><b>Engine assembly</b>: blocks travel on pallets; auxiliary conveyors bring sub-assemblies and vibratory bowls feed screws and bolts; a magazine of grippers lets one robot do several jobs.</li>
+<li><b>Electrical and electronic assembly</b>: indexed pallet carriers, tactile sensing and visual feedback give the "feel" that assembly needs, and also detect defects.</li>
+<li><b>General assembly robots</b> that can sense and assemble almost anything of suitable size are needed for flexible manufacturing systems.</li></ul>
+
+<h4>Beyond the factory</h4>
+<p>Robots also work in aerospace and space exploration (the Sojourner Mars rover), underwater and volcanic exploration, medicine (surgery and rehabilitation), the military, service and entertainment, construction, hazardous-material clean-up, and even sheep shearing. Nano-robots are an active research field.</p>
+</article>
+    <!-- NOTES END -->
+    </section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the div below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">For each job, choose powered leadthrough, manual leadthrough or off-line programming, and say why: (a) spot welding 40 points on a car door; (b) spray painting a chair; (c) a new arc-welding cell for a part that is still being designed.</div><details><summary>Show solution</summary><div class="sol">(a) Powered leadthrough with a teach pendant: point-to-point, and the exact points matter more than the path. (b) Manual leadthrough: continuous path, and the skilled painter's smooth motion is the program. (c) Off-line programming from the CAD model: the robot and part do not exist yet, and simulation checks reach, collisions and cycle time first.</div></details></li><li><div class="q">A robot is taught on line for 6 hours per new product, and there are 10 new products a year. The cell earns 4000 birr per hour. Off-line programming would leave 1 hour of touch-up per product. What does it save each year?</div><details><summary>Show solution</summary><div class="sol">On line: $10 \times 6 = 60$ h of lost production. Off line: $10 \times 1 = 10$ h. Saving: $50 \times 4000 = 200\,000$ birr per year, before the cost of the simulation software and the programmer's time.</div></details></li><li><div class="q">Write a short program in the generic language that picks a part from P1 and places it at P2, approaching both points from 50 mm above and closing the gripper to 30 mm. It must not start until input 5 ("part present") is on.</div><details><summary>Show solution</summary><div class="sol"><pre><code>SPEED 60
+WAIT 5, ON
+OPEN
+APPROACH P1, 50 MM
+MOVES P1
+CLOSE 30 MM
+DEPART 50 MM
+APPROACH P2, 50 MM
+MOVES P2
+OPEN
+DEPART 50 MM</code></pre></div></details></li><li><div class="q">A manual welder has an arc-on time of 25 %. A robot in a two-station cell reaches 85 %. If both weld at the same travel speed, how many manual welders does one robot replace? If each welder costs 30 000 birr a month and the robot cell costs 2.4 million birr, roughly how long is the simple payback?</div><details><summary>Show solution</summary><div class="sol">$85/25 = 3.4$, so about 3 to 4 welders, which matches the "four welders" quoted in the notes. Replacing 3.4 welders saves about $3.4 \times 30\,000 = 102\,000$ birr a month, so payback is about $2\,400\,000/102\,000 \approx 23.5$ months, ignoring running costs (Lesson 3 shows the full payback method).</div></details></li><li><div class="q">The four-mill cell in the notes is changed to three shifts of 8 hours, and each mill now takes 10 s per part. What is the daily output if the mills work in parallel? In series?</div><details><summary>Show solution</summary><div class="sol">Parallel: $(3600/10) \times 24 \times 4 = 34\,560$ parts/day. Series: $(3600/10) \times 24 = 8640$ parts/day.</div></details></li><li><div class="q">Why are double grippers useful in a one-machine loading cell but of little value in the sequential cell of the notes?</div><details><summary>Show solution</summary><div class="sol">In a one-machine cell the robot can unload the finished part and load the next blank in a single visit, so the machine waits less. In the sequential cell each part goes from machine to machine and there is no room for extra half-finished parts, so there is rarely a second part to carry.</div></details></li><li><div class="q">Give two reasons why robots are used in (a) die-casting, (b) PCB drilling and (c) assembly of electronic products.</div><details><summary>Show solution</summary><div class="sol">(a) Hot parts and a hot, noisy workplace; risk of injury at the machine. (b) Speed and accuracy over thousands of holes; the drill must stay exactly perpendicular. (c) Repeatability and precision; vision and touch sensing detect defects and missing parts.</div></details></li></ol></section>
+    <section class="lsec" id="sources"><h2>Sources and further reading</h2>
+    <ul class="srclist"><li>Chapter 6 (part B) slides of this course (EACT536), rewritten. Chapter 6 part A was not part of the material received.</li><li>M. P. Groover, <i>Automation, Production Systems, and Computer-Integrated Manufacturing</i>, Pearson (robot programming, the generic robot language and the robot applications).</li><li>M. P. Groover, M. Weiss, R. N. Nagel and N. G. Odrey, <i>Industrial Robotics: Technology, Programming, and Applications</i>, McGraw-Hill.</li><li>ABB, <a href="https://new.abb.com/products/robotics/software-and-digital/robotstudio" target="_blank" rel="noopener">RobotStudio</a>, KUKA, <a href="https://www.kuka.com/en-de/products/robot-systems/software/planning-project-engineering-service-safety/kuka_sim" target="_blank" rel="noopener">KUKA.Sim</a>, and FANUC Roboguide product pages, for current simulation features.</li></ul></section>
+    <nav class="prevnext"><a class="pn prev" href="05-configuration-space-kinematics.html"><small>← Lesson 5</small>Configuration space and forward kinematics</a><a class="pn next" href="../industrial-automation-and-robotics.html"><small>Course home →</small>Industrial Automation and Robotics</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

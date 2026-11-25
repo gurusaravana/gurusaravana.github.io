@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 260" width="780" height="260" role="img" aria-label="Model of a permanent magnet DC servo motor: applied voltage Va drives current ia through armature resistance Ra and inductance La against the back emf Kg times the motor speed; the torque Kt ia turns the rotor inertia J against friction B.">
+<title>Model of a permanent magnet DC servo motor: applied voltage Va drives current ia through armature resistance Ra and inductance La against the back emf Kg times the motor speed; the torque Kt ia turns the rotor inertia J against friction B.</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker><marker id="av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#7c3aed"/></marker></defs>
+<rect width="780" height="260" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="80.0" cy="140.0" r="26.0" fill="#ffffff" stroke="#0f172a" stroke-width="2"/>
+<text x="80.0" y="136.0" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="700">+</text>
+<text x="80.0" y="156.0" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="700">−</text>
+<text x="40.0" y="145.0" font-size="15" text-anchor="end" fill="#0f172a" font-weight="700">Va</text>
+<path d="M80.0 114.0 L80.0 60.0 L130.0 60.0" fill="none" stroke="#0f172a" stroke-width="2"/>
+<path d="M130.0 60.0 L136.4 60.0 L142.9 68.0 L155.7 52.0 L168.6 68.0 L181.4 52.0 L194.3 68.0 L207.1 52.0 L213.6 60.0 L220.0 60.0" fill="none" stroke="#0f172a" stroke-width="2"/>
+<text x="175.0" y="42.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="600">Ra</text>
+<path d="M220.0 60.0 L250.0 60.0" fill="none" stroke="#0f172a" stroke-width="2"/>
+<path d="M250 60 a10.0 10.0 0 0 1 20.0 0 a10.0 10.0 0 0 1 20.0 0 a10.0 10.0 0 0 1 20.0 0 a10.0 10.0 0 0 1 20.0 0 " fill="none" stroke="#0f172a" stroke-width="2"/>
+<path d="M330.0 60.0 L380.0 60.0" fill="none" stroke="#0f172a" stroke-width="2"/>
+<text x="290.0" y="42.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="600">La</text>
+<path d="M260.0 80.0 L330.0 80.0" fill="none" stroke="#0077b6" stroke-width="1.8" marker-end="url(#ab)"/>
+<text x="295.0" y="98.0" font-size="14" text-anchor="middle" fill="#0077b6" font-weight="700" font-style="italic">ia</text>
+<path d="M380.0 60.0 L380.0 110.0" fill="none" stroke="#0f172a" stroke-width="2"/>
+<circle cx="380.0" cy="140.0" r="30.0" fill="#ffedd5" stroke="#ea7a1f" stroke-width="2"/>
+<text x="380.0" y="146.0" font-size="16" text-anchor="middle" fill="#ea7a1f" font-weight="700">M</text>
+<path d="M380.0 170.0 L380.0 220.0 L80.0 220.0 L80.0 166.0" fill="none" stroke="#0f172a" stroke-width="2"/>
+<text x="420.0" y="100.0" font-size="12" text-anchor="start" fill="#ea7a1f" font-weight="400">back emf</text>
+<text x="420.0" y="116.0" font-size="13" text-anchor="start" fill="#ea7a1f" font-weight="700">e = Kg·θ̇m</text>
+<path d="M410.0 140.0 L560.0 140.0" fill="none" stroke="#0f172a" stroke-width="6"/>
+<rect x="560.0" y="95.0" width="70.0" height="90.0" rx="6" fill="#f1f5f9" stroke="#0f172a" stroke-width="2"/>
+<text x="595.0" y="145.0" font-size="18" text-anchor="middle" fill="#0f172a" font-weight="700">J</text>
+<rect x="640.0" y="120.0" width="40.0" height="40.0" rx="3" fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
+<path d="M630.0 140.0 L640.0 140.0" fill="none" stroke="#64748b" stroke-width="2"/>
+<text x="660.0" y="146.0" font-size="13" text-anchor="middle" fill="#64748b" font-weight="700">B</text>
+<path d="M624.0 89.8 A58 58 0 0 0 566.0 89.8" fill="none" stroke="#0077b6" stroke-width="1.8" marker-end="url(#ab)"/>
+<text x="595.0" y="70.0" font-size="14" text-anchor="middle" fill="#0077b6" font-weight="700">θ̇m</text>
+<text x="480.0" y="220.0" font-size="13" text-anchor="start" fill="#0f172a" font-weight="700">torque Tm = Kt·ia</text>
+</g>
+</svg>

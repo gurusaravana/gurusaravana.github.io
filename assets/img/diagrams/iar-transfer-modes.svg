@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 830 250" width="830" height="250" role="img" aria-label="Work-part position against time for continuous transfer (steady motion), intermittent or synchronous transfer (all parts index together, then dwell) and asynchronous or power-and-free transfer (each part moves when its station is done).">
+<title>Work-part position against time for continuous transfer (steady motion), intermittent or synchronous transfer (all parts index together, then dwell) and asynchronous or power-and-free transfer (each part moves when its station is done).</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker><marker id="av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#7c3aed"/></marker></defs>
+<rect width="830" height="250" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<path d="M60.0 190.0 L270.0 190.0" fill="none" stroke="#0f172a" stroke-width="1.8" marker-end="url(#ak)"/>
+<path d="M60.0 190.0 L60.0 30.0" fill="none" stroke="#0f172a" stroke-width="1.8" marker-end="url(#ak)"/>
+<text x="265.0" y="208.0" font-size="12" text-anchor="end" fill="#64748b" font-weight="400">time</text>
+<text x="54.0" y="40.0" font-size="12" text-anchor="end" fill="#64748b" font-weight="400">position</text>
+<path d="M60.0 150.0 L260.0 150.0" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<path d="M60.0 110.0 L260.0 110.0" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<path d="M60.0 70.0 L260.0 70.0" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<text x="165.0" y="238.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="600">Continuous</text>
+<path d="M60.0 190.0 L250.0 50.0" fill="none" stroke="#0077b6" stroke-width="2.5"/>
+<path d="M330.0 190.0 L540.0 190.0" fill="none" stroke="#0f172a" stroke-width="1.8" marker-end="url(#ak)"/>
+<path d="M330.0 190.0 L330.0 30.0" fill="none" stroke="#0f172a" stroke-width="1.8" marker-end="url(#ak)"/>
+<text x="535.0" y="208.0" font-size="12" text-anchor="end" fill="#64748b" font-weight="400">time</text>
+<text x="324.0" y="40.0" font-size="12" text-anchor="end" fill="#64748b" font-weight="400">position</text>
+<path d="M330.0 150.0 L530.0 150.0" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<path d="M330.0 110.0 L530.0 110.0" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<path d="M330.0 70.0 L530.0 70.0" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<text x="435.0" y="238.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="600">Intermittent (synchronous)</text>
+<path d="M330.0 190.0 L354.0 190.0 L366.0 150.0 L390.0 150.0 L414.0 150.0 L426.0 110.0 L450.0 110.0 L474.0 110.0 L486.0 70.0 L510.0 70.0" fill="none" stroke="#0077b6" stroke-width="2.5"/>
+<path d="M600.0 190.0 L810.0 190.0" fill="none" stroke="#0f172a" stroke-width="1.8" marker-end="url(#ak)"/>
+<path d="M600.0 190.0 L600.0 30.0" fill="none" stroke="#0f172a" stroke-width="1.8" marker-end="url(#ak)"/>
+<text x="805.0" y="208.0" font-size="12" text-anchor="end" fill="#64748b" font-weight="400">time</text>
+<text x="594.0" y="40.0" font-size="12" text-anchor="end" fill="#64748b" font-weight="400">position</text>
+<path d="M600.0 150.0 L800.0 150.0" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<path d="M600.0 110.0 L800.0 110.0" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<path d="M600.0 70.0 L800.0 70.0" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<text x="705.0" y="238.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="600">Asynchronous (power-and-free)</text>
+<path d="M600.0 190.0 L612.0 190.0 L624.0 150.0 L660.0 150.0 L672.0 110.0 L696.0 110.0 L708.0 70.0 L780.0 70.0" fill="none" stroke="#0077b6" stroke-width="2.5"/>
+<path d="M600.0 190.0 L640.0 190.0 L652.0 150.0 L710.0 150.0 L722.0 110.0 L740.0 110.0 L752.0 70.0 L790.0 70.0" fill="none" stroke="#ea7a1f" stroke-width="2.5" stroke-dasharray="6 4"/>
+<text x="750.0" y="140.0" font-size="12" text-anchor="start" fill="#0077b6" font-weight="400">part 1</text>
+<text x="750.0" y="162.0" font-size="12" text-anchor="start" fill="#ea7a1f" font-weight="400">part 2</text>
+</g>
+</svg>

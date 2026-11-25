@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="760" height="300" role="img" aria-label="A discrete event dynamic system: the number of parts waiting at a machine changes only at event instants such as a part arrival, a departure, a machine failure and a repair, and stays constant in between.">
+<title>A discrete event dynamic system: the number of parts waiting at a machine changes only at event instants such as a part arrival, a departure, a machine failure and a repair, and stays constant in between.</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker><marker id="av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#7c3aed"/></marker></defs>
+<rect width="760" height="300" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<path d="M70.0 220.0 L730.0 220.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<path d="M70.0 220.0 L70.0 30.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="730.0" y="240.0" font-size="13" text-anchor="end" fill="#64748b" font-weight="400">time</text>
+<text x="28" y="125" font-size="13" text-anchor="middle" fill="#0f172a" transform="rotate(-90 28 125)">parts in buffer</text>
+<path d="M70.0 180.0 L730.0 180.0" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<text x="62.0" y="184.0" font-size="12" text-anchor="end" fill="#64748b" font-weight="400">1</text>
+<path d="M70.0 140.0 L730.0 140.0" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<text x="62.0" y="144.0" font-size="12" text-anchor="end" fill="#64748b" font-weight="400">2</text>
+<path d="M70.0 100.0 L730.0 100.0" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<text x="62.0" y="104.0" font-size="12" text-anchor="end" fill="#64748b" font-weight="400">3</text>
+<path d="M70.0 60.0 L730.0 60.0" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<text x="62.0" y="64.0" font-size="12" text-anchor="end" fill="#64748b" font-weight="400">4</text>
+<path d="M110.0 220.0 L110.0 230.0" fill="none" stroke="#059669" stroke-width="2.5"/>
+<path d="M170.0 220.0 L170.0 230.0" fill="none" stroke="#059669" stroke-width="2.5"/>
+<path d="M230.0 220.0 L230.0 230.0" fill="none" stroke="#db2777" stroke-width="2.5"/>
+<path d="M290.0 220.0 L290.0 230.0" fill="none" stroke="#059669" stroke-width="2.5"/>
+<path d="M330.0 220.0 L330.0 230.0" fill="none" stroke="#ea7a1f" stroke-width="2.5"/>
+<path d="M380.0 220.0 L380.0 230.0" fill="none" stroke="#059669" stroke-width="2.5"/>
+<path d="M430.0 220.0 L430.0 230.0" fill="none" stroke="#059669" stroke-width="2.5"/>
+<path d="M500.0 220.0 L500.0 230.0" fill="none" stroke="#0077b6" stroke-width="2.5"/>
+<path d="M540.0 220.0 L540.0 230.0" fill="none" stroke="#db2777" stroke-width="2.5"/>
+<path d="M590.0 220.0 L590.0 230.0" fill="none" stroke="#db2777" stroke-width="2.5"/>
+<path d="M640.0 220.0 L640.0 230.0" fill="none" stroke="#db2777" stroke-width="2.5"/>
+<path d="M690.0 220.0 L690.0 230.0" fill="none" stroke="#059669" stroke-width="2.5"/>
+<rect x="330.0" y="30.0" width="170.0" height="190.0" rx="0" fill="#ffedd5" stroke="#ea7a1f" stroke-width="0"/>
+<text x="415.0" y="48.0" font-size="12" text-anchor="middle" fill="#ea7a1f" font-weight="600">machine down</text>
+<path d="M70.0 220.0 L110.0 220.0 L110.0 180.0 L170.0 180.0 L170.0 140.0 L230.0 140.0 L230.0 180.0 L290.0 180.0 L290.0 140.0 L330.0 140.0 L330.0 140.0 L380.0 140.0 L380.0 100.0 L430.0 100.0 L430.0 60.0 L500.0 60.0 L500.0 60.0 L540.0 60.0 L540.0 100.0 L590.0 100.0 L590.0 140.0 L640.0 140.0 L640.0 180.0 L690.0 180.0 L690.0 140.0 L720.0 140.0" fill="none" stroke="#0077b6" stroke-width="2.5"/>
+<path d="M120.0 262.0 L120.0 276.0" fill="none" stroke="#059669" stroke-width="3"/>
+<text x="130.0" y="274.0" font-size="13" text-anchor="start" fill="#059669" font-weight="400">arrival</text>
+<path d="M270.0 262.0 L270.0 276.0" fill="none" stroke="#db2777" stroke-width="3"/>
+<text x="280.0" y="274.0" font-size="13" text-anchor="start" fill="#db2777" font-weight="400">departure</text>
+<path d="M420.0 262.0 L420.0 276.0" fill="none" stroke="#ea7a1f" stroke-width="3"/>
+<text x="430.0" y="274.0" font-size="13" text-anchor="start" fill="#ea7a1f" font-weight="400">failure</text>
+<path d="M570.0 262.0 L570.0 276.0" fill="none" stroke="#0077b6" stroke-width="3"/>
+<text x="580.0" y="274.0" font-size="13" text-anchor="start" fill="#0077b6" font-weight="400">repair</text>
+</g>
+</svg>

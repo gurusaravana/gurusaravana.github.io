@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 3: Robots: anatomy, configurations and end effectors · Industrial Automation and Robotics</title>
+<meta name="description" content="History and definition of robots, robot anatomy, joint notation, configurations, workspace, degrees of freedom, accuracy, end effectors, teaching, gears and the economics of buying a robot.">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 3: Robots: anatomy, configurations and end effectors  (Industrial Automation and Robotics, EACT 536)
+  Edit the notes between the NOTES START and NOTES END markers below.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Figures live in assets/img/diagrams/ (names start with iar-) and are shown with a figure of class "diagram".
+  A live simulation is a line like  <div class="sim" data-rsim="arm2r"></div>  (see assets/js/robotics-sims.js).
+  To add an exercise, copy one list item inside the list of class "exlist".
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
+  <nav class="links"><a href="../industrial-automation-and-robotics.html">Course home</a><a href="../industrial-automation-and-robotics.html#lessons">Lessons</a><a href="../industrial-automation-and-robotics.html#figures">Figures</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../industrial-automation-and-robotics.html">← Industrial Automation and Robotics</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 3 of 6 · Chapter 3 (parts A and B)</div>
+    <h1>Robots: anatomy, configurations and end effectors</h1>
+    <p>Industrial Automation and Robotics · EACT 536 · Postgraduate course</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">EACT 536 · Industrial Automation and Robotics</div><ol><li><a href="01-automation-and-flow-lines.html"><span class="n">1</span>Automation, production systems and automated flow lines</a></li><li><a href="02-modelling-automated-manufacturing.html"><span class="n">2</span>Modelling automated manufacturing systems</a></li><li class="on"><a href="03-robot-anatomy-and-end-effectors.html"><span class="n">3</span>Robots: anatomy, configurations and end effectors</a></li><li><a href="04-actuators-sensors-dh.html"><span class="n">4</span>Actuators, sensors and the Denavit–Hartenberg convention</a></li><li><a href="05-configuration-space-kinematics.html"><span class="n">5</span>Configuration space and forward kinematics</a></li><li><a href="06-programming-and-applications.html"><span class="n">6</span>Robot programming and industrial applications</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Define an industrial robot and say how it differs from a CNC machine</li><li>Name the parts of a robot and write a configuration in the L, O, R, T, V joint notation</li><li>Compare Cartesian, cylindrical, polar, jointed-arm and SCARA robots and their workspaces</li><li>Count degrees of freedom with Grübler's criterion</li><li>Explain accuracy, repeatability and resolution</li><li>Choose a gripper type and compute gear ratios</li><li>Decide whether a robot is worth buying from its pay-back period and rate of return</li></ul></div>
+    <nav class="figstrip" aria-label="Figures in this lesson"><a href="#fig-anatomy"><img src="../../assets/img/diagrams/iar-robot-anatomy.svg" alt="" loading="lazy"><span>Robot anatomy</span></a><a href="#fig-joint-types"><img src="../../assets/img/diagrams/iar-joint-types.svg" alt="" loading="lazy"><span>Joints L O R T V</span></a><a href="#fig-joints-dof"><img src="../../assets/img/diagrams/iar-joints-dof.svg" alt="" loading="lazy"><span>Joints and dof</span></a><a href="#fig-configs"><img src="../../assets/img/diagrams/iar-configs.svg" alt="" loading="lazy"><span>Configurations</span></a><a href="#fig-work"><img src="../../assets/img/diagrams/iar-workspaces.svg" alt="" loading="lazy"><span>Work envelopes</span></a><a href="#fig-grubler"><img src="../../assets/img/diagrams/iar-grubler-planar.svg" alt="" loading="lazy"><span>Grübler examples</span></a><a href="#fig-accuracy"><img src="../../assets/img/diagrams/iar-accuracy.svg" alt="" loading="lazy"><span>Accuracy, repeatability</span></a><a href="#fig-grippers"><img src="../../assets/img/diagrams/iar-grippers.svg" alt="" loading="lazy"><span>Grippers</span></a><a href="#fig-gears"><img src="../../assets/img/diagrams/iar-gears.svg" alt="" loading="lazy"><span>Gear pair</span></a></nav>
+    <section class="lsec"><h2>Notes</h2>
+    <!-- NOTES START -->
+    <article class="notes">
+<h3 id="history">1. Where robots come from</h3>
+<p>The word <b>robot</b> comes from the Czech <i>robota</i>, forced labour. It was introduced in Karel Čapek's play <i>R.U.R. (Rossum's Universal Robots)</i>, first staged in 1921 and translated into English in 1923, where robots are built to replace people: efficient and without emotion. Isaac Asimov coined the word <b>robotics</b> and gave his laws of robotics in the short story <i>Runaround</i> (1942), where robots are harmless and under human control.</p>
+<table class="tbl"><tr><th>Year</th><th>Milestone</th></tr>
+<tr><td>1770s</td><td>clockwork automata that draw and play instruments (Germany, Switzerland)</td></tr>
+<tr><td>1830</td><td>cam-programmable lathe</td></tr>
+<tr><td>1946–48</td><td>ENIAC, the first electronic computer; the transistor; Norbert Wiener's <i>Cybernetics</i>, the first book on feedback control; first electric tele-operated arm</td></tr>
+<tr><td>1954</td><td>George Devol files the first patent for a programmable robot (US 2,988,237, "Programmed Article Transfer")</td></tr>
+<tr><td>1955</td><td>Denavit and Hartenberg publish their convention for describing links and joints (Lesson 4)</td></tr>
+<tr><td>1959–61</td><td>Engelberger and Devol found Unimation; General Motors installs the first <b>Unimate</b> to tend a die-casting machine and do spot welding</td></tr>
+<tr><td>1968</td><td>Shakey, the first mobile robot with vision (SRI)</td></tr>
+<tr><td>1970–73</td><td>Stanford Arm, electrically driven and computer controlled; Cincinnati Milacron T3, the first minicomputer-controlled industrial robot</td></tr>
+<tr><td>1978</td><td>PUMA arm from Unimation, still found in university labs</td></tr>
+<tr><td>1980s</td><td>first robotics textbooks; educational robots; SCARA robots for electronics assembly</td></tr>
+<tr><td>1997–2004</td><td>Sojourner, Spirit and Opportunity on Mars; Honda's P3 and ASIMO humanoids; Sony's AIBO</td></tr>
+<tr><td>2000s</td><td>surgical robots, micro- and nano-robots</td></tr></table>
+<p>Early industrial robots did part and material handling, welding and painting, mostly in <b>teach-and-playback</b> mode, replacing repetitive and back-breaking work. Growth slowed in the late 1980s because the robots could not adapt to change: they were blind, deaf and dumb. Better sensors and software have since made robots that work in cluttered spaces, safely close to people, autonomously in hazardous places (Chernobyl, Fukushima, the deep sea, space) and in clean rooms where a human would contaminate the product.</p>
+
+<h3 id="laws">2. The laws of robotics</h3>
+<ol start="0"><li><b>Zeroth law</b> (added by Asimov in 1985): a robot may not harm humanity, or, by inaction, allow humanity to come to harm.</li>
+<li><b>First law</b>: a robot may not injure a human being or, through inaction, allow a human being to come to harm.</li>
+<li><b>Second law</b>: a robot must obey orders given by human beings, except where such orders would conflict with the First Law.</li>
+<li><b>Third law</b>: a robot must protect its own existence as long as this does not conflict with the First or Second Law.</li></ol>
+<p>Later writers added more. Lyuben Dilov's novel <i>Icarus's Way</i> (1974) introduced a <b>fourth law</b>: a robot must establish its identity as a robot in all cases. Nikola Kesarovski's story <i>The Fifth Law of Robotics</i> (1983) gave a <b>fifth</b>: a robot must know it is a robot.</p>
+<p class="warn">The slide numbers the laws as "Law One (zeroth law) … Law Two (First Law) … Law Three (Second Law)", which mixes up the names and the content. The order above is Asimov's. Also, the story that introduced the laws is <i>Runaround</i> (1942), not "Roundabout".</p>
+
+<h3 id="definition">3. What is a robot?</h3>
+<p>The Robot Institute of America (1979) defines an industrial robot as <i>"a reprogrammable, multifunctional manipulator designed to move materials, parts, tools or specialised devices through various programmed motions for the performance of a variety of tasks."</i> Today the word is used more broadly for any physical or virtual agent that does a task autonomously or with guidance: an electromechanical machine with sensors and electronics, guided by a computer.</p>
+<p class="key">The key idea is <b>reprogrammability</b>, and how far the robot can be reprogrammed. That is what separates a robot from a CNC machine tool, which is programmed too but only to machine parts.</p>
+<p>Robots can be classified as fixed or mobile; serial or parallel; by their number of degrees of freedom; rigid or flexible (a space arm is light and therefore flexible); and by control: teach-and-playback, computer controlled (often programmed off-line), sensor driven, or "intelligent" (learning about the environment with AI).</p>
+
+<h3 id="anatomy">4. Robot anatomy</h3>
+<figure class="diagram" id="fig-anatomy"><img src="../../assets/img/diagrams/iar-robot-anatomy.svg" alt="Articulated robot with base, joints, links, wrist and end effector labelled" loading="lazy"><figcaption>A manipulator is a chain of links joined by joints. The body-and-arm positions the tool; the wrist orients it.</figcaption></figure>
+<p>A robotic system has seven components: (1) <b>base</b>, (2) <b>links and joints</b>, (3) <b>end effector</b> (gripper or tool), (4) <b>wrist</b>, (5) <b>drives or actuators</b>, (6) <b>controller</b> and (7) <b>sensors</b>. Joints give relative motion; links are the rigid members between joints; each joint gives one degree of freedom (most robots have five or six). The <b>body-and-arm</b> positions objects in the work volume; the <b>wrist assembly</b> (two or three degrees of freedom: <b>roll, pitch, yaw</b>) orients them.</p>
+<p>Robotics draws on mechanical engineering (kinematics: motion without forces; dynamics: forces and moments; sensing), computer science (motion planning; artificial intelligence), electrical and electronics engineering (control and its hardware), and physics and mathematics.</p>
+
+<h3 id="joints">5. Joint types and notation</h3>
+<figure class="diagram" id="fig-joint-types"><img src="../../assets/img/diagrams/iar-joint-types.svg" alt="The five joint types L, O, R, T and V" loading="lazy"><figcaption>The five joint types of the robot notation: two translational and three rotational.</figcaption></figure>
+<ul><li><b>L, linear</b>: the output link slides along the axis of the input link (telescoping).</li>
+<li><b>O, orthogonal</b>: the output link slides at right angles to the input link.</li>
+<li><b>R, rotational</b>: the rotation axis is perpendicular to both links.</li>
+<li><b>T, twisting</b>: the rotation axis is parallel to both links.</li>
+<li><b>V, revolving</b>: the input link is parallel to the axis, the output link perpendicular to it.</li></ul>
+<p>A configuration is written body-and-arm first, then a colon, then the wrist: for example <b>TLR : TR</b> is a twisting base, a linear joint and a rotational joint, followed by a two-axis T–R wrist.</p>
+<p>In kinematics the same joints are described by how many degrees of freedom (the <b>connectivity</b>) they allow:</p>
+<figure class="diagram" id="fig-joints-dof"><img src="../../assets/img/diagrams/iar-joints-dof.svg" alt="Revolute, prismatic, helical, cylindrical, universal and spherical joints" loading="lazy"><figcaption>Kinematic joints: revolute R and prismatic P (the usual robot joints, 1 dof), helical H (1), cylindrical C and universal (Hooke) U (2), spherical S (3).</figcaption></figure>
+
+<h3 id="configs">6. Robot configurations</h3>
+<figure class="diagram" id="fig-configs"><img src="../../assets/img/diagrams/iar-configs.svg" alt="Cartesian, cylindrical, polar, jointed-arm and SCARA robots" loading="lazy"><figcaption>The five common body-and-arm configurations with their joint notation.</figcaption></figure>
+<table class="tbl"><tr><th>Configuration</th><th>Joints</th><th>Strengths</th><th>Weaknesses</th><th>Examples</th></tr>
+<tr><td>Cartesian (rectilinear, x-y-z, gantry)</td><td>LOO, three sliding joints (PPP)</td><td>rigid and accurate; simple control</td><td>large footprint for its reach</td><td>pick-and-place, gantry loaders, IBM RS-1</td></tr>
+<tr><td>Cylindrical</td><td>TLO: a column that turns, an arm that moves up–down and in–out (one rotary, two linear)</td><td>good for loading machines</td><td>cannot reach the floor round the base; poor dynamics</td><td>Versatran 600</td></tr>
+<tr><td>Polar (spherical)</td><td>TRL: base twist, arm tilt and a sliding arm (two rotary, one linear)</td><td>can reach down to the floor</td><td>poor dynamic performance</td><td>Unimate 2000</td></tr>
+<tr><td>Jointed arm (articulated, revolute)</td><td>TRR: three rotary joints, like a human arm</td><td>large reach for its size, very versatile</td><td>accuracy and rigidity vary over the workspace</td><td>PUMA, Cincinnati T3, most modern 6-axis arms</td></tr>
+<tr><td>SCARA</td><td>VRO: shoulder and elbow turn about vertical axes, then a vertical slide</td><td>stiff vertically, compliant sideways: ideal for vertical insertion</td><td>limited vertical stroke</td><td>electronics assembly</td></tr></table>
+<p class="warn">SCARA stands for <b>Selective Compliance Assembly Robot Arm</b> (some makers say <i>Articulated</i> instead of <i>Assembly</i>). The Chapter 3A slide expands it as "Selective Compliance Adaptive Robot Arm", which is not a usual name.</p>
+
+<h3 id="workspace">7. Workspace</h3>
+<p>The <b>workspace</b> (work envelope, work volume) is the space the end effector can reach. The <b>reachable workspace</b> is everything it can reach in at least one orientation; the <b>dextrous workspace</b> is the part it can reach in every orientation. The dextrous workspace is always a subset of the reachable one.</p>
+<figure class="diagram" id="fig-work"><img src="../../assets/img/diagrams/iar-workspaces.svg" alt="Work envelopes: box, hollow cylinder, spherical shell segment and near-sphere" loading="lazy"><figcaption>The configuration sets the shape of the work envelope.</figcaption></figure>
+
+<h3 id="dof">8. Degrees of freedom and Grübler's criterion</h3>
+<p>The <b>degrees of freedom (dof)</b> of a system are the minimum number of independent coordinates needed to describe it completely. A point has 2 dof in a plane and 3 in space; a rigid body has 3 in a plane and <b>6 in space</b> (three positions and three orientations). So a spatial manipulator needs 6 dof to place a tool in any position and orientation, and a planar one needs 3.</p>
+<ul><li>Painting and welding can be done with 5 dof (rotation about the torch or nozzle axis does not matter); electronics assembly uses 4-dof SCARA robots.</li>
+<li>A <b>redundant</b> manipulator has more than 6 dof (spatial) or more than 3 (planar), for example to reach round obstacles.</li>
+<li>An <b>under-actuated</b> (deficient) manipulator has fewer.</li></ul>
+<p>For a mechanism with $n$ moving links and $m$ joints, where joint $i$ has connectivity $c_i$, each joint removes $6 - c_i$ freedoms in space ($3 - c_i$ in a plane). This gives <b>Grübler's criterion</b> for the mobility $M$:</p>
+<p class="eq">$$M_{\text{spatial}} = 6n - \sum_{i=1}^{m}(6 - c_i), \qquad M_{\text{planar}} = 3n - \sum_{i=1}^{m}(3 - c_i)$$</p>
+<figure class="diagram" id="fig-grubler" ><img src="../../assets/img/diagrams/iar-grubler-planar.svg" alt="Serial planar 4R chain and 3-RRR parallel platform" loading="lazy"><figcaption>Serial chain: $n = 4$, $m = 4$ revolute joints, $M = 12 - 8 = 4$. Parallel 3-RRR platform: $n = 7$, $m = 9$, $M = 21 - 18 = 3$.</figcaption></figure>
+<p>A spatial parallel robot with $n = 13$ moving links and $m = 18$ joints, six each of U ($c = 2$), P ($c = 1$) and S ($c = 3$), has $M = 78 - 6(4 + 5 + 3) = 6$: this is the Stewart platform of Lesson 5. In a <b>serial</b> robot the links and joints form one open chain ending in the end effector; a <b>parallel</b> robot has closed loops and its actuators are often at the base.</p>
+
+<h3 id="accuracy">9. Accuracy, repeatability and resolution</h3>
+<figure class="diagram" id="fig-accuracy"><img src="../../assets/img/diagrams/iar-accuracy.svg" alt="Control resolution between addressable points; accuracy and repeatability on a target" loading="lazy"><figcaption>Resolution is the spacing of the points the controller can address; accuracy is how close the arm gets to a commanded point; repeatability is how close it returns to a taught point.</figcaption></figure>
+<ul><li><b>Resolution</b>: the smallest position increment the robot can command and sense. <i>Programming resolution</i> is the smallest step allowed in a program (the basic resolution unit, BRU, for example 0.01 inch or 0.1°). <i>Control resolution</i> is the smallest change the feedback device can measure, for example an encoder giving 0.36° per pulse (1000 pulses per revolution). The joint resolution is constant, but the resolution of the tool point in space is not, because the arm's kinematics are nonlinear.</li>
+<li><b>Accuracy</b>: the difference between the commanded position and the position actually reached. It varies over the workspace and is usually worse than repeatability.</li>
+<li><b>Repeatability</b>: how closely the arm returns to a position it was taught. It can never be better than the resolution.</li></ul>
+<p>A common textbook model (Groover) with control resolution CR and random mechanical errors of standard deviation $\sigma$: repeatability $= \pm 3\sigma$ and accuracy $= \text{CR}/2 + 3\sigma$.</p>
+
+<h3 id="effectors">10. End effectors</h3>
+<p>An <b>end effector</b> is the device on the wrist that does the work. One big advantage over a human hand is that it can be <b>changed</b>. There are two kinds: <b>grippers</b>, which grasp and hold objects, and <b>tools</b>, which do a process (spot-welding gun, spray gun, drill, grinder).</p>
+<p>Grippers are used for machine loading and unloading, picking parts from conveyors, bottle handling and palletising. They should need as little manoeuvring as possible to grasp the part. They are classified as:</p>
+<ul><li><b>single</b> or <b>double</b> (two independent grippers on one wrist, for example to unload a finished part and load a new one in one visit),</li>
+<li><b>external</b> (grip the outside) or <b>internal</b> (expand inside a hole),</li>
+<li><b>hard</b> (point contact) or <b>soft</b> (surface contact),</li>
+<li><b>active</b> (with sensors) or <b>passive</b> (without).</li></ul>
+<figure class="diagram" id="fig-grippers"><img src="../../assets/img/diagrams/iar-grippers.svg" alt="External, internal, vacuum and magnetic grippers" loading="lazy"><figcaption>Four common grippers.</figcaption></figure>
+<ul><li><b>Mechanical grippers</b> close fingers through a linkage, a rotary (gear) drive or a cam. They are cheaper but less versatile.</li>
+<li><b>Vacuum grippers</b> hold thin, flat parts with a suction cup of rubber or soft plastic (a harder cup for soft objects). The vacuum comes from a pump or a venturi.</li>
+<li><b>Magnetic grippers</b> hold ferrous parts (most steels, but not austenitic stainless steel) with electromagnets or permanent magnets. They pick up quickly and handle different sizes, but leave residual magnetism. A permanent magnet needs a stripping device to release the part; an electromagnet is released by reversing its polarity.</li>
+<li><b>Adhesive grippers</b> use a sticky surface for light materials such as fabric. A <b>universal</b> gripper (the human hand is the model) can grasp almost anything.</li></ul>
+<p>Inserting a peg into a hole is hard for a stiff robot: a tiny misalignment jams the peg. A passive <b>remote centre compliance (RCC)</b> device mounted at the wrist lets the peg shift and tilt about a point near its tip, so it slides in. It works for near-vertical insertions (angle under about 45°) and needs a chamfer on the hole or peg.</p>
+
+<h3 id="teaching">11. Teaching a robot</h3>
+<p><b>On-line</b> methods use the robot itself: <i>manual teaching</i> with a joystick, push buttons or a teach pendant (for point-to-point tasks), or <i>lead-through</i>, where the programmer moves the arm along the path (for continuous-path tasks). <b>Off-line</b> methods use a programming language or a robot simulator (Lesson 6). An example in VAL, the language of the PUMA, for a pick-and-place task:</p>
+<table class="tbl"><tr><th>VAL statement</th><th>Meaning</th></tr>
+<tr><td><code>APPRO PART, 100</code></td><td>move to 100 mm above the location PART</td></tr>
+<tr><td><code>MOVES PART</code></td><td>move in a straight line down to PART</td></tr>
+<tr><td><code>CLOSEI</code></td><td>close the gripper immediately</td></tr>
+<tr><td><code>DEPARTS 200</code></td><td>back away 200 mm in a straight line</td></tr>
+<tr><td><code>APPROS BIN, 300</code></td><td>go in a straight line to 300 mm above BIN</td></tr>
+<tr><td><code>MOVE BIN</code></td><td>move to BIN</td></tr>
+<tr><td><code>OPENI</code></td><td>open the gripper immediately</td></tr>
+<tr><td><code>DEPART 100</code></td><td>back away 100 mm</td></tr></table>
+<p>Other VAL monitor commands include <code>SPEED 40</code>, <code>EXECUTE</code>, <code>ABORT</code>, <code>EDIT</code>, <code>LISTF</code>, <code>STORE</code>, <code>LOAD</code> and <code>DELETE</code>.</p>
+<p><b>A robot specification</b> lists: control type, drive system, coordinate system, teaching and programming methods, accuracy, repeatability and resolution, payload, weight of the manipulator, applications, range and speed of the arm and wrist, sensors, and end effector.</p>
+
+<h3 id="gears">12. Gears and transmissions</h3>
+<p>DC motors usually run too fast and give too little torque to drive a joint directly, so they are geared down.</p>
+<figure class="diagram" id="fig-gears"><img src="../../assets/img/diagrams/iar-gears.svg" alt="Pinion driving a larger gear with torque and speed ratios" loading="lazy"><figcaption>In mesh, both gears share the force $F$ and the speed at the pitch circle.</figcaption></figure>
+<p>With pinion radius $r_0$ and gear radius $r_1$: $T_0 = F r_0$ and $T_1 = F r_1$, so $T_1/T_0 = r_1/r_0$; the pitch-line speed is shared, $\omega_0 r_0 = \omega_1 r_1$, so $\omega_1/\omega_0 = r_0/r_1$. A 1 : 6 train multiplies torque by 6 and divides speed by 6, and the power $T\omega$ stays the same apart from friction. Gears transfer rotation between shafts; an even number of gears in a simple train reverses the direction. The common types are spur, helical, bevel (shafts at an angle) and worm gears (large reduction, shafts at right angles).</p>
+
+<h3 id="economics">13. Is a robot worth buying?</h3>
+<p>Let $F$ be the capital investment (robot plus installation), $B$ the yearly savings in labour and material, $C$ the yearly operating and maintenance cost, $D$ the yearly depreciation and $G$ the tax on the net savings. Then</p>
+<p class="eq">$$A = B - C - D \;(\text{net savings}), \qquad E = \frac{F}{B - C - G} \;(\text{pay-back period}), \qquad H = \frac{A - G}{F}\times 100\% \;(\text{rate of return})$$</p>
+<p>The robot is justified if the pay-back period is shorter than its techno-economic life <b>and</b> the rate of return is higher than the bank interest rate.</p>
+<p><b>Worked example.</b> Robot with accessories Rs 12,00,000; installation Rs 3,00,000; operating and maintenance Rs 20/h; labour saving Rs 100/h; material saving Rs 15/h; 24 h a day (three shifts), 200 days a year; tax 30 %; life 6 years.</p>
+<ul><li>$F = 12{,}00{,}000 + 3{,}00{,}000 = \text{Rs } 15{,}00{,}000$; running hours $= 24 \times 200 = 4800$ h/year.</li>
+<li>$B = (100 + 15) \times 4800 = \text{Rs } 5{,}52{,}000$; $C = 20 \times 4800 = \text{Rs } 96{,}000$; $D = 15{,}00{,}000/6 = \text{Rs } 2{,}50{,}000$.</li>
+<li>$A = 5{,}52{,}000 - 96{,}000 - 2{,}50{,}000 = \text{Rs } 2{,}06{,}000$; $G = 0.3A = \text{Rs } 61{,}800$.</li>
+<li>$E = 15{,}00{,}000 / (5{,}52{,}000 - 96{,}000 - 61{,}800) = 15{,}00{,}000/3{,}94{,}200 = 3.81$ years, shorter than the 6-year life.</li>
+<li>$H = (2{,}06{,}000 - 61{,}800)/15{,}00{,}000 = 9.61\,\%$.</li></ul>
+<p class="warn">The slide divides only the robot price by the life to get a depreciation of Rs 2,00,000 per year, although it defines F as purchase <i>plus</i> installation. With that value it gets A = Rs 2,56,000, G = Rs 76,800, a pay-back of 3.96 years and a return of 11.95 %. Depreciating the full Rs 15,00,000, as above, gives 3.81 years and 9.61 %. Both pay back within the life, but whether the return beats the bank rate now depends on the rate: at 10 % the decision flips. Use the calculator to try both.</p>
+<div class="sim" id="sim-payback" data-rsim="payback"></div>
+</article>
+    <!-- NOTES END -->
+    </section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the div below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">Describe in words the manipulators (a) TRT : R, (b) TVR : TR and (c) RR : T (the example on the Chapter 3B slide).</div><details><summary>Show solution</summary><div class="sol">(a) A base that twists about the axis of the first link (T), a rotational shoulder (R) and a twisting joint along the forearm (T); the wrist has one rotational joint (pitch). (b) A twisting base (T), a revolving joint whose input link lies along its axis and output link is perpendicular (V), and a rotational joint (R); the wrist twists (roll) and then rotates (pitch). (c) Two rotational joints, i.e. a two-link arm moving in one plane (R R), with a twisting wrist (roll).</div></details></li><li><div class="q">Use Grübler's criterion: (a) a 6R serial industrial arm; (b) a planar five-bar linkage with 4 moving links and 5 revolute joints; (c) a Stewart platform in which the six universal joints are replaced by spherical joints.</div><details><summary>Show solution</summary><div class="sol">(a) $M = 6\cdot 6 - 6(6 - 1) = 6$. (b) $M = 3\cdot 4 - 5(3 - 1) = 2$. (c) Each leg is now S–P–S: $M = 6\cdot 13 - 6(3 + 5 + 3) = 78 - 66 = 12$. The six extra freedoms are the legs spinning about their own axes, which do not move the platform.</div></details></li><li><div class="q">A joint encoder gives 0.36° per pulse. How many pulses per revolution is that? If the link is 0.8 m long, what is the resolution at the tip due to this joint?</div><details><summary>Show solution</summary><div class="sol">$360/0.36 = 1000$ pulses per revolution. Tip resolution $= L\,\Delta\theta = 0.8 \times 0.36 \times \pi/180 = 0.0050$ m, about 5 mm.</div></details></li><li><div class="q">A robot has a control resolution of 0.5 mm and a mechanical error with standard deviation 0.08 mm. Find its repeatability and accuracy (Groover's model).</div><details><summary>Show solution</summary><div class="sol">Repeatability $= \pm 3\sigma = \pm 0.24$ mm. Accuracy $= \text{CR}/2 + 3\sigma = 0.25 + 0.24 = 0.49$ mm.</div></details></li><li><div class="q">A motor gives 0.2 N·m at 3000 rpm. It drives a joint through a 1 : 6 gear train. Find the joint torque and speed (ignore friction).</div><details><summary>Show solution</summary><div class="sol">Torque $0.2 \times 6 = 1.2$ N·m; speed $3000/6 = 500$ rpm. Power is unchanged: $0.2 \times 314 = 62.8$ W $= 1.2 \times 52.4$ W.</div></details></li><li><div class="q">Choose a gripper for: (a) glass sheets; (b) hot forged steel billets; (c) a bearing ring held by its bore; (d) cloth panels.</div><details><summary>Show solution</summary><div class="sol">(a) Vacuum cups (flat, smooth, fragile). (b) Mechanical gripper with heat-resistant jaws (a magnet would weaken at forging temperature). (c) Internal gripper. (d) Adhesive or needle gripper, or vacuum with a high-flow pump.</div></details></li><li><div class="q">A robot costs Rs 8,00,000 plus Rs 2,00,000 to install. It saves Rs 90/h in labour and costs Rs 15/h to run. It works 16 h a day, 250 days a year, for 5 years. Tax is 30 % and the bank charges 10 %. Should the company buy it?</div><details><summary>Show solution</summary><div class="sol">$F = 10{,}00{,}000$; hours $= 4000$; $B = 3{,}60{,}000$; $C = 60{,}000$; $D = 2{,}00{,}000$; $A = 1{,}00{,}000$; $G = 30{,}000$. Pay-back $= 10{,}00{,}000/2{,}70{,}000 = 3.7$ years (shorter than 5). Return $= 70{,}000/10{,}00{,}000 = 7\,\%$, below the 10 % bank rate. Not justified on these figures, even though it pays back within its life.</div></details></li></ol></section>
+    <section class="lsec" id="sources"><h2>Sources and further reading</h2>
+    <ul class="srclist"><li>Chapter 3 slides of this course (EACT536), parts A and B, redrawn and rewritten.</li><li>A. Ghosal, <i>Robotics: Fundamental Concepts and Analysis</i>, Oxford University Press, and his NPTEL course <i>Robotics: Advanced Concepts and Analysis</i> (IISc, 2010), on which Chapter 3A is based.</li><li>M. P. Groover, <i>Industrial Robotics</i> and <i>Automation, Production Systems, and Computer-Integrated Manufacturing</i> (joint notation, configurations, precision, end effectors).</li><li>S. K. Saha, <i>Introduction to Robotics</i>, McGraw-Hill (economic analysis of a robot installation).</li></ul></section>
+    <nav class="prevnext"><a class="pn prev" href="02-modelling-automated-manufacturing.html"><small>← Lesson 2</small>Modelling automated manufacturing systems</a><a class="pn next" href="04-actuators-sensors-dh.html"><small>Lesson 4 →</small>Actuators, sensors and the Denavit–Hartenberg convention</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+<script src="../../assets/js/robotics-sims.js"></script>
+</body>
+</html>
