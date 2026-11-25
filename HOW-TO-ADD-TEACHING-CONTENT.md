@@ -371,6 +371,7 @@ The EACT 633 chapter decks are written out as lesson pages in `courses/nonlinear
 
 - `01-introduction.html` and `02-phase-plane-analysis.html` (Chapter 1: why nonlinear control, hard nonlinearities, nonlinear phenomena, phase portraits, isoclines, singular points, limit cycles). Built from "Chapter 1 Phase plane analysis v2" (the v1 file is the same apart from its header) and TVTIx_Chapter1_NLC.
 - `03-linearization.html` and `04-describing-function.html` (Chapter 2: tangent-line and Jacobian linearization, the pendulum, a tank, l'Hôpital's rule, linearizing about a trajectory; describing functions of saturation, dead zone, relays, hysteresis and backlash, and limit-cycle prediction). Built from TVTIx_Chapter2_NLC and the "Chapter2 Linearization" lecture (rewritten in our own words).
+- `05-lyapunov-stability.html` (Chapter 3: equilibria, stability definitions, the Vinograd–Hahn example, positive definite functions and quadratic forms, Lyapunov theorems, the Lyapunov equation and how not to use it, LaSalle, Barbalat, instability and converse theorems, finding Lyapunov functions). Covers the same ground as the Chapter 3 Lyapunov tutorial, in our own words.
 
 The course home page `courses/nonlinear-control.html` lists every lesson by chapter (lessons not written yet show "coming soon"), has a "Figures and worked problems" gallery and the live simulations. New diagrams start with `nlc-` in `assets/img/diagrams/`. Edit a lesson's notes between the `NOTES START` and `NOTES END` comments.
 

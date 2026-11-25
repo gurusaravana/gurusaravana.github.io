@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 5: Lyapunov stability · Nonlinear Control</title>
+<meta name="description" content="Equilibria and the definitions of stability, asymptotic and exponential stability; Lyapunov functions, positive definite functions and quadratic forms; the Lyapunov theorems, the Lyapunov matrix equation, LaSalle’s invariance principle, Barbalat’s lemma, instability and converse theorems, and how to find Lyapunov functions.">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 5: Lyapunov stability  (Nonlinear Control, EACT 633)
+  Edit the notes between the NOTES START and NOTES END markers below.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Figures live in assets/img/diagrams/ (names start with nlc-) and are shown with a figure of class "diagram".
+  To add an exercise, copy one list item inside the list of class "exlist".
+  Guide: HOW-TO-ADD-TEACHING-CONTENT.md, section 20.
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
+  <nav class="links"><a href="../nonlinear-control.html">Course home</a><a href="../nonlinear-control.html#lessons">Lessons</a><a href="../nonlinear-control.html#figures">Figures</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../nonlinear-control.html">← Nonlinear Control</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 5 of 5 · Chapter 3</div>
+    <h1>Lyapunov stability</h1>
+    <p>Nonlinear Control · EACT 633 · Postgraduate course</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">EACT 633 · Nonlinear Control</div><ol><li><a href="01-introduction.html"><span class="n">1</span>Introduction to nonlinear systems</a></li><li><a href="02-phase-plane-analysis.html"><span class="n">2</span>Phase plane analysis</a></li><li><a href="03-linearization.html"><span class="n">3</span>Linearization</a></li><li><a href="04-describing-function.html"><span class="n">4</span>Describing function analysis</a></li><li class="on"><a href="05-lyapunov-stability.html"><span class="n">5</span>Lyapunov stability</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Find the equilibria of a nonlinear system and move the one of interest to the origin</li><li>State the definitions of stability in the sense of Lyapunov, asymptotic, exponential and global stability, and explain why convergence alone is not enough</li><li>Test a function or a quadratic form for positive (semi)definiteness, symmetrizing first</li><li>Use Lyapunov’s direct method to prove stability, asymptotic stability or global exponential stability</li><li>Solve the Lyapunov matrix equation $A^TP + PA = -Q$ and use it the right way round</li><li>Apply LaSalle’s invariance principle and Barbalat’s lemma when $\dot V$ is only negative semidefinite</li></ul></div>
+    <nav class="figstrip" aria-label="Figures in this lesson"><a href="#fig-defs"><img src="../../assets/img/diagrams/nlc-lyap-defs.svg" alt="" loading="lazy"><span>Stability definitions</span></a><a href="#fig-hahn"><img src="../../assets/img/diagrams/nlc-lyap-hahn.svg" alt="" loading="lazy"><span>Convergent but not stable</span></a><a href="#fig-definite"><img src="../../assets/img/diagrams/nlc-lyap-definite.svg" alt="" loading="lazy"><span>Definite and indefinite</span></a><a href="#fig-levelsets"><img src="../../assets/img/diagrams/nlc-lyap-levelsets.svg" alt="" loading="lazy"><span>Level sets of V</span></a><a href="#fig-coupled"><img src="../../assets/img/diagrams/nlc-lyap-coupled.svg" alt="" loading="lazy"><span>Lyapunov proof example</span></a><a href="#fig-lasalle"><img src="../../assets/img/diagrams/nlc-lyap-lasalle.svg" alt="" loading="lazy"><span>LaSalle: pendulum</span></a><a href="#fig-barbalat"><img src="../../assets/img/diagrams/nlc-lyap-barbalat.svg" alt="" loading="lazy"><span>Barbalat warnings</span></a><a href="#fig-region"><img src="../../assets/img/diagrams/nlc-lyap-region.svg" alt="" loading="lazy"><span>Region of attraction</span></a></nav>
+    <section class="lsec"><h2>Notes</h2>
+    <!-- NOTES START -->
+    <article class="notes">
+<h3 id="setting">Systems, solutions and what we want to know</h3>
+<p>We study the nonlinear system</p>
+<p class="eq">$$\dot x(t) = f\big(t, x(t)\big), \qquad x(t_0) = x_0, \qquad x \in \mathbb R^n,$$</p>
+<p>and write its solution as $x(t) = x(t; t_0, x_0)$. If $f$ does not depend on $t$ the system is <b>time-invariant</b> (autonomous), $\dot x = f(x)$. The linear time-invariant case is $\dot x = Ax$, with solution $x(t) = e^{A(t - t_0)}x_0$.</p>
+<p>Two examples from the start of the chapter:</p>
+<ul>
+<li><b>Mass and linear spring</b>: $m\ddot x = -kx$. With $x_1 = x$, $x_2 = \dot x$: $\dot x_1 = x_2$, $\dot x_2 = -\frac km x_1$. Linear and time-invariant.</li>
+<li><b>Simple pendulum</b>: $J\ddot\theta = -mgl\sin\theta$ with $J = ml^2$, so $\ddot\theta = -\frac gl\sin\theta$. With $x_1 = \theta$, $x_2 = \dot\theta$: $\dot x_1 = x_2$, $\dot x_2 = -\frac gl\sin x_1$. Nonlinear and time-invariant.</li>
+</ul>
+<p>For nonlinear systems we rarely want, or can find, the detailed solution. As with large linear systems, the aim is to <b>characterize the behaviour</b>: where are the equilibria, and are they stable? Lyapunov’s idea is to use one scalar <b>summarizing function</b> of the state, a generalized energy, whose evolution in time tells us about stability without solving the equations.</p>
+
+<h3 id="equilibria">Equilibrium points</h3>
+<p>A point $x_e$ is an <b>equilibrium</b> of $\dot x = f(t, x)$ at time $t_0$ if</p>
+<p class="eq">$$f(t, x_e) = 0 \quad\text{for all } t \ge t_0 .$$</p>
+<p>Once the state equals $x_e$ it stays there. If $x_e$ is an equilibrium at $t_0$, it is also one at every later time; for a time-invariant system it is an equilibrium at all times or at none.</p>
+<ul>
+<li><b>Linear systems.</b> Equilibria solve $Ax_e = 0$. If $A^{-1}$ exists, the origin is the <b>unique</b> equilibrium. If $A$ is singular there is a whole subspace of them.</li>
+<li><b>Nonlinear systems</b> may have several equilibria, and the origin need not be one of them. For example $\dot x_1 = x_2$, $\dot x_2 = -x_1 + x_1^2 - x_2$ has equilibria at $(0, 0)$ and $(1, 0)$.</li>
+<li>An equilibrium is <b>isolated</b> if some neighbourhood $\{x : \|x - x_e\| &lt; r\}$, $r &gt; 0$, contains no other equilibrium. (Any norm will do.)</li>
+<li>We can always <b>move the equilibrium of interest to the origin</b> with $\tilde x = x - x_e$, so from now on we assume $x_e = 0$ without loss of generality.</li>
+</ul>
+
+<h3 id="definitions">Stability definitions</h3>
+<p>Informally, an equilibrium is stable if a state that starts near it stays near it. Lyapunov made this precise in his 1892 doctoral thesis.</p>
+<div class="key"><b>Stability in the sense of Lyapunov (i.s.L.).</b> The equilibrium $x_e = 0$ is stable if for every $\varepsilon &gt; 0$ and every $t_0$ there is a $\delta = \delta(\varepsilon, t_0) &gt; 0$ such that
+$$\|x_0\| &lt; \delta \;\Longrightarrow\; \|x(t; t_0, x_0)\| &lt; \varepsilon \quad\text{for all } t \ge t_0 .$$</div>
+<p>Think of it as a game (B. Friedland’s picture). An adversary draws a ball of radius $\varepsilon$ round the equilibrium. You must reply with a ball of radius $\delta$ such that every motion starting in your ball stays in theirs. If you can always answer, however small their $\varepsilon$, the equilibrium is stable.</p>
+<p>Stability i.s.L. is weak: it does not ask the state to return to the equilibrium, only to hover near it.</p>
+<ul>
+<li><b>Asymptotically stable</b>: stable i.s.L. <i>and</i> convergent, i.e. there is a domain of attraction such that every motion starting in it satisfies $x(t) \to 0$ as $t \to \infty$.</li>
+<li><b>Exponentially stable</b>: there are $M, \beta &gt; 0$ with $\|x(t)\| \le M\,e^{-\beta(t - t_0)}\|x_0\|$ near the origin. This also says how fast the state converges, which asymptotic stability does not.</li>
+<li><b>Global</b> (G.A.S., G.E.S.): the property holds for every initial state, not only near the equilibrium. Then the equilibrium must be the only one.</li>
+<li><b>Unstable</b>: not stable.</li>
+</ul>
+<figure class="diagram" id="fig-defs"><img src="../../assets/img/diagrams/nlc-lyap-defs.svg" alt="Three phase-plane sketches with an epsilon circle and a delta circle: a closed orbit, a spiral into the origin, and a spiral out" loading="lazy"><figcaption>The $\varepsilon$–$\delta$ picture. Only in the middle does the state also converge.</figcaption></figure>
+<p><b>Linear systems.</b> $\dot x = Ax$ is asymptotically stable if and only if every eigenvalue of $A$ has negative real part, and then it is in fact globally exponentially stable. For linear systems convergence already implies stability, and local implies global.</p>
+<h4>Convergence is not enough</h4>
+<p>For nonlinear systems the state may first move far away from the equilibrium and only later come back. The definition therefore asks for both stability and convergence. The classic example (Vinograd, discussed by W. Hahn in 1967) is</p>
+<p class="eq">$$\dot x_1 = \frac{x_1^2(x_2 - x_1) + x_2^5}{(x_1^2 + x_2^2)\big(1 + (x_1^2 + x_2^2)^2\big)}, \qquad \dot x_2 = \frac{x_2^2(x_2 - 2x_1)}{(x_1^2 + x_2^2)\big(1 + (x_1^2 + x_2^2)^2\big)} .$$</p>
+<figure class="diagram" id="fig-hahn"><img src="../../assets/img/diagrams/nlc-lyap-hahn.svg" alt="Phase portrait where trajectories starting very near the origin make a large loop before returning to it" loading="lazy"><figcaption>Every trajectory converges to the origin, yet starts as close as $0.01$ make a loop of size about $1$. No $\delta$ answers $\varepsilon = 0.5$, so the origin is attractive but <b>not stable</b>, and hence not asymptotically stable.</figcaption></figure>
+
+<h3 id="lyapfun">Lyapunov functions: the idea</h3>
+<p>A free mechanical system with friction loses energy all the time unless it is at rest, so it must end at an equilibrium. Lyapunov generalized this: look for a function $V(x)$ that</p>
+<ol>
+<li>is continuous with continuous partial derivatives,</li>
+<li>has a strict minimum at the equilibrium (it is <b>positive definite</b>), and</li>
+<li>does not increase along any trajectory.</li>
+</ol>
+<p>Along a solution $x(t)$, the chain rule gives the <b>Lyapunov derivative</b> (the derivative of $V$ along the trajectories)</p>
+<p class="eq">$$\dot V(x) = \frac{d}{dt}V\big(x(t)\big) = \nabla V(x)^T\,\dot x = \nabla V(x)^T f(x) .$$</p>
+<p>This needs only $f$, not the solution. Geometrically, the level curves $V(x) = c$ are nested closed curves shrinking onto the equilibrium, like contour lines of a cup. If $\dot V &lt; 0$, every trajectory crosses the level curves inwards and falls to the bottom of the cup.</p>
+
+<h3 id="definite">Positive definite functions and quadratic forms</h3>
+<p>Let $V$ have continuous partial derivatives on a neighbourhood $S$ of the origin, with $V(0) = 0$.</p>
+<ul>
+<li>$V$ is <b>positive definite</b> on $S$ if $V(x) &gt; 0$ for all $x \ne 0$ in $S$. <b>Positive semidefinite</b> if $V(x) \ge 0$.</li>
+<li>$V$ is <b>negative (semi)definite</b> if $-V$ is positive (semi)definite.</li>
+<li>$V$ is <b>radially unbounded</b> if $V(x) \to \infty$ as $\|x\| \to \infty$; equivalently all its sublevel sets $\{x : V(x) \le c\}$ are bounded. This is what global results need.</li>
+</ul>
+<p>The most used candidates are <b>quadratic forms</b> $V(x) = x^TPx$. Since a scalar equals its transpose, $x^TPx = x^TP^Tx$, so</p>
+<p class="eq">$$x^TPx = x^T\,\frac{P + P^T}{2}\,x,$$</p>
+<p>and only the <b>symmetric part</b> of $P$ matters. For symmetric $P$:</p>
+<ul>
+<li>$x^TPx$ is positive definite $\iff$ all eigenvalues of $P$ are positive $\iff$ all leading principal minors are positive (<b>Sylvester’s criterion</b>).</li>
+<li>positive semidefinite $\iff$ all eigenvalues are $\ge 0$ (for Sylvester, <i>all</i> principal minors $\ge 0$).</li>
+<li>negative (semi)definite $\iff$ $-P$ is positive (semi)definite.</li>
+</ul>
+<div class="warn">The eigenvalue tests are valid only for symmetric matrices. Example: $P = \begin{bmatrix}2 &amp; 6\\ 0 &amp; 2\end{bmatrix}$ has eigenvalues $2, 2$, which suggests "positive definite". But its symmetric part $\begin{bmatrix}2 &amp; 3\\ 3 &amp; 2\end{bmatrix}$ has eigenvalues $5$ and $-1$, so $x^TPx = 2x_1^2 + 6x_1x_2 + 2x_2^2$ is <b>indefinite</b>: it is $10$ at $(1, 1)$ and $-2$ at $(1, -1)$. Always symmetrize first.</div>
+<figure class="diagram" id="fig-definite"><img src="../../assets/img/diagrams/nlc-lyap-definite.svg" alt="Contour plots of a positive definite, a positive semidefinite and an indefinite quadratic form" loading="lazy"><figcaption>Closed level curves round one minimum (left) are what a Lyapunov function needs. A semidefinite form has a valley floor; an indefinite one is a saddle.</figcaption></figure>
+
+<h3 id="theorems">Lyapunov’s direct (second) method</h3>
+<p>For $\dot x = f(x)$ with $f(0) = 0$, let $V$ be positive definite on a neighbourhood of the origin.</p>
+<div class="tblwrap"><table class="tbl">
+<tr><th>If $\dot V(x) = \nabla V^Tf(x)$ is…</th><th>then the origin is…</th></tr>
+<tr><td>negative semidefinite ($\dot V \le 0$)</td><td>stable i.s.L.</td></tr>
+<tr><td>negative definite ($\dot V &lt; 0$ for $x \ne 0$)</td><td>locally asymptotically stable</td></tr>
+<tr><td>negative definite, and $V$ radially unbounded on $\mathbb R^n$</td><td>globally asymptotically stable</td></tr>
+<tr><td>$\dot V \le -\alpha V$ for some $\alpha &gt; 0$, on $\mathbb R^n$ (with $V$ bounded above and below by multiples of $\|x\|^2$)</td><td>globally exponentially stable</td></tr>
+</table></div>
+<p>A function $V$ that satisfies the conditions is called a <b>Lyapunov function</b> for the system.</p>
+<p><b>Why it works (G.A.S. case).</b> $V(x(t))$ is decreasing and bounded below by $0$, so it converges to some $\epsilon \ge 0$. If $\epsilon &gt; 0$, the trajectory stays in the compact set $C = \{\epsilon \le V(x) \le V(x_0)\}$, where the continuous function $\dot V$ is at most some $-a &lt; 0$. Then $V(x(T)) \le V(x_0) - aT$, which is negative for large $T$: impossible. So $\epsilon = 0$ and $x(t) \to 0$. Radial unboundedness makes $C$ bounded.</p>
+<p>A related <b>boundedness theorem</b>: if all sublevel sets of $V$ are bounded and $\dot V \le 0$ everywhere, every trajectory is bounded, because it can never leave the sublevel set it starts in. Every sublevel set $\{V \le c\}$ is then <b>invariant</b>.</p>
+<p><b>Example (linear).</b> For $\dot x = Ax$ with $A = \begin{bmatrix}0 &amp; 1\\-1 &amp; -0.5\end{bmatrix}$ and $V = x^TPx$, $P = \begin{bmatrix}2.25 &amp; 0.5\\ 0.5 &amp; 2\end{bmatrix}$ (found from the Lyapunov equation below), $\dot V = -x^Tx &lt; 0$.</p>
+<figure class="diagram" id="fig-levelsets"><img src="../../assets/img/diagrams/nlc-lyap-levelsets.svg" alt="Elliptic level curves of V with a spiral trajectory crossing them inward, and V against time decreasing to zero" loading="lazy"><figcaption>The trajectory crosses every level curve inwards; $V(x(t))$ falls monotonically.</figcaption></figure>
+<p><b>Example (nonlinear, global exponential stability).</b> Two first-order systems with nonlinear cross-coupling:</p>
+<p class="eq">$$\dot x_1 = -x_1 + g(x_2), \qquad \dot x_2 = -x_2 + h(x_1), \qquad |g(u)| \le \tfrac{|u|}2,\ \ |h(u)| \le \tfrac{|u|}2 .$$</p>
+<p>Take $V = x_1^2 + x_2^2$. Then</p>
+<p class="eq">$$\dot V = 2x_1\big(-x_1 + g(x_2)\big) + 2x_2\big(-x_2 + h(x_1)\big) \le -2x_1^2 - 2x_2^2 + 2|x_1||x_2| \le -(x_1^2 + x_2^2) = -V,$$</p>
+<p>using $2|x_1||x_2| \le x_1^2 + x_2^2$ (from $(|x_1| - |x_2|)^2 \ge 0$). So $\dot V \le -V$, and the system is globally exponentially stable, without knowing $g$, $h$ or the trajectories.</p>
+<figure class="diagram" id="fig-coupled"><img src="../../assets/img/diagrams/nlc-lyap-coupled.svg" alt="Trajectories from a ring of starts all converging to the origin across dashed circles" loading="lazy"><figcaption>With $g(u) = 0.5\sin u$ and $h(u) = 0.5u\cos u$, trajectories cut the circles $V = c$ inwards.</figcaption></figure>
+
+<h3 id="lyapeq">Linear systems: the Lyapunov matrix equation</h3>
+<p>For $\dot x = Ax$ try $V = x^TPx$ with $P = P^T$. Then</p>
+<p class="eq">$$\dot V = \dot x^TPx + x^TP\dot x = x^T\left(A^TP + PA\right)x = -x^TQx, \qquad A^TP + PA = -Q .$$</p>
+<div class="key"><b>Lyapunov theorem for linear systems.</b> All eigenvalues of $A$ have negative real parts if and only if, for any symmetric positive definite $Q$, the solution $P$ of $A^TP + PA = -Q$ is symmetric positive definite.</div>
+<p><b>How to use it.</b> Choose any $Q = Q^T &gt; 0$, usually $Q = I$. Solve the linear equations for $P$. If $P &gt; 0$, $A$ is asymptotically stable; if not, it is not.</p>
+<p><b>How not to use it.</b> Do <i>not</i> choose $P &gt; 0$ first and compute $Q$. Unless $Q$ happens to come out positive definite, you learn nothing. Example: $A = \begin{bmatrix}-1 &amp; 0\\ -3 &amp; -1\end{bmatrix}$ is asymptotically stable (eigenvalues $-1, -1$). With $P = I$, $Q = -(A^T + A) = \begin{bmatrix}2 &amp; 3\\ 3 &amp; 2\end{bmatrix}$, the indefinite matrix of the warning above. Solving instead with $Q = I$ gives $P = \begin{bmatrix}2.75 &amp; -0.75\\ -0.75 &amp; 0.5\end{bmatrix}$, with eigenvalues $2.977$ and $0.273$: positive definite, as the theorem promises.</p>
+<p><b>Software.</b> MATLAB’s <code>lyap(A, Q)</code> solves $AX + XA^T + Q = 0$, so for $A^TP + PA = -Q$ use <code>P = lyap(A', Q)</code>. In Python: <code>scipy.linalg.solve_continuous_lyapunov(A.T, -Q)</code>. (For the example above both forms give the same eigenvalues, $0.273$ and $2.977$, because $A$ and $A^T$ are similar.)</p>
+<p><b>Indirect method.</b> Applying this to the Jacobian $A$ of a nonlinear system at an equilibrium gives Lyapunov’s first (indirect) method of <a href="03-linearization.html#limits">Lesson 3</a>: $V = x^TPx$ is also a Lyapunov function for the nonlinear system near the origin, because the higher-order terms are dominated by $-x^TQx$ there.</p>
+
+<h3 id="lasalle">LaSalle’s invariance principle</h3>
+<p>Often the natural $V$ (an energy) gives only $\dot V \le 0$. LaSalle’s theorem (1960) closes the gap for time-invariant systems.</p>
+<div class="key"><b>LaSalle.</b> Let $\dot x = f(x)$, and let $V$ be positive definite and radially unbounded with $\dot V(x) \le 0$ everywhere. If the only solution of $\dot w = f(w)$ that stays in the set $\{w : \dot V(w) = 0\}$ for all time is $w(t) \equiv 0$, then the origin is globally asymptotically stable. (A local version holds on any bounded invariant set.)</div>
+<p>In words: no nonzero trajectory can hide for ever in the "zero dissipation" set. It is an observability-type condition. Unlike most Lyapunov theorems, LaSalle needs time invariance.</p>
+<p><b>Example: pendulum with friction.</b> $\dot x_1 = x_2$, $\dot x_2 = -\sin x_1 - bx_2$, $b &gt; 0$. The energy $V = (1 - \cos x_1) + \tfrac12x_2^2$ gives $\dot V = -bx_2^2 \le 0$: zero on the whole $x_1$ axis, so the direct method proves only stability. On that axis $x_2 \equiv 0$ forces $\dot x_2 = -\sin x_1 = 0$, so near the origin only $x_1 = 0$ remains. By LaSalle the hanging position is (locally) asymptotically stable.</p>
+<figure class="diagram" id="fig-lasalle"><img src="../../assets/img/diagrams/nlc-lyap-lasalle.svg" alt="Energy contours of the pendulum with the x1 axis highlighted and a trajectory spiralling to the origin" loading="lazy"><figcaption>The trajectory touches the orange axis many times but can never stay on it.</figcaption></figure>
+
+<h3 id="barbalat">Time-varying systems and Barbalat’s lemma</h3>
+<p>For time-varying systems it is hard to find a $V$ with negative definite derivative, and LaSalle does not apply. When can we still conclude convergence from $\dot V \le 0$? Some facts about a function $f(t)$:</p>
+<ul>
+<li>$\dot f \to 0$ does <b>not</b> imply that $f$ has a limit (e.g. $f = \sin(\ln t)$).</li>
+<li>$f$ having a limit does <b>not</b> imply $\dot f \to 0$ (e.g. $f = e^{-t}\sin(e^{2t})$).</li>
+<li>If $f$ is bounded below and non-increasing, it converges to a limit.</li>
+</ul>
+<figure class="diagram" id="fig-barbalat"><img src="../../assets/img/diagrams/nlc-lyap-barbalat.svg" alt="Two plots: a decaying function with ever faster oscillation, and sin of ln t oscillating for ever" loading="lazy"><figcaption>The two counter-examples that Barbalat’s lemma rules out.</figcaption></figure>
+<p>A function is <b>uniformly continuous</b> if the change in $f$ over an interval depends only on the length of the interval, not on where it is. A bounded derivative is enough: $\sin t$ is uniformly continuous, while $1/t$ on $(0, \infty)$ is continuous but not uniformly (its slope blows up near $0$).</p>
+<div class="key"><b>Barbalat’s lemma.</b> If $f(t)$ has a finite limit as $t \to \infty$ and $\dot f$ is uniformly continuous (for example, $\ddot f$ is bounded), then $\dot f(t) \to 0$.</div>
+<div class="key"><b>Lyapunov-like lemma.</b> If $V(t, x)$ is bounded below, $\dot V(t, x)$ is negative semidefinite, and $\dot V$ is uniformly continuous in $t$ (for example, $\ddot V$ is bounded), then $\dot V(t, x) \to 0$ as $t \to \infty$.</div>
+<p><b>Example.</b> The error equations of a simple adaptive system are $\dot e = -e + \theta\,w(t)$, $\dot\theta = -e\,w(t)$, with $w(t)$ bounded. Take $V = e^2 + \theta^2$:</p>
+<ul>
+<li>$\dot V = 2e(-e + \theta w) + 2\theta(-ew) = -2e^2 \le 0$. So the origin is stable, $V$ is non-increasing, and $e$ and $\theta$ stay bounded. The direct method says nothing more, and the system is time-varying, so LaSalle does not apply.</li>
+<li>$\ddot V = -4e\dot e = -4e(-e + \theta w)$ is bounded, because $e$, $\theta$ and $w$ are. So $\dot V$ is uniformly continuous.</li>
+<li>$V$ is bounded below and $\dot V \le 0$, so by the lemma $\dot V = -2e^2 \to 0$, that is, $e(t) \to 0$. (The parameter error $\theta$ need not go to zero.)</li>
+</ul>
+
+<h3 id="instability">Instability and divergence</h3>
+<ul>
+<li><b>Instability theorem.</b> If $\dot V(z) \le 0$ for all $z$ (or just whenever $V(z) \le V(0)$) and there is a point $w$ with $V(w) &lt; V(0)$, then the trajectory from $w$ does not converge to zero: $V$ can only fall further below $V(0)$. So the system is not G.A.S.</li>
+<li><b>Divergence theorem.</b> If $\dot V(z) &lt; 0$ whenever $V(z) \le 0$, and there is a point $w$ with $V(w) &lt; 0$, then the trajectory from $w$ is unbounded.</li>
+<li>Chetaev’s theorem gives a local test of the same kind: a function that is positive and increasing in a region touching the equilibrium proves instability.</li>
+</ul>
+
+<h3 id="converse">Converse theorems</h3>
+<p>Is it worth searching for a Lyapunov function? <b>Converse theorems</b> say yes: if the system has the property, a Lyapunov function proving it exists. For example, if every trajectory satisfies $\|x(t)\| \le Me^{-\beta t}\|x(0)\|$ (G.E.S.), then</p>
+<p class="eq">$$V(z) = \int_0^\infty \|x(\tau)\|^2\,d\tau, \qquad x(0) = z,$$</p>
+<p>is finite, positive definite, and satisfies $\dot V(z) = -\|z\|^2 \le -\alpha V(z)$ with $\alpha = 2\beta/M^2$. For linear systems this is exactly the quadratic $V = x^TPx$ of the Lyapunov equation with $Q = I$. The proof is constructive only in principle (it needs the trajectories), but it tells us that a failure to find $V$ is our failure, not the system’s.</p>
+
+<h3 id="finding">Finding Lyapunov functions</h3>
+<p>There is no general recipe, but these sources cover most course problems:</p>
+<ul>
+<li><b>Physical energy</b> (kinetic plus potential), as for the pendulum. Then use LaSalle if $\dot V$ is only semidefinite.</li>
+<li><b>Quadratic forms</b> $x^TPx$, with $P$ from the Lyapunov equation of the linearization: good locally, and a starting point globally.</li>
+<li><b>A parametrized candidate</b> (for example $V = ax_1^2 + bx_2^2 + cx_1^4$), choosing the parameters so that cross terms cancel in $\dot V$.</li>
+<li><b>Computational methods</b>: linear matrix inequalities and sum-of-squares programming search for $V$ numerically.</li>
+<li>The value function of a related optimal control problem, and graphical methods for low-order systems.</li>
+</ul>
+<p><b>Estimating the region of attraction.</b> If $\dot V &lt; 0$ only in a region $D$, every sublevel set $\Omega_c = \{V \le c\}$ that lies inside $D$ is invariant and every trajectory starting in it goes to the origin. The largest such $\Omega_c$ is a guaranteed estimate of the region of attraction. Example: $\dot x_1 = -x_1 + x_2$, $\dot x_2 = -x_1 - x_2 + x_2^3$ with $V = \tfrac12(x_1^2 + x_2^2)$ gives $\dot V = -x_1^2 - x_2^2(1 - x_2^2)$, negative for $|x_2| &lt; 1$. The largest circle inside that band is $V &lt; \tfrac12$.</p>
+<figure class="diagram" id="fig-region"><img src="../../assets/img/diagrams/nlc-lyap-region.svg" alt="Converging and diverging trajectories, the band where V decreases, and the circle estimate of the region of attraction" loading="lazy"><figcaption>The Lyapunov estimate (green circle) is safe but cautious: the true region of attraction (where the blue trajectories start) is larger.</figcaption></figure>
+</article>
+    <!-- NOTES END -->
+    </section>
+    <section class="lsec" id="try"><h2>Try it</h2>
+    <p>The phase plane explorer is set to the pendulum with friction. With damping $b = 0$ the energy is constant and trajectories are closed (stable, not asymptotically stable). With $b &gt; 0$ trajectories spiral into the hanging equilibria, as LaSalle predicts. Try also Van der Pol (an unstable origin inside a stable limit cycle).</p>
+    <div class="sim nls" data-nls="phase-plane" data-preset="pendulum" data-only="pendulum,vdp,duffing,ex10,ex12,linear"></div>
+    </section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the div below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">Is $V(x) = x_1^2 + x_2^2 - 2x_1x_2$ positive definite? And $V(x) = x_1^2 + 2x_2^2 + 2x_1x_2$?</div><details><summary>Show solution</summary><div class="sol">The first is $(x_1 - x_2)^2$: zero on the line $x_1 = x_2$, so only positive <b>semidefinite</b>. The second has $P = \begin{bmatrix}1 &amp; 1\\1 &amp; 2\end{bmatrix}$ with leading minors $1 &gt; 0$ and $2 - 1 = 1 &gt; 0$: positive <b>definite</b> (indeed $V = (x_1 + x_2)^2 + x_2^2$).</div></details></li><li><div class="q">Is $V = x^TPx$ with $P = \begin{bmatrix}1 &amp; 4\\0 &amp; 1\end{bmatrix}$ positive definite?</div><details><summary>Show solution</summary><div class="sol">No. Symmetrize: $\begin{bmatrix}1 &amp; 2\\2 &amp; 1\end{bmatrix}$ has eigenvalues $3$ and $-1$, so $V$ is indefinite ($V(1, -1) = -2$). The eigenvalues $1, 1$ of the non-symmetric $P$ are misleading.</div></details></li><li><div class="q">Solve $A^TP + PA = -I$ for $A = \begin{bmatrix}0 &amp; 1\\-2 &amp; -3\end{bmatrix}$ and decide stability.</div><details><summary>Show solution</summary><div class="sol">Write $P = \begin{bmatrix}p_1 &amp; p_2\\p_2 &amp; p_3\end{bmatrix}$. The three scalar equations are $-4p_2 = -1$, $p_1 - 3p_2 - 2p_3 = 0$, $2p_2 - 6p_3 = -1$. So $p_2 = 0.25$, $p_3 = 0.25$, $p_1 = 1.25$. $P = \begin{bmatrix}1.25 &amp; 0.25\\0.25 &amp; 0.25\end{bmatrix}$ has minors $1.25 &gt; 0$ and $0.25 &gt; 0$: positive definite, so $A$ is asymptotically stable (eigenvalues $-1$, $-2$).</div></details></li><li><div class="q">Show that $\dot x_1 = -x_1^3 + x_2$, $\dot x_2 = -x_1 - x_2^3$ is globally asymptotically stable. Why does linearization fail here?</div><details><summary>Show solution</summary><div class="sol">$V = x_1^2 + x_2^2$ gives $\dot V = 2x_1(-x_1^3 + x_2) + 2x_2(-x_1 - x_2^3) = -2x_1^4 - 2x_2^4 &lt; 0$ for $x \ne 0$, and $V$ is radially unbounded: G.A.S. The Jacobian at the origin is $\begin{bmatrix}0 &amp; 1\\-1 &amp; 0\end{bmatrix}$ with eigenvalues $\pm j$, so the indirect method is inconclusive.</div></details></li><li><div class="q">For $\dot x = -x + x^3$, use $V = x^2/2$ to find a region where convergence to $0$ is guaranteed. Is the origin globally asymptotically stable?</div><details><summary>Show solution</summary><div class="sol">$\dot V = x(-x + x^3) = -x^2(1 - x^2) &lt; 0$ for $0 &lt; |x| &lt; 1$. So every start with $|x_0| &lt; 1$ converges to $0$. Not global: $x = \pm1$ are also equilibria, and starts with $|x_0| &gt; 1$ escape to infinity (in finite time).</div></details></li><li><div class="q">Use LaSalle to show that $\ddot x + \dot x^3 + x = 0$ is globally asymptotically stable.</div><details><summary>Show solution</summary><div class="sol">$V = \frac12(x^2 + \dot x^2)$ is positive definite and radially unbounded. $\dot V = x\dot x + \dot x(-\dot x^3 - x) = -\dot x^4 \le 0$, zero when $\dot x = 0$. A solution staying there has $\dot x \equiv 0$, so $\ddot x = 0$, so $x = 0$. By LaSalle the origin is G.A.S.</div></details></li><li><div class="q">In the cross-coupled example, suppose instead $|g(u)| \le \gamma|u|$ and $|h(u)| \le \gamma|u|$. For which $\gamma$ does the same $V$ prove global exponential stability?</div><details><summary>Show solution</summary><div class="sol">$\dot V \le -2(x_1^2 + x_2^2) + 4\gamma|x_1||x_2| \le -2(1 - \gamma)(x_1^2 + x_2^2)$, using $2|x_1||x_2| \le x_1^2 + x_2^2$. So $\gamma &lt; 1$ gives $\dot V \le -2(1 - \gamma)V$: G.E.S. with rate $\alpha = 2(1 - \gamma)$. For $\gamma = \frac12$ this is $\alpha = 1$, as in the notes.</div></details></li></ol></section>
+    <!-- PRACTICE START: practice problems from the exercise compendium. To add one, copy a <li>...</li> line. Guide section 20. -->
+    <section class="lsec" id="practice"><h2>Practice problems from the exercise compendium</h2>
+    <p class="note">From <i>Exercises in Nonlinear Control Systems</i> by M. Johansson, B. Bernhardsson and K. H. Johansson (Department of Automatic Control, Lund University), Chapter 3 (Lyapunov Stability). “Ex 3.4” means Chapter 3, Exercise 4. Work from the compendium statement. The hints and short answers here are written for this course; full solutions are not reproduced.</p>
+    <ol class="exlist practice"><li><div class="q"><span class="pno">Ex 3.1</span> The scalar system $\dot x = ax^3$: linearization, the function $V = x^4$, and the case $a = 0$.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> Compute the Jacobian at the origin, then $\dot V = 4x^3\dot x$.<br><b>Answer.</b> The Jacobian is $0$, so the indirect method fails. $\dot V = 4ax^6 &lt; 0$ for $a &lt; 0$ and $V$ is radially unbounded: G.A.S. For $a = 0$ every point is an equilibrium: the origin is stable but not asymptotically stable.</div></details></li><li><div class="q"><span class="pno">Ex 3.2</span> Pendulum: energy without and with friction.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> Write $E$ = kinetic + potential energy and differentiate along trajectories. For (b) find where $\dot E = 0$ and apply LaSalle.<br><b>Answer.</b> Without friction $\dot E = 0$: stable, not asymptotically. With friction $\dot E = -kl^2x_2^2 \le 0$ (up to the compendium’s scaling), zero on $x_2 = 0$; only the equilibrium can stay there, so the origin is asymptotically stable by LaSalle.</div></details></li><li><div class="q"><span class="pno">Ex 3.3</span> $\ddot x + d\dot x^3 + kx = 0$ with $V = \frac12(kx^2 + \dot x^2)$.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> Compute $\dot V$; it is only semidefinite. Then use LaSalle and check radial unboundedness.<br><b>Answer.</b> $\dot V = -d\dot x^4 \le 0$. On $\dot x \equiv 0$ the equation forces $x = 0$. $V$ is radially unbounded, so the origin is locally stable, locally asymptotically stable and globally asymptotically stable.</div></details></li><li><div class="q"><span class="pno">Ex 3.4</span> Lyapunov equation for $A = \begin{bmatrix}0 &amp; 1\\-1 &amp; -1\end{bmatrix}$ with $Q = I$.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> Eigenvalues first. Then write $P$ with three unknowns and match the entries of $A^TP + PA = -I$.<br><b>Answer.</b> $\lambda = -\frac12 \pm j\frac{\sqrt3}{2}$: asymptotically stable. $P = \begin{bmatrix}1.5 &amp; 0.5\\0.5 &amp; 1\end{bmatrix}$, with $p_{11} = 1.5 &gt; 0$ and $p_{11}p_{22} - p_{12}^2 = 1.25 &gt; 0$: positive definite, eigenvalues $1.81$ and $0.69$.</div></details></li><li><div class="q"><span class="pno">Ex 3.5</span> A time-varying system whose frozen-time eigenvalues are all $-1$ but which is unstable.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> Solve the second equation first, then the first one with that as input.<br><b>Answer.</b> $x_2 = x_2(0)e^{-t}$ and $x_1 = \big(x_1(0) - \tfrac12x_2(0)\big)e^{-t} + \tfrac12x_2(0)e^{t}$, which grows without bound. (b) With $V = x^Tx$, $\dot V = x^T(A + A^T)x &lt; 0$ when $A + A^T$ is negative definite.</div></details></li><li><div class="q"><span class="pno">Ex 3.6</span> A student’s "obvious" Lyapunov function for $\ddot x + \frac{2x}{(1 + x^2)^2} = 0$.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> Evaluate $\int_0^\infty \frac{2\zeta}{(1 + \zeta^2)^2}d\zeta$. What do the level sets of $V$ look like when $V &gt; 1$?<br><b>Answer.</b> The integral is $1$, so $V$ is not radially unbounded: level sets with $V \ge 1$ are not closed curves. $V$ is conserved, and any start with $V &gt; 1$ has $\frac12x_2^2 &gt; V - 1 &gt; 0$ for ever, so $x_1 \to \pm\infty$. The origin is stable but not globally; no Lyapunov function can prove global stability.</div></details></li><li><div class="q"><span class="pno">Ex 3.8</span> $\dot x_1 = x_2$, $\dot x_2 = -2x_1 - 2x_2 - 4x_1^3$ with $V = 4x_1^2 + 2x_2^2 + 4x_1^4$.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> Compute $\dot V$; the cross terms cancel.<br><b>Answer.</b> $\dot V = -8x_2^2 \le 0$, and $V$ is radially unbounded: globally stable. On $x_2 \equiv 0$, $-2x_1 - 4x_1^3 = 0$ gives $x_1 = 0$, so by LaSalle the origin is G.A.S.</div></details></li><li><div class="q"><span class="pno">Ex 3.10</span> Global asymptotic stability with $V = x^Tx$ when $\dot V = 0$ on a "thick" set.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> $\dot V = -2x_2\max(0, x_1)\max(0, x_2)$ is zero outside the open first quadrant. Which trajectories can stay in that set?<br><b>Answer.</b> Where $\dot V = 0$ the motion is the harmonic oscillator $\dot x_1 = x_2$, $\dot x_2 = -x_1$, whose circles always enter the first quadrant. So only $x \equiv 0$ stays in the set, and LaSalle gives G.A.S.</div></details></li><li><div class="q"><span class="pno">Ex 3.11</span> A quadratic Lyapunov function and the region of attraction when the perturbation is $x_2^3$.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> With $V = \frac12x^Tx$, find $\dot V$ and the strip where it is negative. Then fit the largest level set in the strip.<br><b>Answer.</b> $\dot V = -x_1^2 - x_2^2 + x_2\,\phi$. (b) If $x_2\phi(x_2) \le 0$, $\dot V \le -x^Tx$: G.A.S. (c) With $\phi = x_2^3$, $\dot V &lt; 0$ for $|x_2| &lt; 1$, and the largest level set inside is $V &lt; \gamma = \frac12$ (the unit disc), as drawn in the notes.</div></details></li><li><div class="q"><span class="pno">Ex 3.12</span> The reversed-time Van der Pol oscillator: local stability and a region-of-attraction estimate.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> Solve $A^TP + PA = -I$ for the Jacobian, then in polar coordinates find the radius $r$ where $\dot V$ first becomes zero.<br><b>Answer.</b> $A = \begin{bmatrix}0 &amp; -1\\1 &amp; -1\end{bmatrix}$, $P = \begin{bmatrix}1.5 &amp; -0.5\\-0.5 &amp; 1\end{bmatrix}$. Numerically $\dot V &lt; 0$ for $0 &lt; \|x\| &lt; 1.14$; the estimate is $\{x^TPx &lt; 0.69 \times 1.14^2 \approx 0.89\}$. It is conservative; the true region is bounded by the unstable limit cycle.</div></details></li></ol></section>
+    <!-- PRACTICE END -->
+    <nav class="prevnext"><a class="pn prev" href="04-describing-function.html"><small>← Lesson 4</small>Describing function analysis</a><a class="pn next" href="../nonlinear-control.html"><small>→</small>Course home</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+<script src="../../assets/js/nonlinear-sims.js"></script>
+</body>
+</html>
