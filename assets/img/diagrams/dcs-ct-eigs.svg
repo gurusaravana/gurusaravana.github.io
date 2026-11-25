@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 260" width="640" height="260" role="img" aria-label="Eigenvalues in the s-plane: −1, −2 and −3 for the third-order companion matrix, and −0.15 ± j0.42 for the mass-spring-damper with K = 2, M = 10, B = 3.">
+<title>Eigenvalues in the s-plane: −1, −2 and −3 for the third-order companion matrix, and −0.15 ± j0.42 for the mass-spring-damper with K = 2, M = 10, B = 3.</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker></defs>
+<rect width="640" height="260" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<path d="M60.0 130.0 L624.0 130.0" fill="none" stroke="#0f172a" stroke-width="1.5" marker-end="url(#ak)"/>
+<path d="M500.0 245.0 L500.0 15.0" fill="none" stroke="#0f172a" stroke-width="1.5" marker-end="url(#ak)"/>
+<text x="622.0" y="150.0" font-size="13" text-anchor="end" fill="#64748b" font-weight="400" font-style="italic">Re s</text>
+<text x="508.0" y="27.0" font-size="13" text-anchor="start" fill="#64748b" font-weight="400" font-style="italic">Im s</text>
+<path d="M363.0 123.0L377.0 137.0M363.0 137.0L377.0 123.0" stroke="#0077b6" stroke-width="2.5"/>
+<text x="370.0" y="154.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">-1</text>
+<path d="M233.0 123.0L247.0 137.0M233.0 137.0L247.0 123.0" stroke="#0077b6" stroke-width="2.5"/>
+<text x="240.0" y="154.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">-2</text>
+<path d="M103.0 123.0L117.0 137.0M103.0 137.0L117.0 123.0" stroke="#0077b6" stroke-width="2.5"/>
+<text x="110.0" y="154.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">-3</text>
+<path d="M473.5 35.4L487.5 49.4M473.5 49.4L487.5 35.4" stroke="#ea7a1f" stroke-width="2.5"/>
+<path d="M473.5 210.6L487.5 224.6M473.5 224.6L487.5 210.6" stroke="#ea7a1f" stroke-width="2.5"/>
+<text x="468.5" y="47.4" font-size="12" text-anchor="end" fill="#ea7a1f" font-weight="400">−0.15 + j0.42</text>
+<text x="468.5" y="222.6" font-size="12" text-anchor="end" fill="#ea7a1f" font-weight="400">−0.15 − j0.42</text>
+<text x="70.0" y="34.0" font-size="13" text-anchor="start" fill="#0077b6" font-weight="400">× λ³ + 6λ² + 11λ + 6</text>
+<text x="70.0" y="54.0" font-size="13" text-anchor="start" fill="#ea7a1f" font-weight="400">× mass-spring-damper</text>
+<text x="70.0" y="72.0" font-size="11" text-anchor="start" fill="#64748b" font-weight="400" font-style="italic">(imaginary axis stretched)</text>
+</g>
+</svg>

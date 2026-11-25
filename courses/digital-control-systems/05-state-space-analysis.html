@@ -29,13 +29,13 @@
 <div class="band course-band"><div class="wrap">
   <div class="crumb"><a href="../digital-control-systems.html">← Digital Control Systems</a></div>
   <div class="course-head">
-    <div class="eyebrow">Lesson 5 of 5 · Chapter 4</div>
+    <div class="eyebrow">Lesson 5 of 6 · Chapter 4</div>
     <h1>State-space analysis of discrete-time systems</h1>
     <p>Digital Control Systems · EACT 534 · Postgraduate course</p>
   </div>
 </div></div>
 <main class="wrap lesson-layout">
-  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">EACT 534 · Digital Control Systems</div><ol><li><a href="01-discrete-time-and-z-transform.html"><span class="n">1</span>Discrete-time systems and the z-transform</a></li><li><a href="02-sampling-and-pulse-transfer.html"><span class="n">2</span>Sampling, ADC and DAC models, and the pulse transfer function</a></li><li><a href="03-pulse-transfer-and-discretization.html"><span class="n">3</span>Pulse transfer functions and discretization</a></li><li><a href="04-stability.html"><span class="n">4</span>Stability of discrete-time systems</a></li><li class="on"><a href="05-state-space-analysis.html"><span class="n">5</span>State-space analysis of discrete-time systems</a></li></ol></div></details></aside>
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">EACT 534 · Digital Control Systems</div><ol><li><a href="01-discrete-time-and-z-transform.html"><span class="n">1</span>Discrete-time systems and the z-transform</a></li><li><a href="02-sampling-and-pulse-transfer.html"><span class="n">2</span>Sampling, ADC and DAC models, and the pulse transfer function</a></li><li><a href="03-pulse-transfer-and-discretization.html"><span class="n">3</span>Pulse transfer functions and discretization</a></li><li><a href="04-stability.html"><span class="n">4</span>Stability of discrete-time systems</a></li><li class="on"><a href="05-state-space-analysis.html"><span class="n">5</span>State-space analysis of discrete-time systems</a></li><li><a href="06-state-space-preliminaries.html"><span class="n">6</span>State-space preliminaries: canonical forms, controllability and observability</a></li></ol></div></details></aside>
   <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
   <div class="lmain">
     <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Write a discrete-time system as $x(k+1) = Fx(k) + gu(k)$, $y(k) = cx(k) + du(k)$</li><li>Find the transfer function $G(z) = c(zI - F)^{-1}g + d$ and the characteristic equation $|zI - F| = 0$</li><li>Realize a transfer function in the first companion, second companion and Jordan forms</li><li>Solve the state equation by recursion and by the z-transform</li><li>Compute the state transition matrix $\Phi(k) = F^k$</li></ul></div>
@@ -147,7 +147,7 @@
 <li><div class="q">Show that the change of state $x = Pw$ ($P$ invertible) changes neither the eigenvalues nor the transfer function.</div><details><summary>Show solution</summary><div class="sol">The new model is $w(k+1) = P^{-1}FPw(k) + P^{-1}gu(k)$, $y = cPw + du$. Then $|zI - P^{-1}FP| = |P^{-1}(zI - F)P| = |zI - F|$, and $cP(zI - P^{-1}FP)^{-1}P^{-1}g + d = cP\,P^{-1}(zI - F)^{-1}P\,P^{-1}g + d = c(zI - F)^{-1}g + d$. This is why one $G(z)$ has many state models, the canonical forms among them.</div></details></li>
 <li><div class="q">Example 1 has two states but a first-order transfer function $2/(z - 3)$. Where did the second mode go, and does it still affect the states?</div><details><summary>Show solution</summary><div class="sol">The factor $(z - 1)$ cancels between numerator and denominator. The mode $1^k$ is still in $x_1(k)$ (it appears in the response from $x(0)$), but the output $y = x_2$ never sees it, because $x_2$ does not depend on $x_1$. A transfer function only shows the modes that are both excited by $u$ and seen at $y$; Lesson 7 makes this precise with controllability and observability.</div></details></li></ol>
     </section>
-    <nav class="prevnext"><a class="pn prev" href="04-stability.html"><small>← Lesson 4</small>Stability of discrete-time systems</a><a class="pn next" href="../digital-control-systems.html"><small>Course home →</small>Digital Control Systems</a></nav>
+    <nav class="prevnext"><a class="pn prev" href="04-stability.html"><small>← Lesson 4</small>Stability of discrete-time systems</a><a class="pn next" href="06-state-space-preliminaries.html"><small>Lesson 6 →</small>State-space preliminaries: canonical forms, controllability and observability</a></nav>
   </div>
 </main>
 <footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
