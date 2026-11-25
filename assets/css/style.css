@@ -472,3 +472,13 @@ ul.lessons .t{flex:1;min-width:160px;font-weight:500}
 .figgroup{font-size:16px;margin:22px 0 4px}
 .notes .katex-display{overflow-x:auto;overflow-y:hidden;padding:2px 0}
 .notes pre{margin:12px 0;padding:12px 14px;border-radius:10px;border-left:4px solid var(--accent);background:var(--bg);overflow-x:auto;font:13px/1.6 var(--mono);color:var(--ink)}
+
+/* ===== Textbook practice problems at the end of each CSE lesson (guide section 17) ===== */
+.practice .pno{display:inline-block;padding:1px 8px;margin-right:2px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font:600 12.5px var(--mono);white-space:nowrap}
+.practice .psec{font:500 12.5px var(--mono);color:var(--muted);margin-right:4px;white-space:nowrap}
+
+/* ===== Industrial process simulations page (guide section 18) ===== */
+.indsim .cite{font-size:13.5px;color:var(--muted);border-top:1px solid var(--line);margin-top:14px;padding-top:10px}
+.indsim .cite b{color:var(--ink);font-weight:600}
+.lab-controls select{display:block;width:100%;box-sizing:border-box;margin-top:3px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit;font-size:14px}
+.refs li{margin-bottom:8px;font-size:15px}
