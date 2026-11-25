@@ -364,3 +364,21 @@ All of it is drawn by `assets/js/course-map.js` from the data block inside `<div
 Keep the quotes and commas exactly as they are. If the data has a typing error, the page shows a short message in place of the map.
 
 To add a map to another course page, copy the whole `<section id="map">` block, change the data, and add `<script src="../assets/js/course-map.js"></script>` before `</body>`.
+
+## 20. Nonlinear Control (EACT 633) lessons
+
+The EACT 633 chapter decks are written out as lesson pages in `courses/nonlinear-control/`, one or two lessons per chapter:
+
+- `01-introduction.html` and `02-phase-plane-analysis.html` (Chapter 1: why nonlinear control, hard nonlinearities, nonlinear phenomena, phase portraits, isoclines, singular points, limit cycles). Built from "Chapter 1 Phase plane analysis v2" (the v1 file is the same apart from its header) and TVTIx_Chapter1_NLC.
+
+The course home page `courses/nonlinear-control.html` lists every lesson by chapter (lessons not written yet show "coming soon"), has a "Figures and worked problems" gallery and the live simulations. New diagrams start with `nlc-` in `assets/img/diagrams/`. Edit a lesson's notes between the `NOTES START` and `NOTES END` comments.
+
+**Phase plane explorer.** `assets/js/nonlinear-sims.js` draws an interactive phase plane. Put this line in any page (and load the script before `</body>`):
+
+    <div class="sim nls" data-nls="phase-plane" data-preset="vdp"></div>
+
+`data-preset` picks the starting system: `ex7` to `ex13` (the linear portraits of Lesson 2), `star`, `linear`, `pendulum`, `vdp` (Van der Pol), `duffing`, `quad`, `relay`.
+
+**Practice problems.** Each lesson ends with practice problems from the exercise compendium *Exercises in Nonlinear Control Systems* (Johansson, Bernhardsson and Johansson, Lund University), between the comments `PRACTICE START` and `PRACTICE END`. "Ex 2.5" means Chapter 2, Exercise 5 of the compendium. Only a one-line summary, a hint and a short answer written for this course are on the site; the compendium's statements, figures and solutions are not copied. To add one, copy a `<li>...</li>` line in that list.
+
+The phone numbers, e-mail addresses, institute logos and title-slide contact blocks of the decks are not on the site. Where a slide had a slip, the page gives the corrected statement in a "Watch out" box.

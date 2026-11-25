@@ -1,22 +1,20 @@
 <!doctype html>
 <!--
   ============================================================
-  HOW TO ADD CONTENT TO THIS COURSE PAGE  (full guide: HOW-TO-ADD-TEACHING-CONTENT.md)
+  HOW TO ADD CONTENT TO THIS COURSE PAGE  (full guide: HOW-TO-ADD-TEACHING-CONTENT.md, section 20)
 
   A) Add a file (PDF notes, PowerPoint slides, assignment):
      1. Upload the file to the folder  courses/files/nonlinear-control/
      2. Copy this line into the "Course materials" list below and change the words:
-        <li><span class="kind">Slides</span>Lecture 2: Block diagrams<a class="open" href="files/nonlinear-control/lecture-2.pdf">Open</a></li>
+        <li><span class="kind">Slides</span>Chapter 1: Phase plane analysis<a class="open" href="files/nonlinear-control/chapter-1.pdf">Open</a></li>
+     Remove phone numbers, e-mail addresses and logos from slides before uploading.
 
   B) Add a live simulation: paste one of these lines in the "Live simulations" section:
-        <div class="sim" data-sim="second-order"></div>
-        <div class="sim" data-sim="pid"></div>
-        <div class="sim" data-sim="spring"></div>
         <div class="sim" data-sim="pendulum"></div>
+        <div class="sim nls" data-nls="phase-plane" data-preset="vdp"></div>
 
-  C) Add a YouTube video or an online simulation (PhET, GeoGebra, MATLAB Online...):
+  C) Add a YouTube video:
         <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div>
-     For YouTube, VIDEO-ID is the part after "v=" in the video link.
   ============================================================
 -->
 <html lang="en" data-skin="glass">
@@ -24,7 +22,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nonlinear Control · Dr. Saravanakumar Gurusamy</title>
-<meta name="description" content="Analysis and design of control systems with nonlinear dynamics.">
+<meta name="description" content="Phase plane analysis, linearization, describing functions, Lyapunov stability, absolute stability and feedback linearization.">
 <link rel="icon" href="../assets/img/favicon1.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -33,7 +31,7 @@
 <body>
 <header class="nav"><div class="wrap">
   <a class="brand" href="../index.html">Saravanakumar G</a>
-  <nav class="links"><a href="../index.html">Home</a><a href="../index.html#teaching">Courses</a><a href="#materials">Materials</a><a href="#simulations">Simulations</a></nav>
+  <nav class="links"><a href="../index.html">Home</a><a href="../index.html#teaching">Courses</a><a href="#lessons">Lessons</a><a href="#figures">Figures</a><a href="#simulations">Simulations</a></nav>
   <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
 </div></header>
 <div class="band course-band"><div class="wrap">
@@ -41,25 +39,39 @@
   <div class="course-head">
     <div class="eyebrow">Postgraduate course · FTI (EACT 633)</div>
     <h1>Nonlinear Control</h1>
-    <p>Analysis and design of control systems with nonlinear dynamics.</p>
+    <p>Phase plane analysis, linearization, describing functions, Lyapunov stability, absolute stability and feedback linearization.</p>
   </div>
 </div></div>
 <main class="wrap">
+  <section id="lessons">
+    <h2>Lessons</h2>
+    <p class="note">Each lesson has notes with worked examples, redrawn figures, exercises with solutions and practice problems with hints. Open a lesson and use "Show solution" to check your work.</p>
+    <div class="modgrid"><div class="modcard"><div class="mhead"><span class="mcode">1</span><div><h3>Introduction and phase plane analysis</h3><p>Why nonlinear control, common nonlinearities and phenomena, phase portraits, singular points and limit cycles.</p></div></div><ul class="lessons"><li><a href="nonlinear-control/01-introduction.html"><span class="n">01</span><span class="t">Introduction to nonlinear systems</span></a></li><li><a href="nonlinear-control/02-phase-plane-analysis.html"><span class="n">02</span><span class="t">Phase plane analysis</span></a></li></ul></div><div class="modcard"><div class="mhead"><span class="mcode">2</span><div><h3>Linearization and describing functions</h3><p>Linearization about an operating point, and the describing function method for predicting limit cycles.</p></div></div><ul class="lessons"><li class="soon"><span class="n">03</span><span class="t">Linearization <em>(coming soon)</em></span></li><li class="soon"><span class="n">04</span><span class="t">Describing function analysis <em>(coming soon)</em></span></li></ul></div><div class="modcard"><div class="mhead"><span class="mcode">3</span><div><h3>Lyapunov stability</h3><p>Stability definitions, Lyapunov functions, the Lyapunov equation, LaSalle and Barbalat.</p></div></div><ul class="lessons"><li class="soon"><span class="n">05</span><span class="t">Lyapunov stability <em>(coming soon)</em></span></li></ul></div><div class="modcard"><div class="mhead"><span class="mcode">4</span><div><h3>Absolute stability</h3><p>Sector nonlinearities, positive real functions, the circle and Popov criteria, input-to-state stability.</p></div></div><ul class="lessons"><li class="soon"><span class="n">06</span><span class="t">Sector nonlinearities, circle and Popov criteria <em>(coming soon)</em></span></li></ul></div><div class="modcard"><div class="mhead"><span class="mcode">5</span><div><h3>Feedback linearization</h3><p>Relative degree, normal form, zero dynamics and input-output linearization.</p></div></div><ul class="lessons"><li class="soon"><span class="n">07</span><span class="t">Feedback linearization <em>(coming soon)</em></span></li></ul></div></div>
+  </section>
+  <section id="figures">
+    <h2>Figures and worked problems</h2>
+    <p class="note">Every diagram is drawn for this course. Click one to jump to it in its lesson.</p>
+    <h3 class="figgroup">Introduction and phase plane analysis (Lessons 1 and 2)</h3>
+    <nav class="figstrip"><a href="nonlinear-control/01-introduction.html#fig-nonlinearities"><img src="../assets/img/diagrams/nlc-nonlinearities.svg" alt="" loading="lazy"><span>Hard nonlinearities</span></a><a href="nonlinear-control/01-introduction.html#fig-friction"><img src="../assets/img/diagrams/nlc-friction.svg" alt="" loading="lazy"><span>Friction</span></a><a href="nonlinear-control/01-introduction.html#fig-escape"><img src="../assets/img/diagrams/nlc-escape-time.svg" alt="" loading="lazy"><span>Finite escape time</span></a><a href="nonlinear-control/01-introduction.html#fig-multi-eq"><img src="../assets/img/diagrams/nlc-multi-eq.svg" alt="" loading="lazy"><span>Multiple equilibria</span></a><a href="nonlinear-control/01-introduction.html#fig-duffing"><img src="../assets/img/diagrams/nlc-duffing.svg" alt="" loading="lazy"><span>Duffing oscillator</span></a><a href="nonlinear-control/01-introduction.html#fig-vdp"><img src="../assets/img/diagrams/nlc-vanderpol.svg" alt="" loading="lazy"><span>Limit cycle</span></a><a href="nonlinear-control/01-introduction.html#fig-lorenz"><img src="../assets/img/diagrams/nlc-lorenz.svg" alt="" loading="lazy"><span>Chaos</span></a><a href="nonlinear-control/01-introduction.html#fig-logistic"><img src="../assets/img/diagrams/nlc-logistic.svg" alt="" loading="lazy"><span>Bifurcations</span></a><a href="nonlinear-control/01-introduction.html#fig-freq-amp"><img src="../assets/img/diagrams/nlc-freq-amplitude.svg" alt="" loading="lazy"><span>Frequency and amplitude</span></a><a href="nonlinear-control/01-introduction.html#fig-jump"><img src="../assets/img/diagrams/nlc-jump-resonance.svg" alt="" loading="lazy"><span>Jump resonance</span></a><a href="nonlinear-control/01-introduction.html#fig-pendulum"><img src="../assets/img/diagrams/nlc-pendulum.svg" alt="" loading="lazy"><span>Pendulum</span></a><a href="nonlinear-control/02-phase-plane-analysis.html#fig-concept"><img src="../assets/img/diagrams/nlc-pp-concept.svg" alt="" loading="lazy"><span>Time response to trajectory</span></a><a href="nonlinear-control/02-phase-plane-analysis.html#fig-relay-loop"><img src="../assets/img/diagrams/nlc-relay-loop.svg" alt="" loading="lazy"><span>Relay system</span></a><a href="nonlinear-control/02-phase-plane-analysis.html#fig-relay-pp"><img src="../assets/img/diagrams/nlc-relay-pp.svg" alt="" loading="lazy"><span>Relay trajectories</span></a><a href="nonlinear-control/02-phase-plane-analysis.html#fig-iso-ms"><img src="../assets/img/diagrams/nlc-isoclines-mass-spring.svg" alt="" loading="lazy"><span>Isoclines</span></a><a href="nonlinear-control/02-phase-plane-analysis.html#fig-iso-damped"><img src="../assets/img/diagrams/nlc-isoclines-damped.svg" alt="" loading="lazy"><span>Isocline construction</span></a><a href="nonlinear-control/02-phase-plane-analysis.html#fig-singular"><img src="../assets/img/diagrams/nlc-pp-singular.svg" alt="" loading="lazy"><span>Singular A</span></a><a href="nonlinear-control/02-phase-plane-analysis.html#fig-ex7"><img src="../assets/img/diagrams/nlc-pp-ex7.svg" alt="" loading="lazy"><span>Stable node</span></a><a href="nonlinear-control/02-phase-plane-analysis.html#fig-ex8"><img src="../assets/img/diagrams/nlc-pp-ex8.svg" alt="" loading="lazy"><span>Unstable node</span></a><a href="nonlinear-control/02-phase-plane-analysis.html#fig-ex9"><img src="../assets/img/diagrams/nlc-pp-ex9.svg" alt="" loading="lazy"><span>Saddle</span></a><a href="nonlinear-control/02-phase-plane-analysis.html#fig-ex10"><img src="../assets/img/diagrams/nlc-pp-ex10.svg" alt="" loading="lazy"><span>Stable focus</span></a><a href="nonlinear-control/02-phase-plane-analysis.html#fig-ex11"><img src="../assets/img/diagrams/nlc-pp-ex11.svg" alt="" loading="lazy"><span>Unstable focus</span></a><a href="nonlinear-control/02-phase-plane-analysis.html#fig-ex12"><img src="../assets/img/diagrams/nlc-pp-ex12.svg" alt="" loading="lazy"><span>Centre</span></a><a href="nonlinear-control/02-phase-plane-analysis.html#fig-star"><img src="../assets/img/diagrams/nlc-pp-star.svg" alt="" loading="lazy"><span>Star node</span></a><a href="nonlinear-control/02-phase-plane-analysis.html#fig-ex13"><img src="../assets/img/diagrams/nlc-pp-ex13.svg" alt="" loading="lazy"><span>Degenerate node</span></a><a href="nonlinear-control/02-phase-plane-analysis.html#fig-poincare"><img src="../assets/img/diagrams/nlc-poincare.svg" alt="" loading="lazy"><span>Poincaré diagram</span></a><a href="nonlinear-control/02-phase-plane-analysis.html#fig-gallery"><img src="../assets/img/diagrams/nlc-pp-gallery.svg" alt="" loading="lazy"><span>All eight portraits</span></a><a href="nonlinear-control/02-phase-plane-analysis.html#fig-nonlinear"><img src="../assets/img/diagrams/nlc-pp-nonlinear.svg" alt="" loading="lazy"><span>Nonlinear portrait</span></a><a href="nonlinear-control/02-phase-plane-analysis.html#fig-lc-types"><img src="../assets/img/diagrams/nlc-limit-cycle-types.svg" alt="" loading="lazy"><span>Limit cycle types</span></a></nav>
+  </section>
   <section id="materials">
     <h2>Course materials</h2>
     <ul class="materials">
       <!-- Add your files here (see the instructions at the top of this file) -->
     </ul>
-    <p class="note">Materials for this course will be added soon.</p>
+    <p class="note">Lecture slides and handouts can be added here as files.</p>
   </section>
   <section id="simulations">
     <h2>Live simulations &amp; animations</h2>
-    <p class="note" style="margin-top:-10px;margin-bottom:20px">The pendulum is the classic nonlinear system: small swings look linear, large ones do not. Explore equilibria, limit behaviour and the separatrix in the phase plane.</p>
+    <p class="note" style="margin-top:-10px;margin-bottom:20px">Click anywhere in the phase plane to start a trajectory. Pick a system from the list: linear examples, the pendulum, Van der Pol, Duffing and a relay loop.</p>
+    <div class="sim nls" data-nls="phase-plane" data-preset="vdp"></div>
+    <p class="note" style="margin-top:28px;margin-bottom:20px">The pendulum is the classic nonlinear system: small swings look linear, large ones do not.</p>
     <div class="sim" data-sim="pendulum"></div>
   </section>
 </main>
 <footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../index.html">Home</a></div></footer>
 <script src="../assets/js/site.js"></script>
 <script src="../assets/js/sims.js"></script>
+<script src="../assets/js/nonlinear-sims.js"></script>
 </body>
 </html>

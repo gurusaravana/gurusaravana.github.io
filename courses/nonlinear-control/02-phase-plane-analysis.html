@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 2: Phase plane analysis · Nonlinear Control</title>
+<meta name="description" content="Phase plane, trajectories and portraits; analytical, numerical and isocline construction; singular points; the eight phase portraits of a second-order linear system; nonlinear phase portraits and limit cycles.">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 2: Phase plane analysis  (Nonlinear Control, EACT 633)
+  Edit the notes between the NOTES START and NOTES END markers below.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Figures live in assets/img/diagrams/ (names start with nlc-) and are shown with a figure of class "diagram".
+  To add an exercise, copy one list item inside the list of class "exlist".
+  Guide: HOW-TO-ADD-TEACHING-CONTENT.md, section 20.
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
+  <nav class="links"><a href="../nonlinear-control.html">Course home</a><a href="../nonlinear-control.html#lessons">Lessons</a><a href="../nonlinear-control.html#figures">Figures</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../nonlinear-control.html">← Nonlinear Control</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 2 of 2 · Chapter 1 · part II</div>
+    <h1>Phase plane analysis</h1>
+    <p>Nonlinear Control · EACT 633 · Postgraduate course</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">EACT 633 · Nonlinear Control</div><ol><li><a href="01-introduction.html"><span class="n">1</span>Introduction to nonlinear systems</a></li><li class="on"><a href="02-phase-plane-analysis.html"><span class="n">2</span>Phase plane analysis</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Explain the phase plane, a phase trajectory and a phase portrait for a second-order system</li><li>Construct trajectories analytically (including a relay system), numerically and by the isocline method</li><li>Classify the equilibrium of $\dot x = Ax$ from the eigenvalues, or from the trace and determinant of $A$</li><li>Sketch the eight linear phase portraits with their eigenvector directions</li><li>Analyse a nonlinear system by linearizing at each equilibrium, and recognise stable and unstable limit cycles</li><li>Use the Bendixson and Poincaré–Bendixson results to rule out or prove a limit cycle</li></ul></div>
+    <nav class="figstrip" aria-label="Figures in this lesson"><a href="#fig-concept"><img src="../../assets/img/diagrams/nlc-pp-concept.svg" alt="" loading="lazy"><span>Time response to trajectory</span></a><a href="#fig-relay-loop"><img src="../../assets/img/diagrams/nlc-relay-loop.svg" alt="" loading="lazy"><span>Relay system</span></a><a href="#fig-relay-pp"><img src="../../assets/img/diagrams/nlc-relay-pp.svg" alt="" loading="lazy"><span>Relay trajectories</span></a><a href="#fig-iso-ms"><img src="../../assets/img/diagrams/nlc-isoclines-mass-spring.svg" alt="" loading="lazy"><span>Isoclines</span></a><a href="#fig-iso-damped"><img src="../../assets/img/diagrams/nlc-isoclines-damped.svg" alt="" loading="lazy"><span>Isocline construction</span></a><a href="#fig-singular"><img src="../../assets/img/diagrams/nlc-pp-singular.svg" alt="" loading="lazy"><span>Singular A</span></a><a href="#fig-ex7"><img src="../../assets/img/diagrams/nlc-pp-ex7.svg" alt="" loading="lazy"><span>Stable node</span></a><a href="#fig-ex8"><img src="../../assets/img/diagrams/nlc-pp-ex8.svg" alt="" loading="lazy"><span>Unstable node</span></a><a href="#fig-ex9"><img src="../../assets/img/diagrams/nlc-pp-ex9.svg" alt="" loading="lazy"><span>Saddle</span></a><a href="#fig-ex10"><img src="../../assets/img/diagrams/nlc-pp-ex10.svg" alt="" loading="lazy"><span>Stable focus</span></a><a href="#fig-ex11"><img src="../../assets/img/diagrams/nlc-pp-ex11.svg" alt="" loading="lazy"><span>Unstable focus</span></a><a href="#fig-ex12"><img src="../../assets/img/diagrams/nlc-pp-ex12.svg" alt="" loading="lazy"><span>Centre</span></a><a href="#fig-star"><img src="../../assets/img/diagrams/nlc-pp-star.svg" alt="" loading="lazy"><span>Star node</span></a><a href="#fig-ex13"><img src="../../assets/img/diagrams/nlc-pp-ex13.svg" alt="" loading="lazy"><span>Degenerate node</span></a><a href="#fig-poincare"><img src="../../assets/img/diagrams/nlc-poincare.svg" alt="" loading="lazy"><span>Poincaré diagram</span></a><a href="#fig-gallery"><img src="../../assets/img/diagrams/nlc-pp-gallery.svg" alt="" loading="lazy"><span>All eight portraits</span></a><a href="#fig-nonlinear"><img src="../../assets/img/diagrams/nlc-pp-nonlinear.svg" alt="" loading="lazy"><span>Nonlinear portrait</span></a><a href="#fig-lc-types"><img src="../../assets/img/diagrams/nlc-limit-cycle-types.svg" alt="" loading="lazy"><span>Limit cycle types</span></a></nav>
+    <section class="lsec"><h2>Notes</h2>
+    <!-- NOTES START -->
+    <article class="notes">
+<h3 id="idea">The phase plane</h3>
+<p>Phase plane analysis is a <b>graphical method for second-order systems</b>, linear or nonlinear. Consider the autonomous system</p>
+<p class="eq">$$\dot x_1 = f_1(x_1, x_2), \qquad \dot x_2 = f_2(x_1, x_2).$$</p>
+<ul>
+<li>The plane with coordinates $x_1$ and $x_2$ is the <b>phase plane</b> (or state plane).</li>
+<li>The solution $x(t) = (x_1(t), x_2(t))$ from an initial state $x_0$ traces a curve in this plane as $t$ runs from $0$ to $\infty$: the <b>phase trajectory</b> through $x_0$. Time is not shown; it is a parameter along the curve.</li>
+<li>The family of trajectories for many initial states is the <b>phase portrait</b>.</li>
+<li>For a mechanical system with one degree of freedom, the phase plane is the position–velocity plane $(x, \dot x)$.</li>
+</ul>
+<p>A second-order system $\ddot x + 2\zeta\omega_n\dot x + \omega_n^2x = 0$ is put in this form with the <b>phase variables</b> $x_1 = x$, $x_2 = \dot x$: $\dot x_1 = x_2$, $\dot x_2 = -\omega_n^2x_1 - 2\zeta\omega_nx_2$.</p>
+<figure class="diagram" id="fig-concept"><img src="../../assets/img/diagrams/nlc-pp-concept.svg" alt="Time responses of position and velocity and the corresponding spiral phase trajectory, with matching time marks" loading="lazy"><figcaption>The same motion two ways. Each dot on the left (at $t = 0, 1, 2, \dots$) is one point on the trajectory on the right.</figcaption></figure>
+<p><b>Advantages.</b> The portrait shows at a glance how the system behaves from <i>every</i> initial state, without solving the equations analytically. It shows equilibria and their stability, limit cycles, and regions of attraction. It works for strong and hard (discontinuous) nonlinearities, not only small smooth ones, and many practical systems are well approximated by second-order models.</p>
+<p><b>Disadvantage.</b> It is restricted to second order. Third-order portraits are hard to draw and read, and beyond that the method is impractical.</p>
+
+<h3 id="construct">Constructing phase trajectories</h3>
+<p>Dividing the two state equations removes time and gives the <b>slope</b> of the trajectory at every point:</p>
+<p class="eq">$$\frac{dx_2}{dx_1} = \frac{f_2(x_1, x_2)}{f_1(x_1, x_2)}.$$</p>
+<p>Methods for drawing trajectories: the <b>analytical</b> method, <b>numerical</b> solution, the <b>isocline</b> method, the <b>vector field</b> (direction field) method, and older graphical methods such as the delta method, Liénard's method and Pell's method. Today the numerical method and a direction field (as in the explorer below) are the everyday tools; the isocline method is still the best way to understand a portrait by hand.</p>
+
+<h4 id="analytical">Analytical method</h4>
+<p>Solve the slope equation $dx_2/dx_1 = f_2/f_1$ by separating variables to get the trajectories as curves $F(x_1, x_2) = c$.</p>
+<p><b>Mass–spring system</b> $m\ddot x + kx = 0$ with $m = k = 1$: $\dot x_1 = x_2$, $\dot x_2 = -x_1$, so</p>
+<p class="eq">$$\frac{dx_2}{dx_1} = -\frac{x_1}{x_2} \;\Rightarrow\; x_2\,dx_2 = -x_1\,dx_1 \;\Rightarrow\; x_1^2 + x_2^2 = c.$$</p>
+<p>The trajectories are circles around the origin, travelled clockwise (when $x_2 &gt; 0$, $x_1$ increases).</p>
+<p>The analytical method also works for <b>piecewise-linear</b> systems: split the plane into regions where the equations are linear, integrate in each region, and join the pieces at the boundaries.</p>
+<h4 id="relay">Worked example: a relay control system</h4>
+<p>An ideal relay with output $\pm M$ drives a double integrator $1/s^2$ in a unit feedback loop. Find the singular point and the trajectories from (i) $c(0) = 2$, $\dot c(0) = 1$ and (ii) $c(0) = 2$, $\dot c(0) = 1.5$, with $r = 2$ and $M = 1.2$.</p>
+<figure class="diagram" id="fig-relay-loop"><img src="../../assets/img/diagrams/nlc-relay-loop.svg" alt="Block diagram: error drives an ideal relay, relay output drives 1 over s squared, output fed back" loading="lazy"><figcaption>Relay control of a double integrator.</figcaption></figure>
+<p><b>State equations.</b> From $C(s) = U(s)/s^2$, $\ddot c = u$. With $x_1 = c$, $x_2 = \dot c$: $\dot x_1 = x_2$, $\dot x_2 = u$. The error is $e = r - c = r - x_1$ and the relay gives $u = +M$ when $e &gt; 0$ ($x_1 &lt; r$) and $u = -M$ when $e &lt; 0$ ($x_1 &gt; r$).</p>
+<p><b>Singular point.</b> $\dot x_1 = 0$ gives $x_2 = 0$; $\dot x_2 = 0$ needs $u = 0$, which (taking the relay output as zero at $e = 0$) happens only when $e = 0$, so $x_1 = r$. The singular point is $(r, 0) = (2, 0)$.</p>
+<p><b>Trajectories.</b> The slope is $\dfrac{dx_2}{dx_1} = \dfrac{\pm M}{x_2}$, so $x_2\,dx_2 = \pm M\,dx_1$. Integrating from $(x_1(0), x_2(0))$:</p>
+<p class="eq">$$x_2^2 = x_2^2(0) + 2M\left(x_1 - x_1(0)\right) \quad (x_1 &lt; r), \qquad x_2^2 = x_2^2(0) - 2M\left(x_1 - x_1(0)\right) \quad (x_1 &gt; r).$$</p>
+<p>Each piece is a parabola. For start (i), $x_2^2 = -2.4x_1 + 5.8$ on the right ($x_1$ reaches its largest value $5.8/2.4 = 2.4167$ where $x_2 = 0$), and $x_2^2 = 2.4x_1 - 3.8$ on the left (smallest $x_1 = 1.5833$). For start (ii), $x_2^2 = -2.4x_1 + 7.05$ and $x_2^2 = 2.4x_1 - 2.55$, giving $x_1$ between $1.0625$ and $2.9375$.</p>
+<figure class="diagram" id="fig-relay-pp"><img src="../../assets/img/diagrams/nlc-relay-pp.svg" alt="Two closed trajectories made of parabolic arcs around the singular point (2, 0)" loading="lazy"><figcaption>Each trajectory is closed: the output oscillates for ever about $c = r$, and the amplitude is set by the initial state.</figcaption></figure>
+<p><b>Conclusion.</b> Every trajectory is a closed curve, so the system oscillates without decay. Because the amplitude depends on the initial state, these closed curves are not isolated; strictly they behave like a centre (a family of periodic orbits), not a single limit cycle. Adding damping or rate feedback (switching on $e - k\dot c$) makes the trajectories spiral into $(r, 0)$.</p>
+
+<h4 id="numerical">Numerical method</h4>
+<p>Solve the state equations numerically (for example with <code>ode45</code> in MATLAB, or a Runge–Kutta step) from many initial states and plot $x_2$ against $x_1$. Integrating <i>backwards</i> in time from the same start as well shows where the trajectory came from. Every portrait on this page was computed this way.</p>
+
+<h4 id="isocline">Isocline method</h4>
+<p>An <b>isocline</b> is the set of points where trajectories have the same slope $S$:</p>
+<p class="eq">$$\frac{dx_2}{dx_1} = \frac{f_2(x_1, x_2)}{f_1(x_1, x_2)} = S \quad\Longleftrightarrow\quad f_2(x_1, x_2) = S\,f_1(x_1, x_2).$$</p>
+<p>Draw several isoclines and mark short dashes of slope $S$ along each. A trajectory crossing an isocline does so at that slope, so the trajectories can be sketched by following the dashes.</p>
+<p><b>Mass–spring</b> $\ddot x + x = 0$: $-x_1/x_2 = \alpha$, so the isoclines are the straight lines $x_1 + \alpha x_2 = 0$ through the origin. On the isocline $x_2 = -x_1/\alpha$ the trajectory slope is $\alpha$, which is perpendicular to the isocline itself: the trajectories are circles.</p>
+<figure class="diagram" id="fig-iso-ms"><img src="../../assets/img/diagrams/nlc-isoclines-mass-spring.svg" alt="Straight-line isoclines through the origin with slope marks, and circular trajectories" loading="lazy"><figcaption>Isoclines (dashed) and slope marks (orange) for $\ddot x + x = 0$.</figcaption></figure>
+<p><b>Constructing a trajectory step by step.</b> Start at the point A on isocline 1 (slope $S_1$). Draw two lines from A, one at angle $\tan^{-1}S_1$ and one at $\tan^{-1}S_2$, to meet isocline 2 at p and q. The trajectory crosses isocline 2 at about the midpoint B of p and q (the average slope over the step). Repeat from B to isocline 3, and so on, then join A, B, C, … by a smooth curve. Closer isoclines give a more accurate curve, and one set of isoclines serves for any number of trajectories.</p>
+<h4 id="isocline-example">Worked example: isoclines for a servo</h4>
+<p>A linear servo obeys $\ddot e + 2\zeta\omega_n\dot e + \omega_n^2e = 0$ with $\zeta = 0.15$, $\omega_n = 1$ rad/s, $e(0) = 1.5$, $\dot e(0) = 0$. Find the singular point and construct the trajectory by isoclines.</p>
+<p>With $x_1 = e$, $x_2 = \dot e$: $\dot x_1 = x_2$, $\dot x_2 = -x_1 - 0.3x_2$. Setting both to zero gives $x_2 = 0$ and $x_1 = 0$: the singular point is the origin. The slope is</p>
+<p class="eq">$$S = \frac{dx_2}{dx_1} = -\frac{x_1 + 0.3x_2}{x_2} \quad\Longrightarrow\quad x_2 = -\frac{x_1}{S + 0.3},$$</p>
+<p>so every isocline is a straight line through the origin, with slope $m = -1/(S + 0.3)$:</p>
+<div class="tblwrap"><table class="tbl"><tr><th>Trajectory slope $S$</th><td>$-2$</td><td>$-1$</td><td>$-0.5$</td><td>$0$</td><td>$0.5$</td><td>$1$</td><td>$2$</td><td>$\infty$</td></tr><tr><th>Angle $\tan^{-1}S$</th><td>$-63°$</td><td>$-45°$</td><td>$-27°$</td><td>$0°$</td><td>$27°$</td><td>$45°$</td><td>$63°$</td><td>$90°$</td></tr><tr><th>Isocline slope $-1/(S + 0.3)$</th><td>$0.59$</td><td>$1.43$</td><td>$5.0$</td><td>$-3.33$</td><td>$-1.25$</td><td>$-0.77$</td><td>$-0.43$</td><td>$0$ (the $x_1$ axis)</td></tr></table></div>
+<figure class="diagram" id="fig-iso-damped"><img src="../../assets/img/diagrams/nlc-isoclines-damped.svg" alt="Isoclines for slopes minus 2 to 2 with slope marks and the trajectory from (1.5, 0) spiralling to the origin" loading="lazy"><figcaption>The trajectory from $(1.5, 0)$ spirals into the origin: the singular point is a <b>stable focus</b>, as expected for $0 &lt; \zeta &lt; 1$.</figcaption></figure>
+
+<h3 id="singular">Singular points</h3>
+<p>At an equilibrium both $f_1$ and $f_2$ vanish, so the slope $dx_2/dx_1 = 0/0$ is indeterminate. Equilibria are therefore the <b>singular points</b> of the phase portrait: the only points where several trajectories can meet. Their type (node, focus, saddle, centre) tells us a great deal about the system, in particular its stability.</p>
+
+<h3 id="lti">Phase plane analysis of linear systems</h3>
+<p>Linear systems are the reference case: their phase portraits are completely classified, and near an equilibrium a nonlinear system usually looks like its linearization. Consider</p>
+<p class="eq">$$\dot x = Ax, \qquad A = \begin{bmatrix}a_{11} &amp; a_{12}\\ a_{21} &amp; a_{22}\end{bmatrix}.$$</p>
+<ul>
+<li><b>$A$ nonsingular</b> ($\det A \neq 0$): $Ax = 0$ only at $x = 0$, so the origin is the unique equilibrium.</li>
+<li><b>$A$ singular</b> ($\det A = 0$): every vector in the null space of $A$ satisfies $Ax = 0$, so there is a whole line (or plane) of equilibria.</li>
+</ul>
+<figure class="diagram" id="fig-singular"><img src="../../assets/img/diagrams/nlc-pp-singular.svg" alt="Line of equilibria along the x1 axis with straight trajectories of slope minus one ending on it" loading="lazy"><figcaption>$\dot x_1 = x_2$, $\dot x_2 = -x_2$: $\det A = 0$, and every point of the $x_1$ axis is an equilibrium.</figcaption></figure>
+<p>From here on $A$ is nonsingular. The eigenvalues are the roots of the <b>characteristic polynomial</b></p>
+<p class="eq">$$\lambda^2 - (\mathrm{tr}\,A)\lambda + \det A = 0, \qquad \lambda_{1,2} = \frac{\mathrm{tr}\,A \pm \sqrt{(\mathrm{tr}\,A)^2 - 4\det A}}{2},$$</p>
+<p>with $\mathrm{tr}\,A = a_{11} + a_{22}$ and $\det A = a_{11}a_{22} - a_{12}a_{21}$. The general solution depends on the eigenvalues:</p>
+<ol>
+<li>Real and distinct: $x(t) = \alpha e^{\lambda_1t}v_1 + \beta e^{\lambda_2t}v_2$, with eigenvectors $v_1$, $v_2$.</li>
+<li>Real and equal, one eigenvector: $x(t) = (a + bt)e^{\lambda t}$ (constant vectors $a$, $b$).</li>
+<li>Complex $\alpha \pm j\beta$: $x(t) = e^{\alpha t}(a\cos\beta t + b\sin\beta t)$.</li>
+</ol>
+<p><b>Stability.</b> The origin is <b>stable</b> if every eigenvalue has $\mathrm{Re}\,\lambda \le 0$ (with no repeated eigenvalue on the imaginary axis), <b>asymptotically stable</b> if $\mathrm{Re}\,\lambda_1, \mathrm{Re}\,\lambda_2 &lt; 0$, and <b>unstable</b> otherwise. For a $2\times2$ matrix: asymptotically stable exactly when $\mathrm{tr}\,A &lt; 0$ and $\det A &gt; 0$.</p>
+
+<h4 id="jordan">Using the Jordan form</h4>
+<p>A change of coordinates $x = Py$ turns $\dot x = Ax$ into $\dot y = Jy$ with $J = P^{-1}AP$. Choosing the columns of $P$ well makes $J$ as simple as possible (the <b>Jordan form</b>), and then the portrait is easy to draw in $y$ coordinates and map back. For a $2\times2$ matrix there are three real forms:</p>
+<p class="eq">$$J = \begin{bmatrix}\lambda_1 &amp; 0\\ 0 &amp; \lambda_2\end{bmatrix}, \qquad J = \begin{bmatrix}\lambda &amp; 1\\ 0 &amp; \lambda\end{bmatrix}, \qquad J = \begin{bmatrix}\alpha &amp; -\beta\\ \beta &amp; \alpha\end{bmatrix}.$$</p>
+<p>To find $P$: compute the eigenvalues; for each, find an eigenvector $v$ from $(A - \lambda I)v = 0$. If a repeated eigenvalue has only one eigenvector $v_1$, the second column is a <b>generalized eigenvector</b> $v_2$ solving $(A - \lambda I)v_2 = v_1$. Then $P = [v_1\;v_2]$.</p>
+<p><b>Example.</b> $A = \begin{bmatrix}3 &amp; 1\\ 0 &amp; 3\end{bmatrix}$: $\det(A - \lambda I) = (3 - \lambda)^2$, so $\lambda_1 = \lambda_2 = 3$. $A - 3I = \begin{bmatrix}0 &amp; 1\\ 0 &amp; 0\end{bmatrix}$ has null space spanned by $v_1 = (1, 0)^T$ only. Solving $(A - 3I)v_2 = v_1$ gives $v_2 = (0, 1)^T$. So $P = I$ and $J = A$: this $A$ is already in Jordan form.</p>
+<p class="warn">The slide chose $v_2 = (0, 1)^T$ as "another linearly independent vector". Here it happens to work because $(0, 1)^T$ is also a generalized eigenvector. In general an arbitrary independent vector does not give the Jordan form: $v_2$ must satisfy $(A - \lambda I)v_2 = v_1$.</p>
+
+<h4 id="cases">The eight phase portraits</h4>
+<p>A nonsingular $2\times2$ matrix has either two real or two complex eigenvalues, with two or one independent eigenvectors. This gives four categories:</p>
+<ol>
+<li>Two distinct real eigenvalues, two real eigenvectors: <b>nodes</b> and <b>saddles</b>.</li>
+<li>Complex conjugate eigenvalues: <b>foci</b> and <b>centres</b>.</li>
+<li>Two equal real eigenvalues and two eigenvectors: a <b>star node</b>.</li>
+<li>Two equal real eigenvalues and one eigenvector: a <b>degenerate (improper) node</b>.</li>
+</ol>
+
+<h4 id="case1">1. Distinct real eigenvalues</h4>
+<p>In Jordan coordinates $\dot y_1 = \lambda_1y_1$, $\dot y_2 = \lambda_2y_2$, so $y_1 = y_{10}e^{\lambda_1t}$, $y_2 = y_{20}e^{\lambda_2t}$. Eliminating $t$: $\ln(y_1/y_{10}) = \lambda_1t$ and $\ln(y_2/y_{20}) = \lambda_2t$, hence</p>
+<p class="eq">$$\frac{y_2}{y_{20}} = \left(\frac{y_1}{y_{10}}\right)^{\lambda_2/\lambda_1} \quad\Longrightarrow\quad y_2 = K\,y_1^{\lambda_2/\lambda_1}.$$</p>
+<p><b>(a) $\lambda_2 &lt; \lambda_1 &lt; 0$: stable node.</b> All trajectories go to the origin. Near the origin they are <b>tangent to the slow eigenvector</b> $v_1$ (the one with the eigenvalue closer to zero), because the fast component dies out first; far away they are <b>parallel to the fast eigenvector</b> $v_2$.</p>
+<p><b>Example 7.</b> $\ddot x + 4\dot x + 2x = 0$, $A = \begin{bmatrix}0 &amp; 1\\ -2 &amp; -4\end{bmatrix}$. $\det(\lambda I - A) = \lambda^2 + 4\lambda + 2 = 0$ gives $\lambda_1 = -0.59$, $\lambda_2 = -3.41$. For a matrix in this phase-variable form the eigenvector for $\lambda$ is $(1, \lambda)^T$; normalized, $v_1 = (0.86, -0.51)^T$ and $v_2 = (0.28, -0.96)^T$.</p>
+<figure class="diagram" id="fig-ex7"><img src="../../assets/img/diagrams/nlc-pp-ex7.svg" alt="Stable node portrait with slow and fast eigenvector lines" loading="lazy"><figcaption>Stable node.</figcaption></figure>
+<p><b>(b) $\lambda_2 &gt; \lambda_1 &gt; 0$: unstable node.</b> The same picture with every arrow reversed: trajectories leave the origin tangent to the slow eigenvector and become parallel to the fast one.</p>
+<p><b>Example 8.</b> $\ddot x - 3\dot x + 2x = 0$, $A = \begin{bmatrix}0 &amp; 1\\ -2 &amp; 3\end{bmatrix}$, $\lambda^2 - 3\lambda + 2 = 0$, $\lambda = 1, 2$; $v_1 = (0.71, 0.71)^T$, $v_2 = (0.45, 0.89)^T$.</p>
+<figure class="diagram" id="fig-ex8"><img src="../../assets/img/diagrams/nlc-pp-ex8.svg" alt="Unstable node portrait" loading="lazy"><figcaption>Unstable node.</figcaption></figure>
+<p><b>(c) $\lambda_2 &lt; 0 &lt; \lambda_1$: saddle point.</b> Only the trajectories along the stable eigenvector reach the origin; every other trajectory comes in parallel to it and then leaves along the unstable eigenvector. A saddle is always unstable. (Here $\det A &lt; 0$.)</p>
+<p><b>Example 9.</b> $\ddot x - \dot x - 2x = 0$, $A = \begin{bmatrix}0 &amp; 1\\ 2 &amp; 1\end{bmatrix}$, $\lambda^2 - \lambda - 2 = 0$, $\lambda = -1, 2$; stable eigenvector $(0.71, -0.71)^T$, unstable eigenvector $(0.45, 0.89)^T$.</p>
+<figure class="diagram" id="fig-ex9"><img src="../../assets/img/diagrams/nlc-pp-ex9.svg" alt="Saddle point portrait with stable and unstable eigenvectors" loading="lazy"><figcaption>Saddle point.</figcaption></figure>
+
+<h4 id="case2">2. Complex conjugate eigenvalues $\alpha \pm j\beta$</h4>
+<p>In Jordan coordinates $\dot y_1 = \alpha y_1 - \beta y_2$, $\dot y_2 = \beta y_1 + \alpha y_2$. In polar coordinates $r = \sqrt{y_1^2 + y_2^2}$, $\theta = \tan^{-1}(y_2/y_1)$:</p>
+<p class="eq">$$r\dot r = y_1\dot y_1 + y_2\dot y_2 = \alpha r^2, \qquad \dot\theta = \frac{y_1\dot y_2 - y_2\dot y_1}{r^2} = \beta \quad\Longrightarrow\quad r(t) = r_0e^{\alpha t}, \;\; \theta(t) = \theta_0 + \beta t.$$</p>
+<p>The trajectories are logarithmic spirals (in $x$ coordinates, distorted spirals). There are no real eigenvectors.</p>
+<p><b>(a) $\alpha &lt; 0$: stable focus</b>, spirals into the origin. <b>Example 10.</b> $\ddot x + \dot x + x = 0$, $\lambda = -0.5 \pm j0.866$.</p>
+<figure class="diagram" id="fig-ex10"><img src="../../assets/img/diagrams/nlc-pp-ex10.svg" alt="Stable focus portrait" loading="lazy"><figcaption>Stable focus.</figcaption></figure>
+<p><b>(b) $\alpha &gt; 0$: unstable focus</b>, spirals outwards. <b>Example 11.</b> $\ddot x - \dot x + x = 0$, $\lambda = 0.5 \pm j0.866$.</p>
+<figure class="diagram" id="fig-ex11"><img src="../../assets/img/diagrams/nlc-pp-ex11.svg" alt="Unstable focus portrait" loading="lazy"><figcaption>Unstable focus.</figcaption></figure>
+<p><b>(c) $\alpha = 0$: centre</b>, closed curves (ellipses) around the origin. The origin is <b>marginally stable</b>: stable, but not asymptotically stable. <b>Example 12.</b> $\ddot x + 3x = 0$, $\lambda = \pm j1.732$.</p>
+<figure class="diagram" id="fig-ex12"><img src="../../assets/img/diagrams/nlc-pp-ex12.svg" alt="Centre portrait with closed elliptical orbits" loading="lazy"><figcaption>Centre.</figcaption></figure>
+
+<h4 id="case3">3. Equal eigenvalues, two eigenvectors: star node</h4>
+<p>$J = \lambda I$, so $y_1 = y_{10}e^{\lambda t}$, $y_2 = y_{20}e^{\lambda t}$ and $y_1/y_2 = y_{10}/y_{20}$: every trajectory is a straight line through the origin. Every direction is an eigenvector. Stable for $\lambda &lt; 0$, unstable for $\lambda &gt; 0$. This only happens when $A = \lambda I$ itself.</p>
+<figure class="diagram" id="fig-star"><img src="../../assets/img/diagrams/nlc-pp-star.svg" alt="Star node with straight-line trajectories" loading="lazy"><figcaption>Stable star node.</figcaption></figure>
+
+<h4 id="case4">4. Equal eigenvalues, one eigenvector: degenerate node</h4>
+<p>$J = \begin{bmatrix}\lambda &amp; 1\\ 0 &amp; \lambda\end{bmatrix}$: $\dot y_1 = \lambda y_1 + y_2$, $\dot y_2 = \lambda y_2$. So $y_2 = y_{20}e^{\lambda t}$, $y_1 = (y_{10} + y_{20}t)e^{\lambda t}$, and eliminating $t = \frac1\lambda\ln(y_2/y_{20})$:</p>
+<p class="eq">$$y_1 = y_2\left(\frac{y_{10}}{y_{20}} + \frac{1}{\lambda}\ln\frac{y_2}{y_{20}}\right).$$</p>
+<p>All trajectories become tangent to the single eigenvector at the origin. Stable for $\lambda &lt; 0$, unstable for $\lambda &gt; 0$.</p>
+<p><b>Example 13.</b> $\ddot x + 2\dot x + x = 0$, $\lambda^2 + 2\lambda + 1 = 0$, $\lambda_1 = \lambda_2 = -1$, one eigenvector $v_1 = (-0.71, 0.71)^T$ (or $(0.71, -0.71)^T$): a stable degenerate node. This is the critically damped second-order system.</p>
+<figure class="diagram" id="fig-ex13"><img src="../../assets/img/diagrams/nlc-pp-ex13.svg" alt="Degenerate node with one eigenvector" loading="lazy"><figcaption>Stable degenerate (improper) node.</figcaption></figure>
+
+<h4 id="poincare">Summary: the Poincaré diagram</h4>
+<p>Since the eigenvalues depend only on $\mathrm{tr}\,A$ and $\det A$, the type of equilibrium can be read off a map of the trace–determinant plane.</p>
+<figure class="diagram" id="fig-poincare"><img src="../../assets/img/diagrams/nlc-poincare.svg" alt="Trace-determinant plane with regions for saddle, nodes, foci and centre separated by the parabola trace squared equals four det" loading="lazy"><figcaption>Poincaré diagram. The parabola $(\mathrm{tr}\,A)^2 = 4\det A$ separates real eigenvalues (nodes) from complex ones (foci).</figcaption></figure>
+<div class="tblwrap"><table class="tbl"><tr><th>Eigenvalues</th><th>Condition</th><th>Singular point</th></tr>
+<tr><td>Real, distinct, both negative</td><td>$\det A &gt; 0$, $\mathrm{tr}\,A &lt; 0$, $\Delta &gt; 0$</td><td>Stable node</td></tr>
+<tr><td>Real, distinct, both positive</td><td>$\det A &gt; 0$, $\mathrm{tr}\,A &gt; 0$, $\Delta &gt; 0$</td><td>Unstable node</td></tr>
+<tr><td>Real, opposite signs</td><td>$\det A &lt; 0$</td><td>Saddle point (unstable)</td></tr>
+<tr><td>Complex, negative real part</td><td>$\mathrm{tr}\,A &lt; 0$, $\Delta &lt; 0$</td><td>Stable focus</td></tr>
+<tr><td>Complex, positive real part</td><td>$\mathrm{tr}\,A &gt; 0$, $\Delta &lt; 0$</td><td>Unstable focus</td></tr>
+<tr><td>Purely imaginary</td><td>$\mathrm{tr}\,A = 0$, $\det A &gt; 0$</td><td>Centre (vortex)</td></tr>
+<tr><td>Real, equal</td><td>$\Delta = 0$</td><td>Star node or degenerate node</td></tr></table></div>
+<p>Here $\Delta = (\mathrm{tr}\,A)^2 - 4\det A$. For example, $\mathrm{tr}\,A &gt; 0$, $\det A &gt; 0$, $\Delta &gt; 0$ means two real eigenvalues of the same (positive) sign: an unstable node.</p>
+<figure class="diagram" id="fig-gallery"><img src="../../assets/img/diagrams/nlc-pp-gallery.svg" alt="Grid of the eight linear phase portraits" loading="lazy"><figcaption>All eight portraits side by side (Examples 7 to 13 and the star node).</figcaption></figure>
+
+<h4 id="higher">Higher-order linear systems</h4>
+<p>The same ideas extend to $n$ states, although pictures beyond three dimensions are no longer useful. If $A$ is nonsingular the origin is the only equilibrium (otherwise the null space of $A$ is a set of equilibria). The origin is exponentially stable if all eigenvalues have negative real parts, marginally stable if none has a positive real part and any eigenvalues on the imaginary axis are not repeated (more precisely, have as many eigenvectors as their multiplicity), and unstable otherwise. Locally the motion is a combination of the planar types: node-like along real eigenvectors, spiralling in the plane of each complex pair, saddle-like when the real parts have different signs.</p>
+
+<h3 id="nonlinear">Phase plane analysis of nonlinear systems</h3>
+<p>For a nonlinear system:</p>
+<ol>
+<li>Find all equilibria from $f_1 = f_2 = 0$.</li>
+<li>At each one, compute the Jacobian $A = \partial f/\partial x$ and classify it as above. If no eigenvalue has zero real part, the nonlinear portrait near that point looks like the linear one (a node stays a node, a saddle stays a saddle). For a centre, or a zero eigenvalue, linearization is inconclusive.</li>
+<li>Join the local pictures: draw the stable and unstable trajectories of each saddle (they separate regions with different behaviour), and look for closed orbits.</li>
+</ol>
+<p><b>Example.</b> $\ddot x + 0.5\dot x + 2x + x^2 = 0$, so $\dot x_1 = x_2$, $\dot x_2 = -0.5x_2 - 2x_1 - x_1^2$. Equilibria: $x_2 = 0$ and $x_1(2 + x_1) = 0$, so $(0, 0)$ and $(-2, 0)$. The Jacobian is $\begin{bmatrix}0 &amp; 1\\ -2 - 2x_1 &amp; -0.5\end{bmatrix}$.</p>
+<ul>
+<li>At $(0, 0)$: $\lambda^2 + 0.5\lambda + 2 = 0$, $\lambda = -0.25 \pm j1.39$: a <b>stable focus</b>.</li>
+<li>At $(-2, 0)$: $\lambda^2 + 0.5\lambda - 2 = 0$, $\lambda = 1.19, -1.69$: a <b>saddle</b>.</li>
+</ul>
+<figure class="diagram" id="fig-nonlinear"><img src="../../assets/img/diagrams/nlc-pp-nonlinear.svg" alt="Phase portrait with a stable focus at the origin and a saddle at minus 2, with the saddle's stable and unstable trajectories" loading="lazy"><figcaption>The pink curve (the saddle's stable trajectories) is the boundary of the region of attraction of the origin. Starts outside it escape to the left.</figcaption></figure>
+<p>The pendulum portrait in Lesson 1 is another example: centres at the hanging positions and saddles at the inverted ones, joined by the separatrix.</p>
+
+<h4 id="stability-defs">Stability of nonlinear systems</h4>
+<p>For linear systems, stability is a property of the whole system. A nonlinear system may have several equilibria with different stability, and behave differently for small and large deviations, so stability is defined <b>for each equilibrium</b>. With the equilibrium of interest moved to the origin of $\dot x = f(x)$:</p>
+<ol>
+<li>The origin is <b>stable</b> if every trajectory that starts sufficiently close to it stays near it for all time.</li>
+<li>It is <b>asymptotically stable</b> if, in addition, nearby trajectories approach it as $t \to \infty$.</li>
+<li>It is <b>asymptotically stable in the large</b> (globally) if every trajectory, whatever its start, approaches it.</li>
+</ol>
+<p>Lesson 5 makes these definitions precise and gives Lyapunov's tools for proving them.</p>
+
+<h3 id="limit-cycles">Limit cycles in the phase plane</h3>
+<p>A <b>limit cycle</b> is an <b>isolated</b> closed trajectory: an oscillation of fixed amplitude and period. Closed trajectories also occur in linear systems (a centre), but there they form a continuous family whose amplitude is set by the initial state, and any small change in the parameters destroys them. A limit cycle is independent of the initial state and persists over a range of parameter values.</p>
+<ul>
+<li><b>Stable</b> limit cycle: nearby trajectories on both sides converge to it (Van der Pol).</li>
+<li><b>Unstable</b> limit cycle: nearby trajectories on both sides move away from it.</li>
+<li><b>Semi-stable</b> limit cycle: trajectories converge on one side and diverge on the other.</li>
+</ul>
+<figure class="diagram" id="fig-lc-types"><img src="../../assets/img/diagrams/nlc-limit-cycle-types.svg" alt="A linear centre, a stable limit cycle and an unstable limit cycle" loading="lazy"><figcaption>A linear centre (no limit cycle), a stable limit cycle and an unstable limit cycle.</figcaption></figure>
+<p><b>Example.</b> $\dot x_1 = -x_2 + x_1(x_1^2 + x_2^2 - 1)$, $\dot x_2 = x_1 + x_2(x_1^2 + x_2^2 - 1)$. In polar coordinates ($x_1 = r\cos\theta$, $x_2 = r\sin\theta$) the equations separate:</p>
+<p class="eq">$$\dot r = r(r^2 - 1), \qquad \dot\theta = 1.$$</p>
+<p>The circle $r = 1$ is a closed trajectory. Inside it $\dot r &lt; 0$ (trajectories spiral in to the origin); outside it $\dot r &gt; 0$ (they spiral out to infinity). So $r = 1$ is an <b>unstable limit cycle</b>, and the origin is stable with the open disc $r &lt; 1$ as its region of attraction.</p>
+
+<h4 id="existence">Existence of limit cycles</h4>
+<p>Three classical results for planar systems $\dot x = f(x)$ help decide whether a limit cycle can exist:</p>
+<ul>
+<li><b>Index theorem (Poincaré).</b> Inside any closed trajectory there must be at least one equilibrium; if there are $N$ nodes, foci and centres and $S$ saddles inside, then $N = S + 1$. So a region with no equilibrium, or with only a saddle, contains no limit cycle.</li>
+<li><b>Bendixson's criterion.</b> If in a simply connected region $D$ the divergence $\dfrac{\partial f_1}{\partial x_1} + \dfrac{\partial f_2}{\partial x_2}$ is not identically zero and does not change sign, then $D$ contains no closed trajectory. For example $\ddot x + (1 + x^2)\dot x + x = 0$ has divergence $-(1 + x_1^2) &lt; 0$ everywhere, so it has no limit cycle.</li>
+<li><b>Poincaré–Bendixson theorem.</b> If a trajectory stays for all future time in a closed and bounded region that contains no equilibrium, it is a closed trajectory or approaches one. In practice: find an annulus that trajectories enter but never leave (and with no equilibrium inside); it contains a limit cycle. This is how the Van der Pol limit cycle is proved to exist.</li>
+</ul>
+<p class="tip">Use the explorer below: choose Van der Pol and move $\mu$ to 0. The limit cycle disappears and the portrait becomes a linear centre. Then try the relay system and watch the closed curves change size with the starting point.</p>
+<p><b>Software.</b> In MATLAB, the free <code>pplane</code> tool draws direction fields and trajectories in the same way as the explorer on this page.</p>
+</article>
+    <!-- NOTES END -->
+    </section>
+    <section class="lsec" id="try"><h2>Try it</h2>
+    <div class="sim nls" data-nls="phase-plane" data-preset="ex7"></div>
+    </section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the div below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">Classify the equilibrium of $\dot x = Ax$ with $A = \begin{bmatrix}1 &amp; 2\\ -3 &amp; -4\end{bmatrix}$ and find the eigenvectors.</div><details><summary>Show solution</summary><div class="sol">$\mathrm{tr}\,A = -3$, $\det A = -4 + 6 = 2$, $\Delta = 9 - 8 = 1 &gt; 0$: $\lambda = -1, -2$, a <b>stable node</b>. For $\lambda = -1$: $(A + I)v = 0$ gives $v_1 = (1, -1)^T$ (slow). For $\lambda = -2$: $(A + 2I)v = 0$ gives $v_2 = (2, -3)^T$ (fast). Trajectories enter the origin tangent to $(1, -1)^T$.</div></details></li><li><div class="q">Classify the origin of $\ddot x + 2\dot x + 5x = 0$ and of $\ddot x - 4x = 0$.</div><details><summary>Show solution</summary><div class="sol">First: $\lambda^2 + 2\lambda + 5 = 0$, $\lambda = -1 \pm j2$: <b>stable focus</b>. Second: $\lambda^2 - 4 = 0$, $\lambda = \pm 2$: <b>saddle</b>, with stable eigenvector $(1, -2)^T$ and unstable eigenvector $(1, 2)^T$.</div></details></li><li><div class="q">Find the isoclines of $\ddot x + \dot x + x = 0$. Which isocline is the $x_1$ axis, and which is the $x_2$ axis?</div><details><summary>Show solution</summary><div class="sol">$S = -\dfrac{x_1 + x_2}{x_2}$, so the isoclines are the lines $x_2 = -\dfrac{x_1}{S + 1}$ through the origin. $S = \infty$ gives $x_2 = 0$, the $x_1$ axis (trajectories cross it vertically). $S = -1$ gives $x_1 = 0$, the $x_2$ axis (trajectories cross it at slope $-1$).</div></details></li><li><div class="q">For the relay system of the worked example ($r = 2$, $M = 1.2$), start at $(2, 0.5)$. Find the extreme values of $c$ and the period of the oscillation.</div><details><summary>Show solution</summary><div class="sol">Right arc: $x_2^2 = 0.25 - 2.4(x_1 - 2)$, so $c_{max} = 2 + 0.25/2.4 = 2.104$; by symmetry $c_{min} = 1.896$. On each quarter of the cycle $\ddot c = \mp M$ changes $\dot c$ by $0.5$, taking $0.5/1.2 = 0.417$ s, so the period is $4 \times 0.417 = 1.67$ s. A larger start gives a longer period: unlike a linear oscillator, the period depends on amplitude.</div></details></li><li><div class="q">Find and classify all equilibria of $\dot x_1 = x_2$, $\dot x_2 = x_1 - x_1^3 - x_2$.</div><details><summary>Show solution</summary><div class="sol">$x_2 = 0$, $x_1(1 - x_1^2) = 0$: $(0, 0)$ and $(\pm1, 0)$. Jacobian $\begin{bmatrix}0 &amp; 1\\ 1 - 3x_1^2 &amp; -1\end{bmatrix}$. At the origin $\det = -1 &lt; 0$: saddle. At $(\pm1, 0)$: $\lambda^2 + \lambda + 2 = 0$, $\lambda = -0.5 \pm j1.32$: stable foci. (This is the Duffing oscillator of Lesson 1 with $\delta = 1$.)</div></details></li><li><div class="q">Use Bendixson’s criterion to show that $\dot x_1 = x_2$, $\dot x_2 = -x_1 - x_2 - x_2^3$ has no limit cycle.</div><details><summary>Show solution</summary><div class="sol">$\dfrac{\partial f_1}{\partial x_1} + \dfrac{\partial f_2}{\partial x_2} = 0 + (-1 - 3x_2^2) &lt; 0$ everywhere. It never changes sign and is not identically zero, so there is no closed trajectory anywhere in the plane.</div></details></li><li><div class="q">Show that $\dot x_1 = x_2 + x_1(1 - x_1^2 - x_2^2)$, $\dot x_2 = -x_1 + x_2(1 - x_1^2 - x_2^2)$ becomes $\dot r = r(1 - r^2)$, $\dot\theta = -1$, and classify the limit cycle.</div><details><summary>Show solution</summary><div class="sol">$r\dot r = x_1\dot x_1 + x_2\dot x_2 = r^2(1 - r^2)$ (the $x_1x_2$ terms cancel), and $r^2\dot\theta = x_1\dot x_2 - x_2\dot x_1 = -(x_1^2 + x_2^2)$. Inside $r = 1$, $\dot r &gt; 0$; outside, $\dot r &lt; 0$: trajectories from both sides approach $r = 1$, a <b>stable</b> limit cycle traversed clockwise. The origin is an unstable focus.</div></details></li></ol></section>
+    <!-- PRACTICE START: practice problems from the exercise compendium. To add one, copy a <li>...</li> line. Guide section 20. -->
+    <section class="lsec" id="practice"><h2>Practice problems from the exercise compendium</h2>
+    <p class="note">From <i>Exercises in Nonlinear Control Systems</i> by M. Johansson, B. Bernhardsson and K. H. Johansson (Department of Automatic Control, Lund University), Chapter 2 (Linearization and Phase-Plane Analysis). “Ex 2.3” means Chapter 2, Exercise 3. Work from the compendium statement and figure. The hints and short answers here are written for this course; full solutions are not reproduced. The phase plane explorer above is useful for checking your sketches.</p>
+    <ol class="exlist practice"><li><div class="q"><span class="pno">Ex 2.1</span> Find and classify all equilibrium points of systems (a) to (e).</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> Start from the simpler equation (often $\dot x_1 = 0$ gives $x_2$ directly), substitute into the other, then evaluate the Jacobian at each point.<br><b>Answer.</b> (a) $(0, 0)$ stable focus; $(\pm\sqrt6, 0)$ saddles. (b) $(0, 0)$ stable node ($\lambda = -0.91, -2.09$); $(-2.55, -2.55)$ saddle. (c) $(0, 0)$ unstable node; $(1, 0)$ saddle; $(0, 1)$ stable node ($\lambda = -1, -1$). (d) $(0, 0)$ unstable focus (there is also a stable limit cycle around it). (e) $(0, 0)$ only (at $x_1 = -1$ the first equation cannot vanish): stable focus.</div></details></li><li><div class="q"><span class="pno">Ex 2.2</span> $\dot x_1 = ax_1 - x_1x_2$, $\dot x_2 = bx_1^2 - cx_2$ with $a, b, c &gt; 0$: find and classify the equilibria.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> Either $x_1 = 0$ or $x_2 = a$. At the non-zero equilibria compute trace and determinant of the Jacobian.<br><b>Answer.</b> $(0, 0)$: $\lambda = a, -c$, a saddle. $\left(\pm\sqrt{ac/b},\, a\right)$: $\mathrm{tr} = -c$, $\det = 2ac$, so asymptotically stable: a stable node if $c \ge 8a$, a stable focus if $c &lt; 8a$.</div></details></li><li><div class="q"><span class="pno">Ex 2.3</span> Construct the phase portraits of (a), (b) and (c) and describe the qualitative behaviour.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> Find and classify the equilibria first, then use a computer (or the explorer) to fill in the rest.<br><b>Answer.</b> (a) Stable degenerate node at the origin ($\lambda = -1, -1$) and saddles at $(\pm2.33, 0)$ where $x_1 = 2\tan^{-1}x_1$. (b) Unstable focus at the origin surrounded by a stable limit cycle. (c) Saddle at the origin and stable foci at $(\pm1, 2)$.</div></details></li><li><div class="q"><span class="pno">Ex 2.5</span> Mark the arrow heads on the two given portraits and discuss the behaviour.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> The sign of $x_2$ decides the sign of $\dot x_1$ (in (a), $\dot x_1 = -x_2$). For (a), look at where the damping term $x_2(1 - x_1^2 + 0.1x_1^4)$ is negative.<br><b>Answer.</b> (a) Stable focus at the origin, surrounded by an unstable limit cycle (crossing the $x_1$ axis between 2 and 2.5) and, further out, a stable limit cycle (amplitude about 3.8 in $x_1$). (b) Stable focus at the origin and saddles at $(\pm3.97, 0)$; trajectories outside the saddles’ stable curves diverge.</div></details></li><li><div class="q"><span class="pno">Ex 2.7</span> Synchronous generator $\dot x_1 = x_2$, $\dot x_2 = \frac{P}{M} - \frac{D}{M}x_2 - \frac{\eta_1}{M}E_q\sin x_1$: determine the character of the equilibria.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> The Jacobian is $\begin{bmatrix}0 &amp; 1\\ -\frac{\eta_1E_q}{M}\cos\delta_0 &amp; -\frac{D}{M}\end{bmatrix}$; look at the sign of $\cos\delta_0$.<br><b>Answer.</b> At $\delta_0 = \arcsin\frac{P}{\eta_1E_q} + 2n\pi$ ($\cos\delta_0 &gt; 0$): stable node or focus depending on $D$ (focus for light damping). At $\delta_0 = \pi - \arcsin\frac{P}{\eta_1E_q} + 2n\pi$ ($\cos\delta_0 &lt; 0$): saddles.</div></details></li><li><div class="q"><span class="pno">Ex 2.8</span> Show that $(\sin t, \cos t)$ is a solution, decide whether this limit cycle is stable, and linearize the system around it.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> Use polar coordinates, as in the last exercise above. For (c), the linearization along a trajectory is a time-varying system $\dot{\tilde x} = A(t)\tilde x$ with $A(t)$ the Jacobian evaluated on the trajectory.<br><b>Answer.</b> (b) $\dot r = r(1 - r^2)$: stable. (c) $A(t) = \begin{bmatrix}-2\sin^2t &amp; 1 - \sin 2t\\ -1 - \sin 2t &amp; -2\cos^2t\end{bmatrix}$.</div></details></li><li><div class="q"><span class="pno">Ex 2.11</span> Child on a swing: draw the portraits for two constant lengths and show how switching between them pumps up the swing.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> For constant $l$ the energy is constant (closed orbits). A quick change of $l$ keeps $\varphi$ and the angular momentum $ml^2\dot\varphi$ unchanged.<br><b>Answer.</b> Shorten the swing (stand up) when passing the bottom, where $\dot\varphi$ is largest: $\dot\varphi$ jumps up by $(l_1/l_2)^2$, moving to a larger orbit. Lengthen it (crouch) at the turning points, where $\dot\varphi = 0$ and nothing is lost. Each half swing then gains energy.</div></details></li></ol></section>
+    <!-- PRACTICE END -->
+    <nav class="prevnext"><a class="pn prev" href="01-introduction.html"><small>← Lesson 1</small>Introduction to nonlinear systems</a><a class="pn next" href="../nonlinear-control.html"><small>→</small>Course home</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+<script src="../../assets/js/nonlinear-sims.js"></script>
+</body>
+</html>
