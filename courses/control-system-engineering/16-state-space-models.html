@@ -44,7 +44,7 @@
 <p>The <b>state</b> is the smallest set of variables that, with the input, fully determines the future behaviour. A linear time-invariant state model is</p>
 <p class="eq">$$\dot{\mathbf x} = A\mathbf x + B\mathbf u, \qquad \mathbf y = C\mathbf x + D\mathbf u$$</p>
 <h3>From a differential equation (phase variables)</h3>
-<p>For $\dddot y + a_2\ddot y + a_1\dot y + a_0y = u$, choose $x_1 = y$, $x_2 = \dot y$, $x_3 = \ddot y$:</p>
+<p>For $\overset{...}{y} + a_2\ddot y + a_1\dot y + a_0y = u$, choose $x_1 = y$, $x_2 = \dot y$, $x_3 = \ddot y$:</p>
 <p class="eq">$$A = \begin{bmatrix}0&1&0\\0&0&1\\-a_0&-a_1&-a_2\end{bmatrix},\ B = \begin{bmatrix}0\\0\\1\end{bmatrix},\ C = \begin{bmatrix}1&0&0\end{bmatrix}$$</p>
 <h3>From a circuit</h3>
 <p>Choose capacitor voltages and inductor currents as state variables, since they describe the stored energy.</p>

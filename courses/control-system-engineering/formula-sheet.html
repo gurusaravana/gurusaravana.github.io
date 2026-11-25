@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Formula sheet · Control System Engineering</title>
+<meta name="description" content="Exam formula sheet for Control System Engineering (EEE2510): modelling, block diagrams, time response, steady-state error, PID tuning, Routh, root locus, Bode, Nyquist, compensation and state space.">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  FORMULA SHEET (Control System Engineering, EEE2510)
+  Each box is one <div class="fbox"> inside a module section <section class="fs-sec" data-mod="1">.
+  * The heading <h3> holds the topic and a link to the lesson it comes from (<a class="src">).
+  * Write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line), as in the lessons.
+  * To add a formula: copy an existing <div class="fbox"> ... </div> and change the text.
+  * The "Midterm" button shows only data-mod="1" and "2"; printing prints what is shown.
+  Full guide: HOW-TO-ADD-TEACHING-CONTENT.md, section 20.
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
+  <nav class="links"><a href="../control-system-engineering.html">Course home</a><a href="../control-system-engineering.html#lessons">Lessons</a><a href="#m1">Module 1</a><a href="#m2">Module 2</a><a href="#m3">Module 3</a><a href="#m4">Module 4</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../control-system-engineering.html">← Control System Engineering</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Control System Engineering · EEE2510 · Exam revision</div>
+    <h1>Formula sheet</h1>
+    <p>The key formulas from all nineteen lessons on one sheet, in the same notation as the lesson notes. Each box links back to its lesson. Print it, or save it as a PDF, for revision.</p>
+  </div>
+</div></div>
+<main class="wrap fsheet">
+  <div class="fs-bar card">
+    <div class="fs-filter" role="group" aria-label="Show modules">
+      <button type="button" data-show="all" class="on">All modules</button>
+      <button type="button" data-show="mid">Midterm (Modules 1–2)</button>
+      <button type="button" data-show="end">Modules 3–4</button>
+    </div>
+    <button type="button" class="fs-print" onclick="window.print()">🖨️ Print / save as PDF</button>
+  </div>
+  <p class="fs-printhead">Control System Engineering (EEE2510) · Formula sheet · Saravanakumar G · Presidency University</p>
+
+  <!-- ===================== MODULE 1 ===================== -->
+  <section class="fs-sec" id="m1" data-mod="1">
+    <h2><span class="mcode">1</span> System components and their representation</h2>
+    <div class="fs-grid">
+
+      <div class="fbox">
+        <h3>Laplace transform <a class="src" href="02-laplace-and-partial-fractions.html">L2</a></h3>
+        <p>$\mathcal L\{f(t)\} = F(s) = \int_{0^-}^{\infty} f(t)e^{-st}\,dt$, $\;s = \sigma + j\omega$</p>
+        <table class="ftbl">
+          <tr><th>$f(t)$</th><th>$F(s)$</th><th>$f(t)$</th><th>$F(s)$</th></tr>
+          <tr><td>$\delta(t)$</td><td>$1$</td><td>$e^{-at}$</td><td>$\frac{1}{s+a}$</td></tr>
+          <tr><td>$u(t)$</td><td>$\frac1s$</td><td>$\sin\omega t$</td><td>$\frac{\omega}{s^2+\omega^2}$</td></tr>
+          <tr><td>$t$</td><td>$\frac1{s^2}$</td><td>$\cos\omega t$</td><td>$\frac{s}{s^2+\omega^2}$</td></tr>
+          <tr><td>$t^n$</td><td>$\frac{n!}{s^{n+1}}$</td><td>$e^{-at}f(t)$</td><td>$F(s+a)$</td></tr>
+        </table>
+      </div>
+
+      <div class="fbox">
+        <h3>Laplace theorems <a class="src" href="02-laplace-and-partial-fractions.html">L2</a></h3>
+        <ul>
+          <li>Time shift: $f(t-T)u(t-T) \to e^{-sT}F(s)$; scaling: $f(at) \to \frac1aF\!\left(\frac sa\right)$</li>
+          <li>$\dfrac{df}{dt} \to sF(s) - f(0^-)$; $\;\dfrac{d^2f}{dt^2} \to s^2F(s) - sf(0^-) - f'(0^-)$</li>
+          <li>$\int_{0^-}^t f(\tau)\,d\tau \to F(s)/s$</li>
+          <li>Initial value: $f(0^+) = \lim_{s\to\infty} sF(s)$</li>
+          <li>Final value: $f(\infty) = \lim_{s\to0} sF(s)$ (stable systems only)</li>
+        </ul>
+      </div>
+
+      <div class="fbox">
+        <h3>Partial fractions <a class="src" href="02-laplace-and-partial-fractions.html">L2</a></h3>
+        <p>Distinct roots: $K_i = \lim_{s\to-p_i}(s+p_i)F(s)$</p>
+        <p>Root $-p_1$ repeated $r$ times:</p>
+        <p class="feq">$$K_i = \frac{1}{(i-1)!}\lim_{s\to-p_1}\frac{d^{\,i-1}}{ds^{\,i-1}}\left[(s+p_1)^rF(s)\right]$$</p>
+        <p>Complex pair: $\dfrac{K_2s + K_3}{s^2+as+b}$, inverts to $Ce^{-\alpha t}\cos(\beta t - \phi)$. If $\deg N \ge \deg D$, divide first.</p>
+      </div>
+
+      <div class="fbox">
+        <h3>Electrical elements <a class="src" href="03-electrical-systems.html">L3</a></h3>
+        <table class="ftbl">
+          <tr><th>Element</th><th>$v$–$i$ law</th><th>$Z(s)$</th></tr>
+          <tr><td>Resistor</td><td>$v = Ri$</td><td>$R$</td></tr>
+          <tr><td>Inductor</td><td>$v = L\,di/dt$</td><td>$Ls$</td></tr>
+          <tr><td>Capacitor</td><td>$v = \frac1C\int i\,dt$</td><td>$\frac{1}{Cs}$</td></tr>
+        </table>
+        <p>Mesh $k$: (sum of $Z$ around mesh)$\,I_k$ − (shared $Z$)$\,I_j$ = (sum of sources). Solve with Cramer's rule.</p>
+        <p>Series RLC: $\dfrac{V_C(s)}{V(s)} = \dfrac{1}{LCs^2 + RCs + 1}$</p>
+        <p>DC motor: $\dfrac{\Omega(s)}{V_a(s)} = \dfrac{K_t}{(L_as + R_a)(Js + B) + K_tK_b}$</p>
+      </div>
+
+      <div class="fbox">
+        <h3>Mechanical elements <a class="src" href="04-mechanical-systems.html">L4</a></h3>
+        <table class="ftbl">
+          <tr><th>Mass $M$</th><th>Damper $B$</th><th>Spring $K$</th></tr>
+          <tr><td>$M\ddot x \to Ms^2X$</td><td>$B\dot x \to BsX$</td><td>$Kx \to KX$</td></tr>
+        </table>
+        <p>Between two masses use relative motion: $B(\dot x_1 - \dot x_2)$, $K(x_1 - x_2)$.</p>
+        <p>$M\ddot x + B\dot x + Kx = f \;\Rightarrow\; \dfrac{X(s)}{F(s)} = \dfrac{1}{Ms^2 + Bs + K}$</p>
+        <p>Critical damping: $B = 2\sqrt{MK}$. Rotational: $J\ddot\theta$, $B\dot\theta$, $K\theta$, torque for force.</p>
+      </div>
+
+      <div class="fbox">
+        <h3>Analogies <a class="src" href="04-mechanical-systems.html">L4</a></h3>
+        <table class="ftbl">
+          <tr><th>Mechanical</th><th>Force–voltage</th><th>Force–current</th></tr>
+          <tr><td>Force $f$</td><td>Voltage $v$</td><td>Current $i$</td></tr>
+          <tr><td>Mass $M$</td><td>$L$</td><td>$C$</td></tr>
+          <tr><td>Damping $B$</td><td>$R$</td><td>$1/R$</td></tr>
+          <tr><td>Stiffness $K$</td><td>$1/C$</td><td>$1/L$</td></tr>
+          <tr><td>Displacement $x$</td><td>Charge $q$</td><td>Flux $\psi$</td></tr>
+        </table>
+      </div>
+
+      <div class="fbox">
+        <h3>Block diagrams <a class="src" href="05-block-diagrams.html">L5</a></h3>
+        <p class="feq">$$T(s) = \frac{C(s)}{R(s)} = \frac{G(s)}{1 \pm G(s)H(s)}$$</p>
+        <p>$+$ for negative feedback, $-$ for positive feedback.</p>
+        <ul>
+          <li>Series: $G_1G_2$; parallel: $G_1 \pm G_2$</li>
+          <li>Take-off point moved after $G$: put $1/G$ in the branch; moved before $G$: put $G$</li>
+          <li>Summing point moved after $G$: put $G$ in the added input; moved before $G$: put $1/G$</li>
+          <li>Two inputs: $C(s) = C_R(s) + C_D(s)$ (one input at a time, the other set to 0)</li>
+        </ul>
+      </div>
+
+      <div class="fbox">
+        <h3>Mason's gain formula <a class="src" href="06-signal-flow-graphs.html">L6</a></h3>
+        <p class="feq">$$T = \frac{C(s)}{R(s)} = \frac{1}{\Delta}\sum_k P_k\Delta_k$$</p>
+        <p class="feq">$$\Delta = 1 - \sum L_i + \sum L_iL_j - \sum L_iL_jL_k + \dots$$</p>
+        <p>$P_k$: gain of forward path $k$. $L_iL_j$: pairs of non-touching loops. $\Delta_k$: $\Delta$ with the loops touching path $k$ removed ($\Delta_k = 1$ if every loop touches it).</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== MODULE 2 ===================== -->
+  <section class="fs-sec" id="m2" data-mod="2">
+    <h2><span class="mcode">2</span> Time response analysis</h2>
+    <div class="fs-grid">
+
+      <div class="fbox">
+        <h3>Test signals, order and type <a class="src" href="07-first-order-response.html">L7</a></h3>
+        <table class="ftbl">
+          <tr><th>Input</th><th>$r(t)$</th><th>$R(s)$</th></tr>
+          <tr><td>Impulse</td><td>$A\,\delta(t)$</td><td>$A$</td></tr>
+          <tr><td>Step</td><td>$A$</td><td>$A/s$</td></tr>
+          <tr><td>Ramp</td><td>$At$</td><td>$A/s^2$</td></tr>
+          <tr><td>Parabolic</td><td>$At^2/2$</td><td>$A/s^3$</td></tr>
+        </table>
+        <p><b>Order</b>: highest power of $s$ in the closed-loop denominator. <b>Type</b> $N$: poles at $s = 0$ in the open loop $G(s)H(s) = \dfrac{K(1 + T_as)\cdots}{s^N(1 + T_1s)\cdots}$</p>
+      </div>
+
+      <div class="fbox">
+        <h3>First-order system <a class="src" href="07-first-order-response.html">L7</a></h3>
+        <p>$\dfrac{C(s)}{R(s)} = \dfrac{a}{s + a}$, unit step: $c(t) = 1 - e^{-at}$</p>
+        <ul>
+          <li>Time constant $\tau = 1/a$ (63.2 % of final value)</li>
+          <li>Rise time (10–90 %) $T_r = 2.2/a = 2.2\tau$</li>
+          <li>Settling time $T_s = 4/a = 4\tau$ (2 %), $3\tau$ (5 %)</li>
+          <li>Unit ramp: $c(t) = t - \tau + \tau e^{-t/\tau}$, error $= \tau$</li>
+        </ul>
+      </div>
+
+      <div class="fbox fwide">
+        <h3>Second-order system <a class="src" href="08-second-order-response.html">L8</a></h3>
+        <p class="feq">$$\frac{C(s)}{R(s)} = \frac{\omega_n^2}{s^2 + 2\zeta\omega_n s + \omega_n^2}, \qquad s_{1,2} = -\zeta\omega_n \pm j\omega_n\sqrt{1 - \zeta^2}, \qquad \omega_d = \omega_n\sqrt{1 - \zeta^2}$$</p>
+        <div class="fcols">
+          <table class="ftbl">
+            <tr><th>$\zeta$</th><th>Poles</th><th>Response</th></tr>
+            <tr><td>$0$</td><td>$\pm j\omega_n$</td><td>Undamped, oscillates</td></tr>
+            <tr><td>$0 &lt; \zeta &lt; 1$</td><td>complex pair</td><td>Underdamped, overshoots</td></tr>
+            <tr><td>$1$</td><td>$-\omega_n$, $-\omega_n$</td><td>Critically damped</td></tr>
+            <tr><td>$&gt; 1$</td><td>two real</td><td>Overdamped, slow</td></tr>
+          </table>
+          <table class="ftbl">
+            <tr><th colspan="2">Underdamped, unit step ($0 &lt; \zeta &lt; 1$)</th></tr>
+            <tr><td>Delay time</td><td>$t_d \approx \dfrac{1 + 0.7\zeta}{\omega_n}$</td></tr>
+            <tr><td>Rise time (0–100 %)</td><td>$t_r = \dfrac{\pi - \theta}{\omega_d}$, $\;\theta = \cos^{-1}\zeta$ (rad)</td></tr>
+            <tr><td>Peak time</td><td>$t_p = \dfrac{\pi}{\omega_d} = \dfrac{\pi}{\omega_n\sqrt{1 - \zeta^2}}$</td></tr>
+            <tr><td>Peak overshoot</td><td>$M_p = e^{-\zeta\pi/\sqrt{1 - \zeta^2}}$, $\;\%OS = 100M_p$</td></tr>
+            <tr><td>Settling time</td><td>$t_s \approx \dfrac{4}{\zeta\omega_n}$ (2 %), $\dfrac{3}{\zeta\omega_n}$ (5 %)</td></tr>
+          </table>
+        </div>
+        <p>From overshoot back to damping: $\zeta = \dfrac{-\ln M_p}{\sqrt{\pi^2 + \ln^2 M_p}}$ <a class="src" href="12-root-locus.html">L12</a>. For $\zeta = 1$: $t_r \approx 3.36/\omega_n$, $t_s \approx 5.83/\omega_n$ (2 %).</p>
+      </div>
+
+      <div class="fbox">
+        <h3>Steady-state error <a class="src" href="09-steady-state-errors.html">L9</a></h3>
+        <p>$e_{ss} = \lim_{s\to0}sE(s)$, $\;E(s) = \dfrac{R(s)}{1 + G(s)}$ (unity feedback)</p>
+        <p>$K_p = \lim_{s\to0}G(s)$, $\;K_v = \lim_{s\to0}sG(s)$, $\;K_a = \lim_{s\to0}s^2G(s)$</p>
+        <p>Non-unity feedback: $e_{ss} = \lim_{s\to0}sR(s)[1 - T(s)]$</p>
+      </div>
+
+      <div class="fbox">
+        <h3>Error by system type <a class="src" href="09-steady-state-errors.html">L9</a></h3>
+        <table class="ftbl">
+          <tr><th>Type</th><th>Step $\frac1s$</th><th>Ramp $\frac1{s^2}$</th><th>Parabola $\frac1{s^3}$</th></tr>
+          <tr><td>0</td><td>$\frac{1}{1 + K_p}$</td><td>$\infty$</td><td>$\infty$</td></tr>
+          <tr><td>1</td><td>0</td><td>$\frac{1}{K_v}$</td><td>$\infty$</td></tr>
+          <tr><td>2</td><td>0</td><td>0</td><td>$\frac{1}{K_a}$</td></tr>
+          <tr><td>3</td><td>0</td><td>0</td><td>0</td></tr>
+        </table>
+        <p>For an input of size $A$, multiply by $A$.</p>
+      </div>
+
+      <div class="fbox">
+        <h3>P, I, D and PID <a class="src" href="10-p-pi-pid-controllers.html">L10</a></h3>
+        <ul>
+          <li>Error $e = r - b$</li>
+          <li>P: $p = K_p\,e_p + p_0$, $\;PB = 100/K_p$ %</li>
+          <li>I: $p(t) = K_i\int_0^t e\,dt + p(0)$</li>
+          <li>D: $p(t) = K_pT_d\,de/dt$</li>
+        </ul>
+        <p class="feq">$$u(t) = K_c\!\left[e + \frac{1}{T_i}\!\int_0^t\! e\,d\tau + T_d\frac{de}{dt}\right] + u_0$$</p>
+        <p>$G_c(s) = K_p + \dfrac{K_i}{s} + K_ds$, $\;K_i = K_c/T_i$, $\;K_d = K_cT_d$</p>
+      </div>
+
+      <div class="fbox">
+        <h3>Effect of raising each gain <a class="src" href="10-p-pi-pid-controllers.html">L10</a></h3>
+        <table class="ftbl">
+          <tr><th></th><th>Rise</th><th>Overshoot</th><th>Settling</th><th>$e_{ss}$</th></tr>
+          <tr><td>$K_p$</td><td>↓</td><td>↑</td><td>small</td><td>↓</td></tr>
+          <tr><td>$K_i$</td><td>↓</td><td>↑</td><td>↑</td><td>removed</td></tr>
+          <tr><td>$K_d$</td><td>small</td><td>↓</td><td>↓</td><td>none</td></tr>
+        </table>
+        <p>Op-amp PI: $K_p = \dfrac{R_f}{R_{s1}}\dfrac{R_p}{R_1}$, $\;K_i = \dfrac{R_f}{R_{s2}}\dfrac{1}{R_iC_i}$</p>
+      </div>
+
+      <div class="fbox">
+        <h3>Ziegler–Nichols tuning <a class="src" href="10-p-pi-pid-controllers.html#fig-zn-step">L10</a></h3>
+        <table class="ftbl">
+          <tr><th></th><th colspan="3">1st method (dead time $L$, time constant $T$)</th></tr>
+          <tr><th></th><th>$K_p$</th><th>$T_i$</th><th>$T_d$</th></tr>
+          <tr><td>P</td><td>$T/L$</td><td>$\infty$</td><td>0</td></tr>
+          <tr><td>PI</td><td>$0.9T/L$</td><td>$L/0.3$</td><td>0</td></tr>
+          <tr><td>PID</td><td>$1.2T/L$</td><td>$2L$</td><td>$0.5L$</td></tr>
+          <tr><th></th><th colspan="3">2nd method (critical gain $K_{cr}$, period $P_{cr}$)</th></tr>
+          <tr><td>P</td><td>$0.5K_{cr}$</td><td>$\infty$</td><td>0</td></tr>
+          <tr><td>PI</td><td>$0.45K_{cr}$</td><td>$P_{cr}/1.2$</td><td>0</td></tr>
+          <tr><td>PID</td><td>$0.6K_{cr}$</td><td>$0.5P_{cr}$</td><td>$0.125P_{cr}$</td></tr>
+        </table>
+        <p>1st-method PID: $G_c = 0.6T\dfrac{(s + 1/L)^2}{s}$. Process gain $K$: divide $K_p$ by $K$. $P_{cr} = 2\pi/\omega$ from the Routh auxiliary equation.</p>
+      </div>
+
+      <div class="fbox">
+        <h3>Cohen–Coon tuning <a class="src" href="10-p-pi-pid-controllers.html">L10</a></h3>
+        <table class="ftbl">
+          <tr><th></th><th>$K_c$</th><th>$T_i$</th><th>$T_d$</th></tr>
+          <tr><td>P</td><td>$\frac{T}{KL}\left(1 + \frac{L}{3T}\right)$</td><td>–</td><td>–</td></tr>
+          <tr><td>PI</td><td>$\frac{T}{KL}\left(0.9 + \frac{L}{12T}\right)$</td><td>$L\frac{30 + 3L/T}{9 + 20L/T}$</td><td>–</td></tr>
+          <tr><td>PD</td><td>$\frac{T}{KL}\left(1.25 + \frac{L}{6T}\right)$</td><td>–</td><td>$L\frac{6 - 2L/T}{22 + 3L/T}$</td></tr>
+          <tr><td>PID</td><td>$\frac{T}{KL}\left(1.33 + \frac{L}{4T}\right)$</td><td>$L\frac{32 + 6L/T}{13 + 8L/T}$</td><td>$L\frac{4}{11 + 2L/T}$</td></tr>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== MODULE 3 ===================== -->
+  <section class="fs-sec" id="m3" data-mod="3">
+    <h2><span class="mcode">3</span> Stability analysis</h2>
+    <div class="fs-grid">
+
+      <div class="fbox">
+        <h3>Routh–Hurwitz <a class="src" href="11-routh-stability.html">L11</a></h3>
+        <p>For $a_0s^n + a_1s^{n-1} + \dots + a_n = 0$, rows 1–2 from alternate coefficients, then</p>
+        <p class="feq">$$b_1 = \frac{a_1a_2 - a_0a_3}{a_1},\qquad b_2 = \frac{a_1a_4 - a_0a_5}{a_1}$$</p>
+        <ul>
+          <li>Sign changes in column 1 = number of RHP poles</li>
+          <li>Missing or mixed-sign coefficient: not stable</li>
+          <li>Zero in column 1 only: replace with $\varepsilon \to 0^+$</li>
+          <li>Row of zeros: auxiliary $A(s)$ from the row above, use $dA/ds$; roots of $A(s)$ are system roots</li>
+          <li>Range of $K$: all column-1 entries $&gt; 0$; $A(s) = 0$ at $K_{cr}$ gives $\omega$</li>
+        </ul>
+      </div>
+
+      <div class="fbox">
+        <h3>Root locus: conditions <a class="src" href="12-root-locus.html">L12</a></h3>
+        <p>$1 + KG(s)H(s) = 0 \;\Leftrightarrow\; D(s) + KN(s) = 0$</p>
+        <ul>
+          <li>Angle: $\angle G(s)H(s) = \pm180°(2q + 1)$</li>
+          <li>Magnitude: $K = 1/|G(s)H(s)|$, or $K = -D(s)/N(s)$</li>
+          <li>$n$ poles, $m$ zeros, $q = n - m$ branches to infinity</li>
+          <li>$j\omega$ crossing: Routh, or put $s = j\omega$ and set real and imaginary parts to 0</li>
+          <li>Other parameter $\alpha$: write $1 + \alpha G_{eq}(s) = 0$</li>
+        </ul>
+      </div>
+
+      <div class="fbox">
+        <h3>Root locus: sketching rules ($K \ge 0$) <a class="src" href="12-root-locus.html">L12</a></h3>
+        <ul>
+          <li>$n$ branches, symmetric about the real axis, from poles ($K = 0$) to zeros ($K \to \infty$)</li>
+          <li>Real axis: on the locus if an odd number of real poles + zeros lie to the right</li>
+          <li>Centroid $\sigma_A = \dfrac{\sum p_i - \sum z_i}{q}$, angles $\theta = \dfrac{r\cdot180°}{q}$, $r = 1, 3, 5,\dots$</li>
+          <li>Break-away / break-in: $N(s)D'(s) - N'(s)D(s) = 0$ ($dK/ds = 0$)</li>
+          <li>Departure: $\theta_{dep} = 180° + \sum\angle(p_j - z_i) - \sum_{i\ne j}\angle(p_j - p_i)$</li>
+          <li>Arrival: $\theta_{arr} = 180° - \sum_{i\ne j}\angle(z_j - z_i) + \sum\angle(z_j - p_i)$</li>
+          <li>$K \le 0$: even count on real axis, $r = 0, 2, 4,\dots$, drop the 180°</li>
+          <li>Constant-$\zeta$ line at $\theta = \cos^{-1}\zeta$ from the negative real axis</li>
+        </ul>
+      </div>
+
+      <div class="fbox">
+        <h3>Frequency response and margins <a class="src" href="13-bode-plots.html">L13</a></h3>
+        <p>Put $s = j\omega$. $\;|G|_{\text{dB}} = 20\log_{10}|G|$. Closed loop $M(j\omega) = \dfrac{G(j\omega)}{1 + G(j\omega)H(j\omega)}$.</p>
+        <ul>
+          <li>Gain margin $K_g = \dfrac{1}{|GH(j\omega_{pc})|}$, in dB $-20\log_{10}|GH(j\omega_{pc})|$, where $\angle GH(j\omega_{pc}) = -180°$</li>
+          <li>Phase margin $\gamma = 180° + \angle GH(j\omega_{gc})$, where $|GH(j\omega_{gc})| = 1$ (0 dB)</li>
+          <li>Minimum phase: both margins positive → stable. Typical: $\gamma$ 30°–60°, GM &gt; 6 dB</li>
+          <li>Rule of thumb: $\zeta \approx \gamma/100$ (for $\gamma$ below about 70°)</li>
+          <li>Bandwidth $\omega_b$: $|M|$ falls to 0.707 (−3 dB)</li>
+        </ul>
+      </div>
+
+      <div class="fbox">
+        <h3>Second-order frequency specs <a class="src" href="13-bode-plots.html#fig-specs">L13</a></h3>
+        <p>Loop $G = \dfrac{\omega_n^2}{s(s + 2\zeta\omega_n)}$, unity feedback, $u = \omega/\omega_n$:</p>
+        <p class="feq">$$M_r = \frac{1}{2\zeta\sqrt{1 - \zeta^2}},\qquad \omega_r = \omega_n\sqrt{1 - 2\zeta^2}\quad(\zeta \le 0.707)$$</p>
+        <p class="feq">$$\omega_b = \omega_n\left[1 - 2\zeta^2 + \sqrt{2 - 4\zeta^2 + 4\zeta^4}\right]^{1/2}$$</p>
+        <p class="feq">$$\gamma = 90° - \tan^{-1}\frac{u_{gc}}{2\zeta},\qquad u_{gc} = \left[\sqrt{4\zeta^4 + 1} - 2\zeta^2\right]^{1/2}$$</p>
+        <p>For $\zeta &gt; 0.707$: no peak, $M_r = 1$.</p>
+      </div>
+
+      <div class="fbox fwide">
+        <h3>Bode plot factors <a class="src" href="13-bode-plots.html#fig-quad">L13</a></h3>
+        <table class="ftbl">
+          <tr><th>Factor</th><th>Magnitude</th><th>Phase</th></tr>
+          <tr><td>$K$</td><td>flat at $20\log_{10}K$ dB</td><td>0° (−180° if $K &lt; 0$)</td></tr>
+          <tr><td>$1/(j\omega)^n$</td><td>$-20n$ dB/dec through 0 dB at $\omega = 1$</td><td>$-90n°$</td></tr>
+          <tr><td>$(j\omega)^n$</td><td>$+20n$ dB/dec through 0 dB at $\omega = 1$</td><td>$+90n°$</td></tr>
+          <tr><td>$(1 + j\omega T)^{\pm m}$</td><td>0 dB to corner $1/T$, then $\pm20m$ dB/dec; exact curve $\pm3m$ dB at the corner</td><td>$\pm m\tan^{-1}\omega T$; $\pm45m°$ at the corner</td></tr>
+          <tr><td>$\left[1 - u^2 + j2\zeta u\right]^{\pm1}$</td><td>0 dB to $\omega_n$, then $\pm40$ dB/dec (peak near $\omega_n$ for small $\zeta$)</td><td>0° to $\pm180°$, $\pm90°$ at $\omega_n$</td></tr>
+        </table>
+        <p>Step along the asymptotes: $A_y = (\text{slope})\log_{10}\dfrac{\omega_y}{\omega_x} + A_x$. Changing $K$ shifts the magnitude by $20\log_{10}K$ and leaves the phase alone. Decade = ×10, octave = ×2.</p>
+      </div>
+
+      <div class="fbox">
+        <h3>Nyquist criterion <a class="src" href="14-nyquist.html">L14</a></h3>
+        <p class="feq">$$Z = N + P$$</p>
+        <ul>
+          <li>$P$: open-loop RHP poles; $N$: clockwise encirclements of $-1 + j0$; $Z$: closed-loop RHP poles</li>
+          <li>Stable if and only if $Z = 0$; for $P = 0$, no encirclement of $-1$</li>
+          <li>Crossing the negative real axis at $-a$: GM $= 1/a$</li>
+          <li>PM: angle from the negative real axis to the unit-circle crossing</li>
+        </ul>
+      </div>
+
+      <div class="fbox">
+        <h3>Lead and lag compensation <a class="src" href="15-compensation.html">L15</a></h3>
+        <p>$G_c(s) = K_c\dfrac{s + z}{s + p}$: lead if $z &lt; p$ (like PD), lag if $z &gt; p$ (like PI)</p>
+        <p>Lead, $\alpha = z/p &lt; 1$: $\;\phi_m = \sin^{-1}\dfrac{1 - \alpha}{1 + \alpha}$ at $\omega_m = \sqrt{zp}$</p>
+        <p>Required lead $\phi_m$ = desired PM − existing PM + 5° to 12°. Place $\omega_m$ where the uncompensated gain is $-10\log(1/\alpha)$ dB.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== MODULE 4 ===================== -->
+  <section class="fs-sec" id="m4" data-mod="4">
+    <h2><span class="mcode">4</span> State space analysis</h2>
+    <div class="fs-grid">
+
+      <div class="fbox">
+        <h3>State model <a class="src" href="16-state-space-models.html">L16</a></h3>
+        <p class="feq">$$\dot{\mathbf x} = A\mathbf x + B\mathbf u, \qquad \mathbf y = C\mathbf x + D\mathbf u$$</p>
+        <p>Phase variables for $\overset{...}{y} + a_2\ddot y + a_1\dot y + a_0y = u$:</p>
+        <p class="feq">$$A = \begin{bmatrix}0&amp;1&amp;0\\0&amp;0&amp;1\\-a_0&amp;-a_1&amp;-a_2\end{bmatrix},\ B = \begin{bmatrix}0\\0\\1\end{bmatrix},\ C = \begin{bmatrix}1&amp;0&amp;0\end{bmatrix}$$</p>
+        <p>$G(s) = C(sI - A)^{-1}B + D$; poles = eigenvalues of $A$, roots of $|sI - A| = 0$. Circuits: capacitor voltages and inductor currents as states.</p>
+      </div>
+
+      <div class="fbox">
+        <h3>Solution of the state equation <a class="src" href="17-state-equation-solution.html">L17</a></h3>
+        <p class="feq">$$\phi(t) = e^{At} = \mathcal L^{-1}\left[(sI - A)^{-1}\right]$$</p>
+        <p class="feq">$$\mathbf x(t) = \phi(t)\mathbf x(0) + \int_0^t \phi(t - \tau)B\mathbf u(\tau)\,d\tau$$</p>
+        <p>Zero-input + zero-state response. $\phi(0) = I$, $\;\phi^{-1}(t) = \phi(-t)$, $\;\phi(t_1 + t_2) = \phi(t_1)\phi(t_2)$.</p>
+      </div>
+
+      <div class="fbox">
+        <h3>Controllability and observability <a class="src" href="18-controllability-observability.html">L18</a></h3>
+        <p>$Q_c = \begin{bmatrix}B &amp; AB &amp; \cdots &amp; A^{n-1}B\end{bmatrix}$, controllable if $\text{rank}(Q_c) = n$</p>
+        <p>$Q_o = \begin{bmatrix}C \\ CA \\ \vdots \\ CA^{n-1}\end{bmatrix}$, observable if $\text{rank}(Q_o) = n$</p>
+        <p>Single input or output: $\det \ne 0$. A pole–zero cancellation hides an uncontrollable or unobservable mode.</p>
+      </div>
+
+      <div class="fbox fnote">
+        <h3>Watch out in the exam</h3>
+        <ul>
+          <li>Check stability before using the final value theorem.</li>
+          <li>$t_r$, $t_p$ and $M_p$ formulas need $0 &lt; \zeta &lt; 1$.</li>
+          <li>$K_p$ means the proportional gain in Lesson 10 but the position error constant in Lesson 9.</li>
+          <li>Bode sketches use asymptotes; say if you corrected by 3 dB at a corner.</li>
+          <li>Use $\theta = \cos^{-1}\zeta$ in radians inside $t_r$.</li>
+          <li>Nonlinear systems (L19): superposition fails; linear methods hold only near an operating point.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+<script>
+document.querySelectorAll(".fs-filter button").forEach(function(b){
+  b.addEventListener("click",function(){
+    var show=b.dataset.show;
+    document.querySelectorAll(".fs-filter button").forEach(function(x){x.classList.toggle("on",x===b)});
+    document.querySelectorAll(".fs-sec").forEach(function(s){
+      var m=+s.dataset.mod;
+      s.hidden = show==="mid" ? m>2 : show==="end" ? m<3 : false;
+    });
+  });
+});
+</script>
+</body>
+</html>

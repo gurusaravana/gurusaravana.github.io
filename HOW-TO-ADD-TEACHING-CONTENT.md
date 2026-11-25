@@ -364,3 +364,15 @@ All of it is drawn by `assets/js/course-map.js` from the data block inside `<div
 Keep the quotes and commas exactly as they are. If the data has a typing error, the page shows a short message in place of the map.
 
 To add a map to another course page, copy the whole `<section id="map">` block, change the data, and add `<script src="../assets/js/course-map.js"></script>` before `</body>`.
+
+## 20. Exam formula sheet (Control System Engineering)
+
+The page `courses/control-system-engineering/formula-sheet.html` collects the key formulas of all 19 lessons, in the lessons' own notation. It is linked from the course home page (the **Formula sheet** card and the **Formulas** menu link).
+
+- Each module is one `<section class="fs-sec" data-mod="1">` block (data-mod 1 to 4).
+- Each box is one `<div class="fbox">`. Its heading `<h3>` ends with a small link to the lesson it comes from, such as `<a class="src" href="08-second-order-response.html">L8</a>`.
+- To add a formula, copy a whole `<div class="fbox"> ... </div>` and change the text. Write equations in LaTeX between `$ ... $` (in a line) or `$$ ... $$` (on its own line), exactly as in the lessons. Add `fwide` to the class (`class="fbox fwide"`) for a box that should span the full width.
+- The buttons at the top show all modules, only the midterm modules (1 and 2), or only modules 3 and 4.
+- **Print / save as PDF** prints whatever is shown, in two compact columns on A4, with the menu and colours removed. Choose "Save as PDF" in the print window to get a file to share with students.
+
+If you change a formula in a lesson, change it here too.
