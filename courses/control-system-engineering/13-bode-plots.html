@@ -37,25 +37,109 @@
   <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">Module 1 · System components and their representation</div><ol><li><a href="01-introduction.html"><span class="n">1</span>Introduction to control systems</a></li><li><a href="02-laplace-and-partial-fractions.html"><span class="n">2</span>Laplace transform and partial fractions</a></li><li><a href="03-electrical-systems.html"><span class="n">3</span>Models of electrical systems</a></li><li><a href="04-mechanical-systems.html"><span class="n">4</span>Models of mechanical systems</a></li><li><a href="05-block-diagrams.html"><span class="n">5</span>Block diagram reduction</a></li><li><a href="06-signal-flow-graphs.html"><span class="n">6</span>Signal flow graphs and Mason's gain formula</a></li></ol></div><div class="mod"><div class="modname">Module 2 · Time response analysis</div><ol><li><a href="07-first-order-response.html"><span class="n">7</span>Standard test signals and first-order response</a></li><li><a href="08-second-order-response.html"><span class="n">8</span>Second-order response and time-domain specifications</a></li><li><a href="09-steady-state-errors.html"><span class="n">9</span>Steady-state errors and error constants</a></li><li><a href="10-p-pi-pid-controllers.html"><span class="n">10</span>P, PI and PID controllers</a></li></ol></div><div class="mod"><div class="modname">Module 3 · Stability analysis</div><ol><li><a href="11-routh-stability.html"><span class="n">11</span>Stability and the Routh criterion</a></li><li><a href="12-root-locus.html"><span class="n">12</span>Root locus</a></li><li class="on"><a href="13-bode-plots.html"><span class="n">13</span>Frequency response and Bode plots</a></li><li><a href="14-nyquist.html"><span class="n">14</span>Nyquist stability criterion</a></li><li><a href="15-compensation.html"><span class="n">15</span>Lead, lag and lead-lag compensation</a></li></ol></div><div class="mod"><div class="modname">Module 4 · State space analysis</div><ol><li><a href="16-state-space-models.html"><span class="n">16</span>State variables and state models</a></li><li><a href="17-state-equation-solution.html"><span class="n">17</span>State diagrams and solution of the state equation</a></li><li><a href="18-controllability-observability.html"><span class="n">18</span>Controllability and observability</a></li><li><a href="19-nonlinear-systems.html"><span class="n">19</span>Introduction to nonlinear systems</a></li></ol></div></details></aside>
   <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
   <div class="lmain">
-    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Define frequency-domain specifications</li><li>Sketch asymptotic Bode magnitude and phase plots</li><li>Find gain and phase margins from a Bode plot</li></ul></div>
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Explain why a sine input gives a sine output, and find the gain and phase by putting $s = j\omega$</li><li>Convert gains to decibels and back</li><li>Define and calculate the frequency-domain specifications ($M_r$, $\omega_r$, $\omega_b$, gain and phase margins)</li><li>Sketch asymptotic Bode magnitude and phase plots factor by factor</li><li>Use gain shifting to find $K$ for a required gain crossover frequency</li><li>Read gain and phase margins from a Bode plot</li></ul></div>
+    <nav class="figstrip" aria-label="Figures in this lesson"><a href="#fig-sine"><img src="../../assets/img/diagrams/bode-sine-io.svg" alt="" loading="lazy"><span>Sine in, sine out</span></a><a href="#fig-phasor"><img src="../../assets/img/diagrams/bode-phasor.svg" alt="" loading="lazy"><span>G(jω) as a vector</span></a><a href="#fig-specs"><img src="../../assets/img/diagrams/bode-specs-zeta.svg" alt="" loading="lazy"><span>Specs vs ζ</span></a><a href="#fig-first"><img src="../../assets/img/diagrams/bode-first-order.svg" alt="" loading="lazy"><span>First-order factors</span></a><a href="#fig-quad"><img src="../../assets/img/diagrams/bode-quadratic.svg" alt="" loading="lazy"><span>Quadratic factor</span></a><a href="#fig-intro"><img src="../../assets/img/diagrams/bode-intro.svg" alt="" loading="lazy"><span>Bode of (2s+1)/s</span></a><a href="#fig-ks2"><img src="../../assets/img/diagrams/bode-ks2.svg" alt="" loading="lazy"><span>Gain shifting</span></a><a href="#fig-margins"><img src="../../assets/img/diagrams/lcs-bode-ex.svg" alt="" loading="lazy"><span>Gain and phase margins</span></a></nav>
     
     <section class="lsec"><h2>Notes</h2>
     <article class="notes">
-<p>Put $s = j\omega$: a sine input gives a sine output scaled by $|G(j\omega)|$ and shifted by $\angle G(j\omega)$.</p>
-<h3>Frequency-domain specifications</h3>
-<ul><li><b>Resonant peak</b> $M_r = \dfrac{1}{2\zeta\sqrt{1-\zeta^2}}$ at $\omega_r = \omega_n\sqrt{1 - 2\zeta^2}$ (for $\zeta &lt; 0.707$).</li>
-<li><b>Bandwidth</b>: the frequency where the closed-loop gain falls to −3 dB.</li></ul>
-<h3>Asymptotic Bode plot</h3>
-<table class="tbl"><tr><th>Factor</th><th>Magnitude slope</th><th>Phase</th></tr>
-<tr><td>Gain $K$</td><td>Flat at $20\log K$</td><td>0°</td></tr>
-<tr><td>Pole at origin $1/s$</td><td>−20 dB/decade</td><td>−90°</td></tr>
-<tr><td>Simple pole $1/(1 + sT)$</td><td>0, then −20 dB/dec after $1/T$</td><td>0 to −90°</td></tr>
-<tr><td>Simple zero $(1 + sT)$</td><td>0, then +20 dB/dec after $1/T$</td><td>0 to +90°</td></tr>
-<tr><td>Quadratic pole</td><td>−40 dB/dec after $\omega_n$</td><td>0 to −180°</td></tr></table>
-<h3>Stability from the Bode plot</h3>
-<ul><li><b>Gain crossover</b> $\omega_{gc}$: where $|GH| = 0$ dB. <b>Phase margin</b> $= 180° + \angle GH(j\omega_{gc})$.</li>
-<li><b>Phase crossover</b> $\omega_{pc}$: where $\angle GH = -180°$. <b>Gain margin</b> $= -20\log|GH(j\omega_{pc})|$ dB.</li>
-<li>For a minimum-phase system, both margins positive means stable. Typical targets: PM 30°–60°, GM above 6 dB.</li></ul>
+<h3 id="why">Why look at frequency?</h3>
+<p>Feed a sine wave into a stable linear, time-invariant (LTI) system and wait for the transient to die out. The output is a sine wave of the <b>same frequency</b>. Only two things change: its <b>height</b> (amplitude) and its <b>timing</b> (phase). An LTI system can only scale, delay, add, differentiate and integrate signals, and each of these turns a sine of frequency $\omega$ into another sine of frequency $\omega$.</p>
+<p>So at each frequency the whole system is described by two numbers: the gain $|G(j\omega)|$ and the phase $\angle G(j\omega)$. Put $s = j\omega$ in the transfer function and you have them both.</p>
+<figure class="diagram" id="fig-sine"><img src="../../assets/img/diagrams/bode-sine-io.svg" alt="Input sine and a larger, delayed output sine of the same frequency" loading="lazy"><figcaption>Input $\sin 0.5t$ and the steady-state output of the example below: same frequency, 2.83 times as tall, 45° later.</figcaption></figure>
+<h3 id="intro-ex">A first example: time domain versus frequency domain</h3>
+<p>A system adds twice its input to the integral of its input: $y(t) = 2u(t) + \int u\,dt$. Let $u(t) = \sin 0.5t$.</p>
+<p><b>The time-domain way.</b> $\int \sin 0.5t\,dt = -2\cos 0.5t$ (plus a constant that the steady state ignores), so</p>
+<p class="eq">$$y(t) = 2\sin 0.5t - 2\cos 0.5t = 2\sqrt2\,\sin(0.5t - 45°) = 2.83\sin(0.5t - 45°)$$</p>
+<p>Combining the sine and cosine needs a trigonometric identity. With more terms this gets slow.</p>
+<p><b>The frequency-domain way.</b> The transfer function is $G(s) = 2 + \dfrac1s = \dfrac{2s + 1}{s}$. Put $s = j0.5$:</p>
+<p class="eq">$$G(j0.5) = 2 + \frac{1}{j0.5} = 2 - j2, \qquad |G| = \sqrt{2^2 + 2^2} = 2.83 \;(9.03\text{ dB}), \qquad \angle G = \tan^{-1}\frac{-2}{2} = -45°$$</p>
+<p>Same answer, with complex numbers only. Draw $G(j\omega)$ as a vector: the length is the gain, the angle is the phase. As $\omega$ changes, the tip moves: for very high frequency $G \to 2$ (6 dB, 0°); for very low frequency the integrator dominates and $G \to -j\infty$ (gain grows without limit, phase −90°).</p>
+<figure class="diagram" id="fig-phasor"><img src="../../assets/img/diagrams/bode-phasor.svg" alt="The vector G(j omega) = 2 minus j over omega in the complex plane" loading="lazy"><figcaption>$G(j\omega) = 2 - j/\omega$ as a vector. At $\omega = 0.5$ it ends at $2 - j2$.</figcaption></figure>
+<h3 id="db">Decibels</h3>
+<p>The <b>bel</b> (after Alexander Graham Bell) is the logarithm of a <b>power</b> ratio: $\log_{10}(P_2/P_1)$. A decibel is a tenth of a bel, so a power ratio is $10\log_{10}(P_2/P_1)$ dB. Power goes with amplitude squared, so for an <b>amplitude</b> (gain) ratio</p>
+<p class="eq">$$|G|_{\text{dB}} = 20\log_{10}|G|$$</p>
+<div class="tblwrap"><table class="tbl"><tr><th>Gain $|G|$</th><td>0.1</td><td>0.707</td><td>1</td><td>1.414</td><td>2</td><td>10</td><td>100</td></tr>
+<tr><th>dB</th><td>−20</td><td>−3</td><td>0</td><td>+3</td><td>+6</td><td>+20</td><td>+40</td></tr></table></div>
+<p>Logarithms turn a product of factors into a <b>sum</b>, which is why Bode plots are drawn in dB: each factor of $G$ is drawn on its own and the curves are added.</p>
+
+<h3 id="typology">Which transfer function are we looking at?</h3>
+<table class="tbl"><tr><th>Frequency response of</th><th>Written</th><th>Used for</th></tr>
+<tr><td>Forward path (open loop)</td><td>$G(j\omega)$</td><td>Describing the plant on its own</td></tr>
+<tr><td>Loop transfer function</td><td>$G(j\omega)H(j\omega)$</td><td>Bode, polar and Nyquist plots; gain and phase margins (closed-loop stability)</td></tr>
+<tr><td>Closed loop</td><td>$M(j\omega) = \dfrac{G(j\omega)}{1 + G(j\omega)H(j\omega)}$</td><td>Resonant peak, resonant frequency and bandwidth</td></tr></table>
+<p>The pipeline is always the same: replace $s$ by $j\omega$, compute the magnitude and phase for a range of $\omega$, and read the specifications from the plot.</p>
+
+<h3 id="specs">Frequency-domain specifications</h3>
+<ol><li><b>Resonant peak $M_r$</b>: the largest value of $|M(j\omega)|$. A large $M_r$ means a large overshoot in the step response.</li>
+<li><b>Resonant frequency $\omega_r$</b>: the frequency at which $M_r$ occurs.</li>
+<li><b>Bandwidth $\omega_b$</b>: the frequency where $|M(j\omega)|$ has fallen to $0.707$ of its low-frequency value (−3 dB). A wide bandwidth means a fast response (short rise time), but also lets more high-frequency noise through.</li>
+<li><b>Cut-off rate</b>: the slope of the magnitude curve just above $\omega_b$. A steep cut-off separates the signal from the noise better.</li>
+<li><b>Gain margin $K_g$</b>: how much the loop gain can be raised before the system becomes unstable. $K_g = \dfrac{1}{|G(j\omega_{pc})H(j\omega_{pc})|}$, where the phase crossover frequency $\omega_{pc}$ is where $\angle GH = -180°$. In dB: $-20\log_{10}|GH(j\omega_{pc})|$.</li>
+<li><b>Phase margin $\gamma$</b>: how much extra phase lag the loop can take before it becomes unstable. $\gamma = 180° + \angle G(j\omega_{gc})H(j\omega_{gc})$, where the gain crossover frequency $\omega_{gc}$ is where $|GH| = 1$ (0 dB).</li></ol>
+
+<h3 id="second-order">Second-order formulas</h3>
+<p>For the standard loop $G(s) = \dfrac{\omega_n^2}{s(s + 2\zeta\omega_n)}$ with unity feedback, $M(s) = \dfrac{\omega_n^2}{s^2 + 2\zeta\omega_n s + \omega_n^2}$. Writing $u = \omega/\omega_n$:</p>
+<p class="eq">$$M_r = \frac{1}{2\zeta\sqrt{1 - \zeta^2}}, \qquad \omega_r = \omega_n\sqrt{1 - 2\zeta^2} \qquad (\zeta \le 0.707)$$</p>
+<p class="eq">$$\omega_b = \omega_n\left[1 - 2\zeta^2 + \sqrt{2 - 4\zeta^2 + 4\zeta^4}\right]^{1/2}$$</p>
+<p class="eq">$$\gamma = 90° - \tan^{-1}\frac{u_{gc}}{2\zeta}, \qquad u_{gc} = \frac{\omega_{gc}}{\omega_n} = \left[\sqrt{4\zeta^4 + 1} - 2\zeta^2\right]^{1/2}$$</p>
+<p>All of them depend on $\zeta$ alone (after scaling by $\omega_n$). For $\zeta &gt; 0.707$ there is no resonant peak at all: $M_r = 1$.</p>
+<figure class="diagram" id="fig-specs"><img src="../../assets/img/diagrams/bode-specs-zeta.svg" alt="Resonant peak, bandwidth and resonant frequency plotted against damping ratio" loading="lazy"><figcaption>How $M_r$, $\omega_r/\omega_n$ and $\omega_b/\omega_n$ change with $\zeta$.</figcaption></figure>
+<p><b>Worked example: from time-domain to frequency-domain specifications.</b> A unity-feedback second-order loop has a step response with 16.3% overshoot and a damped frequency $\omega_d = 125.7$ rad/s.</p>
+<ul><li>$M_p = 16.3\%$ gives $\zeta = 0.5$.</li>
+<li>$\omega_n = \omega_d/\sqrt{1 - \zeta^2} = 125.7/0.866 = 145.1$ rad/s.</li>
+<li>$M_r = 1/(2 \times 0.5 \times 0.866) = 1.155$, that is $1.25$ dB.</li>
+<li>$\omega_r = 145.1\sqrt{1 - 0.5} = 102.6$ rad/s.</li>
+<li>$\omega_b = 145.1\left[0.5 + \sqrt{1.25}\right]^{1/2} = 145.1 \times 1.272 = 184.6$ rad/s.</li>
+<li>$u_{gc} = [\sqrt{1.25} - 0.5]^{1/2} = 0.786$, so $\omega_{gc} = 114.1$ rad/s and $\gamma = 90° - \tan^{-1}0.786 = 51.8°$.</li></ul>
+<p class="warn">The lecture slide for this example gives $M_r = 1.83$ dB, $\omega_r = 120.5$ and $\omega_b = 188.2$ rad/s. Those do not follow from $\zeta = 0.5$ and $\omega_n = 145.1$; the values above do (check them by substituting into the formulas). The slide's bandwidth chart also shows $\omega_b/\omega_n = 2$ at $\zeta = 0$; the formula gives $1.55$, as in the figure above.</p>
+<p class="key">Rules of thumb: a larger phase margin means more damping and less overshoot (roughly $\zeta \approx \gamma/100$ for $\gamma$ below about 70°); a larger bandwidth means a faster response.</p>
+
+<h3 id="bode">The Bode plot</h3>
+<p>A Bode plot is two graphs against $\log_{10}\omega$: the magnitude $20\log_{10}|G(j\omega)|$ in dB and the phase $\angle G(j\omega)$ in degrees. A <b>decade</b> is a factor of 10 in frequency; an <b>octave</b> is a factor of 2. Write $G$ in <b>time-constant form</b>, $G(s) = \dfrac{K(1 + sT_1)\cdots}{s^n(1 + sT_a)\cdots}$, and every factor falls into one of five types:</p>
+<table class="tbl"><tr><th>Factor</th><th>Magnitude</th><th>Phase</th></tr>
+<tr><td>Constant $K$</td><td>Flat at $20\log_{10}K$ dB</td><td>0° (or −180° if $K &lt; 0$)</td></tr>
+<tr><td>Integral $1/(j\omega)^n$</td><td>Straight line of slope $-20n$ dB/decade through 0 dB at $\omega = 1$</td><td>$-90n°$ at every $\omega$</td></tr>
+<tr><td>Derivative $(j\omega)^n$</td><td>Slope $+20n$ dB/decade through 0 dB at $\omega = 1$</td><td>$+90n°$</td></tr>
+<tr><td>First order $(1 + j\omega T)^{\pm m}$</td><td>0 dB up to the corner $\omega_c = 1/T$, then $\pm20m$ dB/decade. The exact curve is $\pm3m$ dB away from the asymptote at the corner.</td><td>$\pm m\tan^{-1}\omega T$: 0° to $\pm90m°$, $\pm45m°$ at the corner</td></tr>
+<tr><td>Quadratic $\left[1 - u^2 + j2\zeta u\right]^{\pm1}$, $u = \omega/\omega_n$</td><td>0 dB up to $\omega_n$, then $\pm40$ dB/decade. Near $\omega_n$ the exact curve depends on $\zeta$ (a peak for small $\zeta$).</td><td>0° to $\pm180°$, passing $\pm90°$ at $\omega_n$ whatever $\zeta$ is</td></tr></table>
+<figure class="diagram" id="fig-first"><img src="../../assets/img/diagrams/bode-first-order.svg" alt="Bode plots of a first-order zero and a first-order pole" loading="lazy"><figcaption>First-order factors: asymptotes (dashed) and exact curves.</figcaption></figure><figure class="diagram" id="fig-quad"><img src="../../assets/img/diagrams/bode-quadratic.svg" alt="Bode plots of a quadratic factor for four damping ratios" loading="lazy"><figcaption>The quadratic factor $1/(1 - u^2 + j2\zeta u)$ for $\zeta = 0.1, 0.3, 0.5, 1$.</figcaption></figure>
+<p>Because the dB values and the phases of the factors <b>add</b>, the Bode plot of the whole $G$ is the sum of the factor plots. Here is the first example, $G(s) = \dfrac{2s + 1}{s} = \dfrac{1 + 2s}{s}$: an integrator (−20 dB/decade, −90°) plus a first-order zero with corner $1/T = 0.5$ rad/s (+20 dB/decade, +90°). Below 0.5 rad/s only the integrator slope acts; above it the two slopes cancel and the magnitude levels off at $20\log_{10}2 = 6$ dB.</p>
+<figure class="diagram" id="fig-intro"><img src="../../assets/img/diagrams/bode-intro.svg" alt="Bode plot of (2s + 1)/s" loading="lazy"><figcaption>Bode plot of $G(s) = (2s + 1)/s$, with the hand-computed point at $\omega = 0.5$.</figcaption></figure>
+
+<h3 id="procedure">How to draw a Bode plot by hand</h3>
+<p>The work goes in four stages: (1) put $G(j\omega)$ in time-constant form and list its factors; (2) draw the asymptotic magnitude plot; (3) compute and draw the phase plot; (4) read the crossover frequencies and the margins.</p>
+<p>For the magnitude plot (stage 2), seven steps:</p>
+<ol><li>Write $G(j\omega)$ in time-constant form.</li>
+<li>List the corner frequencies $1/T$ in increasing order.</li>
+<li>Choose a lowest frequency $\omega_l$ below the first corner and a highest frequency $\omega_h$ above the last one.</li>
+<li>Below the first corner only $K$ and the poles or zeros at the origin act. Use them to find the magnitude $A_l$ at $\omega_l$ and the starting slope.</li>
+<li>At each corner the slope changes: by $-20$ dB/decade for a simple pole, $+20$ for a simple zero, $\mp40$ for a quadratic.</li>
+<li>Step from one frequency to the next with $A_y = \text{(slope)} \times \log_{10}\dfrac{\omega_y}{\omega_x} + A_x$, up to $\omega_h$.</li>
+<li>Join the points with straight lines. If needed, correct by 3 dB at each simple corner.</li></ol>
+<p>For the phase plot, add the phase of every factor at a handful of frequencies (a table), plot the points and join them with a smooth curve.</p>
+
+<h3 id="ks2">Worked example: finding K for a given gain crossover</h3>
+<p>Sketch the Bode plot of $G(s) = \dfrac{Ks^2}{(1 + 0.2s)(1 + 0.02s)}$ and find $K$ so that the gain crossover frequency is 5 rad/s.</p>
+<p><b>Factors.</b> $K$; a double derivative $s^2$ (+40 dB/decade, +180°); simple poles with corners $\omega_{c1} = 1/0.2 = 5$ rad/s and $\omega_{c2} = 1/0.02 = 50$ rad/s. Take $K = 1$ first and choose $\omega_l = 0.5$, $\omega_h = 100$ rad/s.</p>
+<div class="tblwrap"><table class="tbl"><tr><th>Band</th><th>Slope (dB/decade)</th><th>Magnitude, $K = 1$</th></tr>
+<tr><td>$\omega_l = 0.5$</td><td>+40</td><td>$A = 20\log_{10}(0.5^2) = -12$ dB</td></tr>
+<tr><td>0.5 to 5</td><td>+40</td><td>$A(5) = 40\log_{10}\frac{5}{0.5} + (-12) = 28$ dB</td></tr>
+<tr><td>5 to 50</td><td>+40 − 20 = +20</td><td>$A(50) = 20\log_{10}\frac{50}{5} + 28 = 48$ dB</td></tr>
+<tr><td>50 to 100</td><td>+20 − 20 = 0</td><td>$A(100) = 48$ dB</td></tr></table></div>
+<p><b>Phase.</b> $\phi = 180° - \tan^{-1}0.2\omega - \tan^{-1}0.02\omega$:</p>
+<div class="tblwrap"><table class="tbl"><tr><th>Point</th><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td><td>j</td></tr>
+<tr><th>$\omega$ (rad/s)</th><td>0.5</td><td>1</td><td>5</td><td>10</td><td>50</td><td>100</td></tr>
+<tr><th>$\phi$</th><td>173.7°</td><td>167.6°</td><td>129.3°</td><td>105.3°</td><td>50.7°</td><td>29.5°</td></tr></table></div>
+<p><b>Gain shifting.</b> Changing $K$ moves the whole magnitude curve up or down by $20\log_{10}K$ and leaves the phase alone. With $K = 1$ the asymptote is 28 dB at $\omega = 5$; to make that point 0 dB we need $20\log_{10}K = -28$, so</p>
+<p class="eq">$$K = 10^{-28/20} = 0.04$$</p>
+<figure class="diagram" id="fig-ks2"><img src="../../assets/img/diagrams/bode-ks2.svg" alt="Bode plot of K s squared over (1 + 0.2s)(1 + 0.02s), with the gain shifted down by 28 dB" loading="lazy"><figcaption>The magnitude asymptote for $K = 1$ (blue) shifted down 28 dB (pink), and the phase points e to j.</figcaption></figure>
+<p>The asymptotes give $K = 0.04$. The exact curve is 3 dB below the asymptote at the corner 5 rad/s, so the exact answer is $K = 1/|G(j5)| = 0.057$. Hand sketches use the asymptotes; say which one you used.</p>
+
+<h3 id="margins">Gain and phase margins from the Bode plot</h3>
+<ol><li>On the magnitude plot, find where the curve crosses 0 dB: that is $\omega_{gc}$. Go down to the phase plot at $\omega_{gc}$: the <b>phase margin</b> is the distance of the phase above −180°.</li>
+<li>On the phase plot, find where the curve crosses −180°: that is $\omega_{pc}$. Go up to the magnitude plot at $\omega_{pc}$: the <b>gain margin</b> is the distance of the magnitude below 0 dB.</li>
+<li>For a minimum-phase system, both margins positive means the closed loop is stable. Typical targets: phase margin 30° to 60°, gain margin above 6 dB.</li></ol>
+<figure class="diagram" id="fig-margins"><img src="../../assets/img/diagrams/lcs-bode-ex.svg" alt="Bode plot of 10 over s(1 + 0.4s)(1 + 0.1s) with gain and phase margins marked" loading="lazy"><figcaption>Reading the margins: for $G = \dfrac{10}{s(1 + 0.4s)(1 + 0.1s)}$, $\omega_{gc} = 4.46$ and $\omega_{pc} = 5$ rad/s, phase margin 5.2° and gain margin 1.94 dB: stable, but only just.</figcaption></figure>
 </article></section>
     <section class="lsec"><h2>Lecture</h2>
     <!-- LECTURE VIDEO: replace the <div class="video-slot">...</div> below with
@@ -65,7 +149,7 @@
     <div class="sim" id="sim-frequency" data-sim="frequency"></div></section>
     <p class="julia-link"><a href="julia-simulations.html#bode">▶ Julia version: see the code and an interactive plot</a></p>
     <section class="lsec" id="exercises"><h2>Exercises</h2>
-    <ol class="exlist"><li><div class="q">Sketch the magnitude asymptotes of $G = 10/(s(1 + 0.1s))$.</div><details><summary>Show solution</summary><div class="sol">At $\omega = 1$: 20 dB, slope −20 dB/dec; corner at 10 rad/s, then −40 dB/dec. It crosses 0 dB near $\omega = 10$ rad/s.</div></details></li><li><div class="q">Find $M_r$ and $\omega_r$ for $\zeta = 0.4$, $\omega_n = 5$.</div><details><summary>Show solution</summary><div class="sol">$M_r = 1/(2\cdot0.4\cdot0.917) = 1.36$. $\omega_r = 5\sqrt{1 - 0.32} = 4.12$ rad/s.</div></details></li><li><div class="q">Why does a larger phase margin usually mean less overshoot?</div><details><summary>Show solution</summary><div class="sol">Phase margin is closely related to closed-loop damping: roughly $\zeta \approx PM/100$ for PM below about 70°.</div></details></li></ol></section>
+    <ol class="exlist"><li><div class="q">Sketch the magnitude asymptotes of $G = 10/(s(1 + 0.1s))$.</div><details><summary>Show solution</summary><div class="sol">At $\omega = 1$: 20 dB, slope −20 dB/dec; corner at 10 rad/s, then −40 dB/dec. It crosses 0 dB near $\omega = 10$ rad/s.</div></details></li><li><div class="q">Find $M_r$ and $\omega_r$ for $\zeta = 0.4$, $\omega_n = 5$.</div><details><summary>Show solution</summary><div class="sol">$M_r = 1/(2\cdot0.4\cdot0.917) = 1.36$. $\omega_r = 5\sqrt{1 - 0.32} = 4.12$ rad/s.</div></details></li><li><div class="q">Why does a larger phase margin usually mean less overshoot?</div><details><summary>Show solution</summary><div class="sol">Phase margin is closely related to closed-loop damping: roughly $\zeta \approx PM/100$ for PM below about 70°.</div></details></li><li><div class="q">For $G(s) = (2s + 1)/s$, find the gain (in dB) and the phase at $\omega = 2$ rad/s.</div><details><summary>Show solution</summary><div class="sol">$G(j2) = 2 + \dfrac{1}{j2} = 2 - j0.5$. $|G| = \sqrt{4.25} = 2.06$, that is $6.28$ dB. $\angle G = \tan^{-1}(-0.5/2) = -14.0°$.</div></details></li><li><div class="q">Convert: (a) a gain of 0.1 to dB; (b) 40 dB to a gain; (c) a gain of 2 to dB.</div><details><summary>Show solution</summary><div class="sol">(a) $20\log_{10}0.1 = -20$ dB. (b) $10^{40/20} = 100$. (c) $20\log_{10}2 = 6.02$ dB.</div></details></li><li><div class="q">For $1/(1 + 0.1s)$, give the asymptotic and exact magnitude at the corner and at $\omega = 100$ rad/s.</div><details><summary>Show solution</summary><div class="sol">The corner is $1/0.1 = 10$ rad/s: asymptote 0 dB, exact $-10\log_{10}2 = -3.01$ dB. At 100 rad/s (one decade above): asymptote $-20$ dB, exact $-10\log_{10}101 = -20.04$ dB.</div></details></li><li><div class="q">A second-order loop has $\zeta = 0.3$ and $\omega_n = 10$ rad/s. Find $M_r$, $\omega_r$ and $\omega_b$.</div><details><summary>Show solution</summary><div class="sol">$M_r = 1/(2 \times 0.3 \times 0.954) = 1.75$ (4.85 dB). $\omega_r = 10\sqrt{1 - 0.18} = 9.06$ rad/s. $\omega_b = 10[0.82 + \sqrt{2 - 0.36 + 0.0324}]^{1/2} = 10 \times 1.454 = 14.5$ rad/s.</div></details></li><li><div class="q">Give the slope of each band of the magnitude asymptote for $G(s) = \dfrac{100(1 + s)}{s^2(1 + 0.1s)}$ and its value at $\omega = 1$.</div><details><summary>Show solution</summary><div class="sol">Below 1 rad/s: $-40$ dB/decade (double integrator). From 1 to 10 rad/s: $-40 + 20 = -20$. Above 10 rad/s: $-40$. At $\omega = 1$: $20\log_{10}100 - 40\log_{10}1 = 40$ dB.</div></details></li><li><div class="q">With $K = 1$ the magnitude asymptote of a loop is 14 dB at the frequency you want as gain crossover. What $K$ do you need?</div><details><summary>Show solution</summary><div class="sol">Shift the curve down by 14 dB: $K = 10^{-14/20} = 0.20$.</div></details></li><li><div class="q">At the phase crossover frequency $|GH| = 0.25$. What is the gain margin?</div><details><summary>Show solution</summary><div class="sol">$K_g = 1/0.25 = 4$, that is $20\log_{10}4 = 12.0$ dB. The loop gain could be multiplied by 4 before the system becomes unstable.</div></details></li></ol></section>
     <nav class="prevnext"><a class="pn prev" href="12-root-locus.html"><small>← Lesson 12</small>Root locus</a><a class="pn next" href="14-nyquist.html"><small>Lesson 14 →</small>Nyquist stability criterion</a></nav>
   </div>
 </main>
