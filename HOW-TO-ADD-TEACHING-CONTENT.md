@@ -372,6 +372,7 @@ The EACT 633 chapter decks are written out as lesson pages in `courses/nonlinear
 - `01-introduction.html` and `02-phase-plane-analysis.html` (Chapter 1: why nonlinear control, hard nonlinearities, nonlinear phenomena, phase portraits, isoclines, singular points, limit cycles). Built from "Chapter 1 Phase plane analysis v2" (the v1 file is the same apart from its header) and TVTIx_Chapter1_NLC.
 - `03-linearization.html` and `04-describing-function.html` (Chapter 2: tangent-line and Jacobian linearization, the pendulum, a tank, l'Hôpital's rule, linearizing about a trajectory; describing functions of saturation, dead zone, relays, hysteresis and backlash, and limit-cycle prediction). Built from TVTIx_Chapter2_NLC and the "Chapter2 Linearization" lecture (rewritten in our own words).
 - `05-lyapunov-stability.html` (Chapter 3: equilibria, stability definitions, the Vinograd–Hahn example, positive definite functions and quadratic forms, Lyapunov theorems, the Lyapunov equation and how not to use it, LaSalle, Barbalat, instability and converse theorems, finding Lyapunov functions). Covers the same ground as the Chapter 3 Lyapunov tutorial, in our own words.
+- `06-absolute-stability.html` (Chapter 4: sector nonlinearities, the Lur'e system, quadratic Lyapunov functions and the S-procedure LMI, positive real and SPR functions, the KYP lemma, the circle criterion with Examples 7.13 to 7.15, the Popov criterion, input-to-state stability and input-output stability). Built from the "Chapter 4 Sector Nonlinearity", "Chapter 4 Materials" and "Popov Circle" decks, rewritten in our own words.
 
 The course home page `courses/nonlinear-control.html` lists every lesson by chapter (lessons not written yet show "coming soon"), has a "Figures and worked problems" gallery and the live simulations. New diagrams start with `nlc-` in `assets/img/diagrams/`. Edit a lesson's notes between the `NOTES START` and `NOTES END` comments.
 
@@ -386,6 +387,12 @@ The course home page `courses/nonlinear-control.html` lists every lesson by chap
     <div class="sim nls" data-nls="describing-function" data-preset="relay"></div>
 
 It shows the output wave and fundamental for a chosen nonlinearity and amplitude, and the polar plot of K/(s(s+1)(s+2)) with the critical locus, listing every predicted limit cycle. Presets: `saturation`, `deadzone`, `relay`, `relaydz`, `hyst`, `dzhyst`, `backlash`, `cubic`.
+
+**Circle criterion explorer.** In the same script:
+
+    <div class="sim nls" data-nls="circle" data-preset="ex713"></div>
+
+Pick a linear part and move the sector slopes alpha and beta. It draws the Nyquist plot with the disk or line of the circle criterion, picks the right case, counts encirclements and says whether the test passes. Presets: `ex713`, `ex714`, `c45`, `ex715`, `c46a`, `popov` (the plants of Lesson 6 and its practice problems). To add a plant, copy a line in the `CIRC` list in the script and give its numerator and denominator coefficients and its number of unstable poles `m`.
 
 **Practice problems.** Each lesson ends with practice problems from the exercise compendium *Exercises in Nonlinear Control Systems* (Johansson, Bernhardsson and Johansson, Lund University), between the comments `PRACTICE START` and `PRACTICE END`. "Ex 2.5" means Chapter 2, Exercise 5 of the compendium. Only a one-line summary, a hint and a short answer written for this course are on the site; the compendium's statements, figures and solutions are not copied. To add one, copy a `<li>...</li>` line in that list.
 

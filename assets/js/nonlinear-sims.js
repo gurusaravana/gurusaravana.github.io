@@ -5,9 +5,8 @@
          optional: data-only="ex7,ex8,linear" to limit the list of systems
      <div class="sim nls" data-nls="describing-function"></div>
          optional: data-preset="saturation" (saturation, deadzone, relay, relaydz, hyst, dzhyst, backlash, cubic)
-     <div class="sim nls" data-nls="lyapunov"></div>
      <div class="sim nls" data-nls="circle"></div>
-     <div class="sim nls" data-nls="fblin"></div>
+         optional: data-preset="ex713" (ex713, ex714, c45, ex715, c46a, popov)
    Each tool draws on a canvas and follows the light / dark theme.
 */
 (function () {
@@ -390,6 +389,99 @@
       legend(ctx, 60, h.h - 8, [['G(jω)', acc], ['−1/K_N(X)', PINK]]);
       var t = cr.length ? cr.map(function (q) { return 'limit cycle at X ≈ ' + q.X.toFixed(2) + ', ω ≈ ' + q.w.toFixed(2) + ' rad/s (period ' + (2 * Math.PI / q.w).toFixed(2) + ' s), ' + (q.stable ? 'stable (green ring)' : 'unstable (orange ring)') + ((q.p[0] < -R || q.p[1] < -0.75 * R || q.p[1] > 0.35 * R) ? ', outside the plot' : ''); }).join('   ·   ') : 'No crossing: no limit cycle is predicted for this K.';
       r2.textContent = 'K = ' + K + ':  ' + t + '   ·   The filled dot is −1/K_N at the current X.';
+    }
+    draw(); onTheme(draw);
+  };
+
+  // ---------- circle criterion ----------
+  function pmul(a, b) { var r = [], i, j; for (i = 0; i < a.length + b.length - 1; i++) r.push(0); for (i = 0; i < a.length; i++) for (j = 0; j < b.length; j++) r[i + j] += a[i] * b[j]; return r; }
+  function pval(c, w) { // polynomial (highest power first) at s = jw, returns [re, im]
+    var re = 0, im = 0; for (var i = 0; i < c.length; i++) { var nr = -im * w, ni = re * w; re = nr + c[i]; im = ni; } return [re, im];
+  }
+  var CIRC = {
+    ex713: { name: 'G = 4/((s+1)(s/2+1)(s/3+1))  (stable)', num: [4], den: pmul(pmul([1, 1], [0.5, 1]), [1 / 3, 1]), m: 0, a: 0, b: 1.1 },
+    ex714: { name: 'G = 4/((s−1)(s/2+1)(s/3+1))  (1 unstable pole)', num: [4], den: pmul(pmul([1, -1], [0.5, 1]), [1 / 3, 1]), m: 1, a: 0.3, b: 0.325 },
+    c45: { name: 'G = 4/((s−1)(s/3+1)(s/5+1))  (1 unstable pole)', num: [4], den: pmul(pmul([1, -1], [1 / 3, 1]), [0.2, 1]), m: 1, a: 0.27, b: 0.44 },
+    ex715: { name: 'G = (s+2)/((s+1)(s−1))  (1 unstable pole)', num: [1, 2], den: [1, 0, -1], m: 1, a: 0.55, b: 1 },
+    c46a: { name: 'G = 1/((s+1)(s+2))  (stable)', num: [1], den: [1, 3, 2], m: 0, a: 0, b: 15 },
+    popov: { name: 'G = 1/(s² + s + 1)  (stable)', num: [1], den: [1, 1, 1], m: 0, a: 0, b: 2.9 }
+  };
+  NLS['circle'] = function (root) {
+    var preset = root.getAttribute('data-preset') || 'ex713';
+    if (!CIRC[preset]) preset = 'ex713';
+    root.appendChild(el('h3', {}, 'Circle criterion explorer'));
+    root.appendChild(el('p', { 'class': 'desc' }, 'Pick a linear part G(s) and a sector [α, β] for the nonlinearity. The tool draws the Nyquist plot of G(jω) (solid for ω ≥ 0, dashed for ω < 0) and the forbidden region of the circle criterion, and checks the right case: the disk through −1/α and −1/β, the line Re = −1/β when α = 0, or the inside of the disk when α < 0 < β.'));
+    var box = el('div', { 'class': 'controls' }); root.appendChild(box);
+    var sel = select(box, 'Linear part', Object.keys(CIRC).map(function (k) { return [k, CIRC[k].name]; }), preset, function () { var P = CIRC[sel.value]; sA.set(P.a); sB.set(P.b); draw(); });
+    var f3 = function (v) { return (+v).toFixed(3); };
+    var sA = slider(box, 'α (lower slope)', -3, 2, 0.001, CIRC[preset].a, function () { draw(); }, f3);
+    var sB = slider(box, 'β (upper slope)', 0.01, 20, 0.001, CIRC[preset].b, function () { draw(); }, f3);
+    var cv = canvas(root, 0.62, 300, 520);
+    var out = el('div', { 'class': 'readout' }); root.appendChild(out);
+    function curve(P) {
+      var pts = [], i, w;
+      for (i = 0; i <= 1600; i++) { w = 1e-3 * Math.pow(1e6, i / 1600); var n = pval(P.num, w), d = pval(P.den, w), dd = d[0] * d[0] + d[1] * d[1]; pts.push([(n[0] * d[0] + n[1] * d[1]) / dd, (n[1] * d[0] - n[0] * d[1]) / dd]); }
+      return pts;
+    }
+    function winding(pos, c) { // full contour: ω from −∞ to ∞ (mirror image first), CCW positive
+      var full = pos.slice().reverse().map(function (p) { return [p[0], -p[1]]; }).concat(pos), tot = 0;
+      for (var i = 1; i < full.length; i++) {
+        var a0 = Math.atan2(full[i - 1][1], full[i - 1][0] - c), a1 = Math.atan2(full[i][1], full[i][0] - c), da = a1 - a0;
+        if (da > Math.PI) da -= 2 * Math.PI; if (da < -Math.PI) da += 2 * Math.PI; tot += da;
+      }
+      return Math.round(tot / (2 * Math.PI));
+    }
+    function draw() {
+      var P = CIRC[sel.value], a = +sA.value, b = +sB.value, pos = curve(P), ink = css('--ink'), acc = css('--accent');
+      var all = pos.concat(pos.map(function (p) { return [p[0], -p[1]]; }));
+      var minRe = Math.min.apply(null, pos.map(function (p) { return p[0]; }));
+      var verdict = '', ok = false, c = null, r = null, mode;
+      if (b <= a) { verdict = 'Choose β > α.'; mode = 'none'; }
+      else if (Math.abs(a) < 5e-4) {
+        mode = 'line';
+        if (P.m > 0) verdict = 'α = 0 needs a stable G, but G has ' + P.m + ' unstable pole. Use α > 0 (the disk case).';
+        else { ok = minRe > -1 / b; verdict = 'min Re G(jω) = ' + minRe.toFixed(3) + (ok ? ' > ' : ' ≤ ') + '−1/β = ' + (-1 / b).toFixed(3) + (ok ? ': absolutely stable for every nonlinearity in [0, ' + b.toFixed(3) + '].' : ': the test fails. Largest β here is ' + (-1 / minRe).toFixed(3) + '.'); }
+      } else {
+        c = -(1 / a + 1 / b) / 2; r = Math.abs(1 / a - 1 / b) / 2;
+        var dmin = Infinity, dmax = 0; all.forEach(function (p) { var d = Math.hypot(p[0] - c, p[1]); if (d < dmin) dmin = d; if (d > dmax) dmax = d; });
+        if (a > 0) {
+          mode = 'disk'; var n = winding(pos, c);
+          ok = dmin > r && n === P.m;
+          verdict = 'Disk centre ' + c.toFixed(3) + ', radius ' + r.toFixed(3) + '. Closest approach of the plot: ' + dmin.toFixed(3) + (dmin > r ? ' (outside, good)' : ' (the plot enters the disk)') + '. Anticlockwise encirclements: ' + n + ', needed: ' + P.m + '. ' + (ok ? 'Absolutely stable for every nonlinearity in [' + a.toFixed(3) + ', ' + b.toFixed(3) + '].' : 'The test fails.');
+        } else {
+          mode = 'inside';
+          if (P.m > 0) verdict = 'α < 0 needs a stable G, but G has ' + P.m + ' unstable pole.';
+          else { ok = dmax < r * (1 - 1e-4); verdict = 'Disk centre ' + c.toFixed(3) + ', radius ' + r.toFixed(3) + '. Farthest point of the plot: ' + dmax.toFixed(3) + (ok ? ' (inside): absolutely stable for every nonlinearity in [' + a.toFixed(3) + ', ' + b.toFixed(3) + '].' : ' (outside the disk): the test fails.'); }
+        }
+      }
+      // view with equal scaling
+      var xs = all.map(function (p) { return p[0]; }), ys = all.map(function (p) { return p[1]; });
+      var x0 = Math.min.apply(null, xs), x1 = Math.max.apply(null, xs), y0 = Math.min.apply(null, ys), y1 = Math.max.apply(null, ys);
+      if (c != null && r < 30) { x0 = Math.min(x0, c - r); x1 = Math.max(x1, c + r); y0 = Math.min(y0, -r); y1 = Math.max(y1, r); }
+      if (mode === 'line') x0 = Math.min(x0, -1 / b);
+      x0 = Math.min(x0, -0.2); x1 = Math.max(x1, 0.2);
+      var g = fit(cv), ctx = g.ctx, L = 52, T = 12, Wd = g.w - L - 14, Ht = g.h - T - 44;
+      var mx = (x1 - x0) * 0.08 + 0.05, my = (y1 - y0) * 0.08 + 0.05; x0 -= mx; x1 += mx; y0 -= my; y1 += my;
+      var sc = Math.min(Wd / (x1 - x0), Ht / (y1 - y0)), cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+      var xr = [cx - Wd / sc / 2, cx + Wd / sc / 2], yr = [cy - Ht / sc / 2, cy + Ht / sc / 2];
+      var B = Box(ctx, L, T, Wd, Ht, xr, yr), span = xr[1] - xr[0];
+      var st = span > 16 ? 4 : span > 8 ? 2 : span > 4 ? 1 : span > 2 ? 0.5 : span > 0.8 ? 0.2 : 0.1;
+      B.grid(st, st, 'Re', 'Im');
+      ctx.save(); ctx.beginPath(); ctx.rect(L, T, Wd, Ht); ctx.clip();
+      ctx.fillStyle = 'rgba(219,39,119,0.14)';
+      if (mode === 'disk') { ctx.beginPath(); ctx.arc(B.X(c), B.Y(0), r * sc, 0, 7); ctx.fill(); }
+      if (mode === 'line') ctx.fillRect(L, T, B.X(-1 / b) - L, Ht);
+      if (mode === 'inside') { ctx.beginPath(); ctx.rect(L, T, Wd, Ht); ctx.moveTo(B.X(c) + r * sc, B.Y(0)); ctx.arc(B.X(c), B.Y(0), r * sc, 0, 2 * Math.PI, true); ctx.fill('evenodd'); }
+      ctx.restore();
+      if (mode === 'disk' || mode === 'inside') { var cp = []; for (var k = 0; k <= 200; k++) cp.push([c + r * Math.cos(k * Math.PI / 100), r * Math.sin(k * Math.PI / 100)]); B.line(cp, PINK, 2); }
+      if (mode === 'line') B.line([[-1 / b, yr[0]], [-1 / b, yr[1]]], PINK, 2);
+      B.line(pos.map(function (p) { return [p[0], -p[1]]; }), acc, 1.5, [5, 4]);
+      B.line(pos, acc, 2.6);
+      var mid = Math.round(pos.length * 0.45); B.arrow(pos[mid - 4], pos[mid], acc);
+      if (mode === 'disk' || mode === 'inside') { B.dot(-1 / a, 0, 4, PINK); B.dot(-1 / b, 0, 4, PINK); }
+      legend(ctx, L + 6, g.h - 8, [['G(jω)', acc], ['forbidden region boundary', PINK]]);
+      out.textContent = verdict;
+      out.style.color = ok ? GREEN : '';
     }
     draw(); onTheme(draw);
   };
