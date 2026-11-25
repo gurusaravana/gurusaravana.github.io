@@ -29,13 +29,13 @@
 <div class="band course-band"><div class="wrap">
   <div class="crumb"><a href="../digital-control-systems.html">← Digital Control Systems</a></div>
   <div class="course-head">
-    <div class="eyebrow">Lesson 3 of 3 · Chapter 2</div>
+    <div class="eyebrow">Lesson 3 of 4 · Chapter 2</div>
     <h1>Pulse transfer functions and discretization</h1>
     <p>Digital Control Systems · EACT 534 · Postgraduate course</p>
   </div>
 </div></div>
 <main class="wrap lesson-layout">
-  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">EACT 534 · Digital Control Systems</div><ol><li><a href="01-discrete-time-and-z-transform.html"><span class="n">1</span>Discrete-time systems and the z-transform</a></li><li><a href="02-sampling-and-pulse-transfer.html"><span class="n">2</span>Sampling, ADC and DAC models, and the pulse transfer function</a></li><li class="on"><a href="03-pulse-transfer-and-discretization.html"><span class="n">3</span>Pulse transfer functions and discretization</a></li></ol></div></details></aside>
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">EACT 534 · Digital Control Systems</div><ol><li><a href="01-discrete-time-and-z-transform.html"><span class="n">1</span>Discrete-time systems and the z-transform</a></li><li><a href="02-sampling-and-pulse-transfer.html"><span class="n">2</span>Sampling, ADC and DAC models, and the pulse transfer function</a></li><li class="on"><a href="03-pulse-transfer-and-discretization.html"><span class="n">3</span>Pulse transfer functions and discretization</a></li><li><a href="04-stability.html"><span class="n">4</span>Stability of discrete-time systems</a></li></ol></div></details></aside>
   <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
   <div class="lmain">
     <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Find the pulse transfer function of open and closed sampled loops wherever the samplers sit</li><li>Tell when $G_1G_2(z)$ differs from $G_1(z)G_2(z)$ and when no closed-loop transfer function exists</li><li>Discretize $G(s)$ by impulse invariance, step invariance, forward and backward differences and the Tustin method</li><li>Compare the methods by where they map the stable region and by their step responses</li></ul></div>
@@ -178,7 +178,7 @@
 <li><div class="q">Discretize the PI controller $C(s) = 2 + \dfrac{4}{s}$ with $T = 0.1$ s using the Tustin method, and write the control law as a difference equation.</div><details><summary>Show solution</summary><div class="sol">Replace $1/s$ by $\dfrac{T}{2}\dfrac{z + 1}{z - 1} = 0.05\dfrac{z + 1}{z - 1}$: $C(z) = 2 + 0.2\dfrac{z + 1}{z - 1} = \dfrac{2.2z - 1.8}{z - 1}$. So $u(k) = u(k-1) + 2.2e(k) - 1.8e(k-1)$.</div></details></li>
 <li><div class="q">Why is impulse invariance a poor choice for the lead compensator $C(s) = \dfrac{s + 1}{s + 10}$?</div><details><summary>Show solution</summary><div class="sol">$|C(j\omega)| \to 1$ as $\omega \to \infty$: the compensator is not band limited, so the replicated spectra overlap and alias badly. Its impulse response also contains an impulse ($C(s) = 1 - 9/(s + 10)$), which sampling cannot represent. Use Tustin (or a pole-zero matching method) for compensators.</div></details></li></ol>
     </section>
-    <nav class="prevnext"><a class="pn prev" href="02-sampling-and-pulse-transfer.html"><small>← Lesson 2</small>Sampling, ADC and DAC models, and the pulse transfer function</a><a class="pn next" href="../digital-control-systems.html"><small>Course home →</small>Digital Control Systems</a></nav>
+    <nav class="prevnext"><a class="pn prev" href="02-sampling-and-pulse-transfer.html"><small>← Lesson 2</small>Sampling, ADC and DAC models, and the pulse transfer function</a><a class="pn next" href="04-stability.html"><small>Lesson 4 →</small>Stability of discrete-time systems</a></nav>
   </div>
 </main>
 <footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
