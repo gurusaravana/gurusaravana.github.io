@@ -471,3 +471,4 @@ ul.lessons .t{flex:1;min-width:160px;font-weight:500}
 .notes .eq,.notes table.tbl,.tblwrap,.sol,.katex-display{position:relative}
 .figgroup{font-size:16px;margin:22px 0 4px}
 .notes .katex-display{overflow-x:auto;overflow-y:hidden;padding:2px 0}
+.notes pre{margin:12px 0;padding:12px 14px;border-radius:10px;border-left:4px solid var(--accent);background:var(--bg);overflow-x:auto;font:13px/1.6 var(--mono);color:var(--ink)}
