@@ -370,6 +370,7 @@ To add a map to another course page, copy the whole `<section id="map">` block, 
 The EACT 633 chapter decks are written out as lesson pages in `courses/nonlinear-control/`, one or two lessons per chapter:
 
 - `01-introduction.html` and `02-phase-plane-analysis.html` (Chapter 1: why nonlinear control, hard nonlinearities, nonlinear phenomena, phase portraits, isoclines, singular points, limit cycles). Built from "Chapter 1 Phase plane analysis v2" (the v1 file is the same apart from its header) and TVTIx_Chapter1_NLC.
+- `03-linearization.html` and `04-describing-function.html` (Chapter 2: tangent-line and Jacobian linearization, the pendulum, a tank, l'Hôpital's rule, linearizing about a trajectory; describing functions of saturation, dead zone, relays, hysteresis and backlash, and limit-cycle prediction). Built from TVTIx_Chapter2_NLC and the "Chapter2 Linearization" lecture (rewritten in our own words).
 
 The course home page `courses/nonlinear-control.html` lists every lesson by chapter (lessons not written yet show "coming soon"), has a "Figures and worked problems" gallery and the live simulations. New diagrams start with `nlc-` in `assets/img/diagrams/`. Edit a lesson's notes between the `NOTES START` and `NOTES END` comments.
 
@@ -378,6 +379,12 @@ The course home page `courses/nonlinear-control.html` lists every lesson by chap
     <div class="sim nls" data-nls="phase-plane" data-preset="vdp"></div>
 
 `data-preset` picks the starting system: `ex7` to `ex13` (the linear portraits of Lesson 2), `star`, `linear`, `pendulum`, `vdp` (Van der Pol), `duffing`, `quad`, `relay`.
+
+**Describing function explorer.** In the same script:
+
+    <div class="sim nls" data-nls="describing-function" data-preset="relay"></div>
+
+It shows the output wave and fundamental for a chosen nonlinearity and amplitude, and the polar plot of K/(s(s+1)(s+2)) with the critical locus, listing every predicted limit cycle. Presets: `saturation`, `deadzone`, `relay`, `relaydz`, `hyst`, `dzhyst`, `backlash`, `cubic`.
 
 **Practice problems.** Each lesson ends with practice problems from the exercise compendium *Exercises in Nonlinear Control Systems* (Johansson, Bernhardsson and Johansson, Lund University), between the comments `PRACTICE START` and `PRACTICE END`. "Ex 2.5" means Chapter 2, Exercise 5 of the compendium. Only a one-line summary, a hint and a short answer written for this course are on the site; the compendium's statements, figures and solutions are not copied. To add one, copy a `<li>...</li>` line in that list.
 

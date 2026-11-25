@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 3: Linearization · Nonlinear Control</title>
+<meta name="description" content="Linear approximation of a nonlinear system about an operating point: tangent lines and Taylor series, equilibria and deviation variables, Jacobian matrices, the pendulum and inverted pendulum, a tank level example, and what linearization can and cannot tell you.">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 3: Linearization  (Nonlinear Control, EACT 633)
+  Edit the notes between the NOTES START and NOTES END markers below.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Figures live in assets/img/diagrams/ (names start with nlc-) and are shown with a figure of class "diagram".
+  To add an exercise, copy one list item inside the list of class "exlist".
+  Guide: HOW-TO-ADD-TEACHING-CONTENT.md, section 20.
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
+  <nav class="links"><a href="../nonlinear-control.html">Course home</a><a href="../nonlinear-control.html#lessons">Lessons</a><a href="../nonlinear-control.html#figures">Figures</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../nonlinear-control.html">← Nonlinear Control</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 3 of 4 · Chapter 2 · part I</div>
+    <h1>Linearization</h1>
+    <p>Nonlinear Control · EACT 633 · Postgraduate course</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">EACT 633 · Nonlinear Control</div><ol><li><a href="01-introduction.html"><span class="n">1</span>Introduction to nonlinear systems</a></li><li><a href="02-phase-plane-analysis.html"><span class="n">2</span>Phase plane analysis</a></li><li class="on"><a href="03-linearization.html"><span class="n">3</span>Linearization</a></li><li><a href="04-describing-function.html"><span class="n">4</span>Describing function analysis</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Approximate a nonlinear function near an operating point by its tangent line (first-order Taylor series)</li><li>Find the equilibrium points of $\dot x = f(x, u)$ and shift to deviation variables</li><li>Compute the Jacobian matrices $A$, $B$, $C$, $D$ of a multi-state, multi-input system</li><li>Linearize the pendulum about its hanging and inverted positions and interpret the eigenvalues</li><li>Use l’Hôpital’s rule when the nonlinear term is $0/0$ at the operating point</li><li>State when the linearization decides local stability and when it does not</li></ul></div>
+    <nav class="figstrip" aria-label="Figures in this lesson"><a href="#fig-tangent"><img src="../../assets/img/diagrams/nlc-lin-tangent.svg" alt="" loading="lazy"><span>Tangent lines of sin x</span></a><a href="#fig-error"><img src="../../assets/img/diagrams/nlc-lin-error.svg" alt="" loading="lazy"><span>Approximation error</span></a><a href="#fig-steps"><img src="../../assets/img/diagrams/nlc-lin-steps.svg" alt="" loading="lazy"><span>Linearization steps</span></a><a href="#fig-pendulum"><img src="../../assets/img/diagrams/nlc-lin-pendulum.svg" alt="" loading="lazy"><span>Pendulum operating points</span></a><a href="#fig-compare"><img src="../../assets/img/diagrams/nlc-lin-compare.svg" alt="" loading="lazy"><span>Linear vs nonlinear</span></a><a href="#fig-lhopital"><img src="../../assets/img/diagrams/nlc-lin-lhopital.svg" alt="" loading="lazy"><span>l’Hôpital example</span></a></nav>
+    <section class="lsec"><h2>Notes</h2>
+    <!-- NOTES START -->
+    <article class="notes">
+<h3 id="why">Why linearize?</h3>
+<p>Almost every tool of classical and modern control (transfer functions, Bode and Nyquist plots, root locus, pole placement, LQR) needs a <b>linear</b> model $\dot x = Ax + Bu$. Real plants are nonlinear. Linearization is the bridge: near a chosen <b>operating point</b> a smooth nonlinear system behaves almost like a linear one, so we design with the linear model and use it only near that point.</p>
+<p>The Chapter 2 deck lists three families of linearization:</p>
+<ul>
+<li><b>Analytical linearization</b> (this lesson): replace each nonlinear function by its tangent at the operating point, using the Taylor series.</li>
+<li><b>Graphical linearization</b>: read the slope of a measured characteristic at the operating point.</li>
+<li><b>Harmonic linearization</b>: replace a nonlinearity by the gain it gives to a sine wave. The <b>describing function</b> of <a href="04-describing-function.html">Lesson 4</a> is the main example; statistical linearization and the dual-input describing function belong to the same family.</li>
+</ul>
+
+<h3 id="tangent">The tangent-line approximation</h3>
+<p>Near a point $x_0$ a smooth function is close to its tangent line:</p>
+<p class="eq">$$f(x) \approx f(x_0) + f'(x_0)\,(x - x_0).$$</p>
+<p>This is the first two terms of the <b>Taylor series</b></p>
+<p class="eq">$$f(x) = f(x_0) + f'(x_0)(x - x_0) + \frac{f''(x_0)}{2!}(x - x_0)^2 + \frac{f^{(3)}(x_0)}{3!}(x - x_0)^3 + \cdots$$</p>
+<p>The neglected terms are of order $(x - x_0)^2$, so the approximation is good when $x - x_0$ is small, and how small depends on how curved $f$ is near $x_0$. For $f(x) = \sin x$:</p>
+<ul>
+<li>near $x_0 = 0$: $\sin x \approx x$ (slope $\cos 0 = 1$),</li>
+<li>near $x_0 = \pi/2$: $\sin x \approx 1$ (slope $\cos\frac{\pi}{2} = 0$),</li>
+<li>near $x_0 = \pi$: $\sin x \approx \pi - x$ (slope $\cos\pi = -1$, and $\sin\pi = 0$).</li>
+</ul>
+<figure class="diagram" id="fig-tangent"><img src="../../assets/img/diagrams/nlc-lin-tangent.svg" alt="Three panels: sin x with its tangent lines at 0, pi over 2 and pi" loading="lazy"><figcaption>One function, three different linear models. Which one is right depends on where the system operates.</figcaption></figure>
+<figure class="diagram" id="fig-error"><img src="../../assets/img/diagrams/nlc-lin-error.svg" alt="Relative error curves for sin x approximately x near 0 and sin x approximately 1 near pi over 2, with 5 and 20 percent lines" loading="lazy"><figcaption>Relative error of the two approximations. Near $0$ the error stays under 5&nbsp;% for $|x| \lesssim 0.54$ rad (about 31°) and under 20&nbsp;% for $|x| \lesssim 1.0$ rad. Near $\pi/2$ the band is narrower: 5&nbsp;% for $1.26 \lesssim x \lesssim 1.88$.</figcaption></figure>
+<div class="key">A linear model is only a <i>local</i> model. Always say which operating point it belongs to, and check how far from that point the system will actually go.</div>
+
+<h3 id="equilibrium">Operating points and deviation variables</h3>
+<p>A point $x_0$ is an <b>equilibrium</b> of $\dot x = f(x, u)$ with constant input $u_0$ if</p>
+<p class="eq">$$f(x_0, u_0) = 0.$$</p>
+<p>A nonlinear system may have one, several, infinitely many, or no equilibria. The linear system $\dot x = Ax$ with $\det A \ne 0$ has exactly one, at the origin. An <i>affine</i> model $\dot x = ax + b$ (what the tangent line gives) has its equilibrium at $x = -b/a$, not at $0$, so it does not yet fit the form $\dot x = Ax + Bu$.</p>
+<p>The fix is to measure everything from the operating point. Define the <b>deviation variables</b></p>
+<p class="eq">$$\delta x = x - x_0, \qquad \delta u = u - u_0, \qquad \delta y = y - y_0 .$$</p>
+<p>Since $x_0$ is constant, $\delta\dot x = \dot x$, and in the new variables the equilibrium sits at $\delta x = 0$.</p>
+
+<h3 id="jacobian">Linearizing a state-space model</h3>
+<p>For $\dot x = f(x, u)$, $y = h(x, u)$ with $n$ states, $m$ inputs and $p$ outputs, expand each component of $f$ and $h$ to first order about $(x_0, u_0)$. Because $f(x_0, u_0) = 0$, the constant terms vanish and</p>
+<p class="eq">$$\delta\dot x = A\,\delta x + B\,\delta u, \qquad \delta y = C\,\delta x + D\,\delta u,$$</p>
+<p>with the <b>Jacobian matrices</b> evaluated at $(x_0, u_0)$:</p>
+<p class="eq">$$A = \left[\frac{\partial f_i}{\partial x_j}\right]_{n\times n},\quad B = \left[\frac{\partial f_i}{\partial u_k}\right]_{n\times m},\quad C = \left[\frac{\partial h_l}{\partial x_j}\right]_{p\times n},\quad D = \left[\frac{\partial h_l}{\partial u_k}\right]_{p\times m}.$$</p>
+<figure class="diagram" id="fig-steps"><img src="../../assets/img/diagrams/nlc-lin-steps.svg" alt="Five boxes: nonlinear model, operating point, deviations, Jacobians, linear model" loading="lazy"><figcaption>The recipe, in five steps.</figcaption></figure>
+
+<h3 id="pendulum">Example: the pendulum</h3>
+<p>A rod of mass $M$ and length $l$ swings about a pivot, driven by a motor torque $T$. Gravity acts at the centre of mass, $l/2$ from the pivot, and gives the moment $-Mg\frac{l}{2}\sin\theta$. With moment of inertia $J$ about the pivot, Newton’s law for rotation gives</p>
+<p class="eq">$$J\ddot\theta = -Mg\frac{l}{2}\sin\theta + T .$$</p>
+<p>With $x_1 = \theta$, $x_2 = \dot\theta$, $u = T$, $y = \theta$ and $a = \dfrac{Mgl}{2J}$:</p>
+<p class="eq">$$\dot x_1 = x_2, \qquad \dot x_2 = -a\sin x_1 + \frac{1}{J}u, \qquad y = x_1 .$$</p>
+<p>This is in first-order form but it is not a state-space model, because of $\sin x_1$. With $u_0 = 0$ the equilibria are $x_2 = 0$, $\sin x_1 = 0$: the <b>hanging</b> positions $x_1 = 2k\pi$ and the <b>inverted</b> positions $x_1 = \pi + 2k\pi$, for every integer $k$.</p>
+<figure class="diagram" id="fig-pendulum"><img src="../../assets/img/diagrams/nlc-lin-pendulum.svg" alt="Pendulum hanging down and pendulum balanced upright, each with torque T at the pivot and weight Mg at the centre" loading="lazy"><figcaption>The two kinds of operating point. Which one you linearize about depends on the job: disturbance rejection for a hanging crane load, balancing for a walking robot or a self-balancing scooter.</figcaption></figure>
+<p>The Jacobians are</p>
+<p class="eq">$$A = \begin{bmatrix} 0 & 1 \\ -a\cos x_{1,0} & 0\end{bmatrix}, \qquad B = \begin{bmatrix} 0 \\ 1/J\end{bmatrix}, \qquad C = \begin{bmatrix} 1 & 0\end{bmatrix}, \qquad D = 0 .$$</p>
+<ul>
+<li><b>Hanging</b>, $x_{1,0} = 0$: $A = \begin{bmatrix} 0 & 1 \\ -a & 0\end{bmatrix}$, eigenvalues $\pm j\sqrt a$. The linear model is an undamped oscillator with natural frequency $\sqrt{a}$.</li>
+<li><b>Inverted</b>, $x_{1,0} = \pi$: here $\sin x_1 \approx \pi - x_1 = -\delta x_1$, so $A = \begin{bmatrix} 0 & 1 \\ a & 0\end{bmatrix}$, eigenvalues $\pm\sqrt a$. One is positive: a <b>saddle</b>, and the upright pendulum is unstable, as everyone knows.</li>
+</ul>
+<p>Written out for the inverted position, with $\delta x_1 = \theta - \pi$ the angle from the upward vertical:</p>
+<p class="eq">$$\delta\dot x = \begin{bmatrix} 0 & 1 \\ \dfrac{Mgl}{2J} & 0\end{bmatrix}\delta x + \begin{bmatrix} 0 \\ \dfrac1J\end{bmatrix}u, \qquad \delta y = \begin{bmatrix}1 & 0\end{bmatrix}\delta x .$$</p>
+<div class="warn">If you only replace $\sin x_1$ by $\pi - x_1$ and keep $x_1$ as the state, you get $\dot x_2 = \frac{Mgl}{2J}x_1 - \frac{Mgl}{2J}\pi + \frac1J T$, which has a constant term and so is not of the form $\dot x = Ax + Bu$. Shifting to $\delta x_1 = x_1 - \pi$ removes it. (In the lecture slides the $A$ matrix of this example lost its layout in the PDF; it is $\begin{bmatrix}0 & 1\\ Mgl/2J & 0\end{bmatrix}$ as above.)</div>
+<figure class="diagram" id="fig-compare"><img src="../../assets/img/diagrams/nlc-lin-compare.svg" alt="Two time plots comparing the nonlinear pendulum and its linear model, close for a small swing, very different for a large swing" loading="lazy"><figcaption>The hanging-pendulum linear model is excellent for a $0.3$ rad swing and poor for a $2.5$ rad swing: the true period grows with amplitude, which no linear model can show.</figcaption></figure>
+
+<h3 id="tank">Example: tank level</h3>
+<p>A tank of cross-section $A_t$ is filled by an inflow $q$ and drains through a valve with outflow $k\sqrt h$ (Torricelli). The level obeys</p>
+<p class="eq">$$A_t\,\dot h = q - k\sqrt h .$$</p>
+<p>At a steady inflow $q_0$ the equilibrium level is $\sqrt{h_0} = q_0/k$. The partial derivatives are $\partial f/\partial h = -\dfrac{k}{2A_t\sqrt{h_0}}$ and $\partial f/\partial q = \dfrac{1}{A_t}$, so</p>
+<p class="eq">$$\delta\dot h = -\frac{1}{\tau}\,\delta h + \frac{1}{A_t}\,\delta q, \qquad \tau = \frac{2A_t\sqrt{h_0}}{k} = \frac{2A_th_0}{q_0}, \qquad \frac{\delta H(s)}{\delta Q(s)} = \frac{\tau/A_t}{\tau s + 1}.$$</p>
+<p><b>Numbers.</b> $A_t = 1\ \mathrm{m^2}$, $k = 0.5\ \mathrm{m^{2.5}/s}$, $q_0 = 0.25\ \mathrm{m^3/s}$: $\sqrt{h_0} = 0.5$, $h_0 = 0.25$ m, $\tau = 2$ s, and $\delta H/\delta Q = 2/(2s + 1)$. Doubling the inflow quadruples $h_0$ and doubles $\tau$: the "same" tank is a different linear system at each level. This is why controllers tuned at one level can behave badly at another, and why gain scheduling exists.</p>
+
+<h3 id="lhopital">When the nonlinear term is 0/0: l’Hôpital’s rule</h3>
+<p>Suppose we want to linearize</p>
+<p class="eq">$$\ddot x = -\dot x + \frac{\sin^2 x}{x}$$</p>
+<p>about $x = 0$. The term $f(x) = \sin^2 x / x$ is $0/0$ at the origin, so $f(0)$ and $f'(0)$ must be found as limits. <b>l’Hôpital’s rule</b>: if $g(0) = h(0) = 0$, then $\lim_{x\to0} g(x)/h(x) = \lim_{x\to0} g'(x)/h'(x)$.</p>
+<ul>
+<li>$f(0) = \lim \dfrac{2\sin x\cos x}{1} = 0$, so $x = 0$ is an equilibrium.</li>
+<li>$f'(x) = \dfrac{2x\sin x\cos x - \sin^2 x}{x^2}$ is again $0/0$ at the origin. Applying the rule twice gives $f'(0) = 1$.</li>
+<li>A quicker check with series: $\sin^2 x = x^2 - \frac{x^4}{3} + \cdots$, so $f(x) = x - \frac{x^3}{3} + \cdots$ and the slope at 0 is $1$.</li>
+</ul>
+<figure class="diagram" id="fig-lhopital"><img src="../../assets/img/diagrams/nlc-lin-lhopital.svg" alt="Plot of sin squared x over x with the tangent line y = x at the origin" loading="lazy"><figcaption>$\sin^2x/x$ looks like $x$ near the origin.</figcaption></figure>
+<p>With $x_1 = x$, $x_2 = \dot x$ the linear model is $\delta\dot x = \begin{bmatrix}0 & 1\\ 1 & -1\end{bmatrix}\delta x$. Its eigenvalues are $\lambda = \frac{-1 \pm\sqrt5}{2} = 0.618,\ -1.618$: a saddle, so the origin is unstable.</p>
+
+<h3 id="trajectory">Linearizing about a trajectory</h3>
+<p>The same idea works around a <b>nominal trajectory</b> $x^*(t)$ produced by a nominal input $u^*(t)$, not only around a constant equilibrium. With $\delta x = x - x^*(t)$ and $\delta u = u - u^*(t)$,</p>
+<p class="eq">$$\delta\dot x = A(t)\,\delta x + B(t)\,\delta u, \qquad A(t) = \frac{\partial f}{\partial x}\Big|_{x^*(t),\,u^*(t)},\quad B(t) = \frac{\partial f}{\partial u}\Big|_{x^*(t),\,u^*(t)} .$$</p>
+<p>The result is linear but <b>time-varying</b>. This is how trajectory-tracking controllers for robots and aircraft are designed (practice problems Ex 2.9 and Ex 2.10 below).</p>
+
+<h3 id="limits">What linearization tells you about stability</h3>
+<p>Let $x_0$ be an equilibrium and $A$ the Jacobian there (Lyapunov’s <b>indirect method</b>, proved in <a href="05-lyapunov-stability.html">Lesson 5</a>):</p>
+<ul>
+<li>If every eigenvalue of $A$ has $\mathrm{Re}\,\lambda &lt; 0$, the equilibrium of the nonlinear system is <b>locally asymptotically stable</b>.</li>
+<li>If at least one eigenvalue has $\mathrm{Re}\,\lambda &gt; 0$, it is <b>unstable</b>.</li>
+<li>If some eigenvalue has $\mathrm{Re}\,\lambda = 0$ and none is positive, the linearization <b>decides nothing</b>. Example: $\dot x = -x^3$ and $\dot x = +x^3$ both linearize to $\delta\dot x = 0$, yet the first is asymptotically stable and the second unstable. The frictionless hanging pendulum (eigenvalues $\pm j\sqrt a$) is another case: its stability needs an energy argument.</li>
+</ul>
+<div class="key">Linearization predicts local behaviour well when the equilibrium is <i>hyperbolic</i> (no eigenvalue on the imaginary axis). It never tells you the size of the region where the prediction holds, and it cannot show limit cycles, multiple equilibria or finite escape time.</div>
+</article>
+    <!-- NOTES END -->
+    </section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the div below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">Find the equilibria of $\dot x = x^2 - u$ for the constant input $u_0 = 4$, linearize about each one, and say which is stable.</div><details><summary>Show solution</summary><div class="sol">$x_0^2 = 4$ gives $x_0 = \pm2$. $\partial f/\partial x = 2x_0$, $\partial f/\partial u = -1$. At $x_0 = 2$: $\delta\dot x = 4\,\delta x - \delta u$, unstable. At $x_0 = -2$: $\delta\dot x = -4\,\delta x - \delta u$, stable.</div></details></li><li><div class="q">A pendulum with viscous friction obeys $\ddot\theta + 0.5\dot\theta + 4\sin\theta = u$. Write $A$ and $B$ for the hanging and the inverted positions and classify each equilibrium.</div><details><summary>Show solution</summary><div class="sol">With $x_1 = \theta$, $x_2 = \dot\theta$: $A = \begin{bmatrix}0 & 1\\ -4\cos\theta_0 & -0.5\end{bmatrix}$, $B = \begin{bmatrix}0\\1\end{bmatrix}$. Hanging ($\theta_0 = 0$): $\lambda^2 + 0.5\lambda + 4 = 0$, $\lambda = -0.25 \pm j1.98$, stable focus. Inverted ($\theta_0 = \pi$): $\lambda^2 + 0.5\lambda - 4 = 0$, $\lambda = 1.76,\ -2.26$, saddle (unstable).</div></details></li><li><div class="q">Linearize $\ddot x + \dot x + \dfrac{2(1 - \cos x)}{x} = 0$ about $x = 0$.</div><details><summary>Show solution</summary><div class="sol">$\dfrac{1 - \cos x}{x}$ is $0/0$ at the origin. By l’Hôpital (or $1 - \cos x = \frac{x^2}{2} - \cdots$) it equals $\frac{x}{2} - \cdots$, so $\frac{2(1-\cos x)}{x} \approx x$. The linear model is $\delta\ddot x + \delta\dot x + \delta x = 0$: $A = \begin{bmatrix}0 & 1\\ -1 & -1\end{bmatrix}$, $\lambda = -0.5 \pm j0.87$, a stable focus.</div></details></li><li><div class="q">Linearize the Van der Pol oscillator $\ddot x - \mu(1 - x^2)\dot x + x = 0$ ($\mu &gt; 0$) about the origin. What does the result say, and what does it miss?</div><details><summary>Show solution</summary><div class="sol">$A = \begin{bmatrix}0 & 1\\ -1 & \mu\end{bmatrix}$, trace $\mu &gt; 0$, determinant $1$: an unstable focus (or node if $\mu \ge 2$). So the origin is unstable. The linear model predicts oscillations that grow for ever; it misses the stable limit cycle that the nonlinear damping creates at larger amplitude (Lesson 2).</div></details></li><li><div class="q">For the tank $A_t\dot h = q - k\sqrt h$ with $A_t = 2\ \mathrm{m^2}$ and $k = 0.4$, find the linear transfer function $\delta H/\delta Q$ at $h_0 = 1$ m and at $h_0 = 4$ m.</div><details><summary>Show solution</summary><div class="sol">$q_0 = k\sqrt{h_0}$, $\tau = 2A_t\sqrt{h_0}/k$, gain $\tau/A_t = 2\sqrt{h_0}/k$. At $h_0 = 1$: $q_0 = 0.4$, $\tau = 10$ s, $\delta H/\delta Q = 5/(10s + 1)$. At $h_0 = 4$: $q_0 = 0.8$, $\tau = 20$ s, $\delta H/\delta Q = 10/(20s + 1)$. Both the gain and the time constant double.</div></details></li><li><div class="q">Explain why linearization cannot decide the stability of the origin of $\dot x = -x^3$ and of $\dot x = x^3$, and decide it another way.</div><details><summary>Show solution</summary><div class="sol">Both have $\partial f/\partial x = \mp3x^2 = 0$ at $x = 0$, so the linear model is $\delta\dot x = 0$ (eigenvalue on the imaginary axis). Directly: for $\dot x = -x^3$, $x\dot x = -x^4 &lt; 0$, so $|x|$ always decreases: asymptotically stable. For $\dot x = x^3$, $|x|$ grows, and in fact escapes to infinity in finite time: unstable.</div></details></li><li><div class="q">Linearize the two-state, one-input system $\dot x_1 = x_2 + u\,x_1$, $\dot x_2 = -\sin x_1 - x_2 + u^2$, $y = x_1x_2$ about $x_0 = (0, 0)$, $u_0 = 0$. Find $A$, $B$, $C$, $D$.</div><details><summary>Show solution</summary><div class="sol">$A = \begin{bmatrix}u_0 & 1\\ -\cos x_{1,0} & -1\end{bmatrix} = \begin{bmatrix}0 & 1\\ -1 & -1\end{bmatrix}$, $B = \begin{bmatrix}x_{1,0}\\ 2u_0\end{bmatrix} = \begin{bmatrix}0\\0\end{bmatrix}$, $C = \begin{bmatrix}x_{2,0} & x_{1,0}\end{bmatrix} = \begin{bmatrix}0 & 0\end{bmatrix}$, $D = 0$. The input and output both vanish to first order: the linear model cannot be controlled or observed at this point, although the nonlinear system can be. Linearization can lose structure.</div></details></li></ol></section>
+    <!-- PRACTICE START: practice problems from the exercise compendium. To add one, copy a <li>...</li> line. Guide section 20. -->
+    <section class="lsec" id="practice"><h2>Practice problems from the exercise compendium</h2>
+    <p class="note">From <i>Exercises in Nonlinear Control Systems</i> by M. Johansson, B. Bernhardsson and K. H. Johansson (Department of Automatic Control, Lund University), Chapters 1 and 2. “Ex 2.6” means Chapter 2, Exercise 6. Work from the compendium statement. The hints and short answers here are written for this course; full solutions are not reproduced.</p>
+    <ol class="exlist practice"><li><div class="q"><span class="pno">Ex 2.6</span> A two-state system with output feedback $u = -Ky$: find the equilibria for every $K$ and the character of the origin.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> Set both right-hand sides to zero. The factors $1 + x_2^2$ and $1 + x_1^2$ never vanish, so equilibria need $u = x_1$ and $x_1 = 2x_2$. For the origin, the Jacobian is $\begin{bmatrix}-1 & -K\\ 1 & -2\end{bmatrix}$.<br><b>Answer.</b> For $K \ne -2$ only the origin; for $K = -2$ the whole line $x_1 = 2x_2$. $\mathrm{tr} = -3$, $\det = 2 + K$, discriminant $1 - 4K$: stable node for $-2 &lt; K &lt; 1/4$, stable focus for $K &gt; 1/4$ (locally asymptotically stable for all $K &gt; -2$), saddle for $K &lt; -2$.</div></details></li><li><div class="q"><span class="pno">Ex 2.9</span> Linearize the ball-on-beam equation around the trajectory with constant beam angle $\varphi_0$ and the ball accelerating down the beam.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> Use $\delta x = x - x^*(t)$ and $\delta\varphi = \varphi - \varphi_0$. Differentiate each term: $x\dot\varphi^2$ gives $\dot\varphi_0^2\,\delta x + 2x^*\dot\varphi_0\,\delta\dot\varphi$, and $\sin\varphi$ gives $\cos\varphi_0\,\delta\varphi$.<br><b>Answer.</b> Because $\dot\varphi_0 = 0$ the velocity terms drop out: $\frac75\,\delta\ddot x = g\cos\varphi_0\,\delta\varphi + \frac{2r}{5}\,\delta\ddot\varphi$ (with $g$ the gravity constant of the compendium equation). This one happens to be time-invariant.</div></details></li><li><div class="q"><span class="pno">Ex 2.10</span> Find a nominal solution for the given sinusoidal input and initial state, then linearize about it.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> Try $y^*(t) = \sin t$ and use $\sin^3 t = \frac{3\sin t - \sin 3t}{4}$.<br><b>Answer.</b> $y^* = \sin t$ satisfies the equation and the initial conditions. Linearizing $\frac43y^3$ gives $4y^{*2}\,\delta y$, so $\delta\ddot y + 4\sin^2 t\;\delta y = -\frac13\,\delta u$: a linear time-varying system.</div></details></li><li><div class="q"><span class="pno">Ex 1.12</span> Is the given system locally controllable at the origin? Linearize and test.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> Compute $A = \partial f/\partial x$ and $B = \partial f/\partial u$ at $(0, 0)$, then the rank of $[B\ \ AB]$. The term $u^2$ has zero derivative at $u_0 = 0$.<br><b>Answer.</b> $A = \begin{bmatrix}0 & 0\\ 1 & 0\end{bmatrix}$, $B = \begin{bmatrix}1\\0\end{bmatrix}$, $[B\ \ AB] = I$ has rank 2, so the linearization is controllable and the nonlinear system is locally controllable.</div></details></li><li><div class="q"><span class="pno">Ex 1.14</span> Simulate the pendulum of Ex 1.1 ($m = 1$, $g = 10$, $l = 1$, $k = 0.1$), find its linearizations numerically and compare with the hand-derived ones.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> By hand: $\ddot\theta = -\frac gl\sin\theta - \frac km\dot\theta$. Any simulation tool can linearize numerically (Simulink <code>linmod</code>, or Python finite differences).<br><b>Answer.</b> Hanging: $A = \begin{bmatrix}0 & 1\\ -10 & -0.1\end{bmatrix}$, $\lambda = -0.05 \pm j3.16$, stable focus. Inverted: $A = \begin{bmatrix}0 & 1\\ 10 & -0.1\end{bmatrix}$, $\lambda = 3.11,\ -3.21$, saddle. Equilibria repeat every $2\pi$, so they are not unique.</div></details></li></ol></section>
+    <!-- PRACTICE END -->
+    <nav class="prevnext"><a class="pn prev" href="02-phase-plane-analysis.html"><small>← Lesson 2</small>Phase plane analysis</a><a class="pn next" href="04-describing-function.html"><small>Lesson 4 →</small>Describing function analysis</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

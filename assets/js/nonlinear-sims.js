@@ -4,7 +4,7 @@
          optional: data-preset="ex7" (ex7 ... ex13, star, linear, pendulum, vdp, duffing, relay, quad)
          optional: data-only="ex7,ex8,linear" to limit the list of systems
      <div class="sim nls" data-nls="describing-function"></div>
-         optional: data-preset="saturation" (saturation, deadzone, relay, relay-dz, hysteresis, backlash, sat-dz)
+         optional: data-preset="saturation" (saturation, deadzone, relay, relaydz, hyst, dzhyst, backlash, cubic)
      <div class="sim nls" data-nls="lyapunov"></div>
      <div class="sim nls" data-nls="circle"></div>
      <div class="sim nls" data-nls="fblin"></div>
@@ -267,6 +267,131 @@
       var s0 = [B.iX(px), B.iY(py)]; starts.push(s0); trajs.push(integrate(s0, sys())); play();
     });
     setup(); ring(); draw(); onTheme(function () { draw(); });
+  };
+
+  /* ============ 2. Describing function explorer ============ */
+  function memStep(kind, par) {
+    return function (x, y) {
+      if (kind === 'hyst') { if (x >= par.h) return 1; if (x <= -par.h) return -1; return y; }
+      if (kind === 'dzhyst') { if (x >= par.on) return 1; if (x <= -par.on) return -1; if (Math.abs(x) < par.off) return 0; return y; }
+      if (kind === 'backlash') { return Math.min(Math.max(y, x - par.b), x + par.b); }
+      return y;
+    };
+  }
+  var DFN = {
+    saturation: { name: 'Saturation (K = 1, S = 1)', f: function (x) { return Math.max(-1, Math.min(1, x)); }, xr: 2.5, yr: 1.6 },
+    deadzone: { name: 'Dead zone (K = 1, D/2 = 0.5)', f: function (x) { return Math.abs(x) > 0.5 ? x - sgn(x) * 0.5 : 0; }, xr: 2.5, yr: 2 },
+    relay: { name: 'Ideal relay (M = 1)', f: function (x) { return sgn(x); }, xr: 2.5, yr: 1.6 },
+    relaydz: { name: 'Relay with dead zone (M = 1, a = 0.5)', f: function (x) { return Math.abs(x) > 0.5 ? sgn(x) : 0; }, xr: 2.5, yr: 1.6 },
+    hyst: { name: 'Relay with hysteresis (M = 1, h = 0.4)', mem: memStep('hyst', { h: 0.4 }), xr: 2.5, yr: 1.6 },
+    dzhyst: { name: 'Relay with dead zone and hysteresis (on 0.8, off 0.4)', mem: memStep('dzhyst', { on: 0.8, off: 0.4 }), xr: 2.5, yr: 1.6 },
+    backlash: { name: 'Backlash (K = 1, gap 2b = 0.8)', mem: memStep('backlash', { b: 0.4 }), xr: 2.5, yr: 2 },
+    cubic: { name: 'Cubic y = x³', f: function (x) { return x * x * x; }, xr: 2, yr: 4 }
+  };
+  function dfWave(nl, X, n) {
+    n = n || 720; var th = [], xs = [], ys = [], y = 0, i;
+    for (i = 0; i < 2 * n; i++) {
+      var t = 2 * Math.PI * (i + 0.5) / n, x = X * Math.sin(t);
+      y = nl.mem ? nl.mem(x, y) : nl.f(x);
+      if (i >= n) { th.push(t - 2 * Math.PI); xs.push(x); ys.push(y); }
+    }
+    var A = 0, Bc = 0;
+    for (i = 0; i < n; i++) { A += ys[i] * Math.sin(th[i]); Bc += ys[i] * Math.cos(th[i]); }
+    A *= 2 / n; Bc *= 2 / n;
+    return { th: th, x: xs, y: ys, A1: A, B1: Bc, N: [A / X, Bc / X] };
+  }
+
+  NLS['describing-function'] = function (root) {
+    var preset = root.getAttribute('data-preset') || 'saturation';
+    root.appendChild(el('h3', {}, 'Describing function explorer'));
+    root.appendChild(el('p', { 'class': 'desc' }, 'Top: a sine of amplitude X enters the nonlinearity; the plot shows the output (blue), its fundamental (pink dashed) and the describing function K_N. Bottom: the polar plot of G(jω) = K/(jω(jω+1)(jω+2)) and the critical locus −1/K_N(X). Each crossing predicts a limit cycle.'));
+    var box = el('div', { 'class': 'controls' }); root.appendChild(box);
+    var opts = Object.keys(DFN).map(function (k) { return [k, DFN[k].name]; });
+    if (!DFN[preset]) preset = 'saturation';
+    var sel = select(box, 'Nonlinearity', opts, preset, function () { draw(); });
+    var sX = slider(box, 'input amplitude X', 0.05, 4, 0.05, 1.5, function () { draw(); });
+    var sK = slider(box, 'plant gain K', 1, 40, 0.5, 10, function () { draw(); });
+    var c1 = canvas(root, 0.4, 240, 340);
+    var r1 = el('div', { 'class': 'readout' }); root.appendChild(r1);
+    var c2 = canvas(root, 0.55, 300, 480);
+    var r2 = el('div', { 'class': 'readout' }); root.appendChild(r2);
+
+    function G(w, K) { // K/(jw(jw+1)(jw+2))
+      var re = -3 * w * w, im = w * (2 - w * w); // denominator = jw(jw+1)(jw+2) = -3w^2 + j(2w - w^3)
+      var d = re * re + im * im; return [K * re / d, -K * im / d];
+    }
+    function phaseG(w) { return -Math.PI / 2 - Math.atan(w) - Math.atan(w / 2); }
+    function locus(nl) {
+      var pts = [], X;
+      for (var i = 0; i <= 400; i++) {
+        X = 0.03 * Math.pow(400, i / 400);
+        var N = dfWave(nl, X, 720).N, m2 = N[0] * N[0] + N[1] * N[1];
+        if (m2 < 1e-8) { pts.push(null); continue; }
+        pts.push({ X: X, p: [-N[0] / m2, N[1] / m2], N: N });
+      }
+      return pts;
+    }
+    function crossings(L, K) {
+      var out = [], prev = null;
+      L.forEach(function (q) {
+        if (!q) { prev = null; return; }
+        var ang = Math.atan2(q.p[1], q.p[0]); if (ang > 0) ang -= 2 * Math.PI; // in (-2π, 0]
+        var lo = 1e-4, hi = 1e3, w = null;
+        if (ang < phaseG(lo) && ang > phaseG(hi)) {
+          for (var k = 0; k < 60; k++) { var mid = Math.sqrt(lo * hi); if (phaseG(mid) > ang) lo = mid; else hi = mid; }
+          w = Math.sqrt(lo * hi);
+        }
+        var d = null;
+        if (w != null) { var g = G(w, K); d = Math.hypot(g[0], g[1]) - Math.hypot(q.p[0], q.p[1]); }
+        if (prev && prev.d != null && d != null && sgn(prev.d) !== sgn(d) && d !== 0) {
+          var f = prev.d / (prev.d - d);
+          out.push({ X: prev.X + f * (q.X - prev.X), w: prev.w + f * (w - prev.w), p: [prev.p[0] + f * (q.p[0] - prev.p[0]), prev.p[1] + f * (q.p[1] - prev.p[1])], stable: prev.d > 0 });
+        }
+        prev = { X: q.X, d: d, w: w, p: q.p };
+      });
+      return out;
+    }
+    function draw() {
+      var nl = DFN[sel.value], X = +sX.value, K = +sK.value;
+      var W = dfWave(nl, X), ink = css('--ink'), mut = css('--muted'), acc = css('--accent');
+      // ---- top: characteristic and waveforms
+      var g = fit(c1), ctx = g.ctx, pad = 44, cw = Math.min(g.h - 40, g.w * 0.34);
+      var Bc = Box(ctx, pad, 12, cw, g.h - 46, [-nl.xr, nl.xr], [-nl.yr, nl.yr]);
+      Bc.grid(1, nl.yr > 2 ? 1 : 0.5, 'x', 'y');
+      var ch = [], xx;
+      if (nl.mem) {
+        var Wc = dfWave(nl, nl.xr * 0.95, 400); for (var i = 0; i < Wc.x.length; i++) ch.push([Wc.x[i], Wc.y[i]]); ch.push(ch[0]);
+        Bc.line(ch, mut, 1.4, [4, 4]);
+      } else { for (xx = -nl.xr; xx <= nl.xr; xx += nl.xr / 300) ch.push([xx, nl.f(xx)]); Bc.line(ch, mut, 1.6); }
+      var used = W.x.map(function (v, i) { return [v, W.y[i]]; }); used.push(used[0]);
+      Bc.line(used, acc, 3);
+      var x0 = pad + cw + 60, Bw = Box(ctx, x0, 12, g.w - x0 - 12, g.h - 46, [0, 2 * Math.PI], [-Math.max(nl.yr, X), Math.max(nl.yr, X)]);
+      Bw.grid(Math.PI / 2, nl.yr > 2 || X > 2 ? 1 : 0.5, 'ωt (0 to 2π)', null);
+      Bw.line(W.th.map(function (t, i) { return [t, W.x[i]]; }), mut, 1.4);
+      Bw.line(W.th.map(function (t, i) { return [t, W.y[i]]; }), acc, 2.6);
+      Bw.line(W.th.map(function (t) { return [t, W.A1 * Math.sin(t) + W.B1 * Math.cos(t)]; }), PINK, 2, [6, 5]);
+      var mag = Math.hypot(W.N[0], W.N[1]), ph = Math.atan2(W.N[1], W.N[0]) * 180 / Math.PI;
+      r1.textContent = 'X = ' + X.toFixed(2) + ':  K_N = ' + mag.toFixed(3) + (Math.abs(ph) > 0.05 ? ' ∠ ' + ph.toFixed(1) + '°' : ' (real)') + '   ·   grey: input X sin ωt and the full characteristic; blue: output and the part of the characteristic in use; pink: fundamental.';
+      // ---- bottom: Nyquist and locus
+      var h = fit(c2); ctx = h.ctx;
+      var L = locus(nl), cr = crossings(L, K);
+      var R = Math.max(2.5, K / 6 * 2.2);
+      var Bn = Box(ctx, 50, 12, h.w - 66, h.h - 48, [-R, 0.25 * R], [-0.75 * R, 0.35 * R]);
+      var step = R > 8 ? 2 : R > 4 ? 1 : 0.5;
+      Bn.grid(step, step, 'Re', 'Im');
+      var gp = []; for (var k2 = 0; k2 <= 600; k2++) { var w = 0.05 * Math.pow(600, k2 / 600); gp.push(G(w, K)); }
+      Bn.line(gp, acc, 2.6);
+      var segs = [], cur = [];
+      L.forEach(function (q) { if (q) cur.push(q.p); else if (cur.length) { segs.push(cur); cur = []; } }); if (cur.length) segs.push(cur);
+      segs.forEach(function (sg) { Bn.line(sg, PINK, 2.6); });
+      var Nx = W.N, m2 = Nx[0] * Nx[0] + Nx[1] * Nx[1];
+      if (m2 > 1e-8) Bn.dot(-Nx[0] / m2, Nx[1] / m2, 6, css('--gold'), ink);
+      cr.forEach(function (q) { Bn.dot(q.p[0], q.p[1], 7, 'rgba(0,0,0,0)', q.stable ? GREEN : ORANGE); });
+      legend(ctx, 60, h.h - 8, [['G(jω)', acc], ['−1/K_N(X)', PINK]]);
+      var t = cr.length ? cr.map(function (q) { return 'limit cycle at X ≈ ' + q.X.toFixed(2) + ', ω ≈ ' + q.w.toFixed(2) + ' rad/s (period ' + (2 * Math.PI / q.w).toFixed(2) + ' s), ' + (q.stable ? 'stable (green ring)' : 'unstable (orange ring)') + ((q.p[0] < -R || q.p[1] < -0.75 * R || q.p[1] > 0.35 * R) ? ', outside the plot' : ''); }).join('   ·   ') : 'No crossing: no limit cycle is predicted for this K.';
+      r2.textContent = 'K = ' + K + ':  ' + t + '   ·   The filled dot is −1/K_N at the current X.';
+    }
+    draw(); onTheme(draw);
   };
 
   window.NLS = NLS;
