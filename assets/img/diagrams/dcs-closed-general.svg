@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 210" width="760" height="210" role="img" aria-label="Closed-loop sampled system: the error e(t) is sampled, the controller Gc(z) drives the hold G0(s) and plant Gp(s); the output y(t) returns through the sensor H(s).">
+<title>Closed-loop sampled system: the error e(t) is sampled, the controller Gc(z) drives the hold G0(s) and plant Gp(s); the output y(t) returns through the sensor H(s).</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker></defs>
+<rect width="760" height="210" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<text x="30.0" y="68.0" font-size="14" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">x(t)</text>
+<path d="M14.0 80.0 L66.0 80.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<circle cx="80.0" cy="80.0" r="13.0" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M70.9 70.9L89.1 89.1M70.9 89.1L89.1 70.9" stroke="#0f172a" stroke-width="1.3"/>
+<text x="59.0" y="73.0" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">+</text>
+<text x="94.0" y="106.0" font-size="16" text-anchor="middle" fill="#db2777" font-weight="700">−</text>
+<text x="116.0" y="68.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400" font-style="italic">e(t)</text>
+<path d="M93.0 80.0 L131.5 80.0" fill="none" stroke="#0f172a" stroke-width="2"/>
+<path d="M131.5 80.0 L153.5 64.0" fill="none" stroke="#0f172a" stroke-width="2"/>
+<path d="M151.5 80.0 L190.0 80.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="141.5" y="100.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400" font-style="italic">T</text>
+<text x="172.0" y="62.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400" font-style="italic">e(kT)</text>
+<rect x="190.0" y="58.0" width="100.0" height="44.0" rx="4" fill="#fff" stroke="#059669" stroke-width="2"/>
+<text x="240.0" y="85.0" font-size="15" text-anchor="middle" fill="#059669" font-weight="400">G_c(z)</text>
+<path d="M290.0 80.0 L350.0 80.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="352.0" y="58.0" width="96.0" height="44.0" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="400.0" y="85.0" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="400">G₀(s)</text>
+<path d="M448.0 80.0 L508.0 80.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="510.0" y="58.0" width="96.0" height="44.0" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="558.0" y="85.0" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="400">G_p(s)</text>
+<path d="M606.0 80.0 L740.0 80.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="700.0" y="68.0" font-size="14" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">y(t)</text>
+<circle cx="660.0" cy="80.0" r="4" fill="#0f172a"/>
+<path d="M660.0 80.0 L660.0 160.0 L400.0 160.0" fill="none" stroke="#0077b6" stroke-width="2" marker-end="url(#ab)"/>
+<rect x="340.0" y="142.0" width="60.0" height="36.0" rx="4" fill="#fff" stroke="#0077b6" stroke-width="2"/>
+<text x="370.0" y="165.0" font-size="14" text-anchor="middle" fill="#0077b6" font-weight="400">H(s)</text>
+<path d="M340.0 160.0 L80.0 160.0 L80.0 93.0" fill="none" stroke="#0077b6" stroke-width="2" marker-end="url(#ab)"/>
+<text x="200.0" y="152.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400" font-style="italic">b(t)</text>
+</g>
+</svg>

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 290" width="780" height="290" role="img" aria-label="Where the stable left half of the s-plane lands under three approximations: forward difference maps it to the half-plane Re z &lt; 1, which extends outside the unit circle; backward difference maps it into the small circle centred at 0.5 with radius 0.5; the bilinear (Tustin) transform maps it exactly onto the inside of the unit circle.">
+<title>Where the stable left half of the s-plane lands under three approximations: forward difference maps it to the half-plane Re z &lt; 1, which extends outside the unit circle; backward difference maps it into the small circle centred at 0.5 with radius 0.5; the bilinear (Tustin) transform maps it exactly onto the inside of the unit circle.</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker></defs>
+<rect width="780" height="290" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<text x="130.0" y="22.0" font-size="14" text-anchor="middle" fill="#ea7a1f" font-weight="700">Forward difference</text>
+<text x="130.0" y="278.0" font-size="13" text-anchor="middle" fill="#ea7a1f" font-weight="400" font-style="italic">z = 1 + sT</text>
+<rect x="10.0" y="30.0" width="200.0" height="220.0" rx="0" fill="#ea7a1f" stroke="none" stroke-width="0" fill-opacity="0.18"/>
+<path d="M210.0 30.0 L210.0 250.0" fill="none" stroke="#ea7a1f" stroke-width="2"/>
+<circle cx="130.0" cy="140.0" r="80.0" fill="none" stroke="#0f172a" stroke-width="1.3" stroke-dasharray="5 4"/>
+<path d="M10.0 140.0 L250.0 140.0" fill="none" stroke="#0f172a" stroke-width="1.5" marker-end="url(#ak)"/>
+<path d="M130.0 250.0 L130.0 30.0" fill="none" stroke="#0f172a" stroke-width="1.5" marker-end="url(#ak)"/>
+<text x="248.0" y="160.0" font-size="13" text-anchor="end" fill="#64748b" font-weight="400" font-style="italic">Re z</text>
+<text x="138.0" y="42.0" font-size="13" text-anchor="start" fill="#64748b" font-weight="400" font-style="italic">Im z</text>
+<text x="214.0" y="156.0" font-size="12" text-anchor="start" fill="#64748b" font-weight="400">1</text>
+<text x="390.0" y="22.0" font-size="14" text-anchor="middle" fill="#0077b6" font-weight="700">Backward difference</text>
+<text x="390.0" y="278.0" font-size="13" text-anchor="middle" fill="#0077b6" font-weight="400" font-style="italic">z = 1/(1 − sT)</text>
+<circle cx="430.0" cy="140.0" r="40.0" fill="#d6e8f4" stroke="#0077b6" stroke-width="2"/>
+<circle cx="390.0" cy="140.0" r="80.0" fill="none" stroke="#0f172a" stroke-width="1.3" stroke-dasharray="5 4"/>
+<path d="M270.0 140.0 L510.0 140.0" fill="none" stroke="#0f172a" stroke-width="1.5" marker-end="url(#ak)"/>
+<path d="M390.0 250.0 L390.0 30.0" fill="none" stroke="#0f172a" stroke-width="1.5" marker-end="url(#ak)"/>
+<text x="508.0" y="160.0" font-size="13" text-anchor="end" fill="#64748b" font-weight="400" font-style="italic">Re z</text>
+<text x="398.0" y="42.0" font-size="13" text-anchor="start" fill="#64748b" font-weight="400" font-style="italic">Im z</text>
+<text x="474.0" y="156.0" font-size="12" text-anchor="start" fill="#64748b" font-weight="400">1</text>
+<text x="650.0" y="22.0" font-size="14" text-anchor="middle" fill="#059669" font-weight="700">Bilinear (Tustin)</text>
+<text x="650.0" y="278.0" font-size="13" text-anchor="middle" fill="#059669" font-weight="400" font-style="italic">z = (1 + sT/2)/(1 − sT/2)</text>
+<circle cx="650.0" cy="140.0" r="80.0" fill="#d3efe5" stroke="#059669" stroke-width="2"/>
+<circle cx="650.0" cy="140.0" r="80.0" fill="none" stroke="#0f172a" stroke-width="1.3" stroke-dasharray="5 4"/>
+<path d="M530.0 140.0 L770.0 140.0" fill="none" stroke="#0f172a" stroke-width="1.5" marker-end="url(#ak)"/>
+<path d="M650.0 250.0 L650.0 30.0" fill="none" stroke="#0f172a" stroke-width="1.5" marker-end="url(#ak)"/>
+<text x="768.0" y="160.0" font-size="13" text-anchor="end" fill="#64748b" font-weight="400" font-style="italic">Re z</text>
+<text x="658.0" y="42.0" font-size="13" text-anchor="start" fill="#64748b" font-weight="400" font-style="italic">Im z</text>
+<text x="734.0" y="156.0" font-size="12" text-anchor="start" fill="#64748b" font-weight="400">1</text>
+</g>
+</svg>

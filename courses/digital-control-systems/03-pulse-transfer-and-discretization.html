@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 3: Pulse transfer functions and discretization · Digital Control Systems</title>
+<meta name="description" content="Pulse transfer functions and discretization">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 3: Pulse transfer functions and discretization  (Digital Control Systems, EACT 534, Chapter 2)
+  Edit the notes between the NOTES START and NOTES END markers below.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Figures live in assets/img/diagrams/ (names start with dcs-) and are shown with a figure of class "diagram".
+  To add an exercise, copy one list item inside the list of class "exlist".
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
+  <nav class="links"><a href="../digital-control-systems.html">Course home</a><a href="../digital-control-systems.html#lessons">Lessons</a><a href="../digital-control-systems.html#figures">Figures</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../digital-control-systems.html">← Digital Control Systems</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 3 of 3 · Chapter 2</div>
+    <h1>Pulse transfer functions and discretization</h1>
+    <p>Digital Control Systems · EACT 534 · Postgraduate course</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">EACT 534 · Digital Control Systems</div><ol><li><a href="01-discrete-time-and-z-transform.html"><span class="n">1</span>Discrete-time systems and the z-transform</a></li><li><a href="02-sampling-and-pulse-transfer.html"><span class="n">2</span>Sampling, ADC and DAC models, and the pulse transfer function</a></li><li class="on"><a href="03-pulse-transfer-and-discretization.html"><span class="n">3</span>Pulse transfer functions and discretization</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Find the pulse transfer function of open and closed sampled loops wherever the samplers sit</li><li>Tell when $G_1G_2(z)$ differs from $G_1(z)G_2(z)$ and when no closed-loop transfer function exists</li><li>Discretize $G(s)$ by impulse invariance, step invariance, forward and backward differences and the Tustin method</li><li>Compare the methods by where they map the stable region and by their step responses</li></ul></div>
+    <nav class="figstrip" aria-label="Figures in this lesson"><a href="#fig-pulse-tf"><img src="../../assets/img/diagrams/dcs-pulse-tf.svg" alt="" loading="lazy"><span>Pulse transfer function</span></a><a href="#fig-open-chain"><img src="../../assets/img/diagrams/dcs-open-chain.svg" alt="" loading="lazy"><span>Open sampled chain</span></a><a href="#fig-cascade"><img src="../../assets/img/diagrams/dcs-cascade-ab.svg" alt="" loading="lazy"><span>Sampler between blocks</span></a><a href="#fig-closed-general"><img src="../../assets/img/diagrams/dcs-closed-general.svg" alt="" loading="lazy"><span>Sampled closed loop</span></a><a href="#fig-cfg1"><img src="../../assets/img/diagrams/dcs-cfg-1.svg" alt="" loading="lazy"><span>Error sampler</span></a><a href="#fig-cfg2"><img src="../../assets/img/diagrams/dcs-cfg-2.svg" alt="" loading="lazy"><span>Feedback sampler only</span></a><a href="#fig-cfg3"><img src="../../assets/img/diagrams/dcs-cfg-3.svg" alt="" loading="lazy"><span>Two samplers</span></a><a href="#fig-cfg4"><img src="../../assets/img/diagrams/dcs-cfg-4.svg" alt="" loading="lazy"><span>Sampler between G1, G2</span></a><a href="#fig-cfg5"><img src="../../assets/img/diagrams/dcs-cfg-5.svg" alt="" loading="lazy"><span>Two forward samplers</span></a><a href="#fig-cfg6"><img src="../../assets/img/diagrams/dcs-cfg-6.svg" alt="" loading="lazy"><span>Inner and outer loop</span></a><a href="#fig-cfg7"><img src="../../assets/img/diagrams/dcs-cfg-7.svg" alt="" loading="lazy"><span>Three sampled blocks</span></a><a href="#fig-cfg8"><img src="../../assets/img/diagrams/dcs-cfg-8.svg" alt="" loading="lazy"><span>Three blocks, two loops</span></a><a href="#fig-ch2-ex1"><img src="../../assets/img/diagrams/dcs-ch2-ex1.svg" alt="" loading="lazy"><span>Example 1 loop</span></a><a href="#fig-ii-strips"><img src="../../assets/img/diagrams/dcs-ii-strips.svg" alt="" loading="lazy"><span>Pole replication</span></a><a href="#fig-zoh-equiv"><img src="../../assets/img/diagrams/dcs-zoh-equiv.svg" alt="" loading="lazy"><span>ZOH equivalent</span></a><a href="#fig-method-maps"><img src="../../assets/img/diagrams/dcs-method-maps.svg" alt="" loading="lazy"><span>Stability regions</span></a><a href="#fig-trapezoid"><img src="../../assets/img/diagrams/dcs-trapezoid.svg" alt="" loading="lazy"><span>Trapezoidal rule</span></a><a href="#fig-step-compare"><img src="../../assets/img/diagrams/dcs-step-compare.svg" alt="" loading="lazy"><span>Four methods compared</span></a></nav>
+    <section class="lsec"><h2>Notes</h2>
+    <!-- NOTES START -->
+    <article class="notes">
+<p>Lesson 2 found the z-transfer function of one cascade: DAC, plant, ADC. Real loops put samplers in different places, and a digital controller is usually designed first in continuous time and then turned into a difference equation. This lesson covers both: <b>pulse transfer functions</b> of open and closed sampled loops, and the four common <b>discretization methods</b>.</p>
+
+<h3 id="pulse-tf">The pulse transfer function</h3>
+<figure class="diagram" id="fig-pulse-tf"><img src="../../assets/img/diagrams/dcs-pulse-tf.svg" alt="Sampler, G(s), sampler" loading="lazy"><figcaption>When both the input and the output of a block are sampled, the block has a pulse transfer function $G(z) = Y(z)/X(z)$.</figcaption></figure>
+<p>The <b>pulse transfer function</b> relates the z-transform of the sampled output to that of the sampled input, with zero initial conditions: $G(z) = Y(z)/X(z) = \mathcal{Z}\{G(s)\}$, where $\mathcal{Z}\{G(s)\}$ is shorthand for "find $g(t) = \mathcal{L}^{-1}\{G(s)\}$, sample it, and z-transform the samples".</p>
+
+<h4>Open-loop systems</h4>
+<figure class="diagram" id="fig-open-chain"><img src="../../assets/img/diagrams/dcs-open-chain.svg" alt="Sampler, controller Gc(z), hold G0(s), plant Gp(s), sampler" loading="lazy"><figcaption>A digital controller, a hold and a plant in an open chain.</figcaption></figure>
+<p>The hold $G_0(s)$ and the plant $G_p(s)$ have no sampler between them, so they must be transformed <b>together</b>:</p>
+<p class="eq">$$Y(z) = \mathcal{Z}\{G_0(s)G_p(s)\}\,G_c(z)\,X(z) = G(z)\,G_c(z)\,X(z)$$</p>
+<p class="key">Blocks separated by a sampler multiply as z-transforms: $G_1(z)G_2(z)$. Blocks joined directly are multiplied first and transformed once: $\mathcal{Z}\{G_1(s)G_2(s)\}$, written $G_1G_2(z)$. In general $G_1G_2(z) \ne G_1(z)G_2(z)$.</p>
+<figure class="diagram" id="fig-cascade"><img src="../../assets/img/diagrams/dcs-cascade-ab.svg" alt="Two cascades of 1/(s+a) and 1/(s+b), with and without a sampler between them" loading="lazy"><figcaption>The same two blocks give different pulse transfer functions depending on whether a sampler separates them.</figcaption></figure>
+<p>For (a), with a sampler between the blocks:</p>
+<p class="eq">$$G_a(z) = \mathcal{Z}\left\{\frac{1}{s + a}\right\}\mathcal{Z}\left\{\frac{1}{s + b}\right\} = \frac{z^2}{(z - e^{-aT})(z - e^{-bT})}$$</p>
+<p>For (b), with the blocks joined directly, expand $\dfrac{1}{(s + a)(s + b)} = \dfrac{1}{b - a}\left[\dfrac{1}{s + a} - \dfrac{1}{s + b}\right]$ first:</p>
+<p class="eq">$$G_b(z) = \frac{1}{b - a}\left[\frac{z}{z - e^{-aT}} - \frac{z}{z - e^{-bT}}\right] = \frac{(e^{-aT} - e^{-bT})\,z}{(b - a)(z - e^{-aT})(z - e^{-bT})}$$</p>
+<p>The poles are the same but the numerators differ, so the two systems respond differently.</p>
+<p class="warn">The slide draws the second cascade with $1/(s+b)$ in both blocks. The comparison only makes sense with the same two blocks in each row, so this page uses $1/(s+a)$ and $1/(s+b)$ in both.</p>
+
+<h4>Closed-loop systems</h4>
+<figure class="diagram" id="fig-closed-general"><img src="../../assets/img/diagrams/dcs-closed-general.svg" alt="Closed loop with error sampler, Gc(z), G0(s), Gp(s) and H(s) in the feedback path" loading="lazy"><figcaption>A digital controller inside a loop with a continuous sensor $H(s)$.</figcaption></figure>
+<p>Write the sampled error: $E(z) = X(z) - \mathcal{Z}\{H(s)G_0(s)G_p(s)\}\,G_c(z)E(z)$, and the output $Y(z) = G(z)G_c(z)E(z)$. Eliminating $E(z)$:</p>
+<p class="eq">$$Y(z) = \frac{G_c(z)\,G(z)}{1 + G_c(z)\,\mathcal{Z}\{H(s)G_0(s)G_p(s)\}}\,X(z)$$</p>
+<p class="warn">The slide's formula leaves out the factor $X(z)$ on the right-hand side. Dividing by $X(z)$ gives the closed-loop pulse transfer function.</p>
+<p><b>The method for any sampled loop.</b> (1) Name the output of every sampler; these are the only sampled signals. (2) Write each sampler's input in terms of $R(s)$ and the sampled signals, multiplying continuous blocks together. (3) Take the starred transform of each equation: a product with a starred signal becomes $GH(z)E(z)$. (4) Solve the algebraic equations. If the input $R(s)$ reaches a continuous block before any sampler, it stays inside a transform such as $RG(z)$, and <b>no transfer function $C(z)/R(z)$ exists</b>; only the output $C(z)$ can be found.</p>
+
+<h3 id="configurations">Common sampled-loop configurations</h3>
+<p>The table below is worth knowing well. Each figure is one row; $GH(z)$ means $\mathcal{Z}\{G(s)H(s)\}$ and $RG(z)$ means $\mathcal{Z}\{R(s)G(s)\}$.</p>
+<figure class="diagram" id="fig-cfg1"><img src="../../assets/img/diagrams/dcs-cfg-1.svg" alt="Error sampler, G(s), H(s) feedback" loading="lazy"><figcaption>1. $\;C(z) = \dfrac{G(z)R(z)}{1 + GH(z)}$</figcaption></figure>
+<figure class="diagram" id="fig-cfg2"><img src="../../assets/img/diagrams/dcs-cfg-2.svg" alt="No forward sampler, sampler before H(s)" loading="lazy"><figcaption>2. $\;C(z) = \dfrac{RG(z)}{1 + GH(z)}$ (no transfer function: $R$ enters $G$ unsampled)</figcaption></figure>
+<figure class="diagram" id="fig-cfg3"><img src="../../assets/img/diagrams/dcs-cfg-3.svg" alt="Error sampler and feedback sampler" loading="lazy"><figcaption>3. $\;C(z) = \dfrac{G(z)R(z)}{1 + G(z)H(z)}$</figcaption></figure>
+<figure class="diagram" id="fig-cfg4"><img src="../../assets/img/diagrams/dcs-cfg-4.svg" alt="G1(s), sampler, G2(s), no error sampler" loading="lazy"><figcaption>4. $\;C(z) = \dfrac{G_2(z)\,RG_1(z)}{1 + G_1G_2H(z)}$</figcaption></figure>
+<figure class="diagram" id="fig-cfg5"><img src="../../assets/img/diagrams/dcs-cfg-5.svg" alt="Error sampler, G1(s), sampler, G2(s)" loading="lazy"><figcaption>5. $\;C(z) = \dfrac{G_1(z)G_2(z)R(z)}{1 + G_1(z)G_2H(z)}$</figcaption></figure>
+<figure class="diagram" id="fig-cfg6"><img src="../../assets/img/diagrams/dcs-cfg-6.svg" alt="Inner loop H1 and outer loop H2 with samplers" loading="lazy"><figcaption>6. $\;C(z) = \dfrac{G_1(z)G_2(z)R(z)}{1 + G_2H_1(z) + G_1(z)G_2H_2(z)}$</figcaption></figure>
+<figure class="diagram" id="fig-cfg7"><img src="../../assets/img/diagrams/dcs-cfg-7.svg" alt="Three blocks separated by samplers, feedback sampler" loading="lazy"><figcaption>7. $\;C(z) = \dfrac{G_1(z)G_2(z)G_3(z)R(z)}{1 + G_1(z)G_2(z)G_3(z)H(z)}$</figcaption></figure>
+<figure class="diagram" id="fig-cfg8"><img src="../../assets/img/diagrams/dcs-cfg-8.svg" alt="Three blocks, inner loop H1 and outer loop H2" loading="lazy"><figcaption>8. $\;C(z) = \dfrac{G_1(z)G_2(z)G_3(z)R(z)}{1 + G_2(z)G_3H_1(z) + G_1(z)G_2(z)G_3H_2(z)}$</figcaption></figure>
+<p><b>Derivation of row 4</b>, as a check of the method. Let $v$ be the output of $G_1$, which is sampled. Then $V(s) = G_1(s)R(s) - G_1(s)H(s)G_2(s)V^*(s)$. Starring: $V(z) = RG_1(z) - G_1G_2H(z)V(z)$, so $V(z) = RG_1(z)/(1 + G_1G_2H(z))$, and $C(z) = G_2(z)V(z)$.</p>
+<p class="warn">The slide gives row 4 the same answer as row 5, $R(z)G_1(z)G_2(z)/(1 + G_1(z)G_2H(z))$. Without a sampler at the error, $R$ and $G_1$ are transformed together, as derived above.</p>
+
+<h4>Example 1</h4>
+<figure class="diagram" id="fig-ch2-ex1"><img src="../../assets/img/diagrams/dcs-ch2-ex1.svg" alt="Error sampler, ZOH, K/(s+1), unity feedback" loading="lazy"><figcaption>Example 1: $G_1(s) = (1 - e^{-sT})/s$ (zero-order hold) and $G_2(s) = K/(s + 1)$.</figcaption></figure>
+<p>Find the closed-loop pulse transfer function. This is row 1 with $G = G_1G_2$ and $H = 1$. The open-loop part is the ZOH-plant cascade of Lesson 2:</p>
+<p class="eq">$$G(z) = (1 - z^{-1})\,\mathcal{Z}\left\{\frac{K}{s(s + 1)}\right\} = \frac{z - 1}{z}\,K\left[\frac{z}{z - 1} - \frac{z}{z - e^{-T}}\right] = \frac{K(1 - e^{-T})}{z - e^{-T}}$$</p>
+<p class="eq">$$\frac{C(z)}{R(z)} = \frac{G(z)}{1 + G(z)} = \frac{K(1 - e^{-T})}{z - e^{-T} + K(1 - e^{-T})}$$</p>
+<p>The closed-loop pole is $z = e^{-T} - K(1 - e^{-T})$. It stays inside the unit circle only while $K &lt; (1 + e^{-T})/(1 - e^{-T})$; for $T = 1$ s that is $K &lt; 2.16$.</p>
+
+<h3 id="discretization">Principles of discretization</h3>
+<p>Most industrial processes are continuous and are modelled by differential equations or transfer functions in $s$, and a wide range of design methods exists for continuous systems. To implement a design on a computer we need a discrete-time version. <b>Discretization</b> means: given $G(s)$, find a $G(z)$ with similar characteristics. No method preserves every characteristic exactly, so we need to know what each method keeps and what errors it introduces.</p>
+<table class="tbl"><tr><th>Method</th><th>What it matches</th><th>Notes</th></tr>
+<tr><td>Impulse invariance</td><td>The impulse response at the sampling instants</td><td>Good time-domain match; aliasing at high frequencies.</td></tr>
+<tr><td>Step invariance (ZOH)</td><td>The step response at the sampling instants</td><td>Exact for a plant driven by a DAC. Used for plant models.</td></tr>
+<tr><td>Finite differences</td><td>Derivatives replaced by forward, backward or central differences</td><td>Simple and cheap; approximation error grows with $T$.</td></tr>
+<tr><td>Bilinear (Tustin)</td><td>Integration by the trapezoidal rule</td><td>Preserves stability; good frequency response. Used for controllers.</td></tr></table>
+
+<h3 id="impulse-invariance">Impulse invariance</h3>
+<p>Choose $G(z)$ so that its impulse response equals the samples of the continuous impulse response: $g(k) = g_a(t)\big|_{t=kT} = g_a(kT)$. The procedure:</p>
+<ol>
+<li>Find the impulse response $g_a(t) = \mathcal{L}^{-1}\{G_a(s)\}$.</li>
+<li>Choose $T$ and sample: $g(k) = g_a(kT)$.</li>
+<li>Z-transform: $G(z) = \mathcal{Z}\{g(k)\}$, written briefly as $G(z) = \mathcal{Z}\{G_a(s)\}$. In practice, expand $G_a(s)$ in partial fractions and use the transform table term by term.</li>
+</ol>
+<p><b>Example.</b> $g_a(t) = e^{-at}$, so $G_a(s) = \dfrac{1}{s + a}$, $g(k) = e^{-akT}$ and $G(z) = \dfrac{z}{z - e^{-aT}}$.</p>
+<figure class="diagram" id="fig-ii-strips"><img src="../../assets/img/diagrams/dcs-ii-strips.svg" alt="Pole at -a replicated every 2 pi over T, all mapping to one z-plane pole" loading="lazy"><figcaption>Sampling replicates every pole every $2\pi/T$ along the imaginary axis; all copies map to the same z-plane pole.</figcaption></figure>
+<p>Sampling the impulse response gives the impulse train $g^*(t) = \sum g(k)\delta(t - kT)$, whose Laplace transform is $G^*(s) = \sum g(k)e^{-skT}$. With $z = e^{sT}$ this is exactly $G(z)$. In frequency terms,</p>
+<p class="eq">$$G(e^{j\Omega}) = \frac{1}{T}\sum_{k=-\infty}^{\infty} G_a\left(j\frac{\Omega}{T} - j\frac{2\pi k}{T}\right)$$</p>
+<p>The continuous frequency response is <b>replicated</b> every $2\pi/T$ and <b>scaled</b> by $1/T$. If $G_a(j\omega)$ is not negligible above $\omega_m = \pi/T$, the copies overlap and alias. Hence:</p>
+<ul>
+<li>the left half of the s-plane maps inside the unit circle, and the imaginary axis in the primary strip maps onto the unit circle, so stable stays stable;</li>
+<li>impulse invariance is <b>unsuitable</b> when $|G_a(j\omega)|$ does not approach zero as $\omega \to \infty$ (high-pass filters, lead compensators, any $G_a(s)$ with as many zeros as poles).</li>
+</ul>
+<p class="key">Because of the $1/T$ scaling, the DC gain of $\mathcal{Z}\{G_a(s)\}$ is about $1/T$ times the continuous DC gain. When impulse invariance is used to design a filter, the result is usually multiplied by $T$: $G(z) = T\,\mathcal{Z}\{G_a(s)\}$.</p>
+
+<h3 id="step-invariance">Step invariance: the zero-order-hold equivalent</h3>
+<figure class="diagram" id="fig-zoh-equiv"><img src="../../assets/img/diagrams/dcs-zoh-equiv.svg" alt="Sampler, zero-order hold, Ga(s)" loading="lazy"><figcaption>Step invariance is the same as putting a zero-order hold in front of the plant.</figcaption></figure>
+<p>Now match the step responses. A unit step $m(t)$ has $\mathcal{L}\{m\} = 1/s$, so the analog output is $y(t) = \mathcal{L}^{-1}\{G_a(s)/s\}$, and its samples have z-transform</p>
+<p class="eq">$$Y(z) = \mathcal{Z}\left\{\mathcal{L}^{-1}\left[\frac{G_a(s)}{s}\right]_{t=kT}\right\} \qquad (1)$$</p>
+<p>The discrete system driven by a sampled step gives $Y(z) = G(z)\dfrac{z}{z - 1}$ (2). Equating (1) and (2):</p>
+<p class="eq">$$G(z) = (1 - z^{-1})\,\mathcal{Z}\left\{\frac{G_a(s)}{s}\right\}$$</p>
+<p>This is exactly $G_{ZAS}(z)$ from Lesson 2. To see why, write the hold as $(1 - e^{-sT})/s$. With $g_1(t) = \mathcal{L}^{-1}\{G_a(s)/s\}$ and $G_1(z) = \mathcal{Z}\{g_1(kT)\}$, the delayed term gives $\mathcal{Z}\{G_a(s)e^{-sT}/s\} = z^{-1}G_1(z)$ by the shift property, so $\mathcal{Z}\{G_a(s)(1 - e^{-sT})/s\} = (1 - z^{-1})G_1(z)$.</p>
+
+<h3 id="finite-difference">Finite-difference methods</h3>
+<p>Replace each derivative by a difference between consecutive samples. Use the first-order equation</p>
+<p class="eq">$$\frac{dy}{dt} + ay(t) = r(t), \qquad G_a(s) = \frac{1}{s + a}$$</p>
+<h4>Backward difference</h4>
+<p>$\dfrac{dy}{dt} \approx \dfrac{y(kT) - y((k-1)T)}{T}$. Substituting:</p>
+<p class="eq">$$\frac{y(kT) - y((k-1)T)}{T} + ay(kT) = r(kT) \quad\Longrightarrow\quad y(kT) = \frac{1}{1 + aT}\left[y((k-1)T) + Tr(kT)\right]$$</p>
+<p>Z-transforming, $(1 - z^{-1})Y(z) + aTY(z) = TR(z)$, so</p>
+<p class="eq">$$G(z) = \frac{Y(z)}{R(z)} = \frac{T}{1 - z^{-1} + aT}, \qquad s = \frac{1 - z^{-1}}{T}, \qquad z = \frac{1}{1 - sT}$$</p>
+<p class="warn">The slide writes $G(z) = 1/(1 - z^{-1} + aT)$. The line before it has $TR(z)$ on the right, so the numerator is $T$. Without it the DC gain would be $1/(aT)$ instead of $1/a$.</p>
+<figure class="diagram" id="fig-method-maps"><img src="../../assets/img/diagrams/dcs-method-maps.svg" alt="Images of the left half s-plane under forward, backward and bilinear maps" loading="lazy"><figcaption>Where the stable left half of the s-plane lands under each approximation. The dashed circle is $|z| = 1$.</figcaption></figure>
+<p><b>Stability.</b> Put $s = j\omega$ into $z = 1/(1 - sT)$: $z - \tfrac{1}{2} = \tfrac{1}{2}\,\dfrac{1 + j\omega T}{1 - j\omega T}$, whose magnitude is always $\tfrac12$. So the imaginary axis maps onto the circle centred at $(0.5, 0)$ with radius 0.5, and the left half-plane maps <b>inside</b> it: writing $z = a + jb$, $(a - 0.5)^2 + b^2 &lt; 0.25$. A stable $G_a(s)$ always gives a stable $G(z)$, but the small circle covers only part of the unit disc, so lightly damped poles become more damped than they should be.</p>
+<p class="warn">The slide reaches this circle via "Re$(z - 1) &lt; 0$", which is not the right step (that would be the half-plane Re $z &lt; 1$). The condition is Re$\left((1 - z^{-1})/T\right) &lt; 0$, which gives the circle shown.</p>
+<p><b>Warping.</b> A point on the unit circle, $z = e^{j\omega T}$, maps back to $s = (1 - e^{-j\omega T})/T$, which is not on the imaginary axis. For small $\omega T$, $e^{-j\omega T} \approx 1 - j\omega T$ and $s \approx j\omega$, so the distortion is negligible only when sampling is fast.</p>
+<h4>Forward difference</h4>
+<p>$\dfrac{dy}{dt} \approx \dfrac{y((k+1)T) - y(kT)}{T}$ gives</p>
+<p class="eq">$$y((k+1)T) = y(kT) + T\left[-ay(kT) + r(kT)\right], \qquad G(z) = \frac{T}{z - 1 + aT} = \frac{Tz^{-1}}{1 - (1 - aT)z^{-1}}$$</p>
+<p class="eq">$$s = \frac{z - 1}{T}, \qquad z = 1 + sT$$</p>
+<p class="warn">The slide writes $G(z) = 1/(1 - z^{-1} - aT)$. Z-transforming the difference equation gives $zY = Y - aTY + TR$, so $G(z) = T/(z - 1 + aT)$.</p>
+<p>The forward map sends the left half-plane to Re $z &lt; 1$, which reaches far outside the unit circle. A stable $G_a(s)$ can become unstable: here the pole $z = 1 - aT$ leaves the unit circle when $aT &gt; 2$.</p>
+
+<h3 id="tustin">The bilinear (Tustin) transformation</h3>
+<p>A one-to-one map from the whole s-plane to the z-plane that avoids these problems is</p>
+<p class="eq">$$s = \frac{2}{T}\,\frac{z - 1}{z + 1}, \qquad z = \frac{1 + sT/2}{1 - sT/2}$$</p>
+<ul>
+<li>The entire $j\omega$ axis maps onto the unit circle.</li>
+<li>The left half-plane maps inside the unit circle; the right half-plane maps outside.</li>
+<li>Stable analog systems always give stable discrete systems, with no aliasing.</li>
+</ul>
+<figure class="diagram" id="fig-trapezoid"><img src="../../assets/img/diagrams/dcs-trapezoid.svg" alt="Forward, backward and trapezoidal approximations to an integral" loading="lazy"><figcaption>Forward and backward differences are rectangle rules; Tustin is the trapezoid rule.</figcaption></figure>
+<p><b>Where it comes from.</b> An integrator $1/s$ accumulates area. The trapezoidal rule approximates the area over one step by</p>
+<p class="eq">$$\int_{(k-1)T}^{kT} y(t)\,dt \approx T\,\frac{y(k) + y(k - 1)}{2}$$</p>
+<p>so the running integral $x(k) = x(k-1) + \tfrac{T}{2}\left[y(k) + y(k-1)\right]$ has transfer function $\dfrac{T}{2}\dfrac{z + 1}{z - 1}$. Replacing every $1/s$ by this is the same as substituting $s = \dfrac{2}{T}\dfrac{z - 1}{z + 1}$.</p>
+<p class="warn">The slide writes the integral from $kT$ to $(k+1)T$ but averages $y(k)$ and $y(k-1)$. The limits that go with those two samples are $(k-1)T$ to $kT$.</p>
+<p><b>Frequency warping.</b> Because the whole infinite $j\omega$ axis is squeezed onto one turn of the unit circle, frequencies are compressed: a continuous frequency $\omega_a$ appears at the discrete frequency $\omega$ with $\omega_a = \dfrac{2}{T}\tan\dfrac{\omega T}{2}$. At low frequencies $\omega \approx \omega_a$. If one frequency (a notch or a crossover) must be exact, <b>pre-warp</b> it: design the analog filter for $\omega_a$ computed from this formula, then apply Tustin.</p>
+<figure class="diagram" id="fig-step-compare"><img src="../../assets/img/diagrams/dcs-step-compare.svg" alt="Step responses of 1/(s+1) and its four discrete equivalents with T = 0.5 s" loading="lazy"><figcaption>$G(s) = 1/(s + 1)$ discretized with $T = 0.5$ s. The ZOH equivalent is exact at the samples; Tustin is close; the difference methods drift.</figcaption></figure>
+<table class="tbl"><tr><th>Method</th><th>$G(z)$ for $1/(s + 1)$, $T = 0.5$</th><th>Pole</th></tr>
+<tr><td>ZOH (step invariant)</td><td>$\dfrac{0.3935}{z - 0.6065}$</td><td>$e^{-0.5} = 0.6065$ (exact)</td></tr>
+<tr><td>Tustin</td><td>$\dfrac{0.2(z + 1)}{z - 0.6}$</td><td>0.6</td></tr>
+<tr><td>Backward difference</td><td>$\dfrac{0.3333z}{z - 0.6667}$</td><td>0.6667</td></tr>
+<tr><td>Forward difference</td><td>$\dfrac{0.5}{z - 0.5}$</td><td>0.5</td></tr></table>
+</article>
+    <!-- NOTES END -->
+    </section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the div below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">Compute the inverse z-transforms of $F_1(z) = \dfrac{10z}{(z - 1)(z - 0.5)}$ and $F_2(z) = \dfrac{2z^3 + z}{(z - 2)^2(z - 1)}$.</div><details><summary>Show solution</summary><div class="sol">$\dfrac{F_1(z)}{z} = \dfrac{20}{z - 1} - \dfrac{20}{z - 0.5}$, so $f_1(k) = 20\left(1 - 0.5^k\right)$: $\{0, 10, 15, 17.5, \dots\}$.<br>$\dfrac{F_2(z)}{z} = \dfrac{2z^2 + 1}{(z - 2)^2(z - 1)} = \dfrac{3}{z - 1} - \dfrac{1}{z - 2} + \dfrac{9}{(z - 2)^2}$. Using $\mathcal{Z}\{k a^{k-1}\} = z/(z - a)^2$, $f_2(k) = 3 - 2^k + 9k\,2^{k-1}$: $\{2, 10, 35, \dots\}$, which matches long division.</div></details></li>
+<li><div class="q">Find the transfer functions of (a) $y(k) + 0.5y(k-1) = 2x(k)$ (b) $y(k) + 2y(k-1) - y(k-2) = 2x(k) - x(k-1) + 2x(k-2)$ (c) $y(kT) + 3y(kT - T) + 4y(kT - 2T) + 5y(kT - 3T) = r(kT) - 3r(kT - T) + 2r(kT - 2T)$.</div><details><summary>Show solution</summary><div class="sol">Each delay becomes a factor $z^{-1}$.<br>(a) $\dfrac{2}{1 + 0.5z^{-1}} = \dfrac{2z}{z + 0.5}$<br>(b) $\dfrac{2 - z^{-1} + 2z^{-2}}{1 + 2z^{-1} - z^{-2}} = \dfrac{2z^2 - z + 2}{z^2 + 2z - 1}$<br>(c) $\dfrac{1 - 3z^{-1} + 2z^{-2}}{1 + 3z^{-1} + 4z^{-2} + 5z^{-3}} = \dfrac{z(z^2 - 3z + 2)}{z^3 + 3z^2 + 4z + 5}$</div></details></li>
+<li><div class="q">Write the difference equations for $G(z) = \dfrac{z^4 + 3z^3 + 2z^2 + z + 1}{z^4 + 4z^3 + 5z^2 + 3z + 2}$ and $H(z) = \dfrac{z}{z^2 - 1.7z + 0.72}$.</div><details><summary>Show solution</summary><div class="sol">Divide top and bottom by the highest power of $z$ to get powers of $z^{-1}$, then read off the delays.<br>$G$: $y(k) + 4y(k-1) + 5y(k-2) + 3y(k-3) + 2y(k-4) = x(k) + 3x(k-1) + 2x(k-2) + x(k-3) + x(k-4)$.<br>$H = \dfrac{z^{-1}}{1 - 1.7z^{-1} + 0.72z^{-2}}$: $y(k) = 1.7y(k-1) - 0.72y(k-2) + x(k-1)$. The poles are 0.8 and 0.9, so it is stable.</div></details></li>
+<li><div class="q">In Example 1 take $T = 0.5$ s. Find the largest $K$ for a stable loop and the closed-loop pole when $K = 1$.</div><details><summary>Show solution</summary><div class="sol">$e^{-0.5} = 0.6065$. The pole is $z = 0.6065 - 0.3935K$, which reaches $-1$ when $K = 1.6065/0.3935 = 4.08$. So the loop is stable for $0 &lt; K &lt; 4.08$. With $K = 1$ the pole is at $z = 0.213$.</div></details></li>
+<li><div class="q">Discretize the PI controller $C(s) = 2 + \dfrac{4}{s}$ with $T = 0.1$ s using the Tustin method, and write the control law as a difference equation.</div><details><summary>Show solution</summary><div class="sol">Replace $1/s$ by $\dfrac{T}{2}\dfrac{z + 1}{z - 1} = 0.05\dfrac{z + 1}{z - 1}$: $C(z) = 2 + 0.2\dfrac{z + 1}{z - 1} = \dfrac{2.2z - 1.8}{z - 1}$. So $u(k) = u(k-1) + 2.2e(k) - 1.8e(k-1)$.</div></details></li>
+<li><div class="q">Why is impulse invariance a poor choice for the lead compensator $C(s) = \dfrac{s + 1}{s + 10}$?</div><details><summary>Show solution</summary><div class="sol">$|C(j\omega)| \to 1$ as $\omega \to \infty$: the compensator is not band limited, so the replicated spectra overlap and alias badly. Its impulse response also contains an impulse ($C(s) = 1 - 9/(s + 10)$), which sampling cannot represent. Use Tustin (or a pole-zero matching method) for compensators.</div></details></li></ol>
+    </section>
+    <nav class="prevnext"><a class="pn prev" href="02-sampling-and-pulse-transfer.html"><small>← Lesson 2</small>Sampling, ADC and DAC models, and the pulse transfer function</a><a class="pn next" href="../digital-control-systems.html"><small>Course home →</small>Digital Control Systems</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>
