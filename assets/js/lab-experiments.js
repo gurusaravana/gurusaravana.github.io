@@ -551,6 +551,14 @@
     }
   };
 
+  /* ---------- extra simulations from other files ----------
+     Another script loaded BEFORE this one can add entries to LAB:
+       (window.LAB_PLUGINS = window.LAB_PLUGINS || []).push(function (LAB, kit) { LAB.mySim = {...}; });
+     kit holds the helpers above (rk4, specs, line, ax, kv, ...). Used by assets/js/industrial-sims.js. */
+  var KIT = { f: f, sig: sig, eng: eng, roots: roots, isStable: isStable, fmtRoot: fmtRoot, rk4: rk4, stepTF: stepTF, range: range, crossTime: crossTime, specs: specs,
+    colors: colors, ax: ax, phone: phone, line: line, hline: hline, vline: vline, title: title, table: table, kv: kv, sec: sec, pct: pct, DEG: DEG };
+  (window.LAB_PLUGINS || []).forEach(function (fn) { try { fn(LAB, KIT); } catch (e) { if (window.console) console.error(e); } });
+
   /* ---------- build the controls and plots on the page ---------- */
   function fmtVal(d, v) {
     if (d.type === 'number') return v;
@@ -567,7 +575,15 @@
     ex.params.forEach(function (d) {
       var lab = el('label'), v = el('b', null, fmtVal(d, d.val)), inp = document.createElement('input');
       p[d.name] = d.val;
-      if (d.type === 'number') {
+      if (d.type === 'select') {
+        // drop-down list: d.options = [[value, 'label'], ...]
+        lab.innerHTML = '<span>' + d.label + '</span>'; inp = document.createElement('select'); inp.setAttribute('aria-label', d.label);
+        d.options.forEach(function (o) { var op = document.createElement('option'); op.value = o[0]; op.textContent = o[1]; inp.appendChild(op); });
+        inp.value = d.val;
+        inp.onchange = function () { p[d.name] = isNaN(+inp.value) ? inp.value : +inp.value; schedule(); };
+        inp.setVal = function (x) { inp.value = x; p[d.name] = x; };
+        lab.appendChild(inp);
+      } else if (d.type === 'number') {
         lab.innerHTML = '<span>' + d.label + '</span>'; inp.type = 'number'; inp.step = 'any'; inp.value = d.val; inp.setAttribute('aria-label', d.label);
         inp.oninput = function () { var x = parseFloat(inp.value); if (isFinite(x)) { p[d.name] = x; schedule(); } };
         inp.setVal = function (x) { inp.value = x; p[d.name] = x; };

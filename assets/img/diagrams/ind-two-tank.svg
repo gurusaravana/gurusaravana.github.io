@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300" width="640" height="300" role="img" aria-label="Two interacting tanks: inflow qi enters tank 1 (area A1, level h1); a pipe with resistance R1 carries flow q1 to tank 2 (area A2, level h2); tank 2 drains through resistance R2 as flow q2. A level transmitter on tank 2 feeds the level controller, which sets the inflow valve.">
+<title>Two interacting tanks: inflow qi enters tank 1 (area A1, level h1); a pipe with resistance R1 carries flow q1 to tank 2 (area A2, level h2); tank 2 drains through resistance R2 as flow q2. A level transmitter on tank 2 feeds the level controller, which sets the inflow valve.</title>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ai" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#4f46e5"/></marker><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker></defs>
+<rect width="640" height="300" fill="#ffffff"/>
+<g fill="none" stroke="#0f172a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" font-family="Inter, Arial, sans-serif">
+<rect x="101" y="140" width="128" height="109" fill="#7dd3fc" stroke="none" opacity=".8"/><path d="M100 90V250H230V90"/>
+<rect x="331" y="175" width="128" height="74" fill="#7dd3fc" stroke="none" opacity=".8"/><path d="M330 90V250H460V90"/>
+<path d="M230 235H270 M294 235H330"/><path d="M270 225L294 245V225L270 245Z" fill="#fff"/><text x="282" y="268" fill="#475569" stroke="none" font-size="13" font-weight="400" text-anchor="middle">R₁, flow q₁</text>
+<path d="M460 235H510 M534 235H600" /><path d="M510 225L534 245V225L510 245Z" fill="#fff"/><text x="560" y="268" fill="#475569" stroke="none" font-size="13" font-weight="400" text-anchor="middle">R₂, outflow q₂</text>
+<path d="M20 60H60 M84 60H165V90"/><path d="M60 48L84 72V48L60 72Z" fill="#fff"/><path d="M72 60V40 M58 40a14 14 0 0 1 28 0Z" fill="#e0e7ff" stroke="#4f46e5"/><text x="20" y="84" fill="#475569" stroke="none" font-size="13" font-weight="400" text-anchor="start">inflow qᵢ</text>
+<text x="165" y="196" fill="#075985" stroke="none" font-size="14" text-anchor="middle" font-style="italic" font-weight="500">h₁, A₁</text><text x="395" y="216" fill="#075985" stroke="none" font-size="14" text-anchor="middle" font-style="italic" font-weight="500">h₂, A₂</text>
+<text x="165" y="120" fill="#475569" stroke="none" font-size="13" font-weight="400" text-anchor="middle">tank 1</text><text x="395" y="120" fill="#475569" stroke="none" font-size="13" font-weight="400" text-anchor="middle">tank 2</text>
+<path d="M460 190H500"/><circle cx="522" cy="190" r="20" fill="#fff" stroke="#4f46e5"/><text x="522" y="195" fill="#4f46e5" stroke="none" font-size="13" text-anchor="middle" font-weight="600">LT</text>
+<circle cx="522" cy="80" r="20" fill="#fff" stroke="#4f46e5"/><text x="522" y="85" fill="#4f46e5" stroke="none" font-size="13" text-anchor="middle" font-weight="600">LC</text>
+<path d="M522 170V102" stroke="#4f46e5" stroke-dasharray="6 5" marker-end="url(#ai)"/><path d="M522 60V22H72V28" stroke="#4f46e5" stroke-dasharray="6 5" marker-end="url(#ai)"/>
+<path d="M620 80H545" stroke="#db2777" marker-end="url(#ar)"/><text x="625" y="70" fill="#db2777" stroke="none" font-size="13" text-anchor="end" font-weight="500">set-point</text>
+<text x="320" y="292" fill="#475569" stroke="none" font-size="13" font-weight="400" text-anchor="middle">Interacting: the flow q₁ = (h₁ − h₂)/R₁ depends on both levels</text>
+</g></svg>

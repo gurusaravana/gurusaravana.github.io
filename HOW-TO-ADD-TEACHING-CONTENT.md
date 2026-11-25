@@ -314,3 +314,32 @@ The phone number and email addresses on the original title slides are not on the
 - The **Bode deck** (PUx EEE2510 Module 3 Bode) is now the notes of `courses/control-system-engineering/13-bode-plots.html`: why a sine gives a sine, the y = 2u + ∫u example done both ways, decibels, the three kinds of frequency response, the six specifications, the second-order formulas with a worked example, the factor table, how to draw a Bode plot (four stages, seven steps), the K s² gain-shifting example, and reading the margins. Diagrams start with `bode-` in `assets/img/diagrams/`.
 - The **root locus lecture** was compared with Lesson 12; only the new parts were added to `12-root-locus.html`, after worked example 2: choosing K for K/(s(s+3)) three ways, the s = jω crossing method, worked examples 3 (poles 0, −1, −2) and 4 (the circle round a zero), designing K for an overshoot limit, varying a parameter other than K, and the MATLAB commands. New diagrams: `rl-s-s3`, `rl-steps`, `rl-three-poles`, `rl-circle`.
 - The deck's pictures were redrawn rather than copied. Where a slide had a slip, Lesson 13 gives the corrected numbers in a "Watch out" box (the Mr, ωr and ωb of the second-order example, and the bandwidth chart). The Bode sketch of (2s + 1)/s is drawn with the correct shape (falling at −20 dB/decade, then flat at 6 dB).
+
+## 17. Textbook practice problems at the end of each lesson (Control System Engineering)
+
+Every lesson in `courses/control-system-engineering/` now ends with a **Practice problems from the textbook** section, placed between the comments `PRACTICE START` and `PRACTICE END`. The problems are the end-of-chapter Problems of N. S. Nise, *Control Systems Engineering*, 7th edition (Wiley, 2015). Each line shows:
+
+- the problem number, for example `Nise 4.24` (Chapter 4, Problem 24),
+- the textbook section it practises (`§4.6`),
+- a one-line summary of what the problem asks,
+- a hint, and for some problems a short answer, behind a "Hint" button.
+
+Students work from the book's own statement and figure. Only short hints and answers written for this course are on the site; the book's full problem text, figures and solutions are not copied (they are copyrighted).
+
+To add a problem, copy one `<li>...</li>` inside `<ol class="exlist practice">` and change the number, section, summary and hint. To give an answer as well, add `<br><b>Answer.</b> ...` after the hint and change the button text from `Hint` to `Hint and answer`.
+
+## 18. Industrial process simulations (Control System Engineering)
+
+The page `courses/control-system-engineering/industrial-simulations.html` has five simulations of typical industrial problems:
+
+1. tank level control (nonlinear draining tank, P or PI with anti-windup),
+2. two interacting tanks (the liquid-level system of D'Azzo, Houpis and Sheldon, Section 2.11),
+3. temperature of a steam-heated tank with dead time (on/off, P, PI, PID),
+4. conveyor drive speed with a 100 V voltage limit (integrator windup and anti-windup),
+5. a PID tuning workbench (reaction curve, Ziegler–Nichols, Cohen–Coon and AMIGO rules on three example processes).
+
+Each simulation is one `<section class="lsec labexp indsim">` block with the problem, a diagram (`assets/img/diagrams/ind-*.svg`, plus the existing `tank-level-control.svg` and `pid-reaction-curve.svg`), the model, the simulation, a **Sources** line and open questions. The full reference list is at the bottom of the page. If you add a simulation, always add its sources in the same style.
+
+The maths is in `assets/js/industrial-sims.js`. It uses the same slider engine as the lab experiments page (`assets/js/lab-experiments.js`), so the page must load `industrial-sims.js` first, then Plotly, then `lab-experiments.js`. To change a default value, find the simulation in `industrial-sims.js` (for example `LAB['ind-tank']`) and change `val:` for that slider. Drop-down lists use `type: 'select'` with an `options` list.
+
+The process numbers are example values chosen for teaching and are labelled as such on the page. Lessons 1, 4, 7, 8 and 10 link to the matching simulation, and the course home page lists them under Simulations.
