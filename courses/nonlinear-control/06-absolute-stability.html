@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 6: Sector nonlinearities, circle and Popov criteria · Nonlinear Control</title>
+<meta name="description" content="Sector nonlinearities and the Lur’e system; quadratic Lyapunov functions and the S-procedure; positive real and strictly positive real transfer functions and the Kalman–Yakubovich–Popov lemma; absolute stability, the circle criterion and the Popov criterion with worked examples; input-to-state stability and input–output (L) stability.">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 6: Sector nonlinearities, circle and Popov criteria  (Nonlinear Control, EACT 633)
+  Edit the notes between the NOTES START and NOTES END markers below.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Figures live in assets/img/diagrams/ (names start with nlc-) and are shown with a figure of class "diagram".
+  To add an exercise, copy one list item inside the list of class "exlist".
+  Guide: HOW-TO-ADD-TEACHING-CONTENT.md, section 20.
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
+  <nav class="links"><a href="../nonlinear-control.html">Course home</a><a href="../nonlinear-control.html#lessons">Lessons</a><a href="../nonlinear-control.html#figures">Figures</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../nonlinear-control.html">← Nonlinear Control</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 6 of 7 · Chapter 4</div>
+    <h1>Sector nonlinearities, circle and Popov criteria</h1>
+    <p>Nonlinear Control · EACT 633 · Postgraduate course</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">EACT 633 · Nonlinear Control</div><ol><li><a href="01-introduction.html"><span class="n">1</span>Introduction to nonlinear systems</a></li><li><a href="02-phase-plane-analysis.html"><span class="n">2</span>Phase plane analysis</a></li><li><a href="03-linearization.html"><span class="n">3</span>Linearization</a></li><li><a href="04-describing-function.html"><span class="n">4</span>Describing function analysis</a></li><li><a href="05-lyapunov-stability.html"><span class="n">5</span>Lyapunov stability</a></li><li class="on"><a href="06-absolute-stability.html"><span class="n">6</span>Sector nonlinearities, circle and Popov criteria</a></li><li><a href="07-feedback-linearization.html"><span class="n">7</span>Feedback linearization</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Find the sector $[\alpha, \beta]$ of a static nonlinearity and write the closed loop as a Lur’e system</li><li>Explain how a quadratic Lyapunov function and the S-procedure turn a sector bound into a linear matrix inequality</li><li>Decide whether a transfer function is positive real or strictly positive real, and state the KYP lemma</li><li>Apply the three cases of the circle criterion on a Nyquist plot, including loop transformation for an unstable $G(s)$</li><li>Use the Popov plot and explain why the Popov criterion allows larger sectors than the circle criterion</li><li>Test a system for input-to-state stability and finite-gain $\mathcal L$ stability with a Lyapunov function</li></ul></div>
+    <nav class="figstrip" aria-label="Figures in this lesson"><a href="#fig-sector"><img src="../../assets/img/diagrams/nlc-abs-sector.svg" alt="" loading="lazy"><span>Sector bounds</span></a><a href="#fig-lure"><img src="../../assets/img/diagrams/nlc-abs-lure.svg" alt="" loading="lazy"><span>Lur’e system</span></a><a href="#fig-pr"><img src="../../assets/img/diagrams/nlc-abs-pr.svg" alt="" loading="lazy"><span>Positive real or not</span></a><a href="#fig-cases"><img src="../../assets/img/diagrams/nlc-abs-circle-cases.svg" alt="" loading="lazy"><span>Circle criterion cases</span></a><a href="#fig-ex713"><img src="../../assets/img/diagrams/nlc-abs-ex713.svg" alt="" loading="lazy"><span>Three sectors, one plot</span></a><a href="#fig-ex714"><img src="../../assets/img/diagrams/nlc-abs-ex714.svg" alt="" loading="lazy"><span>Unstable plant</span></a><a href="#fig-popov"><img src="../../assets/img/diagrams/nlc-abs-popov.svg" alt="" loading="lazy"><span>Popov plot</span></a><a href="#fig-iss"><img src="../../assets/img/diagrams/nlc-abs-iss.svg" alt="" loading="lazy"><span>ISS or not</span></a></nav>
+    <section class="lsec"><h2>Notes</h2>
+    <!-- NOTES START -->
+    <article class="notes">
+<h3 id="sector">Sector nonlinearities</h3>
+<p>Many control loops are a linear plant with one awkward element: a saturating actuator, a relay, a dead zone, friction, a sensor that is not quite linear. Often we do not know the nonlinearity exactly, only that its graph lies between two straight lines. That is enough for strong results.</p>
+<div class="key">A function $\varphi : \mathbb R \to \mathbb R$ is in the <b>sector $[l, u]$</b> if, for every $q$, the value $p = \varphi(q)$ lies between $lq$ and $uq$. As one quadratic inequality:
+$$(p - uq)(p - lq) \le 0 \quad\text{for all } q, \; p = \varphi(q).$$</div>
+<p>Three equivalent ways to say the same thing:</p>
+<ul>
+<li>$\left|\varphi(q) - \frac{u + l}{2}q\right| \le \frac{u - l}{2}|q|$: the graph stays within a cone of half-width $\frac{u - l}{2}$ about the middle line of slope $\frac{u + l}{2}$.</li>
+<li>For each $q$ there is a number $\theta(q) \in [l, u]$ with $\varphi(q) = \theta(q)\,q$: a “gain” that may change with $q$ but never leaves $[l, u]$.</li>
+<li>Special cases: sector $[-1, 1]$ means $|\varphi(q)| \le |q|$; sector $[0, \infty]$ means $\varphi(q)$ always has the sign of $q$ (graph in the first and third quadrants).</li>
+</ul>
+<figure class="diagram" id="fig-sector"><img src="../../assets/img/diagrams/nlc-abs-sector.svg" alt="Three plots: a nonlinearity between two lines through the origin, saturation in the sector from 0 to 1, and saturation restricted to an interval with a smaller sector" loading="lazy"><figcaption>Left: a nonlinearity in the sector $[l, u]$. Middle: unit saturation lies in $[0, 1]$. Right: if we only need $|y| \le a$, saturation lies in the narrower sector $[1/a, 1]$, which is useful when the plant is unstable (Example 7.15 below).</figcaption></figure>
+<p>A sector may also be <b>local</b>: the inequality need only hold for $q$ in an interval $[a, b]$ round zero. Then the conclusions are local too. The same idea works for vector nonlinearities: $\psi$ belongs to the sector $[K_{\min}, K_{\max}]$ if $\big(\psi(t, y) - K_{\min}y\big)^T\big(\psi(t, y) - K_{\max}y\big) \le 0$, with $K = K_{\max} - K_{\min}$ symmetric positive definite.</p>
+
+<h3 id="lure">The Lur’e system</h3>
+<p>Separate the loop into a linear part and a nonlinear, possibly time-varying part:</p>
+<p class="eq">$$\dot x = Ax + Bu, \qquad y = Cx, \qquad u = -\psi(t, y), \qquad G(s) = C(sI - A)^{-1}B .$$</p>
+<figure class="diagram" id="fig-lure"><img src="../../assets/img/diagrams/nlc-abs-lure.svg" alt="Block diagram: a linear system G(s) in the forward path and a sector nonlinearity psi in negative feedback" loading="lazy"><figcaption>The Lur’e system: $A, B, C$ and the sector $[\alpha, \beta]$ are known; about $\psi$ we know nothing else.</figcaption></figure>
+<p>Some texts write the same loop as $\dot x = Ax + Bp$, $q = Cx$, $p = \varphi(t, q)$, i.e. with the minus sign inside $\varphi$. Watch the sign when you compare formulas.</p>
+<p>The goal is to prove stability <b>using only the sector information</b>. If we succeed, the result covers a whole family of nonlinear, time-varying loops at once, which is also a way of handling uncertainty.</p>
+<div class="key">The Lur’e system is <b>absolutely stable</b> (for a sector) if the origin is globally uniformly asymptotically stable for <i>every</i> nonlinearity in that sector. If this holds only near the origin it is absolutely stable with a finite domain.</div>
+<div class="warn">It is tempting to check only the linear gains $\psi(y) = ky$, $k \in [\alpha, \beta]$, with the Nyquist or Routh test. That is not enough. Aizerman’s conjecture (that it would be) is false, and so is the stronger Kalman conjecture: there are loops that are stable for every constant gain in the sector but have a limit cycle for some nonlinearity in it. The criteria below give conditions that are sufficient for the whole sector.</div>
+
+<h3 id="lmi">Quadratic Lyapunov functions and the S-procedure</h3>
+<p>Try $V(z) = z^TPz$ with $P &gt; 0$ and ask for $\dot V \le -\alpha V$ for a chosen decay rate $\alpha &gt; 0$. In the $(p, q)$ form, along the loop</p>
+<p class="eq">$$\dot V + \alpha V = 2z^TP(Az + Bp) + \alpha z^TPz \le 0$$</p>
+<p>must hold for all $z$ and all $p$ with $(p - uq)(p - lq) \le 0$, $q = Cz$. Both are quadratic forms in $(z, p)$. With $\sigma = lu$ and $\nu = \frac{l + u}{2}$:</p>
+<p class="eq">$$\begin{bmatrix}z\\p\end{bmatrix}^T\begin{bmatrix}A^TP + PA + \alpha P &amp; PB\\B^TP &amp; 0\end{bmatrix}\begin{bmatrix}z\\p\end{bmatrix} \le 0 \quad\text{whenever}\quad \begin{bmatrix}z\\p\end{bmatrix}^T\begin{bmatrix}\sigma C^TC &amp; -\nu C^T\\-\nu C &amp; 1\end{bmatrix}\begin{bmatrix}z\\p\end{bmatrix} \le 0 .$$</p>
+<p>The <b>S-procedure</b> replaces “one quadratic form is $\le 0$ wherever another is $\le 0$” by “the first is $\le \tau$ times the second, for some $\tau \ge 0$”. For a single constraint this is exact (lossless). It gives the <b>linear matrix inequality</b> (LMI)</p>
+<p class="eq">$$\begin{bmatrix}A^TP + PA + \alpha P - \tau\sigma C^TC &amp; PB + \tau\nu C^T\\B^TP + \tau\nu C &amp; -\tau\end{bmatrix} \le 0, \qquad P \ge I,$$</p>
+<p>in the unknowns $P$ and $\tau$. ($P \ge I$ replaces $P &gt; 0$ because the inequality is homogeneous in $(P, \tau)$; the $(2, 2)$ block forces $\tau \ge 0$.) Modern solvers decide such LMIs quickly, so we can find out whether a quadratic Lyapunov function exists. The same LMI can be solved through a Riccati-like equation, or graphically, and the graphical form is the circle criterion below.</p>
+<p>Compare the older approach: replace $\varphi$ by its middle gain $\nu q$, solve $(A + \nu BC)^TP + P(A + \nu BC) = -Q$ and hope that $P$ also works for the nonlinear loop. The LMI searches over all $P$ instead of trying one.</p>
+<h4>Several nonlinearities</h4>
+<p>With $p_i = \varphi_i(t, q_i)$, each in its own sector $[l_i, u_i]$, use one multiplier $\tau_i \ge 0$ per constraint. With $D = \mathrm{diag}(\tau_i)$, $F = \mathrm{diag}(l_iu_i)$ and $G = \mathrm{diag}\big(\frac{l_i + u_i}{2}\big)$:</p>
+<p class="eq">$$\begin{bmatrix}A^TP + PA + \alpha P - C^TDFC &amp; PB + C^TDG\\B^TP + GDC &amp; -D\end{bmatrix} \le 0 .$$</p>
+<p>Now the S-procedure is only sufficient (lossy), but the test is still an LMI in $P$ and $D$.</p>
+<p><b>Example (three integrators, after S. Boyd’s notes).</b> $\dot x_2 = \varphi_1(t, x_1)$, $\dot x_3 = \varphi_2(t, x_2)$, $\dot x_1 = \varphi_3\big(t, -2(x_1 + x_2 + x_3)\big)$ with every $\varphi_i$ in $[1 - \delta, 1 + \delta]$, so $\delta$ is the “percentage of nonlinearity”. For $\delta = 0$ the loop is linear and stable. To bound $J = \int_0^\infty \|x\|^2dt$ from $x(0) = (1, 0, 0)$, ask for $\dot V \le -z^Tz$ instead of $-\alpha V$; then $J \le x(0)^TPx(0) = P_{11}$, and we minimize $P_{11}$ over the LMI. The source reports that the bound is exact for $\delta = 0$ ($J = 1$), gives $J \le 1.65$ at $\delta = 0.05$ (a simulation with a deliberately bad nonlinearity reaches $1.49$), and that the LMI becomes infeasible near $\delta = 0.15$.</p>
+
+<h3 id="pr">Positive real transfer functions</h3>
+<p>For the frequency-domain criteria we need one more idea. Let $G(s) = \dfrac{b_ms^m + \dots + b_0}{s^n + a_{n-1}s^{n-1} + \dots + a_0}$ with $n \ge m$.</p>
+<div class="key">$G(s)$ is <b>positive real</b> (PR) if $\mathrm{Re}\,G(s) \ge 0$ whenever $\mathrm{Re}\,s \ge 0$. It is <b>strictly positive real</b> (SPR) if $G(s - \varepsilon)$ is PR for some $\varepsilon &gt; 0$.</div>
+<p>So a PR function maps the closed right half-plane into the closed right half-plane. In circuit terms PR means passive: the impedance of a network of resistors, capacitors and inductors is PR.</p>
+<p><b>Example 7.11.</b> $G(s) = \dfrac{1}{s + \lambda}$, $\lambda &gt; 0$: $G(\sigma + j\omega) = \dfrac{\sigma + \lambda - j\omega}{(\sigma + \lambda)^2 + \omega^2}$ has positive real part for $\sigma \ge 0$, so $G$ is PR, and also SPR (take $\varepsilon = \lambda/2$).</p>
+<p>The definition is hard to check directly for higher orders. Two theorems make it practical:</p>
+<ul>
+<li><b>SPR test.</b> $G$ is SPR if and only if (1) $G$ is strictly stable (all poles in the open left half-plane) and (2) $\mathrm{Re}\,G(j\omega) &gt; 0$ for all $\omega \ge 0$.</li>
+<li><b>PR test.</b> $G$ is PR if and only if (1) it has no poles in the open right half-plane, and (2) its poles on the $j\omega$ axis are simple with real, non-negative residues, and $\mathrm{Re}\,G(j\omega) \ge 0$ elsewhere on the axis.</li>
+</ul>
+<p>Consequences that rule many functions out at a glance. An SPR function</p>
+<ul>
+<li>is strictly stable, and its Nyquist plot lies in the right half-plane (phase between $-90^\circ$ and $90^\circ$);</li>
+<li>has relative degree $0$ or $1$;</li>
+<li>is strictly minimum phase (all zeros in the open left half-plane).</li>
+</ul>
+<p>Four test cases with $a, b &gt; 0$: $G_1 = \dfrac{s - 1}{s^2 + as + b}$ is not SPR (non-minimum phase); $G_2 = \dfrac{s + 1}{s^2 - s + 1}$ is not SPR (unstable); $G_3 = \dfrac{1}{s^2 + as + b}$ is not SPR (relative degree $2$); and $G_4 = \dfrac{s + 1}{s^2 + s + 1}$ <b>is</b> SPR, because it is strictly stable and</p>
+<p class="eq">$$\mathrm{Re}\,G_4(j\omega) = \frac{1}{(1 - \omega^2)^2 + \omega^2} &gt; 0 \quad\text{for all } \omega .$$</p>
+<figure class="diagram" id="fig-pr"><img src="../../assets/img/diagrams/nlc-abs-pr.svg" alt="Two polar plots: one stays in the right half-plane, the other crosses into the left half-plane" loading="lazy"><figcaption>$G_4$ (left) stays in the right half-plane: SPR. $G_3$ with $a = b = 1$ (right) has phase down to $-180^\circ$ and enters the left half-plane: not PR.</figcaption></figure>
+<p>The difference between PR and SPR is the $j\omega$ axis: $G(s) = 1/s$ is PR (simple pole at $0$, residue $1$; $\mathrm{Re}\,G(\sigma + j\omega) = \sigma/(\sigma^2 + \omega^2) \ge 0$) but not SPR. For a $p \times p$ transfer matrix, PR means poles in $\mathrm{Re}\,s \le 0$, $G(j\omega) + G^T(-j\omega) \ge 0$ at every $\omega$ that is not a pole, and simple $j\omega$-axis poles with positive semidefinite Hermitian residues.</p>
+
+<h3 id="kyp">The Kalman–Yakubovich–Popov lemma</h3>
+<p>This lemma links the frequency-domain property (PR, SPR) to a state-space matrix equation, which is exactly what a Lyapunov proof needs. Let $G(s) = C(sI - A)^{-1}B + D$ be $p \times p$ with $(A, B)$ controllable and $(A, C)$ observable.</p>
+<ul>
+<li><b>Positive real lemma.</b> $G$ is PR if and only if there are $P = P^T &gt; 0$, $L$ and $W$ with
+$$PA + A^TP = -L^TL, \qquad PB = C^T - L^TW, \qquad W^TW = D + D^T .$$</li>
+<li><b>KYP lemma.</b> $G$ is SPR if and only if the same holds with $PA + A^TP = -L^TL - \varepsilon P$ for some $\varepsilon &gt; 0$.</li>
+</ul>
+<p>Read it as: $V = x^TPx$ is a storage function. The first equation makes $V$ decrease when the input is zero; the second ties the output to $\nabla V$.</p>
+
+<h3 id="circle">The circle criterion</h3>
+<h4>Step 1: a stable plant and the sector $[0, K]$</h4>
+<p>Let $A$ be Hurwitz and $\psi$ satisfy $\psi^T(\psi - Ky) \le 0$, i.e. the sector $[0, K]$. Take $V = x^TPx$. Along the loop $\dot V = x^T(PA + A^TP)x - 2x^TPB\psi$. Since $-2\psi^T(\psi - Ky) \ge 0$ we may add it:</p>
+<p class="eq">$$\dot V \le x^T(PA + A^TP)x + 2x^T(C^TK - PB)\psi - 2\psi^T\psi .$$</p>
+<p>If $P$, $L$ and $\varepsilon &gt; 0$ satisfy $PA + A^TP = -L^TL - \varepsilon P$ and $PB = C^TK - \sqrt2\,L^T$, the right side becomes $-\varepsilon x^TPx - (Lx - \sqrt2\psi)^T(Lx - \sqrt2\psi) \le -\varepsilon x^TPx$. By the KYP lemma (with $W = \sqrt2 I$, i.e. $D + D^T = 2I$) such matrices exist exactly when</p>
+<p class="eq">$$Z(s) = I + KG(s) \quad\text{is SPR.}$$</p>
+<h4>Step 2: loop transformation</h4>
+<p>For a general sector $[K_{\min}, K_{\max}]$, or an unstable $A$, feed $K_{\min}y$ forward around the nonlinearity and back around the plant. The new plant is $G_T = G(I + K_{\min}G)^{-1}$ (state matrix $A - BK_{\min}C$), and the new nonlinearity $\psi_T = \psi - K_{\min}y$ lies in $[0, K]$ with $K = K_{\max} - K_{\min}$. Then $I + KG_T = (I + K_{\max}G)(I + K_{\min}G)^{-1}$.</p>
+<div class="key"><b>Multivariable circle criterion.</b> With $(A, B)$ controllable, $(A, C)$ observable and $\psi$ globally in $[K_{\min}, K_{\max}]$, the system is absolutely stable if $G_T = G(I + K_{\min}G)^{-1}$ is Hurwitz and $Z_T = (I + K_{\max}G)(I + K_{\min}G)^{-1}$ is SPR.</div>
+<p><b>Small gain as a special case (Example 7.12).</b> If $G$ is Hurwitz with $\gamma_1 = \sup_\omega \|G(j\omega)\|$ (largest singular value) and $\|\psi(t, y)\| \le \gamma_2\|y\|$, the sector is $[-\gamma_2 I, \gamma_2 I]$, and the conditions hold whenever $\gamma_1\gamma_2 &lt; 1$. Closing a loop round a stable plant with a small enough nonlinear gain cannot destroy stability.</p>
+<h4>Step 3: the scalar case on the Nyquist plot</h4>
+<p>For one input and one output, with sector $[\alpha, \beta]$, $\beta &gt; \alpha$, we need $G_T = \dfrac{G}{1 + \alpha G}$ Hurwitz and $\mathrm{Re}\dfrac{1 + \beta G(j\omega)}{1 + \alpha G(j\omega)} &gt; 0$ for all $\omega$. Write $D(\alpha, \beta)$ for the disk whose diameter is the segment from $-1/\alpha$ to $-1/\beta$ on the real axis. For a point $q = G(j\omega)$, $\frac{1/\beta + q}{1/\alpha + q}$ has positive real part exactly when the angle between the lines from $q$ to $-1/\beta$ and to $-1/\alpha$ is less than $90^\circ$, i.e. when $q$ is outside the disk.</p>
+<div class="key"><b>Circle criterion.</b> Let $G$ have $m$ poles in the open right half-plane and let $\psi$ be globally in $[\alpha, \beta]$. The system is absolutely stable if one of these holds:
+<ol>
+<li>$0 &lt; \alpha &lt; \beta$: the Nyquist plot of $G(j\omega)$ does not enter $D(\alpha, \beta)$ and encircles it $m$ times anticlockwise.</li>
+<li>$0 = \alpha &lt; \beta$: $G$ is Hurwitz and the Nyquist plot lies to the right of the line $\mathrm{Re}\,s = -1/\beta$.</li>
+<li>$\alpha &lt; 0 &lt; \beta$: $G$ is Hurwitz and the Nyquist plot lies inside $D(\alpha, \beta)$.</li>
+</ol>
+If the sector holds only on an interval $[a, b]$, the conclusion is absolute stability with a finite domain.</div>
+<figure class="diagram" id="fig-cases"><img src="../../assets/img/diagrams/nlc-abs-circle-cases.svg" alt="Three Nyquist plots with a forbidden region: outside a disk, right of a vertical line, inside a disk" loading="lazy"><figcaption>The three cases. Pink is forbidden. As $\alpha \to \beta = k$ the disk shrinks to the point $-1/k$ and we recover the ordinary Nyquist criterion for the gain $k$.</figcaption></figure>
+<p>The name comes from the disk. The criterion is a generalized Nyquist test: the point $-1/k$ is replaced by a disk that covers every gain in the sector.</p>
+
+<h4>Example 7.13: a stable plant, three answers</h4>
+<p class="eq">$$G(s) = \frac{4}{(s + 1)(\frac12s + 1)(\frac13s + 1)} .$$</p>
+<p>$G$ is Hurwitz, so all three cases are open to us, and each gives a different sector. None of them is “the” answer; they are different sufficient conditions.</p>
+<ul>
+<li><b>Case 3 with a disk about the origin.</b> $\gamma_1 = \sup|G(j\omega)| = 4$ (at $\omega = 0$), so the disk $|s| \le 4$ through $\pm4$ works and $\psi$ may lie in $[-0.25 + \epsilon, 0.25 - \epsilon]$.</li>
+<li><b>Case 3 with a better disk.</b> Centre $1.5$: the farthest point of the plot is $2.834$ away, so radius $2.9$ encloses it. The disk runs from $-1.4$ to $4.4$, i.e. $-1/\beta = -1.4$, $-1/\alpha = 4.4$: the sector $[-0.227, 0.714]$.</li>
+<li><b>Case 2.</b> The smallest real part of $G(j\omega)$ is $-0.859$, so with $\alpha = 0$ any $\beta &lt; 1/0.859 = 1.164$ works: the sector $[0, 1.164)$. (Slides round this to $-0.857$ and $1.166$.)</li>
+</ul>
+<figure class="diagram" id="fig-ex713"><img src="../../assets/img/diagrams/nlc-abs-ex713.svg" alt="Nyquist plot of a third-order stable plant with a circle about the origin, a shifted circle and a vertical line" loading="lazy"><figcaption>Three fits for the same plot. A unit saturation is in $[0, 1]$, so case 2 proves the loop with saturation globally asymptotically stable, although it fails both disk tests.</figcaption></figure>
+
+<h4>Example 7.14: an unstable plant</h4>
+<p class="eq">$$G(s) = \frac{4}{(s - 1)(\frac12s + 1)(\frac13s + 1)}, \qquad m = 1 .$$</p>
+<p>$G$ is not Hurwitz, so only case 1 applies: $\alpha &gt; 0$, and the plot must encircle the disk once anticlockwise. The plot runs from $G(0) = -4$ and has two lobes. A disk in the right lobe is encircled once clockwise, which is no good. A disk in the left lobe is encircled once anticlockwise. Centre it at $-3.2$, about halfway along the lobe.</p>
+<figure class="diagram" id="fig-ex714"><img src="../../assets/img/diagrams/nlc-abs-ex714.svg" alt="Nyquist plot of an unstable plant with a small disk inside the left lobe" loading="lazy"><figcaption>The distance from $-3.2$ to the plot is only about $0.163$. A disk of radius $0.16$ gives $-1/\alpha = -3.36$, $-1/\beta = -3.04$: the sector $[0.298, 0.329]$. That is a narrow sector; an unstable plant leaves little room.</figcaption></figure>
+<div class="warn">The slide gives the smallest distance as $0.1688$ and uses radius $0.168$ (sector $[0.2969, 0.3298]$). A numerical check of $|G(j\omega) + 3.2|$ gives a minimum of about $0.163$, so a disk of radius $0.168$ just touches the plot. Use a radius below $0.163$, as in the figure. The conclusion, a narrow sector near $0.3$, is the same.</div>
+
+<h4>Example 7.15: saturation round an unstable plant, a finite domain</h4>
+<p>$G(s) = \dfrac{s + 2}{(s + 1)(s - 1)}$ with $\psi(y) = \mathrm{sat}(y)$. Saturation is in $[0, 1]$, but $G$ is unstable, so case 1 needs $\alpha &gt; 0$ and we cannot prove global absolute stability. (We should not expect to: with $m = 1$ a saturated input cannot stabilize large states.)</p>
+<p>Restrict to $|y| \le a$. There $\mathrm{sat}$ is in $[1/a, 1]$. The plot must encircle $D(\alpha, 1)$ once anticlockwise, which works for $\alpha &gt; 0.5359$. With $\alpha = 0.55$ the sector holds on $|y| \le 1/0.55 = 1.818$, and the loop is absolutely stable with a finite domain.</p>
+<p>To estimate that domain we need the Lyapunov function itself. In state form $\dot x_1 = x_2$, $\dot x_2 = x_1 + u$, $y = 2x_1 + x_2$. After the loop transformation with $\alpha = 0.55$, $A_T = \begin{bmatrix}0 &amp; 1\\-0.1 &amp; -0.55\end{bmatrix}$ and $\psi_T$ is in $[0, 0.45]$. Solving the KYP equations (the source uses $\varepsilon = 0.02$) gives $P = \begin{bmatrix}0.4946 &amp; 0.4834\\0.4834 &amp; 1.0774\end{bmatrix}$. The largest level set $\{x^TPx \le c\}$ inside the strip $|y| \le 1.818$ has $c = \min_{|y| = 1.818} x^TPx = 0.3446$; taking $c = 0.34$ gives a safe estimate of the region of attraction.</p>
+
+<h3 id="popov">The Popov criterion</h3>
+<p>The circle criterion allows time-varying nonlinearities, and pays for it. If $\psi$ is <b>time-invariant</b> we can use a Lur’e-type Lyapunov function with an integral term:</p>
+<p class="eq">$$V(x) = x^TPx + 2\eta\int_0^y \psi^T(\sigma)K\,d\sigma, \qquad \eta \ge 0 .$$</p>
+<p>The same steps as before, with the KYP lemma, lead to the condition that</p>
+<p class="eq">$$Z(s) = I + (1 + \eta s)KG(s) \quad\text{is SPR.}$$</p>
+<div class="key"><b>Popov criterion (scalar).</b> Let $A$ be Hurwitz, $(A, B)$ controllable, $(A, C)$ observable and $\psi$ a time-invariant nonlinearity globally in $[0, k]$. The system is absolutely stable if there is $\eta \ge 0$ (with $-1/\eta$ not an eigenvalue of $A$) such that
+$$\frac1k + \mathrm{Re}\,G(j\omega) - \eta\,\omega\,\mathrm{Im}\,G(j\omega) &gt; 0 \quad\text{for all } \omega .$$</div>
+<p><b>Graphically:</b> draw the <b>Popov plot</b>, $\mathrm{Re}\,G(j\omega)$ against $\omega\,\mathrm{Im}\,G(j\omega)$. The condition says the plot lies to the right of a straight line through $-1/k$ with slope $1/\eta$. With $\eta = 0$ the line is vertical and we are back at case 2 of the circle criterion.</p>
+<div class="warn">Some slides say “the Popov criterion is weaker than the circle criterion”. It is the <i>condition</i> that is weaker (easier to satisfy), because we may tilt the line. So the Popov criterion proves stability for sectors at least as large as the circle criterion, often much larger. The price is that the nonlinearity must be time-invariant.</div>
+<p><b>Example 7.16.</b> $\dot x_1 = x_2$, $\dot x_2 = -x_2 - h(x_1)$, $y = x_1$, with $h$ in $[\alpha, \beta]$. $A$ has an eigenvalue at $0$, so first transform the loop: write $-h(y) = -\alpha y - (h(y) - \alpha y)$. Then $G(s) = \dfrac{1}{s^2 + s + \alpha}$ is Hurwitz for $\alpha &gt; 0$ and $\psi = h - \alpha y$ is in $[0, k]$ with $k = \beta - \alpha$. The Popov condition is</p>
+<p class="eq">$$\frac1k + \frac{\alpha - \omega^2 + \eta\omega^2}{(\alpha - \omega^2)^2 + \omega^2} &gt; 0 .$$</p>
+<p>For $\eta \ge 1$ the numerator is at least $\alpha &gt; 0$, so the condition holds for <b>every</b> $k &gt; 0$. The loop is absolutely stable for $h$ in $[\alpha, \beta]$ with $\alpha &gt; 0$ as small and $\beta$ as large as we like. With $\eta = 0$ (the circle criterion) the smallest real part of $G$ is $-\frac{1}{1 + 2\sqrt\alpha}$, which allows only $k &lt; 1 + 2\sqrt\alpha$.</p>
+<figure class="diagram" id="fig-popov"><img src="../../assets/img/diagrams/nlc-abs-popov.svg" alt="Popov plot of 1 over s squared plus s plus 1 with a vertical line at minus one third and a tilted line" loading="lazy"><figcaption>Popov plot for $\alpha = 1$. The vertical line (circle criterion) must stay left of $-1/3$, so $k &lt; 3$. A line of slope $1$ can pass through $-1/k$ for any $k$, however large.</figcaption></figure>
+
+<h3 id="iss">Input-to-state stability</h3>
+<p>So far the input was zero. Now take $\dot x = f(t, x, u)$ whose unforced system $\dot x = f(t, x, 0)$ has a globally uniformly asymptotically stable origin, and ask what a bounded input does. For a stable linear system $\dot x = Ax + Bu$ the answer is reassuring:</p>
+<p class="eq">$$\|x(t)\| \le ke^{-\lambda(t - t_0)}\|x(t_0)\| + \frac{k\|B\|}{\lambda}\sup_{t_0 \le \tau \le t}\|u(\tau)\| :$$</p>
+<p>the initial condition is forgotten and a bounded input gives a bounded state. For nonlinear systems this can fail badly. $\dot x = -3x + (1 + 2x^2)u$ has a globally exponentially stable origin when $u = 0$, but with $x(0) = 2$ and $u \equiv 1$ the solution is $x(t) = \dfrac{3 - e^t}{3 - 2e^t}$, which escapes to infinity at $t = \ln 1.5 \approx 0.41$.</p>
+<figure class="diagram" id="fig-iss"><img src="../../assets/img/diagrams/nlc-abs-iss.svg" alt="Left: a state that decays with zero input but escapes in finite time with a unit input. Right: a state that stays bounded under a sinusoidal input" loading="lazy"><figcaption>Left: stable with $u = 0$ is not enough. Right: $\dot x = -x^3 + u$ is input-to-state stable; a bounded input gives a bounded state.</figcaption></figure>
+<div class="key">The system is <b>input-to-state stable</b> (ISS) if there are a class $\mathcal{KL}$ function $\beta$ and a class $\mathcal K$ function $\gamma$ such that for every initial state and every bounded input the solution exists for all $t \ge t_0$ and
+$$\|x(t)\| \le \beta\big(\|x(t_0)\|, t - t_0\big) + \gamma\Big(\sup_{t_0 \le \tau \le t}\|u(\tau)\|\Big).$$</div>
+<p>(A class $\mathcal K$ function is continuous, zero at zero and strictly increasing; $\mathcal K_\infty$ if it also grows to infinity. A class $\mathcal{KL}$ function is class $\mathcal K$ in its first argument and decreases to zero in its second.) ISS implies that $x \to 0$ when $u \to 0$, and with $u \equiv 0$ it reduces to global uniform asymptotic stability.</p>
+<p><b>Lyapunov test.</b> If $\alpha_1(\|x\|) \le V(t, x) \le \alpha_2(\|x\|)$ with $\alpha_1, \alpha_2$ class $\mathcal K_\infty$, and</p>
+<p class="eq">$$\frac{\partial V}{\partial t} + \frac{\partial V}{\partial x}f(t, x, u) \le -W_3(x) \quad\text{whenever } \|x\| \ge \rho(\|u\|) &gt; 0$$</p>
+<p>with $W_3$ positive definite, then the system is ISS with $\gamma = \alpha_1^{-1}\circ\alpha_2\circ\rho$. In words: outside a ball whose size grows with the input, $V$ decreases.</p>
+<p><b>A shortcut.</b> If $f$ is continuously differentiable and <i>globally Lipschitz</i> in $(x, u)$ and the unforced origin is <i>globally exponentially</i> stable, the system is ISS. (A converse Lyapunov function with quadratic bounds, together with $\|f(t, x, u) - f(t, x, 0)\| \le L\|u\|$, gives $\dot V \le -c_3(1 - \theta)\|x\|^2$ for $\|x\| \ge \frac{c_4L}{c_3\theta}\|u\|$.) Both assumptions matter. $\dot x = -3x + (1 + 2x^2)u$ is not globally Lipschitz.</p>
+<ul>
+<li><b>Example 7.1.</b> $\dot x = -\dfrac{x}{1 + x^2} + u$ is globally Lipschitz and its unforced origin is globally asymptotically stable ($V = x^2/2$, $\dot V = -\frac{x^2}{1 + x^2}$), even locally exponentially. But it is not globally exponentially stable, and it is <b>not ISS</b>: since $\frac{x}{1 + x^2} \le \frac12$, the input $u \equiv 1$ gives $\dot x \ge \frac12$ and $x(t) \ge x(t_0) + t/2$.</li>
+<li><b>Example 7.2.</b> $\dot x = -x^3 + u$, $V = x^2/2$: $\dot V = -x^4 + xu = -(1 - \theta)x^4 - \theta x^4 + xu \le -(1 - \theta)x^4$ for $|x| \ge (|u|/\theta)^{1/3}$, $0 &lt; \theta &lt; 1$. ISS with $\gamma(r) = (r/\theta)^{1/3}$, although $f$ is not globally Lipschitz.</li>
+<li><b>Example 7.3.</b> $\dot x = -x - 2x^3 + (1 + x^2)u^2$, $V = x^2/2$: $\dot V = -x^2 - 2x^4 + x(1 + x^2)u^2 \le -x^4$ for $|x| \ge u^2$ (factor $-(1 + x^2)x(x - u^2) - x^4$). ISS with $\gamma(r) = r^2$.</li>
+</ul>
+<h4>Cascades</h4>
+<p>For $\dot x_1 = f_1(t, x_1, x_2)$, $\dot x_2 = f_2(t, x_2)$: if the $x_1$-system with $x_2$ as input is ISS and the origin of $\dot x_2 = f_2$ is globally uniformly asymptotically stable, then the cascade is globally uniformly asymptotically stable. Asymptotic stability of $\dot x_1 = f_1(t, x_1, 0)$ alone is not enough: the first counterexample above, driven by a decaying $x_2$, can still escape.</p>
+
+<h3 id="lstab">Input–output stability</h3>
+<p>The input–output view (Sandberg and Zames, 1960s) ignores the state and treats the system as an operator $y = Hu$ on signals. Signal sizes are norms, such as</p>
+<p class="eq">$$\|u\|_{\mathcal L_\infty} = \sup_{t \ge 0}\|u(t)\|, \qquad \|u\|_{\mathcal L_2} = \sqrt{\int_0^\infty u^T(t)u(t)\,dt}, \qquad \|u\|_{\mathcal L_p} = \Big(\int_0^\infty\|u(t)\|^pdt\Big)^{1/p} .$$</p>
+<p>To talk about signals that grow (like $u(t) = t$, which is not in $\mathcal L_\infty$) we use the <b>truncation</b> $u_\tau(t) = u(t)$ for $t \le \tau$ and $0$ after, and the <b>extended space</b> $\mathcal L_e$ of signals whose every truncation has finite norm. $H$ is <b>causal</b> if the output up to time $\tau$ depends only on the input up to time $\tau$: $(Hu)_\tau = (Hu_\tau)_\tau$.</p>
+<div class="key">$H$ is <b>$\mathcal L$ stable</b> if there are a class $\mathcal K$ function $\alpha$ and a constant $\beta \ge 0$ with $\|(Hu)_\tau\|_{\mathcal L} \le \alpha(\|u_\tau\|_{\mathcal L}) + \beta$ for all $u$ and $\tau$. It is <b>finite-gain $\mathcal L$ stable</b> if this holds with $\alpha(r) = \gamma r$; the smallest such $\gamma$ is the gain. $\mathcal L_\infty$ stability is bounded-input bounded-output stability.</div>
+<p>The bias $\beta$ allows a nonzero output for zero input. <b>Small-signal</b> versions require the inequality only for inputs with $\sup\|u\| \le r$.</p>
+<ul>
+<li><b>Example 7.4.</b> $y = a + b\tanh(cu)$, $a, b, c \ge 0$: $|h'(u)| \le bc$, so $|y| \le a + bc|u|$: finite-gain $\mathcal L_\infty$ stable with $\gamma = bc$, $\beta = a$.</li>
+<li><b>Example 7.5.</b> $y = u^2$: $\sup|y| = (\sup|u|)^2$, so $\mathcal L_\infty$ stable with $\alpha(r) = r^2$, but not finite-gain: no line $\gamma|u| + \beta$ bounds $u^2$.</li>
+<li><b>Example 7.6.</b> $y = \tan u$ is defined only for $|u| &lt; \pi/2$, so it is not $\mathcal L_\infty$ stable. For $|u| \le r &lt; \pi/2$, $|y| \le \frac{\tan r}{r}|u|$: small-signal finite-gain $\mathcal L_\infty$ stable.</li>
+</ul>
+<h4>From Lyapunov functions to $\mathcal L$ stability</h4>
+<p>For $\dot x = f(t, x, u)$, $y = h(t, x, u)$: suppose the unforced origin is exponentially stable with a Lyapunov function satisfying $c_1\|x\|^2 \le V \le c_2\|x\|^2$, $\dot V \le -c_3\|x\|^2$, $\|\partial V/\partial x\| \le c_4\|x\|$, and that $\|f(t, x, u) - f(t, x, 0)\| \le L\|u\|$ and $\|h\| \le \eta_1\|x\| + \eta_2\|u\|$. Then the system is small-signal finite-gain $\mathcal L_p$ stable for every $p \in [1, \infty]$, with gain</p>
+<p class="eq">$$\gamma = \eta_2 + \frac{\eta_1c_2c_4L}{c_1c_3} ,$$</p>
+<p>and if everything holds globally the system is finite-gain $\mathcal L_p$ stable. For example, $\dot x = -x - x^3 + u$, $y = \tanh x + u$ with $V = x^2/2$ has $c_1 = c_2 = \frac12$, $c_3 = c_4 = 1$, $L = \eta_1 = \eta_2 = 1$: finite-gain $\mathcal L_p$ stable with $\gamma \le 2$. A weaker version: if the system is ISS and $\|h\| \le \alpha_6(\|x\|) + \alpha_7(\|u\|) + \eta$, it is $\mathcal L_\infty$ stable. Example 7.3 with output $y = x + u$ is a case.</p>
+</article>
+    <!-- NOTES END -->
+    </section>
+    <section class="lsec" id="try"><h2>Try it</h2>
+    <p>Pick one of the plants from the notes or the practice problems and move $\alpha$ and $\beta$. The tool chooses the case of the circle criterion from the sign of $\alpha$, counts encirclements, and reports whether the test passes. Try Example 7.13 with $\alpha = 0$ and push $\beta$ past $1.164$; then Example 7.14 with a disk at $[0.298, 0.329]$ and widen it.</p>
+    <div class="sim nls" data-nls="circle" data-preset="ex713"></div>
+    </section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the div below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">Find the smallest sector $[\alpha, \beta]$ for (a) a unit saturation, (b) a dead zone $y = x - \mathrm{sign}(x)$ for $|x| &gt; 1$, $y = 0$ otherwise, (c) $y = x^3$, globally and on $|x| \le 2$.</div><details><summary>Show solution</summary><div class="sol">(a) $[0, 1]$: slope $1$ near zero, slope tending to $0$ far out. (b) $[0, 1]$: zero near the origin, approaching slope $1$. (c) Globally $y/x = x^2$ is unbounded, so no finite sector, only $[0, \infty]$. On $|x| \le 2$: $[0, 4]$.</div></details></li><li><div class="q">Is $G(s) = \dfrac{s + 3}{(s + 1)(s + 2)}$ strictly positive real?</div><details><summary>Show solution</summary><div class="sol">It is strictly stable, minimum phase and has relative degree $1$, so it might be. $\mathrm{Re}\,G(j\omega) = \dfrac{\mathrm{Re}\big[(3 + j\omega)(2 - \omega^2 - 3j\omega)\big]}{|(1 + j\omega)(2 + j\omega)|^2} = \dfrac{6}{(1 + \omega^2)(4 + \omega^2)} &gt; 0$. Yes, SPR.</div></details></li><li><div class="q">For $G(s) = 1/(s + 1)^3$ compare: (a) the largest linear gain $k$ with a stable loop, (b) the circle criterion with $\alpha = 0$, (c) the small-gain sector.</div><details><summary>Show solution</summary><div class="sol">(a) Phase $-180^\circ$ at $\omega = \sqrt3$, where $|G| = 1/8$, so $k &lt; 8$. (b) $\mathrm{Re}\,G(j\omega)$ has minimum $-1/4$ at $\omega = 1$, so the sector $[0, 4)$. (c) $\sup|G| = 1$, so $(-1, 1)$. The nonlinear guarantees are smaller than the linear gain margin, as they must be: they cover every nonlinearity in the sector.</div></details></li><li><div class="q">Show that $\dot x = -x + x^2u$ is not input-to-state stable, although the unforced origin is globally exponentially stable.</div><details><summary>Show solution</summary><div class="sol">With $u \equiv 1$: $\dot x = -x + x^2 = x(x - 1)$, so any $x(0) &gt; 1$ grows and escapes in finite time. A bounded input gives an unbounded state, so the system is not ISS. ($f$ is not globally Lipschitz in $x$ for $u \ne 0$.)</div></details></li><li><div class="q">Show that $\dot x = -x - x^3 + u$ is ISS and find a gain $\gamma$.</div><details><summary>Show solution</summary><div class="sol">$V = x^2/2$: $\dot V = -x^2 - x^4 + xu \le -x^2 + |x||u| = -(1 - \theta)x^2 - |x|(\theta|x| - |u|) \le -(1 - \theta)x^2$ for $|x| \ge |u|/\theta$. With $\alpha_1 = \alpha_2 = r^2/2$, $\gamma(r) = r/\theta$ for any $0 &lt; \theta &lt; 1$.</div></details></li><li><div class="q">In Example 7.16, why must we transform the loop before applying the Popov criterion, and what does the result say for $h(y) = y + y^3$?</div><details><summary>Show solution</summary><div class="sol">With $h$ removed, $A = \begin{bmatrix}0 &amp; 1\\0 &amp; -1\end{bmatrix}$ has an eigenvalue at $0$, not Hurwitz. Moving $\alpha y$ into the linear part makes it $1/(s^2 + s + \alpha)$. $h(y) = y + y^3$ has $h(y)/y = 1 + y^2 \ge 1$, so it is in $[1, \infty)$, i.e. in $[\alpha, \beta]$ with $\alpha = 1$ and any large $\beta$ (on any bounded set). The Popov criterion with $\eta \ge 1$ proves absolute stability; the circle criterion would need $\beta &lt; \alpha + 1 + 2\sqrt\alpha = 4$, and $h(y)/y = 1 + y^2$ exceeds $4$ once $|y| &gt; \sqrt3$.</div></details></li></ol></section>
+    <!-- PRACTICE START: practice problems from the exercise compendium. To add one, copy a <li>...</li> line. Guide section 20. -->
+    <section class="lsec" id="practice"><h2>Practice problems from the exercise compendium</h2>
+    <p class="note">From <i>Exercises in Nonlinear Control Systems</i> by M. Johansson, B. Bernhardsson and K. H. Johansson (Department of Automatic Control, Lund University), Chapter 4 (Input-Output Stability). “Ex 4.4” means Chapter 4, Exercise 4. Work from the compendium statement and its Nyquist figures. The hints and short answers here are written for this course; full solutions are not reproduced.</p>
+    <ol class="exlist practice"><li><div class="q"><span class="pno">Ex 4.2</span> Compare the Nyquist, circle, small-gain and passivity criteria for a stable $G$ with a nonlinearity $\psi$.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> For each test ask: what must $\psi$ be (linear, static in a sector, finite gain, passive)? Where must the Nyquist curve of $G$ lie?<br><b>Answer.</b> Nyquist: $\psi$ a constant gain $k$; curve must not encircle $-1/k$. Circle: $\psi$ static (possibly time-varying) in $[\alpha, \beta]$; curve outside, right of, or inside the disk. Small gain: any $\psi$ with gain $\gamma(\psi)$; curve inside $|s| &lt; 1/\gamma(\psi)$. Passivity: $\psi$ passive; $G$ (strictly) passive, curve in the right half-plane. Small gain and passivity also handle dynamic nonlinearities.</div></details></li><li><div class="q"><span class="pno">Ex 4.4</span> Stability sectors for $G = \dfrac{4}{(s + 1)(s/2 + 1)(s/3 + 1)}$ from its Nyquist curve and a circle of centre $1.5$, radius $2.85$.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> (a) Use $\sup|G|$. (b) Where does the circle cut the real axis? It is the case $\alpha &lt; 0 &lt; \beta$. (c) Use the smallest real part.<br><b>Answer.</b> (a) $(-0.25, 0.25)$. (b) The circle cuts at $-1.35$ and $4.35$, so $-1/\beta = -1.35$, $-1/\alpha = 4.35$: $(-0.230, 0.741)$. (c) $\min\mathrm{Re}\,G = -0.859$: $(0, 1.164)$. Same plant as Example 7.13.</div></details></li><li><div class="q"><span class="pno">Ex 4.5</span> A stability sector for $G = \dfrac{4}{(s - 1)(s/3 + 1)(s/5 + 1)}$.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> One unstable pole: case 1, $\alpha &gt; 0$. The curve leaves $-4$ and crosses the real axis again near $-0.94$. Put a disk inside the loop between them and measure the distance to the curve.<br><b>Answer.</b> For example centre $-3$: the curve is about $0.76$ away, so a radius of $0.75$ fits, giving $-1/\alpha = -3.75$, $-1/\beta = -2.25$: the sector $(0.267, 0.444)$. Other centres give other valid sectors.</div></details></li><li><div class="q"><span class="pno">Ex 4.6</span> Sectors for (a) $G = \dfrac{1}{(s + 1)(s + 2)}$ and (b) $G = \dfrac{s}{s^2 - s + 1}$.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> (a) Stable: use case 2 and case 3. (b) Two unstable poles: case 1, and the disk must be encircled twice anticlockwise. Check that $G(j\omega)$ traces a circle.<br><b>Answer.</b> (a) $\min\mathrm{Re}\,G = -0.0572$, so $(0, 17.48)$; or $\sup|G| = 0.5$ gives $(-2, 2)$. (b) $|G(j\omega) + 0.5| = 0.5$: the curve is the circle through $-1$ and $0$, traversed twice anticlockwise. Any disk strictly inside it works, i.e. $-1 &lt; -1/\alpha$, so any sector $(\alpha, \beta)$ with $1 &lt; \alpha &lt; \beta &lt; \infty$.</div></details></li><li><div class="q"><span class="pno">Ex 4.7</span> $\dot x = (A + B\delta(t)C)x$ as a feedback loop, with $|\delta(t)| \le 1$ and the small-gain test.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> (a) Put $u = \delta(t)y$, $y = Cx$. (b) The multiplication by $\delta$ has $\mathcal L_2$ gain at most $\sup|\delta| \le 1$.<br><b>Answer.</b> (a) $\dot x = Ax + Bu$, $y = Cx$, $u = \delta(t)y$: $G(s) = C(sI - A)^{-1}B$ in feedback with $\psi(t, y) = \delta(t)y$. (b) Gain product $\sup|G(j\omega)| \cdot 1 &lt; 1$, so the small-gain theorem gives BIBO stability. (c) Only the curves that stay strictly inside the unit circle qualify.</div></details></li><li><div class="q"><span class="pno">Ex 4.10</span> If $A^TP + PA = -I$, show that $G(s) = B^TP(sI - A)^{-1}B$ is passive.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> Take $V = x^TPx$ with $\dot x = Ax + Bu$, $y = B^TPx$, and compute $\dot V$.<br><b>Answer.</b> $\dot V = -x^Tx + 2x^TPBu = -\|x\|^2 + 2y^Tu$. So $y^Tu \ge \frac12\dot V$, and from $x(0) = 0$, $\int_0^Ty^Tu\,dt \ge \frac12V(x(T)) \ge 0$: passive (indeed $G$ is positive real).</div></details></li></ol></section>
+    <!-- PRACTICE END -->
+    <nav class="prevnext"><a class="pn prev" href="05-lyapunov-stability.html"><small>← Lesson 5</small>Lyapunov stability</a><a class="pn next" href="07-feedback-linearization.html"><small>Lesson 7 →</small>Feedback linearization</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+<script src="../../assets/js/nonlinear-sims.js"></script>
+</body>
+</html>

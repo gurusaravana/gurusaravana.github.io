@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 4: Describing function analysis · Nonlinear Control</title>
+<meta name="description" content="Harmonic linearization: the describing function of saturation, dead zone, relays, hysteresis and backlash; predicting the amplitude, frequency and stability of limit cycles from the Nyquist plot.">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 4: Describing function analysis  (Nonlinear Control, EACT 633)
+  Edit the notes between the NOTES START and NOTES END markers below.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Figures live in assets/img/diagrams/ (names start with nlc-) and are shown with a figure of class "diagram".
+  To add an exercise, copy one list item inside the list of class "exlist".
+  Guide: HOW-TO-ADD-TEACHING-CONTENT.md, section 20.
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
+  <nav class="links"><a href="../nonlinear-control.html">Course home</a><a href="../nonlinear-control.html#lessons">Lessons</a><a href="../nonlinear-control.html#figures">Figures</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../nonlinear-control.html">← Nonlinear Control</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 4 of 7 · Chapter 2 · part II</div>
+    <h1>Describing function analysis</h1>
+    <p>Nonlinear Control · EACT 633 · Postgraduate course</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">EACT 633 · Nonlinear Control</div><ol><li><a href="01-introduction.html"><span class="n">1</span>Introduction to nonlinear systems</a></li><li><a href="02-phase-plane-analysis.html"><span class="n">2</span>Phase plane analysis</a></li><li><a href="03-linearization.html"><span class="n">3</span>Linearization</a></li><li class="on"><a href="04-describing-function.html"><span class="n">4</span>Describing function analysis</a></li><li><a href="05-lyapunov-stability.html"><span class="n">5</span>Lyapunov stability</a></li><li><a href="06-absolute-stability.html"><span class="n">6</span>Sector nonlinearities, circle and Popov criteria</a></li><li><a href="07-feedback-linearization.html"><span class="n">7</span>Feedback linearization</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>State the assumptions behind the describing function method and when it can be trusted</li><li>Compute a describing function from the fundamental Fourier coefficients of the output</li><li>Derive the describing functions of saturation and dead zone, and use the table for relays, hysteresis and backlash</li><li>Predict a limit cycle from $G(j\omega) = -1/K_N(X)$ and find its amplitude and frequency</li><li>Decide whether a predicted limit cycle is stable, and choose a parameter to avoid it</li></ul></div>
+    <nav class="figstrip" aria-label="Figures in this lesson"><a href="#fig-loop"><img src="../../assets/img/diagrams/nlc-df-loop.svg" alt="" loading="lazy"><span>Describing-function loop</span></a><a href="#fig-harmonic"><img src="../../assets/img/diagrams/nlc-df-harmonic.svg" alt="" loading="lazy"><span>Fundamental harmonic</span></a><a href="#fig-sat"><img src="../../assets/img/diagrams/nlc-df-saturation.svg" alt="" loading="lazy"><span>Saturation</span></a><a href="#fig-dz"><img src="../../assets/img/diagrams/nlc-df-deadzone.svg" alt="" loading="lazy"><span>Dead zone</span></a><a href="#fig-relay"><img src="../../assets/img/diagrams/nlc-df-relay.svg" alt="" loading="lazy"><span>Ideal relay</span></a><a href="#fig-relay-hyst"><img src="../../assets/img/diagrams/nlc-df-relay-hyst.svg" alt="" loading="lazy"><span>Relay, dead zone, hysteresis</span></a><a href="#fig-backlash"><img src="../../assets/img/diagrams/nlc-df-backlash.svg" alt="" loading="lazy"><span>Backlash</span></a><a href="#fig-satdz"><img src="../../assets/img/diagrams/nlc-df-satdz.svg" alt="" loading="lazy"><span>Dead zone and saturation</span></a><a href="#fig-curves"><img src="../../assets/img/diagrams/nlc-df-curves.svg" alt="" loading="lazy"><span>Describing function curves</span></a><a href="#fig-nyquist"><img src="../../assets/img/diagrams/nlc-df-nyquist.svg" alt="" loading="lazy"><span>Limit cycle prediction</span></a><a href="#fig-relay-sim"><img src="../../assets/img/diagrams/nlc-df-relay-sim.svg" alt="" loading="lazy"><span>Simulation check</span></a><a href="#fig-stability"><img src="../../assets/img/diagrams/nlc-df-stability.svg" alt="" loading="lazy"><span>Stable and unstable cycles</span></a></nav>
+    <section class="lsec"><h2>Notes</h2>
+    <!-- NOTES START -->
+    <article class="notes">
+<h3 id="idea">The idea: a gain for sine waves</h3>
+<p>The <b>describing function method</b> replaces a nonlinear element in a feedback loop by an "equivalent" linear gain: the best linear approximation of the element <i>for a sinusoidal input of a given amplitude</i>. Because the gain is allowed to depend on the amplitude, the method can predict effects that no fixed linear model shows, above all <b>limit cycles</b>: their existence, amplitude, frequency and stability. It is also called <b>harmonic linearization</b>.</p>
+<figure class="diagram" id="fig-loop"><img src="../../assets/img/diagrams/nlc-df-loop.svg" alt="Two block diagrams: a loop with G1, a nonlinear element N and G2; the same loop with N replaced by K_N of X" loading="lazy"><figcaption>The nonlinear element $N$ is replaced by its describing function $K_N(X)$.</figcaption></figure>
+<p>The method rests on four assumptions:</p>
+<ol>
+<li>There is a <b>single</b> nonlinear element, and the rest of the loop is linear and time-invariant.</li>
+<li>The nonlinearity is <b>time-invariant</b>.</li>
+<li>It is <b>odd-symmetric</b> ($y(-x) = -y(x)$), so its output has no constant (bias) term for a sine input.</li>
+<li>The linear part is <b>low-pass</b>: it attenuates the higher harmonics produced by the nonlinearity, so that the signal $x$ arriving at the nonlinearity is close to a pure sine. This is the <i>filtering hypothesis</i>.</li>
+</ol>
+
+<h3 id="definition">Definition</h3>
+<p>Let the input be $x(t) = X\sin\omega t$. The output $y(t)$ is periodic with the same period, but not sinusoidal. Its Fourier series is</p>
+<p class="eq">$$y(t) = A_0 + \sum_{n=1}^{\infty}\left(A_n\sin n\omega t + B_n\cos n\omega t\right),\qquad A_n = \frac1\pi\int_0^{2\pi} y\sin n\omega t\;d(\omega t),\quad B_n = \frac1\pi\int_0^{2\pi} y\cos n\omega t\;d(\omega t).$$</p>
+<p>For an odd nonlinearity $A_0 = 0$. Keeping only the <b>fundamental</b>,</p>
+<p class="eq">$$y_1(t) = A_1\sin\omega t + B_1\cos\omega t = Y_1\sin(\omega t + \varphi_1),\qquad Y_1 = \sqrt{A_1^2 + B_1^2},\quad \varphi_1 = \tan^{-1}\frac{B_1}{A_1}.$$</p>
+<p>The <b>describing function</b> is the complex ratio of the output fundamental to the input:</p>
+<p class="eq">$$K_N(X, \omega) = \frac{Y_1}{X}\angle\varphi_1 = \frac{A_1 + jB_1}{X}.$$</p>
+<ul>
+<li>For a <b>static, single-valued</b> nonlinearity (saturation, dead zone, relay) the output has quarter-wave symmetry, $B_1 = 0$, and $K_N(X)$ is <b>real</b> and independent of $\omega$.</li>
+<li>For a nonlinearity <b>with memory</b> (hysteresis, backlash) the output lags the input, $B_1 &lt; 0$, and $K_N(X)$ is <b>complex</b>, with a phase lag.</li>
+</ul>
+<figure class="diagram" id="fig-harmonic"><img src="../../assets/img/diagrams/nlc-df-harmonic.svg" alt="A clipped sine with its fundamental, and a bar chart of the first, third, fifth and seventh harmonics" loading="lazy"><figcaption>The fundamental carries most of the output. The third harmonic is a fifth of it here, and a low-pass plant reduces it further.</figcaption></figure>
+
+<h3 id="saturation">Saturation</h3>
+<p>Saturation has slope $K$ for $|x| \le S$ and output $\pm KS$ beyond. For $X \le S$ the element is linear and $K_N = K$. For $X &gt; S$ the output is clipped from $\omega t = \beta$ to $\pi - \beta$, where</p>
+<p class="eq">$$X\sin\beta = S, \qquad \beta = \sin^{-1}\frac SX .$$</p>
+<figure class="diagram" id="fig-sat"><img src="../../assets/img/diagrams/nlc-df-saturation.svg" alt="Saturation characteristic, input sine running downwards, and the clipped output with its fundamental" loading="lazy"><figcaption>Projecting the input sine through the characteristic gives the output wave.</figcaption></figure>
+<p>The output is odd with quarter-wave symmetry, so $B_1 = 0$ and $A_1$ is four times the integral over a quarter period:</p>
+<p class="eq">$$A_1 = \frac4\pi\left[\int_0^{\beta} KX\sin^2\omega t\;d(\omega t) + \int_\beta^{\pi/2} KS\sin\omega t\;d(\omega t)\right].$$</p>
+<p>The first integral is $\frac{KX}{2}\left(\beta - \sin\beta\cos\beta\right)$ and the second is $KS\cos\beta = KX\sin\beta\cos\beta$. Adding,</p>
+<p class="eq">$$A_1 = \frac{2KX}{\pi}\left(\beta + \sin\beta\cos\beta\right), \qquad K_N(X) = \frac{A_1}{X} = \frac{2K}{\pi}\left[\sin^{-1}\frac SX + \frac SX\sqrt{1 - \left(\frac SX\right)^2}\,\right], \quad X &gt; S.$$</p>
+<p>$K_N$ starts at $K$ when $X = S$ and falls towards $0$ as $X$ grows: the bigger the signal, the smaller the effective gain.</p>
+<div class="warn">A few steps of the Chapter 2 deck’s saturation derivation have slips: the quarter-period prefactor is written $\frac{2}{\pi/2}$ (it should be $\frac{4}{\pi}$, which the next line then uses); one line has $[\beta - \sin2\beta]$ where $[\beta - \tfrac12\sin2\beta]$ is meant; and equation (12) still carries a factor $X$ ($\frac{2KX}{\pi}$), which cancels when dividing $Y_1$ by $X$. The final result, equation (17), is correct and matches the formula above.</div>
+
+<h3 id="deadzone">Dead zone</h3>
+<p>A dead zone of total width $D$ gives no output for $|x| \le D/2$ and slope $K$ beyond. With $\sin\alpha = \dfrac{D}{2X}$, the output is $K(X\sin\omega t - D/2)$ from $\alpha$ to $\pi - \alpha$ and zero elsewhere in the half period. The same integration gives</p>
+<p class="eq">$$K_N(X) = K\left[1 - \frac2\pi\left(\alpha + \sin\alpha\cos\alpha\right)\right] = K\left[1 - \frac2\pi\left(\sin^{-1}\frac{D}{2X} + \frac{D}{2X}\sqrt{1 - \left(\frac{D}{2X}\right)^2}\,\right)\right],\quad X &gt; \frac D2,$$</p>
+<p>and $K_N = 0$ for $X \le D/2$. A quick check: a dead zone is the line $Kx$ minus a saturation of slope $K$ and limit $D/2$, so its describing function is $K$ minus the saturation formula with $S = D/2$. It rises from $0$ towards $K$ as $X$ grows.</p>
+<figure class="diagram" id="fig-dz"><img src="../../assets/img/diagrams/nlc-df-deadzone.svg" alt="Dead zone characteristic, input sine, and output with the middle cut out" loading="lazy"><figcaption>Small signals are lost in the dead zone; large ones pass almost unchanged.</figcaption></figure>
+<div class="warn">The deck’s final dead-zone formula is labelled "for $X &gt; S$". For a dead zone the condition is $X &gt; D/2$; there is no $S$ in this element.</div>
+
+<h3 id="table">Describing functions of common nonlinearities</h3>
+<p>The other elements are found the same way. Their characteristics and waveforms are drawn below the table.</p>
+<div class="tblwrap"><table class="tbl">
+<thead><tr><th>Element</th><th>Describing function $K_N(X)$</th><th>Valid for</th></tr></thead>
+<tbody>
+<tr><td>Saturation (slope $K$, limit $S$)</td><td>$\dfrac{2K}{\pi}\left[\beta + \sin\beta\cos\beta\right]$, $\ \sin\beta = \dfrac SX$</td><td>$X &gt; S$ (else $K$)</td></tr>
+<tr><td>Dead zone (slope $K$, width $D$)</td><td>$K\left[1 - \dfrac2\pi(\alpha + \sin\alpha\cos\alpha)\right]$, $\ \sin\alpha = \dfrac{D}{2X}$</td><td>$X &gt; D/2$ (else $0$)</td></tr>
+<tr><td>Dead zone and saturation</td><td>$\dfrac{2K}{\pi}\left[(\beta - \alpha) + \sin\beta\cos\beta - \sin\alpha\cos\alpha\right]$</td><td>$X &gt; S$</td></tr>
+<tr><td>Ideal relay (output $\pm M$)</td><td>$\dfrac{4M}{\pi X}$</td><td>all $X$</td></tr>
+<tr><td>Relay with dead zone (switches at $\pm a$)</td><td>$\dfrac{4M}{\pi X}\sqrt{1 - \left(\dfrac aX\right)^2}$</td><td>$X &gt; a$ (else $0$)</td></tr>
+<tr><td>Relay with hysteresis (switches at $\pm h$)</td><td>$\dfrac{4M}{\pi X}\left[\sqrt{1 - \left(\dfrac hX\right)^2} - j\dfrac hX\right]$</td><td>$X &gt; h$</td></tr>
+<tr><td>Relay with dead zone and hysteresis (on at $D/2$, off at $D/2 - H$)</td><td>$\dfrac{2M}{\pi X}\left[\sqrt{1 - \left(\dfrac{D}{2X}\right)^2} + \sqrt{1 - \left(\dfrac{D/2 - H}{X}\right)^2}\,\right] - j\dfrac{2MH}{\pi X^2}$</td><td>$X &gt; D/2$</td></tr>
+<tr><td>Backlash (slope $K$, total gap $2b$)</td><td>$\dfrac K\pi\left[\dfrac\pi2 + \sin^{-1}r + r\sqrt{1 - r^2}\right] - j\dfrac{4Kb}{\pi X}\left(1 - \dfrac bX\right)$, $\ r = 1 - \dfrac{2b}{X}$</td><td>$X &gt; b$</td></tr>
+<tr><td>Cubic $y = x^3$</td><td>$\dfrac34X^2$</td><td>all $X$</td></tr>
+</tbody></table></div>
+<p>All of these were checked numerically against a direct Fourier computation of the output wave. Setting $H = 0$ in the dead-zone-and-hysteresis relay gives the relay with dead zone, and setting also $D = 0$ gives the ideal relay.</p>
+<figure class="diagram" id="fig-relay"><img src="../../assets/img/diagrams/nlc-df-relay.svg" alt="Ideal relay characteristic, input sine, and square-wave output with its fundamental" loading="lazy"><figcaption>Ideal relay: the fundamental of a square wave of height $M$ has amplitude $4M/\pi$.</figcaption></figure>
+<figure class="diagram" id="fig-relay-hyst"><img src="../../assets/img/diagrams/nlc-df-relay-hyst.svg" alt="Relay with dead zone and hysteresis: characteristic with arrows, input sine, delayed pulse output" loading="lazy"><figcaption>Relay with dead zone and hysteresis. The pulses switch off late, so the fundamental lags: the imaginary part is negative.</figcaption></figure>
+<figure class="diagram" id="fig-backlash"><img src="../../assets/img/diagrams/nlc-df-backlash.svg" alt="Backlash parallelogram characteristic, input sine, and lagging output with flat tops" loading="lazy"><figcaption>Backlash in a gear train: the driven gear waits while the gap is taken up. The output lags the input by $21.8°$ here.</figcaption></figure>
+<figure class="diagram" id="fig-satdz"><img src="../../assets/img/diagrams/nlc-df-satdz.svg" alt="Dead zone with saturation: characteristic, input, and output with both a gap and flat tops" loading="lazy"><figcaption>Dead zone and saturation together, a common model of a real actuator.</figcaption></figure>
+<figure class="diagram" id="fig-curves"><img src="../../assets/img/diagrams/nlc-df-curves.svg" alt="Four curves of describing-function magnitude against amplitude" loading="lazy"><figcaption>How the "gain" of each element changes with signal size.</figcaption></figure>
+
+<h3 id="limitcycle">Predicting limit cycles</h3>
+<p>Put the linear blocks together as $G(s) = G_1(s)G_2(s)$ and set $r = 0$. A self-sustained oscillation $x = X\sin\omega t$ goes once round the loop and must come back unchanged. In the describing-function model this means</p>
+<p class="eq">$$1 + K_N(X)\,G(j\omega) = 0 \qquad\Longleftrightarrow\qquad G(j\omega) = -\frac{1}{K_N(X)} .$$</p>
+<p>This is the <b>harmonic balance</b> equation. Plot the polar (Nyquist) curve of $G(j\omega)$ and, on the same axes, the <b>critical locus</b> $-1/K_N(X)$ as $X$ varies. Each intersection predicts a limit cycle: its frequency $\omega$ is read on the $G$ curve, and its amplitude $X$ on the locus. If the two curves do not meet, no limit cycle is predicted.</p>
+<p>For a real $K_N$ the locus lies on the negative real axis, so we only need the <b>phase crossover</b>, where $\angle G(j\omega) = -180°$.</p>
+
+<h4>Worked example: relay control of a third-order plant</h4>
+<p>An ideal relay with $M = 1$ controls $G(s) = \dfrac{10}{s(s+1)(s+2)}$.</p>
+<ol>
+<li><b>Critical locus.</b> $K_N = \dfrac{4}{\pi X}$, so $-\dfrac{1}{K_N} = -\dfrac{\pi X}{4}$: the whole negative real axis, from $0$ (small $X$) to $-\infty$ (large $X$).</li>
+<li><b>Phase crossover.</b> $\angle G = -90° - \tan^{-1}\omega - \tan^{-1}\frac\omega2 = -180°$ gives $\omega^2 = 2$, $\omega = \sqrt2 = 1.414$ rad/s. There $|G| = \dfrac{10}{\sqrt2\cdot\sqrt3\cdot\sqrt6} = \dfrac{10}{6} = 1.667$.</li>
+<li><b>Amplitude.</b> $\dfrac{\pi X}{4} = 1.667$ gives $X = \dfrac{4 \times 1.667}{\pi} = 2.12$.</li>
+<li><b>Period.</b> $T = 2\pi/\sqrt2 = 4.44$ s.</li>
+</ol>
+<figure class="diagram" id="fig-nyquist"><img src="../../assets/img/diagrams/nlc-df-nyquist.svg" alt="Polar plot of G crossing the negative real axis at minus 1.667, where the relay locus is marked" loading="lazy"><figcaption>The intersection predicts $X = 2.12$ and $\omega = \sqrt2$.</figcaption></figure>
+<figure class="diagram" id="fig-relay-sim"><img src="../../assets/img/diagrams/nlc-df-relay-sim.svg" alt="Time simulation of the relay loop settling to a steady oscillation of amplitude 2.2" loading="lazy"><figcaption>A simulation gives amplitude $2.20$ and period $4.55$ s, within about 4&nbsp;% of the prediction. The error comes from the third harmonic that the plant does not fully filter out.</figcaption></figure>
+
+<h3 id="stability">Is the limit cycle stable?</h3>
+<p>Treat $-1/K_N(X)$ as a moving "critical point" and use the Nyquist criterion. Suppose $G$ is stable (or has only poles at the origin, as here, indented as usual). Perturb the amplitude of the oscillation slightly:</p>
+<ul>
+<li>If the perturbed critical point is <b>encircled</b> by $G(j\omega)$, the loop behaves as if unstable and the amplitude <b>grows</b>.</li>
+<li>If it is <b>not encircled</b>, the loop behaves as if stable and the amplitude <b>shrinks</b>.</li>
+</ul>
+<p>A limit cycle is <b>stable</b> if, as $X$ increases along the locus, the locus moves from the encircled region to the non-encircled region: a larger amplitude then decays and a smaller one grows, so both return to the cycle. If the locus moves the other way, the cycle is <b>unstable</b>: a small disturbance sends the amplitude away from it. (This is often called the Loeb criterion.) For the relay example, increasing $X$ moves the critical point left, out of the encircled region, so the predicted oscillation is stable, as the simulation shows.</p>
+<h4>Worked example: relay with dead zone</h4>
+<p>A relay with output $\pm1$ and dead zone $a$ controls $G(s) = \dfrac{4}{s(s+1)(s+2)}$. The plant crosses the negative real axis at $\omega = \sqrt2$, where $|G| = 4/6 = 2/3$.</p>
+<p>$K_N(X) = \dfrac{4}{\pi X}\sqrt{1 - a^2/X^2}$ is zero at $X = a$, reaches its maximum $\dfrac{2}{\pi a}$ at $X = a\sqrt2$, and falls back to zero. So $-1/K_N$ comes in from $-\infty$, turns at $-\pi a/2$, and goes back to $-\infty$.</p>
+<ul>
+<li>With $a = 0.3$ the turning point $-0.47$ lies to the right of $-2/3$, so the locus meets $G$ twice. Solving $K_N(X) = 1.5$ gives $X = 0.32$ (an <b>unstable</b> cycle: the locus enters the encircled region as $X$ grows) and $X = 0.78$ (a <b>stable</b> cycle).</li>
+<li>The system starts oscillating only if it is disturbed beyond the unstable cycle, and it then settles on the stable one.</li>
+<li>To avoid sustained oscillation, the peak gain must stay below $3/2$: $\dfrac{2}{\pi a} &lt; \dfrac32$, that is $a &gt; \dfrac{4}{3\pi} = 0.42$.</li>
+</ul>
+<figure class="diagram" id="fig-stability"><img src="../../assets/img/diagrams/nlc-df-stability.svg" alt="Polar plot of G with the two arms of the relay-with-dead-zone locus, meeting G at an unstable and a stable limit cycle" loading="lazy"><figcaption>One intersection is unstable and one is stable. A larger dead zone removes both.</figcaption></figure>
+
+<h3 id="accuracy">How far can the method be trusted?</h3>
+<ul>
+<li>It is an <b>approximation</b>. The predicted amplitude and frequency are usually within a few per cent when the plant is strongly low-pass (relative degree two or more, with the crossover well above the corner frequencies).</li>
+<li>It can be <b>wrong</b> when the filtering hypothesis fails: a plant with a resonant peak at a harmonic, or a first-order plant. It may then predict a limit cycle that does not exist, or miss one that does.</li>
+<li>When $G(j\omega)$ and the locus are nearly tangent, a small modelling error decides whether they cross, so the prediction is unreliable.</li>
+<li>The method says nothing about transients or about other kinds of motion such as chaos. Check the prediction by simulation, as in the relay example.</li>
+<li>Uses beyond analysis: the <b>relay auto-tuning</b> experiment (practice Ex 5.9) uses exactly this prediction to measure the ultimate gain and period of a process for PID tuning.</li>
+</ul>
+</article>
+    <!-- NOTES END -->
+    </section>
+    <section class="lsec" id="try"><h2>Try it</h2>
+    <p>Pick a nonlinearity and an input amplitude $X$ to see the output wave, its fundamental and the describing function. Below, change the plant gain $K$ in $G(s) = K/(s(s+1)(s+2))$ and watch where $G(j\omega)$ meets the critical locus $-1/K_N(X)$.</p>
+    <div class="sim nls" data-nls="describing-function" data-preset="relay"></div>
+    </section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the div below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">Find the describing function of the cubic nonlinearity $y = x^3$.</div><details><summary>Show solution</summary><div class="sol">$X^3\sin^3\omega t = X^3\left(\frac34\sin\omega t - \frac14\sin3\omega t\right)$. The fundamental is $\frac34X^3\sin\omega t$, so $K_N = \frac34X^2$: real, and growing with amplitude (a hardening spring).</div></details></li><li><div class="q">A saturation has slope $K = 2$ and limit $S = 1$. Find $K_N$ for $X = 0.5$ and $X = 2$.</div><details><summary>Show solution</summary><div class="sol">$X = 0.5 &lt; S$: linear, $K_N = 2$. $X = 2$: $\beta = \sin^{-1}0.5 = \pi/6$, $K_N = \frac{4}{\pi}\left(0.524 + 0.5\times0.866\right) = 1.22$.</div></details></li><li><div class="q">Explain why the describing function of any odd, single-valued nonlinearity is real.</div><details><summary>Show solution</summary><div class="sol">For $x = X\sin\omega t$ the output $y = f(X\sin\omega t)$ has the same symmetry as $\sin\omega t$ about $\omega t = \pi/2$ (quarter-wave symmetry). Multiplying by $\cos\omega t$, which is anti-symmetric about $\pi/2$, and integrating over a period gives $B_1 = 0$. No phase shift means $K_N$ is real.</div></details></li><li><div class="q">An ideal relay with $M = 1$ controls $G(s) = \dfrac{8}{s(s+2)^2}$. Predict the limit cycle.</div><details><summary>Show solution</summary><div class="sol">$\angle G = -90° - 2\tan^{-1}(\omega/2) = -180°$ at $\omega = 2$ rad/s. $|G(j2)| = \frac{8}{2\times8} = 0.5$. $\frac{\pi X}{4} = 0.5$ gives $X = 0.64$. Period $\pi$ s. The locus leaves the encircled region as $X$ grows, so the cycle is stable.</div></details></li><li><div class="q">A unit saturation ($K = 1$, $S = 1$) is in a loop with $G(s) = \dfrac{K_p}{s(s+1)(s+2)}$. For which $K_p$ is a limit cycle predicted, and with what amplitude for $K_p = 12$?</div><details><summary>Show solution</summary><div class="sol">$-1/K_N$ runs from $-1$ (small $X$) to $-\infty$. The plant crosses at $-K_p/6$, so an intersection exists when $K_p/6 &gt; 1$, $K_p &gt; 6$ (which is exactly where the linear loop becomes unstable). For $K_p = 12$: $K_N(X) = 0.5$; solving the saturation formula gives $X \approx 2.47$, at $\omega = \sqrt2$. It is a stable cycle: saturation stops the unstable linear loop from growing without bound.</div></details></li><li><div class="q">Show that for the relay with hysteresis the critical locus $-1/K_N$ is a horizontal straight line, and say what this means for the predicted frequency.</div><details><summary>Show solution</summary><div class="sol">$-\frac{1}{K_N} = -\frac{\pi X}{4M}\cdot\frac{1}{\sqrt{1 - (h/X)^2} - jh/X} = -\frac{\pi X}{4M}\left(\sqrt{1 - (h/X)^2} + j\frac hX\right)$, whose imaginary part is $-\frac{\pi h}{4M}$ for every $X$. The locus is a horizontal line below the real axis, so it meets $G(j\omega)$ where $\angle G$ is greater than $-180°$: hysteresis lowers the oscillation frequency compared with an ideal relay.</div></details></li><li><div class="q">Why does the describing function method work well for the relay loop of the worked example but poorly for a relay controlling $G(s) = 1/(s + 1)$?</div><details><summary>Show solution</summary><div class="sol">$G(s) = 1/(s+1)$ has phase above $-90°$ at every frequency, so it never meets the negative real axis and no limit cycle is predicted. The actual relay loop chatters (switches infinitely fast) about $y = 0$, a motion the method cannot describe. A first-order plant does not filter the harmonics, so the filtering hypothesis fails.</div></details></li></ol></section>
+    <!-- PRACTICE START: practice problems from the exercise compendium. To add one, copy a <li>...</li> line. Guide section 20. -->
+    <section class="lsec" id="practice"><h2>Practice problems from the exercise compendium</h2>
+    <p class="note">From <i>Exercises in Nonlinear Control Systems</i> by M. Johansson, B. Bernhardsson and K. H. Johansson (Department of Automatic Control, Lund University), Chapter 5 (Describing Function Analysis, Limit Cycles). “Ex 5.7” means Chapter 5, Exercise 7. Work from the compendium statement and figures. The hints and short answers here are written for this course; full solutions are not reproduced. The compendium writes the amplitude as $A$ where these notes use $X$.</p>
+    <ol class="exlist practice"><li><div class="q"><span class="pno">Ex 5.1</span> Match four odd static nonlinearities with four describing-function curves.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> Read $K_N$ as an equivalent gain. Compare the slope of each nonlinearity near the origin with $K_N$ for small amplitude, and its slope far out with $K_N$ for large amplitude.<br><b>Answer.</b> A curve that starts at zero belongs to an element with a dead zone; one that starts high and falls belongs to a saturating or relay-like element; one that rises belongs to an element that gets steeper.</div></details></li><li><div class="q"><span class="pno">Ex 5.2</span> Describing functions of the saturation, the dead zone and a piecewise-linear function.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> Derive the saturation first. Then write the dead zone as "line minus saturation" and the piecewise-linear function as a sum of saturations with different limits and slopes.<br><b>Answer.</b> Saturation as in the notes. Dead zone $= K - K_{N,\text{sat}}$. A piecewise-linear function with breakpoints $\alpha$ and $\beta$ is a weighted sum of two saturation describing functions.</div></details></li><li><div class="q"><span class="pno">Ex 5.3</span> Show the given formula for $-1/N(A)$ of a relay with hysteresis.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> Find where the output switches in the cycle ($A\sin\omega t = \pm D$), compute $A_1$ and $B_1$, then invert.<br><b>Answer.</b> The locus is the horizontal line $\mathrm{Im} = -\frac{\pi D}{4H}$ (compendium notation: switching level $D$, output $H$), with real part $-\frac{\pi}{4H}\sqrt{A^2 - D^2}$.</div></details></li><li><div class="q"><span class="pno">Ex 5.4</span> Relate the describing function of $D f(x/D)$ to that of $f(x)$.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> Substitute the input $C\sin\omega t$ and change variables in the Fourier integral.<br><b>Answer.</b> It equals $Y_N(C/D)$: scaling input and output by the same factor only rescales the amplitude axis.</div></details></li><li><div class="q"><span class="pno">Ex 5.6</span> Describing function of $f(x) = k_1x + k_2x^2 + k_3x^3$; the role of $k_2x^2$.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> Use $\sin^2\theta = \frac{1 - \cos2\theta}{2}$ and $\sin^3\theta = \frac{3\sin\theta - \sin3\theta}{4}$.<br><b>Answer.</b> $N(A) = k_1 + \frac34k_3A^2$. The even term $k_2x^2$ gives only a bias and a second harmonic, no fundamental, so it does not enter $N$; but it breaks the odd-symmetry assumption, and the bias it creates can shift the operating point.</div></details></li><li><div class="q"><span class="pno">Ex 5.7</span> An electronic oscillator: saturation in a loop with $G(s) = \dfrac{-5s}{s^2 + s + 25}$. Is there a limit cycle, with what frequency and amplitude, and is it stable?</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> Split $G(j\omega)$ into real and imaginary parts (multiply by the conjugate of the denominator). Find where it is real and negative.<br><b>Answer.</b> $G(j5) = -5$, so $\omega = 5$ rad/s and $N(A) = 0.2$. For a unit saturation this gives $A \approx 6.3$. The locus leaves the encircled region as $A$ grows: a stable limit cycle, which is what makes the circuit a good oscillator.</div></details></li><li><div class="q"><span class="pno">Ex 5.8</span> A servo $\dfrac{4}{s(s+1)(s+2)}$ with a relay with dead zone $a$: show the describing function and choose $a$ to avoid oscillation.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> For (a) integrate the pulse output between the switching angles. For (b) find the maximum of $N(A)$ and compare it with the gain margin of $G_0$.<br><b>Answer.</b> $N$ peaks at $\frac{2}{\pi a}$ when $A = a\sqrt2$; $G_0$ crosses the real axis at $-2/3$. No oscillation if $\frac{2}{\pi a} &lt; \frac32$, i.e. $a &gt; \frac{4}{3\pi} \approx 0.42$ (the worked example in the notes).</div></details></li><li><div class="q"><span class="pno">Ex 5.9</span> Relay auto-tuning: estimate the ultimate gain and period from the relay oscillation, and apply it to $G(s) = \dfrac{50}{s(s+1)(s+10)}$.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> At the oscillation, $K_N(A)\,|G(j\omega_u)| = 1$ with $K_N = \frac{4D}{\pi A}$.<br><b>Answer.</b> $K_u \approx \frac{4D}{\pi A}$, $T_u = \frac{2\pi}{\omega}$. For this plant $\omega_u = \sqrt{10}$, $|G(j\omega_u)| = 0.455$, so the relay gives $A \approx 0.58$ (for $D = 1$), $K_u \approx 2.2$ and $T_u \approx 1.99$ s, matching the analytical values.</div></details></li><li><div class="q"><span class="pno">Ex 5.12</span> Show that $G(s) = \dfrac{1}{s(s+1)^2}$ with relay feedback has a locally stable limit cycle.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> Find the phase crossover of $G$ and apply the stability rule for the relay locus.<br><b>Answer.</b> $\angle G = -180°$ at $\omega = 1$, $|G(j1)| = 0.5$, so $A = \frac{4 \times 0.5}{\pi} = 0.64$ for a unit relay, period $2\pi$. The locus leaves the encircled region as $A$ grows: stable. (A rigorous proof uses the Poincaré map of Ex 5.13.)</div></details></li></ol></section>
+    <!-- PRACTICE END -->
+    <nav class="prevnext"><a class="pn prev" href="03-linearization.html"><small>← Lesson 3</small>Linearization</a><a class="pn next" href="05-lyapunov-stability.html"><small>Lesson 5 →</small>Lyapunov stability</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+<script src="../../assets/js/nonlinear-sims.js"></script>
+</body>
+</html>
