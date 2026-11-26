@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 200" width="620" height="200" role="img" aria-label="The Lur'e system: a linear system G(s) with state x, input u and output y, in negative feedback with a memoryless, possibly time-varying nonlinearity psi(t, y) known only to lie in a sector">
+<title>The Lur'e system: a linear system G(s) with state x, input u and output y, in negative feedback with a memoryless, possibly time-varying nonlinearity psi(t, y) known only to lie in a sector</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#16a34a"/></marker><marker id="al" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#94a3b8"/></marker><marker id="av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#7c3aed"/></marker></defs>
+<rect width="620" height="200" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<line x1="30.0" y1="60.0" x2="92.0" y2="60.0" stroke="#0f172a" stroke-width="1.6" marker-end="url(#ak)"/>
+<text x="50.0" y="50.0" font-size="12.5" text-anchor="middle" fill="#0f172a" font-weight="400">r = 0</text>
+<circle cx="105.0" cy="60.0" r="13" fill="#ffffff" stroke="#0f172a" stroke-width="1.6"/>
+<text x="96.0" y="44.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="400">+</text>
+<text x="96.0" y="90.0" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="400">−</text>
+<line x1="118.0" y1="60.0" x2="230.0" y2="60.0" stroke="#0f172a" stroke-width="1.6" marker-end="url(#ak)"/>
+<text x="170.0" y="50.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">u</text>
+<rect x="230.0" y="26.0" width="170.0" height="68.0" rx="6" fill="#eef6fb" stroke="#0f172a" stroke-width="1.6"/>
+<text x="315.0" y="65.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400"></text>
+<text x="315.0" y="54.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400">ẋ = Ax + Bu</text>
+<text x="315.0" y="76.0" font-size="12" text-anchor="middle" fill="#0f172a" font-weight="400">y = Cx,  G(s) = C(sI − A)⁻¹B</text>
+<line x1="400.0" y1="60.0" x2="580.0" y2="60.0" stroke="#0f172a" stroke-width="1.6" marker-end="url(#ak)"/>
+<text x="560.0" y="50.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">y</text>
+<line x1="520.0" y1="60.0" x2="520.0" y2="150.0" stroke="#0f172a" stroke-width="1.6"/>
+<line x1="520.0" y1="150.0" x2="375.0" y2="150.0" stroke="#0f172a" stroke-width="1.6" marker-end="url(#ak)"/>
+<rect x="255.0" y="120.0" width="120.0" height="60.0" rx="6" fill="#fdf2f8" stroke="#db2777" stroke-width="1.8"/>
+<text x="315.0" y="156.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">ψ(t, y)</text>
+<line x1="255.0" y1="150.0" x2="105.0" y2="150.0" stroke="#0f172a" stroke-width="1.6"/>
+<line x1="105.0" y1="150.0" x2="105.0" y2="73.0" stroke="#0f172a" stroke-width="1.6" marker-end="url(#ak)"/>
+<text x="315.0" y="196.0" font-size="12" text-anchor="middle" fill="#db2777" font-weight="400">nonlinearity in sector [α, β]</text>
+</g>
+</svg>

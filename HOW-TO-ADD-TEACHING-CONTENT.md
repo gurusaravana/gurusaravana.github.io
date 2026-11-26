@@ -365,7 +365,67 @@ Keep the quotes and commas exactly as they are. If the data has a typing error, 
 
 To add a map to another course page, copy the whole `<section id="map">` block, change the data, and add `<script src="../assets/js/course-map.js"></script>` before `</body>`.
 
-## 20. Exam formula sheet (Control System Engineering)
+## 20. Nonlinear Control (EACT 633) lessons
+
+The EACT 633 chapter decks are written out as lesson pages in `courses/nonlinear-control/`, one or two lessons per chapter:
+
+- `01-introduction.html` and `02-phase-plane-analysis.html` (Chapter 1: why nonlinear control, hard nonlinearities, nonlinear phenomena, phase portraits, isoclines, singular points, limit cycles). Built from "Chapter 1 Phase plane analysis v2" (the v1 file is the same apart from its header) and TVTIx_Chapter1_NLC.
+- `03-linearization.html` and `04-describing-function.html` (Chapter 2: tangent-line and Jacobian linearization, the pendulum, a tank, l'Hôpital's rule, linearizing about a trajectory; describing functions of saturation, dead zone, relays, hysteresis and backlash, and limit-cycle prediction). Built from TVTIx_Chapter2_NLC and the "Chapter2 Linearization" lecture (rewritten in our own words).
+- `05-lyapunov-stability.html` (Chapter 3: equilibria, stability definitions, the Vinograd–Hahn example, positive definite functions and quadratic forms, Lyapunov theorems, the Lyapunov equation and how not to use it, LaSalle, Barbalat, instability and converse theorems, finding Lyapunov functions). Covers the same ground as the Chapter 3 Lyapunov tutorial, in our own words.
+- `06-absolute-stability.html` (Chapter 4: sector nonlinearities, the Lur'e system, quadratic Lyapunov functions and the S-procedure LMI, positive real and SPR functions, the KYP lemma, the circle criterion with Examples 7.13 to 7.15, the Popov criterion, input-to-state stability and input-output stability). Built from the "Chapter 4 Sector Nonlinearity", "Chapter 4 Materials" and "Popov Circle" decks, rewritten in our own words.
+- `07-feedback-linearization.html` (Chapter 5: cancelling nonlinearities, change of variables, input-state and input-output linearization, internal dynamics, relative degree and Lie derivatives, the normal form, zero dynamics and minimum phase, tracking, limits of exact cancellation, the two-tank example). Built from the "Chapter 5 tutorials" deck; its Exercises 12.1 to 12.3 are on the page with our own short answers.
+
+The course home page `courses/nonlinear-control.html` lists every lesson by chapter (lessons not written yet show "coming soon"), has a "Figures and worked problems" gallery and the live simulations (phase plane, pendulum, describing function and circle criterion). New diagrams start with `nlc-` in `assets/img/diagrams/`. Edit a lesson's notes between the `NOTES START` and `NOTES END` comments.
+
+**Phase plane explorer.** `assets/js/nonlinear-sims.js` draws an interactive phase plane. Put this line in any page (and load the script before `</body>`):
+
+    <div class="sim nls" data-nls="phase-plane" data-preset="vdp"></div>
+
+`data-preset` picks the starting system: `ex7` to `ex13` (the linear portraits of Lesson 2), `star`, `linear`, `pendulum`, `vdp` (Van der Pol), `duffing`, `quad`, `relay`.
+
+**Describing function explorer.** In the same script:
+
+    <div class="sim nls" data-nls="describing-function" data-preset="relay"></div>
+
+It shows the output wave and fundamental for a chosen nonlinearity and amplitude, and the polar plot of K/(s(s+1)(s+2)) with the critical locus, listing every predicted limit cycle. Presets: `saturation`, `deadzone`, `relay`, `relaydz`, `hyst`, `dzhyst`, `backlash`, `cubic`.
+
+**Circle criterion explorer.** In the same script:
+
+    <div class="sim nls" data-nls="circle" data-preset="ex713"></div>
+
+Pick a linear part and move the sector slopes alpha and beta. It draws the Nyquist plot with the disk or line of the circle criterion, picks the right case, counts encirclements and says whether the test passes. Presets: `ex713`, `ex714`, `c45`, `ex715`, `c46a`, `popov` (the plants of Lesson 6 and its practice problems). To add a plant, copy a line in the `CIRC` list in the script and give its numerator and denominator coefficients and its number of unstable poles `m`.
+
+**Practice problems.** Each lesson ends with practice problems from the exercise compendium *Exercises in Nonlinear Control Systems* (Johansson, Bernhardsson and Johansson, Lund University), between the comments `PRACTICE START` and `PRACTICE END`. "Ex 2.5" means Chapter 2, Exercise 5 of the compendium. Only a one-line summary, a hint and a short answer written for this course are on the site; the compendium's statements, figures and solutions are not copied. To add one, copy a `<li>...</li>` line in that list.
+
+The phone numbers, e-mail addresses, institute logos and title-slide contact blocks of the decks are not on the site. Where a slide had a slip, the page gives the corrected statement in a "Watch out" box.
+
+## 21. Digital Control Systems (EACT 534) lessons
+
+The FTI EACT534 slide decks are written out as seven lesson pages in `courses/digital-control-systems/`, in three modules:
+
+| Lesson | Page | From |
+|---|---|---|
+| 1 | `01-discrete-time-and-z-transform.html`: why digital control, difference equations, z-transform, s-to-z mapping, inverse z-transform | Chapter 1, first half |
+| 2 | `02-sampling-and-pulse-transfer.html`: sampling theorem, choosing T, ADC and DAC (ZOH) models, $G_{ZAS}(z)$, digital closed loop | Chapter 1, second half |
+| 3 | `03-pulse-transfer-and-discretization.html`: pulse transfer functions of sampled loops, eight loop configurations, impulse/step invariance, forward/backward difference, Tustin | Chapter 2 |
+| 4 | `04-stability.html`: BIBO and internal stability, pole-zero cancellation, Routh test with $w = (z-1)/(z+1)$, Jury test | Chapter 3 |
+| 5 | `05-state-space-analysis.html`: discrete state model, state space to transfer function, companion and Jordan forms, state transition matrix | Chapter 4 |
+| 6 | `06-state-space-preliminaries.html`: continuous state-space review, canonical forms, eigenvalues, similarity transforms, controllability and observability tests | Chapter 5a (preliminaries) |
+| 7 | `07-pole-placement-and-observers.html`: discrete controllability and observability, pole placement, Ackermann, prediction and reduced-order observers, integral control, deadbeat control | Chapter 5 and the Chapter 5 tutorial sheet |
+
+The course page `courses/digital-control-systems.html` lists the lessons and has a "Figures and worked problems" gallery between the `LESSONS START` and `LESSONS END` comments. New diagrams start with `dcs-` in `assets/img/diagrams/` (Lesson 6 also reuses `mass-spring-damper.svg` and `rlc-series.svg`). Edit a lesson's notes between the `NOTES START` and `NOTES END` comments, and add exercises by copying a list item in the `exlist` list.
+
+The email address, institute name and logos on the original slides are not on the site. Every worked number on the pages was checked by calculation. Where a slide had a slip, the page gives the corrected value in a "Watch out" box:
+
+- Lesson 1: the exponential sequence $a^k$ and its region of convergence; the sequence 4, 8, 16, 32.
+- Lesson 2: the gain at 7ωb; 2π written as "2 × 3141"; T = 1 in the position-control result.
+- Lesson 3: cascade figure (b); the closed-loop formula missing $X(z)$; loop configuration 4; backward-difference numerator; forward-difference $G(z)$; trapezoid limits.
+- Lesson 4: $G_{ZAS}(z)$ and the sign of $D$ in the internal-stability loop; the w-polynomial of the Routh example; $b_4$ and the $|d_0| > |d_2|$ check in the Jury example.
+- Lesson 5: the output row of the first companion form; the state matrix of the second companion form (it is the transpose of the first).
+- Lesson 6: state order in the observable form example; the matrix $A$ in the diagonalization example (+4, not −4); $CA = [0\ -8]$ in the observability example.
+- Lesson 7: desired poles in the satellite example (0.795 ± j0.256); the lead compensator $-27.5(z - 0.818)/(z - 0.2375)$; swapped terms in the reduced-order observer; the integral-state definition, $e^{-0.25}$ and the gains in the integral-control example; $Fg$ in the deadbeat example.
+
+## 22. Exam formula sheet (Control System Engineering)
 
 The page `courses/control-system-engineering/formula-sheet.html` collects the key formulas of all 19 lessons, in the lessons' own notation. It is linked from the course home page (the **Formula sheet** card and the **Formulas** menu link).
 

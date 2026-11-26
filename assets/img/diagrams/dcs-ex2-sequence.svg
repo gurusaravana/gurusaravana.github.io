@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 230" width="560" height="230" role="img" aria-label="Stem plot of the sequence 1, 1, 3, 2, 0, 4, 0, 0, 0 for k = 0 to 8.">
+<title>Stem plot of the sequence 1, 1, 3, 2, 0, 4, 0, 0, 0 for k = 0 to 8.</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker></defs>
+<rect width="560" height="230" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<path d="M86.1 20.0 L86.1 180.0" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<path d="M138.3 20.0 L138.3 180.0" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<path d="M190.6 20.0 L190.6 180.0" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<path d="M242.8 20.0 L242.8 180.0" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<path d="M295.0 20.0 L295.0 180.0" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<path d="M347.2 20.0 L347.2 180.0" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<path d="M399.4 20.0 L399.4 180.0" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<path d="M451.7 20.0 L451.7 180.0" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<path d="M503.9 20.0 L503.9 180.0" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<path d="M60.0 180.0 L530.0 180.0" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<path d="M60.0 145.2 L530.0 145.2" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<path d="M60.0 110.4 L530.0 110.4" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<path d="M60.0 75.7 L530.0 75.7" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<path d="M60.0 40.9 L530.0 40.9" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<rect x="60.0" y="20.0" width="470.0" height="160.0" rx="0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<text x="86.1" y="196.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">0</text>
+<text x="138.3" y="196.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">1</text>
+<text x="190.6" y="196.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">2</text>
+<text x="242.8" y="196.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">3</text>
+<text x="295.0" y="196.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">4</text>
+<text x="347.2" y="196.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">5</text>
+<text x="399.4" y="196.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">6</text>
+<text x="451.7" y="196.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">7</text>
+<text x="503.9" y="196.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">8</text>
+<text x="54.0" y="184.0" font-size="12" text-anchor="end" fill="#64748b" font-weight="400">0</text>
+<text x="54.0" y="149.2" font-size="12" text-anchor="end" fill="#64748b" font-weight="400">1</text>
+<text x="54.0" y="114.4" font-size="12" text-anchor="end" fill="#64748b" font-weight="400">2</text>
+<text x="54.0" y="79.7" font-size="12" text-anchor="end" fill="#64748b" font-weight="400">3</text>
+<text x="54.0" y="44.9" font-size="12" text-anchor="end" fill="#64748b" font-weight="400">4</text>
+<text x="295.0" y="214.0" font-size="13" text-anchor="middle" fill="#64748b" font-weight="400" font-style="italic">k</text>
+<text x="22.0" y="100.0" font-size="13" text-anchor="middle" fill="#64748b" font-style="italic" transform="rotate(-90 22.0 100.0)">u(k)</text>
+<path d="M86.1 180.0 L86.1 145.2" fill="none" stroke="#0077b6" stroke-width="2"/>
+<circle cx="86.1" cy="145.2" r="4" fill="#0077b6"/>
+<path d="M138.3 180.0 L138.3 145.2" fill="none" stroke="#0077b6" stroke-width="2"/>
+<circle cx="138.3" cy="145.2" r="4" fill="#0077b6"/>
+<path d="M190.6 180.0 L190.6 75.7" fill="none" stroke="#0077b6" stroke-width="2"/>
+<circle cx="190.6" cy="75.7" r="4" fill="#0077b6"/>
+<path d="M242.8 180.0 L242.8 110.4" fill="none" stroke="#0077b6" stroke-width="2"/>
+<circle cx="242.8" cy="110.4" r="4" fill="#0077b6"/>
+<path d="M295.0 180.0 L295.0 180.0" fill="none" stroke="#0077b6" stroke-width="2"/>
+<circle cx="295.0" cy="180.0" r="4" fill="#0077b6"/>
+<path d="M347.2 180.0 L347.2 40.9" fill="none" stroke="#0077b6" stroke-width="2"/>
+<circle cx="347.2" cy="40.9" r="4" fill="#0077b6"/>
+<path d="M399.4 180.0 L399.4 180.0" fill="none" stroke="#0077b6" stroke-width="2"/>
+<circle cx="399.4" cy="180.0" r="4" fill="#0077b6"/>
+<path d="M451.7 180.0 L451.7 180.0" fill="none" stroke="#0077b6" stroke-width="2"/>
+<circle cx="451.7" cy="180.0" r="4" fill="#0077b6"/>
+<path d="M503.9 180.0 L503.9 180.0" fill="none" stroke="#0077b6" stroke-width="2"/>
+<circle cx="503.9" cy="180.0" r="4" fill="#0077b6"/>
+<text x="86.1" y="135.2" font-size="12" text-anchor="middle" fill="#db2777" font-weight="400">1</text>
+<text x="138.3" y="135.2" font-size="12" text-anchor="middle" fill="#db2777" font-weight="400">z⁻¹</text>
+<text x="190.6" y="65.7" font-size="12" text-anchor="middle" fill="#db2777" font-weight="400">3z⁻²</text>
+<text x="242.8" y="100.4" font-size="12" text-anchor="middle" fill="#db2777" font-weight="400">2z⁻³</text>
+<text x="347.2" y="30.9" font-size="12" text-anchor="middle" fill="#db2777" font-weight="400">4z⁻⁵</text>
+</g>
+</svg>

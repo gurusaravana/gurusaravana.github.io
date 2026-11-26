@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 200" width="620" height="200" role="img" aria-label="Vehicle model for cruise and position control: a mass M on the road pushed by the force u to the right, with viscous friction b times the velocity acting to the left; v is the velocity and y the position.">
+<title>Vehicle model for cruise and position control: a mass M on the road pushed by the force u to the right, with viscous friction b times the velocity acting to the left; v is the velocity and y the position.</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker></defs>
+<rect width="620" height="200" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<path d="M40.0 150.0 L580.0 150.0" fill="none" stroke="#64748b" stroke-width="2"/>
+<path d="M50.0 150.0 L40.0 162.0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<path d="M68.0 150.0 L58.0 162.0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<path d="M86.0 150.0 L76.0 162.0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<path d="M104.0 150.0 L94.0 162.0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<path d="M122.0 150.0 L112.0 162.0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<path d="M140.0 150.0 L130.0 162.0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<path d="M158.0 150.0 L148.0 162.0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<path d="M176.0 150.0 L166.0 162.0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<path d="M194.0 150.0 L184.0 162.0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<path d="M212.0 150.0 L202.0 162.0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<path d="M230.0 150.0 L220.0 162.0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<path d="M248.0 150.0 L238.0 162.0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<path d="M266.0 150.0 L256.0 162.0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<path d="M284.0 150.0 L274.0 162.0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<path d="M302.0 150.0 L292.0 162.0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<path d="M320.0 150.0 L310.0 162.0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<path d="M338.0 150.0 L328.0 162.0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<path d="M356.0 150.0 L346.0 162.0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<path d="M374.0 150.0 L364.0 162.0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<path d="M392.0 150.0 L382.0 162.0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<path d="M410.0 150.0 L400.0 162.0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<path d="M428.0 150.0 L418.0 162.0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<path d="M446.0 150.0 L436.0 162.0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<path d="M464.0 150.0 L454.0 162.0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<path d="M482.0 150.0 L472.0 162.0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<path d="M500.0 150.0 L490.0 162.0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<path d="M518.0 150.0 L508.0 162.0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<path d="M536.0 150.0 L526.0 162.0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<path d="M554.0 150.0 L544.0 162.0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<path d="M572.0 150.0 L562.0 162.0" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<rect x="230.0" y="70.0" width="160.0" height="64.0" rx="4" fill="#f1f5f9" stroke="#0f172a" stroke-width="2"/>
+<text x="310.0" y="108.0" font-size="20" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">M</text>
+<circle cx="262.0" cy="142.0" r="8.0" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<circle cx="358.0" cy="142.0" r="8.0" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M390.0 102.0 L500.0 102.0" fill="none" stroke="#0077b6" stroke-width="2.4" marker-end="url(#ab)"/>
+<text x="510.0" y="107.0" font-size="16" text-anchor="start" fill="#0077b6" font-weight="400" font-style="italic">u</text>
+<path d="M230.0 102.0 L130.0 102.0" fill="none" stroke="#db2777" stroke-width="2.4" marker-end="url(#ap)"/>
+<text x="120.0" y="107.0" font-size="15" text-anchor="end" fill="#db2777" font-weight="400" font-style="italic">b·v</text>
+<path d="M310.0 50.0 L380.0 50.0" fill="none" stroke="#059669" stroke-width="2" marker-end="url(#ag)"/>
+<text x="388.0" y="55.0" font-size="14" text-anchor="start" fill="#059669" font-weight="400" font-style="italic">v = ẏ,  position y</text>
+<path d="M310.0 44.0 L310.0 66.0" fill="none" stroke="#059669" stroke-width="1.5"/>
+</g>
+</svg>

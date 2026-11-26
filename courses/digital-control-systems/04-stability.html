@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 4: Stability of discrete-time systems · Digital Control Systems</title>
+<meta name="description" content="Stability of discrete-time systems">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 4: Stability of discrete-time systems  (Digital Control Systems, EACT 534, Chapter 3)
+  Edit the notes between the NOTES START and NOTES END markers below.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Figures live in assets/img/diagrams/ (names start with dcs-) and are shown with a figure of class "diagram".
+  To add an exercise, copy one list item inside the list of class "exlist".
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
+  <nav class="links"><a href="../digital-control-systems.html">Course home</a><a href="../digital-control-systems.html#lessons">Lessons</a><a href="../digital-control-systems.html#figures">Figures</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../digital-control-systems.html">← Digital Control Systems</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 4 of 7 · Chapter 3</div>
+    <h1>Stability of discrete-time systems</h1>
+    <p>Digital Control Systems · EACT 534 · Postgraduate course</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">EACT 534 · Digital Control Systems</div><ol><li><a href="01-discrete-time-and-z-transform.html"><span class="n">1</span>Discrete-time systems and the z-transform</a></li><li><a href="02-sampling-and-pulse-transfer.html"><span class="n">2</span>Sampling, ADC and DAC models, and the pulse transfer function</a></li><li><a href="03-pulse-transfer-and-discretization.html"><span class="n">3</span>Pulse transfer functions and discretization</a></li><li class="on"><a href="04-stability.html"><span class="n">4</span>Stability of discrete-time systems</a></li><li><a href="05-state-space-analysis.html"><span class="n">5</span>State-space analysis of discrete-time systems</a></li><li><a href="06-state-space-preliminaries.html"><span class="n">6</span>State-space preliminaries: canonical forms, controllability and observability</a></li><li><a href="07-pole-placement-and-observers.html"><span class="n">7</span>Controllability, pole placement and observer design</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Define asymptotic, marginal, BIBO and internal stability for discrete-time LTI systems</li><li>Judge stability from pole locations, including the effect of pole-zero cancellation</li><li>Apply the Routh–Hurwitz test after the bilinear change of variable $z = (1 + w)/(1 - w)$</li><li>Build a Jury table and apply the Jury conditions, including the quick second-order triangle</li></ul></div>
+    <nav class="figstrip" aria-label="Figures in this lesson"><a href="#fig-stab-examples"><img src="../../assets/img/diagrams/dcs-stab-examples.svg" alt="" loading="lazy"><span>Four pole-zero maps</span></a><a href="#fig-bounded"><img src="../../assets/img/diagrams/dcs-bounded-seq.svg" alt="" loading="lazy"><span>Bounded sequence</span></a><a href="#fig-internal"><img src="../../assets/img/diagrams/dcs-internal-loop.svg" alt="" loading="lazy"><span>Loop with disturbance</span></a><a href="#fig-w-map"><img src="../../assets/img/diagrams/dcs-w-map.svg" alt="" loading="lazy"><span>z to w map</span></a></nav>
+    <section class="lsec"><h2>Notes</h2>
+    <!-- NOTES START -->
+    <article class="notes">
+<p>Stability is the first requirement of any control system, analog or digital. A digital controller updates only once per sampling period, so a loop that would be stable in continuous time can become unstable when it is sampled (Lesson 3, Example 1). This lesson defines stability for discrete-time LTI systems and gives three tests: pole locations, the Routh–Hurwitz criterion after a bilinear change of variable, and the Jury test, which works on the z-polynomial directly.</p>
+
+<h3 id="asymptotic">Asymptotic stability</h3>
+<p>The most common definitions look at the size of the response in the steady state. If it grows without bound, the system is unstable.</p>
+<ul>
+<li><b>Asymptotically stable</b>: the response to any initial conditions decays to zero, $\lim_{k\to\infty} y(k) = 0$.</li>
+<li><b>Marginally stable</b>: the response to initial conditions stays bounded but does not decay to zero.</li>
+</ul>
+<p>Take the LTI difference equation $y(k+n) + a_{n-1}y(k+n-1) + \dots + a_0y(k) = b_mu(k+m) + \dots + b_0u(k)$ with initial conditions $y(0), \dots, y(n-1)$ and zero input. Z-transforming with the time-advance property gives</p>
+<p class="eq">$$Y(z) = \frac{N(z)}{z^n + a_{n-1}z^{n-1} + \dots + a_1z + a_0}$$</p>
+<p>where $N(z)$ depends on the initial conditions. The zeros of the transfer function come from the input terms, so they play no part here. The denominator is the same as that of the transfer function (unless poles and zeros cancel), so the response to initial conditions is a sum of terms $p_i^k$, one for each pole $p_i$.</p>
+<p class="key">In the absence of pole-zero cancellation, an LTI digital system is <b>asymptotically stable</b> if all its poles are in the open unit disc $\{z : |z| &lt; 1\}$, and <b>marginally stable</b> if they are in the closed unit disc $\{z : |z| \le 1\}$ with no repeated poles on the unit circle.</p>
+<figure class="diagram" id="fig-stab-examples"><img src="../../assets/img/diagrams/dcs-stab-examples.svg" alt="Pole-zero maps of the four stability examples" loading="lazy"><figcaption>The four examples. Crosses are poles, circles are zeros, the dashed circle is $|z| = 1$.</figcaption></figure>
+<p><b>Example 1.</b> Determine the asymptotic stability of each system.</p>
+<ol>
+<li>$H(z) = \dfrac{4(z - 2)}{(z - 2)(z - 0.1)}$: the transfer function reduces to $4/(z - 0.1)$, but the cancelled pole at $z = 2$ is still a mode of the system. Any initial condition that excites it grows like $2^k$. <b>Not asymptotically stable.</b> An unstable pole can never be removed by cancellation.</li>
+<li>$H(z) = \dfrac{4(z - 0.2)}{(z - 0.2)(z - 0.1)}$: both poles, 0.2 and 0.1, are inside the unit circle. <b>Asymptotically stable.</b></li>
+<li>$H(z) = \dfrac{5(z - 0.3)}{(z - 0.2)(z - 0.1)}$: poles 0.2 and 0.1. <b>Asymptotically stable.</b></li>
+<li>$H(z) = \dfrac{8(z - 0.2)}{(z - 0.1)(z - 1)}$: a simple pole on the unit circle at $z = 1$. The initial-condition response tends to a constant. <b>Marginally stable.</b></li>
+</ol>
+
+<h3 id="bibo">BIBO stability</h3>
+<p>The second definition concerns the forced response to a bounded input. An input is <b>bounded</b> if $|u(k)| &lt; b_u$ for all $k$, with $0 &lt; b_u &lt; \infty$.</p>
+<figure class="diagram" id="fig-bounded"><img src="../../assets/img/diagrams/dcs-bounded-seq.svg" alt="A sequence bounded by plus and minus 3" loading="lazy"><figcaption>A bounded sequence with bound $b_u = 3$.</figcaption></figure>
+<p>A system is <b>bounded-input bounded-output (BIBO) stable</b> if every bounded input produces a bounded output: $|y(k)| &lt; b_y &lt; \infty$. The response to any input is the convolution sum with the impulse response $h(k)$:</p>
+<p class="eq">$$y(k) = \sum_{i=0}^{k} h(k - i)\,u(i), \qquad k = 0, 1, 2, \dots$$</p>
+<p>so $|y(k)| \le b_u\sum_i |h(i)|$. The system is BIBO stable if and only if the impulse response is absolutely summable, $\sum_{k=0}^{\infty}|h(k)| &lt; \infty$, which for a rational $H(z)$ means all poles inside the unit circle.</p>
+<p>For LTI systems with no pole-zero cancellation, BIBO stability and asymptotic stability are equivalent and are checked with the same tests. That is why the literature simply says "stable", assuming no unstable cancellation. Note that a marginally stable system is <b>not</b> BIBO stable: a bounded input at the right frequency (a step into a pole at $z = 1$) produces an output that grows without bound.</p>
+
+<h3 id="internal">Internal stability</h3>
+<p>A stable closed-loop transfer function from reference to output is not enough. Some internal signal, such as the control effort, may still grow without bound. In a feedback system every signal in the loop must stay bounded when the external inputs are bounded.</p>
+<figure class="diagram" id="fig-internal"><img src="../../assets/img/diagrams/dcs-internal-loop.svg" alt="Unity feedback loop with controller C(z), plant G_ZAS(z) and a disturbance D(z) at the plant input" loading="lazy"><figcaption>Two inputs ($R$, $D$) and two outputs ($Y$, $U$).</figcaption></figure>
+<p class="eq">$$\begin{bmatrix} Y(z) \\ U(z) \end{bmatrix} = \frac{1}{1 + C(z)G_{ZAS}(z)}\begin{bmatrix} C(z)G_{ZAS}(z) &amp; G_{ZAS}(z) \\ C(z) &amp; -C(z)G_{ZAS}(z) \end{bmatrix}\begin{bmatrix} R(z) \\ D(z) \end{bmatrix}$$</p>
+<p>The system is <b>internally stable</b> if all four transfer functions are BIBO stable. The test matters when the controller cancels a plant pole or zero outside the unit circle: the cancelled factor disappears from $Y/R$ but stays in $Y/D$ or $U/R$.</p>
+<p class="warn">The slides write $G_{ZAS}(s)$ in these transfer functions; they are z-domain functions, $G_{ZAS}(z)$. The entry from $D$ to $U$ also carries a minus sign: the disturbance reaches $U$ through the negative feedback.</p>
+
+<h3 id="routh">The Routh–Hurwitz criterion with a bilinear transform</h3>
+<p>The Routh–Hurwitz criterion tests for roots in the left half-plane, so it cannot be applied to a z-polynomial directly. A bilinear transformation maps the inside of the unit circle onto the left half-plane:</p>
+<p class="eq">$$z = \frac{1 + w}{1 - w} \quad\Longleftrightarrow\quad w = \frac{z - 1}{z + 1}$$</p>
+<figure class="diagram" id="fig-w-map"><img src="../../assets/img/diagrams/dcs-w-map.svg" alt="Unit disc in z maps to left half of w" loading="lazy"><figcaption>The inside of the unit circle becomes the left half of the $w$-plane.</figcaption></figure>
+<p>Substitute into $F(z) = a_nz^n + \dots + a_0$, multiply through by $(1 - w)^n$, and apply the usual Routh array to the $w$-polynomial. Each sign change in the first column is one root outside the unit circle. The algebra grows quickly with the order, so this is practical for low-order polynomials, where it gives stability conditions on a gain very neatly.</p>
+<p><b>Example 2.</b> $z^2 - 0.25 = 0$. Substituting and multiplying by $(1 - w)^2$: $(1 + w)^2 - 0.25(1 - w)^2 = 0.75w^2 + 2.5w + 0.75 = 0$.</p>
+<div class="tblwrap"><table class="tbl routh"><tr><th>$w^2$</th><td>0.75</td><td>0.75</td></tr><tr><th>$w^1$</th><td>2.5</td><td>0</td></tr><tr><th>$w^0$</th><td>0.75</td><td></td></tr></table></div>
+<p>No sign changes: the system is stable. (Indeed the roots are $z = \pm 0.5$.)</p>
+<p><b>Example 3.</b> $z^3 - 1.2z^2 - 1.375z - 0.25 = 0$. The slides use the equivalent substitution $z = (w + 1)/(w - 1)$, which gives</p>
+<p class="eq">$$-1.825w^3 + 3.925w^2 + 4.825w + 1.075 = 0$$</p>
+<div class="tblwrap"><table class="tbl routh"><tr><th>$w^3$</th><td>−1.825</td><td>4.825</td></tr><tr><th>$w^2$</th><td>3.925</td><td>1.075</td></tr><tr><th>$w^1$</th><td>5.325</td><td>0</td></tr><tr><th>$w^0$</th><td>1.075</td><td></td></tr></table></div>
+<p>One sign change, so one root lies in the right half of the $w$-plane, that is, one root of the characteristic equation is outside the unit circle. (The roots are $1.965$, $-0.520$ and $-0.245$.)</p>
+<p class="warn">The slides give the transformed polynomial as $-1.875w^3 + 3.875w^2 + 4.875w + 1.125$ and the last Routh entry as "1125". Expanding $(w+1)^3 - 1.2(w+1)^2(w-1) - 1.375(w+1)(w-1)^2 - 0.25(w-1)^3$ gives the coefficients above. The conclusion, one unstable root, does not change.</p>
+
+<h3 id="jury">The Jury stability test</h3>
+<p>E. I. Jury's test checks a z-polynomial directly, with no change of variable. For</p>
+<p class="eq">$$F(z) = a_nz^n + a_{n-1}z^{n-1} + \dots + a_1z + a_0, \qquad a_n &gt; 0$$</p>
+<p>all roots are inside the unit circle if and only if all $n + 1$ conditions hold:</p>
+<ol>
+<li>$F(1) &gt; 0$</li>
+<li>$(-1)^nF(-1) &gt; 0$</li>
+<li>$|a_0| &lt; a_n$</li>
+<li>$|b_0| &gt; |b_{n-1}|$</li>
+<li>$|c_0| &gt; |c_{n-2}|$</li>
+<li>… and so on, until the last row: $|r_0| &gt; |r_2|$.</li>
+</ol>
+<p>The first two need no table and often settle the question at once: if either fails, the polynomial is unstable. The rest come from the <b>Jury table</b>, which has $2n - 3$ rows:</p>
+<div class="tblwrap"><table class="tbl"><tr><th>Row</th><th>$z^0$</th><th>$z^1$</th><th>$z^2$</th><th>…</th><th>$z^{n-1}$</th><th>$z^n$</th></tr>
+<tr><td>1</td><td>$a_0$</td><td>$a_1$</td><td>$a_2$</td><td>…</td><td>$a_{n-1}$</td><td>$a_n$</td></tr>
+<tr><td>2</td><td>$a_n$</td><td>$a_{n-1}$</td><td>$a_{n-2}$</td><td>…</td><td>$a_1$</td><td>$a_0$</td></tr>
+<tr><td>3</td><td>$b_0$</td><td>$b_1$</td><td>$b_2$</td><td>…</td><td>$b_{n-1}$</td><td></td></tr>
+<tr><td>4</td><td>$b_{n-1}$</td><td>$b_{n-2}$</td><td>$b_{n-3}$</td><td>…</td><td>$b_0$</td><td></td></tr>
+<tr><td>5</td><td>$c_0$</td><td>$c_1$</td><td>…</td><td>$c_{n-2}$</td><td></td><td></td></tr>
+<tr><td>6</td><td>$c_{n-2}$</td><td>$c_{n-3}$</td><td>…</td><td>$c_0$</td><td></td><td></td></tr>
+<tr><td>⋮</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>$2n-3$</td><td>$r_0$</td><td>$r_1$</td><td>$r_2$</td><td></td><td></td><td></td></tr></table></div>
+<p>Each even row is the row above written backwards. Each new row comes from 2×2 determinants of the two rows above it:</p>
+<p class="eq">$$b_k = \begin{vmatrix} a_0 &amp; a_{n-k} \\ a_n &amp; a_k \end{vmatrix} = a_0a_k - a_na_{n-k}, \qquad c_k = \begin{vmatrix} b_0 &amp; b_{n-1-k} \\ b_{n-1} &amp; b_k \end{vmatrix}$$</p>
+<p>and so on, always using the first column and the column $k$ positions from the end.</p>
+
+<p><b>Example 4.</b> Test $F(z) = z^5 + 2.6z^4 - 0.56z^3 - 2.05z^2 + 0.0775z + 0.35$.</p>
+<p>$F(1) = 1 + 2.6 - 0.56 - 2.05 + 0.0775 + 0.35 = 1.4175 &gt; 0$: condition 1 holds. $F(-1) = -1 + 2.6 + 0.56 - 2.05 - 0.0775 + 0.35 = 0.3825$, so $(-1)^5F(-1) = -0.3825 &lt; 0$: <b>condition 2 fails</b>, and the polynomial is already known to be unstable. Completing the table for practice:</p>
+<div class="tblwrap"><table class="tbl"><tr><th>Row</th><th>$z^0$</th><th>$z^1$</th><th>$z^2$</th><th>$z^3$</th><th>$z^4$</th><th>$z^5$</th></tr>
+<tr><td>1</td><td>0.35</td><td>0.0775</td><td>−2.05</td><td>−0.56</td><td>2.6</td><td>1</td></tr>
+<tr><td>2</td><td>1</td><td>2.6</td><td>−0.56</td><td>−2.05</td><td>0.0775</td><td>0.35</td></tr>
+<tr><td>3</td><td>−0.8775</td><td>−2.5729</td><td>−0.1575</td><td>1.8540</td><td>0.8325</td><td></td></tr>
+<tr><td>4</td><td>0.8325</td><td>1.8540</td><td>−0.1575</td><td>−2.5729</td><td>−0.8775</td><td></td></tr>
+<tr><td>5</td><td>0.0770</td><td>0.7142</td><td>0.2693</td><td>0.5150</td><td></td><td></td></tr>
+<tr><td>6</td><td>0.5150</td><td>0.2693</td><td>0.7142</td><td>0.0770</td><td></td><td></td></tr>
+<tr><td>7</td><td>−0.2593</td><td>−0.0838</td><td>−0.3471</td><td></td><td></td><td></td></tr></table></div>
+<p>For example $b_0 = 0.35^2 - 1^2 = -0.8775$ and $b_4 = 0.35 \times 2.6 - 1 \times 0.0775 = 0.8325$. The conditions: $|a_0| = 0.35 &lt; 1$ holds; $|b_0| = 0.8775 &gt; |b_4| = 0.8325$ holds; $|c_0| = 0.077 &gt; |c_3| = 0.515$ <b>fails</b>; $|d_0| = 0.2593 &gt; |d_2| = 0.3471$ <b>fails</b>. The polynomial is unstable. (Its roots are $-2.5$, $0.7$, $0.5$, $-0.8$ and $-0.5$; the one at $-2.5$ is outside the unit circle.)</p>
+<p class="warn">The slides print $b_4 = 0.8352$ (the value is 0.8325) and mark the last condition, $|d_0| &gt; |d_2|$, as satisfied. With $d_0 = -0.2593$ and $d_2 = -0.3471$ it is not. The slide's formula for $c_k$ also writes $b_n$ where the row-3 entries stop at $b_{n-1}$. None of this changes the verdict.</p>
+
+<p><b>Example 5.</b> $F(z) = z^2 - 0.25$. $F(1) = 0.75 &gt; 0$, $(-1)^2F(-1) = 0.75 &gt; 0$, and $|a_0| = 0.25 &lt; a_2 = 1$. For $n = 2$ these three conditions are all there is, so the system is <b>stable</b>, in agreement with Example 2.</p>
+<p><b>Example 6.</b> $F(z) = z^3 - 1.2z^2 - 1.375z - 0.25$. $F(1) = 1 - 1.2 - 1.375 - 0.25 = -1.825 &lt; 0$: condition 1 fails, so the system is <b>unstable</b>, as Example 3 found with Routh. (For completeness: $(-1)^3F(-1) = 1.075 &gt; 0$ and $|a_0| = 0.25 &lt; 1$ hold, and row 3 is $b = [-0.9375,\ 1.5438,\ 1.675]$, where $|b_0| &lt; |b_2|$ fails too.)</p>
+<p class="key">For a second-order polynomial $z^2 + a_1z + a_0$ the Jury conditions reduce to the "stability triangle": $|a_0| &lt; 1$, $1 + a_1 + a_0 &gt; 0$ and $1 - a_1 + a_0 &gt; 0$. These three inequalities are the quickest test you will ever use for a second-order loop.</p>
+</article>
+    <!-- NOTES END -->
+    </section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the div below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">A loop has characteristic equation $z^2 - 1.6z + 0.6 + 0.1K = 0$. Find the range of $K$ for stability.</div><details><summary>Show solution</summary><div class="sol">Use the second-order conditions with $a_1 = -1.6$, $a_0 = 0.6 + 0.1K$. $|a_0| &lt; 1$ gives $-16 &lt; K &lt; 4$. $1 + a_1 + a_0 = 0.1K &gt; 0$ gives $K &gt; 0$. $1 - a_1 + a_0 = 3.2 + 0.1K &gt; 0$ holds for $K &gt; -32$. So $0 &lt; K &lt; 4$. At $K = 4$ the poles are on the unit circle.</div></details></li>
+<li><div class="q">Use the Jury test on $F(z) = z^3 - 0.5z^2 - 0.25z + 0.125$.</div><details><summary>Show solution</summary><div class="sol">$F(1) = 0.375 &gt; 0$. $(-1)^3F(-1) = -(-1.125) = 1.125 &gt; 0$. $|a_0| = 0.125 &lt; 1$. Row 3: $b_0 = a_0^2 - a_3^2 = -0.9844$, $b_2 = a_0a_2 - a_3a_1 = 0.1875$; $|b_0| &gt; |b_2|$. All four conditions hold: <b>stable</b>. (It factors as $(z - 0.5)^2(z + 0.5)$.)</div></details></li>
+<li><div class="q">Use the bilinear transform and Routh to test $z^2 - z + 0.5 = 0$.</div><details><summary>Show solution</summary><div class="sol">With $z = (1 + w)/(1 - w)$: $(1 + w)^2 - (1 + w)(1 - w) + 0.5(1 - w)^2 = 2.5w^2 + w + 0.5$. All coefficients are positive, and for a second-order polynomial that means no sign changes: <b>stable</b>. Check: the roots are $0.5 \pm j0.5$, with $|z| = 0.707$.</div></details></li>
+<li><div class="q">$H(z) = \dfrac{z}{z - 1}$ is marginally stable. Show that it is not BIBO stable.</div><details><summary>Show solution</summary><div class="sol">Its impulse response is $h(k) = 1$ for all $k$, and $\sum|h(k)|$ diverges. Concretely, the bounded input $u(k) = 1$ gives $Y(z) = z^2/(z - 1)^2$, so $y(k) = k + 1$, which grows without bound.</div></details></li>
+<li><div class="q">Plant $G_{ZAS}(z) = \dfrac{1}{z - 2}$, controller $C(z) = \dfrac{0.5(z - 2)}{z - 0.5}$. Is the loop stable from $R$ to $Y$? Is it internally stable?</div><details><summary>Show solution</summary><div class="sol">$CG = \dfrac{0.5}{z - 0.5}$ and $1 + CG = \dfrac{z}{z - 0.5}$, so $Y/R = 0.5/z$: stable. But $Y/D = \dfrac{G}{1 + CG} = \dfrac{z - 0.5}{z(z - 2)}$ has a pole at $z = 2$. Any disturbance at the plant input makes the output grow, so the loop is <b>not internally stable</b>. The controller tried to cancel an unstable pole.</div></details></li>
+<li><div class="q">For the ZOH loop of Lesson 3, Example 1, the characteristic equation is $z - e^{-T} + K(1 - e^{-T}) = 0$. Confirm the gain limit with the Jury conditions for $T = 0.2$ s.</div><details><summary>Show solution</summary><div class="sol">For a first-order polynomial $z + a_0$ the only condition is $|a_0| &lt; 1$. Here $a_0 = -e^{-0.2} + K(1 - e^{-0.2}) = -0.8187 + 0.1813K$. Then $-1 &lt; a_0 &lt; 1$ gives $-1 &lt; K &lt; 10.03$. With positive gains: $0 &lt; K &lt; 10.03$. Faster sampling allows more gain.</div></details></li></ol>
+    </section>
+    <nav class="prevnext"><a class="pn prev" href="03-pulse-transfer-and-discretization.html"><small>← Lesson 3</small>Pulse transfer functions and discretization</a><a class="pn next" href="05-state-space-analysis.html"><small>Lesson 5 →</small>State-space analysis of discrete-time systems</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

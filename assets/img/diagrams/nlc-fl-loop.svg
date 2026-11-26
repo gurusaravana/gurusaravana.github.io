@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 250" width="760" height="250" role="img" aria-label="Feedback linearization as two loops. The inner loop measures the state x and computes u = alpha(x) + beta(x) v, which cancels the nonlinearity of the plant dx/dt = f(x) + g(x)u, so that from the new input v the system is linear. The outer loop is an ordinary linear controller, for example v = −Kx + r">
+<title>Feedback linearization as two loops. The inner loop measures the state x and computes u = alpha(x) + beta(x) v, which cancels the nonlinearity of the plant dx/dt = f(x) + g(x)u, so that from the new input v the system is linear. The outer loop is an ordinary linear controller, for example v = −Kx + r</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#16a34a"/></marker><marker id="al" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#94a3b8"/></marker><marker id="av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#7c3aed"/></marker></defs>
+<rect width="760" height="250" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<line x1="20.0" y1="80.0" x2="78.0" y2="80.0" stroke="#0f172a" stroke-width="1.6" marker-end="url(#ak)"/>
+<text x="40.0" y="70.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">r</text>
+<circle cx="91.0" cy="80.0" r="13" fill="#ffffff" stroke="#0f172a" stroke-width="1.6"/>
+<text x="82.0" y="64.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="400">+</text>
+<text x="82.0" y="110.0" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="400">−</text>
+<line x1="104.0" y1="80.0" x2="200.0" y2="80.0" stroke="#0f172a" stroke-width="1.6" marker-end="url(#ak)"/>
+<text x="150.0" y="70.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">v</text>
+<rect x="200.0" y="44.0" width="190.0" height="72.0" rx="6" fill="#fdf2f8" stroke="#db2777" stroke-width="1.6"/>
+<text x="295.0" y="72.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400">u = α(x) + β(x) v</text>
+<text x="295.0" y="96.0" font-size="12" text-anchor="middle" fill="#db2777" font-weight="400">linearizing feedback</text>
+<line x1="390.0" y1="80.0" x2="470.0" y2="80.0" stroke="#0f172a" stroke-width="1.6" marker-end="url(#ak)"/>
+<text x="430.0" y="70.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">u</text>
+<rect x="470.0" y="44.0" width="170.0" height="72.0" rx="6" fill="#eef6fb" stroke="#0077b6" stroke-width="1.6"/>
+<text x="555.0" y="72.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400">ẋ = f(x) + g(x)u</text>
+<text x="555.0" y="96.0" font-size="12" text-anchor="middle" fill="#0077b6" font-weight="400">nonlinear plant</text>
+<line x1="640.0" y1="80.0" x2="740.0" y2="80.0" stroke="#0f172a" stroke-width="1.6" marker-end="url(#ak)"/>
+<text x="720.0" y="70.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">x</text>
+<line x1="680.0" y1="80.0" x2="680.0" y2="150.0" stroke="#0f172a" stroke-width="1.6"/>
+<line x1="680.0" y1="150.0" x2="295.0" y2="150.0" stroke="#0f172a" stroke-width="1.6"/>
+<line x1="295.0" y1="150.0" x2="295.0" y2="116.0" stroke="#0f172a" stroke-width="1.6" marker-end="url(#ak)"/>
+<line x1="680.0" y1="150.0" x2="680.0" y2="205.0" stroke="#0f172a" stroke-width="1.6"/>
+<line x1="680.0" y1="205.0" x2="330.0" y2="205.0" stroke="#0f172a" stroke-width="1.6" marker-end="url(#ak)"/>
+<rect x="250.0" y="185.0" width="80.0" height="40.0" rx="6" fill="#f1f5f9" stroke="#0f172a" stroke-width="1.6"/>
+<text x="290.0" y="210.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">K</text>
+<line x1="250.0" y1="205.0" x2="91.0" y2="205.0" stroke="#0f172a" stroke-width="1.6"/>
+<line x1="91.0" y1="205.0" x2="91.0" y2="93.0" stroke="#0f172a" stroke-width="1.6" marker-end="url(#ak)"/>
+<rect x="190.0" y="30.0" width="460.0" height="135.0" rx="10" fill="none" stroke="#16a34a" stroke-width="1.4" stroke-dasharray="6 4"/>
+<text x="645.0" y="24.0" font-size="12" text-anchor="end" fill="#16a34a" font-weight="400">from v to x: linear (a chain of integrators)</text>
+<text x="160.0" y="240.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400">outer loop: linear state feedback, v = r − Kx</text>
+</g>
+</svg>
