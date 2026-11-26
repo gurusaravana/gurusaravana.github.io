@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 290" width="780" height="290" role="img" aria-label="Aircraft turbojet engine control: pilot command to a computer, DAC, turbojet engine and aircraft; engine sensors and aircraft sensors each feed back through an ADC to the computer.">
+<title>Aircraft turbojet engine control: pilot command to a computer, DAC, turbojet engine and aircraft; engine sensors and aircraft sensors each feed back through an ADC to the computer.</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker></defs>
+<rect width="780" height="290" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<text x="6.0" y="58.0" font-size="12" text-anchor="start" fill="#db2777" font-weight="400">Pilot command</text>
+<path d="M8.0 70.0 L84.0 70.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="84.0" y="47.0" width="100.0" height="46.0" rx="4" fill="#fff" stroke="#059669" stroke-width="2"/>
+<text x="134.0" y="75.0" font-size="14" text-anchor="middle" fill="#059669" font-weight="400">Computer</text>
+<path d="M184.0 70.0 L232.0 70.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="232.0" y="50.0" width="68.0" height="40.0" rx="4" fill="#fff" stroke="#ea7a1f" stroke-width="2"/>
+<text x="266.0" y="75.0" font-size="14" text-anchor="middle" fill="#ea7a1f" font-weight="400">DAC</text>
+<path d="M300.0 70.0 L350.0 70.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="350.0" y="45.0" width="108.0" height="50.0" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="404.0" y="66.5" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400">Turbojet</text>
+<text x="404.0" y="83.5" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400">engine</text>
+<path d="M458.0 70.0 L530.0 70.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="530.0" y="47.0" width="108.0" height="46.0" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="584.0" y="75.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400">Aircraft</text>
+<path d="M638.0 70.0 L764.0 70.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="712.0" y="58.0" font-size="12" text-anchor="middle" fill="#db2777" font-weight="400">Aircraft state</text>
+<circle cx="494.0" cy="70.0" r="4" fill="#0f172a"/>
+<text x="500.0" y="110.0" font-size="11" text-anchor="start" fill="#64748b" font-weight="400" font-style="italic">engine state</text>
+<path d="M494.0 70.0 L494.0 160.0 L458.0 160.0" fill="none" stroke="#0077b6" stroke-width="2" marker-end="url(#ab)"/>
+<rect x="350.0" y="136.0" width="108.0" height="48.0" rx="4" fill="#fff" stroke="#0077b6" stroke-width="2"/>
+<text x="404.0" y="157.0" font-size="13" text-anchor="middle" fill="#0077b6" font-weight="400">Engine</text>
+<text x="404.0" y="173.0" font-size="13" text-anchor="middle" fill="#0077b6" font-weight="400">sensors</text>
+<path d="M350.0 160.0 L300.0 160.0" fill="none" stroke="#0077b6" stroke-width="2" marker-end="url(#ab)"/>
+<rect x="232.0" y="141.0" width="68.0" height="38.0" rx="4" fill="#fff" stroke="#ea7a1f" stroke-width="2"/>
+<text x="266.0" y="165.0" font-size="14" text-anchor="middle" fill="#ea7a1f" font-weight="400">ADC</text>
+<path d="M232.0 160.0 L150.0 160.0 L150.0 93.0" fill="none" stroke="#0077b6" stroke-width="2" marker-end="url(#ab)"/>
+<circle cx="700.0" cy="70.0" r="4" fill="#0f172a"/>
+<path d="M700.0 70.0 L700.0 240.0 L638.0 240.0" fill="none" stroke="#059669" stroke-width="2" marker-end="url(#ag)"/>
+<rect x="530.0" y="216.0" width="108.0" height="48.0" rx="4" fill="#fff" stroke="#059669" stroke-width="2"/>
+<text x="584.0" y="237.0" font-size="13" text-anchor="middle" fill="#059669" font-weight="400">Aircraft</text>
+<text x="584.0" y="253.0" font-size="13" text-anchor="middle" fill="#059669" font-weight="400">sensors</text>
+<path d="M530.0 240.0 L300.0 240.0" fill="none" stroke="#059669" stroke-width="2" marker-end="url(#ag)"/>
+<rect x="232.0" y="221.0" width="68.0" height="38.0" rx="4" fill="#fff" stroke="#ea7a1f" stroke-width="2"/>
+<text x="266.0" y="245.0" font-size="14" text-anchor="middle" fill="#ea7a1f" font-weight="400">ADC</text>
+<path d="M232.0 240.0 L118.0 240.0 L118.0 93.0" fill="none" stroke="#059669" stroke-width="2" marker-end="url(#ag)"/>
+</g>
+</svg>

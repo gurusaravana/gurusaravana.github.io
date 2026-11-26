@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 120" width="640" height="120" role="img" aria-label="Step-invariant (zero-order-hold) equivalent: x(t) is sampled, held by (1 − e^−sT)/s and drives Ga(s).">
+<title>Step-invariant (zero-order-hold) equivalent: x(t) is sampled, held by (1 − e^−sT)/s and drives Ga(s).</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker></defs>
+<rect width="640" height="120" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<text x="30.0" y="44.0" font-size="14" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">x(t)</text>
+<path d="M14.0 56.0 L57.0 56.0" fill="none" stroke="#0f172a" stroke-width="2"/>
+<path d="M57.0 56.0 L79.0 40.0" fill="none" stroke="#0f172a" stroke-width="2"/>
+<path d="M77.0 56.0 L120.0 56.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="67.0" y="76.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400" font-style="italic">T</text>
+<text x="104.0" y="38.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400" font-style="italic">x*(t)</text>
+<rect x="125.0" y="33.0" width="150.0" height="46.0" rx="4" fill="#fff" stroke="#ea7a1f" stroke-width="2"/>
+<text x="200.0" y="61.0" font-size="14" text-anchor="middle" fill="#ea7a1f" font-weight="400">(1 − e^(−sT))/s</text>
+<path d="M275.0 56.0 L345.0 56.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="345.0" y="33.0" width="110.0" height="46.0" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="400.0" y="61.0" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="400">G_a(s)</text>
+<path d="M455.0 56.0 L600.0 56.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="560.0" y="44.0" font-size="14" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">y(t)</text>
+<text x="320.0" y="110.0" font-size="13" text-anchor="middle" fill="#64748b" font-weight="400" font-style="italic">G(z) = (1 − z⁻¹) Z{G_a(s)/s}</text>
+</g>
+</svg>

@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 2: Sampling, ADC and DAC models, and the pulse transfer function · Digital Control Systems</title>
+<meta name="description" content="Sampling, ADC and DAC models, and the pulse transfer function">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 2: Sampling, ADC and DAC models, and the pulse transfer function  (Digital Control Systems, EACT 534, Chapter 1, part 2)
+  Edit the notes between the NOTES START and NOTES END markers below.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Figures live in assets/img/diagrams/ (names start with dcs-) and are shown with a figure of class "diagram".
+  To add an exercise, copy one list item inside the list of class "exlist".
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
+  <nav class="links"><a href="../digital-control-systems.html">Course home</a><a href="../digital-control-systems.html#lessons">Lessons</a><a href="../digital-control-systems.html#figures">Figures</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../digital-control-systems.html">← Digital Control Systems</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 2 of 7 · Chapter 1, part 2</div>
+    <h1>Sampling, ADC and DAC models, and the pulse transfer function</h1>
+    <p>Digital Control Systems · EACT 534 · Postgraduate course</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">EACT 534 · Digital Control Systems</div><ol><li><a href="01-discrete-time-and-z-transform.html"><span class="n">1</span>Discrete-time systems and the z-transform</a></li><li class="on"><a href="02-sampling-and-pulse-transfer.html"><span class="n">2</span>Sampling, ADC and DAC models, and the pulse transfer function</a></li><li><a href="03-pulse-transfer-and-discretization.html"><span class="n">3</span>Pulse transfer functions and discretization</a></li><li><a href="04-stability.html"><span class="n">4</span>Stability of discrete-time systems</a></li><li><a href="05-state-space-analysis.html"><span class="n">5</span>State-space analysis of discrete-time systems</a></li><li><a href="06-state-space-preliminaries.html"><span class="n">6</span>State-space preliminaries: canonical forms, controllability and observability</a></li><li><a href="07-pole-placement-and-observers.html"><span class="n">7</span>Controllability, pole placement and observer design</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>State the sampling theorem and explain aliasing</li><li>Choose a sampling period for first- and second-order systems and check it against sensor delay</li><li>Model the ADC as an ideal sampler and the DAC as a zero-order hold</li><li>Derive $G_{ZAS}(z) = (1 - z^{-1})\,\mathcal{Z}\{G(s)/s\}$ and apply it to vehicle and circuit models</li><li>Write the closed-loop z-transfer function of a digital loop</li></ul></div>
+    <nav class="figstrip" aria-label="Figures in this lesson"><a href="#fig-aliasing"><img src="../../assets/img/diagrams/dcs-aliasing.svg" alt="" loading="lazy"><span>Same samples, two signals</span></a><a href="#fig-bode"><img src="../../assets/img/diagrams/dcs-bode-first.svg" alt="" loading="lazy"><span>First-order bandwidth</span></a><a href="#fig-dac-adc"><img src="../../assets/img/diagrams/dcs-dac-adc-loop.svg" alt="" loading="lazy"><span>DAC, plant, ADC</span></a><a href="#fig-sampler"><img src="../../assets/img/diagrams/dcs-sampler.svg" alt="" loading="lazy"><span>Ideal sampler</span></a><a href="#fig-zoh"><img src="../../assets/img/diagrams/dcs-zoh.svg" alt="" loading="lazy"><span>Zero-order hold</span></a><a href="#fig-zoh-pulse"><img src="../../assets/img/diagrams/dcs-zoh-pulse.svg" alt="" loading="lazy"><span>ZOH impulse response</span></a><a href="#fig-zas"><img src="../../assets/img/diagrams/dcs-zas-response.svg" alt="" loading="lazy"><span>Step minus delayed step</span></a><a href="#fig-cruise"><img src="../../assets/img/diagrams/dcs-cruise.svg" alt="" loading="lazy"><span>Vehicle model</span></a><a href="#fig-rl"><img src="../../assets/img/diagrams/dcs-rl-circuit.svg" alt="" loading="lazy"><span>R-L circuit</span></a><a href="#fig-closed-z"><img src="../../assets/img/diagrams/dcs-closed-loop-z.svg" alt="" loading="lazy"><span>Digital closed loop</span></a></nav>
+    <section class="lsec"><h2>Notes</h2>
+    <!-- NOTES START -->
+    <article class="notes">
+<p>Lesson 1 worked entirely with sequences. A real digital loop also contains a continuous plant, so we need two bridges: a rule for how fast to sample, and models of the ADC and DAC that let us describe "DAC, plant, ADC" as one z-domain transfer function.</p>
+
+<h3 id="sampling-theorem">The sampling theorem</h3>
+<p>Sampling is needed to process analog data with digital elements. For it to work, the samples must capture the nature of the analog signal, and the analog signal must be recoverable from its samples.</p>
+<figure class="diagram" id="fig-aliasing"><img src="../../assets/img/diagrams/dcs-aliasing.svg" alt="A slow and a fast sine wave sharing the same samples" loading="lazy"><figcaption>Two different waveforms with identical samples. Faster sampling would tell them apart.</figcaption></figure>
+<p>A signal is <b>band limited</b> when its spectrum is zero above some frequency $\omega_m$:</p>
+<p class="eq">$$f(t) \;\xrightarrow{\ \mathcal{F}\ }\; F(j\omega), \qquad F(j\omega) \ne 0 \text{ for } -\omega_m \le \omega \le \omega_m, \qquad F(j\omega) = 0 \text{ elsewhere}$$</p>
+<p><b>Sampling theorem.</b> Such a signal can be reconstructed from its impulse-sampled version $f^*(t) = \sum_k f(t)\,\delta(t - kT)$ if and only if the sampling frequency $\omega_s = 2\pi/T$ satisfies</p>
+<p class="eq">$$\omega_s &gt; 2\omega_m$$</p>
+<p>This is the same Nyquist condition we met in the s-to-z mapping: every frequency in the signal must lie inside the primary strip $|\omega| &lt; \pi/T = \omega_s/2$.</p>
+
+<h3 id="choose-T">Choosing the sampling frequency</h3>
+<p>Physical signals are not strictly band limited, but most have an <b>effective bandwidth</b> beyond which the spectrum is negligible. In practice we sample much faster than the theorem's lower bound. A rule of thumb is</p>
+<p class="eq">$$\omega_s = k\,\omega_m, \qquad 5 \le k \le 10$$</p>
+<p>The choice of $k$ depends on the application. Two things limit how fast we can go:</p>
+<ul>
+<li><b>Sensor delay.</b> The loop cannot sample faster than the output can be measured. Oxygen sensors in automotive air/fuel ratio control take about 20 ms, which caps the sampling frequency at 50 Hz.</li>
+<li><b>Computation time.</b> The control law must be computed between samples. Faster processors make this less restrictive, but it must still be checked.</li>
+</ul>
+<p>For a linear system the output spectrum is the input spectrum times the frequency response. The input is not known in advance, so we base the choice on the system's frequency response.</p>
+<h4>First-order systems</h4>
+<p>A first-order system $H(j\omega) = \dfrac{K}{j\omega/\omega_b + 1}$ has DC gain $K$ and bandwidth $\omega_b = 1/\tau$, where $\tau$ is the time constant ($f_{3\text{dB}} = 1/(2\pi\tau)$).</p>
+<figure class="diagram" id="fig-bode"><img src="../../assets/img/diagrams/dcs-bode-first.svg" alt="Bode magnitude of 1/(3s+1) with the bandwidth and seven times the bandwidth marked" loading="lazy"><figcaption>$G(s) = 1/(3s + 1)$: −3 dB at $\omega_b = 0.33$ rad/s and about −17 dB at $7\omega_b = 2.33$ rad/s.</figcaption></figure>
+<p>At $7\omega_b$ the gain has fallen to $1/\sqrt{50} \approx 0.14$ of its DC value (−17 dB), which is small enough to treat as the edge of the significant spectrum. Taking $\omega_m = 7\omega_b$ and $k = 5$ to 10 gives</p>
+<p class="eq">$$\omega_s = k\,\omega_b, \qquad 35 \le k \le 70$$</p>
+<p class="warn">The slides say the gain drops "by a factor of about 10" at $7\omega_b$. The exact figure is $1/\sqrt{1 + 49} \approx 1/7$, as the slide's own Bode plot shows (−16.9 dB). The rule $35 \le k \le 70$ is unaffected. The slides also write $\omega_b = 1/T$; here $T$ means the time constant, written $\tau$ on this page so it is not confused with the sampling period.</p>
+<h4>Second-order systems</h4>
+<p>For $H(j\omega) = \dfrac{K}{1 - (\omega/\omega_n)^2 + j2\zeta\omega/\omega_n}$ the bandwidth is approximately the damped natural frequency $\omega_d = \omega_n\sqrt{1 - \zeta^2}$. Taking $7\omega_d$ as the highest significant frequency,</p>
+<p class="eq">$$\omega_s = k\,\omega_d, \qquad 35 \le k \le 70$$</p>
+<p><b>Example 1.</b> A first-order system has bandwidth 10 rad/s. Choose $k = 60$: $\omega_s = 600$ rad/s and $T = 2\pi/600 = 0.0105$ s, so $T \approx 0.01$ s.</p>
+<p><b>Example 2.</b> A closed loop must have steady-state error at most 5%, $\zeta \approx 0.7$ and $\omega_n = 10$ rad/s. The sensor delay is 0.02 s. Choose a sampling period.</p>
+<p class="eq">$$\omega_s \ge 35\omega_d = 35 \times 10\sqrt{1 - 0.7^2} = 249.95 \text{ rad/s} \quad\Longrightarrow\quad T \le \frac{2\pi}{249.95} = 0.025 \text{ s}$$</p>
+<p>$T = 20$ ms is a good choice: it meets the bound and equals the sensor delay, so every sample has a fresh measurement.</p>
+<p class="warn">The slides write $2\pi$ as "2 × 3141". The value used is $2\pi \approx 6.283$.</p>
+
+<h3 id="adc">The ADC model</h3>
+<figure class="diagram" id="fig-dac-adc"><img src="../../assets/img/diagrams/dcs-dac-adc-loop.svg" alt="Computer, DAC, analog subsystem and ADC in a loop" loading="lazy"><figcaption>A common digital control configuration. The dashed box (DAC, analog subsystem, ADC) is what we now model.</figcaption></figure>
+<p>Assume that the ADC output equals its input in magnitude (quantization error is negligible), that conversion is instantaneous, and that sampling is perfectly uniform. Then the ADC is an <b>ideal sampler</b> with period $T$.</p>
+<figure class="diagram" id="fig-sampler"><img src="../../assets/img/diagrams/dcs-sampler.svg" alt="Signal times impulse train equals sampled signal" loading="lazy"><figcaption>Sampling as modulation: the signal modulates a train of unit impulses.</figcaption></figure>
+<p class="eq">$$u^*(t) = u(t)\,\delta_T(t) = \sum_{k=0}^{\infty} u(kT)\,\delta(t - kT)$$</p>
+<p>In the language of modulation, $u(t)$ is the modulating signal, the impulse train $\delta_T(t)$ is the carrier, and $u^*(t)$ is the modulated wave.</p>
+
+<h3 id="dac">The DAC model: the zero-order hold</h3>
+<p>Assume that the DAC output equals its input in magnitude, that conversion is instantaneous, and that the output is held constant over each sampling period. The DAC is then a <b>zero-order hold (ZOH)</b>:</p>
+<p class="eq">$$u_h(t) = u(k), \qquad kT \le t &lt; (k+1)T$$</p>
+<figure class="diagram" id="fig-zoh"><img src="../../assets/img/diagrams/dcs-zoh.svg" alt="Sequence of numbers converted to a staircase by the zero-order hold" loading="lazy"><figcaption>The ZOH turns a number sequence into a staircase. On average the staircase lags the smooth signal by $T/2$.</figcaption></figure>
+<figure class="diagram" id="fig-zoh-pulse"><img src="../../assets/img/diagrams/dcs-zoh-pulse.svg" alt="Impulse response of the ZOH is a pulse of width T made of two steps" loading="lazy"><figcaption>The ZOH impulse response is a unit pulse of width $T$: a step up at $kT$ and a step down one period later.</figcaption></figure>
+<p>To get the transfer function, take the Laplace transform of the impulse response. The pulse is a unit step minus a unit step delayed by $T$, and $\mathcal{L}\{1(t)\} = 1/s$, $\mathcal{L}\{-1(t - T)\} = -e^{-sT}/s$, so</p>
+<p class="eq">$$G_{ZOH}(s) = \frac{1 - e^{-sT}}{s}$$</p>
+
+<h3 id="gzas">Transfer function of the DAC, analog subsystem and ADC</h3>
+<p>Both the input and the output of the cascade in the dashed box are sampled, so it has a z-domain transfer function. With analog subsystem $G(s)$, the DAC and plant together are</p>
+<p class="eq">$$G_{ZA}(s) = G_{ZOH}(s)\,G(s) = \frac{G(s)}{s} - \frac{G(s)}{s}e^{-sT}$$</p>
+<figure class="diagram" id="fig-zas"><img src="../../assets/img/diagrams/dcs-zas-response.svg" alt="Step response, delayed negative step response, and their sum" loading="lazy"><figcaption>The impulse response of DAC plus plant is the plant's step response minus the same response delayed by $T$.</figcaption></figure>
+<p>Taking the inverse Laplace transform, with $g_s(t) = \mathcal{L}^{-1}\{G(s)/s\}$ the plant's step response,</p>
+<p class="eq">$$g_{ZA}(t) = g_s(t) - g_s(t - T) \quad\Longrightarrow\quad g_{ZA}(kT) = g_s(kT) - g_s(kT - T)$$</p>
+<p>The ADC samples this. Z-transforming, and using the delay property on the second term:</p>
+<p class="eq">$$G_{ZAS}(z) = (1 - z^{-1})\,\mathcal{Z}\left\{\mathcal{L}^{-1}\left[\frac{G(s)}{s}\right]^*\right\} \quad\text{or, more briefly,}\quad G_{ZAS}(z) = (1 - z^{-1})\,\mathcal{Z}\left\{\frac{G(s)}{s}\right\}$$</p>
+<p>The star is a reminder that the time function must be sampled before it is z-transformed. This $G_{ZAS}(z)$ is often called the <b>pulse transfer function</b> of the plant with a zero-order hold.</p>
+<p class="key">Recipe: divide $G(s)$ by $s$, expand in partial fractions, replace each term by its z-transform from the table, then multiply by $(z - 1)/z$.</p>
+
+<h4>Example 3: vehicle cruise control</h4>
+<figure class="diagram" id="fig-cruise"><img src="../../assets/img/diagrams/dcs-cruise.svg" alt="Mass M pushed by force u with viscous friction b times v" loading="lazy"><figcaption>Vehicle model: force $u$, viscous friction $bv$, velocity $v$ and position $y$.</figcaption></figure>
+<p>Newton's law $M\dot{v} = u - bv$ gives $G(s) = \dfrac{V(s)}{U(s)} = \dfrac{1}{Ms + b} = \dfrac{K}{\tau s + 1} = \dfrac{K/\tau}{s + 1/\tau}$ with $K = 1/b$ and $\tau = M/b$. Then</p>
+<p class="eq">$$\frac{G(s)}{s} = \frac{K/\tau}{s(s + 1/\tau)} = K\left[\frac{1}{s} - \frac{1}{s + 1/\tau}\right]$$</p>
+<p class="eq">$$G_{ZAS}(z) = \frac{z - 1}{z}\,K\left[\frac{z}{z - 1} - \frac{z}{z - e^{-T/\tau}}\right] = K\left[1 - \frac{z - 1}{z - e^{-T/\tau}}\right] = K\,\frac{1 - e^{-T/\tau}}{z - e^{-T/\tau}}$$</p>
+<p>A first-order plant stays first order, with its pole at $z = e^{-T/\tau}$, exactly the $z = e^{sT}$ image of $s = -1/\tau$.</p>
+
+<h4>Example 4: vehicle position control</h4>
+<p>With position $y$ as the output, $G(s) = \dfrac{Y(s)}{U(s)} = \dfrac{1}{s(Ms + b)} = \dfrac{K/\tau}{s(s + 1/\tau)}$. Now</p>
+<p class="eq">$$\frac{G(s)}{s} = \frac{K/\tau}{s^2(s + 1/\tau)} = K\left[\frac{1}{s^2} - \frac{\tau}{s} + \frac{\tau}{s + 1/\tau}\right]$$</p>
+<p>Using $\mathcal{Z}\{1/s^2\} = Tz/(z - 1)^2$ (the sampled ramp $kT$):</p>
+<p class="eq">$$G_{ZAS}(z) = \frac{z - 1}{z}K\left[\frac{Tz}{(z - 1)^2} - \frac{\tau z}{z - 1} + \frac{\tau z}{z - e^{-T/\tau}}\right] = K\left[\frac{T}{z - 1} - \tau + \frac{\tau(z - 1)}{z - e^{-T/\tau}}\right]$$</p>
+<p class="eq">$$G_{ZAS}(z) = K\,\frac{\left(T - \tau + \tau e^{-T/\tau}\right)z + \left(\tau - (\tau + T)e^{-T/\tau}\right)}{(z - 1)(z - e^{-T/\tau})}$$</p>
+<p class="warn">The slides write $1$ where $T$ appears in the ramp term and in the final numerator, which is the result for $T = 1$ s only. The general form above keeps $T$.</p>
+
+<h4>Example 5: series R-L circuit</h4>
+<figure class="diagram" id="fig-rl"><img src="../../assets/img/diagrams/dcs-rl-circuit.svg" alt="Series R-L circuit with output across the inductor" loading="lazy"><figcaption>Series R-L circuit with the inductor voltage as the output.</figcaption></figure>
+<p>The voltage divider rule gives $\dfrac{V_o}{V_{in}} = \dfrac{Ls}{R + Ls} = \dfrac{\tau s}{1 + \tau s}$ with $\tau = L/R$. So $\dfrac{G(s)}{s} = \dfrac{1}{s + 1/\tau}$ and</p>
+<p class="eq">$$G_{ZAS}(z) = (1 - z^{-1})\,\mathcal{Z}\left\{\frac{1}{s + 1/\tau}\right\} = \frac{z - 1}{z}\cdot\frac{z}{z - e^{-T/\tau}} = \frac{z - 1}{z - e^{-T/\tau}}$$</p>
+<p>The zero at $z = 1$ reflects the fact that the inductor voltage is zero in steady state for a constant input.</p>
+
+<h3 id="closed-loop">Closed-loop systems</h3>
+<figure class="diagram" id="fig-closed-z"><img src="../../assets/img/diagrams/dcs-closed-loop-z.svg" alt="Digital closed loop with controller C(z) and plant G_ZAS(z)" loading="lazy"><figcaption>Once the plant is written as $G_{ZAS}(z)$, the whole loop lives in the z-domain.</figcaption></figure>
+<p>With a digital controller $C(z)$ and the plant written as $G_{ZAS}(z)$, the loop has exactly the same algebra as a continuous loop, with $s$ replaced by $z$:</p>
+<p class="eq">$$G_{cl}(z) = \frac{Y(z)}{R(z)} = \frac{C(z)G_{ZAS}(z)}{1 + C(z)G_{ZAS}(z)}, \qquad \text{characteristic equation: } 1 + C(z)G_{ZAS}(z) = 0$$</p>
+<p>The closed loop is stable when every root of the characteristic equation lies inside the unit circle. Stability tests for this condition are the subject of a later chapter.</p>
+</article>
+    <!-- NOTES END -->
+    </section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the div below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">Repeat Example 2 (steady-state error at most 5%, $\zeta \approx 0.7$, $\omega_n = 10$ rad/s) when the sensor delay is 0.03 s. Select a suitable sampling period.</div><details><summary>Show solution</summary><div class="sol">The rule of thumb still asks for $\omega_s \ge 35\omega_d = 249.95$ rad/s, that is $T \le 25$ ms. The sensor needs 30 ms, so $T$ cannot be shorter than 30 ms. With $T = 30$ ms, $\omega_s = 2\pi/0.03 = 209$ rad/s $\approx 29\,\omega_d$: a little below the 35 to 70 range but still far above the Nyquist limit ($2 \times 7\omega_d \approx 100$ rad/s). Choose $T = 30$ ms and check the closed-loop response, or use a faster sensor if the margin is not enough.</div></details></li>
+<li><div class="q">A first-order process has time constant $\tau = 0.2$ s. Give the range of suitable sampling periods.</div><details><summary>Show solution</summary><div class="sol">$\omega_b = 1/\tau = 5$ rad/s, so $\omega_s = 35$ to $70 \times 5 = 175$ to $350$ rad/s. Then $T = 2\pi/\omega_s$ lies between $2\pi/350 = 18$ ms and $2\pi/175 = 36$ ms.</div></details></li>
+<li><div class="q">Find $G_{ZAS}(z)$ for $G(s) = \dfrac{2}{s + 2}$ with $T = 0.1$ s.</div><details><summary>Show solution</summary><div class="sol">This is the cruise-control form with $K = 1$ and $\tau = 0.5$ s, so $G_{ZAS}(z) = \dfrac{1 - e^{-0.2}}{z - e^{-0.2}} = \dfrac{0.1813}{z - 0.8187}$. Its DC gain $G_{ZAS}(1) = 1$ matches $G(0) = 1$, as it must.</div></details></li>
+<li><div class="q">Find $G_{ZAS}(z)$ for a pure integrator $G(s) = 1/s$.</div><details><summary>Show solution</summary><div class="sol">$G(s)/s = 1/s^2$, whose z-transform is $Tz/(z - 1)^2$. Then $G_{ZAS}(z) = \dfrac{z - 1}{z}\cdot\dfrac{Tz}{(z - 1)^2} = \dfrac{T}{z - 1}$: the familiar "add $T$ times the input every step" integrator, $y(k+1) = y(k) + Tu(k)$.</div></details></li>
+<li><div class="q">A proportional controller $C(z) = K_p$ controls the plant of exercise 3. Find the characteristic equation and the range of $K_p &gt; 0$ for which the closed loop is stable.</div><details><summary>Show solution</summary><div class="sol">$1 + K_p\dfrac{0.1813}{z - 0.8187} = 0$ gives $z = 0.8187 - 0.1813K_p$. Stability needs $|z| &lt; 1$: $-1 &lt; 0.8187 - 0.1813K_p &lt; 1$, so $0 &lt; K_p &lt; 10.03$. The continuous loop would be stable for every $K_p &gt; 0$; sampling and the hold add phase lag that limits the gain.</div></details></li>
+<li><div class="q">Why does the zero-order hold make the staircase lag the smooth signal, and roughly by how much?</div><details><summary>Show solution</summary><div class="sol">Each value is held for a whole period after it is sampled, so on average the output is half a period old. The ZOH acts approximately like a time delay of $T/2$, which adds phase lag $\omega T/2$ at frequency $\omega$. This is one more reason to sample fast compared with the loop bandwidth.</div></details></li></ol>
+    </section>
+    <nav class="prevnext"><a class="pn prev" href="01-discrete-time-and-z-transform.html"><small>← Lesson 1</small>Discrete-time systems and the z-transform</a><a class="pn next" href="03-pulse-transfer-and-discretization.html"><small>Lesson 3 →</small>Pulse transfer functions and discretization</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

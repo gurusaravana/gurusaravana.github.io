@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 330" width="760" height="330" role="img" aria-label="Mapping points from the s-plane to the z-plane with z = e to the sT: s = 0 goes to z = 1, a real pole s = −a goes to z = e to the −aT inside the unit circle, poles on the imaginary axis go onto the unit circle, s = ±jπ/T goes to z = −1, and complex poles in the left half go inside the circle.">
+<title>Mapping points from the s-plane to the z-plane with z = e to the sT: s = 0 goes to z = 1, a real pole s = −a goes to z = e to the −aT inside the unit circle, poles on the imaginary axis go onto the unit circle, s = ±jπ/T goes to z = −1, and complex poles in the left half go inside the circle.</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker></defs>
+<rect width="760" height="330" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<path d="M25.0 165.0 L355.0 165.0" fill="none" stroke="#0f172a" stroke-width="1.5" marker-end="url(#ak)"/>
+<path d="M190.0 305.0 L190.0 25.0" fill="none" stroke="#0f172a" stroke-width="1.5" marker-end="url(#ak)"/>
+<text x="353.0" y="185.0" font-size="13" text-anchor="end" fill="#64748b" font-weight="400" font-style="italic">σ</text>
+<text x="198.0" y="37.0" font-size="13" text-anchor="start" fill="#64748b" font-weight="400" font-style="italic">jω</text>
+<text x="190.0" y="18.0" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="700">s-plane</text>
+<path d="M30.0 58.2 L350.0 58.2" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="5 4"/>
+<text x="348.0" y="53.2" font-size="12" text-anchor="end" fill="#64748b" font-weight="400">jπ/T</text>
+<path d="M30.0 271.8 L350.0 271.8" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="5 4"/>
+<text x="348.0" y="266.8" font-size="12" text-anchor="end" fill="#64748b" font-weight="400">−jπ/T</text>
+<path d="M184.0 159.0L196.0 171.0M184.0 171.0L196.0 159.0" stroke="#059669" stroke-width="2.5"/>
+<text x="200.0" y="156.0" font-size="12" text-anchor="start" fill="#059669" font-weight="400">s = 0</text>
+<path d="M133.0 159.0L145.0 171.0M133.0 171.0L145.0 159.0" stroke="#0077b6" stroke-width="2.5"/>
+<text x="129.0" y="156.0" font-size="12" text-anchor="end" fill="#0077b6" font-weight="400">s = −a</text>
+<path d="M184.0 111.4L196.0 123.4M184.0 123.4L196.0 111.4" stroke="#ea7a1f" stroke-width="2.5"/>
+<text x="200.0" y="108.4" font-size="12" text-anchor="start" fill="#ea7a1f" font-weight="400">s = jω</text>
+<path d="M184.0 206.6L196.0 218.6M184.0 218.6L196.0 206.6" stroke="#ea7a1f" stroke-width="2.5"/>
+<text x="200.0" y="203.6" font-size="12" text-anchor="start" fill="#ea7a1f" font-weight="400">−jω</text>
+<path d="M153.4 91.0L165.4 103.0M153.4 103.0L165.4 91.0" stroke="#0f172a" stroke-width="2.5"/>
+<text x="149.4" y="88.0" font-size="12" text-anchor="end" fill="#0f172a" font-weight="400">σ + jω</text>
+<path d="M153.4 227.0L165.4 239.0M153.4 239.0L165.4 227.0" stroke="#0f172a" stroke-width="2.5"/>
+<text x="149.4" y="224.0" font-size="12" text-anchor="end" fill="#0f172a" font-weight="400">σ − jω</text>
+<circle cx="190.0" cy="58.2" r="5" fill="#db2777"/>
+<circle cx="190.0" cy="271.8" r="5" fill="#db2777"/>
+<path d="M395.0 165.0 L725.0 165.0" fill="none" stroke="#0f172a" stroke-width="1.5" marker-end="url(#ak)"/>
+<path d="M560.0 305.0 L560.0 25.0" fill="none" stroke="#0f172a" stroke-width="1.5" marker-end="url(#ak)"/>
+<text x="723.0" y="185.0" font-size="13" text-anchor="end" fill="#64748b" font-weight="400" font-style="italic">Re z</text>
+<text x="568.0" y="37.0" font-size="13" text-anchor="start" fill="#64748b" font-weight="400" font-style="italic">Im z</text>
+<text x="560.0" y="18.0" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="700">z-plane</text>
+<circle cx="560.0" cy="165.0" r="105.0" fill="none" stroke="#0077b6" stroke-width="1.6" stroke-dasharray="6 4"/>
+<text x="641.6" y="83.4" font-size="12" text-anchor="start" fill="#0077b6" font-weight="400">|z| = 1</text>
+<path d="M659.0 159.0L671.0 171.0M659.0 171.0L671.0 159.0" stroke="#059669" stroke-width="2.5"/>
+<path d="M577.4 159.0L589.4 171.0M577.4 171.0L589.4 159.0" stroke="#0077b6" stroke-width="2.5"/>
+<path d="M571.8 55.5L583.8 67.5M571.8 67.5L583.8 55.5" stroke="#ea7a1f" stroke-width="2.5"/>
+<path d="M571.8 262.5L583.8 274.5M571.8 274.5L583.8 262.5" stroke="#ea7a1f" stroke-width="2.5"/>
+<path d="M536.2 120.2L548.2 132.2M536.2 132.2L548.2 120.2" stroke="#0f172a" stroke-width="2.5"/>
+<path d="M536.2 197.8L548.2 209.8M536.2 209.8L548.2 197.8" stroke="#0f172a" stroke-width="2.5"/>
+<text x="673.0" y="155.0" font-size="12" text-anchor="start" fill="#059669" font-weight="400">1</text>
+<text x="583.4" y="187.0" font-size="12" text-anchor="middle" fill="#0077b6" font-weight="400">e⁻ᵃᵀ</text>
+<circle cx="455.0" cy="165.0" r="5" fill="#db2777"/>
+<text x="447.0" y="157.0" font-size="12" text-anchor="end" fill="#db2777" font-weight="400">−1</text>
+<path d="M590.0 165.0 A30 30 0 0 0 565.1 135.4" fill="none" stroke="#ea7a1f" stroke-width="1.5"/>
+<text x="590.0" y="143.0" font-size="12" text-anchor="start" fill="#ea7a1f" font-weight="400">ωT</text>
+<path d="M560.0 165.0 L577.8 61.5" fill="none" stroke="#ea7a1f" stroke-width="1.2" stroke-dasharray="3 3"/>
+<text x="380.0" y="318.0" font-size="13" text-anchor="middle" fill="#64748b" font-weight="400" font-style="italic">z = e^(sT):  |z| = e^(σT),  ∠z = ωT   (drawn with T = 1)</text>
+</g>
+</svg>

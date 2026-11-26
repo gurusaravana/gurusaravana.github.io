@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 230" width="700" height="230" role="img" aria-label="Two cascades: top, a sampler sits between 1/(s + a) and 1/(s + b), so G(z) is the product of the two z-transforms; bottom, the blocks are joined directly, so G(z) is the z-transform of their product.">
+<title>Two cascades: top, a sampler sits between 1/(s + a) and 1/(s + b), so G(z) is the product of the two z-transforms; bottom, the blocks are joined directly, so G(z) is the z-transform of their product.</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker></defs>
+<rect width="700" height="230" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<text x="30.0" y="48.0" font-size="14" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">x(t)</text>
+<path d="M14.0 60.0 L49.0 60.0" fill="none" stroke="#0f172a" stroke-width="2"/>
+<path d="M49.0 60.0 L71.0 44.0" fill="none" stroke="#0f172a" stroke-width="2"/>
+<path d="M69.0 60.0 L104.0 60.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="59.0" y="80.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400" font-style="italic">T</text>
+<rect x="115.0" y="38.0" width="110.0" height="44.0" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="170.0" y="65.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400">1/(s+a)</text>
+<path d="M225.0 60.0 L275.0 60.0" fill="none" stroke="#0f172a" stroke-width="2"/>
+<path d="M275.0 60.0 L297.0 44.0" fill="none" stroke="#0f172a" stroke-width="2"/>
+<path d="M295.0 60.0 L345.0 60.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="285.0" y="80.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400" font-style="italic">T</text>
+<rect x="355.0" y="38.0" width="110.0" height="44.0" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="410.0" y="65.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400">1/(s+b)</text>
+<path d="M465.0 60.0 L560.0 60.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="536.0" y="48.0" font-size="14" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">y(t)</text>
+<text x="590.0" y="65.0" font-size="15" text-anchor="start" fill="#0077b6" font-weight="700">(a)</text>
+<text x="30.0" y="158.0" font-size="14" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">x(t)</text>
+<path d="M14.0 170.0 L49.0 170.0" fill="none" stroke="#0f172a" stroke-width="2"/>
+<path d="M49.0 170.0 L71.0 154.0" fill="none" stroke="#0f172a" stroke-width="2"/>
+<path d="M69.0 170.0 L104.0 170.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="59.0" y="190.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400" font-style="italic">T</text>
+<rect x="115.0" y="148.0" width="110.0" height="44.0" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="170.0" y="175.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400">1/(s+a)</text>
+<path d="M225.0 170.0 L345.0 170.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="355.0" y="148.0" width="110.0" height="44.0" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="410.0" y="175.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400">1/(s+b)</text>
+<path d="M465.0 170.0 L560.0 170.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="536.0" y="158.0" font-size="14" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">y(t)</text>
+<text x="590.0" y="175.0" font-size="15" text-anchor="start" fill="#ea7a1f" font-weight="700">(b)</text>
+</g>
+</svg>
