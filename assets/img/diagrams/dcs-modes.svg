@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" width="720" height="300" role="img" aria-label="Two decoupled modes. Left: A = diag(−1, −3), B = [1, 0]: the input reaches only x1, so x2 cannot be controlled. Right: A = [0 1; 0 −2], C = [0 4]: the output only sees x2, so x1 cannot be observed.">
+<title>Two decoupled modes. Left: A = diag(−1, −3), B = [1, 0]: the input reaches only x1, so x2 cannot be controlled. Right: A = [0 1; 0 −2], C = [0 4]: the output only sees x2, so x1 cannot be observed.</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker></defs>
+<rect width="720" height="300" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<rect x="8.0" y="8.0" width="346.0" height="284.0" rx="8" fill="#fff" stroke="#cbd5e1" stroke-width="1"/>
+<text x="181.0" y="32.0" font-size="14" text-anchor="middle" fill="#db2777" font-weight="700">not controllable</text>
+<text x="30.0" y="90.0" font-size="14" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">u</text>
+<path d="M20.0 100.0 L78.0 100.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<circle cx="90.0" cy="100.0" r="11.0" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="90.0" y="105.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="400">Σ</text>
+<path d="M101.0 100.0 L136.0 100.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="136.0" y="83.0" width="48.0" height="34.0" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="160.0" y="105.0" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400">∫</text>
+<path d="M184.0 100.0 L290.0 100.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="214.0" y="92.0" font-size="13" text-anchor="middle" fill="#64748b" font-weight="400" font-style="italic">x₁</text>
+<circle cx="230.0" cy="100.0" r="4" fill="#0f172a"/>
+<path d="M230.0 100.0 L230.0 140.0 L186.0 140.0" fill="none" stroke="#ea7a1f" stroke-width="2" marker-end="url(#ao)"/>
+<rect x="138.0" y="128.0" width="44.0" height="24.0" rx="4" fill="#fff" stroke="#ea7a1f" stroke-width="2"/>
+<text x="160.0" y="145.0" font-size="12" text-anchor="middle" fill="#ea7a1f" font-weight="400">−1</text>
+<path d="M138.0 140.0 L90.0 140.0 L90.0 111.0" fill="none" stroke="#ea7a1f" stroke-width="2" marker-end="url(#ao)"/>
+<circle cx="90.0" cy="200.0" r="11.0" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="90.0" y="205.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="400">Σ</text>
+<path d="M101.0 200.0 L136.0 200.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="136.0" y="183.0" width="48.0" height="34.0" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="160.0" y="205.0" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400">∫</text>
+<path d="M184.0 200.0 L290.0 200.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="214.0" y="192.0" font-size="13" text-anchor="middle" fill="#64748b" font-weight="400" font-style="italic">x₂</text>
+<circle cx="230.0" cy="200.0" r="4" fill="#0f172a"/>
+<path d="M230.0 200.0 L230.0 240.0 L186.0 240.0" fill="none" stroke="#ea7a1f" stroke-width="2" marker-end="url(#ao)"/>
+<rect x="138.0" y="228.0" width="44.0" height="24.0" rx="4" fill="#fff" stroke="#ea7a1f" stroke-width="2"/>
+<text x="160.0" y="245.0" font-size="12" text-anchor="middle" fill="#ea7a1f" font-weight="400">−3</text>
+<path d="M138.0 240.0 L90.0 240.0 L90.0 211.0" fill="none" stroke="#ea7a1f" stroke-width="2" marker-end="url(#ao)"/>
+<circle cx="302.0" cy="150.0" r="11.0" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="302.0" y="155.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="400">Σ</text>
+<path d="M290.0 100.0 L296.0 140.0" fill="none" stroke="#059669" stroke-width="2"/>
+<path d="M290.0 200.0 L296.0 160.0" fill="none" stroke="#059669" stroke-width="2"/>
+<text x="270.0" y="90.0" font-size="12" text-anchor="middle" fill="#059669" font-weight="400">1</text>
+<text x="270.0" y="194.0" font-size="12" text-anchor="middle" fill="#059669" font-weight="400">2</text>
+<path d="M313.0 150.0 L346.0 150.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="334.0" y="140.0" font-size="14" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">y</text>
+<text x="181.0" y="282.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400" font-style="italic">u never reaches the x₂ loop</text>
+<rect x="366.0" y="8.0" width="346.0" height="284.0" rx="8" fill="#fff" stroke="#cbd5e1" stroke-width="1"/>
+<text x="539.0" y="32.0" font-size="14" text-anchor="middle" fill="#db2777" font-weight="700">not observable</text>
+<text x="386.0" y="100.0" font-size="14" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">u</text>
+<path d="M378.0 110.0 L424.0 110.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<circle cx="436.0" cy="110.0" r="11.0" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="436.0" y="115.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="400">Σ</text>
+<path d="M447.0 110.0 L482.0 110.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="482.0" y="93.0" width="48.0" height="34.0" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="506.0" y="115.0" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400">∫</text>
+<path d="M530.0 110.0 L634.0 110.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="562.0" y="102.0" font-size="13" text-anchor="middle" fill="#64748b" font-weight="400" font-style="italic">x₂</text>
+<circle cx="576.0" cy="110.0" r="4" fill="#0f172a"/>
+<path d="M576.0 110.0 L576.0 150.0 L532.0 150.0" fill="none" stroke="#ea7a1f" stroke-width="2" marker-end="url(#ao)"/>
+<rect x="484.0" y="138.0" width="44.0" height="24.0" rx="4" fill="#fff" stroke="#ea7a1f" stroke-width="2"/>
+<text x="506.0" y="155.0" font-size="12" text-anchor="middle" fill="#ea7a1f" font-weight="400">−2</text>
+<path d="M484.0 150.0 L436.0 150.0 L436.0 121.0" fill="none" stroke="#ea7a1f" stroke-width="2" marker-end="url(#ao)"/>
+<rect x="636.0" y="95.0" width="44.0" height="30.0" rx="4" fill="#fff" stroke="#059669" stroke-width="2"/>
+<text x="658.0" y="115.0" font-size="13" text-anchor="middle" fill="#059669" font-weight="400">4</text>
+<path d="M680.0 110.0 L706.0 110.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<text x="696.0" y="90.0" font-size="14" text-anchor="middle" fill="#db2777" font-weight="400" font-style="italic">y</text>
+<path d="M596.0 110.0 L596.0 210.0 L538.0 210.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<rect x="482.0" y="193.0" width="48.0" height="34.0" rx="4" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<text x="506.0" y="215.0" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400">∫</text>
+<path d="M482.0 210.0 L426.0 210.0" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#ak)"/>
+<circle cx="596.0" cy="110.0" r="4" fill="#0f172a"/>
+<text x="436.0" y="200.0" font-size="13" text-anchor="middle" fill="#64748b" font-weight="400" font-style="italic">x₁</text>
+<text x="539.0" y="282.0" font-size="12" text-anchor="middle" fill="#64748b" font-weight="400" font-style="italic">x₁ is driven by x₂ but never reaches y</text>
+</g>
+</svg>

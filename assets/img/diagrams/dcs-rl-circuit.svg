@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 240" width="520" height="240" role="img" aria-label="Series R-L circuit: input voltage Vin drives a resistor R in series with an inductor L; the output Vo is the voltage across the inductor.">
+<title>Series R-L circuit: input voltage Vin drives a resistor R in series with an inductor L; the output Vo is the voltage across the inductor.</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#059669"/></marker></defs>
+<rect width="520" height="240" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<path d="M80.0 60.0 L170.0 60.0" fill="none" stroke="#0f172a" stroke-width="2"/>
+<path d="M170.0 60.0 L180.0 48.0 L200.0 72.0 L220.0 48.0 L240.0 72.0 L260.0 48.0 L280.0 72.0 L290.0 60.0 L380.0 60.0" fill="none" stroke="#0f172a" stroke-width="2"/>
+<text x="230.0" y="36.0" font-size="16" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">R</text>
+<path d="M380.0 60.0 L380.0 90.0" fill="none" stroke="#0f172a" stroke-width="2"/>
+<path d="M380 90 a12 12 0 0 1 0 24 a12 12 0 0 1 0 24 a12 12 0 0 1 0 24 a12 12 0 0 1 0 24" fill="none" stroke="#0f172a" stroke-width="2"/>
+<path d="M380.0 186.0 L380.0 200.0 L80.0 200.0" fill="none" stroke="#0f172a" stroke-width="2"/>
+<text x="408.0" y="145.0" font-size="16" text-anchor="start" fill="#0f172a" font-weight="400" font-style="italic">L</text>
+<circle cx="80.0" cy="60.0" r="5.0" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<circle cx="80.0" cy="200.0" r="5.0" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M60.0 190.0 L60.0 70.0" fill="none" stroke="#0077b6" stroke-width="1.8" marker-end="url(#ab)"/>
+<text x="44.0" y="135.0" font-size="15" text-anchor="end" fill="#0077b6" font-weight="400" font-style="italic">Vin</text>
+<circle cx="460.0" cy="60.0" r="5.0" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<circle cx="460.0" cy="200.0" r="5.0" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+<path d="M380.0 60.0 L455.0 60.0" fill="none" stroke="#0f172a" stroke-width="2"/>
+<path d="M380.0 200.0 L455.0 200.0" fill="none" stroke="#0f172a" stroke-width="2"/>
+<path d="M480.0 190.0 L480.0 70.0" fill="none" stroke="#db2777" stroke-width="1.8" marker-end="url(#ap)"/>
+<text x="492.0" y="135.0" font-size="15" text-anchor="start" fill="#db2777" font-weight="400" font-style="italic">Vo</text>
+</g>
+</svg>

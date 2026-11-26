@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 1: Discrete-time systems and the z-transform · Digital Control Systems</title>
+<meta name="description" content="Discrete-time systems and the z-transform">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 1: Discrete-time systems and the z-transform  (Digital Control Systems, EACT 534, Chapter 1, part 1)
+  Edit the notes between the NOTES START and NOTES END markers below.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Figures live in assets/img/diagrams/ (names start with dcs-) and are shown with a figure of class "diagram".
+  To add an exercise, copy one list item inside the list of class "exlist".
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
+  <nav class="links"><a href="../digital-control-systems.html">Course home</a><a href="../digital-control-systems.html#lessons">Lessons</a><a href="../digital-control-systems.html#figures">Figures</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../digital-control-systems.html">← Digital Control Systems</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 1 of 7 · Chapter 1, part 1</div>
+    <h1>Discrete-time systems and the z-transform</h1>
+    <p>Digital Control Systems · EACT 534 · Postgraduate course</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">EACT 534 · Digital Control Systems</div><ol><li class="on"><a href="01-discrete-time-and-z-transform.html"><span class="n">1</span>Discrete-time systems and the z-transform</a></li><li><a href="02-sampling-and-pulse-transfer.html"><span class="n">2</span>Sampling, ADC and DAC models, and the pulse transfer function</a></li><li><a href="03-pulse-transfer-and-discretization.html"><span class="n">3</span>Pulse transfer functions and discretization</a></li><li><a href="04-stability.html"><span class="n">4</span>Stability of discrete-time systems</a></li><li><a href="05-state-space-analysis.html"><span class="n">5</span>State-space analysis of discrete-time systems</a></li><li><a href="06-state-space-preliminaries.html"><span class="n">6</span>State-space preliminaries: canonical forms, controllability and observability</a></li><li><a href="07-pole-placement-and-observers.html"><span class="n">7</span>Controllability, pole placement and observer design</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Explain why digital control is used and name the parts of a digital control loop</li><li>Classify a difference equation by order, linearity, time invariance and homogeneity</li><li>Map poles between the s-plane and the z-plane with $z = e^{sT}$ and spot aliasing</li><li>Find z-transforms with the standard table and the four properties</li><li>Invert a z-transform by long division and by partial fractions</li></ul></div>
+    <nav class="figstrip" aria-label="Figures in this lesson"><a href="#fig-analog-loop"><img src="../../assets/img/diagrams/dcs-analog-loop.svg" alt="" loading="lazy"><span>Analog loop</span></a><a href="#fig-digital-loop"><img src="../../assets/img/diagrams/dcs-digital-loop.svg" alt="" loading="lazy"><span>Digital loop</span></a><a href="#fig-drug"><img src="../../assets/img/diagrams/dcs-drug-delivery.svg" alt="" loading="lazy"><span>Drug delivery</span></a><a href="#fig-turbojet"><img src="../../assets/img/diagrams/dcs-turbojet.svg" alt="" loading="lazy"><span>Turbojet engine</span></a><a href="#fig-ex2"><img src="../../assets/img/diagrams/dcs-ex2-sequence.svg" alt="" loading="lazy"><span>Sequence to U(z)</span></a><a href="#fig-s-z"><img src="../../assets/img/diagrams/dcs-s-z-cases.svg" alt="" loading="lazy"><span>s to z mapping</span></a><a href="#fig-strips"><img src="../../assets/img/diagrams/dcs-strips.svg" alt="" loading="lazy"><span>Primary strip</span></a><a href="#fig-zgrid"><img src="../../assets/img/diagrams/dcs-zgrid.svg" alt="" loading="lazy"><span>Constant ζ and ωn</span></a><a href="#fig-pole-resp"><img src="../../assets/img/diagrams/dcs-pole-responses.svg" alt="" loading="lazy"><span>Pole location and response</span></a><a href="#fig-ex3"><img src="../../assets/img/diagrams/dcs-ex3-map.svg" alt="" loading="lazy"><span>Example 3 poles</span></a><a href="#fig-std"><img src="../../assets/img/diagrams/dcs-std-signals.svg" alt="" loading="lazy"><span>Standard sequences</span></a></nav>
+    <section class="lsec"><h2>Notes</h2>
+    <!-- NOTES START -->
+    <article class="notes">
+<p>A digital controller is a computer program. It reads the plant output only at sampling instants $t = kT$, computes a new control value from a stored rule, and holds that value until the next instant. This lesson builds the mathematics for signals that exist only at those instants: difference equations, the z-transform, and the link $z = e^{sT}$ between the s-plane and the z-plane.</p>
+
+<h3 id="why">Why digital control?</h3>
+<p>Digital control offers clear advantages over analog control, which explains its popularity:</p>
+<ul>
+<li><b>Accuracy.</b> Digital signals are represented by numbers, so they do not drift or pick up noise the way analog voltages do.</li>
+<li><b>Implementation errors are negligible.</b> A coefficient stored in memory stays exactly what you wrote; resistor and capacitor values drift with age and temperature.</li>
+<li><b>Flexibility.</b> Changing the controller means changing the program, not replacing hardware.</li>
+<li><b>Speed.</b> Modern processors compute control laws very quickly, which allows fast sampling and sophisticated algorithms.</li>
+<li><b>Cost.</b> One inexpensive microcontroller can replace a board of analog parts, and can run several loops at once.</li>
+</ul>
+
+<h3 id="structure">Structure of a digital control system</h3>
+<figure class="diagram" id="fig-analog-loop"><img src="../../assets/img/diagrams/dcs-analog-loop.svg" alt="Analog control loop with compensator, actuator and process, and sensor" loading="lazy"><figcaption>An analog loop: the compensator is built from analog parts and every signal is continuous in time.</figcaption></figure>
+<figure class="diagram" id="fig-digital-loop"><img src="../../assets/img/diagrams/dcs-digital-loop.svg" alt="Digital control loop with computer, DAC, actuator and process, sensor and ADC" loading="lazy"><figcaption>The digital loop: a computer replaces the compensator, and converters sit on each side of it.</figcaption></figure>
+<p>The comparison and the control law now run inside the <b>computer</b>. Two converters connect it to the analog world:</p>
+<ul>
+<li>the <b>analog-to-digital converter (ADC)</b> samples the sensor signal every $T$ seconds and turns it into a number $y(k)$;</li>
+<li>the <b>digital-to-analog converter (DAC)</b> turns the computed number $u(k)$ back into a voltage and holds it until the next update.</li>
+</ul>
+<p>The loop is therefore a <b>sampled-data system</b>: part discrete (inside the computer), part continuous (the actuator and the process).</p>
+
+<h4>Two examples</h4>
+<figure class="diagram" id="fig-drug"><img src="../../assets/img/diagrams/dcs-drug-delivery.svg" alt="Closed-loop drug delivery block diagram" loading="lazy"><figcaption>Closed-loop drug delivery: the computer compares the measured blood level with the reference and commands the pump.</figcaption></figure>
+<p><b>Closed-loop drug delivery.</b> A blood sensor measures the concentration of a drug or nutrient. The computer compares it with the prescribed level and sets the speed of a drug pump. Insulin delivery and anaesthesia control work this way.</p>
+<figure class="diagram" id="fig-turbojet"><img src="../../assets/img/diagrams/dcs-turbojet.svg" alt="Turbojet engine control block diagram with two feedback loops" loading="lazy"><figcaption>Aircraft turbojet engine control: an inner loop on the engine state and an outer loop on the aircraft state.</figcaption></figure>
+<p><b>Aircraft turbojet engine.</b> The pilot's command goes to a computer that drives the engine through a DAC. Engine sensors (speeds, temperatures, pressures) and aircraft sensors (speed, altitude) both return through ADCs, so one computer closes two loops.</p>
+
+<h3 id="difference">Difference equations</h3>
+<p>A <b>differential equation</b> relates the change in a variable to an <i>infinitesimal</i> change in another variable (usually time). A <b>difference equation</b> relates the change to a <i>finite</i> change: the independent variable takes only discrete values $k = 0, 1, 2, \dots$. The general linear time-invariant difference equation of order $n$ is</p>
+<p class="eq">$$y(k+n) + a_{n-1}y(k+n-1) + \dots + a_1y(k+1) + a_0y(k) = b_nu(k+n) + b_{n-1}u(k+n-1) + \dots + b_0u(k)$$</p>
+<p>with constant coefficients $a_i$, $b_i$. The input $u(k)$ is the <b>forcing function</b>. We describe a difference equation with four labels:</p>
+<table class="tbl"><tr><th>Property</th><th>Test</th></tr>
+<tr><td>Order</td><td>The difference between the highest and lowest time arguments of $y$.</td></tr>
+<tr><td>Linear</td><td>Every term contains $y$ or $u$ only to the first power, with no products such as $y(k)y(k+1)$ or $y(k)u(k)$.</td></tr>
+<tr><td>Time invariant</td><td>All coefficients are constants (no coefficient depends on $k$).</td></tr>
+<tr><td>Homogeneous</td><td>There is no forcing term ($u(k) = 0$).</td></tr></table>
+<p><b>Example 1.</b> Classify each equation.</p>
+<ol>
+<li>$y(k+2) + 0.8y(k+1) + 0.07y(k) = u(k)$: <b>second order</b>, <b>linear</b>, <b>time invariant</b> (constant coefficients), <b>nonhomogeneous</b> (a forcing function appears). It is an LTI equation.</li>
+<li>$y(k+4) + \sin(0.4k)\,y(k+1) + 0.3y(k) = 0$: <b>fourth order</b>, <b>linear</b> (each term has $y$ to the first power), <b>time varying</b> (the coefficient $\sin(0.4k)$ changes with $k$), <b>homogeneous</b>.</li>
+<li>$y(k+1) = -0.1y^2(k)$: <b>first order</b>, <b>nonlinear</b> (the square), <b>time invariant</b>, <b>homogeneous</b>.</li>
+</ol>
+<p class="key">A coefficient that depends on $k$ does not make an equation nonlinear. Linearity is about how $y$ and $u$ appear; time variation is about the coefficients.</p>
+
+<h3 id="ztransform">The z-transform</h3>
+<p>Difference equations can be solved step by step or with classical methods, but the <b>z-transform</b> is far more convenient for LTI equations. It turns difference equations into algebraic equations and convolution into multiplication, just as the Laplace transform does for continuous systems. For a causal sequence $\{u_0, u_1, u_2, \dots\}$,</p>
+<p class="eq">$$U(z) = u_0 + u_1z^{-1} + u_2z^{-2} + \dots + u_kz^{-k} + \dots = \sum_{k=0}^{\infty} u_kz^{-k}$$</p>
+<p>Each power $z^{-k}$ marks a position in time, so $z^{-1}$ can be read as a <b>one-step time delay</b> operator.</p>
+<figure class="diagram" id="fig-ex2"><img src="../../assets/img/diagrams/dcs-ex2-sequence.svg" alt="Stem plot of the sequence 1, 1, 3, 2, 0, 4" loading="lazy"><figcaption>Example 2: each sample becomes one term of $U(z)$, tagged with its delay.</figcaption></figure>
+<p><b>Example 2.</b> The z-transform of $\{u_k\} = \{1, 1, 3, 2, 0, 4, 0, 0, \dots\}$ is read straight off the definition:</p>
+<p class="eq">$$U(z) = 1 + z^{-1} + 3z^{-2} + 2z^{-3} + 4z^{-5}$$</p>
+
+<h3 id="laplace-z">From the Laplace transform to the z-transform</h3>
+<p>Represent the sampled signal as a train of impulses whose strengths are the samples:</p>
+<p class="eq">$$u^*(t) = u_0\delta(t) + u_1\delta(t - T) + u_2\delta(t - 2T) + \dots = \sum_{k=0}^{\infty} u_k\,\delta(t - kT)$$</p>
+<p>Its Laplace transform is $U^*(s) = \sum u_k e^{-ksT}$. Comparing this with $U(z) = \sum u_k z^{-k}$ shows that the two are the same once we set</p>
+<p class="eq">$$z = e^{sT}$$</p>
+<p>With $s = \sigma + j\omega$ this gives $z = e^{\sigma T}e^{j\omega T}$, so in polar form</p>
+<p class="eq">$$|z| = e^{\sigma T}, \qquad \angle z = \omega T$$</p>
+<p>The real part of $s$ sets the distance from the origin; the imaginary part sets the angle.</p>
+
+<h3 id="mapping">Mapping the s-plane onto the z-plane</h3>
+<figure class="diagram" id="fig-s-z"><img src="../../assets/img/diagrams/dcs-s-z-cases.svg" alt="Points in the s-plane and their images in the z-plane" loading="lazy"><figcaption>Where typical s-plane poles land in the z-plane (drawn with $T = 1$).</figcaption></figure>
+<ul>
+<li><b>Case 1, real poles $s = \sigma$.</b> $\angle z = 0$ and $|z| = e^{\sigma T}$, so the image is on the positive real axis. $s = 0$ goes to $z = 1$; $s = -a$ goes to $z = e^{-aT}$, between 0 and 1; $s \to -\infty$ goes to $z = 0$.</li>
+<li><b>Case 2, imaginary poles $s = \pm j\omega$.</b> $|z| = 1$ and $\angle z = \pm\omega T$: the image is on the <b>unit circle</b>. As $\omega$ rises from 0 to $\pi/T$ the point travels from $z = 1$ to $z = -1$; $s = \pm j\pi/T$ both land on $z = -1$.</li>
+<li><b>Case 3, complex poles $s = \sigma \pm j\omega$.</b> $|z| = e^{\sigma T}$ and $\angle z = \pm\omega T$. Poles in the left half-plane ($\sigma &lt; 0$) land <b>inside</b> the unit circle, in a complex-conjugate pair.</li>
+</ul>
+<figure class="diagram" id="fig-strips"><img src="../../assets/img/diagrams/dcs-strips.svg" alt="Primary strip of the s-plane mapped to the z-plane" loading="lazy"><figcaption>The strip $-\pi/T &lt; \omega \le \pi/T$ covers the whole z-plane once: left half (A) inside the circle, the $j\omega$ axis (B) on it, the right half (C) outside.</figcaption></figure>
+<p>Because the angle $\omega T$ repeats every $2\pi$, the points $s$ and $s + j2\pi/T$ map to the <b>same</b> $z$. The band between $\pm j\pi/T$ is the <b>primary strip</b>; every band above and below it is an <b>alias strip</b> whose contents are overlaid on the same z-plane. To avoid aliasing there must be nothing in the alias strips: no signal with angular frequency above $\omega = \pi/T$, or cyclic frequency above $f = 1/(2T)$. Put another way, the sampling frequency must be at least twice the highest frequency present (the <b>Nyquist rate</b>). Lesson 2 returns to this as the sampling theorem.</p>
+<p class="key">Stability carries over directly: the left half of the s-plane becomes the inside of the unit circle. A discrete-time system is stable when all its poles satisfy $|z| &lt; 1$.</p>
+<figure class="diagram" id="fig-zgrid"><img src="../../assets/img/diagrams/dcs-zgrid.svg" alt="z-plane grid of constant damping ratio and natural frequency" loading="lazy"><figcaption>Lines of constant damping ratio $\zeta$ become spirals; lines of constant natural frequency $\omega_nT$ become curves that cross them.</figcaption></figure>
+<p>A second-order pole pair $s = -\zeta\omega_n \pm j\omega_n\sqrt{1 - \zeta^2}$ maps to $|z| = e^{-\zeta\omega_nT}$, $\angle z = \pm\omega_nT\sqrt{1 - \zeta^2}$. Holding $\zeta$ fixed and raising $\omega_n$ traces a <b>logarithmic spiral</b> from $z = 1$ toward the origin; holding $\omega_nT$ fixed and raising $\zeta$ traces a curve from the unit circle to the real axis. Designers draw this grid on the z-plane in the same way they use $\zeta$ lines in the s-plane (the pink curve is $\zeta = 0.7$).</p>
+<figure class="diagram" id="fig-pole-resp"><img src="../../assets/img/diagrams/dcs-pole-responses.svg" alt="Six z-plane pole positions and their impulse responses" loading="lazy"><figcaption>The position of a pole tells you the shape of its response at a glance.</figcaption></figure>
+<ul>
+<li>Positive real pole inside the circle: smooth exponential decay, faster the nearer it is to the origin.</li>
+<li>Negative real pole: the response alternates in sign every sample. It has no continuous-time counterpart.</li>
+<li>Complex poles inside the circle: a decaying oscillation; the angle sets the number of samples per cycle.</li>
+<li>Poles on the circle: sustained output (marginal stability). Poles outside: growing output (unstable).</li>
+</ul>
+<p><b>Example 3.</b> With $T = 1$ s, map each s-plane pole and describe the step response.</p>
+<figure class="diagram" id="fig-ex3"><img src="../../assets/img/diagrams/dcs-ex3-map.svg" alt="The five pole pairs of Example 3 drawn in the z-plane" loading="lazy"><figcaption>The five answers of Example 3.</figcaption></figure>
+<table class="tbl"><tr><th>s-plane pole</th><th>z-plane pole</th><th>Response</th></tr>
+<tr><td>$s = -3$</td><td>$z = e^{-3} = 0.0498$</td><td>Very fast, smooth decay; the step response settles in a couple of samples.</td></tr>
+<tr><td>$s = \pm 4j$</td><td>$|z| = 1$, $\angle z = \pm 4$ rad $= \pm 229°$</td><td>Sustained oscillation. Since $4 &gt; \pi$, the pole is outside the primary strip: it lands at $\pm 131°$ with the signs swapped, so the samples look like a $2\pi - 4 = 2.28$ rad/s oscillation (aliasing).</td></tr>
+<tr><td>$s = \pm \pi j$</td><td>$z = -1$ (both)</td><td>An oscillation at exactly half the sampling frequency: the samples alternate in sign.</td></tr>
+<tr><td>$s = \pm 2\pi j$</td><td>$z = 1$ (both)</td><td>The oscillation completes one full cycle per sample, so every sample is the same. It looks like a constant: the oscillation is invisible.</td></tr>
+<tr><td>$s = -10 \pm 5j$</td><td>$|z| = e^{-10} \approx 4.5\times10^{-5}$, $\angle z = \pm 5$ rad</td><td>Practically at the origin: the transient dies out within one sample.</td></tr></table>
+
+<h3 id="standard">z-transforms of standard sequences</h3>
+<p>Two sums are used again and again:</p>
+<p class="eq">$$\sum_{k=0}^{n} a^k = \frac{1 - a^{n+1}}{1 - a}\ (a \ne 1), \qquad \sum_{k=0}^{\infty} a^k = \frac{1}{1 - a}\ (|a| &lt; 1)$$</p>
+<figure class="diagram" id="fig-std"><img src="../../assets/img/diagrams/dcs-std-signals.svg" alt="Unit impulse, step, ramp and exponential sequences with their z-transforms" loading="lazy"><figcaption>The four sequences you will meet most often.</figcaption></figure>
+<table class="tbl"><tr><th>Sequence $f(k)$, $k \ge 0$</th><th>$F(z)$</th><th>Converges for</th></tr>
+<tr><td>Unit impulse $\delta(k)$ (1 at $k = 0$, else 0)</td><td>$1$</td><td>all $z$</td></tr>
+<tr><td>Sampled step $1(k)$</td><td>$\dfrac{1}{1 - z^{-1}} = \dfrac{z}{z - 1}$</td><td>$|z| &gt; 1$</td></tr>
+<tr><td>Sampled ramp $k$</td><td>$\dfrac{z}{(z - 1)^2}$</td><td>$|z| &gt; 1$</td></tr>
+<tr><td>Exponential $a^k$</td><td>$\dfrac{1}{1 - az^{-1}} = \dfrac{z}{z - a}$</td><td>$|z| &gt; |a|$</td></tr>
+<tr><td>$e^{-akT}$ (sampled exponential)</td><td>$\dfrac{z}{z - e^{-aT}}$</td><td>$|z| &gt; e^{-aT}$</td></tr></table>
+<p>For the step, $U(z) = \sum_{k=0}^{\infty} z^{-k}$ is a geometric series with ratio $z^{-1}$, which converges to $1/(1 - z^{-1})$ when $|z^{-1}| &lt; 1$. The exponential is the same series with ratio $az^{-1}$.</p>
+<p class="warn">The original slides call $a^k$ a "sampled parabolic signal", write its sum as $(az)^{-k}$, and give the region of convergence as $|z| &lt; 1$. The sequence $a^k$ is an <b>exponential</b>, the ratio of the series is $az^{-1}$, and the series converges for $|z| &gt; |a|$ (for the step, $|z| &gt; 1$).</p>
+
+<h3 id="properties">Properties of the z-transform</h3>
+<table class="tbl"><tr><th>Property</th><th>Statement</th></tr>
+<tr><td>Linearity</td><td>$\mathcal{Z}\{\alpha f_1(k) + \beta f_2(k)\} = \alpha F_1(z) + \beta F_2(z)$</td></tr>
+<tr><td>Time delay</td><td>$\mathcal{Z}\{f(k - n)\} = z^{-n}F(z)$ (for a causal $f$)</td></tr>
+<tr><td>Time advance</td><td>$\mathcal{Z}\{f(k + n)\} = z^nF(z) - z^nf(0) - z^{n-1}f(1) - \dots - zf(n-1)$</td></tr>
+<tr><td>Multiplication by an exponential</td><td>$\mathcal{Z}\{a^{-k}f(k)\} = F(az)$</td></tr></table>
+<p>The time-advance property is how initial conditions enter: they appear as extra terms, just as $sF(s) - f(0)$ does for the Laplace transform of a derivative.</p>
+<h4>Worked examples</h4>
+<ol>
+<li><b>$f(k) = 2\cdot1(k) + 4\delta(k)$.</b> By linearity, $F(z) = 2\dfrac{z}{z - 1} + 4 = \dfrac{6z - 4}{z - 1}$.</li>
+<li><b>$f(k) = 4$ for $k \ge 2$, 0 otherwise.</b> This is a step of height 4 delayed by two samples, $4\cdot1(k-2)$. By the delay property, $F(z) = 4z^{-2}\dfrac{z}{z - 1} = \dfrac{4}{z(z - 1)}$.</li>
+<li><b>$f(k) = \{4, 8, 16, 32, \dots\}$.</b> This is $f(k) = 2^{k+2} = g(k + 2)$ with $g(k) = 2^k$, $G(z) = z/(z - 2)$. By the advance property, $F(z) = z^2G(z) - z^2g(0) - zg(1) = \dfrac{z^3}{z - 2} - z^2 - 2z = \dfrac{4z}{z - 2}$. (Check: $4\cdot 2^k$ has transform $4z/(z-2)$.)</li>
+<li><b>$f(k) = e^{-akT}$.</b> Write it as $(e^{aT})^{-k}\cdot1(k)$ and apply the exponential property with $a \to e^{aT}$: $F(z) = \dfrac{e^{aT}z}{e^{aT}z - 1} = \dfrac{z}{z - e^{-aT}}$.</li>
+</ol>
+<p class="warn">The slide lists the sequence in example 3 as $\{4, 8, 16, 24, \dots\}$. Since $f(k) = 2^{k+2}$, the fourth term is $2^5 = 32$, not 24.</p>
+
+<h3 id="inverse">The inverse z-transform</h3>
+<p>Two methods are used in practice:</p>
+<ol>
+<li><b>Long division.</b> Divide the numerator by the denominator, both written in powers of $z^{-1}$, to get as many terms of the series as you need. The coefficients are the samples. It is simple but gives no closed form.</li>
+<li><b>Partial fractions.</b> Almost the same as for Laplace transforms. Because most entries in the table have a $z$ in the numerator, expand $F(z)/z$, not $F(z)$, then multiply back by $z$.</li>
+</ol>
+<p><b>Example 4 (long division).</b> Invert $F(z) = \dfrac{z + 1}{z^2 + 0.2z + 0.1}$. Dividing,</p>
+<p class="eq">$$F(z) = 0 + z^{-1} + 0.8z^{-2} - 0.26z^{-3} - 0.028z^{-4} + \dots$$</p>
+<p>so $f(k) = \{0, 1, 0.8, -0.26, -0.028, \dots\}$. Each new coefficient follows from the recursion $f(k) = -0.2f(k-1) - 0.1f(k-2)$ once the numerator terms are used up.</p>
+<p><b>Example 5 (partial fractions).</b> Invert $F(z) = \dfrac{z + 1}{z^2 + 0.3z + 0.02}$. The denominator factors as $(z + 0.1)(z + 0.2)$, so</p>
+<p class="eq">$$\frac{F(z)}{z} = \frac{z + 1}{z(z + 0.1)(z + 0.2)} = \frac{A}{z} + \frac{B}{z + 0.1} + \frac{C}{z + 0.2}$$</p>
+<p class="eq">$$A = \left.\frac{z + 1}{(z + 0.1)(z + 0.2)}\right|_{z=0} = 50, \quad B = \left.\frac{z + 1}{z(z + 0.2)}\right|_{z=-0.1} = -90, \quad C = \left.\frac{z + 1}{z(z + 0.1)}\right|_{z=-0.2} = 40$$</p>
+<p class="eq">$$F(z) = 50 - \frac{90z}{z + 0.1} + \frac{40z}{z + 0.2} \quad\Longrightarrow\quad f(k) = 50\delta(k) - 90(-0.1)^k + 40(-0.2)^k$$</p>
+<p>Check: $f(0) = 50 - 90 + 40 = 0$, $f(1) = 9 - 8 = 1$, $f(2) = -0.9 + 1.6 = 0.7$, which matches long division of $F(z)$.</p>
+</article>
+    <!-- NOTES END -->
+    </section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the div below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">For each equation, give the order and test it for linearity, time invariance and homogeneity. (a) $y(k+2) = y(k+1)y(k) + u(k)$ (b) $y(k+3) + 2y(k) = 0$ (c) $y(k+4) + y(k-1) = u(k)$ (d) $y(k+5) = y(k+4) + u(k+1) - u(k)$ (e) $y(k+2) = y(k)u(k)$</div><details><summary>Show solution</summary><div class="sol">(a) Second order; nonlinear (product $y(k+1)y(k)$); time invariant; nonhomogeneous.<br>(b) Third order; linear; time invariant; homogeneous.<br>(c) Fifth order (the arguments of $y$ run from $k-1$ to $k+4$); linear; time invariant; nonhomogeneous.<br>(d) First order (only $y(k+5)$ and $y(k+4)$ appear); linear; time invariant; nonhomogeneous.<br>(e) Second order; nonlinear, because the output multiplies the input; time invariant. There is no stand-alone forcing term, but the input still drives the equation through the product.</div></details></li>
+<li><div class="q">Find the z-transforms of (a) $\{0, 1, 2, 4, 0, 0, \dots\}$ (b) $\{0, 0, 0, 1, 1, 1, 0, 0, \dots\}$ (c) $\{0, 2^{-0.5}, 1, 2^{-0.5}, 0, 0, \dots\}$.</div><details><summary>Show solution</summary><div class="sol">(a) $z^{-1} + 2z^{-2} + 4z^{-3} = \dfrac{z^2 + 2z + 4}{z^3}$<br>(b) $z^{-3} + z^{-4} + z^{-5} = \dfrac{z^2 + z + 1}{z^5}$<br>(c) $0.7071z^{-1} + z^{-2} + 0.7071z^{-3}$ (these are samples of a half sine wave).</div></details></li>
+<li><div class="q">Find the inverse z-transforms of (a) $1 + 3z^{-1} + 4z^{-2}$ (b) $5z^{-1} + 4z^{-5}$ (c) $\dfrac{z}{z^2 + 0.3z + 0.02}$ (d) $\dfrac{z - 0.1}{z^2 + 0.04z + 0.25}$ (e) $\dfrac{z}{(z + 0.1)(z + 0.2)(z + 0.3)}$</div><details><summary>Show solution</summary><div class="sol">(a) $f(k) = \{1, 3, 4, 0, 0, \dots\}$.<br>(b) $f(1) = 5$, $f(5) = 4$, all other samples zero.<br>(c) $\dfrac{F(z)}{z} = \dfrac{1}{(z + 0.1)(z + 0.2)} = \dfrac{10}{z + 0.1} - \dfrac{10}{z + 0.2}$, so $f(k) = 10\left[(-0.1)^k - (-0.2)^k\right]$: $\{0, 1, -0.3, 0.07, \dots\}$.<br>(d) The poles are $-0.02 \pm j0.4996 = 0.5\angle\pm92.3°$ ($\theta = 1.611$ rad). Long division gives $\{0, 1, -0.14, -0.2444, 0.0448, 0.0593, \dots\}$. In closed form, $f(0) = 0$ and $f(k) = 0.5^{k-1}\left[\cos((k-1)\theta) - 0.2402\sin((k-1)\theta)\right]$ for $k \ge 1$, a decaying oscillation.<br>(e) $\dfrac{F(z)}{z} = \dfrac{50}{z + 0.1} - \dfrac{100}{z + 0.2} + \dfrac{50}{z + 0.3}$, so $f(k) = 50(-0.1)^k - 100(-0.2)^k + 50(-0.3)^k$: $\{0, 0, 1, -0.6, 0.25, \dots\}$.</div></details></li>
+<li><div class="q">With $T = 0.1$ s, where in the z-plane do the poles $s = -2 \pm j5$ land? Is the discrete system stable, and roughly how many samples does one oscillation take?</div><details><summary>Show solution</summary><div class="sol">$|z| = e^{-0.2} = 0.819$ and $\angle z = \pm 0.5$ rad $= \pm 28.6°$. The poles are inside the unit circle, so the system is stable. One full turn is $2\pi$ rad, so one oscillation takes about $2\pi/0.5 \approx 12.6$ samples.</div></details></li>
+<li><div class="q">A signal contains a 30 Hz component and is sampled at 40 Hz. At what frequency does that component appear in the samples?</div><details><summary>Show solution</summary><div class="sol">The Nyquist frequency is 20 Hz, so 30 Hz lies in an alias strip. It folds to $|30 - 40| = 10$ Hz: the samples are identical to those of a 10 Hz signal.</div></details></li>
+<li><div class="q">Use the time-advance property to solve $y(k+1) - 0.5y(k) = 0$ with $y(0) = 2$.</div><details><summary>Show solution</summary><div class="sol">$zY(z) - zy(0) - 0.5Y(z) = 0$, so $Y(z) = \dfrac{2z}{z - 0.5}$ and $y(k) = 2(0.5)^k$.</div></details></li></ol>
+    </section>
+    <nav class="prevnext"><a class="pn prev" href="../digital-control-systems.html"><small>← Course home</small>Digital Control Systems</a><a class="pn next" href="02-sampling-and-pulse-transfer.html"><small>Lesson 2 →</small>Sampling, ADC and DAC models, and the pulse transfer function</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>
