@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 1: Introduction to nonlinear systems · Nonlinear Control</title>
+<meta name="description" content="Why nonlinear control, types of nonlinearity, nonlinear phenomena (finite escape time, multiple equilibria, limit cycles, chaos, jump resonance), nonlinear state models and equilibrium points.">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 1: Introduction to nonlinear systems  (Nonlinear Control, EACT 633)
+  Edit the notes between the NOTES START and NOTES END markers below.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Figures live in assets/img/diagrams/ (names start with nlc-) and are shown with a figure of class "diagram".
+  To add an exercise, copy one list item inside the list of class "exlist".
+  Guide: HOW-TO-ADD-TEACHING-CONTENT.md, section 20.
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
+  <nav class="links"><a href="../nonlinear-control.html">Course home</a><a href="../nonlinear-control.html#lessons">Lessons</a><a href="../nonlinear-control.html#figures">Figures</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../nonlinear-control.html">← Nonlinear Control</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 1 of 7 · Chapter 1 · part I</div>
+    <h1>Introduction to nonlinear systems</h1>
+    <p>Nonlinear Control · EACT 633 · Postgraduate course</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">EACT 633 · Nonlinear Control</div><ol><li class="on"><a href="01-introduction.html"><span class="n">1</span>Introduction to nonlinear systems</a></li><li><a href="02-phase-plane-analysis.html"><span class="n">2</span>Phase plane analysis</a></li><li><a href="03-linearization.html"><span class="n">3</span>Linearization</a></li><li><a href="04-describing-function.html"><span class="n">4</span>Describing function analysis</a></li><li><a href="05-lyapunov-stability.html"><span class="n">5</span>Lyapunov stability</a></li><li><a href="06-absolute-stability.html"><span class="n">6</span>Sector nonlinearities, circle and Popov criteria</a></li><li><a href="07-feedback-linearization.html"><span class="n">7</span>Feedback linearization</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Explain why linear models and superposition are not enough for many real control systems</li><li>Recognise the common hard nonlinearities: saturation, dead zone, relay, hysteresis, backlash and friction</li><li>Describe the phenomena that only nonlinear systems show: finite escape time, multiple equilibria, limit cycles, chaos, jump resonance and more</li><li>Write a nonlinear system in state-space form and find its equilibrium points</li><li>Name the main tools of nonlinear analysis used in this course</li></ul></div>
+    <nav class="figstrip" aria-label="Figures in this lesson"><a href="#fig-nonlinearities"><img src="../../assets/img/diagrams/nlc-nonlinearities.svg" alt="" loading="lazy"><span>Hard nonlinearities</span></a><a href="#fig-friction"><img src="../../assets/img/diagrams/nlc-friction.svg" alt="" loading="lazy"><span>Friction</span></a><a href="#fig-escape"><img src="../../assets/img/diagrams/nlc-escape-time.svg" alt="" loading="lazy"><span>Finite escape time</span></a><a href="#fig-multi-eq"><img src="../../assets/img/diagrams/nlc-multi-eq.svg" alt="" loading="lazy"><span>Multiple equilibria</span></a><a href="#fig-duffing"><img src="../../assets/img/diagrams/nlc-duffing.svg" alt="" loading="lazy"><span>Duffing oscillator</span></a><a href="#fig-vdp"><img src="../../assets/img/diagrams/nlc-vanderpol.svg" alt="" loading="lazy"><span>Limit cycle</span></a><a href="#fig-lorenz"><img src="../../assets/img/diagrams/nlc-lorenz.svg" alt="" loading="lazy"><span>Chaos</span></a><a href="#fig-logistic"><img src="../../assets/img/diagrams/nlc-logistic.svg" alt="" loading="lazy"><span>Bifurcations</span></a><a href="#fig-freq-amp"><img src="../../assets/img/diagrams/nlc-freq-amplitude.svg" alt="" loading="lazy"><span>Frequency and amplitude</span></a><a href="#fig-jump"><img src="../../assets/img/diagrams/nlc-jump-resonance.svg" alt="" loading="lazy"><span>Jump resonance</span></a><a href="#fig-pendulum"><img src="../../assets/img/diagrams/nlc-pendulum.svg" alt="" loading="lazy"><span>Pendulum</span></a></nav>
+    <section class="lsec"><h2>Notes</h2>
+    <!-- NOTES START -->
+    <article class="notes">
+<h3 id="motivation">Why study nonlinear systems?</h3>
+<p>A system is <b>linear</b> when it obeys the <b>superposition principle</b>: it is <i>additive</i> (the response to $u_1 + u_2$ is the sum of the separate responses) and <i>homogeneous</i> (the response to $a u$ is $a$ times the response to $u$). Superposition is what makes the linear toolbox so powerful: transfer functions, Bode and Nyquist plots, root locus and the closed-form solution $x(t) = e^{At}x(0)$ all depend on it.</p>
+<p>Every practical system is nonlinear to some degree. Often we can describe it by a linear model around an <b>operating point</b>, and that linearized model predicts the behaviour well <i>near</i> that point. But linearization is only a local approximation: it says nothing about what happens far from the operating point, and some behaviour cannot appear in any linear model at all.</p>
+<ul>
+<li>For linear systems we can usually write the solution in closed form. For nonlinear systems we generally cannot, so we use <b>qualitative analysis</b>: we predict how the system behaves (stable or not, oscillating or not, where it settles) without solving the equations.</li>
+<li>Unlike the linear case, <b>no single tool works for every nonlinear system</b>. Nonlinear analysis uses several methods, each suited to a class of problems, and needs more mathematics.</li>
+</ul>
+<p class="key">Linearization tells you what happens near one operating point. Nonlinear analysis tells you what happens everywhere else, including behaviour that a linear model can never show.</p>
+
+<h3 id="why">Why nonlinear control?</h3>
+<ol>
+<li><b>Improving existing control systems.</b> A linear controller is designed for a small range around one operating point. Over a wide range the unmodelled nonlinearities degrade it. Example: a pendulum $\ddot\theta + \frac{g}{l}\sin\theta = 0$ behaves like $\ddot\theta + \frac{g}{l}\theta = 0$ only for small angles; a nonlinear controller can handle large swings.</li>
+<li><b>Analysis of hard nonlinearities.</b> Linear control assumes the system can be linearized. Hard (discontinuous) nonlinearities such as Coulomb friction $F_f = \mu F_N\,\mathrm{sign}(v)$, saturation, dead zone, backlash and hysteresis cannot be linearized at the discontinuity and can cause limit cycles or loss of stability.</li>
+<li><b>Dealing with model uncertainty.</b> Linear designs need well-known parameters. Robust and adaptive controllers deliberately use nonlinear terms, for example $u = f(x) + \delta$, to cope with parameter variations and uncertainty.</li>
+<li><b>Design simplicity.</b> A design built on the physics of the process can be simpler and more intuitive than a linear design, and it often works over a larger range.</li>
+</ol>
+<p>Other reasons: linear models fail over <b>large operating ranges</b>; linearizing at some points gives an <b>inadequate model</b> (for example, linearizing $\dot x = u^3$ at $x = 0$, $u = 0$ gives $\dot x = 0$: the linear model says the input has no effect, although the real system can be driven anywhere); nonlinear controllers can be more <b>robust</b> to large parameter changes.</p>
+
+<h3 id="features">Features of nonlinear systems</h3>
+<ol>
+<li>The response to one test signal is <b>no guide</b> to the response to other inputs, because superposition does not hold.</li>
+<li>The response can be very <b>sensitive to the input amplitude</b> and the initial conditions. Stability has to be studied together with the type and size of the expected inputs and initial states, not only from the model.</li>
+<li>Nonlinear systems can show <b>limit cycles</b>: self-sustained oscillations of fixed amplitude and frequency.</li>
+<li>They can show <b>jump resonance</b> in the frequency response.</li>
+<li>A sinusoidal input produces <b>harmonics and sub-harmonics</b> at the output.</li>
+<li>They show <b>frequency entrainment</b> and <b>asynchronous quenching</b>.</li>
+</ol>
+
+<h3 id="classification">Classification of nonlinearities</h3>
+<p>By origin:</p>
+<ul>
+<li><b>Inherent</b> nonlinearities come from the physics or structure of the system itself: the $\sin\theta$ of a pendulum, the magnetic saturation of a motor, the $\sqrt{h}$ outflow of a tank, nonlinear electronic components, biological systems.</li>
+<li><b>Incidental</b> (parasitic) nonlinearities come from imperfections and physical limits rather than from the intended dynamics: friction, backlash in gears, actuator saturation, sensor dead band and noise.</li>
+<li><b>Intentional</b> nonlinearities are inserted on purpose to modify the system: relays (on–off control), adaptive control laws, bang–bang optimal control.</li>
+</ul>
+<p>By mathematical form:</p>
+<ol>
+<li><b>Memoryless (static)</b>: the output depends only on the present input. Relay, saturation, dead zone, quantizer, piecewise-linear gains.</li>
+<li><b>With memory (dynamic)</b>: the output depends on past inputs as well. Hysteresis and backlash: the output for a given input depends on whether the input is rising or falling.</li>
+<li><b>Time-varying</b>: the characteristic itself changes with time or with another variable.</li>
+<li><b>Local or global</b>: the nonlinearity matters only in some region of the state space, or everywhere.</li>
+</ol>
+<p>A <b>hard</b> nonlinearity has a discontinuity or a corner (relay, saturation, dead zone, backlash); a <b>soft</b> nonlinearity is smooth ($x^3$, $\sin x$) and can be linearized.</p>
+<figure class="diagram" id="fig-nonlinearities"><img src="../../assets/img/diagrams/nlc-nonlinearities.svg" alt="Characteristics of the ideal relay, saturation, dead zone, relay with hysteresis, backlash and quantizer" loading="lazy"><figcaption>The common hard nonlinearities. Arrows on the hysteresis and backlash loops show the direction of travel: these two have memory.</figcaption></figure>
+
+<h4>Common physical nonlinearities</h4>
+<ul>
+<li><b>Saturation.</b> The output is proportional to the input over a limited range and then stays nearly constant. Every device saturates when driven hard enough: amplifier outputs, motor speed and torque limits, valve travel, sensor ranges.</li>
+<li><b>Dead zone.</b> No output for inputs smaller than a threshold $\delta$; linear beyond it. Examples: a DC motor that does not turn until its torque overcomes static friction, valve-controlled pneumatic and hydraulic actuators, sensors with a dead band.</li>
+<li><b>Relay (on–off).</b> The output switches between $+M$ and $-M$ with the sign of the input. Used deliberately in thermostats and simple position controllers. A real relay often has a dead zone and <b>hysteresis</b>: it switches on at $+h$ but back off only at $-h$.</li>
+<li><b>Backlash.</b> In a gear train there is a small gap between the teeth of mating gears. When the driving gear reverses, the driven gear does not move until the gap is closed, then follows linearly. With periodic motion the input–output plot is a parallelogram-shaped loop.</li>
+<li><b>Friction.</b> Viscous friction is linear (force proportional to velocity). <b>Coulomb friction</b> is a constant force opposing motion. <b>Stiction</b> (static friction) is larger than Coulomb friction: more force is needed to start motion than to keep it going, because surface irregularities interlock. In practice stiction falls off to Coulomb friction at small velocities.</li>
+</ul>
+<figure class="diagram" id="fig-friction"><img src="../../assets/img/diagrams/nlc-friction.svg" alt="Viscous, Coulomb, and combined stiction plus Coulomb plus viscous friction characteristics" loading="lazy"><figcaption>Friction force against velocity. Only viscous friction is linear.</figcaption></figure>
+
+<h3 id="phenomena">Nonlinear phenomena</h3>
+<p>The following behaviours can occur only in nonlinear systems.</p>
+
+<h4 id="escape">Finite escape time</h4>
+<p>The state of an unstable <i>linear</i> system grows to infinity only as $t \to \infty$. A nonlinear system's state can reach infinity in <b>finite time</b>.</p>
+<p>Linear: $\dot x = ax$ has the solution $x(t) = x(0)e^{at}$. For $a &gt; 0$ it grows without bound, but $x(t)$ is finite at every finite time. Nonlinear: $\dot x = x^2$ with $x(0) = x_0 &gt; 0$. Separating variables, $\int dx/x^2 = \int dt$ gives</p>
+<p class="eq">$$x(t) = \frac{x_0}{1 - x_0 t},$$</p>
+<p>which reaches infinity at the <b>escape time</b> $t_e = 1/x_0$.</p>
+<figure class="diagram" id="fig-escape"><img src="../../assets/img/diagrams/nlc-escape-time.svg" alt="Exponential growth of the linear system compared with the finite escape of x dot equals x squared at t equals 1" loading="lazy"><figcaption>Both start at $x(0) = 1$. The linear system is finite for all time; the nonlinear one escapes at $t = 1$.</figcaption></figure>
+<p class="warn">The slides used the logistic equation $\dot x = rx(1 - x/K)$ as the example of finite escape time. That equation does not have one: from any $x(0) &gt; 0$ its solution $x(t) = \dfrac{K}{1 + \left(\frac{K}{x(0)} - 1\right)e^{-rt}}$ stays finite and tends to the carrying capacity $K$, and a population above $K$ decays smoothly to $K$ rather than crashing. The logistic equation is a good example of <b>two equilibria</b> ($x = 0$ unstable, $x = K$ stable); $\dot x = x^2$ above is the standard escape-time example.</p>
+
+<h4 id="multi-eq">Multiple isolated equilibria</h4>
+<p>A linear system $\dot x = Ax$ with $\det A \neq 0$ has exactly one equilibrium, the origin, and if it is stable it attracts every initial state. A nonlinear system can have several isolated equilibria, and which one the state reaches depends on where it starts.</p>
+<p><b>Example.</b> $\dot x = x - x^3 = x(1 - x)(1 + x)$ has three equilibria, $x = -1, 0, 1$. Where $\dot x &gt; 0$ the state moves right, where $\dot x &lt; 0$ it moves left, so $x = \pm 1$ are stable and $x = 0$ is unstable. From $x(0) = 0.5$ the solution goes to $1$; from $x(0) = -0.5$ it goes to $-1$. Compare $\dot x = -x$: one equilibrium, reached from every start.</p>
+<figure class="diagram" id="fig-multi-eq"><img src="../../assets/img/diagrams/nlc-multi-eq.svg" alt="Phase line of x dot equals x minus x cubed with three equilibria, and time responses settling at plus or minus one" loading="lazy"><figcaption>Left: the phase line; filled dots are stable equilibria, the open dot unstable. Right: solutions from six starting values.</figcaption></figure>
+<p><b>Duffing oscillator.</b> $\ddot x + \delta\dot x + \alpha x + \beta x^3 = 0$. With $\alpha &lt; 0$ and $\beta &gt; 0$ (a "double-well" spring) it has three equilibria: $x = 0$ (a saddle) and $x = \pm\sqrt{-\alpha/\beta}$ (stable). The figure uses $\delta = 0.3$, $\alpha = -1$, $\beta = 1$.</p>
+<figure class="diagram" id="fig-duffing"><img src="../../assets/img/diagrams/nlc-duffing.svg" alt="Phase portrait of a damped Duffing oscillator with two stable foci and a saddle, with the basins of attraction shaded" loading="lazy"><figcaption>The two regions of attraction wind around each other: a small change in the starting state can change which equilibrium the system ends at.</figcaption></figure>
+
+<h4 id="limit-cycles">Limit cycles</h4>
+<p>For a linear time-invariant system to oscillate it must have a pair of eigenvalues exactly on the imaginary axis. That condition is not robust: any small perturbation of the parameters destroys it. Even then, the amplitude of the oscillation depends on the initial state.</p>
+<p>A nonlinear system can have a <b>limit cycle</b>: an isolated closed trajectory, an oscillation of fixed amplitude and frequency that does not depend on the initial state and survives parameter changes. The <b>Van der Pol oscillator</b></p>
+<p class="eq">$$\ddot x - \mu(1 - x^2)\dot x + x = 0, \qquad \mu &gt; 0$$</p>
+<p>has damping $-\mu(1 - x^2)$ that is <i>negative</i> for $|x| &lt; 1$ (energy is pumped in) and <i>positive</i> for $|x| &gt; 1$ (energy is removed). Small oscillations grow, large ones shrink, and every trajectory except the origin settles on the same closed curve. Because no input is needed, this is a <b>self-excited</b> or zero-input limit cycle.</p>
+<figure class="diagram" id="fig-vdp"><img src="../../assets/img/diagrams/nlc-vanderpol.svg" alt="Van der Pol phase portrait with a stable limit cycle and two time responses settling to the same oscillation" loading="lazy"><figcaption>Van der Pol with $\mu = 1$: starts inside (blue) and outside (orange) both end on the limit cycle, of amplitude about 2.</figcaption></figure>
+
+<h4 id="chaos">Chaos</h4>
+<p>A nonlinear system can have steady-state behaviour that is neither an equilibrium nor a periodic oscillation nor a quasi-periodic one. In a <b>chaotic</b> system the motion looks random although the equations are fully deterministic, and it depends extremely sensitively on the initial state. The <b>Lorenz equations</b>, a simple model of atmospheric convection,</p>
+<p class="eq">$$\dot x = \sigma(y - x), \qquad \dot y = x(\rho - z) - y, \qquad \dot z = xy - \beta z,$$</p>
+<p>are chaotic for $\sigma = 10$, $\rho = 28$, $\beta = 8/3$: the trajectory never repeats and stays on a "strange attractor". Two starts that differ by $10^{-5}$ soon follow completely different paths (the "butterfly effect").</p>
+<figure class="diagram" id="fig-lorenz"><img src="../../assets/img/diagrams/nlc-lorenz.svg" alt="Lorenz attractor in the x z plane and two nearby solutions that separate after about 25 time units" loading="lazy"><figcaption>Left: the Lorenz attractor. Right: $x(t)$ from two almost identical starts.</figcaption></figure>
+
+<h4 id="modes">Multiple modes of behaviour</h4>
+<p>A nonlinear system can show very different behaviour for different values of a parameter, or jump from one behaviour to another. In a linear system the behaviour is fixed by the eigenvalues of $A$. The <b>logistic map</b> $x_{n+1} = r x_n(1 - x_n)$, a population model, has a stable fixed point for $1 &lt; r &lt; 3$, oscillates with period 2, then 4, 8, … as $r$ grows (period doubling), and becomes chaotic beyond about $r \approx 3.57$. Each change of behaviour at a critical parameter value is a <b>bifurcation</b>.</p>
+<figure class="diagram" id="fig-logistic"><img src="../../assets/img/diagrams/nlc-logistic.svg" alt="Bifurcation diagram of the logistic map from r equals 2.5 to 4" loading="lazy"><figcaption>For each $r$, the values $x_n$ visits after the transient has died out.</figcaption></figure>
+
+<h4 id="freq-amp">Frequency–amplitude dependence</h4>
+<p>In a linear system the frequency of free oscillation does not depend on the amplitude. In a nonlinear system it usually does. Consider a mass on a nonlinear spring,</p>
+<p class="eq">$$M\ddot x + B\dot x + Kx + K'x^3 = 0,$$</p>
+<p>the <b>Duffing equation</b>. $M$, $B$, $K$ are positive. If $K' &gt; 0$ the spring stiffens as it stretches (<b>hard spring</b>); if $K' &lt; 0$ it softens (<b>soft spring</b>). With small damping, the free response is a decaying oscillation whose frequency changes as the amplitude decays:</p>
+<ul>
+<li><b>Hard spring</b> ($K' &gt; 0$): larger amplitude means a stiffer spring and a <b>higher</b> frequency, so the frequency <b>decreases</b> as the oscillation dies away, towards $\omega_n = \sqrt{K/M}$.</li>
+<li><b>Soft spring</b> ($K' &lt; 0$): larger amplitude means a softer spring and a <b>lower</b> frequency, so the frequency <b>increases</b> as the amplitude decays.</li>
+<li><b>Linear spring</b> ($K' = 0$): the frequency stays at $\omega_n$.</li>
+</ul>
+<figure class="diagram" id="fig-freq-amp"><img src="../../assets/img/diagrams/nlc-freq-amplitude.svg" alt="Frequency of free oscillation against amplitude for hard, linear and soft springs" loading="lazy"><figcaption>Frequency of free oscillation against amplitude, computed by simulation ($M = K = 1$).</figcaption></figure>
+<p class="warn">The chapter notes state the opposite ("for a hard spring the frequency increases with decreasing amplitude"). The figure and the physical argument above show the correct direction: a hard spring oscillates faster at large amplitude, so its frequency falls as the amplitude decays.</p>
+
+<h4 id="jump">Jump resonance</h4>
+<p>Now drive the same system with $A\cos\omega t$:</p>
+<p class="eq">$$M\ddot x + B\dot x + Kx + K'x^3 = A\cos\omega t.$$</p>
+<p>Keep $A$ constant, vary $\omega$ slowly and record the output amplitude $X$. For a hard spring the resonance curve bends to the right and, for small damping and large enough forcing, has <b>three</b> possible amplitudes over a band of frequencies. The middle one is unstable.</p>
+<figure class="diagram" id="fig-jump"><img src="../../assets/img/diagrams/nlc-jump-resonance.svg" alt="Frequency response of a hard-spring Duffing oscillator with the jump from point 2 to 3 for increasing frequency and from 5 to 6 for decreasing frequency" loading="lazy"><figcaption>Frequency response from harmonic balance (computed for $M = K = 1$, $B = 0.1$, $K' = 0.3$, $A = 0.25$).</figcaption></figure>
+<p>As $\omega$ increases, $X$ follows the upper branch $1 \to 2$; any further increase makes the amplitude <b>jump down</b> to point 3, and it then follows $3 \to 4$. Coming back from high frequency, $X$ follows the lower branch $4 \to 5$ and then <b>jumps up</b> to point 6 before following $6 \to 1$. This hysteresis in the frequency response is <b>jump resonance</b>. It needs small damping and a forcing large enough to drive the system well into its nonlinear range.</p>
+
+<h4 id="other">Sub-harmonics, entrainment and quenching</h4>
+<ul>
+<li><b>Sub-harmonic oscillations.</b> A sinusoidal input of frequency $\omega$ can produce a steady oscillation at $\omega/n$ (an integer sub-multiple of the forcing frequency). Whether it appears depends on the parameters, the initial state, and the amplitude and frequency of the forcing.</li>
+<li><b>Frequency entrainment.</b> Take a system with a limit cycle of frequency $\omega_l$ and force it at a nearby frequency $\omega$. In a linear system you would see beats at $|\omega - \omega_l|$, and the beat frequency shrinks steadily as $\omega \to \omega_l$. In a nonlinear system, inside a band of frequencies around $\omega_l$ (the <b>zone of entrainment</b>) the limit cycle locks to the forcing: only one frequency, $\omega$, remains.</li>
+<li><b>Asynchronous quenching.</b> Forcing a system that has a limit cycle at a frequency $\omega_q$ unrelated to $\omega_l$ can suppress the limit cycle altogether. This is also called <b>signal stabilization</b>, and it is the idea behind adding a high-frequency "dither" signal to reduce the effect of friction or relay chattering.</li>
+</ul>
+
+<h3 id="state-space">Nonlinear state-space models</h3>
+<p>A nonlinear system with $n$ states and $p$ inputs is written as $n$ first-order equations</p>
+<p class="eq">$$\dot x_i = f_i(t, x_1, \dots, x_n, u_1, \dots, u_p), \qquad i = 1, \dots, n,$$</p>
+<p>or, collecting them into vectors $x \in \mathbb{R}^n$, $u \in \mathbb{R}^p$,</p>
+<p class="eq">$$\dot x = f(t, x, u), \qquad y = h(t, x, u).$$</p>
+<ul>
+<li>If $f$ and $h$ do not depend on $t$ explicitly, the system is <b>time-invariant</b>: $\dot x = f(x, u)$, $y = h(x, u)$.</li>
+<li>If, in addition, there is no input (or the input is fixed by a feedback law $u = \gamma(x)$), the system is <b>autonomous</b>: $\dot x = f(x)$.</li>
+</ul>
+<p><b>Equilibrium (singular) point.</b> For $\dot x = f(x)$, a point $\bar x$ is an equilibrium if $f(\bar x) = 0$. If the state starts there it stays there for all time. Equilibria are where we study stability and long-term behaviour.</p>
+<p class="tip">To find the equilibria, set every derivative to zero and solve the algebraic equations $f(x) = 0$. A nonlinear system may have none, one, several or infinitely many.</p>
+
+<h4 id="examples">Examples of nonlinear system models</h4>
+<p><b>Simple pendulum.</b> A mass $m$ on a light rod of length $l$, with friction coefficient $k$. Newton's law for rotation gives</p>
+<p class="eq">$$ml\ddot\theta = -mg\sin\theta - kl\dot\theta.$$</p>
+<p>With $x_1 = \theta$ and $x_2 = \dot\theta$:</p>
+<p class="eq">$$\dot x_1 = x_2, \qquad \dot x_2 = -\frac{g}{l}\sin x_1 - \frac{k}{m}x_2.$$</p>
+<p>Setting $x_2 = 0$ and $\sin x_1 = 0$ gives the equilibria $(n\pi, 0)$, $n = 0, \pm 1, \dots$: the pendulum hanging down ($n$ even) or balanced upright ($n$ odd). Physically there are only two, since angles differing by $2\pi$ are the same position.</p>
+<figure class="diagram" id="fig-pendulum"><img src="../../assets/img/diagrams/nlc-pendulum.svg" alt="Pendulum sketch and phase portrait of the undamped pendulum with centres, saddles and the separatrix" loading="lazy"><figcaption>Undamped pendulum ($k = 0$, $g/l = 1$). Closed orbits around the bottom position are swings; the curves outside the pink separatrix are full rotations.</figcaption></figure>
+<p><b>Mass–spring system.</b> A mass $m$ on a linear spring $k$: $m\ddot y = -ky$, so with $x_1 = y$, $x_2 = \dot y$: $\dot x_1 = x_2$, $\dot x_2 = -\frac{k}{m}x_1$. This one is linear, $\dot x = Ax$ with $A = \begin{bmatrix} 0 &amp; 1 \\ -k/m &amp; 0\end{bmatrix}$. Replacing the spring by a hard spring $k y + k' y^3$ makes it the nonlinear Duffing equation above.</p>
+<p><b>Continuous stirred tank reactor.</b> A tank of volume $V$ with feed flow $q$, feed concentration $C_{Af}$ and feed temperature $T_f$, in which reactant A reacts with rate constant $r(T) = k_0e^{-E/(RT)}$, and a cooling jacket at temperature $T_c$:</p>
+<p class="eq">$$\dot C_A = \frac{q}{V}(C_{Af} - C_A) - k_0e^{-E/(RT)}C_A, \qquad \dot T = \frac{q}{V}(T_f - T) + K_r\,k_0e^{-E/(RT)}C_A - K_c(T - T_c).$$</p>
+<p>The states are the concentration $C_A$ and the temperature $T$. The product of $C_A$ with the exponential (Arrhenius) term makes the model strongly nonlinear; such reactors can have several steady states at the same feed conditions.</p>
+<p class="warn">On the slide the Arrhenius term was written $K\exp(E/RT)$ and the cooling term $+K_c(T - T_c)$. The reaction rate is $k_0e^{-E/(RT)}$ (it <i>increases</i> with temperature), and heat removed by the jacket enters with a minus sign, $-K_c(T - T_c)$ with $K_c &gt; 0$.</p>
+
+<h3 id="tools">Analysing nonlinear systems</h3>
+<p>A sensible workflow:</p>
+<ol>
+<li><b>Theoretical analysis</b> first: equilibria, local stability, possible oscillations.</li>
+<li><b>Simulation guided by the theory.</b> Blind simulation can mislead: you only see the initial states and parameter values you happened to try.</li>
+<li><b>Control design</b>, then improve it using the insight from the analysis if the performance is not good enough.</li>
+</ol>
+<p>The main analysis methods in this course:</p>
+<ul>
+<li><b>Phase plane analysis</b> (Lesson 2): a graphical method for second-order systems.</li>
+<li><b>Linearization</b> (Lesson 3): local behaviour near an equilibrium.</li>
+<li><b>Describing function method</b> (Lesson 4): predicts limit cycles in feedback loops with one nonlinearity.</li>
+<li><b>Lyapunov's methods</b> (Lesson 5): stability without solving the equations.</li>
+<li><b>Absolute stability</b>: circle and Popov criteria (Lesson 6).</li>
+</ul>
+</article>
+    <!-- NOTES END -->
+    </section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the div below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">Show that $y = x^2$ is not linear by testing additivity and homogeneity.</div><details><summary>Show solution</summary><div class="sol">Additivity: the response to $x_1 + x_2$ is $(x_1 + x_2)^2 = x_1^2 + 2x_1x_2 + x_2^2$, which differs from $x_1^2 + x_2^2$ by $2x_1x_2$. Homogeneity: the response to $ax$ is $a^2x^2 \neq a x^2$ unless $a = 0$ or $1$. Both fail, so the system is nonlinear.</div></details></li><li><div class="q">Find the escape time of $\dot x = x^2$ from $x(0) = 2$, and describe the solution from $x(0) = -2$.</div><details><summary>Show solution</summary><div class="sol">$x(t) = \dfrac{x_0}{1 - x_0t}$. For $x_0 = 2$: $x(t) = \dfrac{2}{1 - 2t}$, which escapes at $t_e = 1/2$. For $x_0 = -2$: $x(t) = \dfrac{-2}{1 + 2t}$, which stays finite and tends to $0$ as $t \to \infty$. Finite escape depends on the initial state.</div></details></li><li><div class="q">Find and classify the equilibria of the logistic equation $\dot x = rx(1 - x/K)$ with $r, K &gt; 0$.</div><details><summary>Show solution</summary><div class="sol">$\dot x = 0$ at $x = 0$ and $x = K$. Near $x = 0$, $\dot x \approx rx$, so small populations grow: unstable. Near $x = K$, put $x = K + \xi$: $\dot\xi \approx -r\xi$, stable. Every positive start converges to $K$ without escaping.</div></details></li><li><div class="q">Write the state equations of $\ddot y + 2\dot y + y + y^3 = u$ and find its equilibria for a constant input $u = 2$.</div><details><summary>Show solution</summary><div class="sol">With $x_1 = y$, $x_2 = \dot y$: $\dot x_1 = x_2$, $\dot x_2 = -x_1 - x_1^3 - 2x_2 + u$. At equilibrium $x_2 = 0$ and $x_1 + x_1^3 = 2$, whose only real root is $x_1 = 1$. Equilibrium: $(1, 0)$.</div></details></li><li><div class="q">For the pendulum $\dot x_1 = x_2$, $\dot x_2 = -\sin x_1 - 0.5x_2$, list all equilibria and say which are physically the same.</div><details><summary>Show solution</summary><div class="sol">$x_2 = 0$ and $\sin x_1 = 0$, so $(n\pi, 0)$ for every integer $n$. Even $n$ ($0, \pm 2\pi, \dots$) are the hanging position; odd $n$ ($\pm\pi, \pm 3\pi, \dots$) are the inverted position. There are two physically distinct equilibria.</div></details></li><li><div class="q">The Van der Pol damping term is $-\mu(1 - x^2)\dot x$. Using the energy $E = \tfrac12(x^2 + \dot x^2)$, show why small oscillations grow and large ones shrink.</div><details><summary>Show solution</summary><div class="sol">$\dot E = x\dot x + \dot x\ddot x = x\dot x + \dot x\left(\mu(1 - x^2)\dot x - x\right) = \mu(1 - x^2)\dot x^2$. If $|x| &lt; 1$ throughout a cycle, $\dot E \ge 0$: energy grows. If $|x| &gt; 1$ for most of the cycle, $\dot E$ is mostly negative: energy shrinks. The amplitude settles where the energy gained and lost over one cycle balance, which is the limit cycle.</div></details></li><li><div class="q">Classify each as memoryless or with memory, and hard or soft: (a) $y = \tanh x$, (b) backlash, (c) a relay with hysteresis, (d) a quantizer.</div><details><summary>Show solution</summary><div class="sol">(a) memoryless, soft (smooth). (b) with memory, hard. (c) with memory, hard. (d) memoryless, hard (discontinuous steps).</div></details></li></ol></section>
+    <!-- PRACTICE START: practice problems from the exercise compendium. To add one, copy a <li>...</li> line. Guide section 20. -->
+    <section class="lsec" id="practice"><h2>Practice problems from the exercise compendium</h2>
+    <p class="note">From <i>Exercises in Nonlinear Control Systems</i> by M. Johansson, B. Bernhardsson and K. H. Johansson (Department of Automatic Control, Lund University), Chapter 1 (Nonlinear Models and Simulation). “Ex 1.3” means Chapter 1, Exercise 3. Work from the compendium statement and figure. The hints and short answers here are written for this course; full solutions are not reproduced.</p>
+    <ol class="exlist practice"><li><div class="q"><span class="pno">Ex 1.1</span> Pendulum $ml\ddot\theta = -mg\sin\theta - kl\dot\theta$: choose states, find all equilibria and decide their local stability by linearization.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> Use $x_1 = \theta$, $x_2 = \dot\theta$. The Jacobian of $-\frac{g}{l}\sin x_1$ is $-\frac{g}{l}\cos x_1$.<br><b>Answer.</b> $\dot x_1 = x_2$, $\dot x_2 = -\frac{g}{l}\sin x_1 - \frac{k}{m}x_2$. Equilibria $(n\pi, 0)$. At even $n$: $A = \begin{bmatrix}0&amp;1\\-g/l&amp;-k/m\end{bmatrix}$, asymptotically stable for $k &gt; 0$. At odd $n$: $A = \begin{bmatrix}0&amp;1\\g/l&amp;-k/m\end{bmatrix}$, $\det A &lt; 0$, a saddle (unstable).</div></details></li><li><div class="q"><span class="pno">Ex 1.2</span> Flexible single-link manipulator: choose states and write the state equations.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> Two second-order equations need four states: both angles and both angular velocities.<br><b>Answer.</b> $x = (q_1, \dot q_1, q_2, \dot q_2)$: $\dot x_1 = x_2$, $\dot x_2 = -\frac{M}{I}\sin x_1 - \frac{k}{I}(x_1 - x_3)$, $\dot x_3 = x_4$, $\dot x_4 = \frac{k}{J}(x_1 - x_3) + \frac{1}{J}u$.</div></details></li><li><div class="q"><span class="pno">Ex 1.3</span> Synchronous generator on an infinite bus: (a) state equation with $E_{FD}$ as input, (b) reduce it when $E_q$ is constant, (c) find the equilibria of the reduced model.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> (b) With $E_q$ constant the first equation alone is a forced pendulum. (c) Set $\dot\delta = 0$ and solve $\sin\delta = P/(\eta_1E_q)$.<br><b>Answer.</b> (a) $\dot x_1 = x_2$, $\dot x_2 = \frac{1}{M}\left(P - Dx_2 - \eta_1x_3\sin x_1\right)$, $\dot x_3 = \frac{1}{\tau}\left(-\eta_2x_3 + \eta_3\cos x_1 + E_{FD}\right)$. (b) $M\ddot\delta + D\dot\delta + \eta_1E_q\sin\delta = P$: a pendulum with constant input torque $P$. (c) $\delta = \arcsin\frac{P}{\eta_1E_q} + 2n\pi$ or $\pi - \arcsin\frac{P}{\eta_1E_q} + 2n\pi$, $\dot\delta = 0$; they exist only if $|P| \le \eta_1E_q$.</div></details></li><li><div class="q"><span class="pno">Ex 1.5</span> Phase-locked loop with $\sin(\cdot)$ and $G(s) = C(sI - A)^{-1}B$: (b) find the equilibria, (c) when does it match the pendulum model for $G(s) = 1/(\tau s + 1)$?</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> (b) At equilibrium $z = -A^{-1}B\sin e$ and $Cz = 0$; recall $G(0) = -CA^{-1}B$. (c) Eliminate $z$ to get one second-order equation in $e$.<br><b>Answer.</b> (b) $G(0)\sin e = 0$ with $G(0) \neq 0$, so $e = n\pi$, $z = 0$. (c) $\tau\ddot e + \dot e + \sin e = 0$. It matches $\ddot\theta + \frac{k}{m}\dot\theta + \frac{g}{l}\sin\theta = 0$ when $\frac{k}{m} = \frac{g}{l} = \frac{1}{\tau}$.</div></details></li><li><div class="q"><span class="pno">Ex 1.8</span> Motor ($1/s$), valve $f(x) = x^2$ and process $1/(s + 1)^2$ in a unit feedback loop: (a) state equations, (b) for which constant $r &gt; 0$ is there a locally stable equilibrium?</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> Let $x_1$ be the motor output, and $x_2$, $x_3$ the two first-order process states. Linearize at $x_1 = \sqrt r$ and use the Routh test on the third-order characteristic polynomial.<br><b>Answer.</b> (a) $\dot x_1 = r - x_3$, $\dot x_2 = -x_2 + x_1^2$, $\dot x_3 = -x_3 + x_2$, $y = x_3$. (b) Equilibrium $x_1 = \sqrt r$, $x_2 = x_3 = r$; characteristic polynomial $s^3 + 2s^2 + s + 2\sqrt r$, stable if $0 &lt; 2\sqrt r &lt; 2$, so $0 &lt; r &lt; 1$. (c) A real valve passes no negative flow: $f(x) = 0$ for $x &lt; 0$.</div></details></li><li><div class="q"><span class="pno">Ex 1.15</span> Two tanks in series with $\dot h = (u - q)/A$, $q = a\sqrt{2gh}$: find the inflow that gives $h_1 = h_2 = 0.1$ m, and linearize there ($A = 3\times10^{-3}$, $a = 7\times10^{-6}$).</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> At steady state $u = q = a\sqrt{2gh}$. The derivative of $a\sqrt{2gh}$ with respect to $h$ is $a\sqrt{2g}/(2\sqrt h)$.<br><b>Answer.</b> $u_0 = 9.8\times10^{-6}$ m³/s. With $k = \frac{a\sqrt{2g}}{2A\sqrt{h_0}} \approx 0.0163$ s⁻¹: $\Delta\dot h_1 = -k\Delta h_1 + \frac{1}{A}\Delta u$, $\Delta\dot h_2 = k\Delta h_1 - k\Delta h_2$ (time constant about 61 s per tank). The process is not linear: filling and emptying responses are not mirror images because outflow grows like $\sqrt h$.</div></details></li><li><div class="q"><span class="pno">Ex 1.17</span> Lorenz equations: (a) all equilibria, (b) when is the origin locally asymptotically stable?</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> From $\dot x_1 = 0$, $x_1 = x_2$. Then either $x_1 = 0$ or $x_3 = r - 1$. The linearization at the origin splits into a $2\times2$ block and $-b$.<br><b>Answer.</b> (a) The origin, and for $r &gt; 1$ also $\left(\pm\sqrt{b(r - 1)}, \pm\sqrt{b(r - 1)}, r - 1\right)$. (b) Eigenvalues $-b$ and the roots of $s^2 + (\sigma + 1)s + \sigma(1 - r)$: locally asymptotically stable if $r &lt; 1$.</div></details></li></ol></section>
+    <!-- PRACTICE END -->
+    <nav class="prevnext"><a class="pn prev" href="../nonlinear-control.html"><small>←</small>Course home</a><a class="pn next" href="02-phase-plane-analysis.html"><small>Lesson 2 →</small>Phase plane analysis</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

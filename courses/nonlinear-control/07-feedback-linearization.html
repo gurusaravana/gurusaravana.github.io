@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en" data-skin="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 7: Feedback linearization · Nonlinear Control</title>
+<meta name="description" content="Feedback linearization: cancelling nonlinearities by state feedback, changes of variables, input–state and input–output linearization, Lie derivatives and relative degree, the normal form, internal and zero dynamics, minimum phase systems, tracking, and the limits of exact cancellation, with the two-tank example.">
+<link rel="icon" href="../../assets/img/favicon1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script defer src="../../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../../assets/vendor/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head>
+<body>
+<!--
+  LESSON 7: Feedback linearization  (Nonlinear Control, EACT 633)
+  Edit the notes between the NOTES START and NOTES END markers below.
+  Equations: write LaTeX between $ ... $ (inline) or $$ ... $$ (on its own line).
+  Figures live in assets/img/diagrams/ (names start with nlc-) and are shown with a figure of class "diagram".
+  To add an exercise, copy one list item inside the list of class "exlist".
+  Guide: HOW-TO-ADD-TEACHING-CONTENT.md, section 20.
+-->
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../../index.html">Saravanakumar G</a>
+  <nav class="links"><a href="../nonlinear-control.html">Course home</a><a href="../nonlinear-control.html#lessons">Lessons</a><a href="../nonlinear-control.html#figures">Figures</a><a href="../../index.html#teaching">All courses</a></nav>
+  <button id="theme" title="Switch light / dark" aria-label="Switch light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div></header>
+<div class="band course-band"><div class="wrap">
+  <div class="crumb"><a href="../nonlinear-control.html">← Nonlinear Control</a></div>
+  <div class="course-head">
+    <div class="eyebrow">Lesson 7 of 7 · Chapter 5</div>
+    <h1>Feedback linearization</h1>
+    <p>Nonlinear Control · EACT 633 · Postgraduate course</p>
+  </div>
+</div></div>
+<main class="wrap lesson-layout">
+  <aside class="lside"><details open><summary>All lessons</summary><div class="mod"><div class="modname">EACT 633 · Nonlinear Control</div><ol><li><a href="01-introduction.html"><span class="n">1</span>Introduction to nonlinear systems</a></li><li><a href="02-phase-plane-analysis.html"><span class="n">2</span>Phase plane analysis</a></li><li><a href="03-linearization.html"><span class="n">3</span>Linearization</a></li><li><a href="04-describing-function.html"><span class="n">4</span>Describing function analysis</a></li><li><a href="05-lyapunov-stability.html"><span class="n">5</span>Lyapunov stability</a></li><li><a href="06-absolute-stability.html"><span class="n">6</span>Sector nonlinearities, circle and Popov criteria</a></li><li class="on"><a href="07-feedback-linearization.html"><span class="n">7</span>Feedback linearization</a></li></ol></div></details></aside>
+  <script>if(innerWidth<900)document.querySelector(".lside details").open=false</script>
+  <div class="lmain">
+    <div class="objectives card"><h3>By the end of this lesson you can</h3><ul><li>Cancel the nonlinearity of a system in companion form by state feedback and place the poles of the resulting linear system</li><li>Use a change of variables to linearize a system whose nonlinearity is not in the same equation as the input</li><li>Find the relative degree of a system by differentiating the output, or with Lie derivatives</li><li>Write a system in normal form and find its zero dynamics; decide whether it is minimum phase</li><li>Design a tracking controller by input–output linearization, and explain why unstable internal dynamics make it fail</li><li>Explain the practical limits of exact linearization: model errors, singular input gain, saturation and the need for the full state</li></ul></div>
+    <nav class="figstrip" aria-label="Figures in this lesson"><a href="#fig-loop"><img src="../../assets/img/diagrams/nlc-fl-loop.svg" alt="" loading="lazy"><span>Two loops</span></a><a href="#fig-internal"><img src="../../assets/img/diagrams/nlc-fl-internal.svg" alt="" loading="lazy"><span>Hidden state grows</span></a><a href="#fig-normal"><img src="../../assets/img/diagrams/nlc-fl-normal.svg" alt="" loading="lazy"><span>Normal form</span></a><a href="#fig-robust"><img src="../../assets/img/diagrams/nlc-fl-robust.svg" alt="" loading="lazy"><span>Model error</span></a><a href="#fig-tanks"><img src="../../assets/img/diagrams/nlc-fl-tanks.svg" alt="" loading="lazy"><span>Two tanks</span></a></nav>
+    <section class="lsec"><h2>Notes</h2>
+    <!-- NOTES START -->
+    <article class="notes">
+<h3 id="idea">The idea: cancel the nonlinearity</h3>
+<p>Linearization about an operating point (Lesson 3) gives a model that is good only near that point. Feedback linearization is different: it uses feedback to <b>cancel</b> the nonlinearity exactly, so that the closed loop is linear everywhere the cancellation is defined. Then all of linear control (pole placement, PID, LQR) can be used on the new linear system.</p>
+<p>The simplest case is a system in <b>companion form</b>, where the nonlinearity sits in the same equation as the input:</p>
+<p class="eq">$$\dot x_1 = x_2, \quad \dot x_2 = x_3, \quad \dots, \quad \dot x_n = f(x) + g(x)u .$$</p>
+<p>If $g(x) \ne 0$, the feedback</p>
+<p class="eq">$$u = \frac{1}{g(x)}\big(v - f(x)\big)$$</p>
+<p>gives $\dot x_n = v$: a chain of $n$ integrators from the new input $v$. With $v = -k_0x_1 - k_1x_2 - \dots - k_{n-1}x_n$ the closed loop is linear with characteristic polynomial $s^n + k_{n-1}s^{n-1} + \dots + k_0$, so the poles can be placed anywhere.</p>
+<figure class="diagram" id="fig-loop"><img src="../../assets/img/diagrams/nlc-fl-loop.svg" alt="Block diagram with an inner linearizing feedback around the nonlinear plant and an outer linear state feedback" loading="lazy"><figcaption>Two loops: the inner loop $u = \alpha(x) + \beta(x)v$ makes the plant linear from $v$; the outer loop is an ordinary linear controller.</figcaption></figure>
+<p><b>Example: mass, nonlinear spring and nonlinear damper.</b> $\dot x_1 = x_2$, $\dot x_2 = -\phi(x_1) - \psi(x_2) + u$, where $\phi$ is the spring force and $\psi$ the damping force. The feedback $u = \phi(x_1) + \psi(x_2) - a_1x_1 - a_2x_2 + r$ gives $\ddot x_1 + a_2\dot x_1 + a_1x_1 = r$: a linear mass–spring–damper with any poles we like. This is Exercise 12.1 of the tutorial.</p>
+<p><b>Cancelling an input nonlinearity.</b> A related trick: if the plant is linear but the actuator is a known static nonlinearity $f$ (a valve with a square-law characteristic, a dead zone), feed the controller output through the inverse $f^{-1}$ before the actuator. Then $f(f^{-1}(\cdot))$ is the identity and the loop is linear. For $f(v) = v^2$, $v \ge 0$, the inverse is $\sqrt{\cdot}$; for a dead zone of width $d$ the inverse adds $d\,\mathrm{sign}(\cdot)$.</p>
+
+<h3 id="change">A change of variables first</h3>
+<p>The nonlinearity is not always in the same equation as the input. Consider</p>
+<p class="eq">$$\dot x_1 = a\sin x_2, \qquad \dot x_2 = -x_1^2 + u .$$</p>
+<p>No choice of $u$ cancels $a\sin x_2$ directly. But take new coordinates $z_1 = x_1$, $z_2 = a\sin x_2 = \dot x_1$. Then</p>
+<p class="eq">$$\dot z_1 = z_2, \qquad \dot z_2 = a\cos x_2\,\dot x_2 = a\cos x_2\,(-x_1^2 + u),$$</p>
+<p>and the feedback</p>
+<p class="eq">$$u = x_1^2 + \frac{1}{a\cos x_2}\,v, \qquad -\frac\pi2 &lt; x_2 &lt; \frac\pi2,$$</p>
+<p>gives the linear system $\dot z_1 = z_2$, $\dot z_2 = v$. The transformation and the control are defined only where $\cos x_2 \ne 0$: feedback linearization is often only valid in a region. This is <b>input–state linearization</b>: a change of state coordinates $z = T(x)$ plus feedback makes the whole state equation linear.</p>
+
+<h3 id="io">Input–output linearization and internal dynamics</h3>
+<p>Now give the same system an output and ask it to track a reference:</p>
+<p class="eq">$$\dot x_1 = a\sin x_2, \qquad \dot x_2 = -x_1^2 + u, \qquad y = x_2 .$$</p>
+<p>The input–state linearization above makes the state equation linear, but the output becomes $y = \sin^{-1}(z_2/a)$, which is still nonlinear. Linearizing the state equation does not necessarily linearize the output map.</p>
+<p>Instead, aim at the output directly. With $u = x_1^2 + v$ we get $\dot y = v$: a linear map from $v$ to $y$, and $v = -k(y - y_d)$ makes $y$ follow $y_d$. There is a catch. This feedback has made $x_1$ <b>unobservable</b> from $y$, and $x_1$ still evolves by $\dot x_1 = a\sin x_2 = a\sin y$. If we hold $y = y_d$ constant, $x_1(t) = x_1(0) + t\,a\sin y_d$, which grows without bound.</p>
+<figure class="diagram" id="fig-internal"><img src="../../assets/img/diagrams/nlc-fl-internal.svg" alt="Two plots: the output converges to its target, while the hidden state grows linearly in time" loading="lazy"><figcaption>The output does exactly what we asked; the state we stopped looking at runs away. Part of the system, the <b>internal dynamics</b>, is hidden by the linearizing feedback, and we must check that it is well behaved.</figcaption></figure>
+
+<h3 id="reldeg">Relative degree</h3>
+<p>Take a single-input single-output system affine in the input:</p>
+<p class="eq">$$\dot x = f(x) + g(x)u, \qquad y = h(x), \qquad x \in \mathbb R^n .$$</p>
+<p>Differentiate the output until the input appears. The <b>Lie derivative</b> of $h$ along $f$ is $L_fh = \frac{\partial h}{\partial x}f$, the rate of change of $h$ along the vector field $f$; repeated, $L_f^kh = L_f(L_f^{k-1}h)$. Then</p>
+<p class="eq">$$\dot y = L_fh + (L_gh)\,u .$$</p>
+<p>If $L_gh = 0$ the input does not appear and we differentiate again: $\ddot y = L_f^2h + (L_gL_fh)\,u$, and so on.</p>
+<div class="key">The system has <b>relative degree $\rho$</b> (in a region) if
+$$L_gL_f^{k}h(x) = 0 \;\text{ for } k = 0, \dots, \rho - 2, \qquad L_gL_f^{\rho - 1}h(x) \ne 0 .$$
+Then $y^{(\rho)} = L_f^\rho h(x) + L_gL_f^{\rho - 1}h(x)\,u$, and the feedback
+$$u = \frac{1}{L_gL_f^{\rho - 1}h(x)}\big(v - L_f^\rho h(x)\big)$$
+gives $y^{(\rho)} = v$: a chain of $\rho$ integrators from $v$ to $y$.</div>
+<p>In practice we rarely write Lie derivatives out; we just differentiate $y$ and substitute the state equations. For a linear system $G(s) = \frac{b(s)}{a(s)}$, the relative degree is the pole excess $\deg a - \deg b$, which is why it carries that name. It satisfies $1 \le \rho \le n$. When $\rho = n$, nothing is hidden: the output and its derivatives are a full set of coordinates and input–output linearization is also input–state linearization.</p>
+<p><b>Example (two tanks, Exercise 12.3).</b> With levels $x_1, x_2$ and pump flow $1 + u$:</p>
+<p class="eq">$$\dot x_1 = 1 + u - \sqrt{1 + x_1}, \qquad \dot x_2 = \sqrt{1 + x_1} - \sqrt{1 + x_2}, \qquad y = x_2 .$$</p>
+<p>$\dot y$ does not contain $u$. Differentiating once more, the input enters through $\dot x_1$:</p>
+<p class="eq">$$\ddot y = \frac{\dot x_1}{2\sqrt{1 + x_1}} - \frac{\dot x_2}{2\sqrt{1 + x_2}} = \frac12\Big(\frac{1}{\sqrt{1 + x_1}} - \frac{\sqrt{1 + x_1}}{\sqrt{1 + x_2}}\Big) + \frac{u}{2\sqrt{1 + x_1}} .$$</p>
+<p>The coefficient of $u$ is never zero, so $\rho = 2 = n$. In the coordinates $z_1 = y$, $z_2 = \dot y$ (so $x_2 = z_1$ and $\sqrt{1 + x_1} = z_2 + \sqrt{1 + z_1}$) the system is $\dot z_1 = z_2$, $\dot z_2 = \alpha(z) + \beta(z)u$, and $u = (v - \alpha(z))/\beta(z)$ linearizes it exactly.</p>
+<figure class="diagram" id="fig-tanks"><img src="../../assets/img/diagrams/nlc-fl-tanks.svg" alt="Two tanks in cascade, and a plot of the lower level following a step with the linearizing controller" loading="lazy"><figcaption>With $v = -(y - 0.5) - 2\dot y$ (double pole at $-1$) the lower level rises to $0.5$ like a critically damped linear system. The input starts at $u = 1$ and settles at $\sqrt{1.5} - 1 \approx 0.22$.</figcaption></figure>
+
+<h3 id="normal">The normal form</h3>
+<p>If $\rho &lt; n$, take $\xi = (y, \dot y, \dots, y^{(\rho - 1)}) = (h, L_fh, \dots, L_f^{\rho - 1}h)$ as the first $\rho$ coordinates and complete them with $n - \rho$ further coordinates $\eta$ (chosen, where possible, so that $u$ does not enter their equations). The system becomes</p>
+<p class="eq">$$\dot\eta = f_0(\eta, \xi), \qquad \dot\xi_1 = \xi_2, \;\dots,\; \dot\xi_{\rho - 1} = \xi_\rho, \qquad \dot\xi_\rho = L_f^\rho h + L_gL_f^{\rho - 1}h\,u, \qquad y = \xi_1 .$$</p>
+<figure class="diagram" id="fig-normal"><img src="../../assets/img/diagrams/nlc-fl-normal.svg" alt="A chain of integrators from v to y, feeding a separate block for the internal states eta" loading="lazy"><figcaption>The normal form. The external part is linearized by feedback; the internal part $\eta$ is driven by $\xi$ but never affects $y$.</figcaption></figure>
+<div class="key">The <b>zero dynamics</b> are the internal dynamics when the output is held at zero: $y \equiv 0$ forces $\xi \equiv 0$, leaving $\dot\eta = f_0(\eta, 0)$. The system is <b>minimum phase</b> if the zero dynamics have an asymptotically stable equilibrium at the origin.</div>
+<p>This generalizes linear systems: the zero dynamics of $G(s) = b(s)/a(s)$ have the zeros of $G$ as eigenvalues, and a linear system is minimum phase when all its zeros are in the left half-plane. Input–output linearization cancels the zeros with the controller, so it is only safe when they are stable.</p>
+<p><b>Example 1.</b> $\dot x_1 = x_2$, $\dot x_2 = -x_1 + \epsilon(1 - x_1^2)x_2 + u$, $y = x_2$. Here $\dot y$ contains $u$, so $\rho = 1$, and the system is already in normal form with $\xi = y$, $\eta = x_1$. With $y \equiv 0$: $\dot\eta = x_2 = 0$. The zero dynamics $\dot\eta = 0$ have no asymptotically stable equilibrium (every $\eta$ is an equilibrium), so the system is not minimum phase. With the output $y = x_1$ instead, $\rho = 2 = n$ and there are no zero dynamics at all.</p>
+<p><b>Example 2.</b></p>
+<p class="eq">$$\dot x_1 = -x_1 + \frac{2 + x_3}{1 + x_3^2}\,u, \qquad \dot x_2 = x_3, \qquad \dot x_3 = x_2x_3 + u, \qquad y = x_2 .$$</p>
+<p>$\dot y = x_3$ and $\ddot y = \dot x_3 = x_2x_3 + u$, so $\rho = 2$. Holding $y \equiv 0$ gives $\dot y = \ddot y = 0$, i.e. $x_2 = x_3 = 0$ and $u = -x_2x_3 = 0$, and what remains is $\dot x_1 = -x_1$: the system is minimum phase. (A proper internal coordinate is $\eta = x_1 - 2\arctan x_3 - \frac12\ln(1 + x_3^2)$, chosen so that $u$ cancels from $\dot\eta$; on $\xi = 0$ it equals $x_1$ and gives the same $\dot\eta = -\eta$.)</p>
+<div class="warn">One version of the tutorial slide writes $\ddot y = \dot x_3 = x_1x_3 + u$ and then $u = -x_1x_3$. From the state equation $\dot x_3 = x_2x_3 + u$, so it should read $\ddot y = x_2x_3 + u$ and $u = -x_2x_3$. Since $x_2 = x_3 = 0$ either way, the conclusion ($u = 0$, $\dot x_1 = -x_1$, minimum phase) is unchanged.</div>
+
+<h3 id="tracking">Tracking</h3>
+<p>To make $y$ follow a smooth reference $y_d(t)$, with $e = y - y_d$, choose</p>
+<p class="eq">$$v = y_d^{(\rho)} - k_{\rho - 1}e^{(\rho - 1)} - \dots - k_1\dot e - k_0e .$$</p>
+<p>Since $y^{(\rho)} = v$, the error obeys $e^{(\rho)} + k_{\rho - 1}e^{(\rho - 1)} + \dots + k_0e = 0$, which converges to zero if $s^\rho + k_{\rho - 1}s^{\rho - 1} + \dots + k_0$ is Hurwitz. The derivatives of $e$ are computed from the state ($y^{(k)} = L_f^kh(x)$ for $k &lt; \rho$), not by differentiating a measured signal. The internal states stay bounded if the system is minimum phase (more precisely, if $\dot\eta = f_0(\eta, \xi)$ is input-to-state stable with $\xi$ as input, Lesson 6) and the reference and its derivatives are bounded.</p>
+
+<h3 id="limits">Limits of exact linearization</h3>
+<ul>
+<li><b>Model errors.</b> The cancellation is exact only if the model is. Designing $u = -x^2 - x$ for $\dot x = x^2 + u$ gives $\dot x = -x$; if the true plant is $\dot x = (1 + \varepsilon)x^2 + u$, the loop is $\dot x = \varepsilon x^2 - x$, which has a second equilibrium at $x = 1/\varepsilon$ and finite escape beyond it, whatever the sign of $\varepsilon \ne 0$.</li>
+<li><b>Singular input gain.</b> Where $g(x)$ or $L_gL_f^{\rho - 1}h$ is zero the control is undefined, and near it the control is huge (the $\cos x_2$ example).</li>
+<li><b>Saturation.</b> The cancelling term may demand more input than the actuator can give.</li>
+<li><b>Useful nonlinearities are cancelled too.</b> A damping term like $-x^3$ helps stability; cancelling it wastes control effort. Lyapunov-based designs (backstepping, for instance) keep such terms.</li>
+<li><b>The full state is needed</b>, measured or estimated by an observer.</li>
+</ul>
+<figure class="diagram" id="fig-robust"><img src="../../assets/img/diagrams/nlc-fl-robust.svg" alt="Responses of a feedback-linearized loop with a 10 percent model error: small starts converge, a large start escapes" loading="lazy"><figcaption>A 10 % error in the model of $x^2$: starts below $x = 10$ converge, a start at $11$ escapes in finite time. Exact cancellation gives exact results only for exact models.</figcaption></figure>
+</article>
+    <!-- NOTES END -->
+    </section>
+    <section class="lsec"><h2>Lecture</h2>
+    <!-- LECTURE VIDEO: replace the div below with
+     <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO-ID" allowfullscreen></iframe></div> -->
+    <div class="video-slot"><span>🎬</span><div><b>Lecture video</b><br>Coming soon. The recorded lecture for this lesson will appear here.</div></div></section>
+    <section class="lsec" id="exercises"><h2>Exercises</h2>
+    <ol class="exlist"><li><div class="q">(Tutorial Exercise 12.1) For $\dot x_1 = x_2$, $\dot x_2 = -\phi(x_1) - \psi(x_2) + u$, find a feedback that makes the closed loop linear with poles at $-2 \pm j$.</div><details><summary>Show solution</summary><div class="sol">Cancel both forces and add linear ones: $u = \phi(x_1) + \psi(x_2) - a_1x_1 - a_2x_2 + r$ gives $\ddot x_1 + a_2\dot x_1 + a_1x_1 = r$. Poles $-2 \pm j$ need $s^2 + 4s + 5$: $a_1 = 5$, $a_2 = 4$.</div></details></li><li><div class="q">(Tutorial Exercise 12.2) Linearize $\dot x_1 = x_1^2 + x_2$, $\dot x_2 = u$, $y = x_1$ exactly.</div><details><summary>Show solution</summary><div class="sol">Differentiate the output: $\dot y = x_1^2 + x_2$, $\ddot y = 2x_1(x_1^2 + x_2) + u$, so $\rho = 2 = n$. With $z_1 = y$, $z_2 = \dot y$: $\dot z_1 = z_2$, $\dot z_2 = 2z_1z_2 + u$. Hence $u = -2z_1z_2 + v = -2x_1(x_1^2 + x_2) + v$ gives $\ddot y = v$.</div></details></li><li><div class="q">(Tutorial Exercise 12.3) For the two tanks in the notes, write $\alpha(z)$ and $\beta(z)$ and the linearizing control.</div><details><summary>Show solution</summary><div class="sol">With $r = z_2 + \sqrt{1 + z_1}$ (which equals $\sqrt{1 + x_1}$): $\alpha(z) = \frac12\big(\frac1r - \frac{r}{\sqrt{1 + z_1}}\big)$, $\beta(z) = \frac{1}{2r}$, and $u = 2r\big(v - \alpha(z)\big)$. $\beta$ is never zero because $r &gt; 0$.</div></details></li><li><div class="q">What is the relative degree of $G(s) = \dfrac{s + 3}{s^3 + 2s^2 + 4s + 1}$? Is it minimum phase?</div><details><summary>Show solution</summary><div class="sol">Pole excess $3 - 1 = 2$, so $\rho = 2$. The zero dynamics are one-dimensional with eigenvalue at the zero $s = -3$: stable, so minimum phase.</div></details></li><li><div class="q">The pendulum with torque input: $\dot x_1 = x_2$, $\dot x_2 = -\frac gl\sin x_1 - \frac{b}{ml^2}x_2 + \frac{1}{ml^2}u$. Find a feedback that gives $\ddot x_1 + 2\dot x_1 + x_1 = 0$. Is it defined everywhere?</div><details><summary>Show solution</summary><div class="sol">$u = ml^2\big(\frac gl\sin x_1 + \frac{b}{ml^2}x_2 - x_1 - 2x_2\big) = mgl\sin x_1 + bx_2 - ml^2(x_1 + 2x_2)$. The input gain $1/(ml^2)$ is never zero, so it is defined for every state (unlike the inverted pendulum on a cart, where the gain contains $\cos x_1$).</div></details></li><li><div class="q">For $\dot x_1 = x_1 + x_2$, $\dot x_2 = u$, $y = x_2$: find $\rho$ and the zero dynamics. Can you track $y_d = 1$ with input–output linearization?</div><details><summary>Show solution</summary><div class="sol">$\dot y = u$: $\rho = 1$. Internal state $\eta = x_1$ with $\dot\eta = \eta + y$. Zero dynamics $\dot\eta = \eta$: unstable, not minimum phase. Holding $y = 1$ gives $\dot x_1 = x_1 + 1$, so $x_1$ grows exponentially. Input–output linearization fails here; the output $y = x_1$ (with $\rho = 2$) would work.</div></details></li></ol></section>
+    <!-- PRACTICE START: practice problems from the exercise compendium. To add one, copy a <li>...</li> line. Guide section 20. -->
+    <section class="lsec" id="practice"><h2>Practice problems from the exercise compendium</h2>
+    <p class="note">From <i>Exercises in Nonlinear Control Systems</i> by M. Johansson, B. Bernhardsson and K. H. Johansson (Department of Automatic Control, Lund University), Chapter 7 (Nonlinear Controller Design). “Ex 7.2” means Chapter 7, Exercise 2. Work from the compendium statement. The hints and short answers here are written for this course; full solutions are not reproduced.</p>
+    <ol class="exlist practice"><li><div class="q"><span class="pno">Ex 7.1</span> Inverting an actuator nonlinearity: a square-law valve, a piecewise linear characteristic (and the dead zone as a special case), and backlash.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> Solve $u = f(v)$ for $v$ on each piece. For the dead zone set the inner slope to zero.<br><b>Answer.</b> (a) $v = \sqrt u$, $u \ge 0$. (b) $v = u/k_1$ for $|u| \le k_1d$, and $v = \big(u - \mathrm{sign}(u)(k_1 - k_2)d\big)/k_2$ beyond. With $k_1 = 0$, $k_2 = 1$ (dead zone): $v = u + d\,\mathrm{sign}(u)$. (c) Backlash has no static inverse; the usual compensation adds half the gap in the direction of motion, $v = u + b\,\mathrm{sign}(\dot u)$.</div></details></li><li><div class="q"><span class="pno">Ex 7.2</span> Linearizing feedback for $\dot x_1 = x_2, \dots, \dot x_n = f(x) + g(x)u$; the inverted pendulum; sensitivity to model error.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> (a) Make $\dot x_n = v$. (b) Use $v = -x_1 - 2x_2$ for a double pole at $-1$. (c) Compare the designed and the true $\dot x$ and look for a new equilibrium.<br><b>Answer.</b> (a) $u = (v - f(x))/g(x)$, well posed where $g(x) \ne 0$. (b) $u = (-a\sin x_1 - x_1 - 2x_2)/(b\cos(\cdot))$: undefined where the cosine in the input gain is zero (the input then has no effect on the angular acceleration). (c) $u = -x^2 - x$ gives $\dot x = \varepsilon x^2 - x$: starts beyond $x = 1/\varepsilon$ (on the side of its sign) escape, for any $\varepsilon \ne 0$.</div></details></li><li><div class="q"><span class="pno">Ex 7.16</span> $\ddot x - 2\dot x^2 + x = u - 1$: state form, equilibria for $u = 0$, and a globally stabilizing feedback.</div><details><summary>Hint and answer</summary><div class="sol"><b>Hint.</b> Use $x_1 = x$, $x_2 = \dot x$. For (c), cancel the nonlinear and constant terms and add linear damping.<br><b>Answer.</b> (a) $\dot x_1 = x_2$, $\dot x_2 = -x_1 + 2x_2^2 + u - 1$. (b) One equilibrium, $(-1, 0)$; its linearization has eigenvalues $\pm j$, so linearization is inconclusive. (c) $u = 1 - 2x_2^2 - 2x_2$ gives $\ddot x + 2\dot x + x = 0$: globally asymptotically stable (double pole at $-1$).</div></details></li></ol></section>
+    <!-- PRACTICE END -->
+    <nav class="prevnext"><a class="pn prev" href="06-absolute-stability.html"><small>← Lesson 6</small>Sector nonlinearities, circle and Popov criteria</a><a class="pn next" href="../nonlinear-control.html"><small>→</small>Course home</a></nav>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Saravanakumar Gurusamy · <a href="../../index.html">Home</a> · <a href="../../index.html#teaching">Teaching</a></div></footer>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

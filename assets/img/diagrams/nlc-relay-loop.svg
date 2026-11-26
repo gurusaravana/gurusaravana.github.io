@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 190" width="640" height="190" role="img" aria-label="Relay control of a double integrator: the error e = r minus c drives an ideal relay of output plus or minus M, whose output u drives the plant 1 over s squared; the output c is fed back">
+<title>Relay control of a double integrator: the error e = r minus c drives an ideal relay of output plus or minus M, whose output u drives the plant 1 over s squared; the output c is fed back</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#16a34a"/></marker><marker id="al" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#94a3b8"/></marker><marker id="av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#7c3aed"/></marker></defs>
+<rect width="640" height="190" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<line x1="20.0" y1="70.0" x2="92.0" y2="70.0" stroke="#0f172a" stroke-width="1.6" marker-end="url(#ak)"/>
+<text x="40.0" y="60.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">r</text>
+<circle cx="105.0" cy="70.0" r="13" fill="#ffffff" stroke="#0f172a" stroke-width="1.6"/>
+<text x="96.0" y="54.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="400">+</text>
+<text x="96.0" y="100.0" font-size="15" text-anchor="middle" fill="#0f172a" font-weight="400">−</text>
+<line x1="118.0" y1="70.0" x2="200.0" y2="70.0" stroke="#0f172a" stroke-width="1.6" marker-end="url(#ak)"/>
+<text x="150.0" y="60.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">e</text>
+<rect x="200.0" y="30.0" width="110.0" height="80.0" rx="6" fill="#f1f5f9" stroke="#0f172a" stroke-width="1.6"/>
+<line x1="212.0" y1="70.0" x2="298.0" y2="70.0" stroke="#64748b" stroke-width="1"/>
+<line x1="255.0" y1="100.0" x2="255.0" y2="40.0" stroke="#64748b" stroke-width="1"/>
+<path d="M215.0 88.0 L255.0 88.0 L255.0 52.0 L295.0 52.0" fill="none" stroke="#0077b6" stroke-width="2.4"/>
+<text x="261.0" y="48.0" font-size="11" text-anchor="start" fill="#64748b" font-weight="400">M</text>
+<text x="249.0" y="100.0" font-size="11" text-anchor="end" fill="#64748b" font-weight="400">−M</text>
+<line x1="310.0" y1="70.0" x2="400.0" y2="70.0" stroke="#0f172a" stroke-width="1.6" marker-end="url(#ak)"/>
+<text x="355.0" y="60.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">u</text>
+<rect x="400.0" y="40.0" width="90.0" height="60.0" rx="6" fill="#f1f5f9" stroke="#0f172a" stroke-width="1.6"/>
+<text x="445.0" y="75.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400">1/s²</text>
+<line x1="490.0" y1="70.0" x2="610.0" y2="70.0" stroke="#0f172a" stroke-width="1.6" marker-end="url(#ak)"/>
+<text x="590.0" y="60.0" font-size="14" text-anchor="middle" fill="#0f172a" font-weight="400" font-style="italic">c</text>
+<path d="M560.0 70.0 L560.0 160.0 L105.0 160.0 L105.0 83.0" fill="none" stroke="#0f172a" stroke-width="1.6" marker-end="url(#ak)"/>
+</g>
+</svg>
