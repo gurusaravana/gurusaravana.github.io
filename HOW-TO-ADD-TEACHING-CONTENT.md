@@ -424,3 +424,15 @@ The email address, institute name and logos on the original slides are not on th
 - Lesson 5: the output row of the first companion form; the state matrix of the second companion form (it is the transpose of the first).
 - Lesson 6: state order in the observable form example; the matrix $A$ in the diagonalization example (+4, not −4); $CA = [0\ -8]$ in the observability example.
 - Lesson 7: desired poles in the satellite example (0.795 ± j0.256); the lead compensator $-27.5(z - 0.818)/(z - 0.2375)$; swapped terms in the reduced-order observer; the integral-state definition, $e^{-0.25}$ and the gains in the integral-control example; $Fg$ in the deadbeat example.
+
+## 22. Exam formula sheet (Control System Engineering)
+
+The page `courses/control-system-engineering/formula-sheet.html` collects the key formulas of all 19 lessons, in the lessons' own notation. It is linked from the course home page (the **Formula sheet** card and the **Formulas** menu link).
+
+- Each module is one `<section class="fs-sec" data-mod="1">` block (data-mod 1 to 4).
+- Each box is one `<div class="fbox">`. Its heading `<h3>` ends with a small link to the lesson it comes from, such as `<a class="src" href="08-second-order-response.html">L8</a>`.
+- To add a formula, copy a whole `<div class="fbox"> ... </div>` and change the text. Write equations in LaTeX between `$ ... $` (in a line) or `$$ ... $$` (on its own line), exactly as in the lessons. Add `fwide` to the class (`class="fbox fwide"`) for a box that should span the full width.
+- The buttons at the top show all modules, only the midterm modules (1 and 2), or only modules 3 and 4.
+- **Print / save as PDF** prints whatever is shown, in two compact columns on A4, with the menu and colours removed. Choose "Save as PDF" in the print window to get a file to share with students.
+
+If you change a formula in a lesson, change it here too.
