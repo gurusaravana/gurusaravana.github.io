@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 240" width="700" height="240" role="img" aria-label="Linearization steps: start from the nonlinear model dx/dt = f(x, u), find an operating point where f(x0, u0) = 0, shift variables to deviations, take the Jacobians A and B, and use the linear model d(δx)/dt = A δx + B δu for small deviations">
+<title>Linearization steps: start from the nonlinear model dx/dt = f(x, u), find an operating point where f(x0, u0) = 0, shift variables to deviations, take the Jacobians A and B, and use the linear model d(δx)/dt = A δx + B δu for small deviations</title>
+<defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0077b6"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ea7a1f"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#16a34a"/></marker><marker id="al" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#94a3b8"/></marker><marker id="av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#7c3aed"/></marker></defs>
+<rect width="700" height="240" fill="#ffffff"/>
+<g font-family="Inter, Arial, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<rect x="14.0" y="60.0" width="118.0" height="90.0" rx="8" fill="#eef6fb" stroke="#0077b6" stroke-width="1.6"/>
+<text x="73.0" y="92.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="600">Nonlinear model</text>
+<text x="73.0" y="122.0" font-size="12" text-anchor="middle" fill="#0f172a" font-weight="400">ẋ = f(x, u)</text>
+<line x1="134.0" y1="105.0" x2="152.0" y2="105.0" stroke="#64748b" stroke-width="1.6" marker-end="url(#am)"/>
+<rect x="154.0" y="60.0" width="118.0" height="90.0" rx="8" fill="#f8fafc" stroke="#0f172a" stroke-width="1.6"/>
+<text x="213.0" y="92.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="600">Operating point</text>
+<text x="213.0" y="122.0" font-size="12" text-anchor="middle" fill="#0f172a" font-weight="400">f(x₀, u₀) = 0</text>
+<line x1="274.0" y1="105.0" x2="292.0" y2="105.0" stroke="#64748b" stroke-width="1.6" marker-end="url(#am)"/>
+<rect x="294.0" y="60.0" width="118.0" height="90.0" rx="8" fill="#f8fafc" stroke="#0f172a" stroke-width="1.6"/>
+<text x="353.0" y="92.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="600">Deviations</text>
+<text x="353.0" y="122.0" font-size="12" text-anchor="middle" fill="#0f172a" font-weight="400">δx = x − x₀</text>
+<line x1="414.0" y1="105.0" x2="432.0" y2="105.0" stroke="#64748b" stroke-width="1.6" marker-end="url(#am)"/>
+<rect x="434.0" y="60.0" width="118.0" height="90.0" rx="8" fill="#f8fafc" stroke="#0f172a" stroke-width="1.6"/>
+<text x="493.0" y="92.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="600">Jacobians</text>
+<text x="493.0" y="122.0" font-size="11" text-anchor="middle" fill="#0f172a" font-weight="400">A = ∂f/∂x,  B = ∂f/∂u</text>
+<line x1="554.0" y1="105.0" x2="572.0" y2="105.0" stroke="#64748b" stroke-width="1.6" marker-end="url(#am)"/>
+<rect x="574.0" y="60.0" width="118.0" height="90.0" rx="8" fill="#eef6fb" stroke="#0077b6" stroke-width="1.6"/>
+<text x="633.0" y="92.0" font-size="13" text-anchor="middle" fill="#0f172a" font-weight="600">Linear model</text>
+<text x="633.0" y="122.0" font-size="12" text-anchor="middle" fill="#0f172a" font-weight="400">δẋ = A δx + B δu</text>
+<text x="350.0" y="190.0" font-size="13" text-anchor="middle" fill="#db2777" font-weight="400">valid only for small δx and δu around (x₀, u₀)</text>
+</g>
+</svg>
